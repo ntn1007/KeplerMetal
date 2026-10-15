@@ -1,0 +1,68 @@
+{
+  "status": "PASS",
+  "static_library_SHA256": "1656923d0fd416fc25d75f0024736fc368f7c0e4285911c90625a71078efd727",
+  "source_manifest_SHA256": "6ef287d200eeab7816dbf58ba19c25a654a567c1ec668fda7303307ca3df4ca4",
+  "client_SHA256": "d8bcfe74ece542667d4a4c9a46f706fcbabfd149c48520dccb7cdfad1c312e73",
+  "GPU_cohorts": 74,
+  "GPU_trials": 296,
+  "exact_uint32_results": 31583232,
+  "consumer_invocations": 7895808,
+  "guard_bytes": 386434048,
+  "native_function_factory_observations": 20,
+  "CPU_library_contract_cases": 82,
+  "lifecycle_cases": 98,
+  "legacy_contract_cases": 93,
+  "lifecycle_controls": [
+    {
+      "PASS": true,
+      "kind": "library_scope_release_live_objects",
+      "native_compiler_failure_restored": true,
+      "user_kernel_submitted": false,
+      "scope_released": true,
+      "native_library_and_function_classes_restored": true
+    },
+    {
+      "request_observed_before_release": true,
+      "early_callbacks": 0,
+      "user_kernel_submitted": false,
+      "factory_method_restored": true,
+      "scope_released_before_callback": true,
+      "kind": "pending_scope_release",
+      "PASS": true
+    }
+  ],
+  "M1_trials": 12,
+  "M1_identical_common_files": 156,
+  "system_files_unchanged": 83,
+  "OCLP_unchanged": true,
+  "failed_preflight_preserved": true,
+  "failure_cause": "Negative native-compiler control ran after automatic producer-library activation; moved before activation",
+  "runtime_modified_to_resolve_preflight": false,
+  "manual_function_registration_calls": 0,
+  "manual_encoder_adaptation_calls": 0,
+  "integration_level": 2,
+  "scope": "One explicit registration, six pinned source functions/programs, one scope-owned queue",
+  "arbitrary_libraries_supported": false,
+  "installed_driver_modified": false,
+  "performance_benchmark": false,
+  "public_source_rebuild": {
+    "static_library_SHA256": "c907868266c2d86a0d53f2072e9e496f7e0ebea3690598c8231180e81e46a260",
+    "all_runtime_objects": 7,
+    "CPU_link_check": "PASS",
+    "GPU_smoke": {
+      "status": "PASS",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    "full_296_trial_suite": "NOT RUN; qualification is artifact-specific"
+  },
+  "full_objective_complete": false,
+  "Qwen_job_ids": [],
+  "date": "2026-10-15",
+  "evidence_scope": "Maintainer GTX execution, CPU numerical recomputation and exact-source native M1 reference; raw proprietary assets and binary captures remain local.",
+  "raw_binary_evidence_published": false,
+  "source_snapshot": "SOURCE_SNAPSHOT.json",
+  "old_public_client_commit": "72992a123328c2bea8a72f0e10dd3014fa3a867a"
+}

@@ -1,18 +1,19 @@
 # Registered native function pipelines
 
-This extension connects native `MTLFunction` argument encoders, public device pipeline factories and native buffer bindings for a bounded producer family. Integration remains **level 2**: an adapted application explicitly registers a known library/function and offline-compiled SM30 program. Arbitrary application libraries and the installed NVIDIA compiler are not automatically repaired.
+This extension connects native libraries, functions, argument encoders, public device pipeline factories and native buffer bindings for a bounded producer family. Integration remains **level 2**: an adapted application registers one known library and its six offline-compiled SM30 programs, then uses ordinary Metal calls. Arbitrary application libraries and the installed NVIDIA compiler are not automatically repaired.
 
 ## Bootstrap and calls
 
 With an enabled IRv2 scope, validated consumer catalogue and locally regenerated assets:
 
 ```objc
-id<MTLFunction> function = [scope newCommandIRFunctionWithLibraryData:sourceLibrary
-    expectedSHA256:sourceSHA functionName:@"encode_dataflow_basic"
-    rootBufferIndex:0 error:&error];
-BOOL registered = [scope registerCommandIRProducerForFunction:function
-    carrierData:nativeCarrier programData:compiledSM30 error:&error];
+// compiledPrograms maps all six qualified source function names to program data.
+BOOL registered = [scope registerCommandIRLibraryData:sourceLibrary
+    expectedSHA256:sourceSHA carrierData:nativeCarrier
+    programsByFunction:compiledPrograms error:&error];
 if (!registered) { return; }
+id<MTLLibrary> library = [device newLibraryWithURL:sourceLibraryURL error:&error];
+id<MTLFunction> function = [library newFunctionWithName:@"encode_dataflow_basic"];
 id<MTLComputePipelineState> pipeline =
     [device newComputePipelineStateWithFunction:function error:&error];
 id<MTLArgumentEncoder> arguments = [function newArgumentEncoderWithBufferIndex:0];
@@ -24,7 +25,27 @@ id<MTLComputeCommandEncoder> encoder = [cb computeCommandEncoder];
 [encoder setBuffer:rootArgumentBuffer offset:0 atIndex:0];
 ```
 
-The excerpt omits required plan validation, resource declarations, retention and ordering. [The tested reception client](../examples/command_ir_pipeline_contracts.mm) and [factory helper](../examples/PipelineFactoryReception.inc) include those checks and controls. Build definitions are `KP_DATAFLOW_NATIVE=0`, `KP_PUBLIC_ARGUMENT_ENCODER=1`, `KP_FUNCTION_ARGUMENT_ENCODER=1`; the M1 reference uses `KP_DATAFLOW_NATIVE=1`. The example needs regenerated local assets; it is not a clean-checkout GPU bootstrap. Its CLI prefix selects `0:basic` through `5:basic` (factory kind followed by semantic mode).
+The excerpt omits required plan validation, resource declarations, retention and ordering. [The tested reception client](../examples/command_ir_pipeline_contracts.mm), [pipeline helper](../examples/PipelineFactoryReception.inc) and [library/function helper](../examples/LibraryFunctionReception.inc) include those checks and controls. Build definitions are `KP_DATAFLOW_NATIVE=0`, `KP_PUBLIC_ARGUMENT_ENCODER=1`, `KP_FUNCTION_ARGUMENT_ENCODER=1`; the M1 reference uses `KP_DATAFLOW_NATIVE=1`. The example needs regenerated local assets; it is not a clean-checkout GPU bootstrap. Its full CLI prefix is `pipeline:queue:encoder:library:function:mode`; for example `5:1:4:2:6:barrier`. The older two-part prefix still selects the default library/function route. The earlier per-function registration API remains available separately; do not register a producer twice through both interfaces.
+
+## Native library and function factories
+
+One registration snapshots the source, carrier and exact six-program set and prepares six native PSOs before publication. Invalid hashes, missing/extra programs and duplicate registration fail closed. Later matching library lookups reuse these profiles without importing another program. The reception client contains no manual per-function registration or compute-encoder adaptation calls.
+
+The qualified library constructors are `newLibraryWithData:error:`, `newLibraryWithURL:error:` and `newLibraryWithFile:error:`. A matching file/URL is read into an immutable, hash-checked snapshot before native construction. Other library bytes follow the original native path. This is object-local adaptation on the scope's device, not a change to shared driver classes.
+
+The five function selectors are:
+
+- `newFunctionWithName:`
+- `newFunctionWithName:constantValues:error:`
+- `newFunctionWithDescriptor:error:`
+- `newFunctionWithName:constantValues:completionHandler:`
+- `newFunctionWithDescriptor:completionHandler:`
+
+Each creates a real native function before attaching its registered profile. Descriptor aliases preserve the native returned name while selecting the program by its source function name. The pinned source declares no function constants; nil, empty and unused constant values retain the native behavior. This does not qualify specialization of declared constants. Nondefault function options and binary archives are refused for the registered producers, including `CompileToBinary`; native factory acceptance alone is insufficient evidence for that feature.
+
+The native library/function layouts remain 64/400 bytes for this exact driver profile. Weak associations allow restoration with live objects, and asynchronous function replies release their temporary scope reference before invoking application callbacks. Native objects and retained PSOs can outlive the scope; future calls then take the restored native path. Pipeline asynchronous scheduling is qualified separately below.
+
+The native unsupported-AIR control runs **before** library registration. After activation, successful lookup of that same pinned source is expected and must not be reported as a broken negative control. The earlier failed preflight logs remain preserved. Unregistered consumer libraries provide a separate passthrough control after activation. See [the library/function validation summary](library-function-validation.json).
 
 ## Supported factory subset
 

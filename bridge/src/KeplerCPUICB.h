@@ -214,6 +214,13 @@
                                 carrierData:(NSData *)carrier
                                 programData:(NSData *)program
                                       error:(NSError **)error;
+// Register an immutable source/carrier/program set once. Ordinary device
+// library loads and native function factories then use the validated set.
+- (BOOL)registerCommandIRLibraryData:(NSData *)data
+                    expectedSHA256:(NSString *)expected
+                       carrierData:(NSData *)carrier
+                programsByFunction:(NSDictionary<NSString *, NSData *> *)programs
+                             error:(NSError **)error;
 @property(nonatomic,readonly) NSArray<NSDictionary *> *events;
 @end
 

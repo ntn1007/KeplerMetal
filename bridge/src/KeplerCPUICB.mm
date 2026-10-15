@@ -125,7 +125,8 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 @property(nonatomic) Class originalDeviceClass,originalQueueClass;
 @property(nonatomic,strong) NSMutableArray *automaticBuffers;
 @property(nonatomic,strong) NSObject *factoryLock;
-@property(nonatomic,strong) NSMutableArray *adaptedFunctions,*functionLibraries;
+@property(nonatomic,strong) NSMutableArray *adaptedFunctions,*functionLibraries,*adaptedIRLibraries;
+@property(nonatomic,strong) NSMutableDictionary *registeredIRLibraries;
 @property(nonatomic) BOOL restored;
 @property(nonatomic) NSUInteger releasedEncoderCount;
 @property(nonatomic) NSUInteger maxKernelBindings;
@@ -307,6 +308,7 @@ static NSString*residentBindingError(KPComputeICBCommand*c,KPCPUICBScope*scope){
 #include "KeplerNativeThreadLimits.inc"
 #include "KeplerCommandIRPipelineContracts.inc"
 #include "KeplerAutomaticComputeFactories.inc"
+#include "KeplerCommandIRLibrary.inc"
 
 @implementation KPComputeICB
 - (id<MTLDevice>)device{return _scope.device;}
@@ -653,6 +655,7 @@ BOOL installRenderOverride(Class dynamic,Class original,SEL selector,IMP impleme
 #include "KeplerCommandIRv2Scope.inc"
 #include "KeplerCommandIRFunctionScope.inc"
 #include "KeplerCommandIRProducerScope.inc"
+#include "KeplerCommandIRLibraryScope.inc"
 - (BOOL)enableGPUCommandBindingsWithLibraryData:(NSData*)data expectedSHA256:(NSString*)expected error:(NSError**)error {
  NSString*pin=@"ce99cdc66f55f4ce7069b9518ed1f074feea2bee6daded2d320098e29b43f290";
  NSData*snapshot=data?[NSData dataWithBytes:data.bytes length:data.length]:nil;
@@ -768,7 +771,7 @@ BOOL installRenderOverride(Class dynamic,Class original,SEL selector,IMP impleme
  id<MTLBuffer>host=[_device newBufferWithLength:65536 options:MTLResourceStorageModeManaged];id<MTLCommandBuffer>read=[_queue commandBuffer];id<MTLBlitCommandEncoder>b=[read blitCommandEncoder];[b copyFromBuffer:nativeCB sourceOffset:0 toBuffer:host destinationOffset:0 size:65536];[b synchronizeResource:host];[b endEncoding];if(!complete(read))reject(@"Native state readback failed");NSData*snapshot=[NSData dataWithBytes:host.contents length:65536];NSError*error=nil;NSDictionary*registered=([profile[@"native_registration_v1"]boolValue]||[profile[@"library_SHA256"]isEqual:@"913c4c1a32db704bc0ee5e54c6d9084f8601418c924fbd35ef72bcc08cb64ecd"])?profile:nil;KPRecordedNativeCompute*r=[KPRecordedNativeCompute recordedCommands:commands queue:_queue pipeline:command.pipeline output:out counter:counter parameters:parameters nativeConstants:nativeCB nativeDescriptor:nativeQMD constantSnapshot:snapshot groups:command.groups.width local:command.local.width profile:registered error:&error];if(!r)reject(error.localizedDescription);
  id<MTLCommandBuffer>upload=[_queue commandBuffer];b=[upload blitCommandEncoder];[b copyFromBuffer:nativeCB sourceOffset:0 toBuffer:r.constants destinationOffset:0 size:65536];[b endEncoding];if(!complete(upload))reject(@"Dedicated constant copy failed");[_eventRows addObject:@{@"operation":@"materialize_CPU_command",@"user_kernel_invocations":@0,@"requires_GPU_NOP_and_blit_preparation":@YES,@"commands_SHA256":hash(commands),@"snapshot_SHA256":hash(snapshot),@"command_bytes":@(commands.length),@"dynamic_threadgroup_length":@(dynamicLength),@"relocation":r.relocationEvidence}];return r;
 }
-- (void)restore{@synchronized(_factoryLock){if(_restored)return;_restored=YES;NSUInteger liveFunctions=0;for(KPAdaptedFunction*r in _adaptedFunctions){id f=r.function;if(f){liveFunctions++;object_setClass(f,r.originalClass);objc_setAssociatedObject(f,&IRFunctionKey,nil,OBJC_ASSOCIATION_ASSIGN);}}[_adaptedFunctions removeAllObjects];[_functionLibraries removeAllObjects];if(liveFunctions)[_eventRows addObject:@{@"operation":@"restore_IRv2_functions",@"live_functions_restored":@(liveFunctions),@"cached_function_classes":@(functionClasses.size())}];NSUInteger live=0,expired=_releasedEncoderCount;for(KPAdaptedEncoder*r in _adapted){id e=r.encoder;if(!e){expired++;continue;}live++;object_setClass(e,r.originalClass);objc_setAssociatedObject(e,&contextKey,nil,OBJC_ASSOCIATION_ASSIGN);}[_adapted removeAllObjects];restoreAutomaticComputeFactories(self);object_setClass(_device,_originalDeviceClass);objc_setAssociatedObject(_device,&contextKey,nil,OBJC_ASSOCIATION_ASSIGN);_restored=YES;[_eventRows addObject:@{@"operation":@"scope_restore",@"device_class_restored":@(object_getClass(_device)==_originalDeviceClass),@"live_encoder_classes_restored":@(live),@"already_released_encoders":@(expired),@"cached_device_classes":@(deviceClasses.size()),@"cached_encoder_classes":@(encoderClasses.size()),@"system_modified":@NO}];}}
+- (void)restore{@synchronized(_factoryLock){if(_restored)return;_restored=YES;NSUInteger liveFunctions=0;for(KPAdaptedFunction*r in _adaptedFunctions){id f=r.function;if(f){liveFunctions++;object_setClass(f,r.originalClass);objc_setAssociatedObject(f,&IRFunctionKey,nil,OBJC_ASSOCIATION_ASSIGN);}}[_adaptedFunctions removeAllObjects];[_functionLibraries removeAllObjects];restoreIRLibraries(self);if(liveFunctions)[_eventRows addObject:@{@"operation":@"restore_IRv2_functions",@"live_functions_restored":@(liveFunctions),@"cached_function_classes":@(functionClasses.size())}];NSUInteger live=0,expired=_releasedEncoderCount;for(KPAdaptedEncoder*r in _adapted){id e=r.encoder;if(!e){expired++;continue;}live++;object_setClass(e,r.originalClass);objc_setAssociatedObject(e,&contextKey,nil,OBJC_ASSOCIATION_ASSIGN);}[_adapted removeAllObjects];restoreAutomaticComputeFactories(self);object_setClass(_device,_originalDeviceClass);objc_setAssociatedObject(_device,&contextKey,nil,OBJC_ASSOCIATION_ASSIGN);_restored=YES;[_eventRows addObject:@{@"operation":@"scope_restore",@"device_class_restored":@(object_getClass(_device)==_originalDeviceClass),@"live_encoder_classes_restored":@(live),@"already_released_encoders":@(expired),@"cached_device_classes":@(deviceClasses.size()),@"cached_encoder_classes":@(encoderClasses.size()),@"system_modified":@NO}];}}
 - (void)dealloc{[self restore];}
 @end
 

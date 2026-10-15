@@ -35,12 +35,33 @@ NSDictionary*functionArgumentSchema(MTLArgument*argument,id<MTLArgumentEncoder>e
  return @{@"buffer_index":@(index),@"binding_count":@(count-2),@"encoded_length":@(count*8),@"alignment":@8,@"members":[rows copy]};
 }
 id<MTLArgumentEncoder>nativeFunctionEncoder(id self,SEL selector,NSUInteger index,MTLArgument*__autoreleasing*reflection){
- KPIRFunctionLink*link=objc_getAssociatedObject(self,&IRFunctionKey);Class original=link?link.originalClass:class_getSuperclass(object_getClass(self));Method m=class_getInstanceMethod(original,selector);if(!m)reject(@"Native function encoder selector is missing");
+ KPIRFunctionLink*link=objc_getAssociatedObject(self,&IRFunctionKey);Class actual=object_getClass(self),native=objc_getClass("_MTLFunctionInternal");Class original=link?link.originalClass:(actual==native?native:class_getSuperclass(actual));Method m=class_getInstanceMethod(original,selector);if(!m)reject(@"Native function encoder selector is missing");
  nativeFunctionArgumentDepth++;
  @try{
   if(sel_isEqual(selector,@selector(newArgumentEncoderWithBufferIndex:reflection:))){typedef id<MTLArgumentEncoder>(*F)(id,SEL,NSUInteger,MTLArgument*__autoreleasing*) __attribute__((ns_returns_retained));return((F)method_getImplementation(m))(self,selector,index,reflection);}
   typedef id<MTLArgumentEncoder>(*F)(id,SEL,NSUInteger) __attribute__((ns_returns_retained));return((F)method_getImplementation(m))(self,selector,index);
  }@finally{nativeFunctionArgumentDepth--;}
+}
+id<MTLArgumentEncoder>functionIRArguments(id,SEL,NSUInteger) NS_RETURNS_RETAINED;
+id<MTLArgumentEncoder>functionIRArgumentsWithReflection(id,SEL,NSUInteger,MTLArgument*__autoreleasing*) NS_RETURNS_RETAINED;
+BOOL installRenderOverride(Class,Class,SEL,IMP);
+BOOL adoptNativeIRFunction(KPCPUICBScope*s,id<MTLFunction>function,NSString*expected,NSUInteger index,BOOL allowExisting,NSError**error){
+ @synchronized(s.factoryLock){
+  if(error)*error=nil;
+  if(s.restored||!s.GPUCommandIRv2Selector||index||!function||function.functionType!=MTLFunctionTypeKernel||function.device!=s.device)return fail(error,@"Native producer function identity/type differs");
+  KPIRFunctionLink*old=objc_getAssociatedObject(function,&IRFunctionKey);
+  if(old)return allowExisting&&old.scope==s&&old.bufferIndex==index&&[old.librarySHA isEqual:expected]?YES:fail(error,@"Function is already owned by another registration");
+  MTLArgument*argument=nil;id<MTLArgumentEncoder>native=nil;
+  nativeFunctionArgumentDepth++;@try{native=[function newArgumentEncoderWithBufferIndex:index reflection:&argument];}@catch(NSException*x){fail(error,x.reason?:@"Native argument reflection failed");}@finally{nativeFunctionArgumentDepth--;}
+  NSDictionary*schema=functionArgumentSchema(argument,native,index);if(!schema)return fail(error,@"Native reflection is outside the dense IRv2 ABI");
+  BOOL gettersAdapted=![native isKindOfClass:KPCommandIRArgumentEncoder.class];Class original=object_getClass(function),dynamic=original;
+  if(gettersAdapted){
+   {std::lock_guard<std::mutex>lock(installMutex);dynamic=scopedClass(functionClasses,original,@"KPIRFunction_",@selector(newArgumentEncoderWithBufferIndex:),(IMP)functionIRArguments,error);if(!dynamic||!installRenderOverride(dynamic,original,@selector(newArgumentEncoderWithBufferIndex:reflection:),(IMP)functionIRArgumentsWithReflection))return fail(error,@"Cannot create function-local encoder overrides");}
+   KPIRFunctionLink*link=[KPIRFunctionLink new];link.scope=s;link.originalClass=original;link.bufferIndex=index;link.bindingCount=[schema[@"binding_count"]unsignedIntegerValue];link.schema=schema;link.librarySHA=[expected copy];objc_setAssociatedObject(function,&IRFunctionKey,link,OBJC_ASSOCIATION_RETAIN_NONATOMIC);object_setClass(function,dynamic);
+   KPAdaptedFunction*record=[KPAdaptedFunction new];record.function=function;record.originalClass=original;if(!s.adaptedFunctions)s.adaptedFunctions=[NSMutableArray new];[s.adaptedFunctions addObject:record];
+  }
+  NSMutableArray*events=s.eventRows;@synchronized(events){[events addObject:@{@"operation":@"register_native_IRv2_function",@"function":function.name,@"library_SHA256":expected,@"schema":schema,@"native_class":NSStringFromClass(original),@"dynamic_class":NSStringFromClass(dynamic),@"native_reflection_reused":@YES,@"function_getters_adapted":@(gettersAdapted),@"native_argument_encoder_class":NSStringFromClass(object_getClass(native)),@"native_shader_compilation_replaced":@NO,@"GPU_execution":@NO}];}return YES;
+ }
 }
 id<MTLArgumentEncoder>IRFunctionEncoder(KPIRFunctionLink*link){
  NSMutableArray*a=[NSMutableArray new];for(NSUInteger i=0;i<link.bindingCount+2;i++){MTLArgumentDescriptor*d=[MTLArgumentDescriptor argumentDescriptor];d.index=i;d.arrayLength=1;d.dataType=i==0?MTLDataTypeIndirectCommandBuffer:i==1?MTLDataTypeComputePipeline:MTLDataTypePointer;[a addObject:d];}

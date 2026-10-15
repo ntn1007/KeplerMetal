@@ -724,5 +724,7 @@
     "full_236_trial_suite": "NOT RUN on this separately rebuilt artifact",
     "historical_qualification_inherited": false
   },
-  "evidence_scope": "Maintainer hardware execution, numeric re-verification and source/return hash checks; raw proprietary inputs and binary captures remain local."
+  "evidence_scope": "Maintainer hardware execution, numeric re-verification and source/return hash checks; raw proprietary inputs and binary captures remain local.",
+  "source_client_public_commit": "72992a123328c2bea8a72f0e10dd3014fa3a867a",
+  "source_client_path_at_commit": "examples/command_ir_pipeline_contracts.mm"
 }
