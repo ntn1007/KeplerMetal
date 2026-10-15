@@ -1,0 +1,8 @@
+#import "KeplerNativeCommands.h"
+int main(){@autoreleasepool{
+ NSObject*p=[NSObject new],*l=[NSObject new];NSString*h=[@"a" stringByPaddingToLength:64 withString:@"b" startingAtIndex:0];
+ NSDictionary*base=@{@"native_registration_v1":@YES,@"binding_layout_v2":@YES,@"pipeline_owner":p,@"library_owner":l,@"registration_id":@"test-owned-registration",@"library_SHA256":h,@"manifest_SHA256":h};NSMutableArray*rows=[NSMutableArray new];
+ for(NSString*n in @[@"owned",@"not_registered",@"not_reflected",@"wrong_pipeline",@"no_library",@"no_registration",@"bad_library_hash",@"bad_manifest_hash",@"literal_CB0"]){NSMutableDictionary*d=[base mutableCopy];id owner=p;BOOL expected=[n isEqual:@"owned"];
+  if([n isEqual:@"not_registered"])d[@"native_registration_v1"]=@NO;if([n isEqual:@"not_reflected"])d[@"binding_layout_v2"]=@NO;if([n isEqual:@"wrong_pipeline"])owner=l;if([n isEqual:@"no_library"])[d removeObjectForKey:@"library_owner"];if([n isEqual:@"no_registration"])d[@"registration_id"]=@"";if([n isEqual:@"bad_library_hash"])d[@"library_SHA256"]=@"a";if([n isEqual:@"bad_manifest_hash"])d[@"manifest_SHA256"]=@"a";if([n isEqual:@"literal_CB0"])d[@"native_literal_bank_0"]=@{@"bytes":@256};BOOL actual=KPResidentProfilePermitsInactiveCB0(d,(id<MTLComputePipelineState>)owner);if(actual!=expected)return 1;[rows addObject:@{@"case":n,@"accepted":@(actual),@"expected":@(expected)}];
+ }NSData*out=[NSJSONSerialization dataWithJSONObject:@{@"status":@"PASS",@"GPU_executed":@NO,@"Metal_device_created":@NO,@"checks":rows}options:NSJSONWritingPrettyPrinted error:nil];fwrite(out.bytes,1,out.length,stdout);puts("");return 0;
+}}

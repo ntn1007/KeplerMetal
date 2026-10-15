@@ -1,0 +1,16 @@
+# Third-party notices
+
+Original KeplerMetal code is MIT-licensed. The export excludes complete external source trees and all proprietary components. Upstream context in patches retains the upstream terms; our root license does not replace them.
+
+| Project | Reference used in the lab | Role | License / notice |
+| --- | --- | --- | --- |
+| [OpenNVDA](https://github.com/bdwithganesh/OpenNVDA) | `da0c53d0a2a0b69b658c9e26b4cfa51946fff5f5` | AIR/NIR frontend, patch target | [Upstream MIT notice](third_party/licenses/OpenNVDA-MIT.txt), copyright 2026 bdwithganesh |
+| [Mesa](https://gitlab.freedesktop.org/mesa/mesa) | 26.2.4, `96cb43121031992b85767f9c1be8f3f48e22b1d2` | NIR and NAK SM30 compiler | [MIT text](third_party/licenses/Mesa-MIT.txt); consult each upstream SPDX header. Patched NAK files include copyright 2025 Collabora, Ltd.; meson.build includes copyright 2017–2020 Intel Corporation. |
+| [envytools](https://github.com/envytools/envytools) | `f102b82381f3f11cee113d16374c87091db039d9` | NVIDIA instruction and command documentation, assembler/disassembler | [Upstream MIT notice](third_party/licenses/envytools-MIT.txt) |
+| [OpenCore Legacy Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher) | source reference `d622cd5de86e5cb9a8c975c2809dbdbd2822c86e` | Installed stack provenance research | Referenced, not bundled; upstream license applies. |
+
+`bridge/src/*.patch` are patches against the named open source revisions, not patches containing proprietary driver bodies. `bridge/src/opennvda-command-ir.inc` is an original extension to the OpenNVDA frontend. GPU programs are generated locally from included sources; no compiled program or captured vendor command stream is distributed.
+
+The FP64 include contains an allowlist of program hashes, dimensions, and register counts, not program bytes. Other profile JSON files likewise describe test contracts and expected hashes; they do not grant rights to any external dependency.
+
+Apple Metal, Xcode, macOS frameworks, restored Apple/NVIDIA drivers, NVIDIA Linux/FreeBSD packages, and firmware remain proprietary dependencies under their publishers' terms. They are not covered by this repository's MIT license and are not redistributed here. See [recovery instructions](docs/DEPENDENCIES.md).

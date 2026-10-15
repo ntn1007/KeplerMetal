@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "date": "2026-10-15",
+  "scope": "Initial source publication validation; historical GPU cohorts were not rerun",
+  "source_snapshot_SHA256": "e0e0bba5f11fae7c10bb642d07d9d18c18f219ae208f67a7085fe979897014bf",
+  "source_files": 713,
+  "unchanged_exported_source_files": 709,
+  "publication_edited_source_files": 4,
+  "portable_tests": {
+    "status": "PASS",
+    "tests": 7
+  },
+  "source_only_build": {
+    "status": "PASS",
+    "architecture": "x86_64",
+    "SDK": "26.2",
+    "static_library_SHA256": "9f935da184450fd3fd12b9b95205c534defed7d9a1ece388b1e22cb0a44058a3",
+    "all_runtime_objects_rebuilt": true,
+    "full_archive_link": "PASS",
+    "cpu_link_check": "PASS",
+    "GPU_execution": false,
+    "GPU_qualification": "NOT RUN"
+  },
+  "reference_payload_inspection": {
+    "status": "PASS",
+    "existing_archives": 5,
+    "original_payload_offsets_match": true,
+    "first_tar_members_readable": true,
+    "new_driver_downloads": 0,
+    "installer_executed": false
+  },
+  "system_files_unchanged": 83,
+  "OCLP_unchanged": true,
+  "proprietary_payloads_in_repository": false,
+  "Qwen_job_ids": [],
+  "full_project_goal": "INCOMPLETE"
+}

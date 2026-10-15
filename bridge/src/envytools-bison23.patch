@@ -1,0 +1,46 @@
+--- a/easm/easm_parse.y
++++ b/easm/easm_parse.y
+@@ -33,8 +33,8 @@
+ %}
+ 
+ %locations
+-%define api.pure
+-%name-prefix "easm_"
++%pure-parser
++%name-prefix="easm_"
+ %lex-param { void *lex_state }
+ %parse-param { void *lex_state }
+ %parse-param { struct easm_file **res }
+@@ -92,19 +92,19 @@
+ 
+ /* XXX: destructors */
+ 
+-%destructor { } <num>
+-%destructor { free($$); } <str>
+-%destructor { free($$.str); } <astr>
+-%destructor { easm_del_mod($$); } <mod>
+-%destructor { easm_del_mods($$); } <mods>
+-%destructor { easm_del_operand($$); } <operand>
+-%destructor { easm_del_expr($$); } <expr>
+-%destructor { easm_del_insn($$); } <insn>
+-%destructor { easm_del_subinsn($$); } <subinsn>
+-%destructor { easm_del_sinsn($$); } <sinsn>
+-%destructor { easm_del_directive($$); } <direct>
+-%destructor { easm_del_line($$); } <line>
+-%destructor { easm_del_file($$); } <file>
++%destructor { } T_NUM T_DOTNUM
++%destructor { free($$); } T_WORD T_WORDC T_WORDLB T_DOTWORD T_HASHWORD T_DOLWORD
++%destructor { free($$.str); } T_STR
++%destructor { easm_del_mod($$); } mod
++%destructor { easm_del_mods($$); } mods
++%destructor { easm_del_operand($$); } operand
++%destructor { easm_del_expr($$); } expr expr0 expr1 expr2 expr3 expr4 expr5 sexpr sexpr0 sexpr1 pexpr aexpr lswizzle membody
++%destructor { easm_del_insn($$); } insn
++%destructor { easm_del_subinsn($$); } subinsn prefs
++%destructor { easm_del_sinsn($$); } sinsn operands
++%destructor { easm_del_directive($$); } direct
++%destructor { easm_del_line($$); } line
++%destructor { easm_del_file($$); } file
+ 
+ %%
+ 

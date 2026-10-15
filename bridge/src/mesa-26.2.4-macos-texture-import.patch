@@ -1,0 +1,133 @@
+--- a/src/nouveau/compiler/nak/api.rs
++++ b/src/nouveau/compiler/nak/api.rs
+@@ -498,10 +498,16 @@
+     robust2_modes: nir_variable_mode,
+     fs_key: *const nak_fs_key,
+     has_task_shader: bool,
++    embedded_postprocess: Option<unsafe extern "C" fn(*mut nir_shader, *mut core::ffi::c_void)>,
++    embedded_data: *mut core::ffi::c_void,
+ ) -> *mut nak_shader_bin {
+     unsafe {
+         nak_postprocess_nir(nir, nak, robust2_modes, fs_key, has_task_shader)
+     };
++    // macOS embedding: adapt lowered resource ABI before register allocation.
++    if let Some(callback) = embedded_postprocess {
++        unsafe { callback(nir, embedded_data) };
++    }
+     let nak = unsafe { &*nak };
+     let nir = unsafe { &*nir };
+     let fs_key = if fs_key.is_null() {
+@@ -571,6 +577,8 @@
+             robust2_modes,
+             fs_key,
+             has_task_shader,
++            None,
++            std::ptr::null_mut(),
+         )
+     };
+     if DEBUG.panic() {
+@@ -579,3 +587,21 @@
+         panic::catch_unwind(compile).unwrap_or(std::ptr::null_mut())
+     }
+ }
++
++// Additional embedding entry point. Existing callers retain the upstream path.
++#[no_mangle]
++pub extern "C" fn nak_compile_shader_embedded(
++    nir: *mut nir_shader,
++    dump_asm: bool,
++    nak: *const nak_compiler,
++    robust2_modes: nir_variable_mode,
++    fs_key: *const nak_fs_key,
++    has_task_shader: bool,
++    callback: Option<unsafe extern "C" fn(*mut nir_shader, *mut core::ffi::c_void)>,
++    data: *mut core::ffi::c_void,
++) -> *mut nak_shader_bin {
++    let compile = || nak_compile_shader_internal(nir, dump_asm, nak, robust2_modes,
++                                                fs_key, has_task_shader, callback, data);
++    if DEBUG.panic() { compile() }
++    else { panic::catch_unwind(compile).unwrap_or(std::ptr::null_mut()) }
++}
+--- a/src/nouveau/compiler/nak/sm20.rs
++++ b/src/nouveau/compiler/nak/sm20.rs
+@@ -1744,7 +1744,9 @@
+ 
+         match self.tex {
+             TexRef::Bound(idx) => {
+-                e.set_field(32..40, idx);
++                // macOS bound references pack TIC (8 bits) + TSC (5 bits).
++                e.set_field(32..40, idx & 0xff);
++                e.set_field(40..45, idx >> 8);
+                 e.set_bit(50, false); // .b
+             }
+             TexRef::CBuf { .. } => {
+@@ -1783,7 +1785,9 @@
+ 
+         match self.tex {
+             TexRef::Bound(idx) => {
+-                e.set_field(32..40, idx);
++                // macOS bound references pack TIC (8 bits) + TSC (5 bits).
++                e.set_field(32..40, idx & 0xff);
++                e.set_field(40..45, idx >> 8);
+                 e.set_bit(50, false); // .b
+             }
+             TexRef::CBuf { .. } => {
+@@ -1829,7 +1833,9 @@
+ 
+         match self.tex {
+             TexRef::Bound(idx) => {
+-                e.set_field(32..40, idx);
++                // macOS bound references pack TIC (8 bits) + TSC (5 bits).
++                e.set_field(32..40, idx & 0xff);
++                e.set_field(40..45, idx >> 8);
+                 e.set_bit(50, false); // .b
+             }
+             TexRef::CBuf { .. } => {
+@@ -1875,7 +1881,9 @@
+ 
+         match self.tex {
+             TexRef::Bound(idx) => {
+-                e.set_field(32..40, idx);
++                // macOS bound references pack TIC (8 bits) + TSC (5 bits).
++                e.set_field(32..40, idx & 0xff);
++                e.set_field(40..45, idx >> 8);
+                 e.set_bit(50, false); // .b
+             }
+             TexRef::CBuf { .. } => {
+@@ -1910,7 +1918,9 @@
+ 
+         match self.tex {
+             TexRef::Bound(idx) => {
+-                e.set_field(32..40, idx);
++                // macOS bound references pack TIC (8 bits) + TSC (5 bits).
++                e.set_field(32..40, idx & 0xff);
++                e.set_field(40..45, idx >> 8);
+                 e.set_bit(50, false); // .b
+             }
+             TexRef::CBuf { .. } => {
+@@ -1945,7 +1955,9 @@
+ 
+         match self.tex {
+             TexRef::Bound(idx) => {
+-                e.set_field(32..40, idx);
++                // macOS bound references pack TIC (8 bits) + TSC (5 bits).
++                e.set_field(32..40, idx & 0xff);
++                e.set_field(40..45, idx >> 8);
+                 e.set_bit(50, false); // .b
+             }
+             TexRef::CBuf { .. } => {
+--- a/src/nouveau/compiler/nak/calc_instr_deps.rs
++++ b/src/nouveau/compiler/nak/calc_instr_deps.rs
+@@ -522,6 +522,12 @@
+     /// Simulates the execution of an instruction and returns the
+     /// barrier level needed.
+     pub fn visit_instr(&mut self, instr: &Instr) -> Option<u8> {
++        // macOS fragment outputs are consumed implicitly by EXIT. Ensure that
++        // pending texture results are available even without a final MOV.
++        if matches!(instr.op, Op::Exit(_)) && !self.queue_pos.is_empty() {
++            self.flush_after(0);
++            return Some(0);
++        }
+         // Flush register reads and writes
+         // (avoid write-after-write and read-after-write hazards)
+         // Compute the minimum required flush level (for barriers)

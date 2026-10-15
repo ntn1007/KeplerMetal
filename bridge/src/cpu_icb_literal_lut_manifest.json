@@ -1,0 +1,242 @@
+{
+  "schema": 2,
+  "library_SHA256": "8f00cb2da814d7a0cc3c428a327395c50278871b35dfd28f4d9530986f6b96db",
+  "functions": [
+    {
+      "name": "literal_lut_16",
+      "static_threadgroup_bytes": 0,
+      "max_local": 1024,
+      "qmd_register_count": 14,
+      "constant_buffer_index": 2,
+      "max_invocations": 65536,
+      "allow_multidimensional": false,
+      "buffers": [
+        {
+          "index": 0,
+          "name": "dst",
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 36,
+          "access": 1,
+          "active": true,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 16
+        },
+        {
+          "index": 1,
+          "name": "src",
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 36,
+          "access": 0,
+          "active": true,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 16
+        },
+        {
+          "index": 2,
+          "name": "p",
+          "data_size": 16,
+          "alignment": 256,
+          "data_type": 1,
+          "access": 0,
+          "active": true,
+          "minimum_bytes": 512,
+          "per_invocation_bytes": 0
+        },
+        {
+          "index": 3,
+          "name": "counter",
+          "data_size": 4,
+          "alignment": 4,
+          "data_type": 1,
+          "access": 1,
+          "active": true,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 0
+        }
+      ],
+      "native_literal_bank_0": {
+        "bytes": 256,
+        "address_relation": "native_code_end_aligned_256"
+      }
+    },
+    {
+      "name": "literal_lut_64",
+      "static_threadgroup_bytes": 0,
+      "max_local": 1024,
+      "qmd_register_count": 14,
+      "constant_buffer_index": 2,
+      "max_invocations": 65536,
+      "allow_multidimensional": false,
+      "buffers": [
+        {
+          "index": 0,
+          "name": "dst",
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 36,
+          "access": 1,
+          "active": true,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 16
+        },
+        {
+          "index": 1,
+          "name": "src",
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 36,
+          "access": 0,
+          "active": true,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 16
+        },
+        {
+          "index": 2,
+          "name": "p",
+          "data_size": 16,
+          "alignment": 256,
+          "data_type": 1,
+          "access": 0,
+          "active": true,
+          "minimum_bytes": 512,
+          "per_invocation_bytes": 0
+        },
+        {
+          "index": 3,
+          "name": "counter",
+          "data_size": 4,
+          "alignment": 4,
+          "data_type": 1,
+          "access": 1,
+          "active": true,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 0
+        }
+      ],
+      "native_literal_bank_0": {
+        "bytes": 256,
+        "address_relation": "native_code_end_aligned_256"
+      }
+    },
+    {
+      "name": "literal_lut_128",
+      "static_threadgroup_bytes": 0,
+      "max_local": 1024,
+      "qmd_register_count": 14,
+      "constant_buffer_index": 2,
+      "max_invocations": 65536,
+      "allow_multidimensional": false,
+      "buffers": [
+        {
+          "index": 0,
+          "name": "dst",
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 36,
+          "access": 1,
+          "active": true,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 16
+        },
+        {
+          "index": 1,
+          "name": "src",
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 36,
+          "access": 0,
+          "active": true,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 16
+        },
+        {
+          "index": 2,
+          "name": "p",
+          "data_size": 16,
+          "alignment": 256,
+          "data_type": 1,
+          "access": 0,
+          "active": true,
+          "minimum_bytes": 512,
+          "per_invocation_bytes": 0
+        },
+        {
+          "index": 3,
+          "name": "counter",
+          "data_size": 4,
+          "alignment": 4,
+          "data_type": 1,
+          "access": 1,
+          "active": true,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 0
+        }
+      ],
+      "native_literal_bank_0": {
+        "bytes": 512,
+        "address_relation": "native_code_end_aligned_256"
+      }
+    },
+    {
+      "name": "literal_lut_256",
+      "static_threadgroup_bytes": 0,
+      "max_local": 1024,
+      "qmd_register_count": 14,
+      "constant_buffer_index": 2,
+      "max_invocations": 65536,
+      "allow_multidimensional": false,
+      "buffers": [
+        {
+          "index": 0,
+          "name": "dst",
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 36,
+          "access": 1,
+          "active": true,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 16
+        },
+        {
+          "index": 1,
+          "name": "src",
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 36,
+          "access": 0,
+          "active": true,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 16
+        },
+        {
+          "index": 2,
+          "name": "p",
+          "data_size": 16,
+          "alignment": 256,
+          "data_type": 1,
+          "access": 0,
+          "active": true,
+          "minimum_bytes": 512,
+          "per_invocation_bytes": 0
+        },
+        {
+          "index": 3,
+          "name": "counter",
+          "data_size": 4,
+          "alignment": 4,
+          "data_type": 1,
+          "access": 1,
+          "active": true,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 0
+        }
+      ],
+      "native_literal_bank_0": {
+        "bytes": 1024,
+        "address_relation": "native_code_end_aligned_256"
+      }
+    }
+  ]
+}

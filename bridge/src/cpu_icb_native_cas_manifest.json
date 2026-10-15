@@ -1,0 +1,226 @@
+{
+  "schema": 2,
+  "library_SHA256": "92b1560d30a6f29bb8d28c758a8f9b917257452e1a52ffd3761972c4e451c573",
+  "functions": [
+    {
+      "name": "sdk_cas_expected",
+      "static_threadgroup_bytes": 256,
+      "max_local": 1024,
+      "qmd_register_count": 7,
+      "constant_buffer_index": 0,
+      "max_invocations": 3072,
+      "allow_multidimensional": false,
+      "buffers": [
+        {
+          "index": 0,
+          "name": "p",
+          "data_size": 20,
+          "alignment": 256,
+          "data_type": 1,
+          "access": 0,
+          "active": true,
+          "minimum_bytes": 512,
+          "per_invocation_bytes": 0
+        },
+        {
+          "index": 1,
+          "name": "out",
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 36,
+          "access": 1,
+          "active": true,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 16
+        },
+        {
+          "index": 3,
+          "name": "global",
+          "data_size": 4,
+          "alignment": 4,
+          "data_type": 1,
+          "access": 1,
+          "active": false,
+          "minimum_bytes": 4,
+          "per_invocation_bytes": 0
+        }
+      ]
+    },
+    {
+      "name": "sdk_cas_slot",
+      "static_threadgroup_bytes": 256,
+      "max_local": 1024,
+      "qmd_register_count": 7,
+      "constant_buffer_index": 0,
+      "max_invocations": 3072,
+      "allow_multidimensional": false,
+      "buffers": [
+        {
+          "index": 0,
+          "name": "p",
+          "data_size": 20,
+          "alignment": 256,
+          "data_type": 1,
+          "access": 0,
+          "active": true,
+          "minimum_bytes": 512,
+          "per_invocation_bytes": 0
+        },
+        {
+          "index": 1,
+          "name": "out",
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 36,
+          "access": 1,
+          "active": true,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 16
+        },
+        {
+          "index": 3,
+          "name": "global",
+          "data_size": 4,
+          "alignment": 4,
+          "data_type": 1,
+          "access": 1,
+          "active": false,
+          "minimum_bytes": 4,
+          "per_invocation_bytes": 0
+        }
+      ]
+    },
+    {
+      "name": "sdk_cas_noise",
+      "static_threadgroup_bytes": 256,
+      "max_local": 1024,
+      "qmd_register_count": 8,
+      "constant_buffer_index": 0,
+      "max_invocations": 3072,
+      "allow_multidimensional": false,
+      "buffers": [
+        {
+          "index": 0,
+          "name": "p",
+          "data_size": 20,
+          "alignment": 256,
+          "data_type": 1,
+          "access": 0,
+          "active": true,
+          "minimum_bytes": 512,
+          "per_invocation_bytes": 0
+        },
+        {
+          "index": 1,
+          "name": "out",
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 36,
+          "access": 1,
+          "active": true,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 16
+        },
+        {
+          "index": 3,
+          "name": "global",
+          "data_size": 4,
+          "alignment": 4,
+          "data_type": 1,
+          "access": 1,
+          "active": false,
+          "minimum_bytes": 4,
+          "per_invocation_bytes": 0
+        }
+      ]
+    },
+    {
+      "name": "sdk_cas_swizzle",
+      "static_threadgroup_bytes": 256,
+      "max_local": 1024,
+      "qmd_register_count": 7,
+      "constant_buffer_index": 0,
+      "max_invocations": 3072,
+      "allow_multidimensional": false,
+      "buffers": [
+        {
+          "index": 0,
+          "name": "p",
+          "data_size": 20,
+          "alignment": 256,
+          "data_type": 1,
+          "access": 0,
+          "active": true,
+          "minimum_bytes": 512,
+          "per_invocation_bytes": 0
+        },
+        {
+          "index": 1,
+          "name": "out",
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 36,
+          "access": 1,
+          "active": true,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 16
+        },
+        {
+          "index": 3,
+          "name": "global",
+          "data_size": 4,
+          "alignment": 4,
+          "data_type": 1,
+          "access": 1,
+          "active": false,
+          "minimum_bytes": 4,
+          "per_invocation_bytes": 0
+        }
+      ]
+    },
+    {
+      "name": "sdk_keep_comparand",
+      "static_threadgroup_bytes": 256,
+      "max_local": 1024,
+      "qmd_register_count": 7,
+      "constant_buffer_index": 0,
+      "max_invocations": 3072,
+      "allow_multidimensional": false,
+      "buffers": [
+        {
+          "index": 0,
+          "name": "p",
+          "data_size": 20,
+          "alignment": 256,
+          "data_type": 1,
+          "access": 0,
+          "active": true,
+          "minimum_bytes": 512,
+          "per_invocation_bytes": 0
+        },
+        {
+          "index": 1,
+          "name": "out",
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 36,
+          "access": 1,
+          "active": true,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 16
+        },
+        {
+          "index": 3,
+          "name": "global",
+          "data_size": 4,
+          "alignment": 4,
+          "data_type": 1,
+          "access": 1,
+          "active": false,
+          "minimum_bytes": 4,
+          "per_invocation_bytes": 0
+        }
+      ]
+    }
+  ]
+}

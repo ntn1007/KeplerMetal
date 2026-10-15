@@ -1,0 +1,125 @@
+#import "KeplerCPUICB.h"
+#import <objc/runtime.h>
+#include <CommonCrypto/CommonDigest.h>
+#include <cstring>
+#ifndef KP_SELECT_NATIVE
+#define KP_SELECT_NATIVE 0
+#endif
+struct P{uint32_t seed,groups,local,max_n,scratch_words;};
+@interface WeakResource : NSObject
+@property(nonatomic,weak) id<MTLBuffer> output,counter;
+@end
+@implementation WeakResource
+@end
+static NSString*sha(NSData*d){unsigned char h[32];CC_SHA256(d.bytes,(CC_LONG)d.length,h);NSMutableString*s=[NSMutableString new];for(unsigned char b:h)[s appendFormat:@"%02x",b];return s;}
+static BOOL done(id<MTLCommandBuffer>c){[c commit];[c waitUntilCompleted];return c.status==MTLCommandBufferStatusCompleted;}
+static void emit(id x){NSData*d=[NSJSONSerialization dataWithJSONObject:x options:NSJSONWritingPrettyPrinted error:nil];fwrite(d.bytes,1,d.length,stdout);puts("");}
+static id<MTLLibrary>load(id<MTLDevice>d,NSString*p,NSError**e){NSData*x=[NSData dataWithContentsOfFile:p];dispatch_data_t v=dispatch_data_create(x.bytes,x.length,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),^{(void)x.length;});return[d newLibraryWithData:v error:e];}
+int main(int argc,char**argv){@autoreleasepool{
+ if(argc!=4)return 1;NSString*assets=@(argv[1]),*out=@(argv[2]),*mode=@(argv[3]);
+ if(![@[@"prepare",@"select",@"range",@"split",@"completed",@"copy",@"no_producer",@"no_selector"]containsObject:mode])return 1;
+ BOOL prepare=[mode isEqual:@"prepare"],split=[mode isEqual:@"split"],completed=[mode isEqual:@"completed"],copy=[mode isEqual:@"copy"],producer=![mode isEqual:@"no_producer"],selector=![mode isEqual:@"no_selector"];
+ NSUInteger rows=[mode isEqual:@"range"]?2:1,candidates=3,slots=candidates+rows*(copy?2:1);
+ id<MTLDevice>d=nil;
+#if KP_SELECT_NATIVE
+ d=MTLCreateSystemDefaultDevice();
+#else
+ for(id<MTLDevice>x in MTLCopyAllDevices())if(x.registryID==4294968458)d=x;
+#endif
+ if(!d)return 2;Class original=object_getClass(d);NSError*error=nil;id<MTLCommandQueue>q=[d newCommandQueue];
+ NSArray*names=@[@"shared_mix_s128",@"shared_mix_s1024",@"shared_mix_s4096"];NSMutableDictionary*pipelines=[NSMutableDictionary new];
+ NSData*libdata=[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"combined_shared.metallib"]],*manifest=[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"cpu_icb_combined_shared_manifest.json"]],*seldata=[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"gpu_command_selector.metallib"]],*geodata=[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"gpu_command_geometry.metallib"]],*bindingdata=[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"gpu_command_bindings.metallib"]];
+#if KP_SELECT_NATIVE
+ id<MTLLibrary>library=load(d,[assets stringByAppendingPathComponent:@"combined_shared.metallib"],&error),selLib=load(d,[assets stringByAppendingPathComponent:@"gpu_command_bindings.metallib"],&error);if(!library||!selLib)return 3;
+ for(NSString*n in names){MTLComputePipelineDescriptor*x=[MTLComputePipelineDescriptor new];x.computeFunction=[library newFunctionWithName:n];x.supportIndirectCommandBuffers=YES;id<MTLComputePipelineState>p=[d newComputePipelineStateWithDescriptor:x options:MTLPipelineOptionNone reflection:nil error:&error];if(!p)return 3;pipelines[n]=p;}
+ id<MTLFunction>selectorFunction=[selLib newFunctionWithName:@"generate_bound_command_from_gpu"];
+ id<MTLComputePipelineState>producerPSO=[d newComputePipelineStateWithFunction:[selLib newFunctionWithName:@"produce_command_choices"]error:&error],selectorPSO=[d newComputePipelineStateWithFunction:selectorFunction error:&error];if(!producerPSO||!selectorPSO)return 3;
+#else
+ KPCPUICBScope*scope=[KPCPUICBScope installOnDevice:d queue:q libraryData:libdata expectedSHA256:sha(libdata)manifestData:manifest expectedManifestSHA256:sha(manifest)error:&error];if(!scope)return 3;
+ if(![scope enableGPUCommandSelectionWithLibraryData:seldata expectedSHA256:@"b6d3f29fc4f85dd020f96fff3fc5f2586548aad483ea2649172b56545a9e581c" error:&error]){fprintf(stderr,"%s\n",error.description.UTF8String);return 3;}if(![scope enableGPUCommandGeometryWithLibraryData:geodata expectedSHA256:sha(geodata)error:&error]){fprintf(stderr,"%s\n",error.description.UTF8String);return 3;}if(![scope enableGPUCommandBindingsWithLibraryData:bindingdata expectedSHA256:sha(bindingdata)error:&error]){fprintf(stderr,"%s\n",error.description.UTF8String);return 3;}for(NSString*n in names)pipelines[n]=[scope pipelineForFunction:n];
+#endif
+ const unsigned statics[3]={512,4096,16384},locals[3][6]={{32,33,128,256,512,1024},{512,1024,256,32,33,128},{128,256,32,1024,512,33}};
+ NSMutableArray*runs=[NSMutableArray new];
+ for(unsigned t=0;t<3;t++){@autoreleasepool{
+  const NSUInteger bytes=8192*16+512;uint32_t nonce=0x9e37+31*t;
+  NSMutableArray*outputs=[NSMutableArray new],*hosts=[NSMutableArray new],*counters=[NSMutableArray new],*counterHosts=[NSMutableArray new],*params=[NSMutableArray new],*specs=[NSMutableArray new];
+  for(unsigned k=0;k<slots;k++){unsigned index=(k+t)%3,l=locals[t][k],g=k<3?(l==1024?4:7):3,sb=statics[index],db=k<3?49152-sb:1024*(k+1),seed=0x765431+t*97+k*101;P p={seed,g,l,g*l,db/4};
+   id<MTLBuffer>o=[d newBufferWithLength:bytes options:MTLResourceStorageModePrivate],h=[d newBufferWithLength:bytes options:MTLResourceStorageModeShared],c=[d newBufferWithLength:208 options:MTLResourceStorageModePrivate],ch=[d newBufferWithLength:208 options:MTLResourceStorageModeShared],pb=[d newBufferWithLength:2048 options:MTLResourceStorageModeShared];if(!o||!h||!c||!ch||!pb)return 4;
+   memset(h.contents,0xa5,h.length);memset(ch.contents,0xa5,ch.length);memset((char*)ch.contents+128,0,4);memset(pb.contents,0xa5,pb.length);memcpy((char*)pb.contents+1024,&p,sizeof(p));[outputs addObject:o];[hosts addObject:h];[counters addObject:c];[counterHosts addObject:ch];[params addObject:pb];
+   [specs addObject:@{@"function":names[index],@"local":@(l),@"groups":@(g),@"count":@(l*g),@"seed":@(seed),@"static_bytes":@(sb),@"dynamic_bytes":@(db)}];
+  }
+  NSMutableArray*resourceEntries=[NSMutableArray new],*resourceWeak=[NSMutableArray new];
+  for(unsigned bank=0;bank<3;bank++){id<MTLBuffer>o=[d newBufferWithLength:bytes options:MTLResourceStorageModePrivate],h=[d newBufferWithLength:bytes options:MTLResourceStorageModeShared],c=[d newBufferWithLength:208 options:MTLResourceStorageModePrivate],ch=[d newBufferWithLength:208 options:MTLResourceStorageModeShared];if(!o||!h||!c||!ch)return 4;NSUInteger oo=128+32*bank,co=128+4*bank;memset(h.contents,0xa5,h.length);memset(ch.contents,0xa5,ch.length);memset((char*)ch.contents+co,0,4);[outputs addObject:o];[hosts addObject:h];[counters addObject:c];[counterHosts addObject:ch];[resourceEntries addObject:@{@"output":o,@"counter":c,@"outputOffset":@(oo),@"counterOffset":@(co)}];WeakResource*w=[WeakResource new];w.output=o;w.counter=c;[resourceWeak addObject:w];}
+  id<MTLBuffer>input=[d newBufferWithLength:192+rows*128 options:MTLResourceStorageModePrivate],inputHost=[d newBufferWithLength:input.length options:MTLResourceStorageModeShared],inputRead=[d newBufferWithLength:input.length options:MTLResourceStorageModeShared];if(!input||!inputHost||!inputRead)return 4;memset(inputHost.contents,0xa5,inputHost.length);
+  for(unsigned row=0;row<rows;row++)for(unsigned i=0;i<32;i++){uint32_t x=17*i+t*3+row*11+(i==31?(t==2?2:t+1):0);memcpy((char*)inputHost.contents+128+row*128+i*4,&x,4);}
+  id<MTLCommandBuffer>init=[q commandBuffer];id<MTLBlitCommandEncoder>b=[init blitCommandEncoder];for(unsigned k=0;k<outputs.count;k++){[b copyFromBuffer:hosts[k]sourceOffset:0 toBuffer:outputs[k]destinationOffset:0 size:bytes];[b copyFromBuffer:counterHosts[k]sourceOffset:0 toBuffer:counters[k]destinationOffset:0 size:208];}[b copyFromBuffer:inputHost sourceOffset:0 toBuffer:input destinationOffset:0 size:input.length];[b endEncoding];if(!done(init))return 5;
+  MTLIndirectCommandBufferDescriptor*desc=[MTLIndirectCommandBufferDescriptor new];desc.commandTypes=MTLIndirectCommandTypeConcurrentDispatch;desc.maxKernelBufferBindCount=3;desc.inheritBuffers=NO;desc.inheritPipelineState=NO;id<MTLIndirectCommandBuffer>icb=[d newIndirectCommandBufferWithDescriptor:desc maxCommandCount:slots options:MTLResourceStorageModeShared];if(!icb)return 6;
+  for(unsigned k=0;k<slots;k++){NSDictionary*s=specs[k];id<MTLIndirectComputeCommand>c=[icb indirectComputeCommandAtIndex:k];[c setComputePipelineState:pipelines[s[@"function"]]];[c setKernelBuffer:outputs[k]offset:128 atIndex:0];[c setKernelBuffer:counters[k]offset:128 atIndex:1];[c setKernelBuffer:params[k]offset:1024 atIndex:2];[c setThreadgroupMemoryLength:[s[@"dynamic_bytes"]unsignedIntegerValue]atIndex:0];[c concurrentDispatchThreadgroups:MTLSizeMake([s[@"groups"]unsignedIntegerValue],1,1)threadsPerThreadgroup:MTLSizeMake([s[@"local"]unsignedIntegerValue],1,1)];}
+  id<MTLBuffer>choices=nil,counts=nil,geometry=nil;
+#if KP_SELECT_NATIVE
+  geometry=[d newBufferWithLength:128+rows*32 options:MTLResourceStorageModePrivate];id<MTLBuffer>limits=[d newBufferWithLength:48 options:MTLResourceStorageModeShared];memset(limits.contents,0,limits.length);for(unsigned k=0;k<3;k++){uint32_t v[4]={[specs[k][@"groups"]unsignedIntValue],[specs[k][@"local"]unsignedIntValue],0,0};memcpy((char*)limits.contents+k*16,v,16);}choices=[d newBufferWithLength:128+rows*16 options:MTLResourceStorageModePrivate];counts=[d newBufferWithLength:128+rows*8 options:MTLResourceStorageModePrivate];init=[q commandBuffer];b=[init blitCommandEncoder];[b fillBuffer:geometry range:NSMakeRange(0,geometry.length)value:0xa5];[b fillBuffer:geometry range:NSMakeRange(64,rows*32)value:0];[b fillBuffer:choices range:NSMakeRange(0,choices.length)value:0xa5];[b fillBuffer:choices range:NSMakeRange(64,rows*16)value:0];[b fillBuffer:counts range:NSMakeRange(0,counts.length)value:0xa5];[b fillBuffer:counts range:NSMakeRange(64,rows*8)value:0];[b endEncoding];if(!done(init))return 7;
+  id<MTLArgumentEncoder>argumentEncoder=[selectorFunction newArgumentEncoderWithBufferIndex:0];id<MTLBuffer>argument=[d newBufferWithLength:argumentEncoder.encodedLength options:MTLResourceStorageModeShared];[argumentEncoder setArgumentBuffer:argument offset:0];[argumentEncoder setIndirectCommandBuffer:icb atIndex:0];
+  id<MTLArgumentEncoder>resourceEncoder=[selectorFunction newArgumentEncoderWithBufferIndex:7];id<MTLBuffer>resourceArgument=[d newBufferWithLength:resourceEncoder.encodedLength options:MTLResourceStorageModeShared];memset(resourceArgument.contents,0,resourceArgument.length);[resourceEncoder setArgumentBuffer:resourceArgument offset:0];for(unsigned bank=0;bank<3;bank++){NSDictionary*x=resourceEntries[bank];[resourceEncoder setBuffer:x[@"output"]offset:[x[@"outputOffset"]unsignedIntegerValue]atIndex:bank];[resourceEncoder setBuffer:x[@"counter"]offset:[x[@"counterOffset"]unsignedIntegerValue]atIndex:4+bank];}
+  uint32_t configWords[4]={nonce,3,0,0};id<MTLBuffer>producerConfig=[d newBufferWithLength:256 options:MTLResourceStorageModeShared];memcpy(producerConfig.contents,configWords,16);NSMutableArray*selectorConfigs=[NSMutableArray new];for(unsigned row=0;row<rows;row++){configWords[2]=row;configWords[3]=(uint32_t)(candidates+row);id<MTLBuffer>p=[d newBufferWithLength:256 options:MTLResourceStorageModeShared];memset(p.contents,0,256);memcpy(p.contents,configWords,16);uint32_t extra[4]={3,0,0,0};memcpy((char*)p.contents+16,extra,16);[selectorConfigs addObject:p];}
+#else
+  if(![scope prepareResidentComputeCommands:icb range:NSMakeRange(0,slots)error:&error])return 7;
+  KPGPUCommandSelection*plan=[scope newGPUCommandBindingsFromBuffer:icb sourceRange:NSMakeRange(0,candidates)destination:icb destinationRange:NSMakeRange(candidates,rows)resources:resourceEntries input:input inputOffset:128 nonce:nonce error:&error];if(!plan){fprintf(stderr,"%s\n",error.description.UTF8String);return 7;}choices=plan.choices;counts=plan.invocationCounts;geometry=plan.generatedGeometry;NSUInteger eventStart=scope.events.count;
+#endif
+  auto readOutputs=[&]()->BOOL{id<MTLCommandBuffer>r=[q commandBuffer];id<MTLBlitCommandEncoder>bl=[r blitCommandEncoder];for(unsigned k=0;k<hosts.count;k++){id<MTLBuffer>o=k<slots?outputs[k]:((WeakResource*)resourceWeak[k-slots]).output,c=k<slots?counters[k]:((WeakResource*)resourceWeak[k-slots]).counter;if(!o||!c){[bl endEncoding];return NO;}[bl copyFromBuffer:o sourceOffset:0 toBuffer:hosts[k]destinationOffset:0 size:bytes];[bl copyFromBuffer:c sourceOffset:0 toBuffer:counterHosts[k]destinationOffset:0 size:208];}[bl endEncoding];return done(r);};
+  if(!readOutputs())return 8;for(id<MTLBuffer>h in hosts)for(unsigned i=0;i<h.length;i++)if(((uint8_t*)h.contents)[i]!=0xa5)return 8;for(unsigned k=0;k<counterHosts.count;k++){id<MTLBuffer>h=counterHosts[k];uint32_t n;memcpy(&n,(char*)h.contents+(k<slots?128:128+4*(k-slots)),4);if(n)return 8;}
+  id<MTLCommandBuffer>main=[q commandBuffer],pbuf=split?[q commandBuffer]:completed?[q commandBuffer]:main,sbuf=split?[q commandBuffer]:pbuf;
+  if(producer){
+#if KP_SELECT_NATIVE
+   id<MTLComputeCommandEncoder>e=[pbuf computeCommandEncoder];[e setComputePipelineState:producerPSO];[e setBuffer:input offset:128 atIndex:0];[e setBuffer:choices offset:64 atIndex:1];[e setBuffer:counts offset:64 atIndex:2];[e setBuffer:producerConfig offset:0 atIndex:3];[e dispatchThreadgroups:MTLSizeMake(rows,1,1)threadsPerThreadgroup:MTLSizeMake(32,1,1)];[e endEncoding];
+#else
+   if(![plan encodeProducerInCommandBuffer:pbuf error:&error])return 9;
+#endif
+  }
+  if(split)[pbuf commit];
+  if(selector){
+#if KP_SELECT_NATIVE
+   for(unsigned row=0;row<rows;row++){id<MTLComputeCommandEncoder>e=[sbuf computeCommandEncoder];[e setComputePipelineState:selectorPSO];[e setBuffer:argument offset:0 atIndex:0];[e setBuffer:choices offset:64 atIndex:1];[e setBuffer:counts offset:64+rows*4 atIndex:2];[e setBuffer:selectorConfigs[row]offset:0 atIndex:3];[e setBuffer:limits offset:0 atIndex:5];[e setBuffer:geometry offset:64 atIndex:6];[e setBuffer:resourceArgument offset:0 atIndex:7];for(NSDictionary*x in resourceEntries){[e useResource:x[@"output"]usage:MTLResourceUsageRead|MTLResourceUsageWrite];[e useResource:x[@"counter"]usage:MTLResourceUsageRead|MTLResourceUsageWrite];}[e useResource:icb usage:MTLResourceUsageRead|MTLResourceUsageWrite];[e dispatchThreadgroups:MTLSizeMake(1,1,1)threadsPerThreadgroup:MTLSizeMake(64,1,1)];[e endEncoding];}
+#else
+   if(![plan encodeSelectionInCommandBuffer:sbuf error:&error]){fprintf(stderr,"%s\n",error.description.UTF8String);return 10;}
+#endif
+  }
+  if(split)[sbuf commit];if(completed){if(!done(pbuf))return 10;[icb resetWithRange:NSMakeRange(0,candidates)];}
+  NSUInteger executeIndex=candidates;
+  if(copy){b=[main blitCommandEncoder];
+#if !KP_SELECT_NATIVE
+   if(![scope adaptBlitEncoder:b error:&error])return 10;
+#endif
+   [b copyIndirectCommandBuffer:icb sourceRange:NSMakeRange(candidates,rows)destination:icb destinationIndex:candidates+rows];[b endEncoding];executeIndex+=rows;
+  }
+  id<MTLComputeCommandEncoder>e=[main computeCommandEncoder];
+#if !KP_SELECT_NATIVE
+  if(![scope adaptComputeEncoder:e error:&error])return 11;
+#endif
+  for(unsigned k=0;k<outputs.count;k++){
+#if !KP_SELECT_NATIVE
+   if(k>=slots)continue; // The adapter must declare/retain the GPU-chosen catalogue.
+#endif
+   [e useResource:outputs[k]usage:MTLResourceUsageRead|MTLResourceUsageWrite];[e useResource:counters[k]usage:MTLResourceUsageRead|MTLResourceUsageWrite];}for(id<MTLBuffer>p in params)[e useResource:p usage:MTLResourceUsageRead];[e executeCommandsInBuffer:icb withRange:NSMakeRange(executeIndex,rows)];[e endEncoding];
+#if KP_SELECT_NATIVE
+  NSArray*events=@[];NSArray*keep=@[icb,[pipelines.allValues copy],[params copy],argument,producerConfig,[selectorConfigs copy],limits,geometry,resourceArgument,[resourceEntries copy]];[main addCompletedHandler:^(id<MTLCommandBuffer>done){(void)keep.count;}];
+#else
+  NSArray*events=[scope.events subarrayWithRange:NSMakeRange(eventStart,scope.events.count-eventStart)];plan=nil;
+#endif
+  // Readback is part of the consumer CB, before the application drops buffers.
+  // Metal/adapter ownership is required through completion, not afterwards.
+  b=[main blitCommandEncoder];for(unsigned k=0;k<outputs.count;k++){[b copyFromBuffer:outputs[k]sourceOffset:0 toBuffer:hosts[k]destinationOffset:0 size:bytes];[b copyFromBuffer:counters[k]sourceOffset:0 toBuffer:counterHosts[k]destinationOffset:0 size:208];}[b endEncoding];
+  icb=nil;[params removeAllObjects];[resourceEntries removeAllObjects];[outputs removeObjectsInRange:NSMakeRange(slots,3)];[counters removeObjectsInRange:NSMakeRange(slots,3)];
+#if KP_SELECT_NATIVE
+  resourceEncoder=nil;
+#endif
+  for(WeakResource*w in resourceWeak)if(!w.output||!w.counter)return 14;if(!prepare&&!done(main))return 12;
+  id<MTLBuffer>geometryHost=[d newBufferWithLength:geometry.length options:MTLResourceStorageModeShared],choiceHost=[d newBufferWithLength:choices.length options:MTLResourceStorageModeShared],countHost=[d newBufferWithLength:counts.length options:MTLResourceStorageModeShared];id<MTLCommandBuffer>read=[q commandBuffer];b=[read blitCommandEncoder];[b copyFromBuffer:geometry sourceOffset:0 toBuffer:geometryHost destinationOffset:0 size:geometry.length];[b copyFromBuffer:choices sourceOffset:0 toBuffer:choiceHost destinationOffset:0 size:choices.length];[b copyFromBuffer:counts sourceOffset:0 toBuffer:countHost destinationOffset:0 size:counts.length];[b copyFromBuffer:input sourceOffset:0 toBuffer:inputRead destinationOffset:0 size:input.length];[b endEncoding];if(!done(read))return 13;
+  NSMutableArray*files=[NSMutableArray new],*countFiles=[NSMutableArray new];for(unsigned k=0;k<hosts.count;k++){NSString*n=[NSString stringWithFormat:@"trial-%u-slot-%u.bin",t,k],*cn=[NSString stringWithFormat:@"trial-%u-counter-%u.bin",t,k];id<MTLBuffer>h=hosts[k],ch=counterHosts[k];[[NSData dataWithBytes:h.contents length:h.length]writeToFile:[out stringByAppendingPathComponent:n]atomically:YES];[[NSData dataWithBytes:ch.contents length:ch.length]writeToFile:[out stringByAppendingPathComponent:cn]atomically:YES];[files addObject:n];[countFiles addObject:cn];}
+  NSString*cf=[NSString stringWithFormat:@"trial-%u-choices.bin",t],*pf=[NSString stringWithFormat:@"trial-%u-invocations.bin",t],*vf=[NSString stringWithFormat:@"trial-%u-input.bin",t],*gf=[NSString stringWithFormat:@"trial-%u-geometry.bin",t];for(NSArray*x in @[@[gf,geometryHost],@[cf,choiceHost],@[pf,countHost],@[vf,inputRead]]){id<MTLBuffer>h=x[1];[[NSData dataWithBytes:h.contents length:h.length]writeToFile:[out stringByAppendingPathComponent:x[0]]atomically:YES];}
+  [runs addObject:@{@"trial":@(t),@"nonce":@(nonce),@"node_specs":specs,@"outputs":files,@"counter_files":countFiles,@"choice_file":cf,@"invocation_file":pf,@"input_file":vf,@"geometry_file":gf,@"events":events,@"committed":@(!prepare),@"command_status":@(main.status),@"initial_outputs_untouched_after_preparation":@YES,@"source_reset_after_completed_selector":@(completed),@"ICB_and_parameter_external_refs_released_before_commit":@YES,@"resource_catalogue_external_refs_released_before_commit":@YES,@"output_readback_encoded_before_dropping_resources":@YES,@"client_declared_extra_consumer_resources":@(KP_SELECT_NATIVE!=0),@"intermediate_CPU_completion_waits":@(completed?1:0),@"execute_index":@(executeIndex)}];
+ }}
+#if !KP_SELECT_NATIVE
+ [scope restore];
+#endif
+ emit(@{@"mode":mode,@"device":d.name,@"registry_id":@(d.registryID),@"native_reference":@(KP_SELECT_NATIVE!=0),@"candidate_count":@(candidates),@"rows":@(rows),@"slots":@(slots),@"runs":runs,@"scope_restored":@(object_getClass(d)==original),@"system_modified":@NO,@"choice_CPU_read_before_execution":@NO,@"CPU_expected_answers_uploaded":@NO,@"performance_benchmark":@NO,@"GPU_generated_X_grid":@YES,@"GPU_generated_resource_bindings":@YES,@"resource_entries":@3,@"general_GPU_ICB_encoding":@NO});return 0;
+}}

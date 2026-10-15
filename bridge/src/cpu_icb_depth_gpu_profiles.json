@@ -1,0 +1,267 @@
+{
+  "schema": 1,
+  "library_SHA256": "3f07a5bb05487244b82001dff6edeed23ace2bd10a32824be1cb727f29f17775",
+  "pipelines": [
+    {
+      "name": "smooth",
+      "vertex": "vs_io_smooth",
+      "fragment": "fs_combined_smooth",
+      "attributes": [
+        {
+          "index": 0,
+          "buffer": 0,
+          "offset": 0
+        },
+        {
+          "index": 1,
+          "buffer": 0,
+          "offset": 16
+        },
+        {
+          "index": 2,
+          "buffer": 1,
+          "offset": 0
+        }
+      ],
+      "layouts": [
+        {
+          "index": 0,
+          "stride": 32,
+          "step": "vertex"
+        },
+        {
+          "index": 1,
+          "stride": 16,
+          "step": "instance"
+        }
+      ],
+      "indexed_vertex_domain": {
+        "minimum": 5,
+        "maximum": 10
+      },
+      "fragment_buffers": [
+        {
+          "active": true,
+          "access": 0,
+          "data_type": 1,
+          "data_size": 24,
+          "members": [
+            {
+              "data_type": 58,
+              "argument_index": 0,
+              "offset": 0,
+              "name": "image",
+              "texture": {
+                "access": 0,
+                "texture_type": 2,
+                "data_type": 3
+              }
+            },
+            {
+              "data_type": 59,
+              "argument_index": 1,
+              "offset": 8,
+              "name": "s"
+            },
+            {
+              "data_type": 60,
+              "argument_index": 2,
+              "offset": 16,
+              "name": "parameters",
+              "pointer": {
+                "data_type": 1,
+                "alignment": 16,
+                "access": 0,
+                "data_size": 32,
+                "element_is_argument_buffer": false
+              }
+            }
+          ],
+          "alignment": 256,
+          "type": 0,
+          "name": "a",
+          "index": 0,
+          "encoded_length": 24,
+          "encoded_alignment": 8
+        }
+      ],
+      "depth_format": 260,
+      "stencil_format": 260,
+      "color_write_mask": 15
+    },
+    {
+      "name": "linear",
+      "vertex": "vs_io_linear",
+      "fragment": "fs_combined_linear",
+      "attributes": [
+        {
+          "index": 0,
+          "buffer": 0,
+          "offset": 0
+        },
+        {
+          "index": 1,
+          "buffer": 0,
+          "offset": 16
+        },
+        {
+          "index": 2,
+          "buffer": 1,
+          "offset": 0
+        }
+      ],
+      "layouts": [
+        {
+          "index": 0,
+          "stride": 32,
+          "step": "vertex"
+        },
+        {
+          "index": 1,
+          "stride": 16,
+          "step": "instance"
+        }
+      ],
+      "indexed_vertex_domain": {
+        "minimum": 5,
+        "maximum": 10
+      },
+      "fragment_buffers": [
+        {
+          "active": true,
+          "access": 0,
+          "data_type": 1,
+          "data_size": 24,
+          "members": [
+            {
+              "data_type": 58,
+              "argument_index": 0,
+              "offset": 0,
+              "name": "image",
+              "texture": {
+                "access": 0,
+                "texture_type": 2,
+                "data_type": 3
+              }
+            },
+            {
+              "data_type": 59,
+              "argument_index": 1,
+              "offset": 8,
+              "name": "s"
+            },
+            {
+              "data_type": 60,
+              "argument_index": 2,
+              "offset": 16,
+              "name": "parameters",
+              "pointer": {
+                "data_type": 1,
+                "alignment": 16,
+                "access": 0,
+                "data_size": 32,
+                "element_is_argument_buffer": false
+              }
+            }
+          ],
+          "alignment": 256,
+          "type": 0,
+          "name": "a",
+          "index": 0,
+          "encoded_length": 24,
+          "encoded_alignment": 8
+        }
+      ],
+      "depth_format": 260,
+      "stencil_format": 260,
+      "color_write_mask": 15
+    },
+    {
+      "name": "flat",
+      "vertex": "vs_io_flat",
+      "fragment": "fs_combined_flat",
+      "attributes": [
+        {
+          "index": 0,
+          "buffer": 0,
+          "offset": 0
+        },
+        {
+          "index": 1,
+          "buffer": 0,
+          "offset": 16
+        },
+        {
+          "index": 2,
+          "buffer": 1,
+          "offset": 0
+        }
+      ],
+      "layouts": [
+        {
+          "index": 0,
+          "stride": 32,
+          "step": "vertex"
+        },
+        {
+          "index": 1,
+          "stride": 16,
+          "step": "instance"
+        }
+      ],
+      "indexed_vertex_domain": {
+        "minimum": 5,
+        "maximum": 10
+      },
+      "fragment_buffers": [
+        {
+          "active": true,
+          "access": 0,
+          "data_type": 1,
+          "data_size": 24,
+          "members": [
+            {
+              "data_type": 58,
+              "argument_index": 0,
+              "offset": 0,
+              "name": "image",
+              "texture": {
+                "access": 0,
+                "texture_type": 2,
+                "data_type": 3
+              }
+            },
+            {
+              "data_type": 59,
+              "argument_index": 1,
+              "offset": 8,
+              "name": "s"
+            },
+            {
+              "data_type": 60,
+              "argument_index": 2,
+              "offset": 16,
+              "name": "parameters",
+              "pointer": {
+                "data_type": 1,
+                "alignment": 16,
+                "access": 0,
+                "data_size": 32,
+                "element_is_argument_buffer": false
+              }
+            }
+          ],
+          "alignment": 256,
+          "type": 0,
+          "name": "a",
+          "index": 0,
+          "encoded_length": 24,
+          "encoded_alignment": 8
+        }
+      ],
+      "depth_format": 260,
+      "stencil_format": 260,
+      "color_write_mask": 15
+    }
+  ]
+}

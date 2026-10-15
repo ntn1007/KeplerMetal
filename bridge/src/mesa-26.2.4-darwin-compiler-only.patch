@@ -1,0 +1,69 @@
+--- a/meson.build
++++ b/meson.build
+@@ -958,7 +958,8 @@
+   with_gallium_asahi, with_asahi_vk, with_tools.contains('asahi'),
+   with_gallium_panfrost, with_panfrost_vk,
+   with_gallium_rusticl,
+-  with_nouveau_vk, with_imagination_vk,
++  # KeplerMetal: offline NAK only; do not build NVK OpenCL helpers.
++  with_imagination_vk,
+   with_kosmickrisp_vk,
+ ].contains(true)
+ 
+@@ -2147,7 +2148,7 @@
+   pre_args += '-DUSE_LIBELF'
+ elif with_gallium_radeonsi and with_gfx_compute
+   error('Gallium driver radeonsi requires libelf')
+-elif with_nouveau_vk
++elif with_nouveau_vk and host_machine.system() != 'darwin'
+   error('NVK requires libelf')
+ endif
+ 
+--- a/src/nouveau/meson.build
++++ b/src/nouveau/meson.build
+@@ -2,8 +2,13 @@
+ # SPDX-License-Identifier: MIT
+ 
+ subdir('headers')
+-subdir('drm')
+-subdir('winsys')
++if host_machine.system() != 'darwin'
++  subdir('drm')
++  subdir('winsys')
++else
++  # Compiler-only build: no DRM implementation and no fake GPU transport.
++  idep_nouveau_ws = null_dep
++endif
+ if with_nouveau_vk
+   subdir('rust')
+   subdir('nil')
+@@ -13,7 +18,7 @@
+   subdir('drm-shim')
+ endif
+ 
+-if with_nouveau_vk
++if with_nouveau_vk and host_machine.system() != 'darwin'
+   subdir('cubin')
+   subdir('mme')
+   subdir('vulkan')
+--- a/src/nouveau/compiler/nak_bindings.h
++++ b/src/nouveau/compiler/nak_bindings.h
+@@ -5,16 +5,5 @@
+ 
+ #include "nak_private.h"
+ 
+-#include "nouveau_bo.h"
+-#include "nouveau_context.h"
+-#include "nouveau_device.h"
+-
+-#include <xf86drm.h>
+-#include "drm-uapi/nouveau_drm.h"
+-
+-#define DRM_RS_IOCTL(FOO) \
+-   DRM_RS_IOCTL_##FOO = DRM_IOCTL_##FOO
+-
+-enum ENUM_PACKED drm_rs_ioctls {
+-   DRM_RS_IOCTL(NOUVEAU_EXEC),
+-};
++/* KeplerMetal: hardware-test bindings excluded in this offline build.
++ * The shader compiler has no DRM dependency; cfg(test) hw_runner does. */

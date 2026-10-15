@@ -1,0 +1,46 @@
+{
+  "schema": 2,
+  "library_SHA256": "7478ba6e51f7bb4c466e60e4b07cf7af15c8abe04d04f3211cb2f1f2c6525911",
+  "functions": [
+    {
+      "name": "gpu_indices",
+      "buffers": [
+        {
+          "name": "indices",
+          "index": 0,
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 36,
+          "access": 1,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 0
+        },
+        {
+          "name": "counter",
+          "index": 1,
+          "data_size": 4,
+          "alignment": 4,
+          "data_type": 1,
+          "access": 1,
+          "minimum_bytes": 4,
+          "per_invocation_bytes": 0
+        },
+        {
+          "name": "p",
+          "index": 2,
+          "data_size": 16,
+          "alignment": 256,
+          "data_type": 1,
+          "access": 0,
+          "minimum_bytes": 512,
+          "per_invocation_bytes": 0
+        }
+      ],
+      "constant_buffer_index": 2,
+      "static_threadgroup_bytes": 0,
+      "max_local": 32,
+      "max_invocations": 32,
+      "qmd_register_count": 7
+    }
+  ]
+}

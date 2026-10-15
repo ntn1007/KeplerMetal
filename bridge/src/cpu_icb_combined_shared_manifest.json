@@ -1,0 +1,150 @@
+{
+  "schema": 2,
+  "library_SHA256": "b66637d429769478b5be034572e258f16078760ab511f016aec5a57fc76fdebd",
+  "functions": [
+    {
+      "name": "shared_mix_s128",
+      "buffers": [
+        {
+          "index": 0,
+          "name": "out",
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 36,
+          "access": 1,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 16
+        },
+        {
+          "index": 1,
+          "name": "count",
+          "data_size": 4,
+          "alignment": 4,
+          "data_type": 1,
+          "access": 1,
+          "minimum_bytes": 4,
+          "per_invocation_bytes": 0
+        },
+        {
+          "index": 2,
+          "name": "p",
+          "data_size": 20,
+          "alignment": 256,
+          "data_type": 1,
+          "access": 0,
+          "minimum_bytes": 512,
+          "per_invocation_bytes": 0
+        }
+      ],
+      "constant_buffer_index": 2,
+      "static_threadgroup_bytes": 512,
+      "max_local": 1024,
+      "max_invocations": 4096,
+      "qmd_register_count": 12,
+      "allow_multidimensional": false,
+      "dynamic_threadgroup": {
+        "index": 0,
+        "name": "dynamic",
+        "min_bytes": 1024,
+        "max_bytes": 48640,
+        "parameter_word_offset": 16
+      }
+    },
+    {
+      "name": "shared_mix_s1024",
+      "buffers": [
+        {
+          "index": 0,
+          "name": "out",
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 36,
+          "access": 1,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 16
+        },
+        {
+          "index": 1,
+          "name": "count",
+          "data_size": 4,
+          "alignment": 4,
+          "data_type": 1,
+          "access": 1,
+          "minimum_bytes": 4,
+          "per_invocation_bytes": 0
+        },
+        {
+          "index": 2,
+          "name": "p",
+          "data_size": 20,
+          "alignment": 256,
+          "data_type": 1,
+          "access": 0,
+          "minimum_bytes": 512,
+          "per_invocation_bytes": 0
+        }
+      ],
+      "constant_buffer_index": 2,
+      "static_threadgroup_bytes": 4096,
+      "max_local": 1024,
+      "max_invocations": 4096,
+      "qmd_register_count": 12,
+      "allow_multidimensional": false,
+      "dynamic_threadgroup": {
+        "index": 0,
+        "name": "dynamic",
+        "min_bytes": 1024,
+        "max_bytes": 45056,
+        "parameter_word_offset": 16
+      }
+    },
+    {
+      "name": "shared_mix_s4096",
+      "buffers": [
+        {
+          "index": 0,
+          "name": "out",
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 36,
+          "access": 1,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 16
+        },
+        {
+          "index": 1,
+          "name": "count",
+          "data_size": 4,
+          "alignment": 4,
+          "data_type": 1,
+          "access": 1,
+          "minimum_bytes": 4,
+          "per_invocation_bytes": 0
+        },
+        {
+          "index": 2,
+          "name": "p",
+          "data_size": 20,
+          "alignment": 256,
+          "data_type": 1,
+          "access": 0,
+          "minimum_bytes": 512,
+          "per_invocation_bytes": 0
+        }
+      ],
+      "constant_buffer_index": 2,
+      "static_threadgroup_bytes": 16384,
+      "max_local": 1024,
+      "max_invocations": 4096,
+      "qmd_register_count": 12,
+      "allow_multidimensional": false,
+      "dynamic_threadgroup": {
+        "index": 0,
+        "name": "dynamic",
+        "min_bytes": 1024,
+        "max_bytes": 32768,
+        "parameter_word_offset": 16
+      }
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+# Build from source
+
+## Supported public build
+
+Use macOS with the Xcode developer directory selected, an SDK containing Metal, clang++, ar, and Python 3.9 or later. The laboratory source baseline used SDK 26.2 / clang 17 on x86_64. Full Xcode plus its Metal toolchain is needed to regenerate MSL assets; install these using Apple's tools and terms.
+
+```sh
+python3 tools/check_publication.py
+python3 -m unittest discover -s tests -v
+python3 tools/build_from_source.py --out build/source-local
+```
+
+The builder requires a **new** directory beneath `build/`. It freezes text inputs, compiles all runtime objects, archives `libKeplerMetal.a`, builds a link-check client, and runs that CPU-only client. It does not reuse objects from `results/`, download anything, allocate a GPU resource, or submit a command buffer. It records commands, tool versions, source/object/library hashes, and logs in the output directory. The executable links the whole archive so unresolved optional-runtime symbols are detected.
+
+Memory management is intentional: `KeplerProgramImport.mm` and `KeplerNativeCAS.mm` compile with `-fno-objc-arc`; the other runtime implementations use `-fobjc-arc`. C factory return ownership is declared in headers. The target is baseline x86_64; there is no `-march=native`.
+
+The FP64 pin include allows source compilation without bundling any GPU code. It does not make FP64 usable without locally generated programs matching the pins.
+
+## Historical reproduction scripts
+
+The extensive `bridge/tools/` and `bridge/sdk*/examples/` scripts preserve the experiments' sources. Many later scripts intentionally depend on earlier frozen `build/` and `results/` directories. Those binary trees are **not** in this source release. Consequently, running a late milestone builder directly in a fresh checkout may fail with a missing prerequisite; the source-only build above is the standalone supported entry point.
+
+For compiler experiments, obtain the pinned open source trees described in [dependencies](DEPENDENCIES.md), inspect and apply the corresponding patches, then follow the early `setup_tools.py`, `build_air_compiler.py`, `reproduce_nak_macos.py` and subsequent reproduction scripts. `setup_tools.py` is historical and expects an additional local Rust download manifest; it is not an automatic bootstrap for a clean checkout. Rust 1.99.0 and the package versions in `bridge/tools/python-requirements.txt` were recorded in the lab. Preserve dependency ABI versions when rebuilding. No complete clean-room regeneration of every milestone is claimed yet.
+
+Late runtime builders that reuse earlier objects are retained for provenance. Do not confuse them with `tools/build_from_source.py`, which rebuilds every runtime object from the published text.
+
+## GPU qualification
+
+GPU execution is a separate, explicit operation. Native driver/private ABI profiles are narrowly pinned to the reference device and binaries. Read the relevant harness and negative controls before running. Use the common `bridge/tools/lab_gpu_reservation.py` protocol and the immutable signed launcher; never invoke multiple GPU cohorts concurrently.
+
+The M1 comparison source programs are included. Private SSH transfer scripts are excluded: copy only the required source bundle using your own authorized connection, verify both-end hashes, and keep the reference run separate from GTX qualification. M1 inference or execution cannot validate SM30.

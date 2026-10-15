@@ -1,0 +1,41 @@
+#pragma once
+#include <metal_stdlib>
+// Application-local lowering for 32-lane Kepler warps. Every active lane must
+// call these helpers in converged control flow. count is the physical active
+// lane count (1..32); this is not a general replacement for divergent MSL SIMD.
+namespace kepler_simd {
+using namespace metal;
+template<typename T> T sum(T x,uint lane,uint count) {
+    for(uint step=16;step;step>>=1){
+        uint other=lane+step;
+        T y=simd_shuffle(x,ushort(other<count?other:lane));
+        if(other<count)x+=y;
+    }
+    return simd_shuffle(x,0);
+}
+template<typename T> T minimum(T x,uint lane,uint count) {
+    for(uint step=16;step;step>>=1){
+        uint other=lane+step;
+        T y=simd_shuffle(x,ushort(other<count?other:lane));
+        if(other<count)x=min(x,y);
+    }
+    return simd_shuffle(x,0);
+}
+template<typename T> T maximum(T x,uint lane,uint count) {
+    for(uint step=16;step;step>>=1){
+        uint other=lane+step;
+        T y=simd_shuffle(x,ushort(other<count?other:lane));
+        if(other<count)x=max(x,y);
+    }
+    return simd_shuffle(x,0);
+}
+inline uint prefix_exclusive_sum(uint x,uint lane) {
+    uint original=x;
+    for(uint step=1;step<32;step<<=1){
+        uint other=lane>=step?lane-step:lane;
+        uint y=simd_shuffle(x,ushort(other));
+        if(lane>=step)x+=y;
+    }
+    return x-original;
+}
+}

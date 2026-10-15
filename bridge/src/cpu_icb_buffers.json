@@ -1,0 +1,56 @@
+{
+  "schema": 2,
+  "library_SHA256": "ba0f51c96f993240f9637f0b848e14a5362e125d9c5cdf2aa38efd518531a8fd",
+  "functions": [
+    {
+      "name": "bound_axpy",
+      "buffers": [
+        {
+          "name": "out",
+          "index": 0,
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 6,
+          "access": 1,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 16
+        },
+        {
+          "name": "a",
+          "index": 1,
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 6,
+          "access": 0,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 16
+        },
+        {
+          "name": "b",
+          "index": 2,
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 6,
+          "access": 0,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 16
+        },
+        {
+          "name": "p",
+          "index": 3,
+          "data_size": 16,
+          "alignment": 256,
+          "data_type": 1,
+          "access": 0,
+          "minimum_bytes": 512,
+          "per_invocation_bytes": 0
+        }
+      ],
+      "constant_buffer_index": 3,
+      "static_threadgroup_bytes": 0,
+      "max_local": 1024,
+      "max_invocations": 65536,
+      "qmd_register_count": 14
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "library_SHA256": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7",
+  "pipelines": [
+    {
+      "name": "near",
+      "vertex": "vs_near",
+      "fragment": "fs_state",
+      "attributes": [],
+      "layouts": [],
+      "direct_geometry": {
+        "start": 0,
+        "count": 3,
+        "instances": 1,
+        "base_instance": 0
+      },
+      "depth_format": 252,
+      "stencil_format": 0,
+      "color_write_mask": 15
+    },
+    {
+      "name": "far",
+      "vertex": "vs_far",
+      "fragment": "fs_red",
+      "attributes": [],
+      "layouts": [],
+      "direct_geometry": {
+        "start": 0,
+        "count": 3,
+        "instances": 1,
+        "base_instance": 0
+      },
+      "depth_format": 252,
+      "stencil_format": 0,
+      "color_write_mask": 15
+    },
+    {
+      "name": "write",
+      "vertex": "vs_half",
+      "fragment": "fs_state",
+      "attributes": [],
+      "layouts": [],
+      "direct_geometry": {
+        "start": 0,
+        "count": 3,
+        "instances": 1,
+        "base_instance": 0
+      },
+      "depth_format": 260,
+      "stencil_format": 260,
+      "color_write_mask": 0
+    },
+    {
+      "name": "read",
+      "vertex": "vs_state",
+      "fragment": "fs_state",
+      "attributes": [],
+      "layouts": [],
+      "direct_geometry": {
+        "start": 0,
+        "count": 3,
+        "instances": 1,
+        "base_instance": 0
+      },
+      "depth_format": 260,
+      "stencil_format": 260,
+      "color_write_mask": 15
+    },
+    {
+      "name": "plain",
+      "vertex": "vs_state",
+      "fragment": "fs_state",
+      "attributes": [],
+      "layouts": [],
+      "direct_geometry": {
+        "start": 0,
+        "count": 3,
+        "instances": 1,
+        "base_instance": 0
+      },
+      "depth_format": 0,
+      "stencil_format": 0,
+      "color_write_mask": 15
+    }
+  ]
+}

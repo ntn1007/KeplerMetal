@@ -1,0 +1,36 @@
+// Own-process SM30 import and raw capture. CPU never computes expected outputs.
+#import "KeplerProgramImport.h"
+#import <objc/runtime.h>
+#include <CommonCrypto/CommonDigest.h>
+#include <cstring>
+struct Parameters {uint64_t addresses[4];uint32_t grid[3],block[3];};
+static NSString*sha(NSData*d){unsigned char h[32];CC_SHA256(d.bytes,(CC_LONG)d.length,h);NSMutableString*s=[NSMutableString new];for(unsigned char x:h)[s appendFormat:@"%02x",x];return s;}
+static BOOL done(id<MTLCommandBuffer>c){[c commit];[c waitUntilCompleted];return c.status==MTLCommandBufferStatusCompleted;}
+static void emit(id r){NSData*j=[NSJSONSerialization dataWithJSONObject:r options:NSJSONWritingPrettyPrinted error:nil];fwrite(j.bytes,1,j.length,stdout);puts("");}
+int main(int argc,char**argv){@autoreleasepool{
+ if(argc!=4)return 1;NSString*mode=@(argv[3]),*out=@(argv[2]);BOOL prepare=[mode isEqual:@"prepare"],native=[mode isEqual:@"native"];if(!prepare&&!native&&![mode isEqual:@"execute"])return 1;
+ NSDictionary*plan=[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:@(argv[1])] options:0 error:nil];NSDictionary*info=plan[@"shader_info"];NSUInteger local=[info[@"local"]unsignedIntegerValue];NSArray*fixtures=plan[@"fixtures"];
+ if(!info||[info[@"sm"]intValue]!=30||[info[@"registers"]intValue]<24||[info[@"registers"]intValue]>63||[info[@"scratch_bytes"]intValue]||[info[@"crs_bytes"]intValue]||[info[@"shared_bytes"]intValue]||![@[@32,@128,@1024]containsObject:@(local)]||fixtures.count!=3)return 2;
+ NSData*code=[NSData dataWithContentsOfFile:plan[@"code"]],*carrier=[NSData dataWithContentsOfFile:plan[@"carrier"]];if(![sha(code)isEqual:plan[@"code_SHA256"]]||![sha(carrier)isEqual:plan[@"carrier_SHA256"]]||code.length!=[info[@"code_bytes"]unsignedIntegerValue])return 2;
+ id<MTLDevice>d=nil;for(id<MTLDevice>x in MTLCopyAllDevices())if(x.registryID==4294968458)d=x;if(!d)return 3;NSError*error=nil;NSDictionary*proof=@{};id<MTLComputePipelineState>pso=nil;
+ Class cls=objc_getClass("NVMTLFunctionVariant");Method method=class_getInstanceMethod(cls,sel_registerName("initWithCompilerOutput:size:device:"));IMP before=method?method_getImplementation(method):nil;
+ if(native){id<MTLLibrary>lib=[d newLibraryWithURL:[NSURL fileURLWithPath:plan[@"carrier"]]error:&error];id<MTLFunction>fn=[lib newFunctionWithName:@"add_buffers"];pso=[d newComputePipelineStateWithFunction:fn error:&error];[fn release];[lib release];}
+ else{KeplerImportConfig config={(uint32_t)[info[@"registers"]unsignedIntValue],576,576};pso=KPCreatePipeline(d,[NSURL fileURLWithPath:plan[@"carrier"]],@"add_buffers",code,config,&error,&proof);}
+ if(!pso){fprintf(stderr,"%s\n",error.description.UTF8String);return 4;}BOOL restored=before&&method_getImplementation(method)==before;if(!restored)return 4;
+ id<MTLCommandQueue>q=[d newCommandQueue];NSMutableArray*runs=[NSMutableArray array];
+ for(NSDictionary*f in fixtures){@autoreleasepool{
+  NSUInteger count=[f[@"count"]unsignedIntegerValue];uint32_t nonce=[f[@"nonce"]unsignedIntValue];if(!count||count>8193)return 5;
+  NSData*A=[NSData dataWithContentsOfFile:f[@"A"]],*B=[NSData dataWithContentsOfFile:f[@"B"]],*C=[NSData dataWithContentsOfFile:f[@"C"]];if(A.length!=count*8||B.length!=count*8||C.length!=count*8)return 5;
+  if(![sha(A)isEqual:f[@"A_SHA256"]]||![sha(B)isEqual:f[@"B_SHA256"]]||![sha(C)isEqual:f[@"C_SHA256"]])return 5;
+  NSUInteger inBytes=count*8+128,outBytes=(count+64)*16+128;NSMutableData*a=[NSMutableData dataWithLength:inBytes],*b=[NSMutableData dataWithLength:inBytes],*c=[NSMutableData dataWithLength:inBytes],*initial=[NSMutableData dataWithLength:outBytes];memset(a.mutableBytes,0xa5,inBytes);memset(b.mutableBytes,0xa5,inBytes);memset(c.mutableBytes,0xa5,inBytes);memset(initial.mutableBytes,0xa5,outBytes);memcpy((char*)a.mutableBytes+64,A.bytes,A.length);memcpy((char*)b.mutableBytes+64,B.bytes,B.length);memcpy((char*)c.mutableBytes+64,C.bytes,C.length);
+  id<MTLBuffer>sa=[d newBufferWithBytes:a.bytes length:inBytes options:MTLResourceStorageModeShared],sb=[d newBufferWithBytes:b.bytes length:inBytes options:MTLResourceStorageModeShared],sc=[d newBufferWithBytes:c.bytes length:inBytes options:MTLResourceStorageModeShared],so=[d newBufferWithBytes:initial.bytes length:outBytes options:MTLResourceStorageModeShared];
+  id<MTLBuffer>ga=[d newBufferWithLength:inBytes options:MTLResourceStorageModePrivate],gb=[d newBufferWithLength:inBytes options:MTLResourceStorageModePrivate],gc=[d newBufferWithLength:inBytes options:MTLResourceStorageModePrivate],go=[d newBufferWithLength:outBytes options:MTLResourceStorageModePrivate];
+  id<MTLCommandBuffer>upload=[q commandBuffer];id<MTLBlitCommandEncoder>bl=[upload blitCommandEncoder];[bl copyFromBuffer:sa sourceOffset:0 toBuffer:ga destinationOffset:0 size:inBytes];[bl copyFromBuffer:sb sourceOffset:0 toBuffer:gb destinationOffset:0 size:inBytes];[bl copyFromBuffer:sc sourceOffset:0 toBuffer:gc destinationOffset:0 size:inBytes];[bl copyFromBuffer:so sourceOffset:0 toBuffer:go destinationOffset:0 size:outBytes];[bl endEncoding];if(!done(upload))return 6;
+  Parameters p={{ga.gpuAddress+64,gb.gpuAddress+64,go.gpuAddress+64,gc.gpuAddress+64},{(uint32_t)count,nonce,0},{(uint32_t)local,1,1}};id<MTLBuffer>params=[d newBufferWithBytes:&p length:sizeof(p) options:MTLResourceStorageModeShared];
+  id<MTLCommandBuffer>main=[q commandBuffer];id<MTLComputeCommandEncoder>e=[main computeCommandEncoder];[e setComputePipelineState:pso];[e setBuffer:params offset:0 atIndex:0];[e setBuffer:go offset:64 atIndex:1];[e useResource:ga usage:MTLResourceUsageRead];[e useResource:gb usage:MTLResourceUsageRead];[e useResource:gc usage:MTLResourceUsageRead];[e dispatchThreadgroups:MTLSizeMake((count+local-1)/local,1,1) threadsPerThreadgroup:MTLSizeMake(local,1,1)];[e endEncoding];
+  if(!prepare&&!done(main))return 7;
+  id<MTLCommandBuffer>read=[q commandBuffer];bl=[read blitCommandEncoder];[bl copyFromBuffer:ga sourceOffset:0 toBuffer:sa destinationOffset:0 size:inBytes];[bl copyFromBuffer:gb sourceOffset:0 toBuffer:sb destinationOffset:0 size:inBytes];[bl copyFromBuffer:gc sourceOffset:0 toBuffer:sc destinationOffset:0 size:inBytes];[bl copyFromBuffer:go sourceOffset:0 toBuffer:so destinationOffset:0 size:outBytes];[bl endEncoding];if(!done(read))return 8;
+  NSMutableDictionary*paths=[NSMutableDictionary dictionary];NSArray*buffers=@[sa,sb,sc,so],*names=@[@"A",@"B",@"C",@"output"];for(NSUInteger k=0;k<4;k++){id<MTLBuffer>h=buffers[k];NSString*file=[NSString stringWithFormat:@"trial-%@-%@.bin",f[@"trial"],names[k]];if(![[NSData dataWithBytes:h.contents length:h.length]writeToFile:[out stringByAppendingPathComponent:file]atomically:YES])return 9;paths[names[k]]=file;}
+  [runs addObject:@{@"trial":f[@"trial"],@"count":@(count),@"nonce":@(nonce),@"files":paths,@"committed":@(!prepare),@"command_status":@(main.status),@"upload_status":@(upload.status),@"readback_status":@(read.status)}];
+ }}emit(@{@"mode":mode,@"operation":info[@"operation"],@"local":@(local),@"registry_id":@(d.registryID),@"import":proof?:@{},@"constructor_restored":@(restored),@"runs":runs,@"system_modified":@NO,@"performance_benchmark":@NO,@"CPU_computed_expected_outputs":@NO});[pso release];return 0;
+}}

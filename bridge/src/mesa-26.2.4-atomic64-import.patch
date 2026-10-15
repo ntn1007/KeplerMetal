@@ -1,0 +1,63 @@
+--- a/src/nouveau/compiler/nak/sm20.rs
++++ b/src/nouveau/compiler/nak/sm20.rs
+@@ -2514,7 +2514,11 @@
+         assert!(addr_type == MemAddrType::A64);
+         assert_eq!(self.addr_stride, OffsetStride::X1);
+ 
+-        if self.dst.is_none() {
++        // EXCH/CAS always use the returning instruction, with rZ when unused.
++        // The reduction encoding has no exchange or compare-exchange form.
++        let reduction = self.dst.is_none()
++            && !matches!(self.atom_op, AtomOp::Exch | AtomOp::CmpExch(_));
++        if reduction {
+             e.set_opcode(SM20Unit::Mem, 0x1);
+         } else {
+             e.set_opcode(SM20Unit::Mem, 0x11);
+@@ -2547,17 +2551,18 @@
+             //AtomType::F16 => 0xa_u8,
+             AtomType::F32 => 0xd_u8,
+ 
+-            AtomType::U64 | AtomType::I64 | AtomType::F64 => {
+-                // They encode fine:
+-                //
+-                //     AtomType::U64 => 0x5_u8,
+-                //     AtomType::I64 => 0x8_u8,
+-                //     AtomType::F64 => 0xc_u8,
+-                //
+-                // but the hardware throws an ILLEGAL_INSTRUCTION_ENCODING error
+-                // if we ever actually execute one.  Also, the proprietary
+-                // driver doesn't expose any 64-bit atomic features on Kepler A.
+-                panic!("64-bit atomics are not supported");
++            // GK104 supports U64 ADD/EXCH/CAS, not the full Kepler B set.
++            // Matches the existing Nouveau NVC0 emitter and GF100 ISA tables.
++            AtomType::U64 => {
++                assert!(matches!(self.atom_op,
++                    AtomOp::Add | AtomOp::Exch | AtomOp::CmpExch(_)),
++                    "Unsupported SM20/SM30 uint64 atomic operation");
++                0x5_u8
++            }
++            // Native double atomics and the signed64/min/max/bitwise family
++            // remain unqualified on this backend.
++            AtomType::I64 | AtomType::F64 => {
++                panic!("Unsupported SM20/SM30 64-bit atomic type");
+             }
+         };
+         e.set_field(9..10, typ & 0x1);
+@@ -2566,7 +2571,7 @@
+         e.set_reg_src(20..26, &self.addr);
+         e.set_reg_src(14..20, &self.data);
+ 
+-        if self.dst.is_none() {
++        if reduction {
+             e.set_field(26..58, self.addr_offset);
+         } else {
+             e.set_dst(43..49, &self.dst);
+@@ -2585,7 +2590,7 @@
+             let data = RegRef::new(cmpr_data.file(), data_idx, data_comps);
+ 
+             e.set_reg_src(49..55, &data.into());
+-        } else if !self.dst.is_none() {
++        } else if !reduction {
+             e.set_reg_src(49..55, &0.into());
+         }
+     }

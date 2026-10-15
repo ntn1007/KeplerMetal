@@ -1,0 +1,101 @@
+#!/usr/bin/env python3
+"""Freeze and recheck exact artifact bytes; do not execute extracted binaries."""
+from pathlib import Path
+import hashlib
+import importlib.util
+import json
+import sys
+import zipfile
+
+ROOT=Path(__file__).resolve().parents[1]
+RESULTS=ROOT/'results'
+PROGRESS=RESULTS/'gpu-generated-bindings-progress-20261014/final-qualification'
+ARCHIVE=ROOT/'KEPLERMETAL_ICB_LIAISONS_GPU_2026-10-14.zip'
+sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
+
+
+def main():
+    assert not ARCHIVE.exists()
+    receipt=json.loads((PROGRESS/'qualification-receipt.json').read_text());assert receipt['status']=='PASS'
+    selected=set()
+    def add(p):
+        p=Path(p);p.relative_to(ROOT)
+        if p.is_dir():
+            for f in p.rglob('*'):
+                if f.is_file()and not f.is_symlink()and f.suffix not in ['.o','.pyc']and'__pycache__'not in f.parts and f.name not in ['apple-indirect-dispatch.md','set-kernel-buffer.md']:selected.add(f)
+        elif p.is_file()and not p.is_symlink():selected.add(p)
+        else:raise FileNotFoundError(p)
+    for p in RESULTS.glob('gpu-generated-bindings-*'):add(p)
+    comparisons=json.loads((PROGRESS/'nonregression-raw-comparison.json').read_text())
+    for row in comparisons['files']:add(ROOT/row['previous'])
+    for n in ['KeplerCPUICB.h','KeplerCPUICB.mm','KeplerNativeCommands.h','KeplerNativeCommands.mm','cpu_icb_combined_shared.metal','cpu_icb_combined_shared_manifest.json','gpu_command_selector.metal','gpu_command_geometry.metal','gpu_command_bindings.metal']:add(ROOT/'src'/n)
+    for n in ['build_combined_keplermetal_sdk.py','lab_gpu_reservation.py','decode_native_commands.py',
+              'run_sdk_legacy_icb_probe.py','verify_sdk_legacy_icb_probe.py','verify_cpu_icb_manifest.py','verify_cpu_icb_grid3d.py',
+              'build_gpu_bindings_clients.py','run_gpu_bindings_nonregression.py','finalize_gpu_bindings_qualification.py',
+              'package_gpu_bindings_evidence.py','update_gpu_bindings_coverage.py','write_gpu_bindings_report.py','run_gpu_command_bindings.py','verify_gpu_command_bindings.py','verify_gpu_bindings_refusals.py',
+              'run_m1_gpu_bindings_reference.py','collect_m1_gpu_bindings_reference.py','transfer_m1_bindings_source_bundle.py','resident_primer_compare_probe.mm']:add(ROOT/'tools'/n)
+    add(ROOT/'ICB_LIAISONS_GPU_M1_GTX_2026-10-14.txt')
+    add(ROOT/'results/hardware-coverage.json')
+    add(ROOT/'sdk-combined/README.md')
+    entries=[{'path':'bridge/'+str(p.relative_to(ROOT)),'bytes':p.stat().st_size,'SHA256':sha(p)}for p in sorted(selected)]
+    manifest={'files':entries,'Git':receipt['Git'],'job_ids':[],'objective_complete':False,'system_modified':False,
+              'performance_benchmark':False,'scope':'L2 GPU-generated grid and approved output/counter bindings in native compute commands; not general MSL encoding'}
+    with zipfile.ZipFile(ARCHIVE,'x',zipfile.ZIP_DEFLATED,compresslevel=6,strict_timestamps=False)as z:
+        for p in sorted(selected):z.write(p,'bridge/'+str(p.relative_to(ROOT)))
+        z.writestr('PACKET_MANIFEST.json',json.dumps(manifest,indent=2)+'\n')
+    out=RESULTS/'gpu-generated-bindings-packet-check-20261014';out.mkdir(exist_ok=False)
+    with zipfile.ZipFile(ARCHIVE)as z:
+        assert len(z.namelist())==len(entries)+1 and len(set(z.namelist()))==len(z.namelist())
+        for n in z.namelist():assert not n.startswith('/')and'..'not in Path(n).parts
+        for e in entries:
+            raw=z.read(e['path']);assert len(raw)==e['bytes']and hashlib.sha256(raw).hexdigest()==e['SHA256']
+        z.extractall(out)
+    frozen=out/'bridge';sdk=frozen/'results/gpu-generated-bindings-sdk-build-20261014-06/KeplerMetalSDK'
+    sdk_manifest=json.loads((sdk/'FILE_MANIFEST.json').read_text())
+    for e in sdk_manifest['files']:assert sha(sdk/e['path'])==e['SHA256']and(sdk/e['path']).stat().st_size==e['bytes']
+    sys.path[:0]=[str(frozen/'tools'),str(sdk/'examples')]
+    loaded={}
+    def oracle(name,base):
+        if(name,str(base))not in loaded:
+            spec=importlib.util.spec_from_file_location(name,base/(name+'.py'));m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);loaded[name,str(base)]=m.verify
+        return loaded[name,str(base)]
+    names={'async':'verify_cpu_icb_copy_async','mixed':'verify_cpu_icb_copy_mixed','graph':'verify_cpu_icb_copy_graph',
+           'baseline':'verify_cpu_icb_gpu_copy','refusal':'verify_cpu_icb_copy_refusals','registered':'verify_registered_resident_copy',
+           'registered_bounds':'verify_registered_resident_bounds','reverse':'verify_fp64_reverse_client','arithmetic':'verify_fp64_client',
+           'cas':'verify_example','literal':'verify_literal_client','dynamic':'verify_dynamic_resident_copy','dynamic_bounds':'verify_dynamic_resident_bounds','combined':'verify_combined_shared_copy','combined_bounds':'verify_combined_shared_bounds','selection':'verify_gpu_command_selection','selection_refusals':'verify_gpu_selection_refusals','geometry':'verify_gpu_command_geometry','geometry_refusals':'verify_gpu_geometry_refusals'}
+    offline=frozen/'results/gpu-generated-bindings-primer-controls-20261014'
+    ov=json.loads((offline/'verification.json').read_text());assert ov['status']=='PASS'and len(ov['checks'])==12 and not ov['GPU_executed']
+    expected={'exact','inactive_CB0'};assert {x['case']for x in ov['checks']if x['accepted']}==expected and all(x['accepted']==x['expected_accepted']for x in ov['checks'])
+    assert sha(offline/'resident_primer_compare_probe.mm')==ov['source_SHA256']and sha(offline/'shared_mix_s128.commands.bin')==ov['recorded_input_SHA256']
+    assert ov['library_SHA256']==receipt['static_library_SHA256']
+    source_checks=json.loads((PROGRESS/'independent-rechecks.json').read_text())['checks'];checks=[]
+    for c in source_checks:
+        p=frozen/c['path'];legacy=False
+        if p.name=='gpu-generated-bindings-refusals-20261014-02':name,base='verify_gpu_bindings_refusals',sdk/'examples'
+        elif p.name.startswith('gpu-generated-bindings-regression-'):
+            variant=p.name[len('gpu-generated-bindings-regression-'):].split('-')[0]
+            if variant in ['manifest','grid3d']:name,base,legacy='verify_cpu_icb_'+variant,frozen/'tools',True
+            else:name,base=names[variant],sdk/'examples'
+        else:name,base='verify_gpu_command_bindings',sdk/'examples'
+        v=oracle(name,base)(p,portable=True)
+        assert v['status']==c['verification']['status']and v.get('raw_SHA256')==c['verification'].get('raw_SHA256')
+        if legacy:
+            m=json.loads((p/'execution/manifest.json').read_text())
+            assert sha(p/('cpu_icb_'+variant+'_probe'))==m['original_binary_sha256']
+            assert sha(p/'execution/application')==m['signed_binary_sha256']
+        checks.append({'path':c['path'],'status':v['status']})
+    assert len(checks)==146
+    for row in comparisons['files']:
+        a,b=frozen/row['current'],frozen/row['previous'];assert a.read_bytes()==b.read_bytes()and sha(a)==row['SHA256']
+    assert len(comparisons['files'])==3589
+    verification={'status':'PASS','manifest_files_verified':len(entries),'SDK_files_including_manifest':len(sdk_manifest['files'])+1,
+                  'portable_oracles':checks,'portable_oracle_count':146,'nonregression_raw_files_identical':3589,
+                  'offline_primer_controls_rechecked':12,'GPU_runs_started':0,'extracted_binaries_executed':False,'archive_SHA256':sha(ARCHIVE)}
+    (out/'portable-verification.json').write_text(json.dumps(verification,indent=2)+'\n')
+    delivery={'status':'PASS','path':str(ARCHIVE),'SHA256':sha(ARCHIVE),'bytes':ARCHIVE.stat().st_size,
+              'files_including_manifest':len(entries)+1,'portable_oracles':146,'system_modified':False,'objective_complete':False}
+    with(PROGRESS/'packet-delivery.json').open('x')as f:json.dump(delivery,f,indent=2);f.write('\n')
+    print(json.dumps(delivery,indent=2))
+
+
+if __name__=='__main__':main()

@@ -1,0 +1,183 @@
+{
+  "schema": 1,
+  "library_SHA256": "45c98ce0a295f0cde1a2396c90e60f6a4e2154f2cccf2f30191e65b124c48bbf",
+  "pipelines": [
+    {
+      "name": "read",
+      "vertex": "vs_ref",
+      "fragment": "fs_arg_read",
+      "attributes": [],
+      "layouts": [],
+      "direct_geometry": {
+        "start": 0,
+        "count": 3,
+        "instances": 1,
+        "base_instance": 0
+      },
+      "fragment_buffers": [
+        {
+          "active": true,
+          "access": 0,
+          "data_type": 1,
+          "data_size": 24,
+          "members": [
+            {
+              "data_type": 58,
+              "argument_index": 0,
+              "offset": 0,
+              "name": "image",
+              "texture": {
+                "access": 0,
+                "texture_type": 2,
+                "data_type": 3
+              }
+            },
+            {
+              "data_type": 59,
+              "argument_index": 1,
+              "offset": 8,
+              "name": "s"
+            },
+            {
+              "data_type": 60,
+              "argument_index": 2,
+              "offset": 16,
+              "name": "parameters",
+              "pointer": {
+                "data_type": 1,
+                "alignment": 16,
+                "access": 0,
+                "data_size": 32,
+                "element_is_argument_buffer": false
+              }
+            }
+          ],
+          "alignment": 256,
+          "type": 0,
+          "name": "a",
+          "index": 0,
+          "encoded_length": 24,
+          "encoded_alignment": 8
+        }
+      ]
+    },
+    {
+      "name": "nearest",
+      "vertex": "vs_ref",
+      "fragment": "fs_arg_nearest",
+      "attributes": [],
+      "layouts": [],
+      "direct_geometry": {
+        "start": 0,
+        "count": 3,
+        "instances": 1,
+        "base_instance": 0
+      },
+      "fragment_buffers": [
+        {
+          "active": true,
+          "access": 0,
+          "data_type": 1,
+          "data_size": 24,
+          "members": [
+            {
+              "data_type": 58,
+              "argument_index": 0,
+              "offset": 0,
+              "name": "image",
+              "texture": {
+                "access": 0,
+                "texture_type": 2,
+                "data_type": 3
+              }
+            },
+            {
+              "data_type": 59,
+              "argument_index": 1,
+              "offset": 8,
+              "name": "s"
+            },
+            {
+              "data_type": 60,
+              "argument_index": 2,
+              "offset": 16,
+              "name": "parameters",
+              "pointer": {
+                "data_type": 1,
+                "alignment": 16,
+                "access": 0,
+                "data_size": 32,
+                "element_is_argument_buffer": false
+              }
+            }
+          ],
+          "alignment": 256,
+          "type": 0,
+          "name": "a",
+          "index": 0,
+          "encoded_length": 24,
+          "encoded_alignment": 8
+        }
+      ]
+    },
+    {
+      "name": "linear",
+      "vertex": "vs_ref",
+      "fragment": "fs_arg_linear",
+      "attributes": [],
+      "layouts": [],
+      "direct_geometry": {
+        "start": 0,
+        "count": 3,
+        "instances": 1,
+        "base_instance": 0
+      },
+      "fragment_buffers": [
+        {
+          "active": true,
+          "access": 0,
+          "data_type": 1,
+          "data_size": 24,
+          "members": [
+            {
+              "data_type": 58,
+              "argument_index": 0,
+              "offset": 0,
+              "name": "image",
+              "texture": {
+                "access": 0,
+                "texture_type": 2,
+                "data_type": 3
+              }
+            },
+            {
+              "data_type": 59,
+              "argument_index": 1,
+              "offset": 8,
+              "name": "s"
+            },
+            {
+              "data_type": 60,
+              "argument_index": 2,
+              "offset": 16,
+              "name": "parameters",
+              "pointer": {
+                "data_type": 1,
+                "alignment": 16,
+                "access": 0,
+                "data_size": 32,
+                "element_is_argument_buffer": false
+              }
+            }
+          ],
+          "alignment": 256,
+          "type": 0,
+          "name": "a",
+          "index": 0,
+          "encoded_length": 24,
+          "encoded_alignment": 8
+        }
+      ]
+    }
+  ]
+}

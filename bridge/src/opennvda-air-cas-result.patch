@@ -1,0 +1,24 @@
+--- a/tools/nakc/air_nir.c
++++ b/tools/nakc/air_nir.c
+@@ -1988,13 +1988,19 @@
+         if (!strcmp(opn, "load")) { r.d = mem_load(c, as, ptr, in->type == ~0u ? 32 : (T(c, in->type)->bits), 1, 4); return r; }
+         if (!strcmp(opn, "store")) { mem_store(c, as, ptr, arg(c, in, 1), 4); return r; }
+         if (!strncmp(opn, "cmpxchg", 7)) {
+-            /* (ptr, expected*, desired, ...) returns bool, updates *expected */
++            /* The observed Apple AIR ABI returns the previous i32 value;
++             * the caller compares it to its original expected value. */
++            const air_type *ret = T(c, in->type);
++            if (ret->kind != AT_INT || (ret->bits != 32 && ret->bits != 1)) {
++                fail(c, "unsupported AIR compare-exchange return ABI");
++                return r;
++            }
+             const uint32_t eas = T(c, c->f->values[in->ops[2]].type)->addrspace;
+             nir_def *expp = arg(c, in, 1);
+             nir_def *expected = mem_load(c, eas, expp, 32, 1, 4);
+             nir_def *old = atomic_swap(c, as, ptr, expected, arg(c, in, 2));
+             mem_store(c, eas, expp, old, 4);
+-            r.d = nir_ieq(b, old, expected);
++            r.d = ret->bits == 32 ? old : nir_ieq(b, old, expected);
+             return r;
+         }
+         nir_atomic_op op;

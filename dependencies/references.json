@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-15",
+  "nvidia_linux": [
+    {
+      "id": "nvidia-linux-355.11",
+      "version": "355.11",
+      "url": "https://download.nvidia.com/XFree86/Linux-x86_64/355.11/NVIDIA-Linux-x86_64-355.11.run",
+      "SHA256": "a59b425381add9d9058dc2d987bf3087ab59c43224b5eb04c3f273f5886451ed",
+      "bytes": 76490009,
+      "official_checksum_verified": true,
+      "official_checksum_url": "https://download.nvidia.com/XFree86/Linux-x86_64/355.11/NVIDIA-Linux-x86_64-355.11.run.sha256sum",
+      "license": "NVIDIA proprietary; retrieve locally from publisher; not redistributed"
+    },
+    {
+      "id": "nvidia-linux-418.113",
+      "version": "418.113",
+      "url": "https://download.nvidia.com/XFree86/Linux-x86_64/418.113/NVIDIA-Linux-x86_64-418.113.run",
+      "SHA256": "1ab4b95a93e08f901c10e19b8a4a28d58aca989ba55ddc65009d6f83284d576b",
+      "bytes": 109874115,
+      "official_checksum_verified": false,
+      "official_checksum_url": null,
+      "license": "NVIDIA proprietary; retrieve locally from publisher; not redistributed"
+    },
+    {
+      "id": "nvidia-linux-450.57",
+      "version": "450.57",
+      "url": "https://download.nvidia.com/XFree86/Linux-x86_64/450.57/NVIDIA-Linux-x86_64-450.57.run",
+      "SHA256": "d50c77fc4fda2a5c5ab2af64524da8a3214077bd7daf0dbf7c1986e0ca05d711",
+      "bytes": 142648373,
+      "official_checksum_verified": false,
+      "official_checksum_url": null,
+      "license": "NVIDIA proprietary; retrieve locally from publisher; not redistributed"
+    },
+    {
+      "id": "nvidia-linux-470.63.01",
+      "version": "470.63.01",
+      "url": "https://download.nvidia.com/XFree86/Linux-x86_64/470.63.01/NVIDIA-Linux-x86_64-470.63.01.run",
+      "SHA256": "6f1a44cc4a2ce27dce749ccd1e403c1db0f4791e2d22c05ec966842101d3ed14",
+      "bytes": 271484294,
+      "official_checksum_verified": false,
+      "official_checksum_url": null,
+      "license": "NVIDIA proprietary; retrieve locally from publisher; not redistributed"
+    },
+    {
+      "id": "nvidia-linux-470.256.02",
+      "version": "470.256.02",
+      "url": "https://download.nvidia.com/XFree86/Linux-x86_64/470.256.02/NVIDIA-Linux-x86_64-470.256.02.run",
+      "SHA256": "d6451862deb695bb0447f3b7cd6268f73e81168c10e2c10597ff3fa01349b1de",
+      "bytes": 272850014,
+      "official_checksum_verified": true,
+      "official_checksum_url": "https://download.nvidia.com/XFree86/Linux-x86_64/470.256.02/NVIDIA-Linux-x86_64-470.256.02.run.sha256sum",
+      "license": "NVIDIA proprietary; retrieve locally from publisher; not redistributed"
+    }
+  ],
+  "freebsd_reference": {
+    "version": "470.256.02",
+    "url": "https://download.nvidia.com/XFree86/FreeBSD-x86_64/470.256.02/",
+    "automatic_download": false
+  },
+  "apple_reference": {
+    "source": "Own licensed installation or Apple-authorized installer; inspect locally with tools/inventory_local_driver.py",
+    "driver_executable_SHA256": "2b89839c425d95934f5e01f16c8683fe53432df410292ec8e554b21c98d6c054"
+  },
+  "open_source": {
+    "Mesa": {
+      "version": "26.2.4",
+      "commit": "96cb43121031992b85767f9c1be8f3f48e22b1d2",
+      "url": "https://gitlab.freedesktop.org/mesa/mesa.git"
+    },
+    "OpenNVDA": {
+      "commit": "da0c53d0a2a0b69b658c9e26b4cfa51946fff5f5",
+      "url": "https://github.com/bdwithganesh/OpenNVDA.git"
+    },
+    "envytools": {
+      "commit": "f102b82381f3f11cee113d16374c87091db039d9",
+      "url": "https://github.com/envytools/envytools.git"
+    }
+  }
+}

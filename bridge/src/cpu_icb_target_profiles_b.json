@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "library_SHA256": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7",
+  "pipelines": [
+    {
+      "name": "target_128_96_70",
+      "vertex": "vs_state",
+      "fragment": "fs_state",
+      "attributes": [],
+      "layouts": [],
+      "target_width": 128,
+      "target_height": 96,
+      "color_format": 70,
+      "direct_geometry": {
+        "start": 0,
+        "count": 3,
+        "instances": 1,
+        "base_instance": 0
+      }
+    },
+    {
+      "name": "target_128_96_80",
+      "vertex": "vs_state",
+      "fragment": "fs_state",
+      "attributes": [],
+      "layouts": [],
+      "target_width": 128,
+      "target_height": 96,
+      "color_format": 80,
+      "direct_geometry": {
+        "start": 0,
+        "count": 3,
+        "instances": 1,
+        "base_instance": 0
+      }
+    },
+    {
+      "name": "target_128_96_115",
+      "vertex": "vs_state",
+      "fragment": "fs_state",
+      "attributes": [],
+      "layouts": [],
+      "target_width": 128,
+      "target_height": 96,
+      "color_format": 115,
+      "direct_geometry": {
+        "start": 0,
+        "count": 3,
+        "instances": 1,
+        "base_instance": 0
+      }
+    },
+    {
+      "name": "target_128_96_125",
+      "vertex": "vs_state",
+      "fragment": "fs_state",
+      "attributes": [],
+      "layouts": [],
+      "target_width": 128,
+      "target_height": 96,
+      "color_format": 125,
+      "direct_geometry": {
+        "start": 0,
+        "count": 3,
+        "instances": 1,
+        "base_instance": 0
+      }
+    }
+  ]
+}

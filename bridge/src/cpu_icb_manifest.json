@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "library_SHA256": "ed7854542c2a45533f0114fd7e1100f31f52728433f83667b5d9cd54568cea94",
+  "functions": [
+    {
+      "name": "manifest_mix",
+      "buffers": [
+        {
+          "name": "out",
+          "index": 0,
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 36,
+          "access": 1
+        },
+        {
+          "name": "count",
+          "index": 1,
+          "data_size": 4,
+          "alignment": 4,
+          "data_type": 1,
+          "access": 1
+        },
+        {
+          "name": "p",
+          "index": 2,
+          "data_size": 20,
+          "alignment": 256,
+          "data_type": 1,
+          "access": 0
+        }
+      ],
+      "static_threadgroup_bytes": 0,
+      "max_local": 1024,
+      "qmd_register_count": 7
+    },
+    {
+      "name": "manifest_dynamic",
+      "buffers": [
+        {
+          "name": "out",
+          "index": 0,
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 36,
+          "access": 1
+        },
+        {
+          "name": "count",
+          "index": 1,
+          "data_size": 4,
+          "alignment": 4,
+          "data_type": 1,
+          "access": 1
+        },
+        {
+          "name": "p",
+          "index": 2,
+          "data_size": 20,
+          "alignment": 256,
+          "data_type": 1,
+          "access": 0
+        }
+      ],
+      "static_threadgroup_bytes": 0,
+      "max_local": 1024,
+      "qmd_register_count": 8,
+      "dynamic_threadgroup": {
+        "index": 0,
+        "name": "scratch",
+        "min_bytes": 1024,
+        "max_bytes": 49152,
+        "parameter_word_offset": 16
+      }
+    }
+  ]
+}
