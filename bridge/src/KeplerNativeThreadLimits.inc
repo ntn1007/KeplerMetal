@@ -18,7 +18,7 @@ BOOL configureNativeProducerThreadLimit(id<MTLComputePipelineState>pipeline,NSUI
  objc_setAssociatedObject(pipeline,&nativeThreadLimitKey,limit,OBJC_ASSOCIATION_RETAIN_NONATOMIC);
  NSMutableDictionary*updated=[proof mutableCopy];updated[@"native_thread_limit"]=limit;objc_setAssociatedObject(pipeline,sel_registerName("KeplerMetalProducerEvidence-v1"),updated,OBJC_ASSOCIATION_RETAIN_NONATOMIC);return YES;
 }
-Class originalComputeEncoder(id encoder){return class_getSuperclass(object_getClass(encoder));}
+Class originalComputeEncoder(id encoder){Class actual=object_getClass(encoder),native=objc_getClass("NVMTLComputeCommandEncoder_KEPLER_COMPUTE_A");return actual==native?native:class_getSuperclass(actual);}
 void setCallerComputePipeline(id self,SEL selector,id<MTLComputePipelineState>pipeline){
  KPScopeLink*link=objc_getAssociatedObject(self,&contextKey);
  typedef void(*F)(id,SEL,id<MTLComputePipelineState>);((F)class_getMethodImplementation(originalComputeEncoder(self),selector))(self,selector,pipeline);
@@ -43,6 +43,7 @@ void dispatchLimitedIndirect(id self,SEL selector,id<MTLBuffer>buffer,NSUInteger
 void endLimitedComputeEncoder(id self,SEL selector){
  typedef void(*F)(id,SEL);((F)class_getMethodImplementation(originalComputeEncoder(self),selector))(self,selector);
  ((KPScopeLink*)objc_getAssociatedObject(self,&contextKey)).callerComputePipeline=nil;
+ ((KPScopeLink*)objc_getAssociatedObject(self,&contextKey)).computeEncodingEnded=YES;
 }
 BOOL installNativeThreadLimitChecks(Class dynamic,Class original){
  const SEL selectors[]={@selector(setComputePipelineState:),@selector(dispatchThreadgroups:threadsPerThreadgroup:),@selector(dispatchThreads:threadsPerThreadgroup:),@selector(dispatchThreadgroupsWithIndirectBuffer:indirectBufferOffset:threadsPerThreadgroup:),@selector(endEncoding)};

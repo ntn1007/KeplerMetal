@@ -25,6 +25,6 @@ La dernière commande exige macOS, Xcode et sa chaîne Metal. Elle compile les s
 - [Raccordement des pipelines par l'API publique](docs/NATIVE_FUNCTION_PIPELINES.md)
 - [Contribuer](CONTRIBUTING.md)
 
-La dernière qualification couvre 172 essais GTX, la correction du champ natif de limite de threads pour les pipelines explicitement enregistrés et les refus avant encodage sur les encodeurs adaptés. Douze essais M1 servent de référence. Le correctif ne modifie ni le getter NVIDIA ni la classe du pipeline ; son intégration reste limitée aux applications adaptées. [Preuves et limites](docs/thread-limit-validation.json).
+La création des command buffers et des encodeurs de calcul est maintenant raccordée automatiquement sur la file du scope : le client de réception n'appelle plus `adaptComputeEncoder:`. La qualification couvre 236 essais GTX, 24 717 312 valeurs exactes et 12 essais M1. L'activation et l'enregistrement des bibliothèques/programmes restent explicites ; l'intégration transparente aux applications ordinaires reste à réaliser. [Preuves et limites](docs/ordinary-queue-validation.json).
 
 Aucun pilote propriétaire, firmware, SDK, exécutable ou résultat binaire n'est publié. Les liens et empreintes permettent de retrouver les références séparément. Le code original est sous licence MIT ; les dépendances conservent leurs propres licences.

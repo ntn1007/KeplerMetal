@@ -38,3 +38,9 @@ Source layout:
 ## Thread-limit initialization and encoding checks
 
 The qualified native pipeline class has a 64-bit `maxTotalThreadsPerThreadgroup` field at offset 88 (instance size 104). For approved imported producers, the descriptor path initializes that field to the supported explicit limit. Driver identity, class, type, offset, existing value and unchanged getter are checked before/after the write. It changes no program bytes or optimizer decisions. Adapted encoders track the current PSO and check local-size products before direct, grid-thread or indirect dispatch calls; switching to an ordinary pipeline clears that constraint. This is scoped process-side repair and validation, not a global driver replacement. The application must adapt the encoder before binding the limited pipeline.
+
+## Scope-owned automatic compute factories
+
+`KeplerAutomaticComputeFactories.inc` forwards normal queue and compute factory calls, then adapts newly published objects while the scope remains active. It uses weak associations and weak buffer records; the scope owns a separate synchronization object so restoration during deallocation does not retain the scope itself. Native allocation occurs outside that lock. A later adaptation/publication step serializes with restoration, and saved wrapper IMPs fall back to the exact native class after their associations have been cleared.
+
+The scope-owned queue keeps its original instance layout (688 bytes), as do its command buffers (656 bytes) and compute encoders (128 bytes). These numbers belong to the pinned driver ABI. Other queues, existing buffers, shared native class implementations, retention flags and family/version reporting remain outside the adaptation.

@@ -435,5 +435,7 @@
     "full_172_trial_suite": "NOT RUN on this separately rebuilt artifact",
     "historical_qualification_inherited": false,
     "performance_benchmark": false
-  }
+  },
+  "source_client_public_commit": "311511b14752f78c0abb943378c5cd4a68c93a5f",
+  "source_client_path_at_commit": "examples/command_ir_pipeline_contracts.mm"
 }

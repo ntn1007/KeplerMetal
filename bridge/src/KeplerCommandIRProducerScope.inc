@@ -21,6 +21,7 @@
   const IMP implementations[]={(IMP)registeredProducerPipeline,(IMP)producerFunctionOptions,(IMP)producerDescriptor,(IMP)producerFunctionAsync,(IMP)producerFunctionAsyncOptions,(IMP)producerDescriptorAsync};
   for(unsigned i=0;i<6;i++)if(!installRenderOverride(dynamic,_originalDeviceClass,selectors[i],implementations[i]))return fail(error,@"Cannot install device-local pipeline factory variants");
  }
+ if(!enableAutomaticComputeFactories(self,error))return NO;
  link.nativeProducerCarrier=carrierSnapshot;link.nativeProducerProgram=programSnapshot;
  link.nativeRootPipeline=pipeline;
  link.nativeProducerProfile=@{@"function":function.name,@"source_SHA256":link.librarySHA,@"carrier_SHA256":hash(carrierSnapshot),@"program_SHA256":programPin,@"import":proof};

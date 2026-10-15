@@ -36,11 +36,11 @@
     {
       "path": "bridge/src/KeplerCPUICB.mm",
       "source_path": "bridge/src/KeplerCPUICB.mm",
-      "source_SHA256": "5f3a1aac7c2686003a5c1e549c0aebb7953e71efbbfe139433f8872d8091483d",
-      "published_SHA256": "5f3a1aac7c2686003a5c1e549c0aebb7953e71efbbfe139433f8872d8091483d",
-      "bytes": 127085,
+      "source_SHA256": "e7d1a7fd361587efe1721c78a5d826712ced586db91bc70608bb95ae4d64036c",
+      "published_SHA256": "e7d1a7fd361587efe1721c78a5d826712ced586db91bc70608bb95ae4d64036c",
+      "bytes": 127959,
       "modified_for_publication": false,
-      "previous_published_SHA256": "ac15c5a1724ea87e370ab1c684d4802cde78016d623493dc772964f282ac9c37"
+      "previous_published_SHA256": "5f3a1aac7c2686003a5c1e549c0aebb7953e71efbbfe139433f8872d8091483d"
     },
     {
       "path": "bridge/src/KeplerCommandIR.h",
@@ -5755,20 +5755,20 @@
     {
       "path": "bridge/src/KeplerCommandIRProducerScope.inc",
       "source_path": "bridge/src/KeplerCommandIRProducerScope.inc",
-      "source_SHA256": "41137933e652206123a3e5c26a6b8e85acf9dbcad23ba869767aa80f3dc6a83d",
-      "published_SHA256": "41137933e652206123a3e5c26a6b8e85acf9dbcad23ba869767aa80f3dc6a83d",
-      "bytes": 3422,
+      "source_SHA256": "d7811aab5ffd96d81b902816f28ed05e3665315b9b79f901e01efc82963865de",
+      "published_SHA256": "d7811aab5ffd96d81b902816f28ed05e3665315b9b79f901e01efc82963865de",
+      "bytes": 3482,
       "modified_for_publication": false,
-      "previous_published_SHA256": "ec71211aa05cbf1371549a9f870e7e4ab9a7d350fe275e38efc878b8bf0bf693"
+      "previous_published_SHA256": "41137933e652206123a3e5c26a6b8e85acf9dbcad23ba869767aa80f3dc6a83d"
     },
     {
       "path": "bridge/tools/prepare_m1_function_argument_reference.py",
       "source_path": "bridge/tools/prepare_m1_function_argument_reference.py",
-      "source_SHA256": "b1abd4b17742cb5b79302c34ddc385ac7e882d7bb2149489ebff22ad2723014b",
-      "published_SHA256": "b1abd4b17742cb5b79302c34ddc385ac7e882d7bb2149489ebff22ad2723014b",
-      "bytes": 2318,
+      "source_SHA256": "5311145e2da17b9f8f7b8209c61d3248e8939f023e18662c82b2706547fab04b",
+      "published_SHA256": "5311145e2da17b9f8f7b8209c61d3248e8939f023e18662c82b2706547fab04b",
+      "bytes": 2724,
       "modified_for_publication": false,
-      "previous_published_SHA256": "80e12f49ef3f83ec8782d19c074046172116c59b043b35e131fe6585eb516630"
+      "previous_published_SHA256": "b1abd4b17742cb5b79302c34ddc385ac7e882d7bb2149489ebff22ad2723014b"
     },
     {
       "path": "bridge/tools/qualify_three_argument_client.py",
@@ -5888,20 +5888,20 @@
     {
       "path": "bridge/tools/build_pipeline_contract_reception_client.py",
       "source_path": "bridge/tools/build_pipeline_contract_reception_client.py",
-      "source_SHA256": "f8a75c7ba0c331f89be17e5e81efb149b71f1778ea0d097333d1d7475e63ebff",
-      "published_SHA256": "f8a75c7ba0c331f89be17e5e81efb149b71f1778ea0d097333d1d7475e63ebff",
-      "bytes": 5296,
+      "source_SHA256": "a9ed758f7532c2f8a651388d8dea0ea8724a870b3a5632a70a95c36e78bcf989",
+      "published_SHA256": "a9ed758f7532c2f8a651388d8dea0ea8724a870b3a5632a70a95c36e78bcf989",
+      "bytes": 6948,
       "modified_for_publication": false,
-      "previous_published_SHA256": "e64398b4f1623201ec6134898dedfd4228cd4404c6171be2f85f1153061d66ff"
+      "previous_published_SHA256": "f8a75c7ba0c331f89be17e5e81efb149b71f1778ea0d097333d1d7475e63ebff"
     },
     {
       "path": "bridge/tools/build_registered_pipeline_contract_probe.py",
       "source_path": "bridge/tools/build_registered_pipeline_contract_probe.py",
-      "source_SHA256": "221a14295ec615dd578d68b4195a9209cdb19e1eb75f8a53c44c067ddaebf4d7",
-      "published_SHA256": "221a14295ec615dd578d68b4195a9209cdb19e1eb75f8a53c44c067ddaebf4d7",
-      "bytes": 2694,
+      "source_SHA256": "58ad11fad3a6d56def3ec4318aba378f8c02421aa8e6bd6b1e121846c2a5dd78",
+      "published_SHA256": "58ad11fad3a6d56def3ec4318aba378f8c02421aa8e6bd6b1e121846c2a5dd78",
+      "bytes": 2959,
       "modified_for_publication": false,
-      "previous_published_SHA256": "2a96c681d5d71263e7cc17586adb0bb4565fe8a6567b369b57e7f967b512541d"
+      "previous_published_SHA256": "221a14295ec615dd578d68b4195a9209cdb19e1eb75f8a53c44c067ddaebf4d7"
     },
     {
       "path": "bridge/tools/native_pipeline_contract_probe.mm",
@@ -5922,11 +5922,11 @@
     {
       "path": "bridge/tools/registered_pipeline_contract_probe.mm",
       "source_path": "bridge/tools/registered_pipeline_contract_probe.mm",
-      "source_SHA256": "49f9b0fa9cdb4a70ccf183cd21ee311b3b6e33d18c8c79757c08626d0f96643e",
-      "published_SHA256": "49f9b0fa9cdb4a70ccf183cd21ee311b3b6e33d18c8c79757c08626d0f96643e",
-      "bytes": 11573,
+      "source_SHA256": "00b25d9edef93113daa740c08bc62defb04901070bf3dc5dfd08bbfbc20b249a",
+      "published_SHA256": "00b25d9edef93113daa740c08bc62defb04901070bf3dc5dfd08bbfbc20b249a",
+      "bytes": 13996,
       "modified_for_publication": false,
-      "previous_published_SHA256": "1eaa7c8c6bb90c4d42ad9738083db31f5583ed758cfd8ab9bcb76d32fd3681ce"
+      "previous_published_SHA256": "49f9b0fa9cdb4a70ccf183cd21ee311b3b6e33d18c8c79757c08626d0f96643e"
     },
     {
       "path": "bridge/tools/verify_pipeline_contract_delivery.py",
@@ -5947,20 +5947,21 @@
     },
     {
       "path": "examples/command_ir_pipeline_contracts.mm",
-      "source_path": "bridge/results/thread-limit-32-client-build-20261015/command_ir_dataflow_client.mm",
-      "source_SHA256": "1922c557efeb54e3252adc244cca015a9c2dd9d164739917f7fffe0dba8a07bc",
-      "published_SHA256": "1922c557efeb54e3252adc244cca015a9c2dd9d164739917f7fffe0dba8a07bc",
-      "bytes": 26297,
+      "source_path": "bridge/results/ordinary-queue-reception-client-build-20261015/command_ir_dataflow_client.mm",
+      "source_SHA256": "afc737a978d961dd753194423b7182ec4ae9fd40de8034c5312c7bfada7c9a22",
+      "published_SHA256": "afc737a978d961dd753194423b7182ec4ae9fd40de8034c5312c7bfada7c9a22",
+      "bytes": 26934,
       "modified_for_publication": false,
-      "previous_published_SHA256": "05ccba52affe2f45faacba6bd5136fc7a1963031411a28b04adfeb9438c9f7d7"
+      "previous_published_SHA256": "1922c557efeb54e3252adc244cca015a9c2dd9d164739917f7fffe0dba8a07bc"
     },
     {
       "path": "bridge/src/KeplerNativeThreadLimits.inc",
       "source_path": "bridge/src/KeplerNativeThreadLimits.inc",
-      "source_SHA256": "f9e53dd2ac469443704e4d3c00a3bb3aaf3d160fea638a88688c504b0b58cba0",
-      "published_SHA256": "f9e53dd2ac469443704e4d3c00a3bb3aaf3d160fea638a88688c504b0b58cba0",
-      "bytes": 5229,
-      "modified_for_publication": false
+      "source_SHA256": "6491d2cff3d11d94ee17438eb6a1b38caeff82fd3ddde3454a176b2ea597e057",
+      "published_SHA256": "6491d2cff3d11d94ee17438eb6a1b38caeff82fd3ddde3454a176b2ea597e057",
+      "bytes": 5425,
+      "modified_for_publication": false,
+      "previous_published_SHA256": "f9e53dd2ac469443704e4d3c00a3bb3aaf3d160fea638a88688c504b0b58cba0"
     },
     {
       "path": "bridge/tools/ThreadLimitContractCases.inc",
@@ -6000,6 +6001,78 @@
       "source_SHA256": "5a6ac0d668876f9400a54299a2b4e0254e0ed1a5c85cdbd83e5fa46eab5eb687",
       "published_SHA256": "5a6ac0d668876f9400a54299a2b4e0254e0ed1a5c85cdbd83e5fa46eab5eb687",
       "bytes": 7552,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/src/KeplerAutomaticComputeFactories.inc",
+      "source_path": "bridge/src/KeplerAutomaticComputeFactories.inc",
+      "source_SHA256": "284380c15920b1cd37c40243ddd654a774036dbbdbd0706f16e05fc08764ceb9",
+      "published_SHA256": "284380c15920b1cd37c40243ddd654a774036dbbdbd0706f16e05fc08764ceb9",
+      "bytes": 10331,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/native_queue_factory_probe.mm",
+      "source_path": "bridge/tools/native_queue_factory_probe.mm",
+      "source_SHA256": "1b30a37d2e9d3951859baf43927e120e0730e99a5102bf259e17e21d27a174ae",
+      "published_SHA256": "1b30a37d2e9d3951859baf43927e120e0730e99a5102bf259e17e21d27a174ae",
+      "bytes": 2638,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/build_native_queue_factory_probe.py",
+      "source_path": "bridge/tools/build_native_queue_factory_probe.py",
+      "source_SHA256": "2a4706bdadc4ed7bd298a625e3b17e88a449812071980dbdbdfa8d4f12bad6f8",
+      "published_SHA256": "2a4706bdadc4ed7bd298a625e3b17e88a449812071980dbdbdfa8d4f12bad6f8",
+      "bytes": 1559,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/AutomaticQueueContractCases.inc",
+      "source_path": "bridge/tools/AutomaticQueueContractCases.inc",
+      "source_SHA256": "67a6aa2877ee8d4d8ca8737137d696f12ef2519304c5edb6a74323fc88d4638e",
+      "published_SHA256": "67a6aa2877ee8d4d8ca8737137d696f12ef2519304c5edb6a74323fc88d4638e",
+      "bytes": 5179,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/AutomaticQueueBlockingCase.inc",
+      "source_path": "bridge/tools/AutomaticQueueBlockingCase.inc",
+      "source_SHA256": "c61962e623c180726663165e8c3516b2c7c9e995e2ac7323ebdcd94d03c4651a",
+      "published_SHA256": "c61962e623c180726663165e8c3516b2c7c9e995e2ac7323ebdcd94d03c4651a",
+      "bytes": 2356,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/QueueFactoryReception.inc",
+      "source_path": "bridge/tools/QueueFactoryReception.inc",
+      "source_SHA256": "913e53a57415ff85b03a22ab7b2a0030a2dcdca8302eea2e159c69f346195c41",
+      "published_SHA256": "913e53a57415ff85b03a22ab7b2a0030a2dcdca8302eea2e159c69f346195c41",
+      "bytes": 968,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/qualify_ordinary_queue_factories.py",
+      "source_path": "bridge/tools/qualify_ordinary_queue_factories.py",
+      "source_SHA256": "cbe9ea44e1453b5ac7109a2bc24fae248682b194836a8c74f73fa5fcf6eab004",
+      "published_SHA256": "cbe9ea44e1453b5ac7109a2bc24fae248682b194836a8c74f73fa5fcf6eab004",
+      "bytes": 1816,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/verify_ordinary_queue_delivery.py",
+      "source_path": "bridge/tools/verify_ordinary_queue_delivery.py",
+      "source_SHA256": "831feede1c310cd7c8e917f5e26282df18c4ec6065204b98896dc3debb65d907",
+      "published_SHA256": "831feede1c310cd7c8e917f5e26282df18c4ec6065204b98896dc3debb65d907",
+      "bytes": 7877,
+      "modified_for_publication": false
+    },
+    {
+      "path": "examples/QueueFactoryReception.inc",
+      "source_path": "bridge/tools/QueueFactoryReception.inc",
+      "source_SHA256": "913e53a57415ff85b03a22ab7b2a0030a2dcdca8302eea2e159c69f346195c41",
+      "published_SHA256": "913e53a57415ff85b03a22ab7b2a0030a2dcdca8302eea2e159c69f346195c41",
+      "bytes": 968,
       "modified_for_publication": false
     }
   ],
@@ -6042,7 +6115,7 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "bf4ab319d41007b967ec91345b1b32c3440d1f050ecac536b7173777c5e5eb9c",
-  "previous_public_commit": "15f9650d713b80b27fbf626cc045d32e9f5f63be",
-  "update": "Native per-pipeline thread-limit field correction and adapted-encoder validation, with bounded GTX/M1 qualification"
+  "previous_source_snapshot_SHA256": "e4c61791f7eb5c86977e2053527a6af99978bc2c183f5e4d6e3fe574bf34ed06",
+  "previous_public_commit": "311511b14752f78c0abb943378c5cd4a68c93a5f",
+  "update": "Scope-owned queue/buffer/compute factories with weak ownership and automatic encoder validation"
 }

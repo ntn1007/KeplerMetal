@@ -55,6 +55,8 @@
 @property(nonatomic,strong) id<MTLTexture> renderTarget;
 @property(nonatomic,strong) id<MTLRenderPipelineState> callerRenderPipeline;
 @property(nonatomic,strong) id<MTLComputePipelineState> callerComputePipeline;
+@property(nonatomic) Class originalComputeClass;
+@property(nonatomic) BOOL computeEncodingEnded;
 @property(nonatomic) BOOL encodingRenderICB;
 @property(nonatomic,strong) NSMutableDictionary *callerVertexBindings;
 @property(nonatomic,strong) NSMutableDictionary *callerFragmentBindings;
@@ -120,7 +122,9 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 @property(nonatomic,strong) NSMutableDictionary *namedPipelines;
 @property(nonatomic,strong) NSMutableArray *eventRows;
 @property(nonatomic,strong) NSMutableArray *adapted;
-@property(nonatomic) Class originalDeviceClass;
+@property(nonatomic) Class originalDeviceClass,originalQueueClass;
+@property(nonatomic,strong) NSMutableArray *automaticBuffers;
+@property(nonatomic,strong) NSObject *factoryLock;
 @property(nonatomic,strong) NSMutableArray *adaptedFunctions,*functionLibraries;
 @property(nonatomic) BOOL restored;
 @property(nonatomic) NSUInteger releasedEncoderCount;
@@ -251,7 +255,7 @@ static NSString*residentBindingError(KPComputeICBCommand*c,KPCPUICBScope*scope){
 @end
 
 @implementation KPGPUCommandSelection
-- (NSArray*)events{return [_eventRows copy];}
+- (NSArray*)events{@synchronized(_eventRows){return [_eventRows copy];}}
 #include "KeplerCommandIRPlan.inc"
 - (BOOL)validateOwners:(NSError**)error {
  if(_scope.restored)return fail(error,@"GPU selection scope was restored");
@@ -302,6 +306,7 @@ static NSString*residentBindingError(KPComputeICBCommand*c,KPCPUICBScope*scope){
 #include "KeplerCommandIRProducer.inc"
 #include "KeplerNativeThreadLimits.inc"
 #include "KeplerCommandIRPipelineContracts.inc"
+#include "KeplerAutomaticComputeFactories.inc"
 
 @implementation KPComputeICB
 - (id<MTLDevice>)device{return _scope.device;}
@@ -486,6 +491,7 @@ BOOL installRenderOverride(Class dynamic,Class original,SEL selector,IMP impleme
 }
 
 @implementation KPCPUICBScope
+- (instancetype)init{if((self=[super init]))_factoryLock=[NSObject new];return self;}
 + (instancetype)installOnDevice:(id<MTLDevice>)device queue:(id<MTLCommandQueue>)queue pipeline:(id<MTLComputePipelineState>)pipeline error:(NSError**)error {
  std::lock_guard<std::mutex>lock(installMutex);NSData*d=[NSData dataWithContentsOfFile:@"/System/Library/Extensions/GeForceMTLDriver.bundle/Contents/MacOS/GeForceMTLDriver"];if(![hash(d)isEqual:@"2b89839c425d95934f5e01f16c8683fe53432df410292ec8e554b21c98d6c054"]||device.registryID!=4294968458||queue.device!=device||pipeline.device!=device||objc_getAssociatedObject(device,&contextKey)){fail(error,@"Device/driver/queue/pipeline or existing scope mismatch");return nil;}
  KPCPUICBScope*s=[self new];s.device=device;s.queue=queue;s.pipeline=pipeline;s.eventRows=[NSMutableArray new];s.adapted=[NSMutableArray new];s.profiles=[NSMutableDictionary new];s.namedPipelines=[NSMutableDictionary new];s.originalDeviceClass=object_getClass(device);s.profiles[[NSValue valueWithPointer:(__bridge const void*)pipeline]]=@{@"function":@"consume_grid",@"library_SHA256":@"b15f9b198ba326811f0a61f64fc32ac7cc185d04db63fa8e04f86075e8450a8d",@"static_threadgroup_bytes":@0};s.namedPipelines[@"consume_grid"]=pipeline;
@@ -610,10 +616,16 @@ BOOL installRenderOverride(Class dynamic,Class original,SEL selector,IMP impleme
 - (NSDictionary*)profileForPipeline:(id<MTLComputePipelineState>)pipeline {return pipeline?_profiles[[NSValue valueWithPointer:(__bridge const void*)pipeline]]:nil;}
 - (id<MTLComputePipelineState>)pipelineForFunction:(NSString*)name{return _restored?nil:_namedPipelines[name];}
 - (NSArray*)events{return [_eventRows copy];}
-- (BOOL)adaptComputeEncoder:(id<MTLComputeCommandEncoder>)e error:(NSError**)error {
- if(_restored||!_pipeline||e.device!=_device||objc_getAssociatedObject(e,&contextKey))return fail(error,@"Encoder scope mismatch");Ivar cbVar=class_getInstanceVariable(object_getClass(e),"_commandBuffer");if(!cbVar||ivar_getOffset(cbVar)!=32)return fail(error,@"Encoder layout changed");id<MTLCommandBuffer>cb=object_getIvar(e,cbVar);if(cb.commandQueue!=_queue||cb.status!=MTLCommandBufferStatusNotEnqueued)return fail(error,@"Uncommitted recording queue required");Class original=object_getClass(e),dynamic=nil;{std::lock_guard<std::mutex>lock(installMutex);dynamic=scopedClass(encoderClasses,original,@"KPICBEncoder_",@selector(executeCommandsInBuffer:withRange:),(IMP)executeICB,error);if(dynamic&&!installNativeThreadLimitChecks(dynamic,original))dynamic=nil;}if(!dynamic)return fail(error,@"Native compute dispatch methods differ");
- NSMutableIndexSet*expired=[NSMutableIndexSet new];for(NSUInteger i=0;i<_adapted.count;i++)if(!((KPAdaptedEncoder*)_adapted[i]).encoder)[expired addIndex:i];_releasedEncoderCount+=expired.count;[_adapted removeObjectsAtIndexes:expired];linkScope(e,self);object_setClass(e,dynamic);KPAdaptedEncoder*record=[KPAdaptedEncoder new];record.encoder=e;record.originalClass=original;[_adapted addObject:record];return YES;
-}
+- (BOOL)adaptComputeEncoder:(id<MTLComputeCommandEncoder>)e error:(NSError**)error {@synchronized(_factoryLock){
+ if(error)*error=nil;
+ if(_restored||!_pipeline||!e||e.device!=_device)return fail(error,@"Encoder scope mismatch");
+ Ivar cbVar=class_getInstanceVariable(object_getClass(e),"_commandBuffer");if(!cbVar||ivar_getOffset(cbVar)!=32)return fail(error,@"Encoder layout changed");id<MTLCommandBuffer>cb=object_getIvar(e,cbVar);if(cb.commandQueue!=_queue||cb.status!=MTLCommandBufferStatusNotEnqueued)return fail(error,@"Uncommitted recording queue required");
+ KPScopeLink*existing=objc_getAssociatedObject(e,&contextKey);
+ if(existing){if(existing.scope==self&&!existing.computeEncodingEnded&&existing.originalComputeClass==class_getSuperclass(object_getClass(e)))return YES;return fail(error,@"Encoder belongs to another scope, ended, or changed class");}
+ Class original=object_getClass(e),dynamic=nil;{std::lock_guard<std::mutex>lock(installMutex);dynamic=scopedClass(encoderClasses,original,@"KPICBEncoder_",@selector(executeCommandsInBuffer:withRange:),(IMP)executeICB,error);if(dynamic&&!installNativeThreadLimitChecks(dynamic,original))dynamic=nil;}if(!dynamic)return fail(error,@"Native compute dispatch methods differ");
+ NSMutableIndexSet*expired=[NSMutableIndexSet new];for(NSUInteger i=0;i<_adapted.count;i++)if(!((KPAdaptedEncoder*)_adapted[i]).encoder)[expired addIndex:i];_releasedEncoderCount+=expired.count;[_adapted removeObjectsAtIndexes:expired];linkScope(e,self);((KPScopeLink*)objc_getAssociatedObject(e,&contextKey)).originalComputeClass=original;object_setClass(e,dynamic);KPAdaptedEncoder*record=[KPAdaptedEncoder new];record.encoder=e;record.originalClass=original;[_adapted addObject:record];return YES;
+}}
+
 - (BOOL)prepareResidentComputeCommands:(id<MTLIndirectCommandBuffer>)buffer range:(NSRange)range error:(NSError**)error {
  if(_restored||![buffer isKindOfClass:KPComputeICB.class]||[buffer isKindOfClass:KPRenderICB.class]||((KPComputeICB*)buffer).scope!=self||range.location>buffer.size||range.length>buffer.size-range.location)return fail(error,@"Resident preparation context/range differs");
  KPComputeICB*icb=(KPComputeICB*)buffer;NSMutableArray*records=[NSMutableArray array];
@@ -756,7 +768,7 @@ BOOL installRenderOverride(Class dynamic,Class original,SEL selector,IMP impleme
  id<MTLBuffer>host=[_device newBufferWithLength:65536 options:MTLResourceStorageModeManaged];id<MTLCommandBuffer>read=[_queue commandBuffer];id<MTLBlitCommandEncoder>b=[read blitCommandEncoder];[b copyFromBuffer:nativeCB sourceOffset:0 toBuffer:host destinationOffset:0 size:65536];[b synchronizeResource:host];[b endEncoding];if(!complete(read))reject(@"Native state readback failed");NSData*snapshot=[NSData dataWithBytes:host.contents length:65536];NSError*error=nil;NSDictionary*registered=([profile[@"native_registration_v1"]boolValue]||[profile[@"library_SHA256"]isEqual:@"913c4c1a32db704bc0ee5e54c6d9084f8601418c924fbd35ef72bcc08cb64ecd"])?profile:nil;KPRecordedNativeCompute*r=[KPRecordedNativeCompute recordedCommands:commands queue:_queue pipeline:command.pipeline output:out counter:counter parameters:parameters nativeConstants:nativeCB nativeDescriptor:nativeQMD constantSnapshot:snapshot groups:command.groups.width local:command.local.width profile:registered error:&error];if(!r)reject(error.localizedDescription);
  id<MTLCommandBuffer>upload=[_queue commandBuffer];b=[upload blitCommandEncoder];[b copyFromBuffer:nativeCB sourceOffset:0 toBuffer:r.constants destinationOffset:0 size:65536];[b endEncoding];if(!complete(upload))reject(@"Dedicated constant copy failed");[_eventRows addObject:@{@"operation":@"materialize_CPU_command",@"user_kernel_invocations":@0,@"requires_GPU_NOP_and_blit_preparation":@YES,@"commands_SHA256":hash(commands),@"snapshot_SHA256":hash(snapshot),@"command_bytes":@(commands.length),@"dynamic_threadgroup_length":@(dynamicLength),@"relocation":r.relocationEvidence}];return r;
 }
-- (void)restore{if(_restored)return;NSUInteger liveFunctions=0;for(KPAdaptedFunction*r in _adaptedFunctions){id f=r.function;if(f){liveFunctions++;object_setClass(f,r.originalClass);objc_setAssociatedObject(f,&IRFunctionKey,nil,OBJC_ASSOCIATION_ASSIGN);}}[_adaptedFunctions removeAllObjects];[_functionLibraries removeAllObjects];if(liveFunctions)[_eventRows addObject:@{@"operation":@"restore_IRv2_functions",@"live_functions_restored":@(liveFunctions),@"cached_function_classes":@(functionClasses.size())}];NSUInteger live=0,expired=_releasedEncoderCount;for(KPAdaptedEncoder*r in _adapted){id e=r.encoder;if(!e){expired++;continue;}live++;object_setClass(e,r.originalClass);objc_setAssociatedObject(e,&contextKey,nil,OBJC_ASSOCIATION_ASSIGN);}[_adapted removeAllObjects];object_setClass(_device,_originalDeviceClass);objc_setAssociatedObject(_device,&contextKey,nil,OBJC_ASSOCIATION_ASSIGN);_restored=YES;[_eventRows addObject:@{@"operation":@"scope_restore",@"device_class_restored":@(object_getClass(_device)==_originalDeviceClass),@"live_encoder_classes_restored":@(live),@"already_released_encoders":@(expired),@"cached_device_classes":@(deviceClasses.size()),@"cached_encoder_classes":@(encoderClasses.size()),@"system_modified":@NO}];}
+- (void)restore{@synchronized(_factoryLock){if(_restored)return;_restored=YES;NSUInteger liveFunctions=0;for(KPAdaptedFunction*r in _adaptedFunctions){id f=r.function;if(f){liveFunctions++;object_setClass(f,r.originalClass);objc_setAssociatedObject(f,&IRFunctionKey,nil,OBJC_ASSOCIATION_ASSIGN);}}[_adaptedFunctions removeAllObjects];[_functionLibraries removeAllObjects];if(liveFunctions)[_eventRows addObject:@{@"operation":@"restore_IRv2_functions",@"live_functions_restored":@(liveFunctions),@"cached_function_classes":@(functionClasses.size())}];NSUInteger live=0,expired=_releasedEncoderCount;for(KPAdaptedEncoder*r in _adapted){id e=r.encoder;if(!e){expired++;continue;}live++;object_setClass(e,r.originalClass);objc_setAssociatedObject(e,&contextKey,nil,OBJC_ASSOCIATION_ASSIGN);}[_adapted removeAllObjects];restoreAutomaticComputeFactories(self);object_setClass(_device,_originalDeviceClass);objc_setAssociatedObject(_device,&contextKey,nil,OBJC_ASSOCIATION_ASSIGN);_restored=YES;[_eventRows addObject:@{@"operation":@"scope_restore",@"device_class_restored":@(object_getClass(_device)==_originalDeviceClass),@"live_encoder_classes_restored":@(live),@"already_released_encoders":@(expired),@"cached_device_classes":@(deviceClasses.size()),@"cached_encoder_classes":@(encoderClasses.size()),@"system_modified":@NO}];}}
 - (void)dealloc{[self restore];}
 @end
 

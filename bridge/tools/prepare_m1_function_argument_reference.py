@@ -3,7 +3,7 @@
 from pathlib import Path
 import argparse,hashlib,json,shutil
 ROOT=Path(__file__).resolve().parents[1]
-p=argparse.ArgumentParser();p.add_argument('--out',type=Path,required=True);p.add_argument('--client-source',type=Path,default=ROOT/'tools/command_ir_dataflow_client.mm');p.add_argument('--factory-kind',type=int,choices=range(6),default=0);p.add_argument('--thread-limit',type=int,choices=[0,32,64,128,256,512,1024],default=0);a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--out',type=Path,required=True);p.add_argument('--client-source',type=Path,default=ROOT/'tools/command_ir_dataflow_client.mm');p.add_argument('--factory-kind',type=int,choices=range(6),default=0);p.add_argument('--thread-limit',type=int,choices=[0,32,64,128,256,512,1024],default=0);p.add_argument('--queue-factory',type=int,choices=range(2),default=0);p.add_argument('--encoder-factory',type=int,choices=range(5),default=0);a=p.parse_args()
 out=a.out.resolve();out.relative_to(ROOT/'results');out.mkdir(exist_ok=False)
 client=a.client_source.resolve();client.relative_to(ROOT)
 for source,name in [
@@ -17,9 +17,12 @@ for source,name in [
  (ROOT/'tools/PublicArgumentRefusals.inc','PublicArgumentRefusals.inc')]:shutil.copyfile(source,out/name)
 s=(ROOT/'tools/run_m1_command_ir_dataflow.py').read_text();anchor="'-DKP_DATAFLOW_NATIVE=1',";assert s.count(anchor)==1
 s=s.replace(anchor,anchor+"'-DKP_PUBLIC_ARGUMENT_ENCODER=1','-DKP_FUNCTION_ARGUMENT_ENCODER=1','-DKP_DESCRIPTOR_MAX_THREADS="+str(a.thread_limit)+"',",1)
-if a.factory_kind:
- anchor="str(out/'assets'),str(target/'outputs'),mode";assert s.count(anchor)==1;s=s.replace(anchor,"str(out/'assets'),str(target/'outputs'),str("+str(a.factory_kind)+")+':'+mode",1)
+if a.factory_kind or a.queue_factory or a.encoder_factory:
+ prefix=str(a.factory_kind)+(':'+str(a.queue_factory)+':'+str(a.encoder_factory)if a.queue_factory or a.encoder_factory else'')+':'
+ anchor="str(out/'assets'),str(target/'outputs'),mode";assert s.count(anchor)==1;s=s.replace(anchor,"str(out/'assets'),str(target/'outputs'),"+repr(prefix)+"+mode",1)
 helper=client.parent/'PipelineFactoryReception.inc'
+if helper.exists():shutil.copyfile(helper,out/helper.name)
+helper=client.parent/'QueueFactoryReception.inc'
 if helper.exists():shutil.copyfile(helper,out/helper.name)
 (out/'run_m1_command_ir_dataflow.py').write_text(s)
 sha=lambda f:hashlib.sha256(f.read_bytes()).hexdigest()

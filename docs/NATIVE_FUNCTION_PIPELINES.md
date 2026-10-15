@@ -17,7 +17,9 @@ id<MTLComputePipelineState> pipeline =
     [device newComputePipelineStateWithFunction:function error:&error];
 id<MTLArgumentEncoder> arguments = [function newArgumentEncoderWithBufferIndex:0];
 // Validate the plan, encode the supported fields and declare/retain resources.
-if (![scope adaptComputeEncoder:encoder error:&error]) { return; }
+// Registration enabled automatic factories on the scope-owned queue.
+id<MTLCommandBuffer> cb = [queue commandBuffer];
+id<MTLComputeCommandEncoder> encoder = [cb computeCommandEncoder];
 [encoder setComputePipelineState:pipeline];
 [encoder setBuffer:rootArgumentBuffer offset:0 atIndex:0];
 ```
@@ -47,7 +49,7 @@ The current repair supports explicit per-pipeline limits within the qualified pr
 
 For approved imported producers only, the repair initializes the existing 64-bit native `maxTotalThreadsPerThreadgroup` field (offset 88, instance size 104). It checks the exact driver profile, class, field type/offset/value and original getter before and after the write. Neither the native getter nor the pipeline class is replaced, and shader optimization is unchanged. Each descriptor state is separate from the registered automatic-limit PSO.
 
-Call `adaptComputeEncoder:error:` **before binding** a limited pipeline. The adapted encoder checks the local-size product before direct threadgroup, grid-thread and indirect dispatch calls, and refuses excessive, zero or overflowing dimensions without changing the native command cursor. These checks do not cover unadapted encoders. The application still owns normal Metal resource, geometry and lifetime responsibilities.
+After successful producer registration, newly created command buffers from the scope-owned queue automatically adapt their compute encoders. No manual `adaptComputeEncoder:error:` call is needed on that route. Existing callers can still call it idempotently on an active encoder from the same scope. The adapted encoder checks the local-size product before direct threadgroup, grid-thread and indirect dispatch calls, and refuses excessive, zero or overflowing dimensions without changing the native command cursor. Other queues and command buffers created before activation remain outside this automatic route. The application still owns normal Metal resource, geometry and lifetime responsibilities.
 
 The recorded GPU producer geometries are one-dimensional groups of 32,64,128,256,512,1024. The producer's source returns for every grid index except 0: results validate the command dataflow at those requested geometries, not an independent invocation witness for every lane. Earlier shared-memory/atomic tests remain separate evidence.
 
@@ -69,3 +71,17 @@ The [current thread-limit summary](thread-limit-validation.json) records 43 coho
 - `verify_pipeline_contract_delivery.py`: preceding milestone verifier, preserving that artifact's historical checks.
 
 Preserved failures include the initial CB0 lowering mistake, a default-stage-descriptor rejection, an unguarded unavailable getter in a CPU-only probe, and the native smaller-thread-limit discrepancy before this bounded repair. No failed run is converted into a successful qualification. A new artifact does not inherit these results. No performance benchmark was run, and the full hardware/driver objective remains incomplete.
+
+## Ordinary queue and encoder factories
+
+Registration now connects the three public queue factories (`commandBuffer`, `commandBufferWithUnretainedReferences`, `commandBufferWithDescriptor:`) and three compute factories (`computeCommandEncoder`, `computeCommandEncoderWithDispatchType:`, `computeCommandEncoderWithDescriptor:`). Serial/concurrent choices and retained/unretained flags are forwarded unchanged. Public-call coverage is a distinct result from native concurrent GPU execution or performance.
+
+Only the scope-owned queue and its newly created buffers receive private zero-ivar subclasses. Shared native class methods are untouched. Scope associations and buffer tracking are weak. Restoration resets live encoder/buffer/queue classes; an outstanding native factory call that completes after restoration returns native objects. Native queue allocation runs outside the scope lock so a full command-buffer pool cannot hold that lock while it waits.
+
+The legacy explicit adaptation method accepts a second call on the same active encoder. It refuses ended encoders, foreign queues and mismatched contexts. New factory calls can begin a recycled native encoder's new recording. An activation boundary remains: existing buffers are not discovered or globally patched.
+
+IR dataflow still requires retained command buffers under its existing ownership/order checks. Unretained factories are qualified for creation and pre-encode rejection, not GPU IR dataflow. When native Metal uses unretained resources, lifetime remains the application's responsibility, as described by Apple's [retainedReferences contract](https://developer.apple.com/documentation/metal/mtlcommandbuffer/retainedreferences).
+
+See `KeplerAutomaticComputeFactories.inc`, `AutomaticQueueContractCases.inc`, `AutomaticQueueBlockingCase.inc`, `QueueFactoryReception.inc`, `qualify_ordinary_queue_factories.py` and `verify_ordinary_queue_delivery.py`. The generated reception client has zero manual compute-adaptation calls. Its four-part CLI form is `pipelineFactory:queueFactory:encoderFactory:mode`; queue factories 0/1 select plain/retained-descriptor, and encoder factories 0–4 select plain, serial dispatch, concurrent dispatch, serial descriptor and concurrent descriptor. The shorter `pipelineFactory:mode` form keeps both defaults at 0.
+
+This removes a per-encoder integration step for the registered subset. Explicit scope initialization, exact library/program registration, the custom command IR and the remaining Apple ICB identity limitations still apply. Integration remains level 2; arbitrary libraries and ordinary unmodified applications are open work.

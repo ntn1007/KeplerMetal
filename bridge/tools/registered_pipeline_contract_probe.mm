@@ -2,6 +2,8 @@
 #import <objc/runtime.h>
 #include <CommonCrypto/CommonDigest.h>
 #include <pthread.h>
+#include <mach/mach.h>
+#include <unistd.h>
 #include <initializer_list>
 #ifndef KP_PIPELINE_NEGATIVE_TESTS
 #define KP_PIPELINE_NEGATIVE_TESTS 0
@@ -27,9 +29,9 @@ static BOOL reflectionOK(MTLComputePipelineReflection*r){
 @end
 #include "PipelineContractPendingReply.inc"
 int main(int argc,char**argv){@autoreleasepool{
- if(argc!=4)return 1;NSString*assets=@(argv[1]);id<MTLDevice>d=nil;for(id<MTLDevice>x in MTLCopyAllDevices())if(x.registryID==4294968458)d=x;if(!d)return 2;Class original=object_getClass(d);NSMutableArray*runs=[NSMutableArray new];MTLComputePipelineDescriptor*defaults=[MTLComputePipelineDescriptor new];NSDictionary*descriptorDefaults=@{@"stage_input":@(defaults.stageInputDescriptor!=nil),@"indirect":@(defaults.supportIndirectCommandBuffers),@"adding_binary":@(defaults.supportAddingBinaryFunctions),@"max_call_stack":@(defaults.maxCallStackDepth),@"shader_validation":([defaults respondsToSelector:@selector(shaderValidation)]?@(defaults.shaderValidation):@"selector_unavailable"),@"preloaded":([defaults respondsToSelector:@selector(preloadedLibraries)]?@(defaults.preloadedLibraries.count):@"selector_unavailable"),@"insert":@(defaults.insertLibraries.count),@"archives":@(defaults.binaryArchives.count)};KPContractReply*pendingReply=nil;dispatch_semaphore_t pendingDone=nil;Method pendingMethod=nullptr;BOOL pendingObserved=NO;__weak KPCPUICBScope*weakScope=nil;MTLComputePipelineReflection*survivingReflection=nil;
+ if(argc!=4)return 1;NSString*assets=@(argv[1]);id<MTLDevice>d=nil;for(id<MTLDevice>x in MTLCopyAllDevices())if(x.registryID==4294968458)d=x;if(!d)return 2;Class original=object_getClass(d);NSMutableArray*runs=[NSMutableArray new];MTLComputePipelineDescriptor*defaults=[MTLComputePipelineDescriptor new];NSDictionary*descriptorDefaults=@{@"stage_input":@(defaults.stageInputDescriptor!=nil),@"indirect":@(defaults.supportIndirectCommandBuffers),@"adding_binary":@(defaults.supportAddingBinaryFunctions),@"max_call_stack":@(defaults.maxCallStackDepth),@"shader_validation":([defaults respondsToSelector:@selector(shaderValidation)]?@(defaults.shaderValidation):@"selector_unavailable"),@"preloaded":([defaults respondsToSelector:@selector(preloadedLibraries)]?@(defaults.preloadedLibraries.count):@"selector_unavailable"),@"insert":@(defaults.insertLibraries.count),@"archives":@(defaults.binaryArchives.count)};KPContractReply*pendingReply=nil;dispatch_semaphore_t pendingDone=nil;Method pendingMethod=nullptr;BOOL pendingObserved=NO;__weak KPCPUICBScope*weakScope=nil;MTLComputePipelineReflection*survivingReflection=nil;id<MTLCommandQueue>survivingQueue=nil;id<MTLCommandBuffer>survivingBuffer=nil;id<MTLComputeCommandEncoder>survivingEncoder=nil;
  @autoreleasepool{
-  NSError*error=nil;id<MTLCommandQueue>q=[d newCommandQueue];NSData*consumer=[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"consumer.metallib"]],*manifest=[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"consumer.json"]];KPCPUICBScope*s=[KPCPUICBScope installOnDevice:d queue:q libraryData:consumer expectedSHA256:hash(consumer)manifestData:manifest expectedManifestSHA256:hash(manifest)error:&error];if(!s)return 3;weakScope=s;
+  NSError*error=nil;id<MTLCommandQueue>q=[@(argv[3])isEqual:@"automatic_blocking"]?[d newCommandQueueWithMaxCommandBufferCount:1]:[d newCommandQueue];NSData*consumer=[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"consumer.metallib"]],*manifest=[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"consumer.json"]];KPCPUICBScope*s=[KPCPUICBScope installOnDevice:d queue:q libraryData:consumer expectedSHA256:hash(consumer)manifestData:manifest expectedManifestSHA256:hash(manifest)error:&error];if(!s)return 3;weakScope=s;
   for(NSArray*a in @[@[@"gpu_command_selector.metallib",@0],@[@"gpu_command_geometry.metallib",@1],@[@"gpu_command_bindings.metallib",@2],@[@"materializer.metallib",@3]]){NSData*b=[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:a[0]]];BOOL ok=NO;switch([a[1]intValue]){case 0:ok=[s enableGPUCommandSelectionWithLibraryData:b expectedSHA256:hash(b)error:&error];break;case 1:ok=[s enableGPUCommandGeometryWithLibraryData:b expectedSHA256:hash(b)error:&error];break;case 2:ok=[s enableGPUCommandBindingsWithLibraryData:b expectedSHA256:hash(b)error:&error];break;case 3:ok=[s enableGPUCommandIRv2WithLibraryData:b expectedSHA256:hash(b)error:&error];}if(!ok)return 3;}
   NSData*producer=[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"producer.metallib"]],*carrier=[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"carrier.metallib"]],*code=[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"basic.sass"]];id<MTLFunction>f=[s newCommandIRFunctionWithLibraryData:producer expectedSHA256:hash(producer)functionName:@"encode_dataflow_basic" rootBufferIndex:0 error:&error];if(!f||![s registerCommandIRProducerForFunction:f carrierData:carrier programData:code error:&error])return 4;
   MTLComputePipelineDescriptor*diag=[MTLComputePipelineDescriptor new];diag.computeFunction=f;diag.label=@"native-diagnostic";diag.maxTotalThreadsPerThreadgroup=32;diag.threadGroupSizeIsMultipleOfThreadExecutionWidth=YES;NSDictionary*diagProof=nil;NSError*diagError=nil;id<MTLComputePipelineState>diagPipeline=[KPCommandIRProducerFactory newPipelineForDevice:d carrier:carrier program:code descriptor:diag error:&diagError evidence:&diagProof];
@@ -61,9 +63,24 @@ int main(int argc,char**argv){@autoreleasepool{
 #include "PipelineContractNegativeCases.inc"
 #endif
 
-  if([@(argv[3])isEqual:@"limits"]){
+  if([@(argv[3])isEqual:@"limits"]||[@(argv[3])isEqual:@"automatic"]){
 #include "ThreadLimitContractCases.inc"
   }
+
+  if([@(argv[3])isEqual:@"automatic"]){
+#include "AutomaticQueueContractCases.inc"
+  }
+
+  if([@(argv[3])isEqual:@"automatic_saved_imps"]){
+   id<MTLCommandBuffer>existing=[q commandBuffer];IMP qb=class_getMethodImplementation(object_getClass(q),@selector(commandBuffer)),ce=class_getMethodImplementation(object_getClass(existing),@selector(computeCommandEncoder));[s restore];
+   typedef id<MTLCommandBuffer>(*Q)(id,SEL);typedef id<MTLComputeCommandEncoder>(*E)(id,SEL);id<MTLCommandBuffer>later=((Q)qb)(q,@selector(commandBuffer));id<MTLComputeCommandEncoder>e=((E)ce)(existing,@selector(computeCommandEncoder));BOOL native=object_getClass(later)==objc_getClass("NVMTLCommandBuffer")&&object_getClass(e)==objc_getClass("NVMTLComputeCommandEncoder_KEPLER_COMPUTE_A");[e endEncoding];[runs addObject:@{@"kind":@"automatic_saved_factory_IMPs_after_restore",@"PASS":@(native),@"native_buffer_and_encoder":@(native),@"committed":@NO}];
+  }
+
+  if([@(argv[3])isEqual:@"automatic_blocking"]){
+#include "AutomaticQueueBlockingCase.inc"
+  }
+
+  if([@(argv[3])isEqual:@"automatic_lifetime"]){survivingQueue=q;survivingBuffer=[q commandBuffer];survivingEncoder=[survivingBuffer computeCommandEncoder];}
 
   if([@(argv[3])isEqual:@"pending"]){
    pendingEntered=dispatch_semaphore_create(0);pendingResume=dispatch_semaphore_create(0);pendingDone=dispatch_semaphore_create(0);pendingReply=[KPContractReply new];pendingReply.lock=[NSLock new];KPContractReply*reply=pendingReply;dispatch_semaphore_t done=pendingDone;
@@ -83,6 +100,7 @@ int main(int argc,char**argv){@autoreleasepool{
   [pendingReply.lock lock];BOOL passed=releasedWhilePending&&early==0&&ended&&pendingReply.count==1&&pendingReply.pipeline&&!pendingReply.error&&reflectionOK(pendingReply.reflection)&&[pendingReply.pipeline.label isEqual:@"survive-scope"];[pendingReply.lock unlock];
   [runs addObject:@{@"kind":@"pending_scope_release",@"PASS":@(passed),@"request_observed_before_release":@YES,@"scope_released_before_callback":@(releasedWhilePending),@"early_callbacks":@(early),@"factory_method_restored":@(method_getImplementation(pendingMethod)==pendingOriginal),@"user_kernel_submitted":@NO}];
  }
+ if(survivingQueue){BOOL restored=!weakScope&&object_getClass(survivingQueue)==objc_getClass("NVMTLCommandQueue")&&object_getClass(survivingBuffer)==objc_getClass("NVMTLCommandBuffer")&&object_getClass(survivingEncoder)==objc_getClass("NVMTLComputeCommandEncoder_KEPLER_COMPUTE_A");if(survivingEncoder)[survivingEncoder endEncoding];id<MTLCommandBuffer>later=[survivingQueue commandBuffer];id<MTLComputeCommandEncoder>laterEncoder=[later computeCommandEncoder];BOOL nativeLater=object_getClass(later)==objc_getClass("NVMTLCommandBuffer")&&object_getClass(laterEncoder)==objc_getClass("NVMTLComputeCommandEncoder_KEPLER_COMPUTE_A");[laterEncoder endEncoding];[runs addObject:@{@"kind":@"automatic_scope_release_with_live_objects",@"PASS":@(restored&&nativeLater),@"scope_released":@(!weakScope),@"all_live_classes_restored":@(restored),@"later_factories_native":@(nativeLater),@"committed":@NO}];}
  BOOL released=!weakScope&&object_getClass(d)==original&&reflectionOK(survivingReflection);
- NSDictionary*v=@{@"device":d.name,@"runs":runs,@"scope_released_with_reflection_alive":@(released),@"descriptor_defaults":descriptorDefaults,@"command_buffers_submitted":@NO,@"system_modified":@NO};NSData*j=[NSJSONSerialization dataWithJSONObject:v options:NSJSONWritingPrettyPrinted error:nil];fwrite(j.bytes,1,j.length,stdout);puts("");return released?0:7;
+ NSDictionary*v=@{@"device":d.name,@"runs":runs,@"scope_released_with_reflection_alive":@(released),@"descriptor_defaults":descriptorDefaults,@"command_buffers_submitted":@([@(argv[3])isEqual:@"automatic_blocking"]),@"system_modified":@NO};NSData*j=[NSJSONSerialization dataWithJSONObject:v options:NSJSONWritingPrettyPrinted error:nil];fwrite(j.bytes,1,j.length,stdout);puts("");return released?0:7;
 }}

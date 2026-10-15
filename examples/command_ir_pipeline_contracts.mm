@@ -15,6 +15,7 @@
 #include <CommonCrypto/CommonDigest.h>
 #include <cstring>
 #include "PipelineFactoryReception.inc"
+#include "QueueFactoryReception.inc"
 struct Push{uint64_t root;uint32_t grid[3],local[3];};
 static id<MTLArgumentEncoder>publicArgumentEncoder(id<MTLDevice>d){NSMutableArray*a=[NSMutableArray new];for(unsigned i=0;i<6;i++){MTLArgumentDescriptor*x=[MTLArgumentDescriptor argumentDescriptor];x.index=i;x.arrayLength=1;x.access=MTLArgumentAccessReadOnly;x.dataType=i==0?MTLDataTypeIndirectCommandBuffer:i==1?MTLDataTypeComputePipeline:MTLDataTypePointer;[a addObject:x];}return[d newArgumentEncoderWithArguments:a];}
 #if !KP_DATAFLOW_NATIVE && KP_ARGUMENT_REFUSALS
@@ -26,7 +27,7 @@ static BOOL done(id<MTLCommandBuffer>b){[b commit];[b waitUntilCompleted];return
 static id<MTLLibrary>load(id<MTLDevice>d,NSString*p,NSError**e){return[d newLibraryWithURL:[NSURL fileURLWithPath:p]error:e];}
 int main(int argc,char**argv){@autoreleasepool{
  if(argc!=4)return 1;NSString*assets=@(argv[1]),*out=@(argv[2]),*mode=@(argv[3]);
- NSUInteger factoryKind=0;NSDictionary*factoryEvidence=nil;NSArray*parts=[mode componentsSeparatedByString:@":"];if(parts.count==2){factoryKind=[parts[0]integerValue];if(factoryKind>5||![[NSString stringWithFormat:@"%lu",(unsigned long)factoryKind]isEqual:parts[0]])return 1;mode=parts[1];}else if(parts.count!=1)return 1;
+ NSUInteger factoryKind=0;NSDictionary*factoryEvidence=nil;NSArray*parts=[mode componentsSeparatedByString:@":"];if(parts.count==4){receptionQueueKind=[parts[1]integerValue];receptionEncoderKind=[parts[2]integerValue];if(receptionQueueKind>1||receptionEncoderKind>4||![[NSString stringWithFormat:@"%lu",(unsigned long)receptionQueueKind]isEqual:parts[1]]||![[NSString stringWithFormat:@"%lu",(unsigned long)receptionEncoderKind]isEqual:parts[2]])return 1;parts=@[parts[0],parts[3]];}if(parts.count==2){factoryKind=[parts[0]integerValue];if(factoryKind>5||![[NSString stringWithFormat:@"%lu",(unsigned long)factoryKind]isEqual:parts[0]])return 1;mode=parts[1];}else if(parts.count!=1)return 1;
  BOOL reuseEncoder=[mode isEqual:@"encoder_reuse"];id<MTLArgumentEncoder>reusableEncoder=nil;__weak id priorArgumentPlan=nil;
  BOOL producer=![mode isEqual:@"no_producer"],consumerPresent=![mode isEqual:@"no_consumer"],copy=[mode isEqual:@"copy"],split=[mode isEqual:@"split"],bad=[mode hasPrefix:@"bad_"];NSUInteger rows=copy?4:3,slots=3+rows;
  NSString*semantic=(!producer||!consumerPresent||split||bad||reuseEncoder||[mode isEqual:@"refusals"])?@"basic":mode;
@@ -82,7 +83,7 @@ int main(int argc,char**argv){@autoreleasepool{
   for(NSString*name in @[@"counter",@"dummyCounter"]){id<MTLBuffer>h=hosts[name];memset((char*)h.contents+128,0,12);}
   NSMutableArray*params=[NSMutableArray new],*specs=[NSMutableArray new];
   for(unsigned k=0;k<slots;k++){unsigned stage=k%3,seed=0x13579+trial*97+stage*101,salt=0x7654321+trial*31+stage*137;NSString*name=[NSString stringWithFormat:@"dummy%u",k];if(!allocate(name,bytes))return 4;id<MTLBuffer>p=[d newBufferWithLength:1536 options:MTLResourceStorageModeShared];if(!p)return 4;memset(p.contents,0xa5,p.length);uint32_t words[8]={n,seed,salt,stage,locals[trial][stage],0,0,0};memcpy((char*)p.contents+256,words,sizeof words);[params addObject:p];if(k<3)[specs addObject:@{@"stage":@(stage),@"count":@(n),@"seed":@(seed),@"salt":@(salt),@"local":@(words[4]),@"groups":@((n+words[4]-1)/words[4])}];}
-  id<MTLCommandBuffer>init=[q commandBuffer];id<MTLBlitCommandEncoder>b=[init blitCommandEncoder];for(NSString*name in buffers){id<MTLBuffer>h=hosts[name];[b copyFromBuffer:h sourceOffset:0 toBuffer:buffers[name]destinationOffset:0 size:h.length];}[b endEncoding];if(!done(init))return 5;
+  id<MTLCommandBuffer>init=receptionCommandBuffer(q);id<MTLBlitCommandEncoder>b=[init blitCommandEncoder];for(NSString*name in buffers){id<MTLBuffer>h=hosts[name];[b copyFromBuffer:h sourceOffset:0 toBuffer:buffers[name]destinationOffset:0 size:h.length];}[b endEncoding];if(!done(init))return 5;
   MTLIndirectCommandBufferDescriptor*desc=[MTLIndirectCommandBufferDescriptor new];desc.commandTypes=MTLIndirectCommandTypeConcurrentDispatch;desc.maxKernelBufferBindCount=4;desc.inheritBuffers=NO;desc.inheritPipelineState=NO;id<MTLIndirectCommandBuffer>icb=[d newIndirectCommandBufferWithDescriptor:desc maxCommandCount:slots options:MTLResourceStorageModeShared];if(!icb)return 6;
   for(unsigned k=0;k<slots;k++){unsigned stage=k%3;id<MTLIndirectComputeCommand>c=[icb indirectComputeCommandAtIndex:k];[c setComputePipelineState:pipelines[stage]];[c setKernelBuffer:buffers[[NSString stringWithFormat:@"dummy%u",k]]offset:128 atIndex:0];if(stage)[c setKernelBuffer:buffers[@"dummySrc"]offset:128 atIndex:1];[c setKernelBuffer:params[k]offset:256 atIndex:2];[c setKernelBuffer:buffers[@"dummyCounter"]offset:128 atIndex:3];[c concurrentDispatchThreadgroups:MTLSizeMake((n+locals[trial][stage]-1)/locals[trial][stage],1,1)threadsPerThreadgroup:MTLSizeMake(locals[trial][stage],1,1)];}
   id<MTLIndirectCommandBuffer>target=icb;NSUInteger first=3;id<MTLBuffer>root=nil,witness=nil,witnessHost=nil;KPGPUCommandSelection*plan=nil;
@@ -127,10 +128,10 @@ int main(int argc,char**argv){@autoreleasepool{
 #endif
   witness=plan.generatedGeometry;witnessHost=[d newBufferWithLength:witness.length options:MTLResourceStorageModeShared];
 #endif
-  id<MTLCommandBuffer>main=[q commandBuffer],pbuf=split?[q commandBuffer]:main;
-  if(producer){id<MTLComputeCommandEncoder>e=[pbuf computeCommandEncoder];
+  id<MTLCommandBuffer>main=receptionCommandBuffer(q),pbuf=split?receptionCommandBuffer(q):main;
+  if(producer){id<MTLComputeCommandEncoder>e=receptionComputeEncoder(pbuf);
 #if !KP_DATAFLOW_NATIVE
-if(![scope adaptComputeEncoder:e error:&error])return 10;
+if(![NSStringFromClass(object_getClass(e))hasPrefix:@"KPICBEncoder_"])return 10;
 #endif
 [e setComputePipelineState:writer];
 #if KP_DATAFLOW_NATIVE
@@ -140,15 +141,15 @@ if(![scope adaptComputeEncoder:e error:&error])return 10;
 #endif
    [e endEncoding];}
 #if !KP_DATAFLOW_NATIVE
-  if(bad){NSDictionary*changes=@{@"bad_parameters":@[@16,@1],@"bad_counter":@[@26,@1],@"bad_pipeline":@[@2,@8],@"bad_buffer3_flag":@[@1,@115],@"bad_groups":@[@4,@0],@"bad_reserved":@[@28,@1]};NSArray*c=changes[mode];if(!c)return 9;uint32_t v[2]={[c[0]unsignedIntValue],[c[1]unsignedIntValue]};id<MTLComputeCommandEncoder>e=[pbuf computeCommandEncoder];[e setComputePipelineState:fieldPSO];[e setBuffer:buffers[@"records"]offset:128 atIndex:0];[e setBytes:v length:8 atIndex:1];[e dispatchThreadgroups:MTLSizeMake(1,1,1)threadsPerThreadgroup:MTLSizeMake(1,1,1)];[e endEncoding];}
+  if(bad){NSDictionary*changes=@{@"bad_parameters":@[@16,@1],@"bad_counter":@[@26,@1],@"bad_pipeline":@[@2,@8],@"bad_buffer3_flag":@[@1,@115],@"bad_groups":@[@4,@0],@"bad_reserved":@[@28,@1]};NSArray*c=changes[mode];if(!c)return 9;uint32_t v[2]={[c[0]unsignedIntValue],[c[1]unsignedIntValue]};id<MTLComputeCommandEncoder>e=receptionComputeEncoder(pbuf);[e setComputePipelineState:fieldPSO];[e setBuffer:buffers[@"records"]offset:128 atIndex:0];[e setBytes:v length:8 atIndex:1];[e dispatchThreadgroups:MTLSizeMake(1,1,1)threadsPerThreadgroup:MTLSizeMake(1,1,1)];[e endEncoding];}
 #endif
   if(split)[pbuf commit];
 #if !KP_DATAFLOW_NATIVE
   if(![plan encodeCommandIRInCommandBuffer:main afterProducer:producer?pbuf:nil error:&error]){emit(@{@"failure":@"materialize",@"error":error.description?:@"nil"});return 10;}
 #endif
-  if(consumerPresent){id<MTLComputeCommandEncoder>e=[main computeCommandEncoder];
+  if(consumerPresent){id<MTLComputeCommandEncoder>e=receptionComputeEncoder(main);
 #if !KP_DATAFLOW_NATIVE
-   if(![scope adaptComputeEncoder:e error:&error])return 11;
+   if(![NSStringFromClass(object_getClass(e))hasPrefix:@"KPICBEncoder_"])return 11;
 #endif
    for(id<MTLBuffer>r in buffers.allValues)[e useResource:r usage:MTLResourceUsageRead|MTLResourceUsageWrite];for(id<MTLBuffer>r in params)[e useResource:r usage:MTLResourceUsageRead];
    @try{if(copy){[e executeCommandsInBuffer:target withRange:NSMakeRange(first,1)];[e executeCommandsInBuffer:target withRange:NSMakeRange(first+3,1)];[e executeCommandsInBuffer:target withRange:NSMakeRange(first+1,2)];}else[e executeCommandsInBuffer:target withRange:NSMakeRange(first,3)];}@catch(NSException*x){[e endEncoding];emit(@{@"failure":@"execute",@"trial":@(trial),@"error":x.reason?:@"nil"});return 11;}[e endEncoding];}
@@ -169,5 +170,5 @@ if(![scope adaptComputeEncoder:e error:&error])return 10;
  MTLArgument*restoredReflection=nil;id<MTLArgumentEncoder>restoredEncoder=[producerFunction newArgumentEncoderWithBufferIndex:0 reflection:&restoredReflection];if(![NSStringFromClass(object_getClass(producerFunction))isEqual:@"_MTLFunctionInternal"]||![NSStringFromClass(object_getClass(restoredEncoder))isEqual:@"NVMTLIndirectArgumentEncoder"]||restoredEncoder.encodedLength!=48||restoredReflection.bufferDataSize!=48){emit(@{@"failure":@"native_function_restore"});return 13;}
  NSError*restoredFactoryError=nil;if([d newComputePipelineStateWithFunction:producerFunction error:&restoredFactoryError]||![restoredFactoryError.description containsString:@"air.compute_pipeline_state"])return 13;
 #endif
- BOOL restored=object_getClass(d)==original;emit(@{@"mode":mode,@"native_reference":@(KP_DATAFLOW_NATIVE),@"public_argument_encoder":@(KP_PUBLIC_ARGUMENT_ENCODER),@"function_argument_encoder":@(KP_FUNCTION_ARGUMENT_ENCODER),@"native_root_binding":@YES,@"host_push_buffer_required":@NO,@"public_pipeline_factory":@YES,@"factory_kind":@(factoryKind),@"factory_evidence":factoryEvidence?:@{},@"producer_registration_refusals":@(KP_DATAFLOW_NATIVE?0:4),@"ordinary_pipeline_passthrough":@YES,@"unregistered_native_failure_preserved":@(!KP_DATAFLOW_NATIVE),@"native_factory_restored":@YES,@"function_events":scope?scope.events:@[],@"argument_refusal_probe":@(KP_ARGUMENT_REFUSALS),@"device":d.name,@"registry_id":@(d.registryID),@"runs":runs,@"API_refusals":@(APIrefusals),@"producer_info":info,@"producer_import":importProof,@"scope_restored":@(restored),@"CPU_expected_answers_uploaded":@NO,@"IR_CPU_read_before_execution":@NO,@"performance_benchmark":@NO,@"system_modified":@NO});return restored?0:13;
+ BOOL restored=object_getClass(d)==original;emit(@{@"mode":mode,@"native_reference":@(KP_DATAFLOW_NATIVE),@"public_argument_encoder":@(KP_PUBLIC_ARGUMENT_ENCODER),@"function_argument_encoder":@(KP_FUNCTION_ARGUMENT_ENCODER),@"native_root_binding":@YES,@"host_push_buffer_required":@NO,@"public_pipeline_factory":@YES,@"factory_kind":@(factoryKind),@"factory_evidence":factoryEvidence?:@{},@"automatic_encoders":@YES,@"manual_compute_adaptation_calls":@0,@"queue_factory_kind":@(receptionQueueKind),@"encoder_factory_kind":@(receptionEncoderKind),@"producer_registration_refusals":@(KP_DATAFLOW_NATIVE?0:4),@"ordinary_pipeline_passthrough":@YES,@"unregistered_native_failure_preserved":@(!KP_DATAFLOW_NATIVE),@"native_factory_restored":@YES,@"function_events":scope?scope.events:@[],@"argument_refusal_probe":@(KP_ARGUMENT_REFUSALS),@"device":d.name,@"registry_id":@(d.registryID),@"runs":runs,@"API_refusals":@(APIrefusals),@"producer_info":info,@"producer_import":importProof,@"scope_restored":@(restored),@"CPU_expected_answers_uploaded":@NO,@"IR_CPU_read_before_execution":@NO,@"performance_benchmark":@NO,@"system_modified":@NO});return restored?0:13;
 }}
