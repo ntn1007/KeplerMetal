@@ -22,6 +22,7 @@ La dernière commande exige macOS, Xcode et sa chaîne Metal. Elle compile les s
 - [Récupérer les dépendances Apple/NVIDIA](docs/DEPENDENCIES.md)
 - [Fonctions validées et travaux restants](docs/STATUS.md)
 - [Architecture et séparation des deux branches](docs/ARCHITECTURE.md)
+- [Raccordement des pipelines par l'API publique](docs/NATIVE_FUNCTION_PIPELINES.md)
 - [Contribuer](CONTRIBUTING.md)
 
 Aucun pilote propriétaire, firmware, SDK, exécutable ou résultat binaire n'est publié. Les liens et empreintes permettent de retrouver les références séparément. Le code original est sous licence MIT ; les dépendances conservent leurs propres licences.

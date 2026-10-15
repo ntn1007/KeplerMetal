@@ -1,0 +1,229 @@
+{
+  "status": "PASS",
+  "static_library_SHA256": "b19f78099eb6bb9b644e481902cbcbed829760f8e5ff61114d2bbb5fbaf66dd7",
+  "native_abi_compiler_SHA256": "69291924b1eb1cc9617ecefd27838fd5309f8f9f0a2934af05440b3da3946b79",
+  "producer_source_metallib_SHA256": "a9367d4492cd100adfcde990efe0b043e4b070536a3615be5b9b2f63bfb473db",
+  "native_carrier_SHA256": "bf5065e2db01161839efe25eac67a2052fc3324367d3c4754182550857014574",
+  "cohorts": [
+    {
+      "directory": "results/native-pipeline-command-final-20261015-no_producer",
+      "mode": "no_producer",
+      "trials": 4,
+      "exact_uint32_results": 0,
+      "consumer_invocations": 0,
+      "guard_bytes": 5052992,
+      "API_refusals": 0,
+      "raw_files": 80
+    },
+    {
+      "directory": "results/native-pipeline-command-final-20261015-refusals",
+      "mode": "refusals",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992,
+      "API_refusals": 8,
+      "raw_files": 80
+    },
+    {
+      "directory": "results/native-pipeline-command-final-20261015-barrier",
+      "mode": "barrier",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992,
+      "API_refusals": 0,
+      "raw_files": 80
+    },
+    {
+      "directory": "results/native-pipeline-command-final-20261015-basic",
+      "mode": "basic",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992,
+      "API_refusals": 0,
+      "raw_files": 80
+    },
+    {
+      "directory": "results/native-pipeline-command-final-20261015-copy",
+      "mode": "copy",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5678624,
+      "API_refusals": 0,
+      "raw_files": 88
+    },
+    {
+      "directory": "results/native-pipeline-command-final-20261015-split",
+      "mode": "split",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992,
+      "API_refusals": 0,
+      "raw_files": 80
+    },
+    {
+      "directory": "results/native-pipeline-command-final-20261015-no_consumer",
+      "mode": "no_consumer",
+      "trials": 4,
+      "exact_uint32_results": 0,
+      "consumer_invocations": 0,
+      "guard_bytes": 5052992,
+      "API_refusals": 0,
+      "raw_files": 80
+    },
+    {
+      "directory": "results/native-pipeline-command-final-20261015-no_seed",
+      "mode": "no_seed",
+      "trials": 4,
+      "exact_uint32_results": 305152,
+      "consumer_invocations": 76288,
+      "guard_bytes": 5052992,
+      "API_refusals": 0,
+      "raw_files": 80
+    },
+    {
+      "directory": "results/native-pipeline-command-final-20261015-no_gather",
+      "mode": "no_gather",
+      "trials": 4,
+      "exact_uint32_results": 305152,
+      "consumer_invocations": 76288,
+      "guard_bytes": 5052992,
+      "API_refusals": 0,
+      "raw_files": 80
+    },
+    {
+      "directory": "results/native-pipeline-command-final-20261015-no_finish",
+      "mode": "no_finish",
+      "trials": 4,
+      "exact_uint32_results": 305152,
+      "consumer_invocations": 76288,
+      "guard_bytes": 5052992,
+      "API_refusals": 0,
+      "raw_files": 80
+    },
+    {
+      "directory": "results/native-pipeline-command-final-20261015-bad_parameters",
+      "mode": "bad_parameters",
+      "trials": 4,
+      "exact_uint32_results": 305152,
+      "consumer_invocations": 76288,
+      "guard_bytes": 5052992,
+      "API_refusals": 0,
+      "raw_files": 80
+    },
+    {
+      "directory": "results/native-pipeline-command-final-20261015-bad_counter",
+      "mode": "bad_counter",
+      "trials": 4,
+      "exact_uint32_results": 305152,
+      "consumer_invocations": 76288,
+      "guard_bytes": 5052992,
+      "API_refusals": 0,
+      "raw_files": 80
+    },
+    {
+      "directory": "results/native-pipeline-command-final-20261015-bad_pipeline",
+      "mode": "bad_pipeline",
+      "trials": 4,
+      "exact_uint32_results": 305152,
+      "consumer_invocations": 76288,
+      "guard_bytes": 5052992,
+      "API_refusals": 0,
+      "raw_files": 80
+    },
+    {
+      "directory": "results/native-pipeline-command-final-20261015-bad_buffer3_flag",
+      "mode": "bad_buffer3_flag",
+      "trials": 4,
+      "exact_uint32_results": 305152,
+      "consumer_invocations": 76288,
+      "guard_bytes": 5052992,
+      "API_refusals": 0,
+      "raw_files": 80
+    },
+    {
+      "directory": "results/native-pipeline-command-final-20261015-bad_groups",
+      "mode": "bad_groups",
+      "trials": 4,
+      "exact_uint32_results": 305152,
+      "consumer_invocations": 76288,
+      "guard_bytes": 5052992,
+      "API_refusals": 0,
+      "raw_files": 80
+    },
+    {
+      "directory": "results/native-pipeline-command-final-20261015-bad_reserved",
+      "mode": "bad_reserved",
+      "trials": 4,
+      "exact_uint32_results": 305152,
+      "consumer_invocations": 76288,
+      "guard_bytes": 5052992,
+      "API_refusals": 0,
+      "raw_files": 80
+    }
+  ],
+  "trials": 64,
+  "exact_uint32_results": 5035008,
+  "consumer_invocations": 1258752,
+  "guard_bytes": 81473504,
+  "registration_refusals": 64,
+  "argument_refusals": 84,
+  "metadata_lifetime_trials": 4,
+  "metadata_checks": 38,
+  "M1_client_SHA256": "bc3da8f177eac690990fc3e1b51764472d4259e0bb32b891d7328b5c0a494bac",
+  "M1_trials": 12,
+  "OCLP_SHA256": "72abe6b6100a53aa35269ca7e8ede7bc0e26f0be9140494b56c64f78672726d8",
+  "performance_benchmark": false,
+  "new_GPU_tests_in_verifier": false,
+  "installed_native_compiler_replaced": false,
+  "ordinary_unregistered_applications_supported": false,
+  "full_objective_complete": false,
+  "next": "Descriptor/reflection/asynchronous pipeline APIs, automatic function/library integration, broader hardware/driver categories",
+  "system_files_unchanged": 83,
+  "M1_common_files_identical": 156,
+  "source_only_evidence": "Sanitized local verification summary; raw binaries/captures intentionally not redistributed; not independent hardware attestation",
+  "targeted_three_pointer_regression": {
+    "status": "PASS",
+    "cases": [
+      {
+        "mode": "basic",
+        "trials": 3,
+        "exact_uint32": 8340,
+        "invocations": 2085,
+        "guard_bytes": 2734188
+      },
+      {
+        "mode": "barrier",
+        "trials": 3,
+        "exact_uint32": 8340,
+        "invocations": 2085,
+        "guard_bytes": 2734188
+      },
+      {
+        "mode": "copy",
+        "trials": 3,
+        "exact_uint32": 8340,
+        "invocations": 2085,
+        "guard_bytes": 3129552
+      }
+    ],
+    "total_trials": 9,
+    "full_60_case_suite_on_new_library": "NOT RUN",
+    "prior_60_case_ee9c_library_suite": "PASS"
+  },
+  "public_source_runtime_smoke": {
+    "status": "PASS",
+    "library_SHA256": "f110430deec937822b96bbe15d2be627681d376b04d84c724e26cec8986a73f4",
+    "all_runtime_objects_rebuilt_from_published_source": true,
+    "GTX_trials": 4,
+    "exact_uint32_results": 457728,
+    "consumer_invocations": 114432,
+    "guard_bytes": 5052992,
+    "full_64_case_suite_on_this_rebuilt_artifact": "NOT RUN",
+    "prior_b19_candidate_64_case_suite": "PASS"
+  }
+}

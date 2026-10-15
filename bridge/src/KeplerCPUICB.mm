@@ -297,6 +297,7 @@ static NSString*residentBindingError(KPComputeICBCommand*c,KPCPUICBScope*scope){
 
 #include "KeplerCommandIRArgumentEncoder.inc"
 #include "KeplerCommandIRFunction.inc"
+#include "KeplerCommandIRProducer.inc"
 
 @implementation KPComputeICB
 - (id<MTLDevice>)device{return _scope.device;}
@@ -635,6 +636,7 @@ BOOL installRenderOverride(Class dynamic,Class original,SEL selector,IMP impleme
 #include "KeplerCommandIRScope.inc"
 #include "KeplerCommandIRv2Scope.inc"
 #include "KeplerCommandIRFunctionScope.inc"
+#include "KeplerCommandIRProducerScope.inc"
 - (BOOL)enableGPUCommandBindingsWithLibraryData:(NSData*)data expectedSHA256:(NSString*)expected error:(NSError**)error {
  NSString*pin=@"ce99cdc66f55f4ce7069b9518ed1f074feea2bee6daded2d320098e29b43f290";
  NSData*snapshot=data?[NSData dataWithBytes:data.bytes length:data.length]:nil;

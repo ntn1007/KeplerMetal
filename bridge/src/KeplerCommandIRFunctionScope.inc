@@ -14,7 +14,7 @@
  Class original=object_getClass(function),dynamic=original;
  if(gettersAdapted){
  {std::lock_guard<std::mutex>lock(installMutex);dynamic=scopedClass(functionClasses,original,@"KPIRFunction_",@selector(newArgumentEncoderWithBufferIndex:),(IMP)functionIRArguments,error);if(!dynamic||!installRenderOverride(dynamic,original,@selector(newArgumentEncoderWithBufferIndex:reflection:),(IMP)functionIRArgumentsWithReflection)){fail(error,@"Cannot create function-local encoder overrides");return nil;}}
- KPIRFunctionLink*link=[KPIRFunctionLink new];link.scope=self;link.originalClass=original;link.bufferIndex=index;link.bindingCount=[schema[@"binding_count"]unsignedIntegerValue];link.schema=schema;
+ KPIRFunctionLink*link=[KPIRFunctionLink new];link.scope=self;link.originalClass=original;link.bufferIndex=index;link.bindingCount=[schema[@"binding_count"]unsignedIntegerValue];link.schema=schema;link.librarySHA=expected;
  objc_setAssociatedObject(function,&IRFunctionKey,link,OBJC_ASSOCIATION_RETAIN_NONATOMIC);object_setClass(function,dynamic);
  KPAdaptedFunction*record=[KPAdaptedFunction new];record.function=function;record.originalClass=original;if(!_adaptedFunctions)_adaptedFunctions=[NSMutableArray new];[_adaptedFunctions addObject:record];
  }

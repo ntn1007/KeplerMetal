@@ -12,7 +12,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 MRC = {'KeplerNativeCAS', 'KeplerProgramImport'}
 SOURCES = ['KeplerCPUICB', 'KeplerNativeCommands', 'KeplerNativeRenderDraws',
-           'KeplerNativeCAS', 'KeplerFP64', 'KeplerProgramImport']
+           'KeplerNativeCAS', 'KeplerFP64', 'KeplerProgramImport', 'KeplerCommandIRProducerFactory']
 
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()

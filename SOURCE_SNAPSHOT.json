@@ -27,18 +27,20 @@
     {
       "path": "bridge/src/KeplerCPUICB.h",
       "source_path": "bridge/src/KeplerCPUICB.h",
-      "source_SHA256": "b1c84eea6d9f79bf5f376c664624630e2b4fcc6f76a9c29f2368e19271209755",
-      "published_SHA256": "b1c84eea6d9f79bf5f376c664624630e2b4fcc6f76a9c29f2368e19271209755",
-      "bytes": 17570,
-      "modified_for_publication": false
+      "source_SHA256": "a5ea1f91b72e5f6523d696cd5c113423289340fe9a2c64dcfdea9e1f64fe3f92",
+      "published_SHA256": "a5ea1f91b72e5f6523d696cd5c113423289340fe9a2c64dcfdea9e1f64fe3f92",
+      "bytes": 18051,
+      "modified_for_publication": false,
+      "previous_published_SHA256": "b1c84eea6d9f79bf5f376c664624630e2b4fcc6f76a9c29f2368e19271209755"
     },
     {
       "path": "bridge/src/KeplerCPUICB.mm",
       "source_path": "bridge/src/KeplerCPUICB.mm",
-      "source_SHA256": "a735b39fc1cf42e63fedf85d499fe99606c3cb17f3b3ce8924171665236d12b9",
-      "published_SHA256": "a735b39fc1cf42e63fedf85d499fe99606c3cb17f3b3ce8924171665236d12b9",
-      "bytes": 126669,
-      "modified_for_publication": false
+      "source_SHA256": "cccef53aeb33f448c14e3b0e9c50f759f063de688d728025a4c5907d3e3edec5",
+      "published_SHA256": "cccef53aeb33f448c14e3b0e9c50f759f063de688d728025a4c5907d3e3edec5",
+      "bytes": 126752,
+      "modified_for_publication": false,
+      "previous_published_SHA256": "a735b39fc1cf42e63fedf85d499fe99606c3cb17f3b3ce8924171665236d12b9"
     },
     {
       "path": "bridge/src/KeplerCommandIR.h",
@@ -59,18 +61,20 @@
     {
       "path": "bridge/src/KeplerCommandIRFunction.inc",
       "source_path": "bridge/src/KeplerCommandIRFunction.inc",
-      "source_SHA256": "f5c9f41360d98a8ebb9c79564bd2c128a3bda17bad9ff4b103fe88cc7f2bf6e7",
-      "published_SHA256": "f5c9f41360d98a8ebb9c79564bd2c128a3bda17bad9ff4b103fe88cc7f2bf6e7",
-      "bytes": 4955,
-      "modified_for_publication": false
+      "source_SHA256": "884149a38332259c8822fddab5c9f40798a42e2be74ac3702af18ebf707e8322",
+      "published_SHA256": "884149a38332259c8822fddab5c9f40798a42e2be74ac3702af18ebf707e8322",
+      "bytes": 5142,
+      "modified_for_publication": false,
+      "previous_published_SHA256": "f5c9f41360d98a8ebb9c79564bd2c128a3bda17bad9ff4b103fe88cc7f2bf6e7"
     },
     {
       "path": "bridge/src/KeplerCommandIRFunctionScope.inc",
       "source_path": "bridge/src/KeplerCommandIRFunctionScope.inc",
-      "source_SHA256": "8ae180ef9f6ab4503e9f268bc06815475e0df778e5b9d959a963d239d3b87579",
-      "published_SHA256": "8ae180ef9f6ab4503e9f268bc06815475e0df778e5b9d959a963d239d3b87579",
-      "bytes": 3123,
-      "modified_for_publication": false
+      "source_SHA256": "32158a40cd914f0ee7834efc65b3c2a1b6890405f04ce20c7965773d61825847",
+      "published_SHA256": "32158a40cd914f0ee7834efc65b3c2a1b6890405f04ce20c7965773d61825847",
+      "bytes": 3148,
+      "modified_for_publication": false,
+      "previous_published_SHA256": "8ae180ef9f6ab4503e9f268bc06815475e0df778e5b9d959a963d239d3b87579"
     },
     {
       "path": "bridge/src/KeplerCommandIRPlan.inc",
@@ -1019,10 +1023,11 @@
     {
       "path": "bridge/tools/build_command_ir_runtime_library.py",
       "source_path": "bridge/tools/build_command_ir_runtime_library.py",
-      "source_SHA256": "59cfd5d98b1b7fcdbc4b7293be7914552ae36b2680c448968f2b6f6ed86e2621",
-      "published_SHA256": "59cfd5d98b1b7fcdbc4b7293be7914552ae36b2680c448968f2b6f6ed86e2621",
-      "bytes": 2417,
-      "modified_for_publication": false
+      "source_SHA256": "a261bae7dea8afed4105b9dfcd9d45287f7c9b84566b6a7357e4e24fae405819",
+      "published_SHA256": "a261bae7dea8afed4105b9dfcd9d45287f7c9b84566b6a7357e4e24fae405819",
+      "bytes": 2791,
+      "modified_for_publication": false,
+      "previous_published_SHA256": "59cfd5d98b1b7fcdbc4b7293be7914552ae36b2680c448968f2b6f6ed86e2621"
     },
     {
       "path": "bridge/tools/build_cpu_icb_submission_benchmark.py",
@@ -5711,6 +5716,110 @@
       "published_SHA256": "323c587d0ccf10e376f8bf9a7f31fb4ca6078105194b42e0b1e0ee2bc9bde71f",
       "bytes": 1372,
       "modified_for_publication": false
+    },
+    {
+      "path": "bridge/src/KeplerNativeResourceLowering.inc",
+      "source_path": "bridge/src/KeplerNativeResourceLowering.inc",
+      "source_SHA256": "12fe056b55ef0107391e7f53855c8b70786334decdb50fe654030739794e39f8",
+      "published_SHA256": "12fe056b55ef0107391e7f53855c8b70786334decdb50fe654030739794e39f8",
+      "bytes": 1868,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/src/command_ir_native_root_carrier.metal",
+      "source_path": "bridge/src/command_ir_native_root_carrier.metal",
+      "source_SHA256": "d08558734d6e19f2ef80b15218021e821712482ef50b0ba4a68a832bb22d34ae",
+      "published_SHA256": "d08558734d6e19f2ef80b15218021e821712482ef50b0ba4a68a832bb22d34ae",
+      "bytes": 553,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/src/KeplerCommandIRProducerFactory.mm",
+      "source_path": "bridge/src/KeplerCommandIRProducerFactory.mm",
+      "source_SHA256": "693694085fde78994e9dcdc96954b3d04757778e22cb8e168eea8bf11a6fdccf",
+      "published_SHA256": "693694085fde78994e9dcdc96954b3d04757778e22cb8e168eea8bf11a6fdccf",
+      "bytes": 1009,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/src/KeplerCommandIRProducer.inc",
+      "source_path": "bridge/src/KeplerCommandIRProducer.inc",
+      "source_SHA256": "6bf8894537cd31d6765e22e27071489500aee46c0949b9d5bfd6cd69ef39870b",
+      "published_SHA256": "6bf8894537cd31d6765e22e27071489500aee46c0949b9d5bfd6cd69ef39870b",
+      "bytes": 2229,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/src/KeplerCommandIRProducerScope.inc",
+      "source_path": "bridge/src/KeplerCommandIRProducerScope.inc",
+      "source_SHA256": "ec71211aa05cbf1371549a9f870e7e4ab9a7d350fe275e38efc878b8bf0bf693",
+      "published_SHA256": "ec71211aa05cbf1371549a9f870e7e4ab9a7d350fe275e38efc878b8bf0bf693",
+      "bytes": 2696,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/prepare_m1_function_argument_reference.py",
+      "source_path": "bridge/tools/prepare_m1_function_argument_reference.py",
+      "source_SHA256": "54b30cff5e7cc6869e2ee0ad38f81c6766aee6b6dc3977a1d0fe3a3f07522e8e",
+      "published_SHA256": "54b30cff5e7cc6869e2ee0ad38f81c6766aee6b6dc3977a1d0fe3a3f07522e8e",
+      "bytes": 1795,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/qualify_three_argument_client.py",
+      "source_path": "bridge/tools/qualify_three_argument_client.py",
+      "source_SHA256": "b3d29d6497ddba2b523a55de88847402b66aa95407e4e944fa7fbf44eba5e15c",
+      "published_SHA256": "b3d29d6497ddba2b523a55de88847402b66aa95407e4e944fa7fbf44eba5e15c",
+      "bytes": 1942,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/build_native_resource_command_frontend.py",
+      "source_path": "bridge/tools/build_native_resource_command_frontend.py",
+      "source_SHA256": "e49af2082b9e2ab8f4a825c3420d69edd7e2259c377489bceb9e23cca0d0f045",
+      "published_SHA256": "e49af2082b9e2ab8f4a825c3420d69edd7e2259c377489bceb9e23cca0d0f045",
+      "bytes": 3844,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/build_native_root_command_client.py",
+      "source_path": "bridge/tools/build_native_root_command_client.py",
+      "source_SHA256": "ab036b0606cff5cc91a7e8471bce4013128385f912aa8d3fb8bef3d4e2ffcb32",
+      "published_SHA256": "ab036b0606cff5cc91a7e8471bce4013128385f912aa8d3fb8bef3d4e2ffcb32",
+      "bytes": 3994,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/build_native_pipeline_command_client.py",
+      "source_path": "bridge/tools/build_native_pipeline_command_client.py",
+      "source_SHA256": "262c07ed65436ef95ea8a83641638407bcecf4f0bf216795fd6b5eae692884aa",
+      "published_SHA256": "262c07ed65436ef95ea8a83641638407bcecf4f0bf216795fd6b5eae692884aa",
+      "bytes": 6465,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/build_native_pipeline_registration_probe.py",
+      "source_path": "bridge/tools/build_native_pipeline_registration_probe.py",
+      "source_SHA256": "6f81084ef7b44ac53204f2e7008cc10436d79578f9ea53994f4edae8e1275025",
+      "published_SHA256": "6f81084ef7b44ac53204f2e7008cc10436d79578f9ea53994f4edae8e1275025",
+      "bytes": 3867,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/verify_native_pipeline_delivery.py",
+      "source_path": "bridge/tools/verify_native_pipeline_delivery.py",
+      "source_SHA256": "4153b2dbc78c0b39f77a4a902e024baf21fc150651a834a96d13f65db145d1b2",
+      "published_SHA256": "4153b2dbc78c0b39f77a4a902e024baf21fc150651a834a96d13f65db145d1b2",
+      "bytes": 7182,
+      "modified_for_publication": false
+    },
+    {
+      "path": "examples/command_ir_native_pipeline.mm",
+      "source_path": "bridge/results/native-pipeline-command-client-build-20261015-02/command_ir_dataflow_client.mm",
+      "source_SHA256": "bc3da8f177eac690990fc3e1b51764472d4259e0bb32b891d7328b5c0a494bac",
+      "published_SHA256": "bc3da8f177eac690990fc3e1b51764472d4259e0bb32b891d7328b5c0a494bac",
+      "bytes": 25590,
+      "modified_for_publication": false
     }
   ],
   "excluded_source_tools": [
@@ -5751,5 +5860,8 @@
       "reason": "Private host transfer configuration; comparison programs remain included."
     }
   ],
-  "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included."
+  "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
+  "previous_source_snapshot_SHA256": "e0e0bba5f11fae7c10bb642d07d9d18c18f219ae208f67a7085fe979897014bf",
+  "previous_public_commit": "9fba09f5b63ffa602073fb9f269385de2bd4db9f",
+  "update": "Native CB1 producer ABI and scoped public synchronous function pipeline factory, qualified locally"
 }

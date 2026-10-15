@@ -5,6 +5,9 @@
 @property(nonatomic) Class originalClass;
 @property(nonatomic) NSUInteger bufferIndex,bindingCount;
 @property(nonatomic,copy) NSDictionary *schema;
+@property(nonatomic,copy) NSString *librarySHA;
+@property(nonatomic,strong) id<MTLComputePipelineState> nativeRootPipeline;
+@property(nonatomic,copy) NSDictionary *nativeProducerProfile;
 @end
 @implementation KPIRFunctionLink
 @end

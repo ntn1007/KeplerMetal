@@ -39,7 +39,9 @@ The build compiles and links the runtime from text sources. It performs **no GPU
 
 ## What has been demonstrated?
 
-Local experiments have executed native and NAK-produced code on the reference GTX, compared output with CPU oracles, repaired a specific native CAS result defect, and implemented selected command/resource paths for adapted applications. The latest fully qualified device argument-encoder milestone covered 192 selected cases. A subsequent function-encoder candidate has a passing smoke cohort and four metadata/lifetime trials, but its final GPU qualification remains pending.
+Local experiments have executed native and NAK-produced code on the reference GTX, compared output with CPU oracles, repaired a specific native CAS result defect, and implemented selected command/resource paths for adapted applications. An earlier device argument-encoder milestone covered 192 selected cases. The subsequent function-encoder route passed 64 cases, and its three-pointer layout passed 60 cases on that library.
+
+The latest extension serves the ordinary synchronous `newComputePipelineStateWithFunction:error:` call for six explicitly registered producer variants. These shaders now read native CB1 resource bindings directly, without an application-built push buffer. Qualification covered 64 GTX cases, 84 argument rejections, four metadata/lifetime trials, and 12 M1 reference trials with 156 identical common result files. [API contract and source example](docs/NATIVE_FUNCTION_PIPELINES.md) · [Sanitized validation summary](docs/native-pipeline-validation.json).
 
 These observations are scoped to their binaries, profiles, and workloads. The public export is not itself a rerun of those experiments. Full hardware coverage, transparent integration into ordinary applications, and a generally modernized installed driver remain open. No general performance improvement is claimed. Details: [status](docs/STATUS.md).
 

@@ -201,12 +201,19 @@
 - (void)restore;
 // Returns a real native MTLFunction from an immutable library snapshot. Only
 // its two root-encoder getters are adapted to our IRv2 ABI after validating
-// native reflection. The native compiler/pipeline factory is not replaced.
+// native reflection. The installed native compiler is not replaced.
 - (id<MTLFunction>)newCommandIRFunctionWithLibraryData:(NSData *)data
                                      expectedSHA256:(NSString *)expected
                                        functionName:(NSString *)name
                                     rootBufferIndex:(NSUInteger)index
                                               error:(NSError **)error;
+// Register a pinned, offline-compiled native-resource-ABI producer for this
+// real function. The device's ordinary synchronous function factory then
+// returns its native PSO. No general shader compilation/reflection extension.
+- (BOOL)registerCommandIRProducerForFunction:(id<MTLFunction>)function
+                                carrierData:(NSData *)carrier
+                                programData:(NSData *)program
+                                      error:(NSError **)error;
 @property(nonatomic,readonly) NSArray<NSDictionary *> *events;
 @end
 
