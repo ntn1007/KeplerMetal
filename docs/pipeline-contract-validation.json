@@ -358,5 +358,7 @@
       "performance_benchmark": "NOT RUN"
     },
     "historical_qualification_inherited": false
-  }
+  },
+  "source_client_public_commit": "15f9650d713b80b27fbf626cc045d32e9f5f63be",
+  "source_client_path_note": "Historical source path at the stated commit; the current example advances with subsequent qualified milestones."
 }

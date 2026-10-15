@@ -34,3 +34,7 @@ Source layout:
 - `driver-research-2026-10-13/tools/`: historical inventory/comparison scripts; downloaded inputs omitted.
 - `legacy/`: early compatibility prototype for context, outside the supported source build.
 - `tools/`: standalone public build, local inventory, reference retrieval and publication checks.
+
+## Thread-limit initialization and encoding checks
+
+The qualified native pipeline class has a 64-bit `maxTotalThreadsPerThreadgroup` field at offset 88 (instance size 104). For approved imported producers, the descriptor path initializes that field to the supported explicit limit. Driver identity, class, type, offset, existing value and unchanged getter are checked before/after the write. It changes no program bytes or optimizer decisions. Adapted encoders track the current PSO and check local-size products before direct, grid-thread or indirect dispatch calls; switching to an ordinary pipeline clears that constraint. This is scoped process-side repair and validation, not a global driver replacement. The application must adapt the encoder before binding the limited pipeline.

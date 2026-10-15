@@ -128,7 +128,11 @@ int main(int argc,char**argv){@autoreleasepool{
   witness=plan.generatedGeometry;witnessHost=[d newBufferWithLength:witness.length options:MTLResourceStorageModeShared];
 #endif
   id<MTLCommandBuffer>main=[q commandBuffer],pbuf=split?[q commandBuffer]:main;
-  if(producer){id<MTLComputeCommandEncoder>e=[pbuf computeCommandEncoder];[e setComputePipelineState:writer];
+  if(producer){id<MTLComputeCommandEncoder>e=[pbuf computeCommandEncoder];
+#if !KP_DATAFLOW_NATIVE
+if(![scope adaptComputeEncoder:e error:&error])return 10;
+#endif
+[e setComputePipelineState:writer];
 #if KP_DATAFLOW_NATIVE
    [e setBuffer:root offset:0 atIndex:0];[e useResource:target usage:MTLResourceUsageRead|MTLResourceUsageWrite];for(id<MTLBuffer>r in buffers.allValues)[e useResource:r usage:MTLResourceUsageRead|MTLResourceUsageWrite];for(id<MTLBuffer>r in params)[e useResource:r usage:MTLResourceUsageRead];[e dispatchThreadgroups:MTLSizeMake(1,1,1)threadsPerThreadgroup:MTLSizeMake(1,1,1)];
 #else

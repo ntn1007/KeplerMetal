@@ -61,6 +61,10 @@ int main(int argc,char**argv){@autoreleasepool{
 #include "PipelineContractNegativeCases.inc"
 #endif
 
+  if([@(argv[3])isEqual:@"limits"]){
+#include "ThreadLimitContractCases.inc"
+  }
+
   if([@(argv[3])isEqual:@"pending"]){
    pendingEntered=dispatch_semaphore_create(0);pendingResume=dispatch_semaphore_create(0);pendingDone=dispatch_semaphore_create(0);pendingReply=[KPContractReply new];pendingReply.lock=[NSLock new];KPContractReply*reply=pendingReply;dispatch_semaphore_t done=pendingDone;
    pendingMethod=class_getClassMethod(NSClassFromString(@"KPCommandIRProducerFactory"),@selector(newPipelineForDevice:carrier:program:descriptor:error:evidence:));if(!pendingMethod)return 10;pendingOriginal=method_setImplementation(pendingMethod,(IMP)pausedOwnFactory);

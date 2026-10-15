@@ -33,3 +33,5 @@ The M1 comparison source programs are included. Private SSH transfer scripts are
 ## Registered pipeline contract milestone
 
 The public builder still rebuilds all seven runtime objects, including the changed MRC descriptor import transport. `examples/command_ir_pipeline_contracts.mm` and `examples/PipelineFactoryReception.inc` are the exact text of the six-factory reception client and helper; their hashes are in `SOURCE_SNAPSHOT.json`. Local builders under `bridge/tools/` preserve the frozen-asset dependencies and are not standalone fresh-checkout GPU launchers. See [the contract](NATIVE_FUNCTION_PIPELINES.md) for supported options, callbacks and descriptor limitations.
+
+The thread-limit candidate additionally includes `KeplerNativeThreadLimits.inc`. The lab reception builder accepts `--thread-limit` and `--producer-threads`; these control different things. Example using existing frozen prerequisites: `--thread-limit 1024 --producer-threads 1024`. Invalid local sizes are tested without committing their command buffers. The standard public source build performs no GPU dispatch; separate artifact-specific GPU qualification is required.

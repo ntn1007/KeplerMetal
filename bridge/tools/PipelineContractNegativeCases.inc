@@ -1,9 +1,9 @@
 // Included inside the active registered CPU-probe scope; no user dispatch.
-for(NSString*test in @[@"max16",@"max32",@"max2048",@"active_stage",@"indirect",@"adding_binary",@"call_stack",@"nonroot_mutability",@"options4",@"options8"]){
+for(NSString*test in @[@"max16",@"max31",@"max2048",@"active_stage",@"indirect",@"adding_binary",@"call_stack",@"nonroot_mutability",@"options4",@"options8"]){
  for(unsigned asynchronous=0;asynchronous<2;asynchronous++){
   MTLComputePipelineDescriptor*bad=[MTLComputePipelineDescriptor new];bad.computeFunction=f;MTLPipelineOption opts=MTLPipelineOption(3);
   if([test isEqual:@"max16"])bad.maxTotalThreadsPerThreadgroup=16;
-  if([test isEqual:@"max32"])bad.maxTotalThreadsPerThreadgroup=32;
+  if([test isEqual:@"max31"])bad.maxTotalThreadsPerThreadgroup=31;
   if([test isEqual:@"max2048"])bad.maxTotalThreadsPerThreadgroup=2048;
   if([test isEqual:@"active_stage"])bad.stageInputDescriptor.attributes[0].format=MTLAttributeFormatFloat4;
   if([test isEqual:@"indirect"])bad.supportIndirectCommandBuffers=YES;

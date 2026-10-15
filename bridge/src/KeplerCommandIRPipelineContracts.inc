@@ -41,6 +41,7 @@ id<MTLComputePipelineState>constructProducerDescriptor(id<MTLDevice>device,NSDat
 id<MTLComputePipelineState>constructProducerDescriptor(id<MTLDevice>device,NSData*carrier,NSData*program,MTLComputePipelineDescriptor*descriptor,NSError**error){
  Class<KPCommandIRProducerFactoryProtocol>factory=(Class<KPCommandIRProducerFactoryProtocol>)NSClassFromString(@"KPCommandIRProducerFactory");NSDictionary*proof=nil;id<MTLComputePipelineState>pipeline=nil;
  @try{pipeline=[factory newPipelineForDevice:device carrier:carrier program:program descriptor:descriptor error:error evidence:&proof];}@catch(NSException*x){fail(error,x.reason?:@"Descriptor producer import failed");return nil;}
+ if(pipeline&&[proof[@"contract_verified"]boolValue]&&!configureNativeProducerThreadLimit(pipeline,descriptor.maxTotalThreadsPerThreadgroup,error))return nil;
  if(!pipeline||![proof[@"contract_verified"]boolValue]||pipeline.device!=device||pipeline.threadExecutionWidth!=32||pipeline.maxTotalThreadsPerThreadgroup<32||
     (descriptor.maxTotalThreadsPerThreadgroup&&pipeline.maxTotalThreadsPerThreadgroup>descriptor.maxTotalThreadsPerThreadgroup)||
     (descriptor.label&&![pipeline.label isEqual:descriptor.label])){fail(error,@"Native descriptor pipeline limits/label/import differ");return nil;}

@@ -1,0 +1,439 @@
+{
+  "status": "PASS",
+  "static_library_SHA256": "9e9a2b79085d5b031148e7a5294d1383325def18220b614b12cb94170487f036",
+  "source_manifest_SHA256": "63d49538a2b295eef036ce24616d61875fba751da14a2e67de04a4b6427e55af",
+  "GPU_cohorts": 43,
+  "GPU_trials": 172,
+  "exact_uint32_results": 17393664,
+  "consumer_invocations": 4348416,
+  "guard_bytes": 221032448,
+  "cases": [
+    {
+      "suite": "factory_kind",
+      "case": 0,
+      "mode": "basic",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "factory_kind",
+      "case": 0,
+      "mode": "barrier",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "factory_kind",
+      "case": 0,
+      "mode": "copy",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5678624
+    },
+    {
+      "suite": "factory_kind",
+      "case": 1,
+      "mode": "basic",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "factory_kind",
+      "case": 1,
+      "mode": "barrier",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "factory_kind",
+      "case": 1,
+      "mode": "copy",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5678624
+    },
+    {
+      "suite": "factory_kind",
+      "case": 2,
+      "mode": "basic",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "factory_kind",
+      "case": 2,
+      "mode": "barrier",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "factory_kind",
+      "case": 2,
+      "mode": "copy",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5678624
+    },
+    {
+      "suite": "factory_kind",
+      "case": 3,
+      "mode": "basic",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "factory_kind",
+      "case": 3,
+      "mode": "barrier",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "factory_kind",
+      "case": 3,
+      "mode": "copy",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5678624
+    },
+    {
+      "suite": "factory_kind",
+      "case": 4,
+      "mode": "basic",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "factory_kind",
+      "case": 4,
+      "mode": "barrier",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "factory_kind",
+      "case": 4,
+      "mode": "copy",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5678624
+    },
+    {
+      "suite": "factory_kind",
+      "case": 5,
+      "mode": "basic",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "factory_kind",
+      "case": 5,
+      "mode": "barrier",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "factory_kind",
+      "case": 5,
+      "mode": "copy",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5678624
+    },
+    {
+      "suite": "factory_kind",
+      "case": 5,
+      "mode": "no_producer",
+      "trials": 4,
+      "exact_uint32_results": 0,
+      "consumer_invocations": 0,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "factory_kind",
+      "case": 5,
+      "mode": "refusals",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "factory_kind",
+      "case": 5,
+      "mode": "split",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "factory_kind",
+      "case": 5,
+      "mode": "no_consumer",
+      "trials": 4,
+      "exact_uint32_results": 0,
+      "consumer_invocations": 0,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "factory_kind",
+      "case": 5,
+      "mode": "no_seed",
+      "trials": 4,
+      "exact_uint32_results": 305152,
+      "consumer_invocations": 76288,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "factory_kind",
+      "case": 5,
+      "mode": "no_gather",
+      "trials": 4,
+      "exact_uint32_results": 305152,
+      "consumer_invocations": 76288,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "factory_kind",
+      "case": 5,
+      "mode": "no_finish",
+      "trials": 4,
+      "exact_uint32_results": 305152,
+      "consumer_invocations": 76288,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "factory_kind",
+      "case": 5,
+      "mode": "bad_parameters",
+      "trials": 4,
+      "exact_uint32_results": 305152,
+      "consumer_invocations": 76288,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "factory_kind",
+      "case": 5,
+      "mode": "bad_counter",
+      "trials": 4,
+      "exact_uint32_results": 305152,
+      "consumer_invocations": 76288,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "factory_kind",
+      "case": 5,
+      "mode": "bad_pipeline",
+      "trials": 4,
+      "exact_uint32_results": 305152,
+      "consumer_invocations": 76288,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "factory_kind",
+      "case": 5,
+      "mode": "bad_buffer3_flag",
+      "trials": 4,
+      "exact_uint32_results": 305152,
+      "consumer_invocations": 76288,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "factory_kind",
+      "case": 5,
+      "mode": "bad_groups",
+      "trials": 4,
+      "exact_uint32_results": 305152,
+      "consumer_invocations": 76288,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "factory_kind",
+      "case": 5,
+      "mode": "bad_reserved",
+      "trials": 4,
+      "exact_uint32_results": 305152,
+      "consumer_invocations": 76288,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "factory_kind",
+      "case": 5,
+      "mode": "encoder_reuse",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "limit",
+      "case": "64",
+      "mode": "basic",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "limit",
+      "case": "64",
+      "mode": "barrier",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "limit",
+      "case": "128",
+      "mode": "basic",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "limit",
+      "case": "128",
+      "mode": "barrier",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "limit",
+      "case": "256",
+      "mode": "basic",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "limit",
+      "case": "256",
+      "mode": "barrier",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "limit",
+      "case": "512",
+      "mode": "basic",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "limit",
+      "case": "512",
+      "mode": "barrier",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "limit",
+      "case": "1024",
+      "mode": "basic",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "limit",
+      "case": "1024",
+      "mode": "barrier",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    },
+    {
+      "suite": "limit",
+      "case": "auto",
+      "mode": "basic",
+      "trials": 4,
+      "exact_uint32_results": 457728,
+      "consumer_invocations": 114432,
+      "guard_bytes": 5052992
+    }
+  ],
+  "CPU_contract_cases": 70,
+  "CPU_pending_scope_cases": 42,
+  "pre_encode_refusals": 12,
+  "native_pipeline_limits": [
+    32,
+    64,
+    128,
+    256,
+    512,
+    1024
+  ],
+  "M1_trials": 12,
+  "M1_identical_common_files": 156,
+  "M1_same_client_SHA256": "1922c557efeb54e3252adc244cca015a9c2dd9d164739917f7fffe0dba8a07bc",
+  "system_files_unchanged": 83,
+  "OCLP_unchanged": true,
+  "native_getter_replaced": false,
+  "shader_optimizer_changed": false,
+  "integration_level": 2,
+  "enforcement_scope": "Explicitly adapted compute encoders only",
+  "unadapted_encoder_limit_enforcement": "NOT IMPLEMENTED by this repair",
+  "all_lanes_witnessed_in_producer": false,
+  "producer_source_note": "Only grid index0 generates commands; others return. Geometry tests validate requested group sizes and resulting command dataflow, not an independent invocation witness for every lane.",
+  "performance_benchmark": false,
+  "full_objective_complete": false,
+  "evidence_scope": "Maintainer hardware runs, independently recomputed numeric outputs and hash-checked source/return manifests. Proprietary inputs and raw binary captures remain local.",
+  "public_source_build_qualification": {
+    "status": "PASS",
+    "static_library_SHA256": "00736648654c2eba1b7511d0bcdace653aa864004c2f58b4b7efb168844b0470",
+    "runtime_objects": 7,
+    "full_archive_link": "PASS",
+    "CPU_link_check": "PASS",
+    "GPU_trials": 4,
+    "exact_uint32_results": 457728,
+    "consumer_invocations": 114432,
+    "guard_bytes": 5052992,
+    "full_172_trial_suite": "NOT RUN on this separately rebuilt artifact",
+    "historical_qualification_inherited": false,
+    "performance_benchmark": false
+  }
+}

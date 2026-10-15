@@ -54,6 +54,7 @@
 @property(nonatomic,weak) KPCPUICBScope *scope;
 @property(nonatomic,strong) id<MTLTexture> renderTarget;
 @property(nonatomic,strong) id<MTLRenderPipelineState> callerRenderPipeline;
+@property(nonatomic,strong) id<MTLComputePipelineState> callerComputePipeline;
 @property(nonatomic) BOOL encodingRenderICB;
 @property(nonatomic,strong) NSMutableDictionary *callerVertexBindings;
 @property(nonatomic,strong) NSMutableDictionary *callerFragmentBindings;
@@ -299,6 +300,7 @@ static NSString*residentBindingError(KPComputeICBCommand*c,KPCPUICBScope*scope){
 #include "KeplerCommandIRFunction.inc"
 #include "KeplerCommandIRReflection.inc"
 #include "KeplerCommandIRProducer.inc"
+#include "KeplerNativeThreadLimits.inc"
 #include "KeplerCommandIRPipelineContracts.inc"
 
 @implementation KPComputeICB
@@ -609,7 +611,7 @@ BOOL installRenderOverride(Class dynamic,Class original,SEL selector,IMP impleme
 - (id<MTLComputePipelineState>)pipelineForFunction:(NSString*)name{return _restored?nil:_namedPipelines[name];}
 - (NSArray*)events{return [_eventRows copy];}
 - (BOOL)adaptComputeEncoder:(id<MTLComputeCommandEncoder>)e error:(NSError**)error {
- if(_restored||!_pipeline||e.device!=_device||objc_getAssociatedObject(e,&contextKey))return fail(error,@"Encoder scope mismatch");Ivar cbVar=class_getInstanceVariable(object_getClass(e),"_commandBuffer");if(!cbVar||ivar_getOffset(cbVar)!=32)return fail(error,@"Encoder layout changed");id<MTLCommandBuffer>cb=object_getIvar(e,cbVar);if(cb.commandQueue!=_queue||cb.status!=MTLCommandBufferStatusNotEnqueued)return fail(error,@"Uncommitted recording queue required");Class original=object_getClass(e),dynamic=nil;{std::lock_guard<std::mutex>lock(installMutex);dynamic=scopedClass(encoderClasses,original,@"KPICBEncoder_",@selector(executeCommandsInBuffer:withRange:),(IMP)executeICB,error);}if(!dynamic)return NO;
+ if(_restored||!_pipeline||e.device!=_device||objc_getAssociatedObject(e,&contextKey))return fail(error,@"Encoder scope mismatch");Ivar cbVar=class_getInstanceVariable(object_getClass(e),"_commandBuffer");if(!cbVar||ivar_getOffset(cbVar)!=32)return fail(error,@"Encoder layout changed");id<MTLCommandBuffer>cb=object_getIvar(e,cbVar);if(cb.commandQueue!=_queue||cb.status!=MTLCommandBufferStatusNotEnqueued)return fail(error,@"Uncommitted recording queue required");Class original=object_getClass(e),dynamic=nil;{std::lock_guard<std::mutex>lock(installMutex);dynamic=scopedClass(encoderClasses,original,@"KPICBEncoder_",@selector(executeCommandsInBuffer:withRange:),(IMP)executeICB,error);if(dynamic&&!installNativeThreadLimitChecks(dynamic,original))dynamic=nil;}if(!dynamic)return fail(error,@"Native compute dispatch methods differ");
  NSMutableIndexSet*expired=[NSMutableIndexSet new];for(NSUInteger i=0;i<_adapted.count;i++)if(!((KPAdaptedEncoder*)_adapted[i]).encoder)[expired addIndex:i];_releasedEncoderCount+=expired.count;[_adapted removeObjectsAtIndexes:expired];linkScope(e,self);object_setClass(e,dynamic);KPAdaptedEncoder*record=[KPAdaptedEncoder new];record.encoder=e;record.originalClass=original;[_adapted addObject:record];return YES;
 }
 - (BOOL)prepareResidentComputeCommands:(id<MTLIndirectCommandBuffer>)buffer range:(NSRange)range error:(NSError**)error {
