@@ -85,3 +85,7 @@ The public seven-object rebuild `10dd7a21f8755ff16af83e8c09bec746c9d93da89e37e95
 ## MSL/AIR local-memory frontend
 
 The same original MSL now compiles through AIR → NIR → SM30 for the local-array and register-pressure programs. The new cohort passed 180 compute trials and 48 missing-dispatch controls, with 269,040 exact uint32 outputs and 168 native/AIR input-output files matching. Eight offline contract cases passed. Runtime `59f3a04d…` is unchanged. This covers three buffers, a static 16-byte constant block, full 1D groups and the pinned local allocation; arbitrary shader/resource layouts, external CRS and transparent integration remain open. No new benchmark or M1 reference. [Details](AIR_LOCAL_MEMORY.md) · [Evidence](air-local-memory-validation.json).
+
+## Deep control flow — partial qualification
+
+Native source depths through64pass84trials; depth96FAILS12trials. An instrumented96variant writes entry witnesses for all4,484invocations but no final result. Cause unresolved; no hardware limit inferred. Separate allocation-preserving AIR/NAK imports with compiler CRS requirements1024/1536/2048bytes pass60trials;48no-dispatch controls pass.215,232exactuint32results and120native/AIR files match. Runtime63840c89adds decoded allocation evidence only; control→descriptor→CAS regression passes106,650operations and8rejections. NAK depth40using the failing96carrier is NOT RUN. The standard matrix staysFAIL. [Details](CONTROL_FLOW.md) · [Evidence](control-flow-validation.json).

@@ -170,6 +170,9 @@ id importInit(id self,SEL selector,const void*input,NSUInteger length,id device)
   kern_return_t status=pointer?mach_vm_read_overwrite(mach_task_self(),pointer,sizeof variant,(mach_vm_address_t)variant,&read):KERN_INVALID_ADDRESS;
   if(status==KERN_SUCCESS&&read==sizeof variant){
    event[@"decoded_code_bytes"]=@(u64(variant,24));event[@"decoded_registers"]=@(u32(variant,48));event[@"decoded_instruction_count"]=@(u32(variant,44));
+   // Expose decoded native allocation without changing it. Preserving imports
+   // can compare the actual allocation to a separately observed carrier.
+   event[@"decoded_allocation_word_40"]=@(u32(variant,40));event[@"decoded_spill_bytes_56"]=@(u32(variant,56));
    if(keepNativeMetadata&&u32(variant,44)!=c->code.length/8-1)c->rejected=true;
    if(localMemoryContract){
     // Qualified tuples: native local allocation plus the fixed word11=576

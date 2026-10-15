@@ -127,9 +127,9 @@
     {
       "path": "bridge/src/KeplerNativeCAS.mm",
       "source_path": "bridge/src/KeplerNativeCAS.mm",
-      "source_SHA256": "a91ec1801a2dcc92350ef9da661a7133be04b369ba468443b1ff8955633792a7",
-      "published_SHA256": "a91ec1801a2dcc92350ef9da661a7133be04b369ba468443b1ff8955633792a7",
-      "bytes": 28106,
+      "source_SHA256": "0e90972d9024a7d5b1b9ab918fb46dcd3e6af6110d9b4b59233d7cb79d59d712",
+      "published_SHA256": "0e90972d9024a7d5b1b9ab918fb46dcd3e6af6110d9b4b59233d7cb79d59d712",
+      "bytes": 28371,
       "modified_for_publication": false,
       "previous_published_SHA256": "645d44ee7d0089b517305cd8f29ed8ad1a1fe84a808d036f6380c2652c30a0fc"
     },
@@ -5873,9 +5873,9 @@
     {
       "path": "bridge/tools/build_cas_descriptor_transport_regression.py",
       "source_path": "bridge/tools/build_cas_descriptor_transport_regression.py",
-      "source_SHA256": "b0d92b073954430114a13cfe8ab70a1504de118317621b6e5a3871c8e553b4b8",
-      "published_SHA256": "b0d92b073954430114a13cfe8ab70a1504de118317621b6e5a3871c8e553b4b8",
-      "bytes": 4934,
+      "source_SHA256": "d9dac7ee2b624f60f606b6ae009d7f8e9c794e00a5371926b7b8704ed419a520",
+      "published_SHA256": "d9dac7ee2b624f60f606b6ae009d7f8e9c794e00a5371926b7b8704ed419a520",
+      "bytes": 6527,
       "modified_for_publication": false,
       "previous_published_SHA256": "7aa00ecb3791585c034643954ea66383498e1413d27717153cc0352fed0e0f27"
     },
@@ -6284,6 +6284,70 @@
       "published_SHA256": "d2ff45f07c7bf99c90102709bce4dca9d03f8571741b34218e74bac7de408e7c",
       "bytes": 6796,
       "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/control_flow_probe.mm",
+      "source_path": "bridge/tools/control_flow_probe.mm",
+      "source_SHA256": "7db3451ea4ada507762728ab959c1ee678e7525c094a7b7a8df9b9ed30597a4e",
+      "published_SHA256": "7db3451ea4ada507762728ab959c1ee678e7525c094a7b7a8df9b9ed30597a4e",
+      "bytes": 8561,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/build_control_flow_probe.py",
+      "source_path": "bridge/tools/build_control_flow_probe.py",
+      "source_SHA256": "8e23e8f244866a7b4ae5bfa50dc50e372ee6a76c5d20e3c076cdc590330a922f",
+      "published_SHA256": "8e23e8f244866a7b4ae5bfa50dc50e372ee6a76c5d20e3c076cdc590330a922f",
+      "bytes": 4543,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/verify_control_flow.py",
+      "source_path": "bridge/tools/verify_control_flow.py",
+      "source_SHA256": "6d99e1a994bf248149fde0d53bbdae684195994949f515e089f21a8bde0f4e01",
+      "published_SHA256": "6d99e1a994bf248149fde0d53bbdae684195994949f515e089f21a8bde0f4e01",
+      "bytes": 5544,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/observe_control_flow.py",
+      "source_path": "bridge/tools/observe_control_flow.py",
+      "source_SHA256": "7628ec78cba0cc92fe2ab1b19ddb7b43a356e64817ee26b4480a4fa99d7430b0",
+      "published_SHA256": "7628ec78cba0cc92fe2ab1b19ddb7b43a356e64817ee26b4480a4fa99d7430b0",
+      "bytes": 4526,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/build_control_flow_programs.py",
+      "source_path": "bridge/tools/build_control_flow_programs.py",
+      "source_SHA256": "93fb95b5e437001ed9057d955800aa963c8cd165859ed99699b7e8503d55921c",
+      "published_SHA256": "93fb95b5e437001ed9057d955800aa963c8cd165859ed99699b7e8503d55921c",
+      "bytes": 3884,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/build_control_flow_import_probe.py",
+      "source_path": "bridge/tools/build_control_flow_import_probe.py",
+      "source_SHA256": "2d5b554e4d9775f10ca4b430a39eda83c9969cf5eba4426b91397cbce43dcec8",
+      "published_SHA256": "2d5b554e4d9775f10ca4b430a39eda83c9969cf5eba4426b91397cbce43dcec8",
+      "bytes": 4532,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/qualify_control_flow.py",
+      "source_path": "bridge/tools/qualify_control_flow.py",
+      "source_SHA256": "4d9b4f720f6269337dce559f34948bbef9ae9ea91bd1a757d4ac7ad28e65a71b",
+      "published_SHA256": "4d9b4f720f6269337dce559f34948bbef9ae9ea91bd1a757d4ac7ad28e65a71b",
+      "bytes": 2265,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/verify_control_flow_delivery.py",
+      "source_path": "bridge/tools/verify_control_flow_delivery.py",
+      "source_SHA256": "61c02feb1e49522bafd2bbe5e95d12b77b5c691b0d20da709718d3dd120dd28b",
+      "published_SHA256": "61c02feb1e49522bafd2bbe5e95d12b77b5c691b0d20da709718d3dd120dd28b",
+      "bytes": 10352,
+      "modified_for_publication": false
     }
   ],
   "excluded_source_tools": [
@@ -6325,7 +6389,7 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "51a4260154705bf8022694608fe46eeb1797aea56404c935795e502ad66701f8",
-  "previous_public_commit": "6f9a5683c790f5c32822ed7064ee83a585df2355",
-  "update": "MSL/AIR local-memory frontend, static native resource lowering and offline contract/delivery verifiers; runtime unchanged"
+  "previous_source_snapshot_SHA256": "068932b487d7c160c2b939a3baa2018769d44575c57fc44006d0c11507ae5bb9",
+  "previous_public_commit": "104ed69c74a8e411fd7e582a6f749d1ae25a64b5",
+  "update": "Native control allocation observations, bounded external CRS import qualification, native96 failure retained; runtime telemetry only"
 }
