@@ -36,6 +36,7 @@ thread_local id<MTLFunction> certifiedSuppliedFunction=nil;
 thread_local MTLComputePipelineDescriptor *approvedPipelineDescriptor=nil;
 thread_local MTLPipelineOption certifiedPipelineOptions=MTLPipelineOptionNone;
 thread_local MTLComputePipelineReflection **certifiedReflection=nullptr;
+thread_local const KeplerLocalMemoryConfig *localMemoryContract=nullptr;
 char certifiedInputsKey;
 char retainedPayloadKey;
 uint32_t u32(const unsigned char*b,size_t offset){uint32_t v;memcpy(&v,b+offset,4);return v;}
@@ -86,10 +87,24 @@ id importInit(id self,SEL selector,const void*input,NSUInteger length,id device)
  if(expectedNativeOriginal){expectedMatches=valid&&code.size==expectedNativeOriginal.length&&memcmp(b+code.payload,expectedNativeOriginal.bytes,code.size)==0;valid=valid&&expectedMatches;}
  bool metadataMatches=!certifiedNativeMetadata||(valid&&metadata.size==certifiedNativeMetadata.length&&memcmp(b+metadata.payload,certifiedNativeMetadata.bytes,metadata.size)==0);
  valid=valid&&metadataMatches;
+ bool localMetadataMatches=true;
+ if(localMemoryContract){
+  const KeplerLocalMemoryConfig&m=*localMemoryContract;
+  localMetadataMatches=valid&&c->expectedStage==5&&!c->prefixBytes&&
+   u32(b,metadata.payload)==code.size/8-1&&
+   u32(b,metadata.payload+36)==m.carrier_local_bytes*64&&
+   u32(b,metadata.payload+44)==0&&
+   u32(b,metadata.payload+48)==m.carrier_local_bytes&&
+   u32(b,metadata.payload+52)==m.carrier_local_bytes&&
+   u32(b,metadata.payload+56)==m.carrier_spill_bytes&&
+   u32(b,metadata.payload+140)==m.carrier_control_barriers;
+  valid=valid&&localMetadataMatches;
+ }
  if(valid)c->targetImports++;
  NSMutableDictionary*event=[NSMutableDictionary dictionaryWithDictionary:@{@"valid_container":@(valid),@"original_bytes":@(length),@"container_version":@(length>=8?u32(b,0):0)}];
  if(expectedNativeOriginal)event[@"expected_original_code_identical"]=@(expectedMatches);
  if(certifiedNativeMetadata)event[@"native_metadata_identical_to_certificate"]=@(metadataMatches);
+ if(localMemoryContract)event[@"native_local_metadata_verified"]=@(localMetadataMatches);
  const void*passed=input;NSUInteger size=length;NSMutableData*patched=nil;
  if(valid){
   patched=[NSMutableData dataWithBytes:input length:code.payload+c->prefixBytes];[patched appendData:c->code];
@@ -101,7 +116,23 @@ id importInit(id self,SEL selector,const void*input,NSUInteger length,id device)
   // Metadata after code moves when the code section changes size.
   size_t metadataOffset=metadata.payload;
   if(metadata.header>code.header)metadataOffset=metadata.payload-code.size+c->prefixBytes+c->code.length;
-  if(keepNativeMetadata){
+  if(localMemoryContract){
+   uint32_t count=(uint32_t)(c->code.length/8-1);
+   put32(bytes,metadataOffset,count);put32(bytes,metadataOffset+28,c->config.registers);
+   // The previously qualified SM30 structured-control profile requires this
+   // control reservation even when NAK reports no external CRS spill bytes.
+   // Its complete meaning is not inferred. Keep the native local allocation
+   // word 9 and byte capacities 12/13/14 unchanged; do not reuse the old word9=576.
+   put32(bytes,metadataOffset+44,576);
+   bool unchanged=true;for(size_t i=0;i<metadata.size;i++)if(!(i<4||(i>=28&&i<32)||(i>=44&&i<48))&&bytes[metadataOffset+i]!=b[metadata.payload+i])unchanged=false;
+   event[@"native_metadata_preserved_except_instruction_register_and_control"]=@(unchanged);
+   event[@"native_local_allocation_fields_preserved"]=@(u32(bytes,metadataOffset+36)==u32(b,metadata.payload+36)&&u32(bytes,metadataOffset+48)==u32(b,metadata.payload+48)&&u32(bytes,metadataOffset+52)==u32(b,metadata.payload+52)&&u32(bytes,metadataOffset+56)==u32(b,metadata.payload+56));
+   event[@"required_scratch_bytes"]=@(localMemoryContract->required_scratch_bytes);
+   event[@"carrier_local_bytes"]=@(localMemoryContract->carrier_local_bytes);
+   event[@"carrier_spill_bytes"]=@(localMemoryContract->carrier_spill_bytes);
+   event[@"original_instruction_count"]=@(u32(b,metadata.payload));event[@"normalized_instruction_count"]=@(count);
+   if(!unchanged)c->rejected=true;
+  }else if(keepNativeMetadata){
    c->config={u32(b,metadata.payload+28),u32(b,metadata.payload+36),u32(b,metadata.payload+44)};
    if(c->config.registers<1||c->config.registers>63){c->rejected=true;return nil;}
    uint32_t originalCount=u32(b,metadata.payload),newCount=(uint32_t)(c->code.length/8-1);
@@ -118,10 +149,10 @@ id importInit(id self,SEL selector,const void*input,NSUInteger length,id device)
   event[@"all_native_metadata_bytes_preserved"]=@(memcmp(bytes+metadataOffset,b+metadata.payload,metadata.size)==0);
   event[@"original_metadata_sha256_scope"]=@"Full metadata compared to the actual incoming native constructor payload, not copied from an offline file";
   bool preserved=true;
-  for(size_t i=0;i<metadata.size;i++)if(!((keepNativeMetadata&&i<4)||(i>=28&&i<32)||(i>=36&&i<40)||(i>=44&&i<48))&&bytes[metadataOffset+i]!=b[metadata.payload+i])preserved=false;
+  for(size_t i=0;i<metadata.size;i++)if(!(((keepNativeMetadata||localMemoryContract)&&i<4)||(i>=28&&i<32)||(i>=36&&i<40)||(i>=44&&i<48))&&bytes[metadataOffset+i]!=b[metadata.payload+i])preserved=false;
   [c->payloads addObject:patched];passed=patched.bytes;size=patched.length;
   event[@"registers"]=@(c->config.registers);event[@"code_bytes"]=@(c->code.length);
-  event[@"launch_words_9_11"]=@[@(c->config.launch_word_9),@(c->config.launch_word_11)];
+  event[@"launch_words_9_11"]=@[@(u32(bytes,metadataOffset+36)),@(u32(bytes,metadataOffset+44))];
   event[@"code_payload_offset"]=@(code.payload);event[@"stage"]=@(c->expectedStage);event[@"prefix_bytes"]=@(c->prefixBytes);event[@"code_replaced"]=@YES;
   event[@"imported_code_identical"]=@(memcmp(bytes+code.payload+c->prefixBytes,c->code.bytes,c->code.length)==0);
   event[@"original_graphics_header_preserved"]=@(c->prefixBytes==0||memcmp(bytes+code.payload,b+code.payload,c->prefixBytes)==0);
@@ -140,6 +171,16 @@ id importInit(id self,SEL selector,const void*input,NSUInteger length,id device)
   if(status==KERN_SUCCESS&&read==sizeof variant){
    event[@"decoded_code_bytes"]=@(u64(variant,24));event[@"decoded_registers"]=@(u32(variant,48));event[@"decoded_instruction_count"]=@(u32(variant,44));
    if(keepNativeMetadata&&u32(variant,44)!=c->code.length/8-1)c->rejected=true;
+   if(localMemoryContract){
+    // Qualified tuples: native local allocation plus the fixed word11=576
+    // reservation contributes another 1024 to this decoded allocation word.
+    // Observed independently for 0-byte and 128-byte native local frames.
+    uint32_t allocation=((localMemoryContract->carrier_local_bytes*64+1023)&~1023u)+1536;
+   bool decoded=u32(variant,40)==allocation&&u32(variant,56)==localMemoryContract->carrier_spill_bytes&&u32(variant,44)==c->code.length/8-1;
+   event[@"decoded_control_words_32_36"]=@[@(u32(variant,32)),@(u32(variant,36))];
+    event[@"decoded_local_allocation_word"]=@(u32(variant,40));event[@"decoded_native_spill_bytes"]=@(u32(variant,56));event[@"decoded_local_contract_verified"]=@(decoded);
+    if(!decoded)c->rejected=true;
+   }
    bool accepted=u64(variant,24)==c->code.length+c->prefixBytes&&u32(variant,48)==c->config.registers;
    if(accepted){c->verified=true;c->verifiedImports++;}else c->rejected=true;
   }else c->rejected=true;
@@ -198,6 +239,34 @@ extern "C" id<MTLComputePipelineState> KPInternalCASCreatePipeline(id<MTLDevice>
  if(evidence)*evidence=@{@"device":device.name,@"registry_id":@(device.registryID),@"contract_verified":@(complete(context)),@"target_imports":@(context.targetImports),@"verified_imports":@(context.verifiedImports),@"rejected_import":@(context.rejected),@"driver_sha256":@(qualifiedHash),@"events":context.events,@"scope":@"constructor payload and decoded metadata validation; GPU execution requires separate dispatch/result checks"};
  if(pipeline&&!complete(context)){[pipeline release];pipeline=nil;fail(error,@"Decoded program contract did not match; dispatch prohibited");}
  if(pipeline)objc_setAssociatedObject(pipeline,&retainedPayloadKey,context.payloads,OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+ return pipeline;
+}
+
+// Opt-in native allocation preservation. Uses the same serialization and
+// constructor restoration as CAS/approved imports; the legacy ABI is unchanged.
+extern "C" id<MTLComputePipelineState> KPCreateLocalMemoryPipeline(
+ id<MTLDevice>device,NSData*library,NSString*function,NSData*code,
+ KeplerLocalMemoryConfig config,NSError**error,NSDictionary**evidence){
+ if(error)*error=nil;if(evidence)*evidence=nil;
+ if(![library isKindOfClass:NSData.class]||!library.length||library.length>UINT32_MAX||
+    ![code isKindOfClass:NSData.class]||!code.length||code.length%64||code.length>65536||
+    config.registers<24||config.registers>63||config.required_scratch_bytes>config.carrier_local_bytes||
+    expectedNativeOriginal||keepNativeMetadata||certifiedLibraryData||certifiedNativeMetadata||
+    certifiedSuppliedFunction||certifiedReflection||approvedPipelineDescriptor||localMemoryContract){fail(error,@"Invalid local-memory import or nested context");return nil;}
+ uint32_t bytes=0,spill=0,barriers=0;
+ if([function isEqual:@"local_control"]){}
+ else if([function isEqual:@"local32"])bytes=128;
+ else if([function isEqual:@"local256"])bytes=1024;
+ else if([function isEqual:@"local1024"])bytes=4096;
+ else if([function isEqual:@"pressure96"]){bytes=224;spill=224;barriers=1;}
+ else{fail(error,@"Native local-memory carrier function is not qualified");return nil;}
+ if(config.carrier_local_bytes!=bytes||config.carrier_spill_bytes!=spill||config.carrier_control_barriers!=barriers){fail(error,@"Native local-memory profile differs");return nil;}
+ NSData*snapshot=[[NSData alloc]initWithBytes:library.bytes length:library.length];
+ unsigned char digest[32];CC_SHA256(snapshot.bytes,(CC_LONG)snapshot.length,digest);char hex[65];for(unsigned i=0;i<32;i++)sprintf(hex+i*2,"%02x",digest[i]);hex[64]=0;
+ if(strcmp(hex,"bb052086f1a0f8ce1a2cad8da00c74926ac47abe0d0b95d3b1f66cf24f4d3d5d")){[snapshot release];fail(error,@"Native local-memory library fingerprint differs");return nil;}
+ id<MTLComputePipelineState>pipeline=nil;
+ @try{certifiedLibraryData=snapshot;localMemoryContract=&config;pipeline=KPInternalCASCreatePipeline(device,nil,function,code,{config.registers,0,0},error,evidence);}
+ @finally{localMemoryContract=nullptr;certifiedLibraryData=nil;[snapshot release];}
  return pipeline;
 }
 

@@ -47,6 +47,10 @@ Explicit scope activation and one pinned library/program-set registration remain
 
 These observations are scoped to their binaries, profiles, and workloads. The public export is not itself a rerun of those experiments. Full hardware coverage, transparent integration into ordinary applications, and a generally modernized installed driver remain open. No general performance improvement is claimed. Details: [status](docs/STATUS.md).
 
+## Local memory and compiler spills
+
+The native driver already executes private/thread arrays and compiler spills. The new opt-in program-import path preserves its local-memory allocation while supplying the qualified structured-control reservation. The local-memory cohort passed **180 compute trials and 48 missing-dispatch controls**, covering 1–1,024 threads/group, private arrays up to 4 KiB/thread and actual NAK register spills. The CPU oracle checked 269,040 exact uint32 outputs with witnesses for 67,260 kernel invocations. CAS and ordinary-library regressions passed after the new import. This is a bounded backend/resource-ABI extension; no installed driver or Metal family is changed. [Contract and reproduction](docs/LOCAL_MEMORY.md) · [Validation](docs/local-memory-validation.json).
+
 ## Proprietary dependencies
 
 **No Apple/NVIDIA driver, firmware, VBIOS, SDK, installer, compiled GPU program, or binary capture is included.** Obtain proprietary components separately from their publishers or your existing licensed installation. NVIDIA reference packages have official URLs and recorded checksums in [the dependency manifest](dependencies/references.json); [the dependency guide](docs/DEPENDENCIES.md) explains recovery and local-only extraction.

@@ -9,6 +9,24 @@ struct KeplerImportConfig {
     uint32_t launch_word_9;
     uint32_t launch_word_11;
 };
+// Experimental local-memory allocation contract for the pinned native reference
+// library. Byte capacities are observed carrier metadata, not a GPU limit.
+// Native local allocations are preserved; instruction count/GPR are updated
+// and the previously qualified structured-control word11=576 is requested.
+// The caller must supply truthful compiled-code scratch requirements and match
+// the carrier's buffer, barrier and static-memory ABI. This is not a verifier
+// for arbitrary machine code or a new MSL frontend.
+struct KeplerLocalMemoryConfig {
+    uint32_t registers;
+    uint32_t required_scratch_bytes;
+    uint32_t carrier_local_bytes;
+    uint32_t carrier_spill_bytes;
+    uint32_t carrier_control_barriers;
+};
+extern "C" id<MTLComputePipelineState> KPCreateLocalMemoryPipeline(
+    id<MTLDevice> device, NSData *carrierLibrary, NSString *function,
+    NSData *sm30Code, KeplerLocalMemoryConfig config, NSError **error,
+    NSDictionary **evidence) NS_RETURNS_RETAINED;
 // Returns a retained pipeline. The caller releases it (manual Objective-C ownership).
 // Accepts observed NVIDIA container versions 7/8/9 with validated sections.
 // Pins the installed GeForceMTLDriver SHA256 and observed _variant ABI. Every

@@ -127,11 +127,11 @@
     {
       "path": "bridge/src/KeplerNativeCAS.mm",
       "source_path": "bridge/src/KeplerNativeCAS.mm",
-      "source_SHA256": "645d44ee7d0089b517305cd8f29ed8ad1a1fe84a808d036f6380c2652c30a0fc",
-      "published_SHA256": "645d44ee7d0089b517305cd8f29ed8ad1a1fe84a808d036f6380c2652c30a0fc",
-      "bytes": 22791,
+      "source_SHA256": "a91ec1801a2dcc92350ef9da661a7133be04b369ba468443b1ff8955633792a7",
+      "published_SHA256": "a91ec1801a2dcc92350ef9da661a7133be04b369ba468443b1ff8955633792a7",
+      "bytes": 28106,
       "modified_for_publication": false,
-      "previous_published_SHA256": "3044af794eb4cc3b2850cebe9afd76ae50ca67498f9bcf7e700b139f1d06c2d5"
+      "previous_published_SHA256": "645d44ee7d0089b517305cd8f29ed8ad1a1fe84a808d036f6380c2652c30a0fc"
     },
     {
       "path": "bridge/src/KeplerNativeCASAdapter.inc",
@@ -176,10 +176,11 @@
     {
       "path": "bridge/src/KeplerProgramImport.h",
       "source_path": "bridge/src/KeplerProgramImport.h",
-      "source_SHA256": "cb03609d5f695e95c3945fe5b9ba786be421fe61ee16a8f2f553a6e78f15f54c",
-      "published_SHA256": "cb03609d5f695e95c3945fe5b9ba786be421fe61ee16a8f2f553a6e78f15f54c",
-      "bytes": 2804,
-      "modified_for_publication": false
+      "source_SHA256": "b3fc98e9c6183cddd445dfe29609608388d9d3b0f52137154d6ff2caa3596e34",
+      "published_SHA256": "b3fc98e9c6183cddd445dfe29609608388d9d3b0f52137154d6ff2caa3596e34",
+      "bytes": 3789,
+      "modified_for_publication": false,
+      "previous_published_SHA256": "cb03609d5f695e95c3945fe5b9ba786be421fe61ee16a8f2f553a6e78f15f54c"
     },
     {
       "path": "bridge/src/KeplerProgramImport.mm",
@@ -5872,10 +5873,11 @@
     {
       "path": "bridge/tools/build_cas_descriptor_transport_regression.py",
       "source_path": "bridge/tools/build_cas_descriptor_transport_regression.py",
-      "source_SHA256": "7aa00ecb3791585c034643954ea66383498e1413d27717153cc0352fed0e0f27",
-      "published_SHA256": "7aa00ecb3791585c034643954ea66383498e1413d27717153cc0352fed0e0f27",
-      "bytes": 3683,
-      "modified_for_publication": false
+      "source_SHA256": "b0d92b073954430114a13cfe8ab70a1504de118317621b6e5a3871c8e553b4b8",
+      "published_SHA256": "b0d92b073954430114a13cfe8ab70a1504de118317621b6e5a3871c8e553b4b8",
+      "bytes": 4934,
+      "modified_for_publication": false,
+      "previous_published_SHA256": "7aa00ecb3791585c034643954ea66383498e1413d27717153cc0352fed0e0f27"
     },
     {
       "path": "bridge/tools/build_native_pipeline_contract_probe.py",
@@ -6154,6 +6156,94 @@
       "published_SHA256": "0d0718b073d1b811ab61b660273f56ed7b0dbfa17c3b7f1ce6e2652fd348dc9d",
       "bytes": 4510,
       "modified_for_publication": false
+    },
+    {
+      "path": "bridge/src/kepler_local_memory.metal",
+      "source_path": "bridge/src/kepler_local_memory.metal",
+      "source_SHA256": "0b37e25fb4fdc33d8dfe728728cec750426f46143647ad6d1584ea6431be81d6",
+      "published_SHA256": "0b37e25fb4fdc33d8dfe728728cec750426f46143647ad6d1584ea6431be81d6",
+      "bytes": 3764,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/local_memory_probe.mm",
+      "source_path": "bridge/tools/local_memory_probe.mm",
+      "source_SHA256": "253115905f745fea2d06860e9310f24c6d95d29b70d0cd0646503ed8b423e5f3",
+      "published_SHA256": "253115905f745fea2d06860e9310f24c6d95d29b70d0cd0646503ed8b423e5f3",
+      "bytes": 7811,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/local_memory_compile.c",
+      "source_path": "bridge/tools/local_memory_compile.c",
+      "source_SHA256": "0b9570cab3cd574326ce16af3df9e521679081ec7e50bdf1416f2cf91cd2ca3d",
+      "published_SHA256": "0b9570cab3cd574326ce16af3df9e521679081ec7e50bdf1416f2cf91cd2ca3d",
+      "bytes": 6116,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/local_memory_contract_probe.mm",
+      "source_path": "bridge/tools/local_memory_contract_probe.mm",
+      "source_SHA256": "1643e338fd375a4eb4ca1cf485e8d7817041a398dde9bb57f8abec2a23ad0c52",
+      "published_SHA256": "1643e338fd375a4eb4ca1cf485e8d7817041a398dde9bb57f8abec2a23ad0c52",
+      "bytes": 3023,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/build_local_memory_probe.py",
+      "source_path": "bridge/tools/build_local_memory_probe.py",
+      "source_SHA256": "9b519d00d06b7c5fe541691a9af74e609767beb175801a8308b34febdbe9dfe3",
+      "published_SHA256": "9b519d00d06b7c5fe541691a9af74e609767beb175801a8308b34febdbe9dfe3",
+      "bytes": 2477,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/build_local_memory_programs.py",
+      "source_path": "bridge/tools/build_local_memory_programs.py",
+      "source_SHA256": "8a739cdd0d33e9d3be1e61d1f4f656798db27086a6c58a331badaf62115f9542",
+      "published_SHA256": "8a739cdd0d33e9d3be1e61d1f4f656798db27086a6c58a331badaf62115f9542",
+      "bytes": 3131,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/build_local_memory_import_probe.py",
+      "source_path": "bridge/tools/build_local_memory_import_probe.py",
+      "source_SHA256": "dcd4664080c872a6d92147f048f878e13be962bc914ece1e23e1a433aca15b05",
+      "published_SHA256": "dcd4664080c872a6d92147f048f878e13be962bc914ece1e23e1a433aca15b05",
+      "bytes": 2836,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/observe_native_local_memory.py",
+      "source_path": "bridge/tools/observe_native_local_memory.py",
+      "source_SHA256": "b7cad88afb8720f59007b5fe215124484c96d6efdd290345c4ede90d950f65ba",
+      "published_SHA256": "b7cad88afb8720f59007b5fe215124484c96d6efdd290345c4ede90d950f65ba",
+      "bytes": 4168,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/qualify_local_memory.py",
+      "source_path": "bridge/tools/qualify_local_memory.py",
+      "source_SHA256": "202bc1962aa1075d75716491956c98980354ebc84165bcf03a3f4c6d18b106ea",
+      "published_SHA256": "202bc1962aa1075d75716491956c98980354ebc84165bcf03a3f4c6d18b106ea",
+      "bytes": 2328,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/verify_local_memory.py",
+      "source_path": "bridge/tools/verify_local_memory.py",
+      "source_SHA256": "8769fb470b9f49683b33f7d884fc4aa844038fe2e291e47bd008d3347553d417",
+      "published_SHA256": "8769fb470b9f49683b33f7d884fc4aa844038fe2e291e47bd008d3347553d417",
+      "bytes": 5000,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/verify_local_memory_delivery.py",
+      "source_path": "bridge/tools/verify_local_memory_delivery.py",
+      "source_SHA256": "882e75220f1beeabd4632d138c511d55ec2b46ddbba2cc96f3bd5ebb69bdb3a4",
+      "published_SHA256": "882e75220f1beeabd4632d138c511d55ec2b46ddbba2cc96f3bd5ebb69bdb3a4",
+      "bytes": 9798,
+      "modified_for_publication": false
     }
   ],
   "excluded_source_tools": [
@@ -6195,7 +6285,7 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "de32282017f9faf39cf4aafc42ace64c0648e5104bc2962f5d1dfd6494d97f19",
-  "previous_public_commit": "72992a123328c2bea8a72f0e10dd3014fa3a867a",
-  "update": "Native library/function factory integration after one immutable producer-library registration"
+  "previous_source_snapshot_SHA256": "c35793e9f5a4ccd41e39e1d8ff6be0d4a7525c6b3371c92537d8d23078ca601d",
+  "previous_public_commit": "2f5d10e5c1ccee2b9609d9d588a5aef811be9503",
+  "update": "Explicit SM30 local/scratch-memory import preserving native local allocation with qualified control reservation; native and NAK spill oracles"
 }

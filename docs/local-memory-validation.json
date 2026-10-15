@@ -1,0 +1,254 @@
+{
+  "status": "PASS",
+  "runtime_library_SHA256": "59f3a04d6c9929ec5c22034234e27006675174e076855df26a5b584f88f245ac",
+  "runtime_source_manifest_SHA256": "b30cfd6b0189990b61c39efd3909d6d021428f5a6dd31ce05c998b230c03a1c5",
+  "client_SHA256": "253115905f745fea2d06860e9310f24c6d95d29b70d0cd0646503ed8b423e5f3",
+  "programs_manifest_SHA256": "3810eb63caf2c46e1c19a0e52ef298e939143a7617dabb5630185d88e54c43fe",
+  "native_local_bytes": {
+    "local_control": 0,
+    "local32": 128,
+    "local256": 1024,
+    "local1024": 4096,
+    "pressure32": 0,
+    "pressure64": 24,
+    "pressure96": 224
+  },
+  "native_local_instruction_counts": {
+    "local_control": 0,
+    "local32": 115,
+    "local256": 563,
+    "local1024": 1113,
+    "pressure32": 0,
+    "pressure64": 12,
+    "pressure96": 129
+  },
+  "cohorts": 19,
+  "positive_trials": 180,
+  "negative_trials": 48,
+  "exact_uint32_results": 269040,
+  "witnessed_kernel_invocations": 67260,
+  "guard_bytes": 116736,
+  "negative_expected_words_absent": 71744,
+  "contracts": 14,
+  "CAS_operations": 106650,
+  "CAS_rejection_controls": 8,
+  "CAS_after_local_and_descriptor_import": true,
+  "library_regression_trials": 8,
+  "library_regression_uint32": 915456,
+  "same_program_control_failure_preserved": true,
+  "programs": [
+    {
+      "name": "local_control",
+      "semantic": "local_control",
+      "forced_spill": false,
+      "info": {
+        "semantic": "local_control",
+        "uniform_full_workgroups_required": true,
+        "sm": 30,
+        "registers": 24,
+        "actual_registers": 24,
+        "code_bytes": 320,
+        "scratch_bytes": 0,
+        "crs_bytes": 0,
+        "control_barriers": 0,
+        "spills_to_memory": 0,
+        "fills_from_memory": 0
+      },
+      "code_SHA256": "bc1d116872c1606651323d0ff48d462490ec99368acc31da61a7ef73376edfec"
+    },
+    {
+      "name": "local32",
+      "semantic": "local32",
+      "forced_spill": false,
+      "info": {
+        "semantic": "local32",
+        "uniform_full_workgroups_required": true,
+        "sm": 30,
+        "registers": 24,
+        "actual_registers": 24,
+        "code_bytes": 5248,
+        "scratch_bytes": 128,
+        "crs_bytes": 0,
+        "control_barriers": 0,
+        "spills_to_memory": 0,
+        "fills_from_memory": 0
+      },
+      "code_SHA256": "ab4c33588cb3808f8cd7f445147429bb98029747c4708c81a3230f0c4663e2b8"
+    },
+    {
+      "name": "local256",
+      "semantic": "local256",
+      "forced_spill": false,
+      "info": {
+        "semantic": "local256",
+        "uniform_full_workgroups_required": true,
+        "sm": 30,
+        "registers": 24,
+        "actual_registers": 24,
+        "code_bytes": 3456,
+        "scratch_bytes": 1024,
+        "crs_bytes": 0,
+        "control_barriers": 0,
+        "spills_to_memory": 0,
+        "fills_from_memory": 0
+      },
+      "code_SHA256": "9f42cfb2fca7f4afc673a266ab171963286d9d1e72024c67fbaa868e5a17a94a"
+    },
+    {
+      "name": "local1024",
+      "semantic": "local1024",
+      "forced_spill": false,
+      "info": {
+        "semantic": "local1024",
+        "uniform_full_workgroups_required": true,
+        "sm": 30,
+        "registers": 24,
+        "actual_registers": 24,
+        "code_bytes": 3456,
+        "scratch_bytes": 4096,
+        "crs_bytes": 0,
+        "control_barriers": 0,
+        "spills_to_memory": 0,
+        "fills_from_memory": 0
+      },
+      "code_SHA256": "790a24204f8dc7341181f7d67543d3a675e005cc1e97a7c7cbdaba736ff360f3"
+    },
+    {
+      "name": "pressure32",
+      "semantic": "pressure32",
+      "forced_spill": false,
+      "info": {
+        "semantic": "pressure32",
+        "uniform_full_workgroups_required": true,
+        "sm": 30,
+        "registers": 40,
+        "actual_registers": 40,
+        "code_bytes": 3840,
+        "scratch_bytes": 0,
+        "crs_bytes": 0,
+        "control_barriers": 1,
+        "spills_to_memory": 0,
+        "fills_from_memory": 0
+      },
+      "code_SHA256": "9ac8da1460b6fa29a2b373f246371a6d79094bd8ea051cdb652711c3970a46b8"
+    },
+    {
+      "name": "pressure64",
+      "semantic": "pressure64",
+      "forced_spill": false,
+      "info": {
+        "semantic": "pressure64",
+        "uniform_full_workgroups_required": true,
+        "sm": 30,
+        "registers": 63,
+        "actual_registers": 63,
+        "code_bytes": 7552,
+        "scratch_bytes": 28,
+        "crs_bytes": 0,
+        "control_barriers": 1,
+        "spills_to_memory": 7,
+        "fills_from_memory": 7
+      },
+      "code_SHA256": "6c78b21ae0af425c857778bca7dad13bc7f0e8d3a325dd27444e971bb8a07964"
+    },
+    {
+      "name": "pressure96",
+      "semantic": "pressure96",
+      "forced_spill": false,
+      "info": {
+        "semantic": "pressure96",
+        "uniform_full_workgroups_required": true,
+        "sm": 30,
+        "registers": 63,
+        "actual_registers": 63,
+        "code_bytes": 11648,
+        "scratch_bytes": 156,
+        "crs_bytes": 0,
+        "control_barriers": 1,
+        "spills_to_memory": 39,
+        "fills_from_memory": 39
+      },
+      "code_SHA256": "88ad73b57c0e575b310cee8dbfe8dffa5446e75d827319f96fffbc34cc3f1b78"
+    },
+    {
+      "name": "pressure32_forced_spill",
+      "semantic": "pressure32",
+      "forced_spill": true,
+      "info": {
+        "semantic": "pressure32",
+        "uniform_full_workgroups_required": true,
+        "sm": 30,
+        "registers": 24,
+        "actual_registers": 18,
+        "code_bytes": 4288,
+        "scratch_bytes": 80,
+        "crs_bytes": 0,
+        "control_barriers": 1,
+        "spills_to_memory": 20,
+        "fills_from_memory": 20
+      },
+      "code_SHA256": "ee5db331952c5126077444cd7d7d2768828f7545d2534efcd5ad3905de891e34"
+    }
+  ],
+  "source_version": "Mesa 26.2.4 extracted source; no nested Git checkout, effective linked archive hashes recorded",
+  "native_local_frame_limit_tested": 4096,
+  "external_CRS_support": false,
+  "M1_reference": "NOT RUN for this local-memory cohort",
+  "system_files_unchanged": 83,
+  "OCLP_unchanged": true,
+  "installed_driver_modified": false,
+  "performance_benchmark": false,
+  "full_objective_complete": false,
+  "Qwen_job_ids": [],
+  "date": "2026-10-15",
+  "scope": "Maintainer numerical GPU qualification on the reference GTX; raw compiler containers, generated programs and driver binaries omitted",
+  "raw_binary_evidence_published": false,
+  "upstream_reference_commit": "96cb43121031992b85767f9c1be8f3f48e22b1d2 (documented Mesa26.2.4 reference; extracted vendor tree has no independent Git HEAD)",
+  "public_source_verification": {
+    "status": "PASS",
+    "public_source_library_SHA256": "10dd7a21f8755ff16af83e8c09bec746c9d93da89e37e95d24c8466197f05481",
+    "all_runtime_objects": 7,
+    "CPU_link_check": "PASS",
+    "public_archive_import_trials": 24,
+    "regenerated_native_trials": 3,
+    "full_180_plus_48_suite_on_public_archive": "NOT RUN; artifact-specific qualification",
+    "cases": [
+      {
+        "label": "source-native",
+        "status": "PASS",
+        "function": "local1024",
+        "trials": 3,
+        "kernel_dispatches": 3,
+        "exact_uint32_results": 1408,
+        "guard_bytes": 1536,
+        "negative_expected_words_absent": 0,
+        "performance_benchmark": false,
+        "full_objective_complete": false
+      },
+      {
+        "label": "public-import-local1024",
+        "status": "PASS",
+        "function": "local1024",
+        "trials": 12,
+        "kernel_dispatches": 12,
+        "exact_uint32_results": 17936,
+        "guard_bytes": 6144,
+        "negative_expected_words_absent": 0,
+        "performance_benchmark": false,
+        "full_objective_complete": false
+      },
+      {
+        "label": "public-import-spill",
+        "status": "PASS",
+        "function": "pressure32",
+        "trials": 12,
+        "kernel_dispatches": 12,
+        "exact_uint32_results": 17936,
+        "guard_bytes": 6144,
+        "negative_expected_words_absent": 0,
+        "performance_benchmark": false,
+        "full_objective_complete": false
+      }
+    ]
+  }
+}
