@@ -25,4 +25,6 @@ La dernière commande exige macOS, Xcode et sa chaîne Metal. Elle compile les s
 - [Raccordement des pipelines par l'API publique](docs/NATIVE_FUNCTION_PIPELINES.md)
 - [Contribuer](CONTRIBUTING.md)
 
+La dernière qualification couvre six variantes de création de pipelines, dont les appels asynchrones, pour six fonctions explicitement enregistrées : 128 essais GTX et 12 comparaisons M1. Les limites et les empreintes des sources sont documentées ; l'intégration transparente aux applications ordinaires reste à réaliser.
+
 Aucun pilote propriétaire, firmware, SDK, exécutable ou résultat binaire n'est publié. Les liens et empreintes permettent de retrouver les références séparément. Le code original est sous licence MIT ; les dépendances conservent leurs propres licences.

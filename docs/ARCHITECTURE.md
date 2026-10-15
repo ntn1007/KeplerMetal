@@ -12,7 +12,7 @@ The installed driver continues to allocate resources, submit work and manage the
 
 Compiler experiments use an external OpenNVDA AIR frontend, Mesa NIR/NAK and SM30 code generation. An alternative compiler is one tool in the chain; it does not implement new Metal command queues, resource identity or feature-family conformance by itself.
 
-The native-resource lowering maps the producer's root pointer and launch dimensions to the established CB1 resource table. `KeplerCommandIRProducerFactory` calls the existing ownership-correct import transport. After exact source/carrier/program registration, the scope serves only the synchronous function pipeline factory and returns an actual native PSO. Other functions take the original native path. No installed driver or family capability is changed. See [the bounded API contract](NATIVE_FUNCTION_PIPELINES.md).
+The native-resource lowering maps the producer's root pointer and launch dimensions to the established CB1 resource table. `KeplerCommandIRProducerFactory` calls the existing ownership-correct import transport. After exact source/carrier/program registration, the scope serves six synchronous/asynchronous function and descriptor factory variants and returns actual native PSOs. Reflection requests create an adapter around native argument/type metadata. Descriptor imports snapshot supported properties, while unsupported properties and inconsistent native thread limits are refused. Other functions take the original native path. No installed driver or family capability is changed. See [the bounded API contract](NATIVE_FUNCTION_PIPELINES.md).
 
 ## Integration levels
 

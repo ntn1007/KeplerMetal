@@ -16,7 +16,12 @@
  @catch(NSException*x){return fail(error,x.reason?:@"Native producer construction failed");}
  if(!pipeline||pipeline.device!=_device||pipeline.threadExecutionWidth!=32||pipeline.maxTotalThreadsPerThreadgroup<32||![proof[@"contract_verified"]boolValue]||[proof[@"rejected_import"]boolValue])return fail(error,@"Native producer import/limits differ");
  Class dynamic=object_getClass(_device);
- {std::lock_guard<std::mutex>lock(installMutex);if(!installRenderOverride(dynamic,_originalDeviceClass,@selector(newComputePipelineStateWithFunction:error:),(IMP)registeredProducerPipeline))return fail(error,@"Cannot install device-local pipeline factory");}
+ {std::lock_guard<std::mutex>lock(installMutex);
+  const SEL selectors[]={@selector(newComputePipelineStateWithFunction:error:),@selector(newComputePipelineStateWithFunction:options:reflection:error:),@selector(newComputePipelineStateWithDescriptor:options:reflection:error:),@selector(newComputePipelineStateWithFunction:completionHandler:),@selector(newComputePipelineStateWithFunction:options:completionHandler:),@selector(newComputePipelineStateWithDescriptor:options:completionHandler:)};
+  const IMP implementations[]={(IMP)registeredProducerPipeline,(IMP)producerFunctionOptions,(IMP)producerDescriptor,(IMP)producerFunctionAsync,(IMP)producerFunctionAsyncOptions,(IMP)producerDescriptorAsync};
+  for(unsigned i=0;i<6;i++)if(!installRenderOverride(dynamic,_originalDeviceClass,selectors[i],implementations[i]))return fail(error,@"Cannot install device-local pipeline factory variants");
+ }
+ link.nativeProducerCarrier=carrierSnapshot;link.nativeProducerProgram=programSnapshot;
  link.nativeRootPipeline=pipeline;
  link.nativeProducerProfile=@{@"function":function.name,@"source_SHA256":link.librarySHA,@"carrier_SHA256":hash(carrierSnapshot),@"program_SHA256":programPin,@"import":proof};
  [_eventRows addObject:@{@"operation":@"register_IRv2_native_producer",@"profile":link.nativeProducerProfile,@"native_pipeline":@YES,@"source_compiler_replaced":@NO,@"host_push_buffer_required":@NO,@"GPU_execution":@NO}];

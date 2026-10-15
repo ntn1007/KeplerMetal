@@ -3,6 +3,9 @@
 + (id<MTLComputePipelineState>)newPipelineForDevice:(id<MTLDevice>)device
     carrier:(NSData *)carrier program:(NSData *)program error:(NSError **)error
     evidence:(NSDictionary **)evidence NS_RETURNS_RETAINED;
++ (id<MTLComputePipelineState>)newPipelineForDevice:(id<MTLDevice>)device
+    carrier:(NSData *)carrier program:(NSData *)program descriptor:(MTLComputePipelineDescriptor *)descriptor
+    error:(NSError **)error evidence:(NSDictionary **)evidence NS_RETURNS_RETAINED;
 @end
 namespace {
 NSDictionary *nativeProducerPins(){

@@ -33,6 +33,7 @@ thread_local NSData *expectedNativeOriginal=nullptr;
 thread_local bool keepNativeMetadata=false;
 thread_local NSData *certifiedLibraryData=nil,*certifiedNativeMetadata=nil;
 thread_local id<MTLFunction> certifiedSuppliedFunction=nil;
+thread_local MTLComputePipelineDescriptor *approvedPipelineDescriptor=nil;
 thread_local MTLPipelineOption certifiedPipelineOptions=MTLPipelineOptionNone;
 thread_local MTLComputePipelineReflection **certifiedReflection=nullptr;
 char certifiedInputsKey;
@@ -187,7 +188,8 @@ extern "C" id<MTLComputePipelineState> KPInternalCASCreatePipeline(id<MTLDevice>
   }else library=[device newLibraryWithURL:carrierLibrary error:error];
   if(library)entry=[library newFunctionWithName:function];
   if(entry){
-   if(certifiedSuppliedFunction)pipeline=[device newComputePipelineStateWithFunction:entry options:certifiedPipelineOptions reflection:certifiedReflection error:error];
+   if(approvedPipelineDescriptor){MTLComputePipelineDescriptor*p=[[approvedPipelineDescriptor copy]autorelease];p.computeFunction=entry;pipeline=[device newComputePipelineStateWithDescriptor:p options:MTLPipelineOptionNone reflection:nullptr error:error];}
+   else if(certifiedSuppliedFunction)pipeline=[device newComputePipelineStateWithFunction:entry options:certifiedPipelineOptions reflection:certifiedReflection error:error];
    else pipeline=[device newComputePipelineStateWithFunction:entry error:error];
   }
  } @catch(NSException*exception){fail(error,exception.reason?:@"Pipeline exception");}
@@ -207,12 +209,26 @@ extern "C" id<MTLComputePipelineState> KPInternalCreateApprovedSM30Pipeline(
  KeplerImportConfig config,NSError**error,NSDictionary**evidence){
  if(error)*error=nil;if(evidence)*evidence=nil;
  if(!library.length||library.length>UINT32_MAX||expectedNativeOriginal||keepNativeMetadata||
-    certifiedLibraryData||certifiedNativeMetadata||certifiedSuppliedFunction||certifiedReflection){
+    certifiedLibraryData||certifiedNativeMetadata||certifiedSuppliedFunction||certifiedReflection||approvedPipelineDescriptor){
   fail(error,@"Missing carrier or nested import context");return nil;
  }
  NSData*snapshot=[library copy];id<MTLComputePipelineState>pipeline=nil;
  @try {certifiedLibraryData=snapshot;pipeline=KPInternalCASCreatePipeline(device,nil,function,code,config,error,evidence);}
  @finally {certifiedLibraryData=nil;[snapshot release];}
+ return pipeline;
+}
+
+// Descriptor variant for approved command producers. Snapshot both inputs;
+// constructor serialization/restoration remains in the existing MRC transport.
+extern "C" id<MTLComputePipelineState> KPInternalCreateApprovedSM30PipelineWithDescriptor(
+ id<MTLDevice>device,NSData*library,NSString*function,NSData*code,
+ KeplerImportConfig config,MTLComputePipelineDescriptor*descriptor,NSError**error,NSDictionary**evidence){
+ if(error)*error=nil;if(evidence)*evidence=nil;
+ if(!library.length||library.length>UINT32_MAX||!descriptor||expectedNativeOriginal||keepNativeMetadata||
+    certifiedLibraryData||certifiedNativeMetadata||certifiedSuppliedFunction||certifiedReflection||approvedPipelineDescriptor){fail(error,@"Missing descriptor/carrier or nested import context");return nil;}
+ NSData*snapshot=[library copy];MTLComputePipelineDescriptor*settings=[descriptor copy];id<MTLComputePipelineState>pipeline=nil;
+ @try{certifiedLibraryData=snapshot;approvedPipelineDescriptor=settings;pipeline=KPInternalCASCreatePipeline(device,nil,function,code,config,error,evidence);}
+ @finally{approvedPipelineDescriptor=nil;certifiedLibraryData=nil;[settings release];[snapshot release];}
  return pipeline;
 }
 

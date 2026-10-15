@@ -297,7 +297,9 @@ static NSString*residentBindingError(KPComputeICBCommand*c,KPCPUICBScope*scope){
 
 #include "KeplerCommandIRArgumentEncoder.inc"
 #include "KeplerCommandIRFunction.inc"
+#include "KeplerCommandIRReflection.inc"
 #include "KeplerCommandIRProducer.inc"
+#include "KeplerCommandIRPipelineContracts.inc"
 
 @implementation KPComputeICB
 - (id<MTLDevice>)device{return _scope.device;}

@@ -36,11 +36,11 @@
     {
       "path": "bridge/src/KeplerCPUICB.mm",
       "source_path": "bridge/src/KeplerCPUICB.mm",
-      "source_SHA256": "cccef53aeb33f448c14e3b0e9c50f759f063de688d728025a4c5907d3e3edec5",
-      "published_SHA256": "cccef53aeb33f448c14e3b0e9c50f759f063de688d728025a4c5907d3e3edec5",
-      "bytes": 126752,
+      "source_SHA256": "ac15c5a1724ea87e370ab1c684d4802cde78016d623493dc772964f282ac9c37",
+      "published_SHA256": "ac15c5a1724ea87e370ab1c684d4802cde78016d623493dc772964f282ac9c37",
+      "bytes": 126841,
       "modified_for_publication": false,
-      "previous_published_SHA256": "a735b39fc1cf42e63fedf85d499fe99606c3cb17f3b3ce8924171665236d12b9"
+      "previous_published_SHA256": "cccef53aeb33f448c14e3b0e9c50f759f063de688d728025a4c5907d3e3edec5"
     },
     {
       "path": "bridge/src/KeplerCommandIR.h",
@@ -61,11 +61,11 @@
     {
       "path": "bridge/src/KeplerCommandIRFunction.inc",
       "source_path": "bridge/src/KeplerCommandIRFunction.inc",
-      "source_SHA256": "884149a38332259c8822fddab5c9f40798a42e2be74ac3702af18ebf707e8322",
-      "published_SHA256": "884149a38332259c8822fddab5c9f40798a42e2be74ac3702af18ebf707e8322",
-      "bytes": 5142,
+      "source_SHA256": "d7254690945127da0508c875c8eabcfab38612dd4451969ed7d10cb4b0fb0082",
+      "published_SHA256": "d7254690945127da0508c875c8eabcfab38612dd4451969ed7d10cb4b0fb0082",
+      "bytes": 5222,
       "modified_for_publication": false,
-      "previous_published_SHA256": "f5c9f41360d98a8ebb9c79564bd2c128a3bda17bad9ff4b103fe88cc7f2bf6e7"
+      "previous_published_SHA256": "884149a38332259c8822fddab5c9f40798a42e2be74ac3702af18ebf707e8322"
     },
     {
       "path": "bridge/src/KeplerCommandIRFunctionScope.inc",
@@ -127,10 +127,11 @@
     {
       "path": "bridge/src/KeplerNativeCAS.mm",
       "source_path": "bridge/src/KeplerNativeCAS.mm",
-      "source_SHA256": "3044af794eb4cc3b2850cebe9afd76ae50ca67498f9bcf7e700b139f1d06c2d5",
-      "published_SHA256": "3044af794eb4cc3b2850cebe9afd76ae50ca67498f9bcf7e700b139f1d06c2d5",
-      "bytes": 21229,
-      "modified_for_publication": false
+      "source_SHA256": "645d44ee7d0089b517305cd8f29ed8ad1a1fe84a808d036f6380c2652c30a0fc",
+      "published_SHA256": "645d44ee7d0089b517305cd8f29ed8ad1a1fe84a808d036f6380c2652c30a0fc",
+      "bytes": 22791,
+      "modified_for_publication": false,
+      "previous_published_SHA256": "3044af794eb4cc3b2850cebe9afd76ae50ca67498f9bcf7e700b139f1d06c2d5"
     },
     {
       "path": "bridge/src/KeplerNativeCASAdapter.inc",
@@ -1023,11 +1024,11 @@
     {
       "path": "bridge/tools/build_command_ir_runtime_library.py",
       "source_path": "bridge/tools/build_command_ir_runtime_library.py",
-      "source_SHA256": "a261bae7dea8afed4105b9dfcd9d45287f7c9b84566b6a7357e4e24fae405819",
-      "published_SHA256": "a261bae7dea8afed4105b9dfcd9d45287f7c9b84566b6a7357e4e24fae405819",
-      "bytes": 2791,
+      "source_SHA256": "4a58abb3649e61152d2055c1db96e6a14b2253353e89c53732e78f25821c6ced",
+      "published_SHA256": "4a58abb3649e61152d2055c1db96e6a14b2253353e89c53732e78f25821c6ced",
+      "bytes": 2094,
       "modified_for_publication": false,
-      "previous_published_SHA256": "59cfd5d98b1b7fcdbc4b7293be7914552ae36b2680c448968f2b6f6ed86e2621"
+      "previous_published_SHA256": "a261bae7dea8afed4105b9dfcd9d45287f7c9b84566b6a7357e4e24fae405819"
     },
     {
       "path": "bridge/tools/build_cpu_icb_submission_benchmark.py",
@@ -5736,34 +5737,38 @@
     {
       "path": "bridge/src/KeplerCommandIRProducerFactory.mm",
       "source_path": "bridge/src/KeplerCommandIRProducerFactory.mm",
-      "source_SHA256": "693694085fde78994e9dcdc96954b3d04757778e22cb8e168eea8bf11a6fdccf",
-      "published_SHA256": "693694085fde78994e9dcdc96954b3d04757778e22cb8e168eea8bf11a6fdccf",
-      "bytes": 1009,
-      "modified_for_publication": false
+      "source_SHA256": "fbff151f7dd7d08a35241077567ba961bea7f16cb711c2e756d7d58bc6735cf0",
+      "published_SHA256": "fbff151f7dd7d08a35241077567ba961bea7f16cb711c2e756d7d58bc6735cf0",
+      "bytes": 2454,
+      "modified_for_publication": false,
+      "previous_published_SHA256": "693694085fde78994e9dcdc96954b3d04757778e22cb8e168eea8bf11a6fdccf"
     },
     {
       "path": "bridge/src/KeplerCommandIRProducer.inc",
       "source_path": "bridge/src/KeplerCommandIRProducer.inc",
-      "source_SHA256": "6bf8894537cd31d6765e22e27071489500aee46c0949b9d5bfd6cd69ef39870b",
-      "published_SHA256": "6bf8894537cd31d6765e22e27071489500aee46c0949b9d5bfd6cd69ef39870b",
-      "bytes": 2229,
-      "modified_for_publication": false
+      "source_SHA256": "a4735f5aae97ce67a99f7f9203b650c8f1af9407a2a3538fe836814b4c98ad0b",
+      "published_SHA256": "a4735f5aae97ce67a99f7f9203b650c8f1af9407a2a3538fe836814b4c98ad0b",
+      "bytes": 2497,
+      "modified_for_publication": false,
+      "previous_published_SHA256": "6bf8894537cd31d6765e22e27071489500aee46c0949b9d5bfd6cd69ef39870b"
     },
     {
       "path": "bridge/src/KeplerCommandIRProducerScope.inc",
       "source_path": "bridge/src/KeplerCommandIRProducerScope.inc",
-      "source_SHA256": "ec71211aa05cbf1371549a9f870e7e4ab9a7d350fe275e38efc878b8bf0bf693",
-      "published_SHA256": "ec71211aa05cbf1371549a9f870e7e4ab9a7d350fe275e38efc878b8bf0bf693",
-      "bytes": 2696,
-      "modified_for_publication": false
+      "source_SHA256": "41137933e652206123a3e5c26a6b8e85acf9dbcad23ba869767aa80f3dc6a83d",
+      "published_SHA256": "41137933e652206123a3e5c26a6b8e85acf9dbcad23ba869767aa80f3dc6a83d",
+      "bytes": 3422,
+      "modified_for_publication": false,
+      "previous_published_SHA256": "ec71211aa05cbf1371549a9f870e7e4ab9a7d350fe275e38efc878b8bf0bf693"
     },
     {
       "path": "bridge/tools/prepare_m1_function_argument_reference.py",
       "source_path": "bridge/tools/prepare_m1_function_argument_reference.py",
-      "source_SHA256": "54b30cff5e7cc6869e2ee0ad38f81c6766aee6b6dc3977a1d0fe3a3f07522e8e",
-      "published_SHA256": "54b30cff5e7cc6869e2ee0ad38f81c6766aee6b6dc3977a1d0fe3a3f07522e8e",
-      "bytes": 1795,
-      "modified_for_publication": false
+      "source_SHA256": "80e12f49ef3f83ec8782d19c074046172116c59b043b35e131fe6585eb516630",
+      "published_SHA256": "80e12f49ef3f83ec8782d19c074046172116c59b043b35e131fe6585eb516630",
+      "bytes": 2177,
+      "modified_for_publication": false,
+      "previous_published_SHA256": "54b30cff5e7cc6869e2ee0ad38f81c6766aee6b6dc3977a1d0fe3a3f07522e8e"
     },
     {
       "path": "bridge/tools/qualify_three_argument_client.py",
@@ -5820,6 +5825,126 @@
       "published_SHA256": "bc3da8f177eac690990fc3e1b51764472d4259e0bb32b891d7328b5c0a494bac",
       "bytes": 25590,
       "modified_for_publication": false
+    },
+    {
+      "path": "bridge/src/KeplerCommandIRPipelineContracts.inc",
+      "source_path": "bridge/src/KeplerCommandIRPipelineContracts.inc",
+      "source_SHA256": "4b4cbc775a8a556dbd7b779f3150ea4508d5360b1cebfebdb5e8f673622df623",
+      "published_SHA256": "4b4cbc775a8a556dbd7b779f3150ea4508d5360b1cebfebdb5e8f673622df623",
+      "bytes": 10327,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/src/KeplerCommandIRReflection.inc",
+      "source_path": "bridge/src/KeplerCommandIRReflection.inc",
+      "source_SHA256": "fcd35912167195bf04375dc6ca3637b6843e80906318593a71e89f38e66d4bd5",
+      "published_SHA256": "fcd35912167195bf04375dc6ca3637b6843e80906318593a71e89f38e66d4bd5",
+      "bytes": 1687,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/PipelineContractNegativeCases.inc",
+      "source_path": "bridge/tools/PipelineContractNegativeCases.inc",
+      "source_SHA256": "79ff4f4058b8fdc6bee9f3ae74e210248d329dc1821258f53839f4f98f3cdaa9",
+      "published_SHA256": "79ff4f4058b8fdc6bee9f3ae74e210248d329dc1821258f53839f4f98f3cdaa9",
+      "bytes": 3607,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/PipelineContractPendingReply.inc",
+      "source_path": "bridge/tools/PipelineContractPendingReply.inc",
+      "source_SHA256": "38428714ef25f0b526dc3ef74b2d4ddd01fe1e537a4e9f43c595aff92ce0bc07",
+      "published_SHA256": "38428714ef25f0b526dc3ef74b2d4ddd01fe1e537a4e9f43c595aff92ce0bc07",
+      "bytes": 1039,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/PipelineFactoryReception.inc",
+      "source_path": "bridge/tools/PipelineFactoryReception.inc",
+      "source_SHA256": "14bf4ed6521b28efa472b5ed9fe8c32f3ecac5156fef2526b775d58c55eadbfb",
+      "published_SHA256": "14bf4ed6521b28efa472b5ed9fe8c32f3ecac5156fef2526b775d58c55eadbfb",
+      "bytes": 3972,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/build_cas_descriptor_transport_regression.py",
+      "source_path": "bridge/tools/build_cas_descriptor_transport_regression.py",
+      "source_SHA256": "7aa00ecb3791585c034643954ea66383498e1413d27717153cc0352fed0e0f27",
+      "published_SHA256": "7aa00ecb3791585c034643954ea66383498e1413d27717153cc0352fed0e0f27",
+      "bytes": 3683,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/build_native_pipeline_contract_probe.py",
+      "source_path": "bridge/tools/build_native_pipeline_contract_probe.py",
+      "source_SHA256": "ce5a800ff4a469900de780fcb840b6b2b7effaa4b5c39a8147f58d6ac0da073d",
+      "published_SHA256": "ce5a800ff4a469900de780fcb840b6b2b7effaa4b5c39a8147f58d6ac0da073d",
+      "bytes": 1960,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/build_pipeline_contract_reception_client.py",
+      "source_path": "bridge/tools/build_pipeline_contract_reception_client.py",
+      "source_SHA256": "e64398b4f1623201ec6134898dedfd4228cd4404c6171be2f85f1153061d66ff",
+      "published_SHA256": "e64398b4f1623201ec6134898dedfd4228cd4404c6171be2f85f1153061d66ff",
+      "bytes": 4070,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/build_registered_pipeline_contract_probe.py",
+      "source_path": "bridge/tools/build_registered_pipeline_contract_probe.py",
+      "source_SHA256": "2a96c681d5d71263e7cc17586adb0bb4565fe8a6567b369b57e7f967b512541d",
+      "published_SHA256": "2a96c681d5d71263e7cc17586adb0bb4565fe8a6567b369b57e7f967b512541d",
+      "bytes": 2569,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/native_pipeline_contract_probe.mm",
+      "source_path": "bridge/tools/native_pipeline_contract_probe.mm",
+      "source_SHA256": "53edd0e5aa1b64a609ac4ced4ab20758cba8111b2f18e05ab6cea748d2bd4345",
+      "published_SHA256": "53edd0e5aa1b64a609ac4ced4ab20758cba8111b2f18e05ab6cea748d2bd4345",
+      "bytes": 3894,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/qualify_pipeline_factory_contracts.py",
+      "source_path": "bridge/tools/qualify_pipeline_factory_contracts.py",
+      "source_SHA256": "b03afec325a41f5e54394d1b1cd2317f1e8c55e11598f540a6e6edc2b57869f1",
+      "published_SHA256": "b03afec325a41f5e54394d1b1cd2317f1e8c55e11598f540a6e6edc2b57869f1",
+      "bytes": 1959,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/registered_pipeline_contract_probe.mm",
+      "source_path": "bridge/tools/registered_pipeline_contract_probe.mm",
+      "source_SHA256": "1eaa7c8c6bb90c4d42ad9738083db31f5583ed758cfd8ab9bcb76d32fd3681ce",
+      "published_SHA256": "1eaa7c8c6bb90c4d42ad9738083db31f5583ed758cfd8ab9bcb76d32fd3681ce",
+      "bytes": 11491,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/verify_pipeline_contract_delivery.py",
+      "source_path": "bridge/tools/verify_pipeline_contract_delivery.py",
+      "source_SHA256": "3a603103c5ca169da17fa50890b726cfb4c085d5fc49a5e98530a4f1e197742b",
+      "published_SHA256": "3a603103c5ca169da17fa50890b726cfb4c085d5fc49a5e98530a4f1e197742b",
+      "bytes": 6452,
+      "modified_for_publication": false
+    },
+    {
+      "path": "examples/PipelineFactoryReception.inc",
+      "source_path": "bridge/tools/PipelineFactoryReception.inc",
+      "source_SHA256": "14bf4ed6521b28efa472b5ed9fe8c32f3ecac5156fef2526b775d58c55eadbfb",
+      "published_SHA256": "14bf4ed6521b28efa472b5ed9fe8c32f3ecac5156fef2526b775d58c55eadbfb",
+      "bytes": 3972,
+      "modified_for_publication": false
+    },
+    {
+      "path": "examples/command_ir_pipeline_contracts.mm",
+      "source_path": "bridge/results/pipeline-contract-reception-client-build-20261015-02/command_ir_dataflow_client.mm",
+      "source_SHA256": "05ccba52affe2f45faacba6bd5136fc7a1963031411a28b04adfeb9438c9f7d7",
+      "published_SHA256": "05ccba52affe2f45faacba6bd5136fc7a1963031411a28b04adfeb9438c9f7d7",
+      "bytes": 26207,
+      "modified_for_publication": false
     }
   ],
   "excluded_source_tools": [
@@ -5861,7 +5986,7 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "e0e0bba5f11fae7c10bb642d07d9d18c18f219ae208f67a7085fe979897014bf",
-  "previous_public_commit": "9fba09f5b63ffa602073fb9f269385de2bd4db9f",
-  "update": "Native CB1 producer ABI and scoped public synchronous function pipeline factory, qualified locally"
+  "previous_source_snapshot_SHA256": "dbeaefdc8128d4b22bf45c986aa286da7d8397c138086fc27435b5577b4bf7c2",
+  "previous_public_commit": "dfdcd897582a1adca30ece33c22117467a39612c",
+  "update": "Registered pipeline options, reflection, descriptor and asynchronous contracts; exact source of qualified 128-trial client"
 }

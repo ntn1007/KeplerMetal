@@ -29,3 +29,7 @@ Late runtime builders that reuse earlier objects are retained for provenance. Do
 GPU execution is a separate, explicit operation. Native driver/private ABI profiles are narrowly pinned to the reference device and binaries. Read the relevant harness and negative controls before running. Use the common `bridge/tools/lab_gpu_reservation.py` protocol and the immutable signed launcher; never invoke multiple GPU cohorts concurrently.
 
 The M1 comparison source programs are included. Private SSH transfer scripts are excluded: copy only the required source bundle using your own authorized connection, verify both-end hashes, and keep the reference run separate from GTX qualification. M1 inference or execution cannot validate SM30.
+
+## Registered pipeline contract milestone
+
+The public builder still rebuilds all seven runtime objects, including the changed MRC descriptor import transport. `examples/command_ir_pipeline_contracts.mm` and `examples/PipelineFactoryReception.inc` are the exact text of the six-factory reception client and helper; their hashes are in `SOURCE_SNAPSHOT.json`. Local builders under `bridge/tools/` preserve the frozen-asset dependencies and are not standalone fresh-checkout GPU launchers. See [the contract](NATIVE_FUNCTION_PIPELINES.md) for supported options, callbacks and descriptor limitations.

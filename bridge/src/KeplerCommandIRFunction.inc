@@ -8,6 +8,7 @@
 @property(nonatomic,copy) NSString *librarySHA;
 @property(nonatomic,strong) id<MTLComputePipelineState> nativeRootPipeline;
 @property(nonatomic,copy) NSDictionary *nativeProducerProfile;
+@property(nonatomic,copy) NSData *nativeProducerCarrier,*nativeProducerProgram;
 @end
 @implementation KPIRFunctionLink
 @end
