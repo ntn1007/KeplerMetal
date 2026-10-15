@@ -58,3 +58,5 @@ The native driver already executes private/thread arrays and compiler spills. Th
 Open source dependencies are referenced at fixed revisions; their upstream notices are preserved in [third-party notices](THIRD_PARTY_NOTICES.md). This project's MIT license does not relicense any external dependency.
 
 Contributions are welcome: independent reproductions, smaller valid test cases, CPU oracles, portability fixes, and evidence-backed driver/API work. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before changing a hardware profile.
+
+The local-memory path also accepts the same MSL/AIR programs, with native-versus-AIR/NAK byte comparisons and explicit resource-layout rejection controls. [Frontend contract and reproduction](docs/AIR_LOCAL_MEMORY.md).

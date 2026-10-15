@@ -6244,6 +6244,46 @@
       "published_SHA256": "882e75220f1beeabd4632d138c511d55ec2b46ddbba2cc96f3bd5ebb69bdb3a4",
       "bytes": 9798,
       "modified_for_publication": false
+    },
+    {
+      "path": "bridge/src/KeplerLocalAIRLowering.inc",
+      "source_path": "bridge/src/KeplerLocalAIRLowering.inc",
+      "source_SHA256": "c4eb047211f4292369af07ab654622a92c75bf9b7b5e14a25eff5f81ed579d5f",
+      "published_SHA256": "c4eb047211f4292369af07ab654622a92c75bf9b7b5e14a25eff5f81ed579d5f",
+      "bytes": 3822,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/air_local_compile.c",
+      "source_path": "bridge/tools/air_local_compile.c",
+      "source_SHA256": "80d131f21325496861976c511ef19097d53aa914040bd5eee8c8ed345e2b56e8",
+      "published_SHA256": "80d131f21325496861976c511ef19097d53aa914040bd5eee8c8ed345e2b56e8",
+      "bytes": 10634,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/build_air_local_programs.py",
+      "source_path": "bridge/tools/build_air_local_programs.py",
+      "source_SHA256": "af0c7b83699abb66e36d1a98562690cf0c941a045c3ae9b37efe8049181a8fa4",
+      "published_SHA256": "af0c7b83699abb66e36d1a98562690cf0c941a045c3ae9b37efe8049181a8fa4",
+      "bytes": 6932,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/verify_air_local_contracts.py",
+      "source_path": "bridge/tools/verify_air_local_contracts.py",
+      "source_SHA256": "f094846ebfcbb6471a7ff6e0b47569993cbcbffecf8941a12dbb486948256dbf",
+      "published_SHA256": "f094846ebfcbb6471a7ff6e0b47569993cbcbffecf8941a12dbb486948256dbf",
+      "bytes": 4278,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/verify_air_local_delivery.py",
+      "source_path": "bridge/tools/verify_air_local_delivery.py",
+      "source_SHA256": "d2ff45f07c7bf99c90102709bce4dca9d03f8571741b34218e74bac7de408e7c",
+      "published_SHA256": "d2ff45f07c7bf99c90102709bce4dca9d03f8571741b34218e74bac7de408e7c",
+      "bytes": 6796,
+      "modified_for_publication": false
     }
   ],
   "excluded_source_tools": [
@@ -6285,7 +6325,7 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "c35793e9f5a4ccd41e39e1d8ff6be0d4a7525c6b3371c92537d8d23078ca601d",
-  "previous_public_commit": "2f5d10e5c1ccee2b9609d9d588a5aef811be9503",
-  "update": "Explicit SM30 local/scratch-memory import preserving native local allocation with qualified control reservation; native and NAK spill oracles"
+  "previous_source_snapshot_SHA256": "51a4260154705bf8022694608fe46eeb1797aea56404c935795e502ad66701f8",
+  "previous_public_commit": "6f9a5683c790f5c32822ed7064ee83a585df2355",
+  "update": "MSL/AIR local-memory frontend, static native resource lowering and offline contract/delivery verifiers; runtime unchanged"
 }

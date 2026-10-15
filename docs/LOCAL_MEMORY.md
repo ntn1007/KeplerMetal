@@ -66,3 +66,7 @@ This compiles original MSL and an application from text, executes the native dri
 For NAK, obtain/build the open source dependencies in [the dependency guide](DEPENDENCIES.md). The historical lab builder `build_local_memory_programs.py` consumes the existing Mesa build; its manifest fingerprints all linked archives, source inputs and generated programs. The local tree is an extracted Mesa26.2.4 source tree, with no nested Git checkout; the upstream reference commit is documented separately from effective artifact hashes. Run with a known `NAK_DEBUG` environment; the forced-spill case sets it for that child only.
 
 The imported tests intentionally retain a pinned carrier hash. Regenerating a metallib using another SDK or path may change its bytes. A mismatch needs a new profile and native-capacity/import/GPU qualification, rather than changing the allowlist merely to proceed. Generated programs, Metal libraries, raw containers, SDKs and vendor drivers are omitted. The full 19-cohort import suite is a laboratory workflow with frozen prerequisites, not a clean-checkout automatic GPU bootstrap.
+
+## MSL/AIR frontend integration
+
+The same-source MSL/AIR path now passes the bounded local/scratch and real-spill cohort, using the unchanged runtime. See [AIR_LOCAL_MEMORY.md](AIR_LOCAL_MEMORY.md) for compiler/resource guards, versions and reproduction.
