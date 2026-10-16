@@ -11,7 +11,8 @@ from verify_control_flow import result as cpu_result
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def verify(root, build, native, observations, reserve, depth, reservation_root=None):
+def verify(root, build, native, observations, reserve, depth, reservation_root=None,
+           expected_variant='nested'):
     inp = terminal(root, reservation_root or ROOT, build)
     require(inp == load(build / 'inputs.json') and inp['reserve_mode'] == str(reserve)
             and inp['native_build_inputs_SHA256'] == sha(native / 'inputs.json')
@@ -19,8 +20,11 @@ def verify(root, build, native, observations, reserve, depth, reservation_root=N
             and inp['source_generator_SHA256'] == sha(build / 'builder.py')
             and inp['module_object_SHA256'] == sha(build / 'reserve.o'), 'experiment provenance')
     d = load(root / 'results.json'); proof = d['import']; config = load(root / 'assets/control_flow_config.json')
+    require(expected_variant in ['nested', 'reload_bounds']
+            and expected_variant == load(native / 'inputs.json').get('variant', 'nested')
+            == config['variant'], 'explicit nested-equivalent oracle variant')
     require(d['depth'] == depth and d['function'] == d['mode'] == 'depth' + str(depth)
-            and d['variant'] == 'nested' and d['native_reference'] and not d['program_replaced']
+            and d['variant'] == expected_variant and d['native_reference'] and not d['program_replaced']
             and not d['CPU_expected_answers_uploaded'] and not d['system_modified'] and not d['performance_benchmark']
             and d['driver_SHA256'] == DRIVER and d['registry_id'] == 4294968458, 'experiment target')
     require(proof['contract_verified'] and proof['constructor_restored'] and proof['calls'] == 1
@@ -83,7 +87,10 @@ if __name__ == '__main__':
     p = argparse.ArgumentParser(description=__doc__)
     for name in ['root', 'build', 'native', 'observations', 'out']: p.add_argument('--'+name, type=Path, required=True)
     for name in ['reserve', 'depth']: p.add_argument('--'+name, type=int, required=True)
-    a = p.parse_args(); proof = verify(a.root.resolve(), a.build.resolve(), a.native.resolve(), a.observations.resolve(), a.reserve, a.depth)
+    p.add_argument('--variant', choices=['nested', 'reload_bounds'], default='nested',
+                   help='Explicit source variant; reload_bounds preserves the immutable-input nested oracle')
+    a = p.parse_args(); proof = verify(a.root.resolve(), a.build.resolve(), a.native.resolve(), a.observations.resolve(), a.reserve, a.depth,
+                                    expected_variant=a.variant)
     out=a.out.resolve();out.relative_to(ROOT/'results')
     with out.open('x') as f: json.dump(proof, f, indent=2); f.write('\n')
     print(json.dumps({k:v for k,v in proof.items() if k not in ['files_SHA256','trials']}, indent=2))

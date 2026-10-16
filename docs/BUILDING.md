@@ -1,5 +1,7 @@
 # Build from source
 
+The new CPU-only control analyzer and its manually qualified native examples are documented in [NATIVE_CONTROL_PROPOSALS.md](NATIVE_CONTROL_PROPOSALS.md). Portable decoder/refusal tests run in the normal test suite. `audit_native_control_proposals.py --lab-root` rechecks historical fixtures without GPU dispatch. The analyzer changes no runtime allocation; the sweep verifier requires explicit `--variant reload_bounds` for that immutable-input nested oracle.
+
 ## Supported public build
 
 Use macOS with the Xcode developer directory selected, an SDK containing Metal, clang++, ar, and Python 3.9 or later. The laboratory source baseline used SDK 26.2 / clang 17 on x86_64. Full Xcode plus its Metal toolchain is needed to regenerate MSL assets; install these using Apple's tools and terms.

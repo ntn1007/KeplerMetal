@@ -6521,11 +6521,11 @@
     {
       "path": "bridge/tools/verify_native_reserve_sweep.py",
       "source_path": "bridge/tools/verify_native_reserve_sweep.py",
-      "source_SHA256": "3c24c0b652928a6241624341cfcdb7cf83369b1d3c74e901b3d5d2898598c2f1",
-      "published_SHA256": "3c24c0b652928a6241624341cfcdb7cf83369b1d3c74e901b3d5d2898598c2f1",
-      "bytes": 6517,
+      "source_SHA256": "b68f8667e593327d999b80f9ffb63e72a888deafa6b61c77d1f478cfd7331d60",
+      "published_SHA256": "b68f8667e593327d999b80f9ffb63e72a888deafa6b61c77d1f478cfd7331d60",
+      "bytes": 7053,
       "modified_for_publication": false,
-      "previous_published_SHA256": "8d97d626c9e522db64e34fcddac2c5d67cc97e10d7105cb00caee0e2c413bda7"
+      "previous_published_SHA256": "3c24c0b652928a6241624341cfcdb7cf83369b1d3c74e901b3d5d2898598c2f1"
     },
     {
       "path": "bridge/tools/analyze_native_control_reserve.py",
@@ -6641,6 +6641,30 @@
       "published_SHA256": "350ac5baec74924e5f7de9850080f8d693c12115393d823e4f82414fa00775a9",
       "bytes": 14016,
       "previous_published_SHA256": "4c0cc5cab899572c658261ffc036b2b4d8a301fb341c060d485640a7d909944e"
+    },
+    {
+      "path": "bridge/tools/audit_native_control_proposals.py",
+      "source_path": "bridge/tools/audit_native_control_proposals.py",
+      "source_SHA256": "2c89c9ac6ad3fbdf4c86998490c1408df5cc8aeb9d5a5c828f32c9e3cb9f1766",
+      "published_SHA256": "2c89c9ac6ad3fbdf4c86998490c1408df5cc8aeb9d5a5c828f32c9e3cb9f1766",
+      "bytes": 14753,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/propose_native_control_reserve.py",
+      "source_path": "bridge/tools/propose_native_control_reserve.py",
+      "source_SHA256": "13a0e0983ee12c62fd32f0b87ce2ac0fc2d633bcd588790cc692e9178e084389",
+      "published_SHA256": "13a0e0983ee12c62fd32f0b87ce2ac0fc2d633bcd588790cc692e9178e084389",
+      "bytes": 10573,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/test_native_control_proposals.py",
+      "source_path": "bridge/tools/test_native_control_proposals.py",
+      "source_SHA256": "1d6a9d09d8d56b7500b1092136517911a5bd11570ff6943e72c0b32549ff7862",
+      "published_SHA256": "1d6a9d09d8d56b7500b1092136517911a5bd11570ff6943e72c0b32549ff7862",
+      "bytes": 5015,
+      "modified_for_publication": false
     }
   ],
   "excluded_source_tools": [

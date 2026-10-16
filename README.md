@@ -2,6 +2,8 @@
 
 Open source research for modernizing the NVIDIA Kepler graphics stack on macOS.
 
+An offline control analyzer now proposes reservations without applying them. Two exact NVIDIA programs pass 24 new GTX trials at manually selected settings, with 35,872 CPU-matching uint32 values. The 29-profile analysis does not certify hardware stack bounds or an automatic allocator; the runtime stays unchanged. [Evidence, source and reproduction](docs/NATIVE_CONTROL_PROPOSALS.md).
+
 Latest native investigation: an explicit allocation API now shares the MRC import runtime, mutex and thread-local context. It preserves NVIDIA-generated code and passes228 GPU trials on17 native profiles, plus refusal, lifetime, CAS, local-memory and controlled factory-concurrency checks. A concurrency race in our CAS adapter is corrected. No installed-driver change or speedup is claimed. [Contract and limits](docs/NATIVE_ALLOCATION_API.md).
 
 The unchanged API also passes new source-nesting104/120programs, with24additional lifetime trials on each common/public archive. Adjacent reservation settings distinguish failures from correct results in four native programs; a general allocator remains unproven. [Thresholds, source reproduction and evidence](docs/NATIVE_ALLOCATION_THRESHOLDS.md).
