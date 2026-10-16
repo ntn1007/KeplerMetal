@@ -34,3 +34,5 @@ Aucun pilote propriétaire, firmware, SDK, exécutable ou résultat binaire n'es
 La chaîne MSL → AIR → NIR → SM30 couvre maintenant les tableaux privés et les débordements de registres du profil testé : 180 essais de calcul, 48 contrôles sans dispatch et résultats identiques au chemin natif. [Contrat, limites et reproduction](docs/AIR_LOCAL_MEMORY.md).
 
 Contrôle de flot profond : les imports testés avec une pile externe jusqu’à2Kio passent. Un programme natif à96niveaux démarre puis ne produit pas son résultat final ; cet échec reste ouvert et conservé. [Investigation et limites](docs/CONTROL_FLOW.md).
+
+Une expérience distincte corrige maintenant les programmes NVIDIA natifs65/96 en augmentant leur réservation mémoire, sans remplacer leur code GPU :24 essais corrects,35 872 valeurs exactes. Les48 contrôles de rejeu et d’arrondi restent défectueux. Le même metallib d’origine passe sur le M1 Max, avec adaptation explicite de certains groupes. Cette correction reste limitée au processus de test et à deux profils ; elle n’est pas installée dans le système et aucun gain de vitesse n’est annoncé. [Preuves, sources et reproduction](docs/NATIVE_CONTROL_RESERVE.md).

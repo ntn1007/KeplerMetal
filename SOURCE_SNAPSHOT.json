@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "source_git": {
     "branch": "main",
     "commit": null,
@@ -6288,25 +6288,25 @@
     {
       "path": "bridge/tools/control_flow_probe.mm",
       "source_path": "bridge/tools/control_flow_probe.mm",
-      "source_SHA256": "7db3451ea4ada507762728ab959c1ee678e7525c094a7b7a8df9b9ed30597a4e",
-      "published_SHA256": "7db3451ea4ada507762728ab959c1ee678e7525c094a7b7a8df9b9ed30597a4e",
-      "bytes": 8561,
+      "source_SHA256": "eba1b600e80bea4a5c31876285e3696f5ce6877e1120179a757a982bab00fcb8",
+      "published_SHA256": "eba1b600e80bea4a5c31876285e3696f5ce6877e1120179a757a982bab00fcb8",
+      "bytes": 10145,
       "modified_for_publication": false
     },
     {
       "path": "bridge/tools/build_control_flow_probe.py",
       "source_path": "bridge/tools/build_control_flow_probe.py",
-      "source_SHA256": "8e23e8f244866a7b4ae5bfa50dc50e372ee6a76c5d20e3c076cdc590330a922f",
-      "published_SHA256": "8e23e8f244866a7b4ae5bfa50dc50e372ee6a76c5d20e3c076cdc590330a922f",
-      "bytes": 4543,
+      "source_SHA256": "5999b1152f8bb1a06b14b11682c812000c80f0d07535e731edbef165d9ae0c86",
+      "published_SHA256": "5999b1152f8bb1a06b14b11682c812000c80f0d07535e731edbef165d9ae0c86",
+      "bytes": 6301,
       "modified_for_publication": false
     },
     {
       "path": "bridge/tools/verify_control_flow.py",
       "source_path": "bridge/tools/verify_control_flow.py",
-      "source_SHA256": "6d99e1a994bf248149fde0d53bbdae684195994949f515e089f21a8bde0f4e01",
-      "published_SHA256": "6d99e1a994bf248149fde0d53bbdae684195994949f515e089f21a8bde0f4e01",
-      "bytes": 5544,
+      "source_SHA256": "8f7ab8957c0c51c579b27504843b3ee4bc5a1f6501ddbca3bcc125504fa5d532",
+      "published_SHA256": "8f7ab8957c0c51c579b27504843b3ee4bc5a1f6501ddbca3bcc125504fa5d532",
+      "bytes": 7010,
       "modified_for_publication": false
     },
     {
@@ -6347,6 +6347,46 @@
       "source_SHA256": "61c02feb1e49522bafd2bbe5e95d12b77b5c691b0d20da709718d3dd120dd28b",
       "published_SHA256": "61c02feb1e49522bafd2bbe5e95d12b77b5c691b0d20da709718d3dd120dd28b",
       "bytes": 10352,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/prepare_control_flow_reference.py",
+      "source_path": "bridge/tools/prepare_control_flow_reference.py",
+      "source_SHA256": "a0a05cdfcee107c4bfc2f988a927e48a32caafb5eb66bc54f08fee768e2ba0bc",
+      "published_SHA256": "a0a05cdfcee107c4bfc2f988a927e48a32caafb5eb66bc54f08fee768e2ba0bc",
+      "bytes": 3577,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/run_control_flow_reference.py",
+      "source_path": "bridge/tools/run_control_flow_reference.py",
+      "source_SHA256": "0d82030d44f3ca7fe2c7b3646fc8f0e5d7b16339968f5d8963a6ef944e2346f8",
+      "published_SHA256": "0d82030d44f3ca7fe2c7b3646fc8f0e5d7b16339968f5d8963a6ef944e2346f8",
+      "bytes": 4320,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/NativeControlReserveExperiment.mm",
+      "source_path": "bridge/tools/NativeControlReserveExperiment.mm",
+      "source_SHA256": "2f43b3f22c6ce05e1371021c4126bfef9670a72c36e46c08894800ca7f627fef",
+      "published_SHA256": "2f43b3f22c6ce05e1371021c4126bfef9670a72c36e46c08894800ca7f627fef",
+      "bytes": 7911,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/build_native_reserve_experiment.py",
+      "source_path": "bridge/tools/build_native_reserve_experiment.py",
+      "source_SHA256": "d55ba58cf3e0a27dc7e1ca907f7257f35cbc96a96849e9a136a9ce95d85227df",
+      "published_SHA256": "d55ba58cf3e0a27dc7e1ca907f7257f35cbc96a96849e9a136a9ce95d85227df",
+      "bytes": 3142,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/verify_native_control_reserve.py",
+      "source_path": "bridge/tools/verify_native_control_reserve.py",
+      "source_SHA256": "df472ae6df4766df7a082fccdad7dd4a229313eef5fb954f65a9caf27709a620",
+      "published_SHA256": "df472ae6df4766df7a082fccdad7dd4a229313eef5fb954f65a9caf27709a620",
+      "bytes": 17454,
       "modified_for_publication": false
     }
   ],
@@ -6389,7 +6429,7 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "068932b487d7c160c2b939a3baa2018769d44575c57fc44006d0c11507ae5bb9",
-  "previous_public_commit": "104ed69c74a8e411fd7e582a6f749d1ae25a64b5",
-  "update": "Native control allocation observations, bounded external CRS import qualification, native96 failure retained; runtime telemetry only"
+  "previous_source_snapshot_SHA256": "2354bde7cc39995b9dbbf701467f9a679272020495eea6a16e0cb05d233cf62b",
+  "previous_public_commit": "58571e653881c4f1bb71ba49fbdbe38d90461e1f",
+  "update": "Two pinned native allocation-only corrections, replay/rounding controls, same-metallib M1 references and read-only evidence verifier; shared runtime unchanged"
 }

@@ -8,6 +8,9 @@
 #ifndef KP_CONTROL_IMPORT
 #define KP_CONTROL_IMPORT 0
 #endif
+#if KP_NATIVE_RESERVE_EXPERIMENT
+extern "C" id<MTLComputePipelineState> KPExperimentalCreateNativeReservePipeline(id<MTLDevice>,NSURL*,NSString*,NSData*,NSString*,uint32_t,NSError**,NSDictionary**) NS_RETURNS_RETAINED;
+#endif
 #if KP_CONTROL_IMPORT
 extern "C" id<MTLComputePipelineState> KPInternalCASCreatePreservingNativeCASPipeline(
  id<MTLDevice>,NSURL*,NSString*,NSData*,NSData*,NSError**,NSDictionary**) NS_RETURNS_RETAINED;
@@ -18,8 +21,10 @@ int main(int argc,char**argv){@autoreleasepool{
  if(argc!=4)return 1;NSString*assets=@(argv[1]),*out=@(argv[2]),*mode=@(argv[3]);
  BOOL imported=[mode hasPrefix:@"nak:"];NSString*selection=imported?[mode substringFromIndex:4]:mode;
  BOOL dispatch=![selection hasPrefix:@"no_dispatch:"];NSString*name=dispatch?selection:[selection substringFromIndex:12];
- if(![@[@"depth0",@"depth4",@"depth8",@"depth16",@"depth24",@"depth40",@"depth64",@"depth96"]containsObject:name])return 1;
+ if(![name hasPrefix:@"depth"]||name.length<6)return 1;NSString*digits=[name substringFromIndex:5];if([digits rangeOfCharacterFromSet:NSCharacterSet.decimalDigitCharacterSet.invertedSet].location!=NSNotFound||digits.intValue>120)return 1;
  unsigned depth=[[name substringFromIndex:5]intValue];id<MTLDevice>d=nil;
+ NSData*configuration=[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"control_flow_config.json"]];NSDictionary*config=configuration?[NSJSONSerialization JSONObjectWithData:configuration options:0 error:nil]:@{};NSString*variant=config[@"variant"]?:@"nested";
+ if(![@[@"nested",@"reload_bounds",@"serial",@"pressure"]containsObject:variant])return 1;
  for(id<MTLDevice>x in MTLCopyAllDevices())if(x.registryID==4294968458&&[x.name isEqual:@"NVIDIA GeForce GTX 880M"])d=x;
  NSData*driver=[NSData dataWithContentsOfFile:@"/System/Library/Extensions/GeForceMTLDriver.bundle/Contents/MacOS/GeForceMTLDriver"];
  if(!d||![sha(driver)isEqual:@"2b89839c425d95934f5e01f16c8683fe53432df410292ec8e554b21c98d6c054"])return 2;
@@ -51,9 +56,16 @@ int main(int argc,char**argv){@autoreleasepool{
   return 8;
 #endif
  }else{
+#if KP_NATIVE_RESERVE_EXPERIMENT
+  NSDictionary*cert=config[@"certificates"][name];NSArray*w=cert[@"metadata_words"];if(w.count!=58)return 8;
+  uint32_t reserve=[config[@"control_reserve"]isEqual:@"round"]?([w[11]unsignedIntValue]+511)&~511u:[config[@"control_reserve"]unsignedIntValue];
+  NSMutableData*metadata=[NSMutableData dataWithLength:232];for(unsigned i=0;i<58;i++){uint32_t v=[w[i]unsignedIntValue];memcpy((char*)metadata.mutableBytes+4*i,&v,4);}
+  pso=KPExperimentalCreateNativeReservePipeline(d,libraryURL,name,metadata,cert[@"code_SHA256"],reserve,&error,&proof);
+#else
   id<MTLLibrary>lib=[d newLibraryWithURL:libraryURL error:&error];id<MTLFunction>f=[lib newFunctionWithName:name];pso=f?[d newComputePipelineStateWithFunction:f error:&error]:nil;
+#endif
  }
- if(!pso){fprintf(stderr,"%s\n",error.description.UTF8String);return 3;}
+ if(!pso){NSDictionary*failure=@{@"failure":@"pipeline",@"error":error.description?:@"",@"evidence":proof?:@{},@"runs":@[]};NSData*j=[NSJSONSerialization dataWithJSONObject:failure options:NSJSONWritingPrettyPrinted error:nil];fwrite(j.bytes,1,j.length,stdout);puts("");fprintf(stderr,"%s\n",error.description.UTF8String);return 3;}
  id<MTLCommandQueue>q=[d newCommandQueue];NSMutableArray*runs=[NSMutableArray new];
  const unsigned counts[]={1,31,32,33,64,128,256,512,1024,99,256,2048};
  const unsigned locals[]={1,31,32,33,64,128,256,512,1024,33,64,1024};
@@ -75,6 +87,6 @@ int main(int argc,char**argv){@autoreleasepool{
   if(![[NSData dataWithBytes:hi.contents length:inBytes]writeToFile:[out stringByAppendingPathComponent:inf]atomically:YES]||![[NSData dataWithBytes:ho.contents length:outBytes]writeToFile:[out stringByAppendingPathComponent:ouf]atomically:YES])return 7;
   [runs addObject:@{@"trial":@(trial),@"threads":@(p.count),@"local":@(locals[trial]),@"groups":@(p.count/locals[trial]),@"seed":@(p.seed),@"stride":@(p.stride),@"reserved":@(p.reserved),@"input_bytes":@(inBytes),@"output_bytes":@(outBytes),@"input_file":inf,@"output_file":ouf,@"kernel_dispatches":@(dispatch?1:0),@"command_status":@(cb.status)}];
  }}
- NSDictionary*result=@{@"device":d.name,@"registry_id":@(d.registryID),@"driver_SHA256":sha(driver),@"mode":mode,@"function":name,@"depth":@(depth),@"native_reference":@(!imported),@"program_replaced":@(imported),@"caller_inputs_mutated_after_import":@(imported),@"import":proof,@"profile":profile,@"CPU_expected_answers_uploaded":@NO,@"performance_benchmark":@NO,@"system_modified":@NO,@"GPU_command_buffers":@12,@"thread_width":@(pso.threadExecutionWidth),@"max_threads":@(pso.maxTotalThreadsPerThreadgroup),@"runs":runs};
+ NSDictionary*result=@{@"variant":variant,@"device":d.name,@"registry_id":@(d.registryID),@"driver_SHA256":sha(driver),@"mode":mode,@"function":name,@"depth":@(depth),@"native_reference":@(!imported),@"program_replaced":@(imported),@"caller_inputs_mutated_after_import":@(imported),@"import":proof,@"profile":profile,@"CPU_expected_answers_uploaded":@NO,@"performance_benchmark":@NO,@"system_modified":@NO,@"GPU_command_buffers":@12,@"thread_width":@(pso.threadExecutionWidth),@"max_threads":@(pso.maxTotalThreadsPerThreadgroup),@"runs":runs};
  NSData*j=[NSJSONSerialization dataWithJSONObject:result options:NSJSONWritingPrettyPrinted error:nil];fwrite(j.bytes,1,j.length,stdout);puts("");return 0;
 }}

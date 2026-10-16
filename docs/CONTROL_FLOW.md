@@ -1,5 +1,7 @@
 # Deep control flow: qualified imports and an unresolved native failure
 
+**Follow-up:** a separate allocation-only experiment corrects the unchanged native65/96 code in the test process. Original/replay/rounding controls still fail; the installed stack and the historical standard matrix below remain unchanged. The exact original iMac metallib also passes the M1 correctness reference with documented group-size adaptations. See [native allocation correction and limits](NATIVE_CONTROL_RESERVE.md).
+
 **The standard qualification is FAIL at native `depth96`.** This milestone is partial. Native programs through source depth64 pass. Separate preserving-import experiments pass for NAK external control-stack requirements of 1,024,1,536,2,048 bytes. The full hardware objective remains incomplete.
 
 ## Native failure retained

@@ -2,6 +2,8 @@
 
 Open source research for modernizing the NVIDIA Kepler graphics stack on macOS.
 
+Latest native investigation: unchanged NVIDIA programs at source depths65/96 pass24 trials after a targeted, process-local allocation correction;48 replay/rounding comparison trials still fail. The same original iMac metallib passes an M1 correctness reference. No installed-driver change or speedup is claimed. [Evidence and reproduction](docs/NATIVE_CONTROL_RESERVE.md).
+
 [Français](README.fr.md) · [Build from source](docs/BUILDING.md) · [Dependencies](docs/DEPENDENCIES.md) · [Status](docs/STATUS.md) · [Architecture](docs/ARCHITECTURE.md)
 
 The reference device is a GeForce GTX 880M, GK104 / SM30, with 8 GiB VRAM in an Intel iMac. The project studies two independent areas:
