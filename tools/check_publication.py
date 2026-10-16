@@ -19,7 +19,8 @@ PATTERNS = [
     ('github-token', re.compile(r'\bgh[pousr]_[A-Za-z0-9]{30,}\b|\bgithub_pat_[A-Za-z0-9_]{30,}\b')),
     ('api-key', re.compile(r'\bsk-(?:proj-)?[A-Za-z0-9_-]{32,}\b|\bAKIA[A-Z0-9]{16}\b')),
     ('private-home-path', re.compile(r'/Users/[A-Za-z0-9_.-]+/|[A-Z]:\\Users\\')),
-    ('private-network', re.compile(r'\b(?:100\.(?:6[4-9]|[7-9]\d|1[01]\d|12[0-7])|192\.168|10\.\d{1,3})\.\d{1,3}\.\d{1,3}\b|[A-Za-z0-9_.-]+\.ts\.net\b')),
+    # A four-component address is distinct from a substring of a vendor version.
+    ('private-network', re.compile(r'(?<![\d.])\b(?:100\.(?:6[4-9]|[7-9]\d|1[01]\d|12[0-7])|192\.168|10\.\d{1,3})\.\d{1,3}\.\d{1,3}(?!\.\d)\b|[A-Za-z0-9_.-]+\.ts\.net\b')),
 ]
 
 def publication_files(root=ROOT):

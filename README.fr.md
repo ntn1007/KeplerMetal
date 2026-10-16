@@ -2,6 +2,8 @@
 
 Recherche open source pour moderniser la pile NVIDIA Kepler sous macOS, avec une GTX 880M GK104 / SM30 de 8 Gio comme matériel de référence.
 
+Dernière enquête vidéo : six images décodées en logiciel sur l’iMac correspondent exactement à une référence CPU FFmpeg indépendante. Le décodage matériel reste refusé. Le WebVA NVIDIA officiel contient les mêmes deux stubs que la copie de support examinée ; aucun remplacement vidéo fonctionnel ni gain n’est annoncé. [Sources, preuves et suite](docs/VIDEO_TRANSPORT.md).
+
 Deux branches restent distinctes : corriger ou améliorer la pile NVIDIA existante, et étendre les fonctions Metal accessibles aux applications. Le dépôt partage le code lisible, les tests, les vérificateurs CPU et les correctifs des outils libres.
 
 **État expérimental :** intégration dans des applications adaptées. Le projet ne fournit pas encore un pilote système de remplacement ni une compatibilité Metal 3/4 complète. Les essais historiques qualifient des fonctions précises ; ils ne prouvent pas un gain général de performances.

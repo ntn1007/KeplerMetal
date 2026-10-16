@@ -1,0 +1,147 @@
+{
+  "status": "PASS",
+  "scope": "Evidence audit; hardware video remains unqualified",
+  "dependencies": {
+    "support_commit": "3250ca07ca49e3f8c743066381b5688028681de8",
+    "support_blobs_verified": 5,
+    "NVIDIA_package_SHA256": "a877c0ef81fbbb4d42bee6c1de063fff47d610a5397ffc6ce7617f28269bfe73",
+    "WebVA_SHA256": "b3ee38ecf4e26764c6ce19c1f0593839ed75aabcd37acb91daa7f8f0af155bce",
+    "installed_VA_SHA256": "2d3894048f5d61f6735955211bba28cb1e1a0ff9a7f556ebb6c144018388a865",
+    "official_WebVA_equals_support": true,
+    "installed_VA_equals_native_support": true,
+    "factory_text_bytes_per_binary": 22,
+    "constant_return_per_factory": 14,
+    "private_return_code_mapped_to_public_error": false,
+    "factory_causally_responsible_for_VT_failure_proved": false,
+    "installer_executed": false
+  },
+  "native_processes_terminal": 13,
+  "synthetic_ABI_cases": 768,
+  "legacy_VDA_failed_creates": 6,
+  "VT_hardware_failed_creates": 2,
+  "incomplete_first_CPU_control_retained": true,
+  "asset_only_derivation_verified": true,
+  "independent_CPU_reference": {
+    "decoder": "FFmpeg 9.0.2 native H264, arm64, -hwaccel none",
+    "binary_SHA256": "c8173e9755795978bce8e104f8d7044fabe7d6d84044aba37d3648c6f4e4e1a8",
+    "annexb_SHA256": "12858642f02b0e1d98ddf409dd729a879b6a7a5d3434c860882532ca4f6b40af",
+    "NV12_SHA256": "d73962c0592ae107d343591bf2d72e013015813e3b2ceff71d37e2c5fee36cd1",
+    "iMac_software_VT_frames": 6,
+    "active_bytes_compared": 691200,
+    "different_bytes": 0,
+    "using_hardware_property_unsupported_not_interpreted_as_false": true,
+    "timestamp_conformance_tested": false
+  },
+  "VT_observed_IOKit_events": 6,
+  "monitored_vendor_factory_calls": 0,
+  "trace_proves_video_engine_submission": false,
+  "nearest_symbol_is_exact_function_boundary": false,
+  "video_renderer_properties_already_present": true,
+  "cohorts_nonoverlapping": true,
+  "unchanged_system_files": 83,
+  "unchanged_runtime_sources": 36,
+  "OCLP_unchanged": true,
+  "support_image_unchanged": true,
+  "cohorts": [
+    {
+      "cohort": "video-va-observer-selftest-20261016",
+      "exit_code": 0,
+      "mode": "selftest",
+      "result_SHA256": "cd1fdcf5e62d90bc1e59bad72e1101e5829c95dd94b285b47f502675edce83b8",
+      "manifest_SHA256": "5da97f0ec764dc8a9f8c3c5194f30630f67e683e86eeed937e09418f3f36aebb"
+    },
+    {
+      "cohort": "video-va-observer-plain-20261016",
+      "exit_code": 0,
+      "mode": "plain",
+      "result_SHA256": "c028dbe4d01dec8e6d616ff572be6c23663bb0acbc8f1751586b50dbf2f597b9",
+      "manifest_SHA256": "9ad1fb89a5b49891346c4a1f870cbdad520a35f161e6288668a67752b579223e"
+    },
+    {
+      "cohort": "video-va-observer-observe-20261016",
+      "exit_code": 0,
+      "mode": "observe",
+      "result_SHA256": "c028dbe4d01dec8e6d616ff572be6c23663bb0acbc8f1751586b50dbf2f597b9",
+      "manifest_SHA256": "672eb6a28c140705755f13098b2b352c7337d07bfbd4979c6b5b791e0ee95435"
+    },
+    {
+      "cohort": "video-va-observer-selftest-20261016-03",
+      "exit_code": 0,
+      "mode": "selftest",
+      "result_SHA256": "2ee42817a12e7b3073ccb5ce434020061aec66f7d8e021fa8eb494cce547c077",
+      "manifest_SHA256": "cfac515f847f921cad0fa95bc857d27ada692875a36763f2d0acc66c4fec20db"
+    },
+    {
+      "cohort": "video-va-observer-plain-20261016-03",
+      "exit_code": 0,
+      "mode": "plain",
+      "result_SHA256": "c028dbe4d01dec8e6d616ff572be6c23663bb0acbc8f1751586b50dbf2f597b9",
+      "manifest_SHA256": "7d4db8b3b5963a7c9942adac809dc61234d82a0bc2df359223366131f78359d4"
+    },
+    {
+      "cohort": "video-va-observer-observe-20261016-03",
+      "exit_code": 0,
+      "mode": "observe",
+      "result_SHA256": "c028dbe4d01dec8e6d616ff572be6c23663bb0acbc8f1751586b50dbf2f597b9",
+      "manifest_SHA256": "f3cf268ada103fe60998bb12dea1bfde0a6ee20a91c0af4b9b39ae33cbe63eec"
+    },
+    {
+      "cohort": "video-va-observer-selftest-20261016-04",
+      "exit_code": 0,
+      "mode": "selftest",
+      "result_SHA256": "87f63b0d15c674d660a574df9e01e210716de9f00e1e8debe026ce6609493ad7",
+      "manifest_SHA256": "2045ea8cbce1c1906525d600469575c12362b6bc8257fd3236e59f537820bc05"
+    },
+    {
+      "cohort": "video-va-observer-plain-20261016-04",
+      "exit_code": 0,
+      "mode": "plain",
+      "result_SHA256": "c028dbe4d01dec8e6d616ff572be6c23663bb0acbc8f1751586b50dbf2f597b9",
+      "manifest_SHA256": "0fcc0e20853608be2d0f0790b92f636cf372f105a6401781514b987841d3e4e1"
+    },
+    {
+      "cohort": "video-va-observer-observe-20261016-04",
+      "exit_code": 0,
+      "mode": "observe",
+      "result_SHA256": "c028dbe4d01dec8e6d616ff572be6c23663bb0acbc8f1751586b50dbf2f597b9",
+      "manifest_SHA256": "b4afeb4a151a108aad6e912ffac39b9898daf53d4134988f31103de4d60a894f"
+    },
+    {
+      "cohort": "video-va-observer-vt-cpu-20261016-04",
+      "exit_code": 0,
+      "mode": "vt-cpu",
+      "result_SHA256": "2e4b627879c898e71c453184588b46b973db158055fd56d36a97b886bec5db89",
+      "manifest_SHA256": "7137cfafde9ffeefeb4b15f5ec825323154eae067171f51fb606d574400f8769"
+    },
+    {
+      "cohort": "video-va-observer-vt-cpu-20261016-05",
+      "exit_code": 0,
+      "mode": "vt-cpu",
+      "result_SHA256": "de1967403ed95c59c1f0d999f2a0fcca57084694c30d84a6afe4ac598c0c843d",
+      "manifest_SHA256": "1ff642fd7ad798467785d225c40638bf64712b21f045e9493468c73e46f76db3"
+    },
+    {
+      "cohort": "video-va-observer-vt-plain-20261016-05",
+      "exit_code": 0,
+      "mode": "vt-plain",
+      "result_SHA256": "b3ecd0a8aba45177ef6b8dadb1de09458821b8a5e40e51ca86ad709eaf9169ea",
+      "manifest_SHA256": "13af44008b712e498fc678fe6f9f2960daf8b58b625599f15c075d1096865d61"
+    },
+    {
+      "cohort": "video-va-observer-vt-observe-20261016-05",
+      "exit_code": 0,
+      "mode": "vt-observe",
+      "result_SHA256": "b3ecd0a8aba45177ef6b8dadb1de09458821b8a5e40e51ca86ad709eaf9169ea",
+      "manifest_SHA256": "f36006b54db68d6c3a62364f696baa892275d5863c30398e8b2e23b6cba00774"
+    }
+  ],
+  "hardware_video_execution_proved": false,
+  "performance_benchmark": "NOT RUN",
+  "new_M1_Metal_GPU_reference": "NOT RUN",
+  "installed_driver_modernized": false,
+  "full_objective_complete": false,
+  "audit_SHA256": "c943510072339ed5e444b6a44fa36e6ed293aaed493c33042b0ae4c32dd0a272",
+  "auditor_source_SHA256": "0cabec588e63e7696899db6fc397888f51fb780f3864036391d7c04362b3e9be",
+  "source_export_is_new_hardware_execution": false,
+  "proprietary_dependencies_in_repository": false
+}

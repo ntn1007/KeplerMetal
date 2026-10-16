@@ -36,6 +36,46 @@ This prints selected bundle versions and SHA-256 values, omitting hostnames, ser
 
 To identify donor components rather than guessing a macOS/Linux version equivalence, consult OCLP's [Kepler patchset at the research revision](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/d622cd5de86e5cb9a8c975c2809dbdbd2822c86e/opencore_legacy_patcher/sys_patch/patchsets/hardware/graphics/nvidia_kepler.py), [OCLP releases](https://github.com/dortania/OpenCore-Legacy-Patcher/releases), and [PatcherSupportPkg releases](https://github.com/dortania/PatcherSupportPkg/releases). Those are external provenance/recovery references; this repository does not mirror their payloads or invoke root patching. Follow the exact donor package and license applicable to your installation. Never substitute an unqualified binary for the installed working stack.
 
+## Original NVIDIA macOS WebVA reference
+
+The [official 387.10.10.10.40.140 download page](https://www.nvidia.com/download/driverResults.aspx/167083/1000/)
+links the package below. Its size and locally observed SHA-256 are in
+`nvidia_macos` in [references.json](../dependencies/references.json). The Linux
+fetch helper does not fetch macOS packages.
+
+```sh
+mkdir -p downloads/webdriver-local
+curl --fail --location --output downloads/WebDriver-387.10.10.10.40.140.pkg \
+  https://us.download.nvidia.com/Mac/Quadro_Certified/387.10.10.10.40.140/WebDriver-387.10.10.10.40.140.pkg
+shasum -a 256 downloads/WebDriver-387.10.10.10.40.140.pkg
+pkgutil --check-signature downloads/WebDriver-387.10.10.10.40.140.pkg
+```
+
+The inspected package has SHA-256
+`a877c0ef81fbbb4d42bee6c1de063fff47d610a5397ffc6ce7617f28269bfe73`.
+The signature check reports an expired NVIDIA installer certificate; this is
+preserved as a limitation. Extract only the named archive member for static
+research, without running an installer or its scripts:
+
+```sh
+cd downloads/webdriver-local
+xar -xf ../WebDriver-387.10.10.10.40.140.pkg \
+  1.8-103-387.10.10.10.40.140-NVWebDrivers.pkg/Payload
+tar -xOf 1.8-103-387.10.10.10.40.140-NVWebDrivers.pkg/Payload \
+  ./System/Library/Extensions/GeForceVADriverWeb.bundle/Contents/MacOS/GeForceVADriverWeb \
+  > GeForceVADriverWeb.local
+shasum -a 256 GeForceVADriverWeb.local
+```
+
+The selected 51,520-byte member has SHA-256
+`b3ee38ecf4e26764c6ce19c1f0593839ed75aabcd37acb91daa7f8f0af155bce`.
+It was compared with the separate support reference at
+[PatcherSupportPkg 3250ca0](https://github.com/dortania/PatcherSupportPkg/tree/3250ca07ca49e3f8c743066381b5688028681de8).
+No compatibility or support for this iMac follows from downloading it. The
+[video investigation](VIDEO_TRANSPORT.md) found two stub factories, not a usable
+replacement video implementation. Keep these dependencies local and excluded
+from Git.
+
 ## Open source compiler references
 
 | Project | Upstream | Pinned reference |

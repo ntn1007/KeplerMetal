@@ -2,6 +2,8 @@
 
 Open source research for modernizing the NVIDIA Kepler graphics stack on macOS.
 
+Video investigation: the official NVIDIA WebVA has the same two stub factories as the examined support copy. Six iMac software-decoded images match an independent FFmpeg CPU reference exactly, but hardware-required VT still fails with zero images. Sources and a bounded own-process observer are now included; no hardware video or speedup is claimed. [Evidence and next transport work](docs/VIDEO_TRANSPORT.md).
+
 An offline control analyzer now proposes reservations without applying them. Two exact NVIDIA programs pass 24 new GTX trials at manually selected settings, with 35,872 CPU-matching uint32 values. The 29-profile analysis does not certify hardware stack bounds or an automatic allocator; the runtime stays unchanged. [Evidence, source and reproduction](docs/NATIVE_CONTROL_PROPOSALS.md).
 
 Latest native investigation: an explicit allocation API now shares the MRC import runtime, mutex and thread-local context. It preserves NVIDIA-generated code and passes228 GPU trials on17 native profiles, plus refusal, lifetime, CAS, local-memory and controlled factory-concurrency checks. A concurrency race in our CAS adapter is corrected. No installed-driver change or speedup is claimed. [Contract and limits](docs/NATIVE_ALLOCATION_API.md).

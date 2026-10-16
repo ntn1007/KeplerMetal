@@ -76,5 +76,22 @@
       "commit": "f102b82381f3f11cee113d16374c87091db039d9",
       "url": "https://github.com/envytools/envytools.git"
     }
-  }
+  },
+  "nvidia_macos": [
+    {
+      "id": "nvidia-macos-webdriver-387.10.10.10.40.140",
+      "version": "387.10.10.10.40.140",
+      "official_page": "https://www.nvidia.com/download/driverResults.aspx/167083/1000/",
+      "url": "https://us.download.nvidia.com/Mac/Quadro_Certified/387.10.10.10.40.140/WebDriver-387.10.10.10.40.140.pkg",
+      "SHA256": "a877c0ef81fbbb4d42bee6c1de063fff47d610a5397ffc6ce7617f28269bfe73",
+      "bytes": 63950155,
+      "official_checksum_verified": false,
+      "signature_check": "NVIDIA installer certificate expired; locally observed pkgutil result",
+      "selected_member": "./System/Library/Extensions/GeForceVADriverWeb.bundle/Contents/MacOS/GeForceVADriverWeb",
+      "selected_member_SHA256": "b3ee38ecf4e26764c6ce19c1f0593839ed75aabcd37acb91daa7f8f0af155bce",
+      "selected_member_bytes": 51520,
+      "license": "NVIDIA proprietary; publisher download and local archive inspection only; not redistributed",
+      "installer_executed": false
+    }
+  ]
 }

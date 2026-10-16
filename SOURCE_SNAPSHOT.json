@@ -6665,6 +6665,62 @@
       "published_SHA256": "1d6a9d09d8d56b7500b1092136517911a5bd11570ff6943e72c0b32549ff7862",
       "bytes": 5015,
       "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_va_observer.mm",
+      "source_path": "bridge/tools/video_va_observer.mm",
+      "source_SHA256": "6915c5dc069bf2af71bcb08e2f1cae3284fb547e56f9997768911be772f33974",
+      "published_SHA256": "6915c5dc069bf2af71bcb08e2f1cae3284fb547e56f9997768911be772f33974",
+      "bytes": 9086,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_va_reception.mm",
+      "source_path": "bridge/tools/video_va_reception.mm",
+      "source_SHA256": "aa55451eb81986e9d4e9dfd656a515e45c802e6bdcc40158ed323b9b3361f71d",
+      "published_SHA256": "aa55451eb81986e9d4e9dfd656a515e45c802e6bdcc40158ed323b9b3361f71d",
+      "bytes": 5092,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_va_vt_client.mm",
+      "source_path": "bridge/tools/video_va_vt_client.mm",
+      "source_SHA256": "aae3d59add7c3fd816ff1f824f762f9799b27c38e6c9b517bcdaeeff35aa60a3",
+      "published_SHA256": "aae3d59add7c3fd816ff1f824f762f9799b27c38e6c9b517bcdaeeff35aa60a3",
+      "bytes": 3898,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/build_video_va_observer.py",
+      "source_path": "bridge/tools/build_video_va_observer.py",
+      "source_SHA256": "7f37bf59f89b931d16524ed055bba46535238760f863104bf5e40c29df443773",
+      "published_SHA256": "7f37bf59f89b931d16524ed055bba46535238760f863104bf5e40c29df443773",
+      "bytes": 4482,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/run_video_va_observer.py",
+      "source_path": "bridge/tools/run_video_va_observer.py",
+      "source_SHA256": "37c75ead537debc9ad123e1a21fd79fee3dab16b00e1518978f515aa3541a707",
+      "published_SHA256": "37c75ead537debc9ad123e1a21fd79fee3dab16b00e1518978f515aa3541a707",
+      "bytes": 2758,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/stage_video_cpu_references.py",
+      "source_path": "bridge/tools/stage_video_cpu_references.py",
+      "source_SHA256": "f4df99eda16538df3a2e106b971afc0b566db196b96dd1f2277ebde2369984ff",
+      "published_SHA256": "f4df99eda16538df3a2e106b971afc0b566db196b96dd1f2277ebde2369984ff",
+      "bytes": 3847,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/audit_video_transport.py",
+      "source_path": "bridge/tools/audit_video_transport.py",
+      "source_SHA256": "0cabec588e63e7696899db6fc397888f51fb780f3864036391d7c04362b3e9be",
+      "published_SHA256": "0cabec588e63e7696899db6fc397888f51fb780f3864036391d7c04362b3e9be",
+      "bytes": 17508,
+      "modified_for_publication": false
     }
   ],
   "excluded_source_tools": [
@@ -6706,7 +6762,7 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "515fca9ee3f5f3caa750e5edb040d6d7c6c7e9453ce5730619248e0f27245828",
-  "previous_public_commit": "1649acde8062f492d33900fc66ddc34d748f655a",
-  "update": "Post-constructor code/payload identity, 17 native allocation profiles, real API refusals and input/pool lifetime qualification; shared runtime unchanged"
+  "previous_source_snapshot_SHA256": "2084ad45ac987bd3e11a68e00ddf250a2ce275db4b4c4ec25b1a833466aca1da",
+  "previous_public_commit": "24a0afcd3270d95376de1d0c0e8616c2a1fee3d4",
+  "update": "Bounded own-process video observation, independent H264 CPU reference comparison, original NVIDIA WebVA provenance; unchanged common runtime, no hardware video or performance claim"
 }

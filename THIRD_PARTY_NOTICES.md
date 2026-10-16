@@ -9,6 +9,8 @@ Original KeplerMetal code is MIT-licensed. The export excludes complete external
 | [envytools](https://github.com/envytools/envytools) | `f102b82381f3f11cee113d16374c87091db039d9` | NVIDIA instruction and command documentation, assembler/disassembler | [Upstream MIT notice](third_party/licenses/envytools-MIT.txt) |
 | [NVIDIA open-gpu-doc](https://github.com/NVIDIA/open-gpu-doc) | `9fdf5c4062007929d9f4e6cbad9c9771fe61b880` | QMDv00_06 field names/bit ranges, consulted reference | NVIDIA 2016 permissive header; referenced, not bundled. |
 | [OpenCore Legacy Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher) | source reference `d622cd5de86e5cb9a8c975c2809dbdbd2822c86e` | Installed stack provenance research | Referenced, not bundled; upstream license applies. |
+| [WhateverGreen](https://github.com/acidanthera/WhateverGreen) | `093e76fec5655001f38b367dd22459c756ee89fa` | Read-only comparison of existing video renderer properties | BSD-3-Clause; referenced, not bundled or installed. |
+| [FFmpeg](https://ffmpeg.org/) | Existing 9.0.2 executable on the arm64 reference host | Native H.264 software decoding with hardware disabled | Separate external installation; no FFmpeg code or executable is bundled or linked into KeplerMetal. Its own build/license terms apply. |
 
 `bridge/src/*.patch` are patches against the named open source revisions, not patches containing proprietary driver bodies. `bridge/src/opennvda-command-ir.inc` is an original extension to the OpenNVDA frontend. GPU programs are generated locally from included sources; no compiled program or captured vendor command stream is distributed.
 

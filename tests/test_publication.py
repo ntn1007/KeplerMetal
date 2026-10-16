@@ -103,5 +103,21 @@ class PublicationTests(unittest.TestCase):
             text.write_text('gh' + 'p_' + 'x' * 40)
             self.assertIn('github-token', policy.inspect_file(text, Path('notes.md')))
 
+    def test_private_address_tokens_are_distinct_from_driver_versions(self):
+        pattern = dict(policy.PATTERNS)['private-network']
+        for version in ['387.10.10.10.40.140', 'WebDriver-387.10.10.10.40.140.pkg',
+                        'https://download.nvidia.com/387.10.10.10.40.140/file',
+                        '198.51.100.42']:
+            with self.subTest(allowed=version):
+                self.assertIsNone(pattern.search(version))
+        for parts in [('10', '23', '45', '67'), ('192', '168', '12', '34'),
+                      ('100', '64', '10', '25'), ('100', '127', '20', '30')]:
+            address = '.'.join(parts)
+            for context in [address, 'https://' + address + ':8445/mcp',
+                            'address=' + address + '.', '[' + address + ']']:
+                with self.subTest(rejected=context):
+                    self.assertIsNotNone(pattern.search(context))
+        self.assertIsNotNone(pattern.search('example' + '.ts' + '.net'))
+
 if __name__ == '__main__':
     unittest.main()
