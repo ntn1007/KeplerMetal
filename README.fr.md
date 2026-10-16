@@ -1,5 +1,7 @@
 # KeplerMetal
 
+Registre des décodeurs : 25 processus terminés, 3 715 contrôles ABI et 42 images logicielles exactes. Les neuf demandes matérielles restent en échec, y compris avec les deux flags publics. La dépendance IOGVA absente reste une piste à vérifier. [Preuves et reproduction](docs/VIDEO_REGISTRY.md).
+
 Les essais par l’API publique H.264 et MPEG‑2 produisent des images CPU exactes, mais les neuf créations avec matériel obligatoire échouent encore sans image. L’entrée modèle qui corrige la disponibilité VP3 ne suffit donc pas pour ces chemins. [Résultats et prochaine cible](docs/VIDEO_CODEC_SELECTION.md).
 
 Une barrière d’éligibilité vidéo est maintenant reproduite : la requête AppleVA passe de −8973 à 0 dans trois processus de test recevant seulement une entrée `iMac11,1` en mémoire. Sept contrôles gardent le refus. Le système reste inchangé et le décodage matériel demeure non démontré. [Preuves et limites](docs/VIDEO_ELIGIBILITY.md).

@@ -6865,6 +6865,118 @@
       "published_SHA256": "7aa07a5fcf5a7d83c6d8902d4f37e33ec52ab077eeb8b420219133460276784a",
       "bytes": 14057,
       "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_registry_layout.h",
+      "source_path": "bridge/tools/video_registry_layout.h",
+      "source_SHA256": "d59585508ce3dd492155bc9d7e3f02f5198682492e94e5f832164ed2e0aee2c1",
+      "published_SHA256": "d59585508ce3dd492155bc9d7e3f02f5198682492e94e5f832164ed2e0aee2c1",
+      "bytes": 742,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_registry_tail.S",
+      "source_path": "bridge/tools/video_registry_tail.S",
+      "source_SHA256": "907ff19a1a216d80ad74192a1c3a5052ee07111c8cdbc5f91f1421652c5a824d",
+      "published_SHA256": "907ff19a1a216d80ad74192a1c3a5052ee07111c8cdbc5f91f1421652c5a824d",
+      "bytes": 2160,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_registry_observer.h",
+      "source_path": "bridge/tools/video_registry_observer.h",
+      "source_SHA256": "69bd340edfa499f38736357729fae3162fedfcc1f88729b5ffdabe69ac030e13",
+      "published_SHA256": "69bd340edfa499f38736357729fae3162fedfcc1f88729b5ffdabe69ac030e13",
+      "bytes": 396,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_registry_observer.mm",
+      "source_path": "bridge/tools/video_registry_observer.mm",
+      "source_SHA256": "f01a5a82cb2d923d97207674905f0a38ed6f0c68b7da0a7267955aef75d82424",
+      "published_SHA256": "f01a5a82cb2d923d97207674905f0a38ed6f0c68b7da0a7267955aef75d82424",
+      "bytes": 5768,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_registry_decoder.mm",
+      "source_path": "bridge/tools/video_registry_decoder.mm",
+      "source_SHA256": "c138332e5c722f1bd8eb9458bb600defe09ed8c2d79c431b0ebd3c68e1e12c31",
+      "published_SHA256": "c138332e5c722f1bd8eb9458bb600defe09ed8c2d79c431b0ebd3c68e1e12c31",
+      "bytes": 521,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_registry_client.mm",
+      "source_path": "bridge/tools/video_registry_client.mm",
+      "source_SHA256": "907a641110d0e0c1ae3e677722aa84f9fe34011ef40622b585cc703e1c5cc2ef",
+      "published_SHA256": "907a641110d0e0c1ae3e677722aa84f9fe34011ef40622b585cc703e1c5cc2ef",
+      "bytes": 11013,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/native_video_registry.py",
+      "source_path": "bridge/tools/native_video_registry.py",
+      "source_SHA256": "96ff525ca4c944692dc72a4b6cd4a4003847d133d1fff5ddaffc54e7ecc60470",
+      "published_SHA256": "96ff525ca4c944692dc72a4b6cd4a4003847d133d1fff5ddaffc54e7ecc60470",
+      "bytes": 10663,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_registry_metadata.h",
+      "source_path": "bridge/tools/video_registry_metadata.h",
+      "source_SHA256": "f7ebc76ae6bd798c202a1ee410672fab1e0546c239ea7773c90bd7deb29e478d",
+      "published_SHA256": "f7ebc76ae6bd798c202a1ee410672fab1e0546c239ea7773c90bd7deb29e478d",
+      "bytes": 245,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_registry_metadata.mm",
+      "source_path": "bridge/tools/video_registry_metadata.mm",
+      "source_SHA256": "5fff67b844d4aca480c6ee82163ff9020c80dd86f8c3e37c9c92b940de6b3372",
+      "published_SHA256": "5fff67b844d4aca480c6ee82163ff9020c80dd86f8c3e37c9c92b940de6b3372",
+      "bytes": 5056,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_registry_metadata_decoder.mm",
+      "source_path": "bridge/tools/video_registry_metadata_decoder.mm",
+      "source_SHA256": "c54d0ea4c8b4152319821320abaecc860a3adcf6324a6a30932edc22feaf50b8",
+      "published_SHA256": "c54d0ea4c8b4152319821320abaecc860a3adcf6324a6a30932edc22feaf50b8",
+      "bytes": 2634,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/native_video_registry_metadata.py",
+      "source_path": "bridge/tools/native_video_registry_metadata.py",
+      "source_SHA256": "53fce4734abd8a02bce92d7e1da50808baa83817c8be6fa2905e38547517c9ab",
+      "published_SHA256": "53fce4734abd8a02bce92d7e1da50808baa83817c8be6fa2905e38547517c9ab",
+      "bytes": 8841,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_registry_spec.mm",
+      "source_path": "bridge/tools/video_registry_spec.mm",
+      "source_SHA256": "b4e1c46c8e1052bb4ef2b2649c8052909eaa12e9e149b31a6622524010ec4a36",
+      "published_SHA256": "b4e1c46c8e1052bb4ef2b2649c8052909eaa12e9e149b31a6622524010ec4a36",
+      "bytes": 2591,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/native_video_registry_spec.py",
+      "source_path": "bridge/tools/native_video_registry_spec.py",
+      "source_SHA256": "e73a4d8fde6b70bf3669af17397271cec08a9aa1edaed8c8ab241b16748c6abe",
+      "published_SHA256": "e73a4d8fde6b70bf3669af17397271cec08a9aa1edaed8c8ab241b16748c6abe",
+      "bytes": 8263,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/audit_video_registry.py",
+      "source_path": "bridge/tools/audit_video_registry.py",
+      "source_SHA256": "4eb0d5914ab603e7b494d0f0070dd384771f54a6aa79b01f9b71e088c05e1024",
+      "published_SHA256": "4eb0d5914ab603e7b494d0f0070dd384771f54a6aa79b01f9b71e088c05e1024",
+      "bytes": 24339,
+      "modified_for_publication": false
     }
   ],
   "excluded_source_tools": [

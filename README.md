@@ -1,5 +1,7 @@
 # KeplerMetal
 
+Decoder-registry follow-up: 25 terminal processes qualify the entry observer and public-CF metadata capture; 42 software images match the existing CPU references exactly. Nine hardware-required requests still fail, including both public hardware flags. The missing IOGVA dependency is a clue with causality untested. [Evidence and reproduction](docs/VIDEO_REGISTRY.md).
+
 Open source research for modernizing the NVIDIA Kepler graphics stack on macOS.
 
 Public-codec follow-up: H.264 and a new independent MPEG-2 fixture decode exactly in software, but nine hardware-required attempts still fail before images. The pinned model-policy site is not observed on our thread, so the availability result alone does not fix these paths. [Tests, source and next selection investigation](docs/VIDEO_CODEC_SELECTION.md).

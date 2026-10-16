@@ -1,5 +1,7 @@
 # Status at the source export, 2026-10-16
 
+New decoder-registry milestone: 25 terminal nonoverlapping processes, 3,715 known CPU ABI cases and 42 exact software images / 4,838,400 NV12 bytes. Six resident CoreMedia pins pass; 663 real CF metadata captures correlate to entry records without opaque-item reads. GVA registrations expose a missing IOGVA dependency, but both public hardware flags still leave hardware creates at -12906. No hardware video, installed correction or performance gain is proved. [Evidence and reproduction](VIDEO_REGISTRY.md).
+
 The full goal remains **incomplete**. This is a development source snapshot with private ABI dependencies, not a production display-driver release. No percentage of total completion is assigned: the remaining hardware/API scope is not bounded enough to make that number meaningful.
 
 Public codec follow-up: fourteen new terminal processes produce18exact software images/2,073,600activeNV12bytes across H.264 and MPEG-2 controls. Nine hardware-required creates still return-12906/zeroimages with original and alternative model tables. The native policy site is not observed on our thread, despite working synthetic calibration. A new MPEG-2 CPU fixture is independently generated/decoded by pinned FFmpeg on arm64. The model eligibility result therefore does not repair these public paths. Offline VT error-site mapping identifies a next observation target, not the runtime cause. [Results and reproduction](VIDEO_CODEC_SELECTION.md).

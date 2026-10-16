@@ -1,5 +1,7 @@
 # Build from source
 
+The ABI-neutral registry observer, public-CF metadata observer and hardware-flag experiment reuse qualified objects and libraries. [VIDEO_REGISTRY.md](VIDEO_REGISTRY.md) lists exact-profile calibration, inspect-first steps, shared-lease requirements and the retained hardware failures.
+
 The public-codec client now accepts H.264 or an original MPEG-2 fixture, with an independent software-reference generator using existing external FFmpeg tools. [VIDEO_CODEC_SELECTION.md](VIDEO_CODEC_SELECTION.md) describes the exact-profile build, inspect-first workflow and retained hardware failures.
 
 The dyld image catalogue and exact-profile AppleVA availability experiment are also separate from the common runtime archive. Their source-only builders and strict resident-code checks are documented in [VIDEO_ELIGIBILITY.md](VIDEO_ELIGIBILITY.md). Availability success does not qualify hardware decoding.

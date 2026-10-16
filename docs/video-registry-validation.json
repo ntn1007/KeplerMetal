@@ -1,0 +1,577 @@
+{
+  "status": "PASS",
+  "auditor_SHA256": "4eb0d5914ab603e7b494d0f0070dd384771f54a6aa79b01f9b71e088c05e1024",
+  "native_processes_terminal": 25,
+  "nonoverlapping": true,
+  "independent_known_CPU_ABI_cases": 3715,
+  "expected_saturation_drops": 3,
+  "CPU_control_frames": 42,
+  "CPU_reference_bytes": 4838400,
+  "CPU_different_bytes": 0,
+  "hardware_required_failures": 9,
+  "hardware_create_status": -12906,
+  "CoreMedia_UUID": "7c4ae5aed528396982c6a4a534949ef3",
+  "CoreMedia_version": "3330.13.105",
+  "resident_code_pins": [
+    {
+      "index": 0,
+      "name": "FigSignalErrorAtGM",
+      "offset": 494668,
+      "bytes": 113,
+      "SHA256": "0fd2d241715535866008a81be061bb1de5bd308c9537d3ba659b886f9c4232d9"
+    },
+    {
+      "index": 1,
+      "name": "FigRegistryItemCopyMatchingInfo",
+      "offset": 118116,
+      "bytes": 45,
+      "SHA256": "96e198903a81155d5ed3b6361b7f5529413d384845abb249d35a031343f3e6b5"
+    },
+    {
+      "index": 2,
+      "name": "FigRegistryItemGetFactory",
+      "offset": 135509,
+      "bytes": 173,
+      "SHA256": "57a7ef8a79a22ba025e1bd3b14c42c3462ca92db447ff9c6efeead2a98c55a16"
+    },
+    {
+      "index": 3,
+      "name": "FigRegistryItemCopyDescription",
+      "offset": 118161,
+      "bytes": 45,
+      "SHA256": "6fd246816149c06fe8b1b940c52268399e85bc17bf2fd6afe4581df1804d5a40"
+    },
+    {
+      "index": 4,
+      "name": "FigRegistryItemRequiresRosetta",
+      "offset": 656448,
+      "bytes": 100,
+      "SHA256": "093c3e2f4beb002942e81800978b704a88fc4ab5f6b840184128d9112edce528"
+    },
+    {
+      "index": 5,
+      "name": "FigRegistryItemRequiresMissingRosetta",
+      "offset": 656674,
+      "bytes": 29,
+      "SHA256": "3a42b5f5d78882591b4fb1cbadf02c6840092aaca8c161245f8e4f503020d629"
+    }
+  ],
+  "shared_tail_object_SHA256": "a95258db75c4f71923799fdafd2d62a9cb429488ac8a6236e08883679a51e877",
+  "host_object_exactly_reused": true,
+  "retained_objects_correlated": 663,
+  "metadata": [
+    {
+      "case": "video-registry-metadata-H264-cpu-20261016",
+      "metadata_events": 84,
+      "metadata_SHA256": "5cfceb8c1d429ccec7298abb5af46f36ecb7229fedfe86991adc39c355949243",
+      "correlated_objects": 83,
+      "relevant_description_caller_offsets": {
+        "com.apple.videotoolbox.videodecoder.avc.vcp": [
+          6301347,
+          6293904,
+          6289206
+        ],
+        "com.apple.videotoolbox.videodecoder.avd.avc": [
+          6301347
+        ],
+        "com.apple.videotoolbox.videodecoder.mpeg2": [
+          6301347
+        ],
+        "com.apple.videotoolbox.videodecoder.h264.gva": [
+          6301347
+        ]
+      }
+    },
+    {
+      "case": "video-registry-metadata-H264-hardware-20261016",
+      "metadata_events": 87,
+      "metadata_SHA256": "b15339fdf54c6525cb4e9f91e19cddf2ab3a5fd993c94cee19932f4b37295de9",
+      "correlated_objects": 86,
+      "relevant_description_caller_offsets": {
+        "com.apple.videotoolbox.videodecoder.avc.vcp": [
+          6301347
+        ],
+        "com.apple.videotoolbox.videodecoder.avd.avc": [
+          6301347,
+          6293904
+        ],
+        "com.apple.videotoolbox.videodecoder.mpeg2": [
+          6301347
+        ],
+        "com.apple.videotoolbox.videodecoder.h264.gva": [
+          6301347,
+          6293904
+        ]
+      }
+    },
+    {
+      "case": "video-registry-metadata-MPEG2Video-cpu-20261016",
+      "metadata_events": 84,
+      "metadata_SHA256": "c2b38cdd10410179d2a3e6f07de6e2dee43d06eeb4e69a0fb5e2ba64b9b62c57",
+      "correlated_objects": 83,
+      "relevant_description_caller_offsets": {
+        "com.apple.videotoolbox.videodecoder.avc.vcp": [
+          6301347
+        ],
+        "com.apple.videotoolbox.videodecoder.avd.avc": [
+          6301347
+        ],
+        "com.apple.videotoolbox.videodecoder.mpeg2": [
+          6301347,
+          6293904,
+          6289206
+        ],
+        "com.apple.videotoolbox.videodecoder.h264.gva": [
+          6301347
+        ]
+      }
+    },
+    {
+      "case": "video-registry-metadata-MPEG2Video-hardware-20261016",
+      "metadata_events": 79,
+      "metadata_SHA256": "b4061d894e59299be0098e0f6d055c8ce49e86ef3ce1652ed3cde597f3f80f21",
+      "correlated_objects": 78,
+      "relevant_description_caller_offsets": {
+        "com.apple.videotoolbox.videodecoder.avc.vcp": [
+          6301347
+        ],
+        "com.apple.videotoolbox.videodecoder.avd.avc": [
+          6301347
+        ],
+        "com.apple.videotoolbox.videodecoder.mpeg2": [
+          6301347
+        ],
+        "com.apple.videotoolbox.videodecoder.h264.gva": [
+          6301347
+        ]
+      }
+    },
+    {
+      "case": "video-registry-spec-H264-passive-hardware-20261016",
+      "metadata_events": 87,
+      "metadata_SHA256": "cae4d0ed48d61b2b79df1c8bbabad08c1735d8cda972e332127eda7328f2a69b",
+      "correlated_objects": 86,
+      "relevant_description_caller_offsets": {
+        "com.apple.videotoolbox.videodecoder.avc.vcp": [
+          6301347
+        ],
+        "com.apple.videotoolbox.videodecoder.avd.avc": [
+          6301347,
+          6293904
+        ],
+        "com.apple.videotoolbox.videodecoder.mpeg2": [
+          6301347
+        ],
+        "com.apple.videotoolbox.videodecoder.h264.gva": [
+          6301347,
+          6293904
+        ]
+      }
+    },
+    {
+      "case": "video-registry-spec-H264-both-cpu-20261016",
+      "metadata_events": 84,
+      "metadata_SHA256": "7da36db7f8839787d6ff601d1fe55f416c8c544a39ede6239c6687b86e66d308",
+      "correlated_objects": 83,
+      "relevant_description_caller_offsets": {
+        "com.apple.videotoolbox.videodecoder.avc.vcp": [
+          6301347,
+          6293904,
+          6289206
+        ],
+        "com.apple.videotoolbox.videodecoder.avd.avc": [
+          6301347
+        ],
+        "com.apple.videotoolbox.videodecoder.mpeg2": [
+          6301347
+        ],
+        "com.apple.videotoolbox.videodecoder.h264.gva": [
+          6301347
+        ]
+      }
+    },
+    {
+      "case": "video-registry-spec-H264-both-hardware-20261016",
+      "metadata_events": 87,
+      "metadata_SHA256": "5889fb8dd0beff710f048580d143246d24eb52fb8705abbdd28691e6058186c5",
+      "correlated_objects": 86,
+      "relevant_description_caller_offsets": {
+        "com.apple.videotoolbox.videodecoder.avc.vcp": [
+          6301347
+        ],
+        "com.apple.videotoolbox.videodecoder.avd.avc": [
+          6301347,
+          6293904
+        ],
+        "com.apple.videotoolbox.videodecoder.mpeg2": [
+          6301347
+        ],
+        "com.apple.videotoolbox.videodecoder.h264.gva": [
+          6301347,
+          6293904
+        ]
+      }
+    },
+    {
+      "case": "video-registry-spec-MPEG2Video-both-hardware-20261016",
+      "metadata_events": 79,
+      "metadata_SHA256": "6fffb4e99a7f9be134c40b20bec4ca39c28b3952be8e291fbffacb104ea9e5f6",
+      "correlated_objects": 78,
+      "relevant_description_caller_offsets": {
+        "com.apple.videotoolbox.videodecoder.avc.vcp": [
+          6301347
+        ],
+        "com.apple.videotoolbox.videodecoder.avd.avc": [
+          6301347
+        ],
+        "com.apple.videotoolbox.videodecoder.mpeg2": [
+          6301347
+        ],
+        "com.apple.videotoolbox.videodecoder.h264.gva": [
+          6301347
+        ]
+      }
+    }
+  ],
+  "specification_experiment": [
+    {
+      "case": "video-registry-spec-H264-passive-hardware-20261016",
+      "applied": false,
+      "forwarded_specification": {
+        "RequireHardwareAcceleratedVideoDecoder": true
+      },
+      "create_status": -12906,
+      "frames": 0,
+      "SHA256": "1581e31c50fe1684417cc02df15d41eb0e311494b45544dadf5efcbdcb56bd81"
+    },
+    {
+      "case": "video-registry-spec-H264-both-cpu-20261016",
+      "applied": false,
+      "forwarded_specification": {
+        "EnableHardwareAcceleratedVideoDecoder": false
+      },
+      "create_status": 0,
+      "frames": 6,
+      "SHA256": "5d17a8a10028b40c8e33d40fffa4a103064da4572e3af43585d6f2f0d21780ef"
+    },
+    {
+      "case": "video-registry-spec-H264-both-hardware-20261016",
+      "applied": true,
+      "forwarded_specification": {
+        "RequireHardwareAcceleratedVideoDecoder": true,
+        "EnableHardwareAcceleratedVideoDecoder": true
+      },
+      "create_status": -12906,
+      "frames": 0,
+      "SHA256": "0e8926e225a060651bcfdf565a41aac95ae9d2428b2805bbc47b890c5c440d43"
+    },
+    {
+      "case": "video-registry-spec-MPEG2Video-both-hardware-20261016",
+      "applied": true,
+      "forwarded_specification": {
+        "RequireHardwareAcceleratedVideoDecoder": true,
+        "EnableHardwareAcceleratedVideoDecoder": true
+      },
+      "create_status": -12906,
+      "frames": 0,
+      "SHA256": "deee3528101191b56b034162e5957da8fbaa3ba4591a43f78dc3f21ff550dfff"
+    }
+  ],
+  "missing_IORegistry_keys": [
+    "IOGVACodec",
+    "IOGVAH264Decode",
+    "IOGVAH264DecodeCapabilities",
+    "IOGVAMPEG2Decode",
+    "IOGVAMPEG2DecodeCapabilities",
+    "IOAVDHEVCDecodeCapabilities"
+  ],
+  "missing_key_causal_test": "NOT RUN",
+  "error_signal_VT_return_offset": 20163,
+  "get_factory_interposed_calls": 0,
+  "unobserved_direct_or_cached_calls_excluded": false,
+  "system_files_unchanged": 83,
+  "additional_policy_file_unchanged": 1,
+  "OCLP_unchanged": true,
+  "common_runtime_sources_unchanged": 36,
+  "shared_cache_SHA256": "01d2fb67994fe5f4a6846263144432af24a1a450993f917e54de53351e6708be",
+  "new_M1_execution": false,
+  "Qwen_job_ids": [],
+  "system_deployment": "NOT RUN",
+  "performance_benchmark": "NOT RUN",
+  "hardware_video_execution_proved": false,
+  "full_objective_complete": false,
+  "processes": [
+    {
+      "case": "video-registry-calibration-integer-20261016",
+      "PID": 52874,
+      "result_SHA256": "1a8b2003199eb87d16d3850d4a8cf5c2ac60af3a45833e85a65499f35fbe41d1",
+      "inputs_SHA256": "6f5156acb87f7ef0bf7944b4f019ae1e2ec882983a5e8442c1e8de7b02fd3da5",
+      "entry_calls": 384,
+      "entry_dropped": 0,
+      "independent_CPU_cases": 384
+    },
+    {
+      "case": "video-registry-calibration-floating-20261016",
+      "PID": 53047,
+      "result_SHA256": "9fd8dd869b6715702d4fd2f9ab034f308b52fe215102bd8769837e6021443418",
+      "inputs_SHA256": "6f5156acb87f7ef0bf7944b4f019ae1e2ec882983a5e8442c1e8de7b02fd3da5",
+      "entry_calls": 384,
+      "entry_dropped": 0,
+      "independent_CPU_cases": 384
+    },
+    {
+      "case": "video-registry-calibration-aggregate-20261016",
+      "PID": 53063,
+      "result_SHA256": "9827d2b6949eb7a109b55a1322c73b276be17d6a8d18cb9d21bd041994808dec",
+      "inputs_SHA256": "6f5156acb87f7ef0bf7944b4f019ae1e2ec882983a5e8442c1e8de7b02fd3da5",
+      "entry_calls": 384,
+      "entry_dropped": 0,
+      "independent_CPU_cases": 384
+    },
+    {
+      "case": "video-registry-calibration-mixed-20261016",
+      "PID": 53075,
+      "result_SHA256": "5471d3db60127703fe0940dc259d47ce9492c02b22bb6f5696ff2f78edd0cac8",
+      "inputs_SHA256": "6f5156acb87f7ef0bf7944b4f019ae1e2ec882983a5e8442c1e8de7b02fd3da5",
+      "entry_calls": 384,
+      "entry_dropped": 0,
+      "independent_CPU_cases": 384
+    },
+    {
+      "case": "video-registry-calibration-variadic-20261016",
+      "PID": 53094,
+      "result_SHA256": "792702625c861565d7e0eb4257fe66a90ffd9cc32a7278e7b2134b5e7be211fe",
+      "inputs_SHA256": "6f5156acb87f7ef0bf7944b4f019ae1e2ec882983a5e8442c1e8de7b02fd3da5",
+      "entry_calls": 384,
+      "entry_dropped": 0,
+      "independent_CPU_cases": 384
+    },
+    {
+      "case": "video-registry-calibration-flags-20261016",
+      "PID": 53109,
+      "result_SHA256": "61d04d02da7988a1a335e3a5f5d3c35a7ad3622548e6550b46d8b3b738c5ed3d",
+      "inputs_SHA256": "6f5156acb87f7ef0bf7944b4f019ae1e2ec882983a5e8442c1e8de7b02fd3da5",
+      "entry_calls": 384,
+      "entry_dropped": 0,
+      "independent_CPU_cases": 384
+    },
+    {
+      "case": "video-registry-calibration-overflow-20261016",
+      "PID": 53122,
+      "result_SHA256": "4d337c8281df0203c780387c30a9e7dcdb22d87631f83b9e40b8943425a7665a",
+      "inputs_SHA256": "6f5156acb87f7ef0bf7944b4f019ae1e2ec882983a5e8442c1e8de7b02fd3da5",
+      "entry_calls": 1027,
+      "entry_dropped": 3,
+      "independent_CPU_cases": 1027
+    },
+    {
+      "case": "video-registry-calibration-disabled-20261016",
+      "PID": 53134,
+      "result_SHA256": "3000a7a212b0bce8c26426a6f20b8c672811f841cec5f01c98a9e61f425babd0",
+      "inputs_SHA256": "6f5156acb87f7ef0bf7944b4f019ae1e2ec882983a5e8442c1e8de7b02fd3da5",
+      "entry_calls": 0,
+      "entry_dropped": 0,
+      "independent_CPU_cases": 384
+    },
+    {
+      "case": "video-registry-inspect-20261016",
+      "PID": 53235,
+      "result_SHA256": "a0e5d86aa0f6162d02af01a575c217c9e4a5b218423851eaf4c50396de8b03a4",
+      "inputs_SHA256": "df4e566e46196166af3f8cfa57a35c9966f863aff4d272babb3a481cf5bc51ed",
+      "entry_calls": 0,
+      "entry_dropped": 0
+    },
+    {
+      "case": "video-registry-H264-plain-cpu-20261016",
+      "PID": 53321,
+      "result_SHA256": "a618a89faadbbacaff5ec91886db73aad373a2f1c070eecff872d93b73e82f25",
+      "inputs_SHA256": "f85525ad5f3ddb55cd2b9a10cbfe2633c8330a4eb2b993742d454cf5f73b9c3a",
+      "entry_calls": 0,
+      "entry_dropped": 0,
+      "codec": "H264",
+      "mode": "cpu",
+      "create_status": 0,
+      "frames": 6
+    },
+    {
+      "case": "video-registry-H264-plain-hardware-20261016",
+      "PID": 53458,
+      "result_SHA256": "46cdd217653775b7b759cb86a483118e8796ffe6beab12e2b5c1b6250f9edb1d",
+      "inputs_SHA256": "f85525ad5f3ddb55cd2b9a10cbfe2633c8330a4eb2b993742d454cf5f73b9c3a",
+      "entry_calls": 0,
+      "entry_dropped": 0,
+      "codec": "H264",
+      "mode": "hardware",
+      "create_status": -12906,
+      "frames": 0
+    },
+    {
+      "case": "video-registry-H264-observer-cpu-20261016",
+      "PID": 53334,
+      "result_SHA256": "35930f56db73791eea5a25b5a16471019d7cfbfd37f94e184daae0c19af6d31b",
+      "inputs_SHA256": "df4e566e46196166af3f8cfa57a35c9966f863aff4d272babb3a481cf5bc51ed",
+      "entry_calls": 85,
+      "entry_dropped": 0,
+      "codec": "H264",
+      "mode": "cpu",
+      "create_status": 0,
+      "frames": 6
+    },
+    {
+      "case": "video-registry-H264-observer-hardware-20261016",
+      "PID": 53472,
+      "result_SHA256": "b7116afb332ba9a214ae6655006df12e418c6124f883e68199b56399535de5dc",
+      "inputs_SHA256": "df4e566e46196166af3f8cfa57a35c9966f863aff4d272babb3a481cf5bc51ed",
+      "entry_calls": 87,
+      "entry_dropped": 0,
+      "codec": "H264",
+      "mode": "hardware",
+      "create_status": -12906,
+      "frames": 0
+    },
+    {
+      "case": "video-registry-metadata-H264-cpu-20261016",
+      "PID": 54367,
+      "result_SHA256": "b2673d6b38166776fe07fd35a0a940f8545d1ebafd66552d70cf3c49982ec5d8",
+      "inputs_SHA256": "b0dd0ea2c852ba787defbef524aa52b328137a3c29f92892c55371ab0d867b62",
+      "entry_calls": 85,
+      "entry_dropped": 0,
+      "codec": "H264",
+      "mode": "cpu",
+      "create_status": 0,
+      "frames": 6
+    },
+    {
+      "case": "video-registry-metadata-H264-hardware-20261016",
+      "PID": 54527,
+      "result_SHA256": "6f08f13bc4ca700ffbdcd728358095405ae5a9b11075e23d45df6184b74b03a6",
+      "inputs_SHA256": "b0dd0ea2c852ba787defbef524aa52b328137a3c29f92892c55371ab0d867b62",
+      "entry_calls": 87,
+      "entry_dropped": 0,
+      "codec": "H264",
+      "mode": "hardware",
+      "create_status": -12906,
+      "frames": 0
+    },
+    {
+      "case": "video-registry-MPEG2Video-plain-cpu-20261016",
+      "PID": 53908,
+      "result_SHA256": "de499d6bf17a0daef2934e4ca3c812a6b41ec45e395fd69fdef0a17d786f4907",
+      "inputs_SHA256": "934f9f25612bc5335994b8e4955b17b7e3a8661c7ebf7724651276f2cf77ef74",
+      "entry_calls": 0,
+      "entry_dropped": 0,
+      "codec": "MPEG2Video",
+      "mode": "cpu",
+      "create_status": 0,
+      "frames": 6
+    },
+    {
+      "case": "video-registry-MPEG2Video-plain-hardware-20261016",
+      "PID": 53946,
+      "result_SHA256": "c038d41d77b233e1c2f767e935d60c932a0cf35d803038bc0672a22fd61e164f",
+      "inputs_SHA256": "934f9f25612bc5335994b8e4955b17b7e3a8661c7ebf7724651276f2cf77ef74",
+      "entry_calls": 0,
+      "entry_dropped": 0,
+      "codec": "MPEG2Video",
+      "mode": "hardware",
+      "create_status": -12906,
+      "frames": 0
+    },
+    {
+      "case": "video-registry-MPEG2Video-observer-cpu-20261016",
+      "PID": 53926,
+      "result_SHA256": "47937163aa57705e0749361124f65aa70142ce1cbbf6591f4824cc5b62ad7346",
+      "inputs_SHA256": "fceb9d2a2d327b6ea13bfc4146b7fa094d607fbd36cdae66adbcbca79c1d8b50",
+      "entry_calls": 85,
+      "entry_dropped": 0,
+      "codec": "MPEG2Video",
+      "mode": "cpu",
+      "create_status": 0,
+      "frames": 6
+    },
+    {
+      "case": "video-registry-MPEG2Video-observer-hardware-20261016",
+      "PID": 53968,
+      "result_SHA256": "382ea70757f047069272ebe74a86951e974e710c281bca5bdaed728d51322198",
+      "inputs_SHA256": "fceb9d2a2d327b6ea13bfc4146b7fa094d607fbd36cdae66adbcbca79c1d8b50",
+      "entry_calls": 79,
+      "entry_dropped": 0,
+      "codec": "MPEG2Video",
+      "mode": "hardware",
+      "create_status": -12906,
+      "frames": 0
+    },
+    {
+      "case": "video-registry-metadata-MPEG2Video-cpu-20261016",
+      "PID": 54736,
+      "result_SHA256": "2e0fee4f042a8910c6c2c9282c67eb5c85952c6c5ad01cd233360c92b4ca5eb5",
+      "inputs_SHA256": "e650f1b5f4948f0a16f79370c35a0a588b1cfe545eb48c5b4fe77c9589d54607",
+      "entry_calls": 85,
+      "entry_dropped": 0,
+      "codec": "MPEG2Video",
+      "mode": "cpu",
+      "create_status": 0,
+      "frames": 6
+    },
+    {
+      "case": "video-registry-metadata-MPEG2Video-hardware-20261016",
+      "PID": 54752,
+      "result_SHA256": "ae66f1f36d8b6f0c2e7d2ea6dac6abfbb9b7d3cdcde6a1f8597c9a01ccafc4fc",
+      "inputs_SHA256": "e650f1b5f4948f0a16f79370c35a0a588b1cfe545eb48c5b4fe77c9589d54607",
+      "entry_calls": 79,
+      "entry_dropped": 0,
+      "codec": "MPEG2Video",
+      "mode": "hardware",
+      "create_status": -12906,
+      "frames": 0
+    },
+    {
+      "case": "video-registry-spec-H264-passive-hardware-20261016",
+      "PID": 55503,
+      "result_SHA256": "c5ad6c4dda2f001c33a7cfc54c3f442972c7a256d0f6daffc3c66c2a3d36e892",
+      "inputs_SHA256": "d3ad5f7c172d2670d9677870ca1e8b2c9194614714fdcd3c123b505f1f7ec86b",
+      "entry_calls": 87,
+      "entry_dropped": 0,
+      "codec": "H264",
+      "mode": "hardware",
+      "create_status": -12906,
+      "frames": 0
+    },
+    {
+      "case": "video-registry-spec-H264-both-cpu-20261016",
+      "PID": 55530,
+      "result_SHA256": "efdde322b3034ee4aee30c93f4d74f24130d48a508065aabc9d611dd6ed4c358",
+      "inputs_SHA256": "b4560c785dd5b9fb3c2f5b98f544c86304f3ec89cae61b71e7926a231eeece12",
+      "entry_calls": 85,
+      "entry_dropped": 0,
+      "codec": "H264",
+      "mode": "cpu",
+      "create_status": 0,
+      "frames": 6
+    },
+    {
+      "case": "video-registry-spec-H264-both-hardware-20261016",
+      "PID": 55576,
+      "result_SHA256": "805670f953864862738e98bc27dc1543962281ca20788d9e08627f34ff38502b",
+      "inputs_SHA256": "b4560c785dd5b9fb3c2f5b98f544c86304f3ec89cae61b71e7926a231eeece12",
+      "entry_calls": 87,
+      "entry_dropped": 0,
+      "codec": "H264",
+      "mode": "hardware",
+      "create_status": -12906,
+      "frames": 0
+    },
+    {
+      "case": "video-registry-spec-MPEG2Video-both-hardware-20261016",
+      "PID": 55768,
+      "result_SHA256": "f83486f31ed137bd46bb5f9f3ed6110f288dbc700fedf747ca04f8b203764389",
+      "inputs_SHA256": "7900a8aa4269472cf79dc4fb6a8acaad09c2933725f4f7d2569ead6427fe457c",
+      "entry_calls": 79,
+      "entry_dropped": 0,
+      "codec": "MPEG2Video",
+      "mode": "hardware",
+      "create_status": -12906,
+      "frames": 0
+    }
+  ]
+}

@@ -9,7 +9,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-SUFFIXES = {'.py', '.mm', '.cpp', '.c', '.h', '.inc', '.metal', '.metalh', '.patch',
+SUFFIXES = {'.py', '.mm', '.cpp', '.c', '.h', '.inc', '.S', '.metal', '.metalh', '.patch',
             '.json', '.md', '.txt', '.yml', '.yaml', '.toml'}
 SPECIAL_NAMES = {'LICENSE', '.gitignore'}
 DENIED_PARTS = {'.ssh', '.codex', 'vendor', 'downloads', 'extracted', 'archives',

@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "module": "/System/Library/Frameworks/CoreMedia.framework/Versions/A/CoreMedia",
+  "UUID": "7c4ae5aed528396982c6a4a534949ef3",
+  "version": "3330.13.105",
+  "symbols": [
+    {
+      "index": 0,
+      "name": "FigSignalErrorAtGM",
+      "offset": 494668,
+      "bytes": 113,
+      "SHA256": "0fd2d241715535866008a81be061bb1de5bd308c9537d3ba659b886f9c4232d9"
+    },
+    {
+      "index": 1,
+      "name": "FigRegistryItemCopyMatchingInfo",
+      "offset": 118116,
+      "bytes": 45,
+      "SHA256": "96e198903a81155d5ed3b6361b7f5529413d384845abb249d35a031343f3e6b5"
+    },
+    {
+      "index": 2,
+      "name": "FigRegistryItemGetFactory",
+      "offset": 135509,
+      "bytes": 173,
+      "SHA256": "57a7ef8a79a22ba025e1bd3b14c42c3462ca92db447ff9c6efeead2a98c55a16"
+    },
+    {
+      "index": 3,
+      "name": "FigRegistryItemCopyDescription",
+      "offset": 118161,
+      "bytes": 45,
+      "SHA256": "6fd246816149c06fe8b1b940c52268399e85bc17bf2fd6afe4581df1804d5a40"
+    },
+    {
+      "index": 4,
+      "name": "FigRegistryItemRequiresRosetta",
+      "offset": 656448,
+      "bytes": 100,
+      "SHA256": "093c3e2f4beb002942e81800978b704a88fc4ab5f6b840184128d9112edce528"
+    },
+    {
+      "index": 5,
+      "name": "FigRegistryItemRequiresMissingRosetta",
+      "offset": 656674,
+      "bytes": 29,
+      "SHA256": "3a42b5f5d78882591b4fb1cbadf02c6840092aaca8c161245f8e4f503020d629"
+    }
+  ],
+  "scope": "Existing framework calls may be forwarded, no host direct invocation of unknown private ABI"
+}
