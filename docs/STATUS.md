@@ -2,6 +2,8 @@
 
 The full goal remains **incomplete**. This is a development source snapshot with private ABI dependencies, not a production display-driver release. No percentage of total completion is assigned: the remaining hardware/API scope is not bounded enough to make that number meaningful.
 
+New video eligibility result: AppleVA5.1.1 and VideoToolbox3330.13.105 are actually loaded; AppleGVA is absent from these recorded processes. A pinned zero-argument availability query returns0 in three fresh processes receiving a minimal `iMac11,1` policy entry, while four native and three wrong-model controls return-8973. Returned data changes only inside the test process; resident instructions and system policy stay unchanged. Seventeen new native processes,256 synthetic ABI cases and six CPU-matching images are audited separately from the earlier transport milestone. No hardware video or global H.264 cause is established. [Evidence and reproduction](VIDEO_ELIGIBILITY.md).
+
 Video transport: the original NVIDIA WebVA matches its support copy and provides two constant-return factory stubs. An independent CPU decoder validates six iMac software images / 691,200 active NV12 bytes exactly. Hardware-required VT still fails `-12906`, plain and observed, with zero images; bounded traces show Metal initialization without proven video submission. Thirteen probe processes are terminal, 768 synthetic ABI cases pass, and 83 system files / 36 runtime sources / OCLP remain unchanged. The first missing-reference control stays incomplete. No hardware video, benchmark or new Metal feature is claimed. [Investigation and reproduction](VIDEO_TRANSPORT.md).
 
 | Area | Evidence from local work | Remaining limitation |

@@ -1,0 +1,175 @@
+{
+  "status": "PASS",
+  "native_processes_terminal": 17,
+  "nonoverlapping": true,
+  "new_synthetic_ABI_cases": 256,
+  "CPU_control_frames": 6,
+  "CPU_reference_bytes": 691200,
+  "CPU_different_bytes": 0,
+  "hardware_only_VT_create_status": -12906,
+  "VDA_create_status": -12473,
+  "AppleVA_UUID": "7533f7872ca53a968dc5fa34f9035e37",
+  "AppleVA_version": "5.1.1",
+  "VT_UUID": "e7231bea63883d0a95c0a93ce970b96b",
+  "VT_version": "3330.13.105",
+  "eligibility_query": {
+    "inspections_without_invocation": 1,
+    "native_refusals": 4,
+    "wrong_model_refusals": 3,
+    "model_entry_successes": 3,
+    "refusal_status": -8973,
+    "success_status": 0,
+    "resident_code_pins": [
+      {
+        "offset": 2484,
+        "bytes": 136,
+        "SHA256": "47daec7d4a15839a56c0ba4ea1c77ef46341ab5b12d313eb5294574a29dfc779"
+      },
+      {
+        "offset": 267611,
+        "bytes": 580,
+        "SHA256": "8a6bba5a42617f54c410541bc449e3889d5d6b4ff9a93981a9e61ff35b2eaa0b"
+      },
+      {
+        "offset": 268191,
+        "bytes": 1535,
+        "SHA256": "25c3d2d6e7e4ded7f2e55dc30714bbe85f2b5dd12fdfcabff72e32fb4e9f8db6"
+      }
+    ],
+    "system_policy_SHA256": "e5cff89218a12c5a55b35832f13fa9552c1990d8f8100a68a7e9f0848fbfb0dc",
+    "system_policy_unchanged": true
+  },
+  "system_files_unchanged": 83,
+  "additional_policy_file_unchanged": 1,
+  "OCLP_unchanged": true,
+  "common_runtime_sources_unchanged": 36,
+  "shared_cache_file_SHA256": "01d2fb67994fe5f4a6846263144432af24a1a450993f917e54de53351e6708be",
+  "new_M1_execution": false,
+  "Qwen_job_ids": [],
+  "hardware_video_execution_proved": false,
+  "global_H264_failure_explained": false,
+  "system_deployment": "NOT RUN",
+  "performance_benchmark": "NOT RUN",
+  "full_objective_complete": false,
+  "processes": [
+    {
+      "cohort": "video-images-catalog-20261016",
+      "mode": "catalog",
+      "process_terminal": true,
+      "result_SHA256": "63ac09470b5c3618558a012fac724641df0d4edee8bfcebc51022308d1f1b323",
+      "manifest_SHA256": "40f7c1a23cf6c49004316a5c00e3b860cff32beb63ef1177964a3967ff02fffb"
+    },
+    {
+      "cohort": "video-images-catalog-20261016-02",
+      "mode": "catalog",
+      "process_terminal": true,
+      "result_SHA256": "f9faab9a4c4338928bd49a204f00a454f28f962efe567a13ec56a287c3c130a8",
+      "manifest_SHA256": "03564f0a26c56b7bc3342069bbf6d44c1440f64cde63b62334ee9398b9d107a6"
+    },
+    {
+      "cohort": "video-images-selftest-20261016-02",
+      "mode": "selftest",
+      "process_terminal": true,
+      "result_SHA256": "497acff4c59eca12abfffa7b014d8dacc5ba021c0a346b0869752a6f921897ca",
+      "manifest_SHA256": "81365c82806c2e2835d669e9cf12e7ac48219f5f858a750f07fe3d4c6b1b5ae3"
+    },
+    {
+      "cohort": "video-images-vt-cpu-20261016-02",
+      "mode": "vt-cpu",
+      "process_terminal": true,
+      "result_SHA256": "d9210e995397d87e0c2aeb35803577e6d71b343142673a5115e0361c832a607d",
+      "manifest_SHA256": "91cfcd59ef390405232f8e107b26a8ee18e5db56d21ac735b86f47d0616a4d8b"
+    },
+    {
+      "cohort": "video-images-vt-observe-20261016-02",
+      "mode": "vt-observe",
+      "process_terminal": true,
+      "result_SHA256": "b3ecd0a8aba45177ef6b8dadb1de09458821b8a5e40e51ca86ad709eaf9169ea",
+      "manifest_SHA256": "dc857809c181b5696ac29ab3b800eac67948f6f0c7a2fac9c96eacfbd44479b5"
+    },
+    {
+      "cohort": "video-images-vda-observe-20261016-02",
+      "mode": "observe",
+      "process_terminal": true,
+      "result_SHA256": "c028dbe4d01dec8e6d616ff572be6c23663bb0acbc8f1751586b50dbf2f597b9",
+      "manifest_SHA256": "2dba91637fd6a36c43075482e631f993eda9c089ce2e71f5fae91e2cd4c224b0"
+    },
+    {
+      "cohort": "video-policy-inspect-20261016",
+      "mode": "inspect",
+      "process_terminal": true,
+      "result_SHA256": "4353eba21412b1d86dfcd4f072b7d7089a4727293a64884eb268bec095b64b84",
+      "manifest_SHA256": "08c2174b450a9acebc46de99ff143100e35780c5fd04106a1d37d6305287f586"
+    },
+    {
+      "cohort": "video-policy-native-20261016",
+      "mode": "native",
+      "process_terminal": true,
+      "result_SHA256": "8962399acb556169b0583efb46f1906f8ab8578b8d82bc24b730eb1d1ef8fe8d",
+      "manifest_SHA256": "a8abc9f4481463addd5a5c976ba8b4281d04d985f143ff08fd54b3f228eaf0ee"
+    },
+    {
+      "cohort": "video-policy-wrong-model-20261016",
+      "mode": "wrong-model",
+      "process_terminal": true,
+      "result_SHA256": "a26fe998c8de9fdc7428bbcd04b19a3afb571fb9f0f19e861ce1cf9e2fdf2472",
+      "manifest_SHA256": "629c86158c03c2f69b67336969d0461febc9ef461c7fc4ef2dd294aa06341b64"
+    },
+    {
+      "cohort": "video-policy-model-entry-20261016",
+      "mode": "model-entry",
+      "process_terminal": true,
+      "result_SHA256": "a3540d7ec448720ec5c157df6109abac3de9527edf953ceab639d6c549112f2c",
+      "manifest_SHA256": "100825a588907aaf36e9a20328232ccdea0d5036c04a919e1bbbd87b9b391761"
+    },
+    {
+      "cohort": "video-policy-native-r2-20261016",
+      "mode": "native",
+      "process_terminal": true,
+      "result_SHA256": "50c577765c4a0ea7253407b3d8cd1ce3168f1e9f8c4aec405758fb2e58a486a8",
+      "manifest_SHA256": "8e69a7a4f641e7b0d9dd83c9d321eb1e6bb0a1e869170e5ce7cabdcc95ebf15c"
+    },
+    {
+      "cohort": "video-policy-wrong-model-r2-20261016",
+      "mode": "wrong-model",
+      "process_terminal": true,
+      "result_SHA256": "d41cbc199cc6e8e2b9eebe2d21f9adcc3d50165dc2cd44a06837174773a38734",
+      "manifest_SHA256": "c2c4250b4a8d427101efecb861a403fff29b9d942a0cbc2ace13a09b47579370"
+    },
+    {
+      "cohort": "video-policy-model-entry-r2-20261016",
+      "mode": "model-entry",
+      "process_terminal": true,
+      "result_SHA256": "e26e59bb4cb0cbc8203d2b0a30f19a200737c573eac5a32b92fe65c9a3a9e54c",
+      "manifest_SHA256": "50cb9b991cfe5f40842a06347b25669ccd94bc491c240208fe249c1b1fd7ab48"
+    },
+    {
+      "cohort": "video-policy-native-r3-20261016",
+      "mode": "native",
+      "process_terminal": true,
+      "result_SHA256": "bb902e0627c5c7320e4a0e6fb45ae391f8556aee274b8895499434ceb25711e0",
+      "manifest_SHA256": "9b01f9b1aa72706a2e93e6605a43041992bfa70974438259b89a401245239e5c"
+    },
+    {
+      "cohort": "video-policy-wrong-model-r3-20261016",
+      "mode": "wrong-model",
+      "process_terminal": true,
+      "result_SHA256": "f2a66c0f6784fa20b45eba493fb095f38142c8c15903b26ab09f15016cd73487",
+      "manifest_SHA256": "3530c4c069372f48fdff55cac630b0b3514b4aad26a67ee2712d1023bd46808e"
+    },
+    {
+      "cohort": "video-policy-model-entry-r3-20261016",
+      "mode": "model-entry",
+      "process_terminal": true,
+      "result_SHA256": "248a964d9adf3c9bd08f5bb98470375a49260e2f810b159b19d69c0bf16c0dc3",
+      "manifest_SHA256": "0b8b5bebe66f331aa7d69666f5a475b818abaa787658bd3b91a698fc496f25a0"
+    },
+    {
+      "cohort": "video-policy-native-after-20261016",
+      "mode": "native",
+      "process_terminal": true,
+      "result_SHA256": "518a40d4c4a0c7cc3021f67282494a976b7df460dc3f9454cc4555294d834d39",
+      "manifest_SHA256": "41fe1cfd267df30954b520e2c2c128ce2d16459a30d132f41592e7ab490c75be"
+    }
+  ]
+}

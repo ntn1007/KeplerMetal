@@ -6721,6 +6721,102 @@
       "published_SHA256": "0cabec588e63e7696899db6fc397888f51fb780f3864036391d7c04362b3e9be",
       "bytes": 17508,
       "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_image_catalog.mm",
+      "source_path": "bridge/tools/video_image_catalog.mm",
+      "source_SHA256": "365741f0f0f73b62d71fdb64971e68e8eaee1195ffb5e728a89334644856886d",
+      "published_SHA256": "365741f0f0f73b62d71fdb64971e68e8eaee1195ffb5e728a89334644856886d",
+      "bytes": 7837,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_image_reception.mm",
+      "source_path": "bridge/tools/video_image_reception.mm",
+      "source_SHA256": "1fd0ca20154f540d3cf289ce8f78d74de87c808a9c42e4b54199a20b8f553261",
+      "published_SHA256": "1fd0ca20154f540d3cf289ce8f78d74de87c808a9c42e4b54199a20b8f553261",
+      "bytes": 2413,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_image_fixture.c",
+      "source_path": "bridge/tools/video_image_fixture.c",
+      "source_SHA256": "9061417ffa773cf7865ee48d892c7bf4cff0a0daf1ac167b9d466aff489ec23a",
+      "published_SHA256": "9061417ffa773cf7865ee48d892c7bf4cff0a0daf1ac167b9d466aff489ec23a",
+      "bytes": 169,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/build_video_images.py",
+      "source_path": "bridge/tools/build_video_images.py",
+      "source_SHA256": "63277d14d6b71b5fb0ccac590dc7057ea8389ac49cb0e2cb454affb4f6e6456f",
+      "published_SHA256": "63277d14d6b71b5fb0ccac590dc7057ea8389ac49cb0e2cb454affb4f6e6456f",
+      "bytes": 4940,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/run_video_images.py",
+      "source_path": "bridge/tools/run_video_images.py",
+      "source_SHA256": "6eba14e332d685ff390476f0d2a40e468c6bf0165654d8b97d207e717578a7be",
+      "published_SHA256": "6eba14e332d685ff390476f0d2a40e468c6bf0165654d8b97d207e717578a7be",
+      "bytes": 2872,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/inspect_video_cache.py",
+      "source_path": "bridge/tools/inspect_video_cache.py",
+      "source_SHA256": "3e6bec43e5c3d971e0d7168782cb070f30304155f63cbe2e83a8020e99feb995",
+      "published_SHA256": "3e6bec43e5c3d971e0d7168782cb070f30304155f63cbe2e83a8020e99feb995",
+      "bytes": 16918,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_region_analysis_object.py",
+      "source_path": "bridge/tools/video_region_analysis_object.py",
+      "source_SHA256": "700bdae13da5f1f3d87cf0efa4eb587cea53967d9bf8e54e65b09969f78dd510",
+      "published_SHA256": "700bdae13da5f1f3d87cf0efa4eb587cea53967d9bf8e54e65b09969f78dd510",
+      "bytes": 2317,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/capture_video_cache_symbols.py",
+      "source_path": "bridge/tools/capture_video_cache_symbols.py",
+      "source_SHA256": "e13d4eab4c396957d442dddcdc65bb6bf9d682773634c5d6933d5807e11981ad",
+      "published_SHA256": "e13d4eab4c396957d442dddcdc65bb6bf9d682773634c5d6933d5807e11981ad",
+      "bytes": 4479,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_policy_observer.mm",
+      "source_path": "bridge/tools/video_policy_observer.mm",
+      "source_SHA256": "54448879ae66feb00e30306883c8214484bf30d4ee99b15369ff7e3fcd0c4cff",
+      "published_SHA256": "54448879ae66feb00e30306883c8214484bf30d4ee99b15369ff7e3fcd0c4cff",
+      "bytes": 3870,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_policy_query.mm",
+      "source_path": "bridge/tools/video_policy_query.mm",
+      "source_SHA256": "3cc3e63cc432d04d006197de12a48995a7678b248d9e28f5a6f543d3b150377a",
+      "published_SHA256": "3cc3e63cc432d04d006197de12a48995a7678b248d9e28f5a6f543d3b150377a",
+      "bytes": 7025,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/native_video_policy.py",
+      "source_path": "bridge/tools/native_video_policy.py",
+      "source_SHA256": "5f1302fe0f3a14dc8f5fd8d94ef667f5fe64a82fd431756766f69d368a6dd630",
+      "published_SHA256": "5f1302fe0f3a14dc8f5fd8d94ef667f5fe64a82fd431756766f69d368a6dd630",
+      "bytes": 6537,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/audit_video_images.py",
+      "source_path": "bridge/tools/audit_video_images.py",
+      "source_SHA256": "0d34f1f73c93c1869948bd1c9828b3373ad51e2c0b6a8fee19c8b2d2d259ebf1",
+      "published_SHA256": "0d34f1f73c93c1869948bd1c9828b3373ad51e2c0b6a8fee19c8b2d2d259ebf1",
+      "bytes": 12895,
+      "modified_for_publication": false
     }
   ],
   "excluded_source_tools": [

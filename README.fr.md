@@ -1,5 +1,7 @@
 # KeplerMetal
 
+Une barrière d’éligibilité vidéo est maintenant reproduite : la requête AppleVA passe de −8973 à 0 dans trois processus de test recevant seulement une entrée `iMac11,1` en mémoire. Sept contrôles gardent le refus. Le système reste inchangé et le décodage matériel demeure non démontré. [Preuves et limites](docs/VIDEO_ELIGIBILITY.md).
+
 Recherche open source pour moderniser la pile NVIDIA Kepler sous macOS, avec une GTX 880M GK104 / SM30 de 8 Gio comme matériel de référence.
 
 Dernière enquête vidéo : six images décodées en logiciel sur l’iMac correspondent exactement à une référence CPU FFmpeg indépendante. Le décodage matériel reste refusé. Le WebVA NVIDIA officiel contient les mêmes deux stubs que la copie de support examinée ; aucun remplacement vidéo fonctionnel ni gain n’est annoncé. [Sources, preuves et suite](docs/VIDEO_TRANSPORT.md).

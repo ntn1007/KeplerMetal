@@ -1,5 +1,7 @@
 # Build from source
 
+The dyld image catalogue and exact-profile AppleVA availability experiment are also separate from the common runtime archive. Their source-only builders and strict resident-code checks are documented in [VIDEO_ELIGIBILITY.md](VIDEO_ELIGIBILITY.md). Availability success does not qualify hardware decoding.
+
 The video observer and reference stager are separate, process-local diagnostic tools; they do not change the runtime archive. [VIDEO_TRANSPORT.md](VIDEO_TRANSPORT.md) lists their fixture requirements, serialized runs and CPU-only historical auditor. Building or completing a diagnostic does not qualify hardware video.
 
 The new CPU-only control analyzer and its manually qualified native examples are documented in [NATIVE_CONTROL_PROPOSALS.md](NATIVE_CONTROL_PROPOSALS.md). Portable decoder/refusal tests run in the normal test suite. `audit_native_control_proposals.py --lab-root` rechecks historical fixtures without GPU dispatch. The analyzer changes no runtime allocation; the sweep verifier requires explicit `--variant reload_bounds` for that immutable-input nested oracle.
