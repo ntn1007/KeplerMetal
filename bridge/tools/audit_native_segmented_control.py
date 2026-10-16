@@ -45,9 +45,17 @@ def verify(lab_root):
             and functions((native / "builder.py").read_text())
             == functions((root / "tools/native_segmented_control.py").read_text()),
             "frozen/current builder and oracle functions differ")
-    regression = load(progress / "default-verifier-regression.json")
+    regression = load(progress / "default-verifier-regression-02.json")
     require(regression["status"] == "PASS" and len(regression["cases"]) == 5
-            and not regression["GPU_rerun"], "default verifier regression")
+            and not regression["GPU_rerun"]
+            and regression["verifier_SHA256"] == sha(root / "tools/verify_native_allocation_qmd_execution.py"),
+            "default verifier regression")
+    semantic_rejection = load(progress / "semantic-oracle-rejection.json")
+    require(semantic_rejection["status"] == "EXPECTED_REFUSAL"
+            and semantic_rejection["message"] == "Non-nested assets require an explicit semantic oracle"
+            and semantic_rejection["verifier_SHA256"] == sha(root / "tools/verify_native_allocation_qmd_execution.py")
+            and semantic_rejection["results_SHA256"] == sha(base / "native-segmented-common4096-20261016/results.json")
+            and semantic_rejection["GPU_work"] == 0, "wrong default oracle refusal")
     od = load(obs / "observations.json")
     require(od["native_build_inputs_SHA256"] == sha(native / "inputs.json"), "native observer input")
     intervals = []
@@ -160,6 +168,8 @@ def verify(lab_root):
             "executed_runner_SHA256": sha(progress / "qualified-runner.py"), "static": static, "cases": cases,
             "historical_full120_controls": historical, "historical_GPU_rerun": False,
             "old_default_verifier_regression": regression, "totals": totals,
+            "wrong_default_oracle_refused": True,
+            "semantic_refusal_receipt_SHA256": sha(progress / "semantic-oracle-rejection.json"),
             "correct_compute_trials": 9, "retained_failed_compute_trials": 6,
             "simultaneous_cohorts": False, "matching_low_common_data_files": 9,
             "shape_comparison": {"total_source_levels": 120, "full_joinat_count": 242,

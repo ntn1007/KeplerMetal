@@ -6,8 +6,8 @@
     "native_segmented_reserve_probe.mm": "d5eacd68e9286849a978529b8a471a6873414bcec6702c34123eadcb2f4a70f9",
     "verify_native_segmented_control.py": "2293835c1b44a8b1dc747d50d433bfe824eaf333dace9379a81c55565fe74a62",
     "qualify_native_segmented_control.py": "3582d70679ec1c400eaac2b64521e3008707ff7de97537459a36eac89d1c7d8b",
-    "audit_native_segmented_control.py": "4c0cc5cab899572c658261ffc036b2b4d8a301fb341c060d485640a7d909944e",
-    "verify_native_allocation_qmd_execution.py": "a94b5eff09b8ea34766949ed471b027a0f2af8eb8b94631458f7a3b099b09085",
+    "audit_native_segmented_control.py": "350ac5baec74924e5f7de9850080f8d693c12115393d823e4f82414fa00775a9",
+    "verify_native_allocation_qmd_execution.py": "eed90d02e5387a844145c228499800ff5d54dc726f23047868fb628f07d70ced",
     "verify_native_reserve_sweep.py": "3c24c0b652928a6241624341cfcdb7cf83369b1d3c74e901b3d5d2898598c2f1",
     "analyze_native_control_reserve.py": "afd1e7d49f887dda72454bb0cec7d6b6834d20a2e9d28d78adcd1db3b6c0a2f4"
   },
@@ -54,31 +54,13 @@
   "old_default_verifier_regression": {
     "status": "PASS",
     "cases": [
-      {
-        "case": "native104",
-        "status": "PASS",
-        "recorded_numerics": "FAIL"
-      },
-      {
-        "case": "reserved104",
-        "status": "PASS",
-        "recorded_numerics": "PASS"
-      },
-      {
-        "case": "native120",
-        "status": "PASS",
-        "recorded_numerics": "FAIL"
-      },
-      {
-        "case": "reserved120",
-        "status": "PASS",
-        "recorded_numerics": "PASS"
-      },
-      {
-        "case": "public120",
-        "status": "PASS"
-      }
+      "native104",
+      "reserved104",
+      "native120",
+      "reserved120",
+      "public120"
     ],
+    "verifier_SHA256": "eed90d02e5387a844145c228499800ff5d54dc726f23047868fb628f07d70ced",
     "GPU_rerun": false
   },
   "shape_comparison": {
@@ -272,6 +254,8 @@
       "invocation_witnesses": 297
     }
   ],
-  "private_full_verification_SHA256": "d6e6206ca6380a0f2033a7de54cbf648ab53a5cebaff82f4b17a64ce71b964c0",
-  "scope": "Text sources and scalar summary only; no binary or packet payload"
+  "private_full_verification_SHA256": "ccc0f3e03488ce86de409caa00453f9de58d8ce740120b7867899149d36a9744",
+  "scope": "Text sources and scalar summary only; no binary or packet payload",
+  "wrong_default_oracle_refused": true,
+  "semantic_refusal_receipt_SHA256": "a33c5b02f4526ef0f8a2a37b6a1b31c665adb00d178d3cf2956d802d08d15bf1"
 }

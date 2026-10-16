@@ -6587,11 +6587,11 @@
     {
       "path": "bridge/tools/verify_native_allocation_qmd_execution.py",
       "source_path": "bridge/tools/verify_native_allocation_qmd_execution.py",
-      "source_SHA256": "a94b5eff09b8ea34766949ed471b027a0f2af8eb8b94631458f7a3b099b09085",
-      "published_SHA256": "a94b5eff09b8ea34766949ed471b027a0f2af8eb8b94631458f7a3b099b09085",
-      "bytes": 7972,
+      "source_SHA256": "eed90d02e5387a844145c228499800ff5d54dc726f23047868fb628f07d70ced",
+      "published_SHA256": "eed90d02e5387a844145c228499800ff5d54dc726f23047868fb628f07d70ced",
+      "bytes": 8172,
       "modified_for_publication": false,
-      "previous_published_SHA256": "2de342dd566dfbca430f333b1e103a09582294d0719fbcd6c6e0b6e996dcac28"
+      "previous_published_SHA256": "a94b5eff09b8ea34766949ed471b027a0f2af8eb8b94631458f7a3b099b09085"
     },
     {
       "path": "bridge/tools/verify_native_allocation_qmd_suite.py",
@@ -6637,9 +6637,10 @@
       "path": "bridge/tools/audit_native_segmented_control.py",
       "source_path": "bridge/tools/audit_native_segmented_control.py",
       "modified_for_publication": false,
-      "source_SHA256": "4c0cc5cab899572c658261ffc036b2b4d8a301fb341c060d485640a7d909944e",
-      "published_SHA256": "4c0cc5cab899572c658261ffc036b2b4d8a301fb341c060d485640a7d909944e",
-      "bytes": 13176
+      "source_SHA256": "350ac5baec74924e5f7de9850080f8d693c12115393d823e4f82414fa00775a9",
+      "published_SHA256": "350ac5baec74924e5f7de9850080f8d693c12115393d823e4f82414fa00775a9",
+      "bytes": 14016,
+      "previous_published_SHA256": "4c0cc5cab899572c658261ffc036b2b4d8a301fb341c060d485640a7d909944e"
     }
   ],
   "excluded_source_tools": [

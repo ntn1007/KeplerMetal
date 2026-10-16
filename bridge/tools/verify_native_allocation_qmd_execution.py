@@ -14,6 +14,9 @@ def verify(root,build,library,reservation_root=None,*,oracle=cpu_result,
            import_validator=allocation_proof,control_reserve=4096):
     """Default contract is unchanged; alternate experiments supply explicit oracles."""
     inp=terminal(root,reservation_root or ROOT,build);d=load(root/'results.json');lm=load(library/'manifest.json')
+    variant=load(root/'assets/control_flow_config.json').get('variant')
+    require(oracle is not cpu_result or variant=='nested',
+            'Non-nested assets require an explicit semantic oracle')
     require(inp==load(build/'inputs.json') and inp['client_will_submit']is True
             and inp['static_library_SHA256']==sha(library/'libKeplerMetal.a')==lm['static_library_SHA256']
             and inp['library_manifest_SHA256']==sha(library/'manifest.json')
