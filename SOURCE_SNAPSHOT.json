@@ -6521,18 +6521,20 @@
     {
       "path": "bridge/tools/verify_native_reserve_sweep.py",
       "source_path": "bridge/tools/verify_native_reserve_sweep.py",
-      "source_SHA256": "8d97d626c9e522db64e34fcddac2c5d67cc97e10d7105cb00caee0e2c413bda7",
-      "published_SHA256": "8d97d626c9e522db64e34fcddac2c5d67cc97e10d7105cb00caee0e2c413bda7",
-      "bytes": 6474,
-      "modified_for_publication": false
+      "source_SHA256": "3c24c0b652928a6241624341cfcdb7cf83369b1d3c74e901b3d5d2898598c2f1",
+      "published_SHA256": "3c24c0b652928a6241624341cfcdb7cf83369b1d3c74e901b3d5d2898598c2f1",
+      "bytes": 6517,
+      "modified_for_publication": false,
+      "previous_published_SHA256": "8d97d626c9e522db64e34fcddac2c5d67cc97e10d7105cb00caee0e2c413bda7"
     },
     {
       "path": "bridge/tools/analyze_native_control_reserve.py",
       "source_path": "bridge/tools/analyze_native_control_reserve.py",
-      "source_SHA256": "799973094732a66dcd148ea07c07f216bb15efe1bd3f6ba86e37a607a3002636",
-      "published_SHA256": "799973094732a66dcd148ea07c07f216bb15efe1bd3f6ba86e37a607a3002636",
-      "bytes": 5208,
-      "modified_for_publication": false
+      "source_SHA256": "afd1e7d49f887dda72454bb0cec7d6b6834d20a2e9d28d78adcd1db3b6c0a2f4",
+      "published_SHA256": "afd1e7d49f887dda72454bb0cec7d6b6834d20a2e9d28d78adcd1db3b6c0a2f4",
+      "bytes": 5245,
+      "modified_for_publication": false,
+      "previous_published_SHA256": "799973094732a66dcd148ea07c07f216bb15efe1bd3f6ba86e37a607a3002636"
     },
     {
       "path": "bridge/tools/verify_native_allocation_rule.py",
@@ -6585,10 +6587,11 @@
     {
       "path": "bridge/tools/verify_native_allocation_qmd_execution.py",
       "source_path": "bridge/tools/verify_native_allocation_qmd_execution.py",
-      "source_SHA256": "2de342dd566dfbca430f333b1e103a09582294d0719fbcd6c6e0b6e996dcac28",
-      "published_SHA256": "2de342dd566dfbca430f333b1e103a09582294d0719fbcd6c6e0b6e996dcac28",
-      "bytes": 7688,
-      "modified_for_publication": false
+      "source_SHA256": "a94b5eff09b8ea34766949ed471b027a0f2af8eb8b94631458f7a3b099b09085",
+      "published_SHA256": "a94b5eff09b8ea34766949ed471b027a0f2af8eb8b94631458f7a3b099b09085",
+      "bytes": 7972,
+      "modified_for_publication": false,
+      "previous_published_SHA256": "2de342dd566dfbca430f333b1e103a09582294d0719fbcd6c6e0b6e996dcac28"
     },
     {
       "path": "bridge/tools/verify_native_allocation_qmd_suite.py",
@@ -6597,6 +6600,46 @@
       "published_SHA256": "580fe480fdb3f6d640e6a68a108f9828974999736959fa03b776321818a95548",
       "bytes": 15481,
       "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/native_segmented_control.py",
+      "source_path": "bridge/tools/native_segmented_control.py",
+      "modified_for_publication": false,
+      "source_SHA256": "b92d85d7f5538d7ee3baca95fab31bad67708661e485165a28e3ad9427405feb",
+      "published_SHA256": "b92d85d7f5538d7ee3baca95fab31bad67708661e485165a28e3ad9427405feb",
+      "bytes": 14010
+    },
+    {
+      "path": "bridge/tools/native_segmented_reserve_probe.mm",
+      "source_path": "bridge/tools/native_segmented_reserve_probe.mm",
+      "modified_for_publication": false,
+      "source_SHA256": "d5eacd68e9286849a978529b8a471a6873414bcec6702c34123eadcb2f4a70f9",
+      "published_SHA256": "d5eacd68e9286849a978529b8a471a6873414bcec6702c34123eadcb2f4a70f9",
+      "bytes": 2372
+    },
+    {
+      "path": "bridge/tools/verify_native_segmented_control.py",
+      "source_path": "bridge/tools/verify_native_segmented_control.py",
+      "modified_for_publication": false,
+      "source_SHA256": "2293835c1b44a8b1dc747d50d433bfe824eaf333dace9379a81c55565fe74a62",
+      "published_SHA256": "2293835c1b44a8b1dc747d50d433bfe824eaf333dace9379a81c55565fe74a62",
+      "bytes": 7956
+    },
+    {
+      "path": "bridge/tools/qualify_native_segmented_control.py",
+      "source_path": "bridge/tools/qualify_native_segmented_control.py",
+      "modified_for_publication": false,
+      "source_SHA256": "3582d70679ec1c400eaac2b64521e3008707ff7de97537459a36eac89d1c7d8b",
+      "published_SHA256": "3582d70679ec1c400eaac2b64521e3008707ff7de97537459a36eac89d1c7d8b",
+      "bytes": 4972
+    },
+    {
+      "path": "bridge/tools/audit_native_segmented_control.py",
+      "source_path": "bridge/tools/audit_native_segmented_control.py",
+      "modified_for_publication": false,
+      "source_SHA256": "4c0cc5cab899572c658261ffc036b2b4d8a301fb341c060d485640a7d909944e",
+      "published_SHA256": "4c0cc5cab899572c658261ffc036b2b4d8a301fb341c060d485640a7d909944e",
+      "bytes": 13176
     }
   ],
   "excluded_source_tools": [

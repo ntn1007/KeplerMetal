@@ -8,6 +8,8 @@ The unchanged API also passes new source-nesting104/120programs, with24additiona
 
 Read-only native command snapshots now map the local-memory and CRS fields on two profiles. A metadata reserve of4,096 produces a prepared CRS field of4,608; nine corrected trials pass while six native failures remain preserved. No packet patch/replay, resident-QMD readback or general allocator is claimed. [Field mapping and reproduction](docs/NATIVE_ALLOCATION_QMD.md).
 
+New sequential blocks of 65 and 55 levels pass at a tested reserve of 2,560 while the fully nested program with 120 levels failed at 3,584. The segmented program contains more `joinat` instructions, so total counts do not explain the different sufficient reserves. Nine new trials pass and six numerical failures remain preserved; no automatic rule or VRAM saving is claimed. [Discriminating control shapes](docs/NATIVE_SEGMENTED_CONTROL.md).
+
 [Français](README.fr.md) · [Build from source](docs/BUILDING.md) · [Dependencies](docs/DEPENDENCIES.md) · [Status](docs/STATUS.md) · [Architecture](docs/ARCHITECTURE.md)
 
 The reference device is a GeForce GTX 880M, GK104 / SM30, with 8 GiB VRAM in an Intel iMac. The project studies two independent areas:

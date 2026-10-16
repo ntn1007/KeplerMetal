@@ -11,8 +11,8 @@ from verify_control_flow import result as cpu_result
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def verify(root, build, native, observations, reserve, depth):
-    inp = terminal(root, ROOT, build)
+def verify(root, build, native, observations, reserve, depth, reservation_root=None):
+    inp = terminal(root, reservation_root or ROOT, build)
     require(inp == load(build / 'inputs.json') and inp['reserve_mode'] == str(reserve)
             and inp['native_build_inputs_SHA256'] == sha(native / 'inputs.json')
             and inp['observations_SHA256'] == sha(observations / 'observations.json')

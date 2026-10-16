@@ -35,6 +35,8 @@ Deux programmes nouveaux, aux niveaux source104et120, passent aussi par cette AP
 
 La lecture des commandes natives préparées identifie maintenant les champs de mémoire locale et de CRS sur deux profils. Une réserve de métadonnées de4 096 produit un champ CRS de4 608 : neuf calculs corrigés passent, six échecs natifs restent conservés. Aucun paquet n’est modifié ou rejoué ; la règle générale reste à établir. [Cartographie, preuves et reproduction](docs/NATIVE_ALLOCATION_QMD.md).
 
+Deux blocs successifs de 65 et 55 niveaux passent avec la réserve testée de 2 560, alors que l’ancien programme à 120 niveaux imbriqués échouait à 3 584. Le programme segmenté contient pourtant davantage de `joinat` : le comptage total n’explique pas ces réservations suffisantes différentes. Neuf nouveaux calculs passent, six échecs numériques restent conservés. Aucun estimateur automatique ni gain de VRAM n’est annoncé. [Expérience, sources et limites](docs/NATIVE_SEGMENTED_CONTROL.md).
+
 Aucun pilote propriétaire, firmware, SDK, exécutable ou résultat binaire n'est publié. Les liens et empreintes permettent de retrouver les références séparément. Le code original est sous licence MIT ; les dépendances conservent leurs propres licences.
 
 La chaîne MSL → AIR → NIR → SM30 couvre maintenant les tableaux privés et les débordements de registres du profil testé : 180 essais de calcul, 48 contrôles sans dispatch et résultats identiques au chemin natif. [Contrat, limites et reproduction](docs/AIR_LOCAL_MEMORY.md).

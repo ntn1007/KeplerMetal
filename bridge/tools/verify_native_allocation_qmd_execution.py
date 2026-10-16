@@ -10,7 +10,9 @@ from verify_control_flow import result as cpu_result
 ROOT=Path(__file__).resolve().parents[1]
 
 
-def verify(root,build,library,reservation_root=None):
+def verify(root,build,library,reservation_root=None,*,oracle=cpu_result,
+           import_validator=allocation_proof,control_reserve=4096):
+    """Default contract is unchanged; alternate experiments supply explicit oracles."""
     inp=terminal(root,reservation_root or ROOT,build);d=load(root/'results.json');lm=load(library/'manifest.json')
     require(inp==load(build/'inputs.json') and inp['client_will_submit']is True
             and inp['static_library_SHA256']==sha(library/'libKeplerMetal.a')==lm['static_library_SHA256']
@@ -27,11 +29,13 @@ def verify(root,build,library,reservation_root=None):
     certificate=root/'assets'/entry['file'];cert=load(certificate);w=cert['metadata_words']
     require(sha(certificate)==entry['SHA256']==d['certificate_SHA256']
             and sha(root/'assets/control_flow.metallib')==manifest['library_sha256']==d['library_SHA256'],'execution asset pins')
-    if mode=='reserved':allocation_proof(d['import'],root/'assets/control_flow.metallib',certificate)
+    if mode=='reserved':
+        require(cert['control_reserve']==control_reserve,'explicit reservation certificate')
+        import_validator(d['import'],root/'assets/control_flow.metallib',certificate)
     else:require(d['import']=={},'unexpected native replacement')
     initial=struct.pack('<32I',*d['variant_initial_words_0_128'])
     require(hashlib.sha256(initial).hexdigest()==d['variant_initial_SHA256'],'initial variant')
-    frame=(w[12]+15)&~15;control=4096 if mode=='reserved'else w[11];budget=frame*64+((control+511)&~511)+512
+    frame=(w[12]+15)&~15;control=control_reserve if mode=='reserved'else w[11];budget=frame*64+((control+511)&~511)+512
     def variant_fields(data):
         require(u64(data,24)==cert['code_bytes']and u32(data,40)==budget and u32(data,44)==cert['code_bytes']//8-1
                 and u32(data,48)==w[7]and u32(data,56)==w[14],'execution variant contract')
@@ -59,7 +63,7 @@ def verify(root,build,library,reservation_root=None):
                 and r['output_bytes']==len(out)==256+n*16 and out[:128]==out[-128:]==b'\xa5'*128,'input/parameters/guards')
         correct=unchanged=other=witnesses=0
         for gid in range(n):
-            expected=cpu_result(depth,gid,seed,reserved);actual=struct.unpack_from('<4I',out,128+16*gid)
+            expected=oracle(depth,gid,seed,reserved);actual=struct.unpack_from('<4I',out,128+16*gid)
             for a,e in zip(actual,expected):
                 if a==e:correct+=1
                 elif a==0xa5a5a5a5:unchanged+=1

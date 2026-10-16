@@ -26,7 +26,7 @@ def mesa_crs(depth):
     return ((depth + 32)*16 + 511) & ~511
 
 
-def analyze(folder):
+def analyze(folder, relative_root=None):
     data = json.loads((folder / 'observations.json').read_text()); output = []
     for row in data['records']:
         capture = folder / row['function'] / 'capture'
@@ -62,7 +62,7 @@ def analyze(folder):
         assert live == 0
         w = row['metadata_words']; nonlexical = {k:counts[k] for k in CONTROL if k not in ['joinat','join','bra','exit'] and counts[k]}
         output.append({'function':row['function'],'source_depth':row['source_depth'],
-                       'observation_file':str((folder/'observations.json').relative_to(ROOT)),
+                       'observation_file':str((folder/'observations.json').relative_to(relative_root or ROOT)),
                        'observation_SHA256':sha(folder/'observations.json'),'code_SHA256':row['code_SHA256'],
                        'listing_SHA256':row['listing_SHA256'],'native_code_bytes':len(code),
                        'native_word11':w[11],'native_frame':w[12],'native_spill':w[14],
