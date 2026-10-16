@@ -33,6 +33,8 @@ La correction de réservation native dispose maintenant d'une API dans le transp
 
 Deux programmes nouveaux, aux niveaux source104et120, passent aussi par cette API inchangée :24essais supplémentaires de durée de vie pour chacune des archives laboratoire et publique. Quatre seuils entre réservations adjacentes sont mesurés, sans transformer leur corrélation en règle universelle. [Résultats et reproduction depuis les sources](docs/NATIVE_ALLOCATION_THRESHOLDS.md).
 
+La lecture des commandes natives préparées identifie maintenant les champs de mémoire locale et de CRS sur deux profils. Une réserve de métadonnées de4 096 produit un champ CRS de4 608 : neuf calculs corrigés passent, six échecs natifs restent conservés. Aucun paquet n’est modifié ou rejoué ; la règle générale reste à établir. [Cartographie, preuves et reproduction](docs/NATIVE_ALLOCATION_QMD.md).
+
 Aucun pilote propriétaire, firmware, SDK, exécutable ou résultat binaire n'est publié. Les liens et empreintes permettent de retrouver les références séparément. Le code original est sous licence MIT ; les dépendances conservent leurs propres licences.
 
 La chaîne MSL → AIR → NIR → SM30 couvre maintenant les tableaux privés et les débordements de registres du profil testé : 180 essais de calcul, 48 contrôles sans dispatch et résultats identiques au chemin natif. [Contrat, limites et reproduction](docs/AIR_LOCAL_MEMORY.md).

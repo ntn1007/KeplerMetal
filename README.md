@@ -6,6 +6,8 @@ Latest native investigation: an explicit allocation API now shares the MRC impor
 
 The unchanged API also passes new source-nesting104/120programs, with24additional lifetime trials on each common/public archive. Adjacent reservation settings distinguish failures from correct results in four native programs; a general allocator remains unproven. [Thresholds, source reproduction and evidence](docs/NATIVE_ALLOCATION_THRESHOLDS.md).
 
+Read-only native command snapshots now map the local-memory and CRS fields on two profiles. A metadata reserve of4,096 produces a prepared CRS field of4,608; nine corrected trials pass while six native failures remain preserved. No packet patch/replay, resident-QMD readback or general allocator is claimed. [Field mapping and reproduction](docs/NATIVE_ALLOCATION_QMD.md).
+
 [Français](README.fr.md) · [Build from source](docs/BUILDING.md) · [Dependencies](docs/DEPENDENCIES.md) · [Status](docs/STATUS.md) · [Architecture](docs/ARCHITECTURE.md)
 
 The reference device is a GeForce GTX 880M, GK104 / SM30, with 8 GiB VRAM in an Intel iMac. The project studies two independent areas:

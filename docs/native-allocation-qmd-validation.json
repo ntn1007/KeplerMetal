@@ -1,0 +1,294 @@
+{
+  "status": "PASS",
+  "base_commit": "ef57c51b0465097d3a2c3cd3bbc1bf9edceaca61",
+  "source_SHA256": {
+    "native_allocation_qmd_capture.mm": "c55c309a109f676b0303deaaddddb954b5ec42ddfb4e43add18d01ec08f2c825",
+    "native_allocation_qmd_execute.mm": "df39de3e115d0b2cd036fa101205be8186fa122b964b112802b534adbb4294a9",
+    "build_native_allocation_qmd_capture.py": "f435612bb2de2d42be78bc2b3fc2e0f60f9b8700c8da585f373d481934eaf853",
+    "analyze_native_allocation_qmd.py": "27b0acb13b2f69a95c11f2fec4015d8a458b8196f8615d38a64a9f60aaaa2a2e",
+    "verify_native_allocation_qmd_execution.py": "2de342dd566dfbca430f333b1e103a09582294d0719fbcd6c6e0b6e996dcac28",
+    "verify_native_allocation_qmd_suite.py": "580fe480fdb3f6d640e6a68a108f9828974999736959fa03b776321818a95548"
+  },
+  "official_reference": {
+    "commit": "9fdf5c4062007929d9f4e6cbad9c9771fe61b880",
+    "SHA256": "8a4ad7edaf88f26bd90fe8bd06353e2b7b7f6703b570e475a7fae7c4da7ab80c",
+    "url": "https://raw.githubusercontent.com/NVIDIA/open-gpu-doc/9fdf5c4062007929d9f4e6cbad9c9771fe61b880/classes/compute/cla0c0qmd.h",
+    "field_ranges": {
+      "QMD_VERSION": {
+        "high_bit": 579,
+        "low_bit": 576
+      },
+      "QMD_MAJOR_VERSION": {
+        "high_bit": 583,
+        "low_bit": 580
+      },
+      "SHADER_LOCAL_MEMORY_LOW_SIZE": {
+        "high_bit": 1463,
+        "low_bit": 1440
+      },
+      "SHADER_LOCAL_MEMORY_HIGH_SIZE": {
+        "high_bit": 1495,
+        "low_bit": 1472
+      },
+      "SHADER_LOCAL_MEMORY_CRS_SIZE": {
+        "high_bit": 1527,
+        "low_bit": 1504
+      },
+      "REGISTER_COUNT": {
+        "high_bit": 1503,
+        "low_bit": 1496
+      },
+      "PROGRAM_OFFSET": {
+        "high_bit": 287,
+        "low_bit": 256
+      },
+      "CTA_RASTER_WIDTH": {
+        "high_bit": 415,
+        "low_bit": 384
+      },
+      "CTA_THREAD_DIMENSION0": {
+        "high_bit": 607,
+        "low_bit": 592
+      }
+    },
+    "local_Mesa_header_identical": true
+  },
+  "paired_memory_fields": [
+    {
+      "function": "depth104",
+      "native_code_SHA256": "3022178c8613e0d11e7457380ebab5622442b60e7dbd5270bbfe17b41f3a18b0",
+      "local_low_bytes": 1904,
+      "local_high_bytes": 1904,
+      "register_count": 63,
+      "native_CRS_bytes": 3072,
+      "corrected_CRS_bytes": 4608,
+      "native_allocation": 124928,
+      "corrected_allocation": 126464
+    },
+    {
+      "function": "depth120",
+      "native_code_SHA256": "3a500914c521ed416f10bf7bc9e2fb29d526785c04535f622a068696c14c7440",
+      "local_low_bytes": 2208,
+      "local_high_bytes": 2208,
+      "register_count": 63,
+      "native_CRS_bytes": 3072,
+      "corrected_CRS_bytes": 4608,
+      "native_allocation": 144384,
+      "corrected_allocation": 145920
+    }
+  ],
+  "totals": {
+    "user_GPU_command_buffers": 45,
+    "compute_trials": 15,
+    "blit_command_buffers": 30,
+    "exact_uint32_results": 3564,
+    "incorrect_uint32_results": 2376,
+    "invocation_witnesses": 891,
+    "guard_bytes": 7680,
+    "parameter_bytes_checked": 7680
+  },
+  "prepared_only_QMDs": 12,
+  "captured_then_committed_QMDs": 15,
+  "correct_compute_trials": 9,
+  "retained_numerical_failure_trials": 6,
+  "cohorts_serialized": true,
+  "excluded_preliminary_uncommitted_QMDs": 3,
+  "preserved_CPU_build_failure": {
+    "root": "results/native-allocation-qmd-capture-build-20261016-02",
+    "GPU_work": 0,
+    "commands_SHA256": "bccafa10d827a6dc9b9234cc095ecdb05036088890b2bb424051170949b6ee3f"
+  },
+  "lab_archive_SHA256": "5636b0d0d158fc985bf9b1df5fd0e16b91909a9a6f48423c175272b7fe4ddb67",
+  "public_archive_SHA256": "9e26d4eb78b772585ae312e1e4ca1a72ef432f02935674ff7f67600cd4488a3c",
+  "system_files_unchanged": 83,
+  "OCLP_unchanged": true,
+  "runtime_unchanged": true,
+  "Qwen_job_ids": [],
+  "new_M1_executions": 0,
+  "performance_benchmark": false,
+  "resident_QMD_readback": false,
+  "driver_commit_rewrites_excluded": false,
+  "general_allocation_rule_proven": false,
+  "full_objective_complete": false,
+  "private_full_verification_SHA256": "02ecff6e56bc90a061e4ea76ed21caf02e1c26772b42f3fa8fbcc14354f8040e",
+  "publication_scope": "Source and scalar summary only; raw packets, GPU programs and binaries remain local",
+  "offline_refusal_controls": {
+    "status": "PASS",
+    "valid_control": "ACCEPTED",
+    "cases": [
+      {
+        "case": "truncated",
+        "status": "EXPECTED_REFUSAL",
+        "gate": "unknown stream length"
+      },
+      {
+        "case": "unknown_method",
+        "status": "EXPECTED_REFUSAL",
+        "gate": "unknown native packet sequence"
+      },
+      {
+        "case": "wrong_subchannel",
+        "status": "EXPECTED_REFUSAL",
+        "gate": "push header"
+      },
+      {
+        "case": "wrong_QMD_version",
+        "status": "EXPECTED_REFUSAL",
+        "gate": "QMD format/geometry/binding identity"
+      },
+      {
+        "case": "wrong_parameter_address",
+        "status": "EXPECTED_REFUSAL",
+        "gate": "QMD format/geometry/binding identity"
+      },
+      {
+        "case": "wrong_register_count",
+        "status": "EXPECTED_REFUSAL",
+        "gate": "QMD local/CRS fields"
+      },
+      {
+        "case": "wrong_CRS",
+        "status": "EXPECTED_REFUSAL",
+        "gate": "QMD local/CRS fields"
+      },
+      {
+        "case": "wrong_QMD_upload_target",
+        "status": "EXPECTED_REFUSAL",
+        "gate": "native QMD/constant upload and launch headers"
+      },
+      {
+        "case": "wrong_constant_buffer_mask",
+        "status": "EXPECTED_REFUSAL",
+        "gate": "QMD format/geometry/binding identity"
+      },
+      {
+        "case": "wrong_program_offset",
+        "status": "EXPECTED_REFUSAL",
+        "gate": "program offset differs from observed variant low32"
+      },
+      {
+        "case": "wrong_decoded_budget",
+        "status": "EXPECTED_REFUSAL",
+        "gate": "QMD fields do not reproduce decoded allocation"
+      },
+      {
+        "case": "wrong_geometry_contract",
+        "status": "EXPECTED_REFUSAL",
+        "gate": "QMD format/geometry/binding identity"
+      },
+      {
+        "case": "wrong_local_high",
+        "status": "EXPECTED_REFUSAL",
+        "gate": "QMD local/CRS fields"
+      },
+      {
+        "case": "unexpected_shared_memory",
+        "status": "EXPECTED_REFUSAL",
+        "gate": "QMD format/geometry/binding identity"
+      }
+    ],
+    "source_stream_SHA256": "f9db7bf62b1b6d2fc55678be2f627f609aa5eb3d0453b8baf5cdb4322ec94dee",
+    "mutated_commands_submitted": 0
+  },
+  "artifacts": [
+    {
+      "root": "results/native-allocation-qmd-native104-20261016-03",
+      "build": "results/native-allocation-qmd-capture-build-20261016-03",
+      "manifest_SHA256": "0123022dea1d9405252eb331b890c058989897afde9f4ae88f45cd58f83aa2ce",
+      "recorded_results_SHA256": "5da5785253cc6280ede7e80d979c4b84a5ea1b256aaaa6cde91110cca6b31fde",
+      "verification_SHA256": "950c49fc3dd11620be1fa905efba514bcc4603f4a2b2a31034d1bc77d3ce350e",
+      "mode": "native",
+      "function": "depth104",
+      "numerical_status": "NOT_RUN",
+      "static_library_SHA256": "5636b0d0d158fc985bf9b1df5fd0e16b91909a9a6f48423c175272b7fe4ddb67"
+    },
+    {
+      "root": "results/native-allocation-qmd-reserved104-20261016-03",
+      "build": "results/native-allocation-qmd-capture-build-20261016-03",
+      "manifest_SHA256": "62d3c987464f2d5f221c23ca92a4bd844cfeffb498198a23dccf53f5fa2d2386",
+      "recorded_results_SHA256": "eebb17137df8fda06697f48449e24849800047e72f31ff3ba89a14f9a7d53b74",
+      "verification_SHA256": "3112c8c1db7a5049e44753a665aa0b1d72f4c45d78454ae41922bc7a88931b19",
+      "mode": "reserved",
+      "function": "depth104",
+      "numerical_status": "NOT_RUN",
+      "static_library_SHA256": "5636b0d0d158fc985bf9b1df5fd0e16b91909a9a6f48423c175272b7fe4ddb67"
+    },
+    {
+      "root": "results/native-allocation-qmd-native120-20261016-03",
+      "build": "results/native-allocation-qmd-capture-build-20261016-03",
+      "manifest_SHA256": "54f3dd08cfbe783f6b104680060f7f15816a1e9ddba377ed9345e4d1d0f724b0",
+      "recorded_results_SHA256": "39b78c74191b30099083ac3680b90467024c920be2d60f4049db05f09ac99127",
+      "verification_SHA256": "1a14e17dde161e0829eb607bde922d9c95d6b81d4c2146b5d6544e8350a391ec",
+      "mode": "native",
+      "function": "depth120",
+      "numerical_status": "NOT_RUN",
+      "static_library_SHA256": "5636b0d0d158fc985bf9b1df5fd0e16b91909a9a6f48423c175272b7fe4ddb67"
+    },
+    {
+      "root": "results/native-allocation-qmd-reserved120-20261016-03",
+      "build": "results/native-allocation-qmd-capture-build-20261016-03",
+      "manifest_SHA256": "671e271f1f17595772b5ad9bd0f7ced5bd49ea53e609e52db816c22d823d2f1e",
+      "recorded_results_SHA256": "056d75906d81fdf0978ada796587bc846b080fc527d7e508180db4b5af81f20a",
+      "verification_SHA256": "014d31160fcf529332369d6d86ed14ba45c68a786dd8c59ec76bd44efe4ed68f",
+      "mode": "reserved",
+      "function": "depth120",
+      "numerical_status": "NOT_RUN",
+      "static_library_SHA256": "5636b0d0d158fc985bf9b1df5fd0e16b91909a9a6f48423c175272b7fe4ddb67"
+    },
+    {
+      "root": "results/native-allocation-qmd-execute-native104-20261016",
+      "build": "results/native-allocation-qmd-execute-build-20261016",
+      "manifest_SHA256": "869499aede6ddbaa2a839bf36f98980d8405048fa9bbe52820d5c2652c2304a3",
+      "recorded_results_SHA256": "1c581426fb2e6da9615eb3c2e32b20ead6b388e5db70a4535314552cd0b5afea",
+      "verification_SHA256": "47779dc31ad22bf4d479b280338f0d15400c616c5a3a04d9dac6385f19c4a90f",
+      "mode": "native",
+      "function": "depth104",
+      "numerical_status": "FAIL",
+      "static_library_SHA256": "5636b0d0d158fc985bf9b1df5fd0e16b91909a9a6f48423c175272b7fe4ddb67"
+    },
+    {
+      "root": "results/native-allocation-qmd-execute-reserved104-20261016",
+      "build": "results/native-allocation-qmd-execute-build-20261016",
+      "manifest_SHA256": "3f7c4be4a5f0d02623b0fd1ffc2d728930102076583f5d96b05ec3bdcca68414",
+      "recorded_results_SHA256": "19993905baa476fe59243f59faf79841341e957ed602db0af942ecbb33beecdf",
+      "verification_SHA256": "40cd3ed1588f1aedd0d8df53e7b5410d39d82b607c4d2e868f4a8cc37b59f9cc",
+      "mode": "reserved",
+      "function": "depth104",
+      "numerical_status": "PASS",
+      "static_library_SHA256": "5636b0d0d158fc985bf9b1df5fd0e16b91909a9a6f48423c175272b7fe4ddb67"
+    },
+    {
+      "root": "results/native-allocation-qmd-execute-native120-20261016",
+      "build": "results/native-allocation-qmd-execute-build-20261016",
+      "manifest_SHA256": "20da08495f19605c796a51811013ef1a440d859f5f339c303afd6f1a4e36baef",
+      "recorded_results_SHA256": "694f43b18514c2e5b754871bea3fd9fdc614c6c2024340bdbf2ff62e867a9016",
+      "verification_SHA256": "299881e7b72b107570e2000f2cb053a0970460971589340cc1745bc1c0db23d0",
+      "mode": "native",
+      "function": "depth120",
+      "numerical_status": "FAIL",
+      "static_library_SHA256": "5636b0d0d158fc985bf9b1df5fd0e16b91909a9a6f48423c175272b7fe4ddb67"
+    },
+    {
+      "root": "results/native-allocation-qmd-execute-reserved120-20261016",
+      "build": "results/native-allocation-qmd-execute-build-20261016",
+      "manifest_SHA256": "2128b2e0874c4dd98bf612b0b5e97d8447f3ba36b553bb4f1902bef2abd13039",
+      "recorded_results_SHA256": "c0f84a1e1b9382d9b5b3055d34b9b3a41b777301a89e6c8b435b8ed623e81fa1",
+      "verification_SHA256": "de4a37b03190d57ac6b25762ef07f211fec23ec0f7134653d6fdc31fa266c37c",
+      "mode": "reserved",
+      "function": "depth120",
+      "numerical_status": "PASS",
+      "static_library_SHA256": "5636b0d0d158fc985bf9b1df5fd0e16b91909a9a6f48423c175272b7fe4ddb67"
+    },
+    {
+      "root": "results/native-allocation-qmd-public-execute-reserved120-20261016",
+      "build": "results/native-allocation-qmd-public-execute-build-20261016",
+      "manifest_SHA256": "d807f8f77f3da2999eafe20843996d7efb27c8c5fe3bd9a08f84e2e4dd6d5228",
+      "recorded_results_SHA256": "321aabe4aa01a980e4b28e12cd7b0d749b0dcd2bdd0a58b6ce51174de69a9398",
+      "verification_SHA256": "3179a7e32bb985d91400da9d506de70eeac5c13563049f4a9b89a489eef7d68d",
+      "mode": "reserved",
+      "function": "depth120",
+      "numerical_status": "PASS",
+      "static_library_SHA256": "9e26d4eb78b772585ae312e1e4ca1a72ef432f02935674ff7f67600cd4488a3c"
+    }
+  ]
+}

@@ -6549,6 +6549,54 @@
       "published_SHA256": "8dbf7a8c35672d45420d6abc563aa37bc25c28038b6dab4f5c9bb857d16ebb1b",
       "bytes": 723,
       "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/native_allocation_qmd_capture.mm",
+      "source_path": "bridge/tools/native_allocation_qmd_capture.mm",
+      "source_SHA256": "c55c309a109f676b0303deaaddddb954b5ec42ddfb4e43add18d01ec08f2c825",
+      "published_SHA256": "c55c309a109f676b0303deaaddddb954b5ec42ddfb4e43add18d01ec08f2c825",
+      "bytes": 9867,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/native_allocation_qmd_execute.mm",
+      "source_path": "bridge/tools/native_allocation_qmd_execute.mm",
+      "source_SHA256": "df39de3e115d0b2cd036fa101205be8186fa122b964b112802b534adbb4294a9",
+      "published_SHA256": "df39de3e115d0b2cd036fa101205be8186fa122b964b112802b534adbb4294a9",
+      "bytes": 8478,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/build_native_allocation_qmd_capture.py",
+      "source_path": "bridge/tools/build_native_allocation_qmd_capture.py",
+      "source_SHA256": "f435612bb2de2d42be78bc2b3fc2e0f60f9b8700c8da585f373d481934eaf853",
+      "published_SHA256": "f435612bb2de2d42be78bc2b3fc2e0f60f9b8700c8da585f373d481934eaf853",
+      "bytes": 2863,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/analyze_native_allocation_qmd.py",
+      "source_path": "bridge/tools/analyze_native_allocation_qmd.py",
+      "source_SHA256": "27b0acb13b2f69a95c11f2fec4015d8a458b8196f8615d38a64a9f60aaaa2a2e",
+      "published_SHA256": "27b0acb13b2f69a95c11f2fec4015d8a458b8196f8615d38a64a9f60aaaa2a2e",
+      "bytes": 8721,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/verify_native_allocation_qmd_execution.py",
+      "source_path": "bridge/tools/verify_native_allocation_qmd_execution.py",
+      "source_SHA256": "2de342dd566dfbca430f333b1e103a09582294d0719fbcd6c6e0b6e996dcac28",
+      "published_SHA256": "2de342dd566dfbca430f333b1e103a09582294d0719fbcd6c6e0b6e996dcac28",
+      "bytes": 7688,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/verify_native_allocation_qmd_suite.py",
+      "source_path": "bridge/tools/verify_native_allocation_qmd_suite.py",
+      "source_SHA256": "580fe480fdb3f6d640e6a68a108f9828974999736959fa03b776321818a95548",
+      "published_SHA256": "580fe480fdb3f6d640e6a68a108f9828974999736959fa03b776321818a95548",
+      "bytes": 15481,
+      "modified_for_publication": false
     }
   ],
   "excluded_source_tools": [
