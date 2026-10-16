@@ -127,19 +127,20 @@
     {
       "path": "bridge/src/KeplerNativeCAS.mm",
       "source_path": "bridge/src/KeplerNativeCAS.mm",
-      "source_SHA256": "0e90972d9024a7d5b1b9ab918fb46dcd3e6af6110d9b4b59233d7cb79d59d712",
-      "published_SHA256": "0e90972d9024a7d5b1b9ab918fb46dcd3e6af6110d9b4b59233d7cb79d59d712",
-      "bytes": 28371,
+      "source_SHA256": "57f598600dbbea9d9da2e60ebb1cbcf677d7bf18d8e420a8c2754425dd0e3f1c",
+      "published_SHA256": "57f598600dbbea9d9da2e60ebb1cbcf677d7bf18d8e420a8c2754425dd0e3f1c",
+      "bytes": 28837,
       "modified_for_publication": false,
-      "previous_published_SHA256": "645d44ee7d0089b517305cd8f29ed8ad1a1fe84a808d036f6380c2652c30a0fc"
+      "previous_published_SHA256": "0e90972d9024a7d5b1b9ab918fb46dcd3e6af6110d9b4b59233d7cb79d59d712"
     },
     {
       "path": "bridge/src/KeplerNativeCASAdapter.inc",
       "source_path": "bridge/src/KeplerNativeCASAdapter.inc",
-      "source_SHA256": "07578b661c256fe7373eb1ef54b404098fff9fac2c66b9156f485774ce833e9b",
-      "published_SHA256": "07578b661c256fe7373eb1ef54b404098fff9fac2c66b9156f485774ce833e9b",
-      "bytes": 11227,
-      "modified_for_publication": false
+      "source_SHA256": "57b86d64a0006d37418b418180b893a778a0da39035ec765efbd23d5ee0a2dfe",
+      "published_SHA256": "57b86d64a0006d37418b418180b893a778a0da39035ec765efbd23d5ee0a2dfe",
+      "bytes": 11244,
+      "modified_for_publication": false,
+      "previous_published_SHA256": "07578b661c256fe7373eb1ef54b404098fff9fac2c66b9156f485774ce833e9b"
     },
     {
       "path": "bridge/src/KeplerNativeCommands.h",
@@ -5873,11 +5874,11 @@
     {
       "path": "bridge/tools/build_cas_descriptor_transport_regression.py",
       "source_path": "bridge/tools/build_cas_descriptor_transport_regression.py",
-      "source_SHA256": "d9dac7ee2b624f60f606b6ae009d7f8e9c794e00a5371926b7b8704ed419a520",
-      "published_SHA256": "d9dac7ee2b624f60f606b6ae009d7f8e9c794e00a5371926b7b8704ed419a520",
-      "bytes": 6527,
+      "source_SHA256": "94881dd80e6fa8a20e8ad19cb22b942251649df3fddf498f770fb81bcb5a0c9f",
+      "published_SHA256": "94881dd80e6fa8a20e8ad19cb22b942251649df3fddf498f770fb81bcb5a0c9f",
+      "bytes": 9808,
       "modified_for_publication": false,
-      "previous_published_SHA256": "7aa00ecb3791585c034643954ea66383498e1413d27717153cc0352fed0e0f27"
+      "previous_published_SHA256": "d9dac7ee2b624f60f606b6ae009d7f8e9c794e00a5371926b7b8704ed419a520"
     },
     {
       "path": "bridge/tools/build_native_pipeline_contract_probe.py",
@@ -6419,6 +6420,94 @@
       "source_SHA256": "12dc85e5a42234667ccf4b5c24dc19c375f94451e2ae2cb9cfd194e26f34bd9e",
       "published_SHA256": "12dc85e5a42234667ccf4b5c24dc19c375f94451e2ae2cb9cfd194e26f34bd9e",
       "bytes": 10755,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/src/KeplerNativeAllocation.h",
+      "source_path": "bridge/src/KeplerNativeAllocation.h",
+      "source_SHA256": "e213281efe74d6d4c01476d87055ec110c70217974e7b20115f3683acd870c19",
+      "published_SHA256": "e213281efe74d6d4c01476d87055ec110c70217974e7b20115f3683acd870c19",
+      "bytes": 1307,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/src/KeplerNativeAllocation.inc",
+      "source_path": "bridge/src/KeplerNativeAllocation.inc",
+      "source_SHA256": "1e139776cd27c127d4190bbe67b93627dc32b415d691502b235d697a58690647",
+      "published_SHA256": "1e139776cd27c127d4190bbe67b93627dc32b415d691502b235d697a58690647",
+      "bytes": 13569,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/native_allocation_runtime_probe.mm",
+      "source_path": "bridge/tools/native_allocation_runtime_probe.mm",
+      "source_SHA256": "50fa2278a8f2d81c4910ab6a69af93009ed2c097229ad4c16e1305bd707316f4",
+      "published_SHA256": "50fa2278a8f2d81c4910ab6a69af93009ed2c097229ad4c16e1305bd707316f4",
+      "bytes": 2380,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/build_native_allocation_runtime_probe.py",
+      "source_path": "bridge/tools/build_native_allocation_runtime_probe.py",
+      "source_SHA256": "ef73d8f6f61267e444c66a1963c22360582607b37b45f8490932eb4df13b1729",
+      "published_SHA256": "ef73d8f6f61267e444c66a1963c22360582607b37b45f8490932eb4df13b1729",
+      "bytes": 4442,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/native_allocation_contract_probe.mm",
+      "source_path": "bridge/tools/native_allocation_contract_probe.mm",
+      "source_SHA256": "2ffb90d54ae5a969c2c6b1da21ca6d7cb52bc8b1b412eb9e1d0e4ff892ce52b6",
+      "published_SHA256": "2ffb90d54ae5a969c2c6b1da21ca6d7cb52bc8b1b412eb9e1d0e4ff892ce52b6",
+      "bytes": 6011,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/build_native_allocation_contract_probe.py",
+      "source_path": "bridge/tools/build_native_allocation_contract_probe.py",
+      "source_SHA256": "2f3a6c5114c2ef141b296bc15390df20b8ee5c22bdc2e48b6f478ff8ebe00d67",
+      "published_SHA256": "2f3a6c5114c2ef141b296bc15390df20b8ee5c22bdc2e48b6f478ff8ebe00d67",
+      "bytes": 2413,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/native_allocation_concurrency_probe.mm",
+      "source_path": "bridge/tools/native_allocation_concurrency_probe.mm",
+      "source_SHA256": "426d9c8b9f9b24361dcb7af1c581c0141d12db835d0ebb890684c07b6901f82d",
+      "published_SHA256": "426d9c8b9f9b24361dcb7af1c581c0141d12db835d0ebb890684c07b6901f82d",
+      "bytes": 8917,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/build_native_allocation_concurrency_probe.py",
+      "source_path": "bridge/tools/build_native_allocation_concurrency_probe.py",
+      "source_SHA256": "a61fe1a3e4f6f87469782e7402b2b49bd90226fd400a38aad994c3e6b1b59718",
+      "published_SHA256": "a61fe1a3e4f6f87469782e7402b2b49bd90226fd400a38aad994c3e6b1b59718",
+      "bytes": 3425,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/NativeAllocationExecution.inc",
+      "source_path": "bridge/tools/NativeAllocationExecution.inc",
+      "source_SHA256": "bdf0564aa26cf9bc5b80bf3b27cdf036228e7a602aafda06215396059e8a57d2",
+      "published_SHA256": "bdf0564aa26cf9bc5b80bf3b27cdf036228e7a602aafda06215396059e8a57d2",
+      "bytes": 2806,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/verify_native_allocation_common.py",
+      "source_path": "bridge/tools/verify_native_allocation_common.py",
+      "source_SHA256": "ff9104945c03f44e07f14f82feeda15ceeddf23aabcce63e769b2af8b8ff8fe3",
+      "published_SHA256": "ff9104945c03f44e07f14f82feeda15ceeddf23aabcce63e769b2af8b8ff8fe3",
+      "bytes": 10603,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/verify_native_allocation_runtime.py",
+      "source_path": "bridge/tools/verify_native_allocation_runtime.py",
+      "source_SHA256": "00e9c12f4ee617bc6acb7999ad3dffb91784e423fd1e782bce62df80980f2da4",
+      "published_SHA256": "00e9c12f4ee617bc6acb7999ad3dffb91784e423fd1e782bce62df80980f2da4",
+      "bytes": 14967,
       "modified_for_publication": false
     }
   ],

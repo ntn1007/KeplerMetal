@@ -1,4 +1,4 @@
-# Status at the source export, 2026-10-15
+# Status at the source export, 2026-10-16
 
 The full goal remains **incomplete**. This is a development source snapshot with private ABI dependencies, not a production display-driver release. No percentage of total completion is assigned: the remaining hardware/API scope is not bounded enough to make that number meaningful.
 
@@ -100,4 +100,10 @@ Two native M1 references pass72 positive and24 no-dispatch trials in total; one 
 
 The strengthened standalone constructor experiment passes228 GPU trials on17 distinct native profiles, with340,784 exact uint32 values,85,196 invocation witnesses and153,600 checked guard bytes. This includes24 lifetime trials after overwriting caller inputs and draining the factory pool. Complete payload and code identity are checked after the original constructor. The48 replay/rounding comparisons remain numerically defective;24 missing-dispatch controls and10 actual pre-dispatch API refusals match their required outcomes. A104,000-byte native program and a4,656-byte spill frame pass with the tested allocation. Eleven semantic comparisons check264 matching files, partly against the archived M1 reference; no new M1 execution or benchmark was run.
 
-The83 system files, OCLP and shared runtime archive remain unchanged. This is explicit level1 integration. A general allocation rule, common-runtime serialization/thread scope and artifact-specific coexistence/concurrency qualification remain open. [Current details](NATIVE_CONTROL_RESERVE_QUALIFICATION.md) · [Evidence](native-control-reserve-qualification.json).
+At that standalone milestone, the83 system files, OCLP and shared runtime archive remained unchanged. It was explicit level1 integration. Its common-runtime work is superseded by the API milestone below; the historical evidence remains scoped to its original archive. [Standalone details](NATIVE_CONTROL_RESERVE_QUALIFICATION.md) · [Evidence](native-control-reserve-qualification.json).
+
+## Native allocation in the common MRC runtime
+
+`KPCreateCertifiedNativeAllocationPipeline` now snapshots a pinned library and certificate, preserves native code, increases only allocation words9/11, and shares the CAS/local/descriptor mutex with a thread-local scope. The six-object lab archive `5636b0d0…` passes228native trials on17profiles,24missing-dispatch controls,16API refusals, controlled simultaneous factory creation,106,749correct CAS operations, and36local/spill regression trials. Total383user command buffers comprise359compute dispatches plus24missing-dispatch controls, with822,116exact uint32 results and161,152guard bytes. All83system hashes and OCLP are unchanged. No benchmark or new M1 run was performed.
+
+A real adapter race was found and fixed: CAS restoration was checked against an IMP sampled before the common lock. The fixed core records restoration while still holding that lock. The failed pre-fix process and an unavailable-profile harness exception remain preserved; neither involved a faulty GPU result. The concurrency test runs GPU computations serially after the factory overlap. The descriptor prelude checks pipeline construction; its producer is not dispatched here. The full historical296-trial suite is NOT RUN on this archive. This is level2 integration for adapted applications, not a driver installation, a general allocation rule or complete Metal3/4 support. [Contract](NATIVE_ALLOCATION_API.md) · [Evidence](native-allocation-runtime-validation.json).

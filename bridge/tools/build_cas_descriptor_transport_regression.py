@@ -3,7 +3,7 @@
 from pathlib import Path
 import argparse,hashlib,json,shutil,subprocess
 ROOT=Path(__file__).resolve().parents[1]
-p=argparse.ArgumentParser();p.add_argument('--out',type=Path,required=True);p.add_argument('--library',type=Path,required=True);p.add_argument('--local-build',type=Path);p.add_argument('--control-build',type=Path);a=p.parse_args();out=a.out.resolve();out.relative_to(ROOT/'results');out.mkdir(exist_ok=False)
+p=argparse.ArgumentParser();p.add_argument('--out',type=Path,required=True);p.add_argument('--library',type=Path,required=True);p.add_argument('--local-build',type=Path);p.add_argument('--control-build',type=Path);p.add_argument('--allocation-build',type=Path);a=p.parse_args();out=a.out.resolve();out.relative_to(ROOT/'results');out.mkdir(exist_ok=False)
 sdk=ROOT/'results/native-cas-sdk-build-20261014-02/KeplerNativeCAS';lib=a.library.resolve();sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();lm=json.loads((lib/'manifest.json').read_text());assert sha(lib/'libKeplerMetal.a')==lm['static_library_SHA256']
 for row in json.loads((sdk/'FILE_MANIFEST.json').read_text())['files']:assert sha(sdk/row['path'])==row['SHA256']
 shutil.copytree(sdk/'assets',out/'assets');shutil.copyfile(lib/'src/KeplerNativeCAS.h',out/'KeplerNativeCAS.h')
@@ -18,6 +18,13 @@ if a.control_build:
  profile=json.loads((control/'assets/depth8.json').read_text());carrier=profile['carrier']['function']
  for source,target in [('control_flow.metallib','control-prelude.metallib'),('depth8.sass','control-prelude.sass'),(carrier+'-native.sass','control-original.sass')]:
   assert sha(control/'assets'/source)==ci['assets_SHA256'][source];shutil.copyfile(control/'assets'/source,out/'assets'/target)
+if a.allocation_build:
+ allocation=a.allocation_build.resolve();ai=json.loads((allocation/'inputs.json').read_text());assert ai['static_library_SHA256']==lm['static_library_SHA256']
+ am=json.loads((allocation/'assets/native-allocation-manifest.json').read_text());entry=am['certificates']['depth96']
+ for source,target in [('control_flow.metallib','allocation-prelude.metallib'),(entry['file'],'allocation-prelude.certificate.json')]:
+  assert sha(allocation/'assets'/source)==ai['assets_SHA256'][source];shutil.copyfile(allocation/'assets'/source,out/'assets'/target)
+ (out/'assets/allocation-prelude.json').write_text(json.dumps({'library_SHA256':am['library_sha256'],'certificate_SHA256':entry['SHA256']},indent=2)+'\n')
+ for name,source in [('KeplerNativeAllocation.h',lib/'src/KeplerNativeAllocation.h'),('NativeAllocationExecution.inc',ROOT/'tools/NativeAllocationExecution.inc')]:shutil.copyfile(source,out/name)
 s=(sdk/'examples/client.mm').read_text();anchor='static NSString *digest(';i=s.index(anchor);s=s[:i]+'''@interface KPCommandIRProducerFactory : NSObject
 + (id<MTLComputePipelineState>)newPipelineForDevice:(id<MTLDevice>)device carrier:(NSData*)carrier program:(NSData*)program descriptor:(MTLComputePipelineDescriptor*)descriptor error:(NSError**)error evidence:(NSDictionary**)evidence;
 @end
@@ -46,6 +53,31 @@ if a.local_build:
  id<MTLComputePipelineState>localPipeline=KPCreateLocalMemoryPipeline(device,localCarrier,@"local32",localCode,{24,128,128,0,0},&error,&localProof);
  if(!localPipeline||![localProof[@"contract_verified"]boolValue])return 9;
  '''+prelude
-s=s.replace(anchor,anchor+prelude,1);anchor='@"mode":mode';assert s.count(anchor)==1;s=s.replace(anchor,anchor+',@"descriptor_transport_prelude":@YES,@"descriptor_transport_import":descriptorProof'+(',@"local_memory_prelude":@YES,@"local_memory_import":localProof'if a.local_build else'')+(',@"control_flow_prelude":@YES,@"control_flow_import":controlProof'if a.control_build else''),1);(out/'cas_client.mm').write_text(s)
+if a.allocation_build:
+ s='#import "KeplerNativeAllocation.h"\n#include <cstring>\n#include "NativeAllocationExecution.inc"\n'+s
+ prelude='''
+ NSDictionary*allocationPins=[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"allocation-prelude.json"]]options:0 error:nil];
+ NSMutableData*allocationLibrary=[NSMutableData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"allocation-prelude.metallib"]];
+ NSMutableData*allocationCertificate=[NSMutableData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"allocation-prelude.certificate.json"]];NSDictionary*allocationProof=nil;
+ id<MTLComputePipelineState>allocationPipeline=KPCreateCertifiedNativeAllocationPipeline(device,allocationLibrary,allocationPins[@"library_SHA256"],allocationCertificate,allocationPins[@"certificate_SHA256"],&error,&allocationProof);
+ if(!allocationPipeline||![allocationProof[@"contract_verified"]boolValue])return 9;
+ memset(allocationLibrary.mutableBytes,0,allocationLibrary.length);memset(allocationCertificate.mutableBytes,0,allocationCertificate.length);
+ '''+prelude
+ anchor_result=' NSDictionary *result=';assert s.count(anchor_result)==1
+ postlude='''
+ NSDictionary*allocationPostlude=@{};NSDictionary*localPostlude=@{};
+ if([mode isEqual:@"execute"]){
+ '''
+ if a.local_build:postlude+='''
+  NSMutableDictionary*localRecord=[KPRunAllocationKernel(device,localPipeline,out,@"local-after-allocation-CAS",0)mutableCopy];
+  if(!localRecord)return 10;localRecord[@"kind"]=@"local";localRecord[@"function"]=@"local32";[localRecord removeObjectForKey:@"depth"];localPostlude=localRecord;
+ '''
+ postlude+='''
+  allocationPostlude=KPRunAllocationKernel(device,allocationPipeline,out,@"allocation-after-CAS",96);
+  if(!allocationPostlude)return 10;
+ }
+ '''
+ s=s.replace(anchor_result,postlude+anchor_result,1)
+s=s.replace(anchor,anchor+prelude,1);anchor='@"mode":mode';assert s.count(anchor)==1;s=s.replace(anchor,anchor+',@"descriptor_transport_prelude":@YES,@"descriptor_transport_import":descriptorProof'+(',@"local_memory_prelude":@YES,@"local_memory_import":localProof'if a.local_build else'')+(',@"control_flow_prelude":@YES,@"control_flow_import":controlProof'if a.control_build else'')+(',@"native_allocation_prelude":@YES,@"native_allocation_import":allocationProof,@"native_allocation_postlude":allocationPostlude,@"local_postlude":localPostlude,@"allocation_inputs_wiped_before_commit":@YES'if a.allocation_build else''),1);(out/'cas_client.mm').write_text(s)
 cmd=['clang++','-arch','x86_64','-O2','-std=c++17','-fobjc-arc','-I',str(out),str(out/'cas_client.mm'),str(lib/'libKeplerMetal.a'),'-Wl,-ObjC','-framework','Metal','-framework','Foundation','-o',str(out/'cas_example')];r=subprocess.run(cmd,capture_output=True,text=True,timeout=45);(out/'build.stdout').write_text(r.stdout);(out/'build.stderr').write_text(r.stderr);(out/'commands.json').write_text(json.dumps([{'argv':cmd,'exit_code':r.returncode}],indent=2)+'\n');assert not r.returncode,r.stderr[-2500:]
-(out/'inputs.json').write_text(json.dumps({'module_static_library_SHA256':sha(lib/'libKeplerMetal.a'),'client_source_SHA256':sha(out/'cas_client.mm'),'public_header_SHA256':sha(out/'KeplerNativeCAS.h'),'local_header_SHA256':sha(out/'KeplerProgramImport.h')if a.local_build else None,'executable_SHA256':sha(out/'cas_example'),'assets':{p.name:sha(p)for p in(out/'assets').iterdir()},'source_generator_SHA256':sha(__file__),'GPU_execution':False},indent=2)+'\n');print(json.dumps({'status':'PASS','out':str(out)}))
+(out/'inputs.json').write_text(json.dumps({'module_static_library_SHA256':sha(lib/'libKeplerMetal.a'),'client_source_SHA256':sha(out/'cas_client.mm'),'public_header_SHA256':sha(out/'KeplerNativeCAS.h'),'local_header_SHA256':sha(out/'KeplerProgramImport.h')if a.local_build else None,'allocation_header_SHA256':sha(out/'KeplerNativeAllocation.h')if a.allocation_build else None,'allocation_execution_helper_SHA256':sha(out/'NativeAllocationExecution.inc')if a.allocation_build else None,'executable_SHA256':sha(out/'cas_example'),'assets':{p.name:sha(p)for p in(out/'assets').iterdir()},'source_generator_SHA256':sha(__file__),'GPU_execution':False},indent=2)+'\n');print(json.dumps({'status':'PASS','out':str(out)}))

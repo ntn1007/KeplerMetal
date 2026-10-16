@@ -2,7 +2,7 @@
 
 Open source research for modernizing the NVIDIA Kepler graphics stack on macOS.
 
-Latest native investigation: the process-local allocation correction passes228 GPU trials on17 native program profiles, including lifetime probes.48 replay/rounding comparison trials still fail;10 actual invalid contracts are refused before dispatch. No installed-driver change or speedup is claimed. [Evidence and integration limits](docs/NATIVE_CONTROL_RESERVE_QUALIFICATION.md).
+Latest native investigation: an explicit allocation API now shares the MRC import runtime, mutex and thread-local context. It preserves NVIDIA-generated code and passes228 GPU trials on17 native profiles, plus refusal, lifetime, CAS, local-memory and controlled factory-concurrency checks. A concurrency race in our CAS adapter is corrected. No installed-driver change or speedup is claimed. [Contract and limits](docs/NATIVE_ALLOCATION_API.md).
 
 [Français](README.fr.md) · [Build from source](docs/BUILDING.md) · [Dependencies](docs/DEPENDENCIES.md) · [Status](docs/STATUS.md) · [Architecture](docs/ARCHITECTURE.md)
 
@@ -19,7 +19,7 @@ This is an experimental source release. It is **not an installable replacement d
 - Readable MSL kernels, C/C++ compiler clients, CPU oracles, bounded GPU test harnesses, negative controls, and lifetime checks.
 - Patches against pinned open source Mesa/NAK, OpenNVDA, and envytools revisions.
 - Historical research and reproduction scripts, including developer examples. Some require locally regenerated fixtures; see [reproducibility](docs/REPRODUCIBILITY.md).
-- A source manifest with original and published SHA-256 hashes. Four files received path/launcher portability edits; the original runtime source is preserved.
+- A source manifest with original and published SHA-256 hashes. Four files received path/launcher portability edits; runtime sources match the qualified source snapshots.
 
 ## First steps
 

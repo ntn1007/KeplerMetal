@@ -119,14 +119,14 @@ extern "C" id<MTLComputePipelineState> KPCreateCertifiedNativeCASPipeline(
   }
   if(!structure){fail(error,@"CAS trampoline/metadata structure refused");if(evidence)*evidence=@{@"gate_accepted":@NO,@"constructor_entered":@NO};return nil;}
   if(expectedNativeOriginal||keepNativeMetadata||certifiedLibraryData||certifiedNativeMetadata){fail(error,@"Nested CAS context refused");return nil;}
-  Class cls=objc_getClass("NVMTLFunctionVariant");
-  Method method=class_getInstanceMethod(cls,sel_registerName("initWithCompilerOutput:size:device:"));
-  IMP before=method?method_getImplementation(method):nullptr;
   certifiedLibraryData=library;certifiedNativeMetadata=metadata;
   @try {
    pipeline=KPInternalCASCreatePreservingNativeCASPipeline(device,nil,function,original,replacement,error,&proof);
   } @finally {certifiedLibraryData=nil;certifiedNativeMetadata=nil;}
-  bool restored=before&&method_getImplementation(method)==before;
+  // The core captures restoration while holding importMutex. Sampling an IMP
+  // before acquiring that mutex can observe another legitimate caller's hook;
+  // sampling after release can observe the next caller. Neither is our baseline.
+  bool restored=[proof[@"constructor_restored"]boolValue];
   if(pipeline&&!restored){[pipeline release];pipeline=nil;fail(error,@"CAS constructor was not restored");}
   if(pipeline)objc_setAssociatedObject(pipeline,&certifiedInputsKey,@[library,certificate],OBJC_ASSOCIATION_RETAIN_NONATOMIC);
   if(evidence)*evidence=@{@"gate_accepted":@YES,@"function":function,@"library_SHA256":kpCASDigest(library),

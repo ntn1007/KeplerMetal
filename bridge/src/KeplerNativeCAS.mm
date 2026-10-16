@@ -29,6 +29,7 @@ struct Context {
 std::mutex importMutex;
 std::atomic<IMP> originalInit{nullptr};
 thread_local Context *activeContext=nullptr;
+thread_local bool nativeAllocationScopeActive=false;
 thread_local NSData *expectedNativeOriginal=nullptr;
 thread_local bool keepNativeMetadata=false;
 thread_local NSData *certifiedLibraryData=nil,*certifiedNativeMetadata=nil;
@@ -211,6 +212,7 @@ bool driverProfile(IMP implementation,NSError**error){
 
 extern "C" id<MTLComputePipelineState> KPInternalCASCreatePipeline(id<MTLDevice> device,NSURL*carrierLibrary,NSString*function,NSData*sm30Code,KeplerImportConfig config,NSError**error,NSDictionary**evidence){
  if(error)*error=nil;if(evidence)*evidence=nil;
+ if(nativeAllocationScopeActive){fail(error,@"Nested import in native allocation scope");return nil;}
  sm30Code=[[sm30Code copy]autorelease];
  if(!device||![device.name isEqual:@"NVIDIA GeForce GTX 880M"]||!sm30Code.length||sm30Code.length%64||sm30Code.length>65536||config.registers<24||config.registers>63){fail(error,@"Unqualified GPU, code size or register contract");return nil;}
  if((config.launch_word_9!=0&&config.launch_word_9!=576)||(config.launch_word_11!=0&&config.launch_word_11!=576)){fail(error,@"Unqualified launch metadata values");return nil;}
@@ -238,8 +240,10 @@ extern "C" id<MTLComputePipelineState> KPInternalCASCreatePipeline(id<MTLDevice>
   }
  } @catch(NSException*exception){fail(error,exception.reason?:@"Pipeline exception");}
  @finally {method_setImplementation(method,saved);activeContext=nullptr;}
+ bool constructorRestored=method_getImplementation(method)==saved;
+ if(!constructorRestored)context.rejected=true;
  [entry release];[library release];
- if(evidence)*evidence=@{@"device":device.name,@"registry_id":@(device.registryID),@"contract_verified":@(complete(context)),@"target_imports":@(context.targetImports),@"verified_imports":@(context.verifiedImports),@"rejected_import":@(context.rejected),@"driver_sha256":@(qualifiedHash),@"events":context.events,@"scope":@"constructor payload and decoded metadata validation; GPU execution requires separate dispatch/result checks"};
+ if(evidence)*evidence=@{@"device":device.name,@"registry_id":@(device.registryID),@"contract_verified":@(complete(context)),@"constructor_restored":@(constructorRestored),@"target_imports":@(context.targetImports),@"verified_imports":@(context.verifiedImports),@"rejected_import":@(context.rejected),@"driver_sha256":@(qualifiedHash),@"events":context.events,@"scope":@"constructor payload and decoded metadata validation; GPU execution requires separate dispatch/result checks"};
  if(pipeline&&!complete(context)){[pipeline release];pipeline=nil;fail(error,@"Decoded program contract did not match; dispatch prohibited");}
  if(pipeline)objc_setAssociatedObject(pipeline,&retainedPayloadKey,context.payloads,OBJC_ASSOCIATION_RETAIN_NONATOMIC);
  return pipeline;
@@ -306,6 +310,7 @@ extern "C" id<MTLComputePipelineState> KPInternalCreateApprovedSM30PipelineWithD
 
 static id<MTLRenderPipelineState> createGraphicsStage(id<MTLDevice>device,MTLRenderPipelineDescriptor*descriptor,NSData*code,KeplerImportConfig config,uint32_t stage,NSError**error,NSDictionary**evidence,NSData*vertex=nil,KeplerImportConfig vertexConfig={}){
  if(error)*error=nil;if(evidence)*evidence=nil;
+ if(nativeAllocationScopeActive){fail(error,@"Nested graphics import in native allocation scope");return nil;}
  code=[[code copy]autorelease];vertex=[[vertex copy]autorelease];
  if(!device||![device.name isEqual:@"NVIDIA GeForce GTX 880M"]||!code.length||code.length%64||code.length>65536||config.registers<1||config.registers>63){fail(error,@"Unqualified render GPU, code or register contract");return nil;}
  if(config.launch_word_9||config.launch_word_11){fail(error,@"Graphics control-stack metadata not yet qualified");return nil;}
@@ -369,3 +374,4 @@ extern "C" id<MTLComputePipelineState> KPInternalCASCreatePreservingNativeCASPip
 }
 
 #include "KeplerNativeCASAdapter.inc"
+#include "KeplerNativeAllocation.inc"

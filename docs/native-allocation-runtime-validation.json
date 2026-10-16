@@ -1,0 +1,153 @@
+{
+  "schema": 1,
+  "date": "2026-10-16",
+  "base_commit": "1a08d0a41446f8930efc2634b14d4b1d41691ab6",
+  "scope": "Pinned native allocation API in common MRC runtime; adapted application only",
+  "integration_level": 2,
+  "driver_SHA256": "2b89839c425d95934f5e01f16c8683fe53432df410292ec8e554b21c98d6c054",
+  "laboratory": {
+    "library_SHA256": "5636b0d0d158fc985bf9b1df5fd0e16b91909a9a6f48423c175272b7fe4ddb67",
+    "positive_native_trials": 228,
+    "distinct_native_profiles": 17,
+    "lifetime_native_trials": 24,
+    "no_dispatch_trials": 24,
+    "total_user_GPU_command_buffers": 383,
+    "total_compute_dispatches": 359,
+    "total_exact_uint32_results": 822116,
+    "total_guard_bytes": 161152,
+    "correct_CAS_operations": 106749,
+    "system_files_unchanged": 83,
+    "OCLP_unchanged": true
+  },
+  "API_refusals": {
+    "status": "PASS",
+    "cases": 16,
+    "GPU_command_buffers": 0,
+    "phases": {
+      "gate": 11,
+      "missing_callback": 1,
+      "constructor": 4
+    }
+  },
+  "CAS_refusals": {
+    "status": "PASS",
+    "mode": "negative",
+    "pre_constructor_rejections": 6,
+    "constructor_pin_rejections": 2,
+    "user_GPU_command_buffers": 0
+  },
+  "factory_concurrency": {
+    "status": "PASS",
+    "actual_unrelated_native_passthrough": true,
+    "CAS_waited_for_common_mutex": true,
+    "GPU_computations_serial": true,
+    "GPU_command_buffers": 3
+  },
+  "local_regressions": [
+    {
+      "status": "PASS",
+      "function": "local1024",
+      "trials": 12,
+      "kernel_dispatches": 12,
+      "exact_uint32_results": 17936,
+      "guard_bytes": 6144,
+      "negative_expected_words_absent": 0,
+      "performance_benchmark": false,
+      "full_objective_complete": false
+    },
+    {
+      "status": "PASS",
+      "function": "pressure96",
+      "trials": 12,
+      "kernel_dispatches": 12,
+      "exact_uint32_results": 17936,
+      "guard_bytes": 6144,
+      "negative_expected_words_absent": 0,
+      "performance_benchmark": false,
+      "full_objective_complete": false
+    },
+    {
+      "status": "PASS",
+      "function": "pressure32",
+      "trials": 12,
+      "kernel_dispatches": 12,
+      "exact_uint32_results": 17936,
+      "guard_bytes": 6144,
+      "negative_expected_words_absent": 0,
+      "performance_benchmark": false,
+      "full_objective_complete": false
+    }
+  ],
+  "public_rebuild": {
+    "status": "PASS",
+    "scope": "Artifact-specific public seven-object archive smoke",
+    "library_SHA256": "9e26d4eb78b772585ae312e1e4ca1a72ef432f02935674ff7f67600cd4488a3c",
+    "library_manifest_SHA256": "10440f267cf805e4fe047c03d9438203f8e6c303f5ca1e13eb9edcf79e2941b8",
+    "SDK": "26.2",
+    "architecture": "x86_64",
+    "runtime_objects": 7,
+    "same_common_runtime_source_as_lab": true,
+    "native_compute_trials": 36,
+    "lifetime_trials": 24,
+    "total_user_GPU_command_buffers": 39,
+    "total_exact_uint32_results": 54468,
+    "total_guard_bytes": 19584,
+    "full_lab_matrix": "NOT RUN",
+    "historical_qualification_inherited": false,
+    "performance_benchmark": false,
+    "full_objective_complete": false
+  },
+  "evidence": {
+    "laboratory": "bridge/results/native-allocation-runtime-progress-20261016/delivery-verification.json",
+    "laboratory_SHA256": "0c3d0da1c6e94f9be42cfc8b76661a0cfc59e624b043d2e7ac5419f2ba18f36a",
+    "public": "bridge/results/native-allocation-runtime-progress-20261016/public-verification.json",
+    "public_SHA256": "ab42b2eaf60ec83d48a0f5e91296edf2d1d21ca74766692eac1683b5ededd032",
+    "raw_artifacts_published": false
+  },
+  "verifier_source_SHA256": {
+    "verify_native_allocation_runtime.py": "00e9c12f4ee617bc6acb7999ad3dffb91784e423fd1e782bce62df80980f2da4",
+    "verify_native_allocation_common.py": "ff9104945c03f44e07f14f82feeda15ceeddf23aabcce63e769b2af8b8ff8fe3",
+    "qualify_native_reserve.py": "cdd81f958aba0b9a23b8b77b64c8d7970bba5180f3f82e70382d872bbec9077e",
+    "verify_native_control_reserve.py": "6ba93e85fda6d515db3e12c4ff5648fcee29c89c8fa8e0105b309cf85a26ed9c",
+    "verify_control_flow.py": "8f7ab8957c0c51c579b27504843b3ee4bc5a1f6501ddbca3bcc125504fa5d532",
+    "verify_local_memory.py": "8769fb470b9f49683b33f7d884fc4aa844038fe2e291e47bd008d3347553d417",
+    "verify_native_cas_sdk.py": "247c97e9fdbc0c0ae2098251210b01fbe5129a79be181e2e5772b6a618cf7bbf"
+  },
+  "preserved_failures": [
+    {
+      "scope": "Pre-fix CAS factory restoration check",
+      "status": "FAIL",
+      "exit_code": 3,
+      "GPU_kernel_dispatches": 0,
+      "cause": "Our adapter sampled its IMP baseline before the shared mutex; fixed by restoration evidence under lock."
+    },
+    {
+      "scope": "Unavailable local profile name",
+      "status": "FAIL",
+      "exit_code": -6,
+      "GPU_kernel_dispatches": 0,
+      "cause": "pressure96_forced_spill is absent; nil JSON data threw before pipeline construction. Existing pressure96 and pressure32_forced_spill profiles pass."
+    }
+  ],
+  "not_run": [
+    "Full historical296-trial library/function suite on these archives",
+    "Full lab matrix on public seven-object archive",
+    "New M1 reference",
+    "Performance benchmarks",
+    "Installed-driver/transparent ordinary-application integration"
+  ],
+  "limits": [
+    "17 pinned profiles; reserve4096 is tested, no general allocation rule",
+    "Constructor payload identity is not resident instruction readback",
+    "Concurrent factory creation tested; actual GPU kernels serialized",
+    "Coexistence descriptor prelude creates a PSO, no descriptor producer dispatch",
+    "Full historical 296-trial library/function suite NOT RUN on this archive",
+    "Public seven-object archive has separate artifact-specific qualification",
+    "No installed-driver change, general Metal3/4 support or speedup claim"
+  ],
+  "system_driver_modified": false,
+  "OCLP_modified": false,
+  "proprietary_components_published": false,
+  "Qwen_job_ids": [],
+  "full_objective_complete": false
+}
