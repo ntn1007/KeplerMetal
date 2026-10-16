@@ -4,6 +4,8 @@ Open source research for modernizing the NVIDIA Kepler graphics stack on macOS.
 
 Latest native investigation: an explicit allocation API now shares the MRC import runtime, mutex and thread-local context. It preserves NVIDIA-generated code and passes228 GPU trials on17 native profiles, plus refusal, lifetime, CAS, local-memory and controlled factory-concurrency checks. A concurrency race in our CAS adapter is corrected. No installed-driver change or speedup is claimed. [Contract and limits](docs/NATIVE_ALLOCATION_API.md).
 
+The unchanged API also passes new source-nesting104/120programs, with24additional lifetime trials on each common/public archive. Adjacent reservation settings distinguish failures from correct results in four native programs; a general allocator remains unproven. [Thresholds, source reproduction and evidence](docs/NATIVE_ALLOCATION_THRESHOLDS.md).
+
 [Français](README.fr.md) · [Build from source](docs/BUILDING.md) · [Dependencies](docs/DEPENDENCIES.md) · [Status](docs/STATUS.md) · [Architecture](docs/ARCHITECTURE.md)
 
 The reference device is a GeForce GTX 880M, GK104 / SM30, with 8 GiB VRAM in an Intel iMac. The project studies two independent areas:

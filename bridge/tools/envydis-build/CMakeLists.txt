@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.5)
+project(KeplerOfflineDisassembler C)
+set(ENVYTOOLS_SOURCE "" CACHE PATH "Pinned envytools source directory")
+if(NOT EXISTS "${ENVYTOOLS_SOURCE}/envydis/envydis.c")
+  message(FATAL_ERROR "Set ENVYTOOLS_SOURCE to the pinned source checkout")
+endif()
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -std=gnu11")
+file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/include-generated")
+include_directories("${ENVYTOOLS_SOURCE}/include" "${CMAKE_BINARY_DIR}/include-generated")
+# Build only file parsers, ISA tables and disassembly. No GPU-access tools.
+add_subdirectory("${ENVYTOOLS_SOURCE}/util" util)
+add_subdirectory("${ENVYTOOLS_SOURCE}/easm" easm)
+add_subdirectory("${ENVYTOOLS_SOURCE}/envydis" envydis)

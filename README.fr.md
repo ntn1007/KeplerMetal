@@ -31,6 +31,8 @@ Le transport accepte aussi les programmes SM30 à mémoire locale et débordemen
 
 La correction de réservation native dispose maintenant d'une API dans le transport MRC commun : instantanés immuables, verrou partagé et contexte par thread. Elle conserve le code NVIDIA et passe228essais sur17profils, complétés par les refus, la durée de vie, le CAS, la mémoire locale et une concurrence contrôlée des créations de pipelines. Un défaut de concurrence de notre adaptateur CAS a été corrigé. L'archive laboratoire totalise383command buffers, dont359dispatchs de calcul, et822 116valeurs exactes. Les composants système restent inchangés. Aucun gain de vitesse n'est annoncé. [Contrat et limites](docs/NATIVE_ALLOCATION_API.md).
 
+Deux programmes nouveaux, aux niveaux source104et120, passent aussi par cette API inchangée :24essais supplémentaires de durée de vie pour chacune des archives laboratoire et publique. Quatre seuils entre réservations adjacentes sont mesurés, sans transformer leur corrélation en règle universelle. [Résultats et reproduction depuis les sources](docs/NATIVE_ALLOCATION_THRESHOLDS.md).
+
 Aucun pilote propriétaire, firmware, SDK, exécutable ou résultat binaire n'est publié. Les liens et empreintes permettent de retrouver les références séparément. Le code original est sous licence MIT ; les dépendances conservent leurs propres licences.
 
 La chaîne MSL → AIR → NIR → SM30 couvre maintenant les tableaux privés et les débordements de registres du profil testé : 180 essais de calcul, 48 contrôles sans dispatch et résultats identiques au chemin natif. [Contrat, limites et reproduction](docs/AIR_LOCAL_MEMORY.md).

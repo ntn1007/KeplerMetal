@@ -1,0 +1,123 @@
+{
+  "schema": 1,
+  "date": "2026-10-16",
+  "base_commit": "a93c44f5caa4a2f4c6e024ad266ef5d2b1e755c2",
+  "status": "EVIDENCE_VERIFIED",
+  "native_original_status": "FAIL for recorded controls",
+  "thresholds": [
+    {
+      "depth": 65,
+      "lower_FAIL": 2048,
+      "upper_PASS": 2560,
+      "step": 512,
+      "code_SHA256": "d787b66c2edb7ff8d87d8196dc9d442badee253a9df9c019ff45278a5db835a2",
+      "universal_minimum_proven": false
+    },
+    {
+      "depth": 96,
+      "lower_FAIL": 2560,
+      "upper_PASS": 3072,
+      "step": 512,
+      "code_SHA256": "d8c0047a37e9170aecaf2aa4936fe9969dda3db5f9f5e5f0e6acc04bbabb9f7a",
+      "universal_minimum_proven": false
+    },
+    {
+      "depth": 104,
+      "lower_FAIL": 3072,
+      "upper_PASS": 3584,
+      "step": 512,
+      "code_SHA256": "3022178c8613e0d11e7457380ebab5622442b60e7dbd5270bbfe17b41f3a18b0",
+      "universal_minimum_proven": false
+    },
+    {
+      "depth": 120,
+      "lower_FAIL": 3584,
+      "upper_PASS": 4096,
+      "step": 512,
+      "code_SHA256": "3a500914c521ed416f10bf7bc9e2fb29d526785c04535f622a068696c14c7440",
+      "universal_minimum_proven": false
+    }
+  ],
+  "new_native_programs": [
+    {
+      "function": "depth104",
+      "source_depth": 104,
+      "GPR": 63,
+      "metadata_word9": 123296,
+      "metadata_word11": 2208,
+      "native_frame": 1892,
+      "native_spill": 1892,
+      "decoded_allocation_word40": 124928,
+      "code_bytes": 47104,
+      "code_SHA256": "3022178c8613e0d11e7457380ebab5622442b60e7dbd5270bbfe17b41f3a18b0",
+      "control_instructions": 527
+    },
+    {
+      "function": "depth120",
+      "source_depth": 120,
+      "GPR": 63,
+      "metadata_word9": 143776,
+      "metadata_word11": 2464,
+      "native_frame": 2208,
+      "native_spill": 2208,
+      "decoded_allocation_word40": 144384,
+      "code_bytes": 52160,
+      "code_SHA256": "3a500914c521ed416f10bf7bc9e2fb29d526785c04535f622a068696c14c7440",
+      "control_instructions": 607
+    }
+  ],
+  "new_trials": {
+    "new_positive_compute_trials": 120,
+    "new_numeric_failure_trials": 48,
+    "new_exact_uint32_results": 179360,
+    "new_incorrect_uint32_results": 71744,
+    "new_guard_bytes": 86016,
+    "new_common_API_trials": 24,
+    "new_public_API_trials": 24
+  },
+  "historical_failure_controls_rechecked": 48,
+  "historical_GPU_rerun": false,
+  "static_listings": {
+    "historical": 25,
+    "new": 2,
+    "every_word_checked": true,
+    "dynamic_hardware_CRS_depth_established": false
+  },
+  "common_archive_unchanged_SHA256": "5636b0d0d158fc985bf9b1df5fd0e16b91909a9a6f48423c175272b7fe4ddb67",
+  "public_archive_unchanged_SHA256": "9e26d4eb78b772585ae312e1e4ca1a72ef432f02935674ff7f67600cd4488a3c",
+  "common_API_reserve_still": 4096,
+  "runtime_modified": false,
+  "API_lifetime_trials": 48,
+  "matching_semantic_files": 96,
+  "general_allocation_rule_proven": false,
+  "source_nesting_is_not_dynamic_CRS_depth": true,
+  "source_function_provenance": {
+    "current_file_differs_from_archive": true,
+    "CRS_function_identical_to_archive": true,
+    "function_SHA256": "bd93939ea0f04cdc2c8fa483fcd659c4ad1b96bf6e319d84706119c8d091a539",
+    "archive_member": "mesa-26.2.4/src/nouveau/compiler/nak/sm20.rs",
+    "formula": "depth<=16:0; depth<=32:1024; otherwise align512((depth+32)*16)",
+    "upstream_reference": "https://gitlab.freedesktop.org/mesa/mesa/-/blob/mesa-26.2.4/src/nouveau/compiler/nak/sm20.rs",
+    "local_modifications_do_not_alter_this_function": true
+  },
+  "evidence": {
+    "path": "bridge/results/native-allocation-rule-progress-20261016/final-verification.json",
+    "SHA256": "3fe71835fb39362fc524fcebbdf8a647c683bfcf63f2fa08c3bcb99d644229d1",
+    "raw_proprietary_artifacts_published": false
+  },
+  "system_files_unchanged": 83,
+  "OCLP_unchanged": true,
+  "Qwen_job_ids": [],
+  "new_M1_executions": 0,
+  "performance_benchmark": false,
+  "measured_VRAM_savings": false,
+  "limits": [
+    "Four sampled adjacent reservation thresholds, not a universal or minimum formula",
+    "25old+2new byte-bound listings; lexical join overlap is not actual dynamic stack depth",
+    "Common API remains pinned to reserve4096; intermediate settings are standalone experiments",
+    "New104/120 programs qualified; arbitrary shaders, graphics stages and transparent system integration remain open",
+    "Metadata quota changes are not measured VRAM savings or performance gains"
+  ],
+  "next": "Map constructor allocation to actual submitted native CRS/QMD fields before automatic allocator integration",
+  "full_objective_complete": false
+}

@@ -6509,6 +6509,46 @@
       "published_SHA256": "00e9c12f4ee617bc6acb7999ad3dffb91784e423fd1e782bce62df80980f2da4",
       "bytes": 14967,
       "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/build_native_reserve_sweep.py",
+      "source_path": "bridge/tools/build_native_reserve_sweep.py",
+      "source_SHA256": "aa67de67305089e03f55a5cb3fcdf99604ec51a0368cdf7c795ffe94ded5efb0",
+      "published_SHA256": "aa67de67305089e03f55a5cb3fcdf99604ec51a0368cdf7c795ffe94ded5efb0",
+      "bytes": 3941,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/verify_native_reserve_sweep.py",
+      "source_path": "bridge/tools/verify_native_reserve_sweep.py",
+      "source_SHA256": "8d97d626c9e522db64e34fcddac2c5d67cc97e10d7105cb00caee0e2c413bda7",
+      "published_SHA256": "8d97d626c9e522db64e34fcddac2c5d67cc97e10d7105cb00caee0e2c413bda7",
+      "bytes": 6474,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/analyze_native_control_reserve.py",
+      "source_path": "bridge/tools/analyze_native_control_reserve.py",
+      "source_SHA256": "799973094732a66dcd148ea07c07f216bb15efe1bd3f6ba86e37a607a3002636",
+      "published_SHA256": "799973094732a66dcd148ea07c07f216bb15efe1bd3f6ba86e37a607a3002636",
+      "bytes": 5208,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/verify_native_allocation_rule.py",
+      "source_path": "bridge/tools/verify_native_allocation_rule.py",
+      "source_SHA256": "0b217d3b493ca6000d21f39c39a0f65be8b1270ca3cef7804629040079819789",
+      "published_SHA256": "0b217d3b493ca6000d21f39c39a0f65be8b1270ca3cef7804629040079819789",
+      "bytes": 11650,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/envydis-build/CMakeLists.txt",
+      "source_path": "bridge/tools/envydis-build/CMakeLists.txt",
+      "source_SHA256": "8dbf7a8c35672d45420d6abc563aa37bc25c28038b6dab4f5c9bb857d16ebb1b",
+      "published_SHA256": "8dbf7a8c35672d45420d6abc563aa37bc25c28038b6dab4f5c9bb857d16ebb1b",
+      "bytes": 723,
+      "modified_for_publication": false
     }
   ],
   "excluded_source_tools": [
