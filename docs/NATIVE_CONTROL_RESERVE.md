@@ -1,5 +1,7 @@
 # Native control allocation: a targeted application-local correction
 
+**Current follow-up:** the strengthened implementation passes228 GPU trials on17 native program profiles, including24 lifetime trials. Actual pre-dispatch refusals and unchanged failing comparisons are retained. [Current qualification and integration limits](NATIVE_CONTROL_RESERVE_QUALIFICATION.md).
+
 Two unchanged NVIDIA native programs, `depth65` and `depth96`, produce correct GPU results after increasing their metadata reservation to 4,096. This is a correction inside the experiment's process, using the existing driver and native compiler output. It is not an installed-driver patch, a new Metal API, a general compiler fix or a performance result.
 
 The original failing programs and all failed controls are retained. The earlier standard matrix still fails on the unmodified native96 path; this separate opt-in experiment does not retroactively turn it into a passing qualification. See the [historical control-flow report](CONTROL_FLOW.md) and [recorded verification](native-control-reserve-validation.json).

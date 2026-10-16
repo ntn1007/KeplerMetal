@@ -2,7 +2,7 @@
 
 Open source research for modernizing the NVIDIA Kepler graphics stack on macOS.
 
-Latest native investigation: unchanged NVIDIA programs at source depths65/96 pass24 trials after a targeted, process-local allocation correction;48 replay/rounding comparison trials still fail. The same original iMac metallib passes an M1 correctness reference. No installed-driver change or speedup is claimed. [Evidence and reproduction](docs/NATIVE_CONTROL_RESERVE.md).
+Latest native investigation: the process-local allocation correction passes228 GPU trials on17 native program profiles, including lifetime probes.48 replay/rounding comparison trials still fail;10 actual invalid contracts are refused before dispatch. No installed-driver change or speedup is claimed. [Evidence and integration limits](docs/NATIVE_CONTROL_RESERVE_QUALIFICATION.md).
 
 [Français](README.fr.md) · [Build from source](docs/BUILDING.md) · [Dependencies](docs/DEPENDENCIES.md) · [Status](docs/STATUS.md) · [Architecture](docs/ARCHITECTURE.md)
 

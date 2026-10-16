@@ -21,7 +21,8 @@ static void error_(NSError**e,NSString*s){if(e)*e=[NSError errorWithDomain:@"Kep
 static id init_(id self,SEL selector,const void*input,NSUInteger length,id device){
  State*s=active;if(!s)return ((id(*)(id,SEL,const void*,NSUInteger,id))original_)(self,selector,input,length,device);
  s->calls++;size_t metadata=0,code=0,codeSize=0;unsigned nm=0,nc=0;bool valid=input&&length>=24&&length<=8*1024*1024;
- const auto*b=(const unsigned char*)input;size_t offset=8;valid=valid&&(u32(b,0)==7||u32(b,0)==8||u32(b,0)==9)&&u32(b,4)==length;
+ NSData*snapshot=valid?[NSData dataWithBytes:input length:length]:nil;
+ const auto*b=(const unsigned char*)(snapshot?snapshot.bytes:input);size_t offset=8;valid=valid&&(u32(b,0)==7||u32(b,0)==8||u32(b,0)==9)&&u32(b,4)==length;
  for(unsigned i=0;valid&&i<32;i++){
   if(offset>length||length-offset<16){valid=false;break;}uint64_t next=u64(b,offset);uint32_t kind=u32(b,offset+8),size=u32(b,offset+12);
   if(size>length-offset-16){valid=false;break;}if(i==0)valid=kind==1&&size==4&&u32(b,offset+16)==5;
@@ -47,15 +48,21 @@ static id init_(id self,SEL selector,const void*input,NSUInteger length,id devic
  valid=valid&&reserve>=oldControl&&reserve<=4096&&(!s->reserve||reserve%512==0)&&frame<=16384&&u32(b,metadata+36)==frame*64+oldControl;
  NSMutableData*data=nil;NSMutableDictionary*event=[NSMutableDictionary dictionaryWithDictionary:@{@"certificate_matches":@(valid),@"requested_reserve":@(s->reserve),@"parsed":@(parsed),@"metadata_match":@(metadataMatch),@"code_match":@(codeMatch),@"actual_code_SHA256":actualCodeHash,@"actual_metadata_words":actualWords,@"metadata_sections":@(nm),@"code_sections":@(nc)}];
  if(valid){
-  data=[NSMutableData dataWithBytes:input length:length];put(data.mutableBytes,metadata+36,frame*64+reserve);put(data.mutableBytes,metadata+44,reserve);
+  data=[NSMutableData dataWithData:snapshot];put(data.mutableBytes,metadata+36,frame*64+reserve);put(data.mutableBytes,metadata+44,reserve);
   bool same=true;const auto*patched=(const unsigned char*)data.bytes;
   for(size_t i=0;i<length;i++)if(!((i>=metadata+36&&i<metadata+40)||(i>=metadata+44&&i<metadata+48))&&b[i]!=patched[i])same=false;
   event[@"only_metadata_words9_11_changed"]=@(same);event[@"native_code_identical"]=@(memcmp(b+code,patched+code,codeSize)==0);event[@"old_control"]=@(oldControl);event[@"new_control"]=@(reserve);event[@"native_frame"]=@(frame);event[@"native_GPR"]=@(u32(b,metadata+28));event[@"code_bytes"]=@(codeSize);
   valid=valid&&same;[s->payloads addObject:data];
  }
+ NSString*payloadHash=data?sha(data):@"";
  if(!valid)s->rejected=true;
  id result=((id(*)(id,SEL,const void*,NSUInteger,id))original_)(self,selector,valid?data.bytes:input,length,device);
  if(result&&valid){
+  NSString*postCodeHash=sha([NSData dataWithBytes:(const unsigned char*)data.bytes+code length:codeSize]);
+  bool postCode=[postCodeHash isEqual:s->codeHash],postPayload=[sha(data)isEqual:payloadHash];
+  event[@"native_code_identical_after_constructor"]=@(postCode);event[@"post_constructor_code_SHA256"]=postCodeHash;
+  event[@"payload_unchanged_after_constructor"]=@(postPayload);event[@"patched_payload_SHA256"]=payloadHash;
+  event[@"input_snapshot_SHA256"]=sha(snapshot);if(!postCode||!postPayload)s->rejected=true;
   Ivar iv=class_getInstanceVariable(object_getClass(result),"_variant");uintptr_t pointer=0;
   if(iv&&ivar_getOffset(iv)==32)memcpy(&pointer,(const char*)result+32,8);
   unsigned char v[128]={};mach_vm_size_t read=0;kern_return_t status=pointer?mach_vm_read_overwrite(mach_task_self(),pointer,sizeof(v),(mach_vm_address_t)v,&read):KERN_INVALID_ADDRESS;
@@ -69,19 +76,20 @@ static id init_(id self,SEL selector,const void*input,NSUInteger length,id devic
 extern "C" id<MTLComputePipelineState> KPExperimentalCreateNativeReservePipeline(
  id<MTLDevice>d,NSURL*library,NSString*function,NSData*certificate,NSString*codeHash,uint32_t reserve,NSError**error,NSDictionary**proof) NS_RETURNS_RETAINED {
  if(error)*error=nil;if(proof)*proof=nil;
- if(!d||![d.name isEqual:@"NVIDIA GeForce GTX 880M"]||certificate.length!=232||codeHash.length!=64||reserve>4096||(reserve&&reserve%512)){error_(error,@"Invalid experiment contract");return nil;}
+ if(!d||![d.name isEqual:@"NVIDIA GeForce GTX 880M"]||d.registryID!=4294968458||certificate.length!=232||codeHash.length!=64||reserve>4096||(reserve&&reserve%512)){error_(error,@"Invalid experiment contract");return nil;}
  const char*path="/System/Library/Extensions/GeForceMTLDriver.bundle/Contents/MacOS/GeForceMTLDriver";
  if(![sha([NSData dataWithContentsOfFile:@(path)])isEqual:@"2b89839c425d95934f5e01f16c8683fe53432df410292ec8e554b21c98d6c054"]){error_(error,@"Driver fingerprint mismatch");return nil;}
  std::lock_guard<std::mutex>lock(mutex_);Method method=class_getInstanceMethod(objc_getClass("NVMTLFunctionVariant"),sel_registerName("initWithCompilerOutput:size:device:"));
  if(active||!method||strcmp(method_getTypeEncoding(method),"@40@0:8r^v16Q24@32")){error_(error,@"Unexpected constructor context");return nil;}
  IMP saved=method_getImplementation(method);Dl_info image={};if(!dladdr((void*)saved,&image)||!image.dli_fname||strcmp(image.dli_fname,path)){error_(error,@"Unexpected constructor owner");return nil;}
- State state{certificate,codeHash,reserve,[NSMutableArray array],[NSMutableArray array]};original_=saved;active=&state;
- IMP replaced=method_setImplementation(method,(IMP)init_);if(replaced!=saved){method_setImplementation(method,replaced);active=nullptr;error_(error,@"Concurrent constructor change");return nil;}
+ State state{[certificate copy],[codeHash copy],reserve,[NSMutableArray array],[NSMutableArray array]};original_=saved;active=&state;
+ IMP replaced=method_setImplementation(method,(IMP)init_);if(replaced!=saved){method_setImplementation(method,replaced);active=nullptr;[state.metadata release];[state.codeHash release];error_(error,@"Concurrent constructor change");return nil;}
  id<MTLComputePipelineState>pso=nil;
  @try {id<MTLLibrary>lib=[d newLibraryWithURL:library error:error];id<MTLFunction>f=[lib newFunctionWithName:function];if(f)pso=[d newComputePipelineStateWithFunction:f error:error];[f release];[lib release];}
  @catch(NSException*e){state.rejected=true;error_(error,e.reason);}
  @finally{method_setImplementation(method,saved);active=nullptr;}
- bool restored=method_getImplementation(method)==saved,verified=pso&&state.calls>0&&!state.rejected&&restored;
+ [state.metadata release];[state.codeHash release];
+ bool restored=method_getImplementation(method)==saved,verified=pso&&state.calls==1&&!state.rejected&&restored;
  if(proof)*proof=@{@"contract_verified":@(verified),@"constructor_restored":@(restored),@"calls":@(state.calls),@"events":state.events,@"native_program_replaced":@NO,@"system_modified":@NO};
  if(pso&&!verified){[pso release];pso=nil;error_(error,@"Native allocation experiment rejected before dispatch");}
  if(pso)objc_setAssociatedObject(pso,&retentionKey,state.payloads,OBJC_ASSOCIATION_RETAIN_NONATOMIC);return pso;

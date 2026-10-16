@@ -103,13 +103,14 @@ def unchanged_failure(root, depth, runtime_build):
             "output_unchanged_A5": True, "process_terminal": True}
 
 
-def allocation_case(depth, reserve, native, obs):
-    root = ROOT / "results" / f"native-reserve-v4-{depth}-{reserve}-20261015"
-    build = root.with_name(root.name.replace("-20261015", "-build-20261015"))
+def allocation_case(depth, reserve, native, obs, root=None, build=None,
+                    require_post=False, expected_mode=None):
+    root = root or ROOT / "results" / f"native-reserve-v4-{depth}-{reserve}-20261015"
+    build = build or root.with_name(root.name.replace("-20261015", "-build-20261015"))
     inp = terminal(root, ROOT, build)
     require(load(build / "inputs.json") == inp, "frozen allocation build provenance")
     for name, h in inp["source_hashes"].items():
-        require(sha(ROOT / "tools" / name) == h, "current allocation source: " + name)
+        require(sha(build / name) == h, "frozen allocation source: " + name)
     require(inp["reserve_mode"] == reserve, "reserve identity")
     require(inp["native_build_inputs_SHA256"] == sha(native / "inputs.json")
             and inp["observations_SHA256"] == sha(obs / "observations.json"),
@@ -126,7 +127,7 @@ def allocation_case(depth, reserve, native, obs):
             and certificate["metadata_words"] == record["metadata_words"],
             "certificate differs from native observation")
     d = load(root / "results.json")
-    require(d["driver_SHA256"] == DRIVER and d["mode"] == function
+    require(d["driver_SHA256"] == DRIVER and d["mode"] == (expected_mode or function)
             and d["depth"] == depth and d["native_reference"]
             and not d["program_replaced"] and not d["system_modified"]
             and not d["CPU_expected_answers_uploaded"], "allocation experiment scope")
@@ -139,6 +140,13 @@ def allocation_case(depth, reserve, native, obs):
                  "only_metadata_words9_11_changed", "native_code_identical",
                  "decoded_contract_verified"]:
         require(event[flag] is True, "constructor assertion: " + flag)
+    if require_post:
+        for flag in ["native_code_identical_after_constructor",
+                     "payload_unchanged_after_constructor"]:
+            require(event[flag] is True, "post-constructor assertion: " + flag)
+        require(event["post_constructor_code_SHA256"] == event["actual_code_SHA256"]
+                and all(len(event[key]) == 64 for key in ["patched_payload_SHA256",
+                        "input_snapshot_SHA256"]), "post-constructor hashes")
     w = event["actual_metadata_words"]
     require(len(w) == 58 and all(w[i] == certificate["metadata_words"][i]
                                 for i in range(58) if i not in (2, 4)),
@@ -168,6 +176,7 @@ def allocation_case(depth, reserve, native, obs):
             "decoded_allocation_word40": expected, "native_code_bytes": event["code_bytes"],
             "native_code_SHA256": record["code_SHA256"], "constructor_restored": True,
             "code_unchanged_in_constructor_payload": True,
+            "post_constructor_identity_checked": require_post,
             "source_SHA256": inp["source_hashes"],
             "run_manifest_SHA256": sha(root / "execution/manifest.json"), **outcome}
 

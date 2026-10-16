@@ -6368,25 +6368,57 @@
     {
       "path": "bridge/tools/NativeControlReserveExperiment.mm",
       "source_path": "bridge/tools/NativeControlReserveExperiment.mm",
-      "source_SHA256": "2f43b3f22c6ce05e1371021c4126bfef9670a72c36e46c08894800ca7f627fef",
-      "published_SHA256": "2f43b3f22c6ce05e1371021c4126bfef9670a72c36e46c08894800ca7f627fef",
-      "bytes": 7911,
+      "source_SHA256": "ecff9c4f83d25283cf35a31ac77f53bcc9d1032a77b21209aba07ce3c5795991",
+      "published_SHA256": "ecff9c4f83d25283cf35a31ac77f53bcc9d1032a77b21209aba07ce3c5795991",
+      "bytes": 8702,
       "modified_for_publication": false
     },
     {
       "path": "bridge/tools/build_native_reserve_experiment.py",
       "source_path": "bridge/tools/build_native_reserve_experiment.py",
-      "source_SHA256": "d55ba58cf3e0a27dc7e1ca907f7257f35cbc96a96849e9a136a9ce95d85227df",
-      "published_SHA256": "d55ba58cf3e0a27dc7e1ca907f7257f35cbc96a96849e9a136a9ce95d85227df",
-      "bytes": 3142,
+      "source_SHA256": "fd969f1c5caeda17e7ea98d7e4448e2c541c4fefb3c52234644983fc02e9fb33",
+      "published_SHA256": "fd969f1c5caeda17e7ea98d7e4448e2c541c4fefb3c52234644983fc02e9fb33",
+      "bytes": 3530,
       "modified_for_publication": false
     },
     {
       "path": "bridge/tools/verify_native_control_reserve.py",
       "source_path": "bridge/tools/verify_native_control_reserve.py",
-      "source_SHA256": "df472ae6df4766df7a082fccdad7dd4a229313eef5fb954f65a9caf27709a620",
-      "published_SHA256": "df472ae6df4766df7a082fccdad7dd4a229313eef5fb954f65a9caf27709a620",
-      "bytes": 17454,
+      "source_SHA256": "6ba93e85fda6d515db3e12c4ff5648fcee29c89c8fa8e0105b309cf85a26ed9c",
+      "published_SHA256": "6ba93e85fda6d515db3e12c4ff5648fcee29c89c8fa8e0105b309cf85a26ed9c",
+      "bytes": 18099,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/native_reserve_contract_probe.mm",
+      "source_path": "bridge/tools/native_reserve_contract_probe.mm",
+      "source_SHA256": "c4a3a15031fe7a7ec3791b4493b857ae6dab000c7cbe8eed1017e53cf95332ec",
+      "published_SHA256": "c4a3a15031fe7a7ec3791b4493b857ae6dab000c7cbe8eed1017e53cf95332ec",
+      "bytes": 4747,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/native_reserve_lifetime_probe.mm",
+      "source_path": "bridge/tools/native_reserve_lifetime_probe.mm",
+      "source_SHA256": "4135becaae6229b1a6060a8bf591f22953f0cf57cb4125be54241a2959a06573",
+      "published_SHA256": "4135becaae6229b1a6060a8bf591f22953f0cf57cb4125be54241a2959a06573",
+      "bytes": 1790,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/qualify_native_reserve.py",
+      "source_path": "bridge/tools/qualify_native_reserve.py",
+      "source_SHA256": "cdd81f958aba0b9a23b8b77b64c8d7970bba5180f3f82e70382d872bbec9077e",
+      "published_SHA256": "cdd81f958aba0b9a23b8b77b64c8d7970bba5180f3f82e70382d872bbec9077e",
+      "bytes": 6324,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/verify_native_reserve_suite.py",
+      "source_path": "bridge/tools/verify_native_reserve_suite.py",
+      "source_SHA256": "12dc85e5a42234667ccf4b5c24dc19c375f94451e2ae2cb9cfd194e26f34bd9e",
+      "published_SHA256": "12dc85e5a42234667ccf4b5c24dc19c375f94451e2ae2cb9cfd194e26f34bd9e",
+      "bytes": 10755,
       "modified_for_publication": false
     }
   ],
@@ -6429,7 +6461,7 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "2354bde7cc39995b9dbbf701467f9a679272020495eea6a16e0cb05d233cf62b",
-  "previous_public_commit": "58571e653881c4f1bb71ba49fbdbe38d90461e1f",
-  "update": "Two pinned native allocation-only corrections, replay/rounding controls, same-metallib M1 references and read-only evidence verifier; shared runtime unchanged"
+  "previous_source_snapshot_SHA256": "515fca9ee3f5f3caa750e5edb040d6d7c6c7e9453ce5730619248e0f27245828",
+  "previous_public_commit": "1649acde8062f492d33900fc66ddc34d748f655a",
+  "update": "Post-constructor code/payload identity, 17 native allocation profiles, real API refusals and input/pool lifetime qualification; shared runtime unchanged"
 }
