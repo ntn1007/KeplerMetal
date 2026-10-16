@@ -6817,6 +6817,54 @@
       "published_SHA256": "0d34f1f73c93c1869948bd1c9828b3373ad51e2c0b6a8fee19c8b2d2d259ebf1",
       "bytes": 12895,
       "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_policy_profile.h",
+      "source_path": "bridge/tools/video_policy_profile.h",
+      "source_SHA256": "e2e9c1bbdc0bd7c67aacc813a83c0a55d4bc9da33aa63f1f0ce23e3a65b0ebc9",
+      "published_SHA256": "e2e9c1bbdc0bd7c67aacc813a83c0a55d4bc9da33aa63f1f0ce23e3a65b0ebc9",
+      "bytes": 3705,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_policy_public.mm",
+      "source_path": "bridge/tools/video_policy_public.mm",
+      "source_SHA256": "ff7a8aac180d35ef8be3c77d5ad303f11b97cf160e6479fcd8b27ad63a518060",
+      "published_SHA256": "ff7a8aac180d35ef8be3c77d5ad303f11b97cf160e6479fcd8b27ad63a518060",
+      "bytes": 3810,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/native_video_public.py",
+      "source_path": "bridge/tools/native_video_public.py",
+      "source_SHA256": "d0a439dbdad32853954ab1cf52a56c1642e610095178d83f0ec54a463173d83f",
+      "published_SHA256": "d0a439dbdad32853954ab1cf52a56c1642e610095178d83f0ec54a463173d83f",
+      "bytes": 7726,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/generate_mpeg2_reference.py",
+      "source_path": "bridge/tools/generate_mpeg2_reference.py",
+      "source_SHA256": "8f2324db7f2e55b2d64976a1007f9a16c94aa7f716aacf5f78e566a0b66466b2",
+      "published_SHA256": "8f2324db7f2e55b2d64976a1007f9a16c94aa7f716aacf5f78e566a0b66466b2",
+      "bytes": 7083,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_mpeg2_vt_client.mm",
+      "source_path": "bridge/tools/video_mpeg2_vt_client.mm",
+      "source_SHA256": "793134d89422d954d8597723c8c1d769161dc978b474bcd454c8ebdaae27fe57",
+      "published_SHA256": "793134d89422d954d8597723c8c1d769161dc978b474bcd454c8ebdaae27fe57",
+      "bytes": 4070,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/audit_video_codecs.py",
+      "source_path": "bridge/tools/audit_video_codecs.py",
+      "source_SHA256": "7aa07a5fcf5a7d83c6d8902d4f37e33ec52ab077eeb8b420219133460276784a",
+      "published_SHA256": "7aa07a5fcf5a7d83c6d8902d4f37e33ec52ab077eeb8b420219133460276784a",
+      "bytes": 14057,
+      "modified_for_publication": false
     }
   ],
   "excluded_source_tools": [

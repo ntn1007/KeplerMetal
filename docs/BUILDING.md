@@ -1,5 +1,7 @@
 # Build from source
 
+The public-codec client now accepts H.264 or an original MPEG-2 fixture, with an independent software-reference generator using existing external FFmpeg tools. [VIDEO_CODEC_SELECTION.md](VIDEO_CODEC_SELECTION.md) describes the exact-profile build, inspect-first workflow and retained hardware failures.
+
 The dyld image catalogue and exact-profile AppleVA availability experiment are also separate from the common runtime archive. Their source-only builders and strict resident-code checks are documented in [VIDEO_ELIGIBILITY.md](VIDEO_ELIGIBILITY.md). Availability success does not qualify hardware decoding.
 
 The video observer and reference stager are separate, process-local diagnostic tools; they do not change the runtime archive. [VIDEO_TRANSPORT.md](VIDEO_TRANSPORT.md) lists their fixture requirements, serialized runs and CPU-only historical auditor. Building or completing a diagnostic does not qualify hardware video.

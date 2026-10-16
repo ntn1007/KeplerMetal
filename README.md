@@ -2,7 +2,9 @@
 
 Open source research for modernizing the NVIDIA Kepler graphics stack on macOS.
 
-New video finding: an exact-profile AppleVA availability query refuses the original model table but succeeds in three fresh processes when only our test process receives an `iMac11,1` entry. Seven native/wrong-model controls retain the refusal. This identifies an eligibility gate, not hardware decoding or a system fix. [Loaded providers, causal test and limits](docs/VIDEO_ELIGIBILITY.md).
+Public-codec follow-up: H.264 and a new independent MPEG-2 fixture decode exactly in software, but nine hardware-required attempts still fail before images. The pinned model-policy site is not observed on our thread, so the availability result alone does not fix these paths. [Tests, source and next selection investigation](docs/VIDEO_CODEC_SELECTION.md).
+
+Availability-query milestone: an exact-profile AppleVA query refuses the original model table but succeeds in three fresh processes when only our test process receives an `iMac11,1` entry. Seven native/wrong-model controls retain the refusal. This identifies an eligibility gate, not hardware decoding or a system fix. [Loaded providers, causal test and limits](docs/VIDEO_ELIGIBILITY.md).
 
 Video investigation: the official NVIDIA WebVA has the same two stub factories as the examined support copy. Six iMac software-decoded images match an independent FFmpeg CPU reference exactly, but hardware-required VT still fails with zero images. Sources and a bounded own-process observer are now included; no hardware video or speedup is claimed. [Evidence and next transport work](docs/VIDEO_TRANSPORT.md).
 

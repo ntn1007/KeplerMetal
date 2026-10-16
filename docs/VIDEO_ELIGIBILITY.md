@@ -4,6 +4,10 @@ A bounded, process-local experiment identifies a model-policy gate in the
 installed AppleVA availability query. It does **not** demonstrate hardware video
 decoding, explain the global H.264 failure, or modify the installed stack.
 
+The [public-codec follow-up](VIDEO_CODEC_SELECTION.md) now confirms that this
+model entry alone does not fix the tested H.264/MPEG-2 hardware path. Its observed
+policy site is not reached on our configuring thread in those requests.
+
 ## Actual loaded components
 
 The observer uses public dyld add/remove callbacks and copies Mach-O load

@@ -1,5 +1,7 @@
 # KeplerMetal
 
+Les essais par l’API publique H.264 et MPEG‑2 produisent des images CPU exactes, mais les neuf créations avec matériel obligatoire échouent encore sans image. L’entrée modèle qui corrige la disponibilité VP3 ne suffit donc pas pour ces chemins. [Résultats et prochaine cible](docs/VIDEO_CODEC_SELECTION.md).
+
 Une barrière d’éligibilité vidéo est maintenant reproduite : la requête AppleVA passe de −8973 à 0 dans trois processus de test recevant seulement une entrée `iMac11,1` en mémoire. Sept contrôles gardent le refus. Le système reste inchangé et le décodage matériel demeure non démontré. [Preuves et limites](docs/VIDEO_ELIGIBILITY.md).
 
 Recherche open source pour moderniser la pile NVIDIA Kepler sous macOS, avec une GTX 880M GK104 / SM30 de 8 Gio comme matériel de référence.

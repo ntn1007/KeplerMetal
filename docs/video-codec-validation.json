@@ -1,0 +1,168 @@
+{
+  "status": "PASS",
+  "scope": "Evidence audit; hardware codec execution still fails",
+  "native_processes_terminal": 14,
+  "nonoverlapping": true,
+  "codecs": {
+    "H264": {
+      "CPU_processes": 2,
+      "CPU_frames": 12,
+      "CPU_reference_bytes": 1382400,
+      "hardware_required_failures": 5,
+      "hardware_frames": 0
+    },
+    "MPEG2Video": {
+      "CPU_processes": 1,
+      "CPU_frames": 6,
+      "CPU_reference_bytes": 691200,
+      "hardware_required_failures": 4,
+      "hardware_frames": 0
+    }
+  },
+  "M1_CPU_reference_processes": 3,
+  "M1_GPU_execution": false,
+  "MPEG2_fixture": {
+    "frames": 6,
+    "compressed_bytes": 11871,
+    "compressed_SHA256": "e5758154a91053776bbce3d15f5e2a52f78de005d3d86319d6c913bd38276f52",
+    "decoded_bytes": 691200,
+    "decoded_SHA256": "882c66a3f07501919430ecf4df55cbdd0947af2448de2892bfb3c969866b8dee",
+    "ffmpeg_SHA256": "c8173e9755795978bce8e104f8d7044fabe7d6d84044aba37d3648c6f4e4e1a8",
+    "ffprobe_SHA256": "56559c234422b0e3722c54b2bd99bbd8cd83d3732a13a6d207589982a6b7085e",
+    "generator_SHA256": "8f2324db7f2e55b2d64976a1007f9a16c94aa7f716aacf5f78e566a0b66466b2"
+  },
+  "observed_native_policy_calls_on_configuring_thread": 0,
+  "static_selection_analysis": {
+    "VT_UUID": "e7231bea63883d0a95c0a93ce970b96b",
+    "public_create_wrapper_bytes": 26,
+    "implementation_bytes": 6538,
+    "implementation_SHA256": "195cdba585347f552da6fbe272ae832dd3e46354f85f2121fa694207e1aa89b0",
+    "runtime_error_branch_proved": false,
+    "private_ABI_invoked": false
+  },
+  "host_private_query_calls": 0,
+  "hardware_video_execution_proved": false,
+  "global_failure_root_cause_proved": false,
+  "system_files_unchanged": 83,
+  "additional_policy_file_unchanged": 1,
+  "OCLP_unchanged": true,
+  "common_runtime_sources_unchanged": 36,
+  "Qwen_job_ids": [],
+  "system_deployment": "NOT RUN",
+  "performance_benchmark": "NOT RUN",
+  "full_objective_complete": false,
+  "processes": [
+    {
+      "cohort": "video-codec-policy-inspect-20261016",
+      "codec": "H264",
+      "mode": "inspect",
+      "process_terminal": true,
+      "result_SHA256": "f5f6e3a16b98963e7da14c7831efb5dbe85d79c8e6cf7439a89b670ce538cb22",
+      "manifest_SHA256": "8a1172a7c60a0e9c8f530a57c0b33346f06586fbe16ef74e39251faaef88a018"
+    },
+    {
+      "cohort": "video-codec-policy-mpeg2-inspect-20261016",
+      "codec": "MPEG2Video",
+      "mode": "inspect",
+      "process_terminal": true,
+      "result_SHA256": "6cb55e88cad6dfc4ebd4ce910d05d5cb77aa2cad4f7b25d05f31fe370674d897",
+      "manifest_SHA256": "1c2e3e1e3ace3ac99f31603ac8a42aaa3d96aa663e6c7190f22f278376ccc827"
+    },
+    {
+      "cohort": "video-codec-policy-cpu-20261016",
+      "codec": "H264",
+      "mode": "cpu",
+      "process_terminal": true,
+      "result_SHA256": "bc07cad030dbc6f48f818016edb8ec6ffaa3a695a9d241ce69ec1747bf539a81",
+      "manifest_SHA256": "0a2aa31abebad98c048287ad4e83952f9726559850cb34bb2cc951c31534b85c"
+    },
+    {
+      "cohort": "video-codec-policy-mpeg2-cpu-20261016",
+      "codec": "MPEG2Video",
+      "mode": "cpu",
+      "process_terminal": true,
+      "result_SHA256": "b269f1a59045034f2ab1476db6cb903f307a5ca9d0ec60bc994d16a666edf664",
+      "manifest_SHA256": "c91ecd79f878eae14de502ac351f04118d087b2d82acd5e80e0789df7667bc0c"
+    },
+    {
+      "cohort": "video-codec-policy-native-20261016",
+      "codec": "H264",
+      "mode": "native",
+      "process_terminal": true,
+      "result_SHA256": "a84c3c97ad424805aa9af11bde2b306e8f35a31511b14016c3ecd2abd7dbb231",
+      "manifest_SHA256": "8f3d1d93b55e73f7615cd7cdda1743654759cdcd12b59c12a72b6b1a2a8af9c5"
+    },
+    {
+      "cohort": "video-codec-policy-mpeg2-native-20261016",
+      "codec": "MPEG2Video",
+      "mode": "native",
+      "process_terminal": true,
+      "result_SHA256": "b2e99e09b924acf53362251843508ebb034a93554861ac83263271838c208a9a",
+      "manifest_SHA256": "9bfe8d62540496f527de9dd7cb6cea17d635f3cc775add12e7f9a6e2b48022ca"
+    },
+    {
+      "cohort": "video-codec-policy-wrong-model-20261016",
+      "codec": "H264",
+      "mode": "wrong-model",
+      "process_terminal": true,
+      "result_SHA256": "a8e4971adb953da97a1eaa5e13b4327eb3e36261b9c8a7db9fd7de94f29afa74",
+      "manifest_SHA256": "a1103082140a4fb8159403ba0b8ab1fd64b4cbc60784b3e6413e5b603285be0d"
+    },
+    {
+      "cohort": "video-codec-policy-mpeg2-wrong-model-20261016",
+      "codec": "MPEG2Video",
+      "mode": "wrong-model",
+      "process_terminal": true,
+      "result_SHA256": "00abdfffe83b6e1b7273bdccd2f806eb0b971f72519302f2a09e7a502c8b4e9b",
+      "manifest_SHA256": "6f9ddb8806f51fcbe12ba39f2dee9788d1e3432c7e3ab8db4294ab3242e19f4b"
+    },
+    {
+      "cohort": "video-codec-policy-model-entry-20261016",
+      "codec": "H264",
+      "mode": "model-entry",
+      "process_terminal": true,
+      "result_SHA256": "1e71c06920107b8df2ff26dd2c81f755623e8dde34c1f425789c352d02a5d713",
+      "manifest_SHA256": "db94116582fd591cce63321780eb6e824e1ac953878d0d437053abe95447165f"
+    },
+    {
+      "cohort": "video-codec-policy-mpeg2-model-entry-20261016",
+      "codec": "MPEG2Video",
+      "mode": "model-entry",
+      "process_terminal": true,
+      "result_SHA256": "a14bc64af3047f8a6e2fa89d187ca8e7eca9d751e36e84f3c91244f3ef97a805",
+      "manifest_SHA256": "cf6b5ce595a22348ef82b697c59f5ac12b8aed55f3e063d4e581a5374d25cbe6"
+    },
+    {
+      "cohort": "video-codec-policy-native-after-20261016",
+      "codec": "H264",
+      "mode": "native",
+      "process_terminal": true,
+      "result_SHA256": "fcea9a39505c7d72abc67acfb782faf9ef13ebb0b22a8e66d0a22855a8247b2c",
+      "manifest_SHA256": "d5845d97137d11c4b31d864144436b0a189e4bba8b590738f46896ada6375130"
+    },
+    {
+      "cohort": "video-codec-policy-mpeg2-native-after-20261016",
+      "codec": "MPEG2Video",
+      "mode": "native",
+      "process_terminal": true,
+      "result_SHA256": "1d2c064a785f7ba66560200804679689d3d83e4e2d96a87075cf97396f3ce048",
+      "manifest_SHA256": "089bbb3d4f9503bedc4ada6880f814d23c03f621b66fb352ea555587bd793aca"
+    },
+    {
+      "cohort": "video-codec-policy-h264-cpu-20261016-02",
+      "codec": "H264",
+      "mode": "cpu",
+      "process_terminal": true,
+      "result_SHA256": "c9145a4c4ffeca2b0598cfa3e76eaa84e78020681baa2b80f2b8fcf6295df59c",
+      "manifest_SHA256": "840e692f0fface624f94bd1ff522e6cd496642fec2949f186e4e8fa9792e8da6"
+    },
+    {
+      "cohort": "video-codec-policy-h264-native-20261016-02",
+      "codec": "H264",
+      "mode": "native",
+      "process_terminal": true,
+      "result_SHA256": "9c90920a40f33badba2a2566e192d50178eee1100b00a6e56e1dbbbe284436f7",
+      "manifest_SHA256": "e70b28a7b192abb8562b4e31e983e4a35fd0d623346063c90fac5021aafb4ad7"
+    }
+  ]
+}
