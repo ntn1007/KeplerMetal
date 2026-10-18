@@ -7033,6 +7033,54 @@
       "published_SHA256": "d77ca482bfac9d5f6d72cde03166a4f23ccf679205902eb459130bc85bb4f756",
       "bytes": 12240,
       "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_routing.h",
+      "source_path": "bridge/tools/video_routing.h",
+      "source_SHA256": "59efc962e03bc354a25856d6e806675d582285bfb686518ad050b6a32c65b007",
+      "published_SHA256": "59efc962e03bc354a25856d6e806675d582285bfb686518ad050b6a32c65b007",
+      "bytes": 172,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_routing.mm",
+      "source_path": "bridge/tools/video_routing.mm",
+      "source_SHA256": "d330d03f2ef754ca879796fdc8755ccb5ea27d62f78c37b3c8927f5a49608040",
+      "published_SHA256": "d330d03f2ef754ca879796fdc8755ccb5ea27d62f78c37b3c8927f5a49608040",
+      "bytes": 18735,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_routing_main.mm",
+      "source_path": "bridge/tools/video_routing_main.mm",
+      "source_SHA256": "f9e62b42eb139ef21761f6b70bc1e5cfe3e3c3d51042e6339ac2c4f090f006c6",
+      "published_SHA256": "f9e62b42eb139ef21761f6b70bc1e5cfe3e3c3d51042e6339ac2c4f090f006c6",
+      "bytes": 679,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/native_video_routing.py",
+      "source_path": "bridge/tools/native_video_routing.py",
+      "source_SHA256": "f40353fd96d71fcb1de29ca085ea413c52547c715777e4d8e67f963cda0d7d09",
+      "published_SHA256": "f40353fd96d71fcb1de29ca085ea413c52547c715777e4d8e67f963cda0d7d09",
+      "bytes": 11011,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/audit_video_routing.py",
+      "source_path": "bridge/tools/audit_video_routing.py",
+      "source_SHA256": "0047130204ec9e69399db5294fcb094aa95b248738207d617a34b3cdab0d0802",
+      "published_SHA256": "0047130204ec9e69399db5294fcb094aa95b248738207d617a34b3cdab0d0802",
+      "bytes": 24168,
+      "modified_for_publication": false
+    },
+    {
+      "path": "patches/video-routing-v1-to-v2.patch",
+      "source_path": "patches/video-routing-v1-to-v2.patch",
+      "source_SHA256": "4c2e625dc202da011746397d963778aa784c8c4329e2d9f6e2ea9388f67dad6b",
+      "published_SHA256": "4c2e625dc202da011746397d963778aa784c8c4329e2d9f6e2ea9388f67dad6b",
+      "bytes": 7835,
+      "modified_for_publication": false
     }
   ],
   "excluded_source_tools": [
@@ -7074,7 +7122,7 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "2084ad45ac987bd3e11a68e00ddf250a2ce275db4b4c4ec25b1a833466aca1da",
-  "previous_public_commit": "24a0afcd3270d95376de1d0c0e8616c2a1fee3d4",
-  "update": "Bounded own-process video observation, independent H264 CPU reference comparison, original NVIDIA WebVA provenance; unchanged common runtime, no hardware video or performance claim"
+  "previous_source_snapshot_SHA256": "6f9adcbe11a6857cdcac3d0c69c3cb08561fe16316a4b2759c1c2f03a88f1321",
+  "previous_public_commit": "a8d6c406c16841c299220a9a31f072cb5922dc8d",
+  "update": "Public-XPC own-process video routing observation, bounded signed-status decoding and independent archive auditor; unchanged common runtime and system; hardware video still fails"
 }

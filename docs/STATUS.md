@@ -1,4 +1,14 @@
-# Status at the source export, 2026-10-16
+# Status at the source export, 2026-10-18
+
+New routing milestone: 19 signed terminal nonoverlapping host runs, 24 software
+images / 2,764,800 exact NV12 bytes, 1,824 mock forwarding calls and 210 bounded
+summary controls. Three present-key cases reach the decoder service: `uber=0`,
+then `Strt=-12906`; six native/wrong-key controls have no such observed
+exchanges. All 13 hardware creates fail before images. Static matching bundle
+metadata is pinned; live peer identity, remote providers/registry and complete
+root cause remain unverified. System, policy, OCLP and common runtime sources
+are unchanged. No new Metal function, M1 run or benchmark.
+[Evidence, scope and reproduction](VIDEO_ROUTING.md).
 
 New dependency milestone: 19 terminal nonoverlapping processes, 24 software images / 2,764,800 exact NV12 bytes, 38 public query controls and 110 CPU scope checks. Twenty-two real queries target nvAccelerator registry ID 4294968458. Three scoped `IOGVACodec` presence substitutions change GVA selection (178 entry observations versus 87 in native/wrong-key controls), but all 13 hardware creates still fail at -12906 with zero images. This establishes a selection barrier; a complete decoder fix and hardware execution remain unproved. [Evidence and reproduction](VIDEO_DEPENDENCIES.md).
 

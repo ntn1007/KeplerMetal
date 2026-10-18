@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "modules": [
+    {
+      "install_name": "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+      "UUID": "7e3d8a67ef7531808644691be9fe3a9f",
+      "current_version": "5026.6.7"
+    },
+    {
+      "install_name": "/System/Library/Frameworks/CoreMedia.framework/Versions/A/CoreMedia",
+      "UUID": "7c4ae5aed528396982c6a4a534949ef3",
+      "current_version": "3330.13.105"
+    },
+    {
+      "install_name": "/System/Library/Frameworks/VideoToolbox.framework/Versions/A/VideoToolbox",
+      "UUID": "e7231bea63883d0a95c0a93ce970b96b",
+      "current_version": "3330.13.105"
+    },
+    {
+      "install_name": "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+      "UUID": "778eaea741f6371e80a2153620d98c85",
+      "current_version": "5026.6.7"
+    },
+    {
+      "install_name": "/usr/lib/system/libxpc.dylib",
+      "UUID": "c365fb78a04b37d5a696ce5ca41c5e2a",
+      "current_version": "3102.160.5"
+    },
+    {
+      "install_name": "/System/Library/PrivateFrameworks/AppleVA.framework/Versions/A/AppleVA",
+      "UUID": "7533f7872ca53a968dc5fa34f9035e37",
+      "current_version": "5.1.1"
+    },
+    {
+      "install_name": "/System/Library/PrivateFrameworks/MediaExperience.framework/Versions/A/MediaExperience",
+      "UUID": "5fe054e812c831578e44728fdf31323f",
+      "current_version": "1.0.0"
+    }
+  ],
+  "required_before_begin": [
+    "/System/Library/Frameworks/CoreMedia.framework/Versions/A/CoreMedia",
+    "/System/Library/Frameworks/VideoToolbox.framework/Versions/A/VideoToolbox",
+    "/usr/lib/system/libxpc.dylib"
+  ],
+  "scope": "Own process while qualified main runs; public XPC APIs only"
+}

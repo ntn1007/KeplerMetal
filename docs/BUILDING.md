@@ -1,5 +1,10 @@
 # Build from source
 
+The public XPC observer preserves the existing codec implementation and observes
+the next service refusal. [VIDEO_ROUTING.md](VIDEO_ROUTING.md) covers exact
+caller identities, two logger source versions, bounded status decoding,
+serialized reproduction and the independent historical auditor.
+
 The public IORegistry observer and tightly scoped presence experiment reuse the qualified host, decoder and observation libraries. [VIDEO_DEPENDENCIES.md](VIDEO_DEPENDENCIES.md) documents inspect/software controls, the unchanged hardware requirement, rotated native/wrong-key/present-key cases and source-version reconstruction.
 
 The public-codec client now accepts H.264 or an original MPEG-2 fixture, with an independent software-reference generator using existing external FFmpeg tools. [VIDEO_CODEC_SELECTION.md](VIDEO_CODEC_SELECTION.md) describes the exact-profile build, inspect-first workflow and retained hardware failures.

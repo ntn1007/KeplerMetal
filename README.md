@@ -1,5 +1,11 @@
 # KeplerMetal
 
+Native video routing: three controlled presence cases reach the decoder service,
+which replies `uber=0` then `Strt=-12906`; native and wrong-key controls have no
+such observed exchanges. All hardware creates still fail. Nineteen terminal
+host runs include 24 exact software images and bounded public-XPC forwarding
+controls. [Evidence, source and limits](docs/VIDEO_ROUTING.md).
+
 Native GPU dependency: a pinned public API confirms missing `IOGVACodec` on the GTX 880M. Three controlled presence substitutions change the GVA selection path, while native and wrong-key controls preserve the original path. All 13 new hardware creates still fail; 24 software images match the CPU exactly. [Evidence, scope and reproduction](docs/VIDEO_DEPENDENCIES.md).
 
 Open source research for modernizing the NVIDIA Kepler graphics stack on macOS.

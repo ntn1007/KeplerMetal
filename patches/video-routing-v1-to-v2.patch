@@ -1,0 +1,110 @@
+--- a/bridge/tools/video_routing.mm
++++ b/bridge/tools/video_routing.mm
+@@ -18,7 +18,7 @@
+ thread_local bool inside=false;
+ constexpr unsigned capacity=512;
+ std::mutex rowsMutex;
+-NSMutableArray *rows=nil,*controls=nil;
++NSMutableArray *rows=nil,*controls=nil,*summaryControls=nil;
+ NSDictionary *allowed=nil;
+ bool nativeCapture=false,controlValid=false;
+ NSString *hash(NSData *data){
+@@ -69,11 +69,18 @@
+         bool cut=false;NSString *name=text(key,&cut);truncated|=cut;
+         NSMutableDictionary *item=[NSMutableDictionary dictionaryWithDictionary:@{@"key":name,@"type":typeName(object)}];
+         NSString *lower=name.lowercaseString;
+-        if([@[@"status",@"err",@"error",@"osstatus",@"errorcode",@"opcode",@"messageid",@"method"]containsObject:lower]){
++        if([lower hasPrefix:@"."])lower=[lower substringFromIndex:1];
++        if([@[@"status",@"err",@"error",@"osstatus",@"errorcode",@"errorreturn",@"opcode",@"operation",@"messageid",@"method"]containsObject:lower]){
+             if(xpc_get_type(object)==XPC_TYPE_INT64){int64_t n=xpc_int64_get_value(object);
+                 if(n>=INT32_MIN&&n<=INT32_MAX)item[@"scalar"]=@(n);else item[@"scalar_omitted"]=@YES;
+             }else if(xpc_get_type(object)==XPC_TYPE_UINT64){uint64_t n=xpc_uint64_get_value(object);
+-                if(n<=UINT32_MAX)item[@"scalar"]=@(n);else item[@"scalar_omitted"]=@YES;
++                if(n<=UINT32_MAX)item[@"scalar"]=@(n);
++                else if(n>=UINT64_MAX-uint64_t(INT32_MAX)){
++                    // Some public XPC clients carry a negative OSStatus in a
++                    // sign-extended uint64. Record only that bounded int32.
++                    item[@"scalar_signed32"]=@(-1-int64_t(UINT64_MAX-n));
++                    item[@"scalar_encoding"]=@"uint64_sign_extended_int32";
++                }else item[@"scalar_omitted"]=@YES;
+             }
+         }
+         [entries addObject:item];return true;
+@@ -180,6 +187,52 @@
+     }
+     xpc_release(controlConnection);xpc_release(controlMessage);xpc_release(controlReply);
+     controlConnection=controlMessage=controlReply=nullptr;controlHandler=nullptr;return valid;
++}
++bool summaryContracts(){
++    struct Case { const char *key;bool unsignedValue;uint64_t bits;const char *field;int64_t wanted; };
++    const Case cases[]={
++        {"Status",true,0,"scalar",0},
++        {"Status",true,UINT32_MAX,"scalar",UINT32_MAX},
++        {"Status",true,UINT64_MAX-12905,"scalar_signed32",-12906},
++        {"Status",true,UINT64_MAX-uint64_t(INT32_MAX),"scalar_signed32",INT32_MIN},
++        {"Status",true,UINT64_MAX,"scalar_signed32",-1},
++        {"Status",true,uint64_t(UINT32_MAX)+1,"scalar_omitted",1},
++        {"Status",true,UINT64_MAX-uint64_t(INT32_MAX)-1,"scalar_omitted",1},
++        {"Status",false,uint64_t(int64_t(-12906)),"scalar",-12906},
++        {"Status",false,uint64_t(INT32_MAX)+1,"scalar_omitted",1},
++        {".ErrorReturn",false,uint64_t(int64_t(-12906)),"scalar",-12906},
++        {".Operation",true,1969382770,"scalar",1969382770},
++        {"PID",true,12345,nullptr,0}};
++    bool valid=true;unsigned trial=0;
++    for(const auto &c:cases){
++        xpc_object_t object=xpc_dictionary_create(nullptr,nullptr,0);
++        if(c.unsignedValue)xpc_dictionary_set_uint64(object,c.key,c.bits);
++        else {int64_t value;std::memcpy(&value,&c.bits,sizeof(value));xpc_dictionary_set_int64(object,c.key,value);}
++        NSDictionary *item=[summary(object)[@"keys"]firstObject];
++        bool correct=c.field?item[@(c.field)]&&[item[@(c.field)]longLongValue]==c.wanted:
++            !item[@"scalar"]&&!item[@"scalar_signed32"]&&!item[@"scalar_omitted"];
++        if(c.field&&!strcmp(c.field,"scalar_signed32"))correct&=[item[@"scalar_encoding"]isEqual:@"uint64_sign_extended_int32"];
++        [summaryControls addObject:@{@"trial":@(trial++),@"kind":@"numeric_bounds_and_allowlist",@"correct":@(correct)}];
++        valid&=correct;xpc_release(object);
++    }
++    xpc_object_t object=xpc_dictionary_create(nullptr,nullptr,0);
++    xpc_dictionary_set_string(object,"Status","KeplerMetal.synthetic.private-value");
++    xpc_dictionary_set_data(object,"Payload","abc",3);
++    xpc_object_t nested=xpc_dictionary_create(nullptr,nullptr,0);
++    xpc_dictionary_set_string(nested,"secret","KeplerMetal.synthetic.nested-value");
++    xpc_dictionary_set_value(object,"Nested",nested);xpc_release(nested);
++    NSDictionary *limited=summary(object);
++    NSData *json=[NSJSONSerialization dataWithJSONObject:limited options:0 error:nil];
++    NSString *serialized=[[[NSString alloc]initWithData:json encoding:NSUTF8StringEncoding]autorelease];
++    bool privateValues=serialized&&[serialized rangeOfString:@"private-value"].location==NSNotFound&&
++        [serialized rangeOfString:@"nested-value"].location==NSNotFound&&[serialized rangeOfString:@"secret"].location==NSNotFound;
++    [summaryControls addObject:@{@"trial":@(trial++),@"kind":@"no_string_binary_or_nested_values",@"correct":@(privateValues)}];
++    valid&=privateValues;xpc_release(object);
++    object=xpc_dictionary_create(nullptr,nullptr,0);
++    for(unsigned i=0;i<33;i++){char key[32];snprintf(key,sizeof(key),"bounded-%u",i);xpc_dictionary_set_int64(object,key,i);}
++    limited=summary(object);bool bounded=[limited[@"keys"]count]==32&&[limited[@"key_count"]unsignedIntValue]==33&&[limited[@"truncated"]boolValue];
++    [summaryControls addObject:@{@"trial":@(trial++),@"kind":@"dictionary_capacity",@"correct":@(bounded)}];
++    valid&=bounded;xpc_release(object);return valid;
+ }
+ #define KP_ROUTE_PAIR(function,original) \
+     __attribute__((used)) static const struct{const void *replacement,*original_;} pair_##function \
+@@ -209,9 +262,10 @@
+             matched=[actual[@"UUID"]isEqual:expected[@"UUID"]]&&[actual[@"current_version"]isEqual:expected[@"current_version"]];
+         }if(!matched)return false;
+     }
+-    allowed=[table copy];rows=[[NSMutableArray alloc]init];controls=[[NSMutableArray alloc]init];
++    allowed=[table copy];rows=[[NSMutableArray alloc]init];controls=[[NSMutableArray alloc]init];summaryControls=[[NSMutableArray alloc]init];
+     nativeCapture=[choice[@"mode"]isEqual:@"observe"];enabled.store(true,std::memory_order_seq_cst);
+-    controlValid=calibrate();if(!controlValid)enabled.store(false);return controlValid;
++    bool abi=calibrate(),summaries=summaryContracts();controlValid=abi&&summaries;
++    if(!controlValid)enabled.store(false);return controlValid;
+ }
+ extern "C" NSDictionary *KPVideoRoutingSnapshot(){
+     enabled.store(false,std::memory_order_seq_cst);auto end=std::chrono::steady_clock::now()+std::chrono::seconds(1);
+@@ -219,9 +273,10 @@
+     bool drained=!inflight.load();NSArray *events=@[];
+     if(drained){std::lock_guard<std::mutex>lock(rowsMutex);events=[[[rows sortedArrayUsingDescriptors:
+         @[[NSSortDescriptor sortDescriptorWithKey:@"ordinal" ascending:YES]]]copy]autorelease];}
+-    return @{@"status":drained&&!dropped.load()?@"COMPLETE":@"INCOMPLETE",@"recorders_drained":@(drained),
++    return @{@"schema":@2,@"status":drained&&!dropped.load()?@"COMPLETE":@"INCOMPLETE",@"recorders_drained":@(drained),
+         @"disabled_before_snapshot":@YES,@"calls":@(count.load()),@"dropped":@(dropped.load()),@"events":events?:@[],
+         @"controls":controls?:@[],@"synthetic_ABI_calls":@96,@"synthetic_controls_valid":@(controlValid),
++        @"scalar_summary_controls":summaryControls?:@[],@"scalar_summary_controls_calls":@(summaryControls.count),
+         @"synthetic_native_IPC_calls":@0,@"native_capture_enabled":@(nativeCapture),@"system_modified":@NO,
+         @"arguments_or_return_values_modified":@NO,@"async_handler_replaced":@NO,@"observer_generated_native_messages":@0,
+         @"message_binary_or_string_values_copied":@NO,@"own_process_only":@YES,@"other_process_injected":@NO};
