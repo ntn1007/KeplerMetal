@@ -1,0 +1,23 @@
+--- a/bridge/tools/video_local_xpc_probe.mm
++++ b/bridge/tools/video_local_xpc_probe.mm
+@@ -51,7 +51,10 @@
+     }
+     dispatch_semaphore_signal(reply->done);
+ }
+-void installPeer(xpc_connection_t peer,const std::weak_ptr<State> &weak){
++void installPeer(xpc_connection_t peer,std::weak_ptr<State> weak,dispatch_queue_t serverQueue){
++    // The handler must own a weak_ptr value, never a reference into the
++    // listener block: that block may be destroyed before peer cancellation.
++    xpc_connection_set_target_queue(peer,serverQueue);
+     auto state=weak.lock();if(!state)return;
+     xpc_retain(peer);{std::lock_guard<std::mutex> lock(state->mutex);state->peers.push_back(peer);}
+     __unsafe_unretained xpc_connection_t borrowedPeer=peer;
+@@ -95,7 +98,7 @@
+     xpc_connection_set_event_handler(listener,^(xpc_object_t event){@autoreleasepool{
+         auto state=weak.lock();if(!state)return;
+         note(state,@"listener",event);
+-        if(xpc_get_type(event)==XPC_TYPE_CONNECTION)installPeer((xpc_connection_t)event,weak);
++        if(xpc_get_type(event)==XPC_TYPE_CONNECTION)installPeer((xpc_connection_t)event,weak,server);
+         else if(event==XPC_ERROR_CONNECTION_INVALID)state->listenerInvalid++;
+         else state->unexpected++;
+     }});

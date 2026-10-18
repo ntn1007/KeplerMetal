@@ -23,7 +23,7 @@ std::atomic<unsigned> inflight{0},count{0},dropped{0};
 thread_local bool inside=false;
 constexpr unsigned capacity=512;
 std::mutex rowsMutex;
-NSMutableArray *rows=nil,*controls=nil,*summaryControls=nil,*peerControls=nil;
+NSMutableArray *rows=nil,*controls=nil,*summaryControls=nil,*peerControls=nil,*namedControls=nil;
 NSDictionary *allowed=nil;
 bool nativeCapture=false,controlValid=false,peerCapture=false;
 
@@ -192,6 +192,15 @@ xpc_connection_t createImpl(const char *name,dispatch_queue_t queue,uint64_t fla
     }
     errno=saved;return result;
 }
+xpc_connection_t namedImpl(const char *name,dispatch_queue_t queue,void *pc,bool mock){
+    int incoming=errno,saved=incoming;xpc_connection_t result=nullptr;
+    @autoreleasepool{
+        Scope scope(pc,mock);errno=incoming;
+        result=mock?mockCreate(name,queue,0):xpc_connection_create(name,queue);saved=errno;
+        if(scope.active)record(scope,@"create",name,result,0,nil,nil,result!=nullptr);
+    }
+    errno=saved;return result;
+}
 xpc_object_t syncImpl(xpc_connection_t connection,xpc_object_t message,void *pc,bool mock){
     int incoming=errno,saved=incoming;xpc_object_t result=nullptr;
     @autoreleasepool{
@@ -215,6 +224,9 @@ void asyncImpl(xpc_connection_t connection,xpc_object_t message,dispatch_queue_t
 }
 __attribute__((noinline)) xpc_connection_t observedCreate(const char *name,dispatch_queue_t queue,uint64_t flags){
     return createImpl(name,queue,flags,__builtin_return_address(0),false);
+}
+__attribute__((noinline)) xpc_connection_t observedNamed(const char *name,dispatch_queue_t queue){
+    return namedImpl(name,queue,__builtin_return_address(0),false);
 }
 __attribute__((noinline)) xpc_object_t observedSync(xpc_connection_t connection,xpc_object_t message){
     return syncImpl(connection,message,__builtin_return_address(0),false);
@@ -319,10 +331,25 @@ bool peerContracts(){
     [peerControls addObject:@{@"trial":@19,@"kind":@"public_own_process_metadata",@"correct":@(selfValid),
         @"remote_process_queried":@NO}];return valid&&selfValid;
 }
+bool namedContracts(){
+    controlConnection=xpc_dictionary_create(nullptr,nullptr,0);if(!controlConnection)return false;
+    bool valid=true;controlFlags=0;
+    for(unsigned i=0;i<16;i++){
+        NSString *name=[NSString stringWithFormat:@"KeplerMetal.named-control.%u",i];controlName=name.UTF8String;
+        controlQueue=i&1?dispatch_get_main_queue():nullptr;controlInputErrno=300+i;controlOutputErrno=400+i;
+        argumentsValid=true;errno=controlInputErrno;
+        auto returned=namedImpl(controlName,controlQueue,nullptr,true);
+        bool good=argumentsValid&&returned==(xpc_connection_t)controlConnection&&errno==controlOutputErrno;
+        [namedControls addObject:@{@"trial":@(i),@"correct":@(good),@"errno_preserved":@(errno==controlOutputErrno)}];
+        valid&=good;
+    }
+    xpc_release(controlConnection);controlConnection=nullptr;return valid;
+}
 #define KP_ROUTE_PAIR(function,original) \
     __attribute__((used)) static const struct{const void *replacement,*original_;} pair_##function \
     __attribute__((section("__DATA,__interpose")))={(void*)&function,(void*)&original};
 KP_ROUTE_PAIR(observedCreate,xpc_connection_create_mach_service)
+KP_ROUTE_PAIR(observedNamed,xpc_connection_create)
 KP_ROUTE_PAIR(observedSync,xpc_connection_send_message_with_reply_sync)
 KP_ROUTE_PAIR(observedAsync,xpc_connection_send_message_with_reply)
 }
@@ -350,10 +377,10 @@ extern "C" bool KPVideoRoutingBegin(NSString *assets){
             matched=[actual[@"UUID"]isEqual:expected[@"UUID"]]&&[actual[@"current_version"]isEqual:expected[@"current_version"]];
         }if(!matched)return false;
     }
-    allowed=[table copy];rows=[[NSMutableArray alloc]init];controls=[[NSMutableArray alloc]init];summaryControls=[[NSMutableArray alloc]init];peerControls=[[NSMutableArray alloc]init];
+    allowed=[table copy];rows=[[NSMutableArray alloc]init];controls=[[NSMutableArray alloc]init];summaryControls=[[NSMutableArray alloc]init];peerControls=[[NSMutableArray alloc]init];namedControls=[[NSMutableArray alloc]init];
     peerCapture=[peerChoice[@"mode"]isEqual:@"observe"];
     nativeCapture=[choice[@"mode"]isEqual:@"observe"];enabled.store(true,std::memory_order_seq_cst);
-    bool abi=calibrate(),summaries=summaryContracts(),peers=peerContracts();controlValid=abi&&summaries&&peers;
+    bool abi=calibrate(),summaries=summaryContracts(),peers=peerContracts(),named=namedContracts();controlValid=abi&&summaries&&peers&&named;
     if(!controlValid)enabled.store(false);return controlValid;
 }
 extern "C" NSDictionary *KPVideoRoutingSnapshot(){
@@ -362,9 +389,10 @@ extern "C" NSDictionary *KPVideoRoutingSnapshot(){
     bool drained=!inflight.load();NSArray *events=@[];
     if(drained){std::lock_guard<std::mutex>lock(rowsMutex);events=[[[rows sortedArrayUsingDescriptors:
         @[[NSSortDescriptor sortDescriptorWithKey:@"ordinal" ascending:YES]]]copy]autorelease];}
-    return @{@"schema":@3,@"status":drained&&!dropped.load()?@"COMPLETE":@"INCOMPLETE",@"recorders_drained":@(drained),
+    return @{@"schema":@4,@"status":drained&&!dropped.load()?@"COMPLETE":@"INCOMPLETE",@"recorders_drained":@(drained),
         @"disabled_before_snapshot":@YES,@"calls":@(count.load()),@"dropped":@(dropped.load()),@"events":events?:@[],
-        @"controls":controls?:@[],@"synthetic_ABI_calls":@96,@"synthetic_controls_valid":@(controlValid),
+        @"controls":controls?:@[],@"synthetic_ABI_calls":@112,@"synthetic_controls_valid":@(controlValid),
+        @"named_constructor_controls":namedControls?:@[],@"named_constructor_control_calls":@(namedControls.count),
         @"scalar_summary_controls":summaryControls?:@[],@"scalar_summary_controls_calls":@(summaryControls.count),
         @"peer_controls":peerControls?:@[],@"peer_control_cases":@(peerControls.count),@"peer_capture_enabled":@(peerCapture),
         @"errno_preserved_around_interposed_calls":@YES,@"remote_memory_read":@NO,@"PID_reuse_fully_excluded":@NO,

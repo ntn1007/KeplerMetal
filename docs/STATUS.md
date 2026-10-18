@@ -1,5 +1,7 @@
 # Status at the source export, 2026-10-18
 
+The new local native video transport passes bounded software decoding:24owned-transport images are exact; the whole33host cohort contains48images/5,529,600CPU-matching NV12bytes and four preserved qualification failures. The final7host artifact completes all observations; hardware-required creation remains-12906/zeroimages. It now observes AppleGVA10.0.20 after two GVA candidate selections. The factory return and refusal cause remain open. [Evidence and limits](VIDEO_LOCAL_SERVICE.md).
+
 New peer milestone: 13 signed terminal hosts, 18 software images / 2,073,600 exact
 NV12 bytes, 14 consistent peer observations across 7 distinct births, and two
 independent bounded service-log windows. All nine hardware creates still fail

@@ -1,0 +1,123 @@
+--- a/bridge/tools/video_local_service.mm
++++ b/bridge/tools/video_local_service.mm
+@@ -64,7 +64,7 @@
+     NSMutableArray *exchanges=[[NSMutableArray alloc]init];
+     std::atomic<unsigned> constructors{0},accepted{0},callbackReturned{0},unexpected{0},inflight{0};
+     std::atomic<pid_t> clientPeerPID{0},serverPeerPID{0};
+-    bool invoke=false,preflight=false;
++    bool invoke=false,preflight=false,hardware=false;
+     ~State(){for(auto p:clients)xpc_release(p);for(auto p:peers)xpc_release(p);
+         if(endpoint)xpc_release(endpoint);if(listener)xpc_release(listener);dispatch_release(queue);[exchanges release];}
+ };
+@@ -92,7 +92,9 @@
+     int incoming=errno;void *pc=__builtin_return_address(0);auto state=std::atomic_load(&current);uint64_t offset=0;
+     if(!enabled.load()||!state||inside||!state->invoke||!name||strcmp(name,"com.apple.coremedia.videodecoder")||
+         !vtAddress(pc,&offset)||offset!=6326308){errno=incoming;return xpc_connection_create(name,target);}
+-    inside=true;state->inflight++;
++    state->inflight++;
++    if(!enabled.load()){state->inflight--;errno=incoming;return xpc_connection_create(name,target);}
++    inside=true;
+     if(state->constructors.fetch_add(1)!=0||!nativePin(state->handler)){
+         state->unexpected++;state->inflight--;inside=false;errno=incoming;return xpc_connection_create(name,target);
+     }
+@@ -106,7 +108,9 @@
+     int incoming=errno;void *pc=__builtin_return_address(0);auto state=std::atomic_load(&current);
+     bool observe=enabled.load()&&state&&!inside&&owns(state,connection)&&vtAddress(pc);
+     if(!observe){errno=incoming;return xpc_connection_send_message_with_reply_sync(connection,message);}
+-    inside=true;state->inflight++;
++    state->inflight++;
++    if(!enabled.load()){state->inflight--;errno=incoming;return xpc_connection_send_message_with_reply_sync(connection,message);}
++    inside=true;
+     int64_t opcode=0;bool op=numeric(message,"OpCode",&opcode);
+     errno=incoming;xpc_object_t result=xpc_connection_send_message_with_reply_sync(connection,message);int saved=errno;
+     int64_t status=0;bool st=numeric(result,"Status",&status);pid_t peer=xpc_connection_get_pid(connection);state->clientPeerPID=peer;
+@@ -124,14 +128,15 @@
+ KP_OWN_PAIR(ownedSync,xpc_connection_send_message_with_reply_sync)
+ }
+ extern "C" bool KPVideoOwnedBegin(NSString *assets,NSString *mode){
+-    if(std::atomic_load(&current)||![@[@"inspect",@"cpu"]containsObject:mode])return false;
++    if(std::atomic_load(&current)||![@[@"inspect",@"cpu",@"hardware"]containsObject:mode])return false;
+     NSDictionary *choice=[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:
+         [assets stringByAppendingPathComponent:@"owned-choice.json"]]options:0 error:nil];
+     if(choice.count!=1||![@[@"native",@"owned"]containsObject:choice[@"route"]])return false;
+     auto state=std::make_shared<State>();
+     state->handler=(xpc_connection_handler_t)dlsym(RTLD_DEFAULT,"VTRemoteDecodeServer_XPCServiceConnectionHandler");
+     state->preflight=nativePin(state->handler);if(!state->preflight)return false;
+-    state->invoke=[mode isEqual:@"cpu"]&&[choice[@"route"]isEqual:@"owned"];std::atomic_store(&current,state);
++    state->hardware=[mode isEqual:@"hardware"];
++    state->invoke=![mode isEqual:@"inspect"]&&[choice[@"route"]isEqual:@"owned"];std::atomic_store(&current,state);
+     if(!state->invoke)return true;
+     std::weak_ptr<State> weak=state;
+     state->listener=xpc_connection_create(nullptr,state->queue);
+@@ -164,8 +169,9 @@
+     if(state->listener)xpc_connection_cancel(state->listener);
+     dispatch_sync(state->queue,^{});
+     bool own=state->invoke;
+-    bool complete=drained&&state->unexpected.load()==0&&(!own||
+-        (state->constructors==1&&state->accepted==1&&state->callbackReturned==1));
++    bool noTransport=state->constructors==0&&state->accepted==0&&state->callbackReturned==0;
++    bool usedTransport=state->constructors==1&&state->accepted==1&&state->callbackReturned==1;
++    bool complete=drained&&state->unexpected.load()==0&&(!own||usedTransport||(state->hardware&&noTransport));
+     NSDictionary *result=@{@"status":complete?@"COMPLETE":@"INCOMPLETE",@"preflight":@(state->preflight),
+         @"route":own?@"owned":@"native",@"constructor_calls":@(state->constructors.load()),
+         @"accepted":@(state->accepted.load()),@"native_callback_returned":@(state->callbackReturned.load()),
+--- a/bridge/tools/video_local_service_main.mm
++++ b/bridge/tools/video_local_service_main.mm
+@@ -8,7 +8,7 @@
+ extern "C" NSDictionary *KPVideoOwnedSnapshot();
+ int KPRegistryQualifiedMain(int,char **);
+ int main(int argc,char **argv){@autoreleasepool{
+-    if(argc!=4||![@[@"inspect",@"cpu"]containsObject:@(argv[3])])return 1;
++    if(argc!=4||![@[@"inspect",@"cpu",@"hardware"]containsObject:@(argv[3])])return 1;
+     std::atomic<bool> done{false};
+     std::thread watchdog([&]{
+         for(unsigned i=0;i<1200;i++){if(done.load())return;std::this_thread::sleep_for(std::chrono::milliseconds(10));}
+--- a/bridge/tools/native_video_local_service.py
++++ b/bridge/tools/native_video_local_service.py
+@@ -3,7 +3,8 @@
+ """Build/run an opt-in anonymous native video transport, in our process only.
+ 
+ Exact local prerequisite artifacts and a pinned native callback are required.
+-The first qualification is H.264 software only. No hardware fallback is hidden.
++H.264 software and hardware-required observations stay distinct. No hardware
++fallback is hidden; the existing requirement and query gates are preserved.
+ """
+ from pathlib import Path
+ import argparse
+@@ -105,6 +106,8 @@
+ def run(args):
+     build, out = args.build.resolve(), args.out.resolve()
+     data = load(build / 'inputs.json')
++    if args.override != 'native' and args.mode != 'hardware':
++        raise ValueError('Presence counterfactual restricted to hardware-required calls')
+     for folder, key in [('', 'source_hashes'), ('assets', 'assets_SHA256'), ('runtime', 'runtime_SHA256')]:
+         for name, digest in data[key].items():
+             if sha(build / folder / name) != digest:
+@@ -121,12 +124,14 @@
+     out.mkdir(exist_ok=False); (out / 'outputs').mkdir()
+     shutil.copytree(build / 'assets', out / 'assets')
+     write(out / 'assets/owned-choice.json', {'route': args.route})
++    write(out / 'assets/dependency-choice.json', {'mode': args.override})
+     for name in data['source_hashes']:
+         shutil.copyfile(build / name, out / name)
+     shutil.copyfile(__file__, out / 'runner.py')
+     shutil.copyfile(build / 'application', out / 'application'); (out / 'application').chmod(0o755)
+-    assets = {**data['assets_SHA256'], 'owned-choice.json': sha(out / 'assets/owned-choice.json')}
+-    write(out / 'inputs.json', {**data, 'assets_SHA256': assets, 'mode': args.mode, 'route': args.route})
++    assets = {**data['assets_SHA256'], **{n: sha(out / 'assets' / n) for n in ['owned-choice.json', 'dependency-choice.json']}}
++    write(out / 'inputs.json', {**data, 'assets_SHA256': assets, 'mode': args.mode, 'route': args.route,
++                              'override_mode': args.override})
+     sys.path.insert(0, str(build / 'runtime'))
+     from run_sdk_host import run_host
+     manifest = run_host(out / 'application', out / 'execution',
+@@ -149,8 +154,9 @@
+     p.add_argument('action', choices=['build', 'run'])
+     p.add_argument('--routing-build', type=Path); p.add_argument('--build', type=Path)
+     p.add_argument('--out', type=Path, required=True)
+-    p.add_argument('--mode', choices=['inspect', 'cpu'])
++    p.add_argument('--mode', choices=['inspect', 'cpu', 'hardware'])
+     p.add_argument('--route', choices=['native', 'owned'], default='native')
++    p.add_argument('--override', choices=['native', 'wrong-key', 'present-key'], default='native')
+     p.add_argument('--reservation-root', type=Path, default=ROOT)
+     args = p.parse_args(); args.out.resolve().relative_to(ROOT / 'results')
+     if args.action == 'build':

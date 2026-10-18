@@ -110,7 +110,7 @@ def build(args):
     write(out / 'assets/routing-config.json', {'library_SHA256': sha(library),
           'profile_SHA256': sha(out / 'assets/routing-profile.json')})
     write(out / 'inputs.json', {
-        'routing_schema': 3, 'source_hashes': {n: sha(out / n) for n in names},
+        'routing_schema': 4, 'source_hashes': {n: sha(out / n) for n in names},
         'assets_SHA256': {str(p.relative_to(out / 'assets')): sha(p) for p in (out / 'assets').rglob('*') if p.is_file()},
         'runtime_SHA256': {p.name: sha(p) for p in (out / 'runtime').iterdir()},
         'dependency_build': str(base), 'dependency_inputs_SHA256': sha(base / 'inputs.json'),
@@ -139,7 +139,7 @@ def run(args):
         raise ValueError('Routing library changed')
     if args.override != 'native' and (args.codec != 'H264' or args.mode != 'hardware'):
         raise ValueError('Counterfactual restricted to H264 hardware')
-    has_peer = data.get('routing_schema') == 3
+    has_peer = data.get('routing_schema') in (3, 4)
     if args.peer is not None and not has_peer:
         raise ValueError('Peer metadata mode requires observer schema 3')
     binary = build_root / ('application-' + args.codec)

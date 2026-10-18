@@ -6933,9 +6933,9 @@
     {
       "path": "bridge/tools/video_registry_metadata.mm",
       "source_path": "bridge/tools/video_registry_metadata.mm",
-      "source_SHA256": "5fff67b844d4aca480c6ee82163ff9020c80dd86f8c3e37c9c92b940de6b3372",
-      "published_SHA256": "5fff67b844d4aca480c6ee82163ff9020c80dd86f8c3e37c9c92b940de6b3372",
-      "bytes": 5056,
+      "source_SHA256": "0600566954b3803ae954d5f826703855ff54c1d76243a5c27736fabe4c967217",
+      "published_SHA256": "0600566954b3803ae954d5f826703855ff54c1d76243a5c27736fabe4c967217",
+      "bytes": 5239,
       "modified_for_publication": false
     },
     {
@@ -7045,9 +7045,9 @@
     {
       "path": "bridge/tools/video_routing.mm",
       "source_path": "bridge/tools/video_routing.mm",
-      "source_SHA256": "d2c3387329ced95c862431d64c98287b608e7696c2a3fbb11b72a9bb4b3713db",
-      "published_SHA256": "d2c3387329ced95c862431d64c98287b608e7696c2a3fbb11b72a9bb4b3713db",
-      "bytes": 25595,
+      "source_SHA256": "946254ea7d9a4b92f9f1250b12cb171c0384c1c6fe3f4e1f9ff3c7ecf8d8d7de",
+      "published_SHA256": "946254ea7d9a4b92f9f1250b12cb171c0384c1c6fe3f4e1f9ff3c7ecf8d8d7de",
+      "bytes": 27337,
       "modified_for_publication": false
     },
     {
@@ -7061,9 +7061,9 @@
     {
       "path": "bridge/tools/native_video_routing.py",
       "source_path": "bridge/tools/native_video_routing.py",
-      "source_SHA256": "4a52126ee94cbfefdeca752b7d0c34dd3d45c9c013c6ad23a992feb44c77193e",
-      "published_SHA256": "4a52126ee94cbfefdeca752b7d0c34dd3d45c9c013c6ad23a992feb44c77193e",
-      "bytes": 11623,
+      "source_SHA256": "acf98802ec94954e81cf57f65067fbb325231beaff27bad4c6c5c18f305c080d",
+      "published_SHA256": "acf98802ec94954e81cf57f65067fbb325231beaff27bad4c6c5c18f305c080d",
+      "bytes": 11628,
       "modified_for_publication": false
     },
     {
@@ -7096,6 +7096,118 @@
       "source_SHA256": "97759777543dfcea5b9434b1d2f093873e8cf41984b7d678754b399a019a533f",
       "published_SHA256": "97759777543dfcea5b9434b1d2f093873e8cf41984b7d678754b399a019a533f",
       "bytes": 22109,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_local_xpc_probe.mm",
+      "source_path": "bridge/tools/video_local_xpc_probe.mm",
+      "source_SHA256": "683154f828d2ed1b515b72942f2498ea7d2bdcd8b202dd356e7c047c04e9c115",
+      "published_SHA256": "683154f828d2ed1b515b72942f2498ea7d2bdcd8b202dd356e7c047c04e9c115",
+      "bytes": 13589,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/native_video_local_xpc.py",
+      "source_path": "bridge/tools/native_video_local_xpc.py",
+      "source_SHA256": "c05ce822ebd6ae0dff66eb56650e40a5c2fd34b92da0b999540d26746ffc3b93",
+      "published_SHA256": "c05ce822ebd6ae0dff66eb56650e40a5c2fd34b92da0b999540d26746ffc3b93",
+      "bytes": 4746,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/audit_video_local_xpc.py",
+      "source_path": "bridge/tools/audit_video_local_xpc.py",
+      "source_SHA256": "0ba47ad05d386724edf56b283e25df231b29af3159b8df2119b35dd87502ac5c",
+      "published_SHA256": "0ba47ad05d386724edf56b283e25df231b29af3159b8df2119b35dd87502ac5c",
+      "bytes": 9837,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_local_service.mm",
+      "source_path": "bridge/tools/video_local_service.mm",
+      "source_SHA256": "0f5604f9b3351f7f7dd8badb572bb098c4936cd3cfa0afcff158171169732287",
+      "published_SHA256": "0f5604f9b3351f7f7dd8badb572bb098c4936cd3cfa0afcff158171169732287",
+      "bytes": 12169,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_local_service_main.mm",
+      "source_path": "bridge/tools/video_local_service_main.mm",
+      "source_SHA256": "85ccc9f865a593995acc7186461d743b2b86999973f7c80e9068283b16697af4",
+      "published_SHA256": "85ccc9f865a593995acc7186461d743b2b86999973f7c80e9068283b16697af4",
+      "bytes": 1332,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/native_video_local_service.py",
+      "source_path": "bridge/tools/native_video_local_service.py",
+      "source_SHA256": "d218738637901bde7b7aa15cde998e1e5f55317b785dd44ec4a73f3fc1e75f3c",
+      "published_SHA256": "d218738637901bde7b7aa15cde998e1e5f55317b785dd44ec4a73f3fc1e75f3c",
+      "bytes": 9951,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/audit_video_local_service.py",
+      "source_path": "bridge/tools/audit_video_local_service.py",
+      "source_SHA256": "fc19df8d6658d73ce6952a2989dabe64b093b8ca60c9c7ca19e38e383c97193b",
+      "published_SHA256": "fc19df8d6658d73ce6952a2989dabe64b093b8ca60c9c7ca19e38e383c97193b",
+      "bytes": 19725,
+      "modified_for_publication": false
+    },
+    {
+      "path": "patches/video-local-xpc-v1-to-v2.patch",
+      "source_path": "patches/video-local-xpc-v1-to-v2.patch",
+      "source_SHA256": "ea5084c62740560ba9f495e72044910fe9e9c69e7d75693ba408ca02c721b0ce",
+      "published_SHA256": "ea5084c62740560ba9f495e72044910fe9e9c69e7d75693ba408ca02c721b0ce",
+      "bytes": 1762,
+      "modified_for_publication": false
+    },
+    {
+      "path": "patches/video-local-xpc-v2-to-v3.patch",
+      "source_path": "patches/video-local-xpc-v2-to-v3.patch",
+      "source_SHA256": "44f9b2d721029a687b45d09f730ac3be539ea6cabe4afc3a962c8372f13ac643",
+      "published_SHA256": "44f9b2d721029a687b45d09f730ac3be539ea6cabe4afc3a962c8372f13ac643",
+      "bytes": 1268,
+      "modified_for_publication": false
+    },
+    {
+      "path": "patches/video-metadata-bounded-capacity.patch",
+      "source_path": "patches/video-metadata-bounded-capacity.patch",
+      "source_SHA256": "b950aa6e352c7f10f03985b51d723c37ba1b67f843dbe805546cc5757148abeb",
+      "published_SHA256": "b950aa6e352c7f10f03985b51d723c37ba1b67f843dbe805546cc5757148abeb",
+      "bytes": 1291,
+      "modified_for_publication": false
+    },
+    {
+      "path": "patches/video-owned-service-v1-to-v2.patch",
+      "source_path": "patches/video-owned-service-v1-to-v2.patch",
+      "source_SHA256": "b4e4240615d034cdf4eaae06a8aaf98be74ad1c230da4b110bf9f0d5a06c520e",
+      "published_SHA256": "b4e4240615d034cdf4eaae06a8aaf98be74ad1c230da4b110bf9f0d5a06c520e",
+      "bytes": 7972,
+      "modified_for_publication": false
+    },
+    {
+      "path": "patches/video-owned-service-v2-to-v3.patch",
+      "source_path": "patches/video-owned-service-v2-to-v3.patch",
+      "source_SHA256": "d9d109fa14f5012de2b433108656cfcd31cb894366377ec84f0439b9c1eae45b",
+      "published_SHA256": "d9d109fa14f5012de2b433108656cfcd31cb894366377ec84f0439b9c1eae45b",
+      "bytes": 2445,
+      "modified_for_publication": false
+    },
+    {
+      "path": "patches/video-owned-service-v3-to-v4.patch",
+      "source_path": "patches/video-owned-service-v3-to-v4.patch",
+      "source_SHA256": "7d8bb6b68cba38f6cd0598ea1ea945d2f4aa9b86ba2e3448177f756321c7b63b",
+      "published_SHA256": "7d8bb6b68cba38f6cd0598ea1ea945d2f4aa9b86ba2e3448177f756321c7b63b",
+      "bytes": 4310,
+      "modified_for_publication": false
+    },
+    {
+      "path": "patches/video-routing-v3-to-v4.patch",
+      "source_path": "patches/video-routing-v3-to-v4.patch",
+      "source_SHA256": "bde3fb65d9dea12f863376dc1802497cfa1da814ac8627ff3099b51e2c2ac30d",
+      "published_SHA256": "bde3fb65d9dea12f863376dc1802497cfa1da814ac8627ff3099b51e2c2ac30d",
+      "bytes": 7051,
       "modified_for_publication": false
     }
   ],
@@ -7138,7 +7250,7 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "f84c34b56987eb4ea0edb6b6ce161dba4518cbf9728dc7e02a2df03bcff8b761",
-  "previous_public_commit": "22920b5fde4ad546f7a343cdad56fa3fe0314804",
-  "update": "Bounded XPC peer PID/birth/path observation, errno-transparent forwarding, independent service-log corroboration and static native entry/Strt selector mapping; hardware video remains unqualified"
+  "previous_source_snapshot_SHA256": "747d7e32638cd32016ca3017a48435631118e43d33d3b942ff3beea28bccb5b5",
+  "previous_public_commit": "e95d40d3680497e216a184e21df7861d2c6b3194",
+  "update": "Own-process native video transport, public XPC oracle controls, complete GVA refusal capture, preserved failures and reversible original-source versions; no hardware video or system deployment claimed."
 }

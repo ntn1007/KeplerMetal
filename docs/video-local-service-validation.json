@@ -1,0 +1,262 @@
+{
+  "status": "AUDIT_PASS_WITH_FOUR_PRESERVED_QUALIFICATION_FAILURES",
+  "terminal_hosts": 33,
+  "nonoverlapping": true,
+  "owned_native_hosts": 19,
+  "public_XPC_hosts": 12,
+  "constructor_observer_hosts": 2,
+  "preserved_failed_hosts": 4,
+  "CPU_images": 48,
+  "CPU_exact_pixel_bytes": 5529600,
+  "owned_transport_CPU_images": 24,
+  "public_XPC_exact_uint32_words": 43792,
+  "public_XPC_primer_words": 3,
+  "hardware_completed_refusals": 6,
+  "hardware_execution_proved": false,
+  "full_objective_complete": false,
+  "native_factory_actual_return_observed": false,
+  "hardware_refusal_root_cause_proved": false,
+  "new_M1_execution": false,
+  "Qwen_job_ids": [],
+  "system_modified": false,
+  "performance_benchmark": false,
+  "public_XPC_audit_SHA256": "99bb6deba3f460f810f8f1c6611035595e4503bc24a7c33c43ea78bc45459a39",
+  "auditor_SHA256": "fc19df8d6658d73ce6952a2989dabe64b093b8ca60c9c7ca19e38e383c97193b",
+  "audit_SHA256": "e5ebfca0915788c7d4c65880122e742b3ae4f73fcd985070dc68eb73c5a93428",
+  "preservation": {
+    "status": "PASS",
+    "at": "2026-10-18T09:09:12.102951+00:00",
+    "system_files_unchanged": 83,
+    "OCLP_unchanged": true,
+    "AppleVA_policy_unchanged": true,
+    "common_runtime_source_files_unchanged": 36,
+    "common_runtime_archive_SHA256": "5636b0d0d158fc985bf9b1df5fd0e16b91909a9a6f48423c175272b7fe4ddb67",
+    "deployment": false
+  },
+  "source_reconstruction": {
+    "status": "PASS",
+    "reverse_patch_commands": 7,
+    "archived_source_comparisons": 14
+  },
+  "final_build": "video-owned-service-build-20261018-04",
+  "final_cohort": [
+    {
+      "case": "video-owned-service-v4-inspect-20261018",
+      "qualification_status": "PASS",
+      "mode": "inspect",
+      "route": "native",
+      "choice": "native",
+      "PID": 43250,
+      "manifest_SHA256": "27f6a97a3623bee7a0fdfd425f72b74111b3a9ecf906c6da73864d846ce20799",
+      "results_SHA256": "a0e5d86aa0f6162d02af01a575c217c9e4a5b218423851eaf4c50396de8b03a4",
+      "owned_SHA256": "2175149c214cc6e202fa5d1c006350c7d95edc0b8509ea89256e245f9ecd37a1",
+      "callback_returned": 0,
+      "frames": 0,
+      "pixel_bytes": 0,
+      "entry_calls": 0,
+      "metadata_associations": 0,
+      "owned_sync_replies": 0,
+      "started_at": "2026-10-18T08:59:20.978033+00:00",
+      "completed_at": "2026-10-18T08:59:21.636554+00:00"
+    },
+    {
+      "case": "video-owned-service-v4-native-cpu-20261018",
+      "qualification_status": "PASS",
+      "mode": "cpu",
+      "route": "native",
+      "choice": "native",
+      "PID": 43393,
+      "manifest_SHA256": "6004c06069753794f2727f94b3972441e857e36795d24e7fa48020b0943c7834",
+      "results_SHA256": "48a227737fc3be7cc46111bb77868e917af2c6f87e55e444e2e2ee200e496c4d",
+      "owned_SHA256": "eb067428c55e3bc10f1f484ae57ce604ef6a1b58efce835ef4b94094b8a3d071",
+      "callback_returned": 0,
+      "frames": 6,
+      "pixel_bytes": 691200,
+      "entry_calls": 85,
+      "metadata_associations": 83,
+      "owned_sync_replies": 0,
+      "started_at": "2026-10-18T09:00:55.617838+00:00",
+      "completed_at": "2026-10-18T09:00:56.650865+00:00",
+      "create_status": 0,
+      "substitutions": 0
+    },
+    {
+      "case": "video-owned-service-v4-local-cpu-20261018",
+      "qualification_status": "PASS",
+      "mode": "cpu",
+      "route": "owned",
+      "choice": "native",
+      "PID": 43262,
+      "manifest_SHA256": "b4989e3585a37599f9228fbfab7ef78d74aabea9bf3cdcd832180e1d73d81dad",
+      "results_SHA256": "41df156c70e12ef359c327f4e58a1827733d647ca8b071ba65c395f02855be86",
+      "owned_SHA256": "d54920c99b7ee9e4163181ea5407cb9a8f7bc18a9cea1514a6988a3d555d3efa",
+      "callback_returned": 1,
+      "frames": 6,
+      "pixel_bytes": 691200,
+      "entry_calls": 182,
+      "metadata_associations": 177,
+      "owned_sync_replies": 19,
+      "started_at": "2026-10-18T08:59:25.756285+00:00",
+      "completed_at": "2026-10-18T08:59:26.465411+00:00",
+      "create_status": 0,
+      "substitutions": 0
+    },
+    {
+      "case": "video-owned-service-v4-local-hw-native-20261018",
+      "qualification_status": "PASS",
+      "mode": "hardware",
+      "route": "owned",
+      "choice": "native",
+      "PID": 43404,
+      "manifest_SHA256": "9c3d3c2fcb36f1bca87952cc0cbc59d44e7e015c1fb150474b68ff452a6e8b7d",
+      "results_SHA256": "d806aa7754661bf96fa0062c2ca7d8cc896b2715468086679dbfedc9c5797cec",
+      "owned_SHA256": "e064af6aa5b84bb130f7912a972412ee8ab976bfcff46843402e88871df5a3ba",
+      "callback_returned": 0,
+      "frames": 0,
+      "pixel_bytes": 0,
+      "entry_calls": 87,
+      "metadata_associations": 86,
+      "owned_sync_replies": 0,
+      "started_at": "2026-10-18T09:01:00.425119+00:00",
+      "completed_at": "2026-10-18T09:01:01.220332+00:00",
+      "create_status": -12906,
+      "substitutions": 0
+    },
+    {
+      "case": "video-owned-service-v4-local-hw-wrong-20261018",
+      "qualification_status": "PASS",
+      "mode": "hardware",
+      "route": "owned",
+      "choice": "wrong-key",
+      "PID": 43426,
+      "manifest_SHA256": "6c6ece89618a57d2e70e295c178bb9f99cc68aee360d5e164fa637cf7e4799e2",
+      "results_SHA256": "a2a56a0856a2626577bb255cb04b8b6746c26ef3aa618b261ddb98c09d947b62",
+      "owned_SHA256": "e205ab85d9b9d36fd695a8e7c397a49ae72b9c12a2cc78f619a1ce5344370006",
+      "callback_returned": 0,
+      "frames": 0,
+      "pixel_bytes": 0,
+      "entry_calls": 87,
+      "metadata_associations": 86,
+      "owned_sync_replies": 0,
+      "started_at": "2026-10-18T09:01:05.215304+00:00",
+      "completed_at": "2026-10-18T09:01:05.889644+00:00",
+      "create_status": -12906,
+      "substitutions": 0
+    },
+    {
+      "case": "video-owned-service-v4-local-hw-present-20261018",
+      "qualification_status": "PASS",
+      "mode": "hardware",
+      "route": "owned",
+      "choice": "present-key",
+      "PID": 43281,
+      "manifest_SHA256": "19c88608ec4123af2bbc1314e1419a997185d50e839c07e5236185c918b439ba",
+      "results_SHA256": "904a1dd89502904ec73785070140b5f923483f89a83cc6a48830306e1bb3d0f9",
+      "owned_SHA256": "58f5f04746753bd4de94ef7245fa5b5c3202f5e3f27d1382b4429ca373ee1d50",
+      "callback_returned": 1,
+      "frames": 0,
+      "pixel_bytes": 0,
+      "entry_calls": 274,
+      "metadata_associations": 268,
+      "owned_sync_replies": 2,
+      "started_at": "2026-10-18T08:59:30.311819+00:00",
+      "completed_at": "2026-10-18T08:59:31.172541+00:00",
+      "create_status": -12906,
+      "substitutions": 1,
+      "GVA_candidates_observed": 2,
+      "native_factory_entry_calls": 1,
+      "AppleGVA_UUID": "ca5414f369373c059ea2d82b35afd4f0",
+      "AppleGVA_version": "10.0.20"
+    },
+    {
+      "case": "video-owned-service-v4-native-hw-present-20261018",
+      "qualification_status": "PASS",
+      "mode": "hardware",
+      "route": "native",
+      "choice": "present-key",
+      "PID": 43437,
+      "manifest_SHA256": "bf6a02d746394d1112f01f7a8de2624b22e03b1bee858256cf5932d3ac60e2a6",
+      "results_SHA256": "cdc839f163c52209ad49225b99b7ef8272138fa919fa669c24f561a49a62900a",
+      "owned_SHA256": "9f0521cbbd7a3447d385271d04d3c5961ff5116ba9a69cb3a45786175d3ff296",
+      "callback_returned": 0,
+      "frames": 0,
+      "pixel_bytes": 0,
+      "entry_calls": 178,
+      "metadata_associations": 174,
+      "owned_sync_replies": 0,
+      "started_at": "2026-10-18T09:01:09.737355+00:00",
+      "completed_at": "2026-10-18T09:01:10.707831+00:00",
+      "create_status": -12906,
+      "substitutions": 1
+    }
+  ],
+  "preserved_failures": [
+    {
+      "experiment": "public XPC V1 cancel",
+      "exit_code": 3,
+      "reason": "peer PID unknown before reply"
+    },
+    {
+      "experiment": "public XPC V2 cancel",
+      "exit_code": 3,
+      "reason": "server invalidation absent; reference capture lifetime corrected in V3"
+    },
+    {
+      "experiment": "owned native V2 hardware presence",
+      "exit_code": -11,
+      "reason": "native client connection cleanup crash; extra client retention/cancellation removed"
+    },
+    {
+      "experiment": "owned native V3 hardware presence",
+      "exit_code": 6,
+      "reason": "metadata capacity256 exceeded by269 observations;13drops; not watchdog timeout"
+    }
+  ],
+  "native_callback": {
+    "image": "VideoToolbox",
+    "version": "3330.13.105",
+    "UUID": "e7231bea63883d0a95c0a93ce970b96b",
+    "offset": 4268444,
+    "bytes": 101,
+    "SHA256": "100deacc2722bfbba2cee35dcf2ddcd00628d9840991e9d6f2ff82d426cab3b9",
+    "ABI_source": "pinned shipped entry xpc_main slot and SDK26.2 xpc_connection_handler_t",
+    "entry_evidence_id": "ev_63ad658ae6dc86220b197dcba7812bbaa15f9db653fa28ec035b18101a832b1a",
+    "full_initialization_lifetime_qualified": false
+  },
+  "AppleGVA_observed": {
+    "version": "10.0.20",
+    "UUID": "ca5414f369373c059ea2d82b35afd4f0"
+  },
+  "common_runtime_regression_execution": "NOT RUN; unchanged source/archive hashes checked",
+  "patches": [
+    {
+      "path": "patches/video-local-xpc-v1-to-v2.patch",
+      "SHA256": "ea5084c62740560ba9f495e72044910fe9e9c69e7d75693ba408ca02c721b0ce"
+    },
+    {
+      "path": "patches/video-local-xpc-v2-to-v3.patch",
+      "SHA256": "44f9b2d721029a687b45d09f730ac3be539ea6cabe4afc3a962c8372f13ac643"
+    },
+    {
+      "path": "patches/video-metadata-bounded-capacity.patch",
+      "SHA256": "b950aa6e352c7f10f03985b51d723c37ba1b67f843dbe805546cc5757148abeb"
+    },
+    {
+      "path": "patches/video-owned-service-v1-to-v2.patch",
+      "SHA256": "b4e4240615d034cdf4eaae06a8aaf98be74ad1c230da4b110bf9f0d5a06c520e"
+    },
+    {
+      "path": "patches/video-owned-service-v2-to-v3.patch",
+      "SHA256": "d9d109fa14f5012de2b433108656cfcd31cb894366377ec84f0439b9c1eae45b"
+    },
+    {
+      "path": "patches/video-owned-service-v3-to-v4.patch",
+      "SHA256": "7d8bb6b68cba38f6cd0598ea1ea945d2f4aa9b86ba2e3448177f756321c7b63b"
+    },
+    {
+      "path": "patches/video-routing-v3-to-v4.patch",
+      "SHA256": "bde3fb65d9dea12f863376dc1802497cfa1da814ac8627ff3099b51e2c2ac30d"
+    }
+  ],
+  "next_action": "Inspect the pinned CoreMedia factory loader and actual AppleGVA factory return before any backend/policy change"
+}

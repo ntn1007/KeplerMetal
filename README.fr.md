@@ -1,5 +1,7 @@
 # KeplerMetal
 
+Le gestionnaire vidéo natif fonctionne maintenant dans notre processus de test :24images logicielles correspondent exactement au CPU sur ce chemin. Le refus matériel-12906 persiste ; AppleGVA10.0.20 est désormais observé dans ce processus. [Preuves, sources et limites](docs/VIDEO_LOCAL_SERVICE.md).
+
 Dépendance GPU : le rôle de `IOGVACodec` dans la sélection GVA est confirmé par trois essais contrôlés, avec le même binaire. Le décodage matériel reste en échec ; 24 images logicielles sont exactes. [Preuves et reproduction](docs/VIDEO_DEPENDENCIES.md).
 
 Les essais par l’API publique H.264 et MPEG‑2 produisent des images CPU exactes, mais les neuf créations avec matériel obligatoire échouent encore sans image. L’entrée modèle qui corrige la disponibilité VP3 ne suffit donc pas pour ces chemins. [Résultats et prochaine cible](docs/VIDEO_CODEC_SELECTION.md).

@@ -11,7 +11,11 @@ std::atomic<bool> enabled{false},configured{false};
 std::atomic<unsigned> inflight{0},count{0},dropped{0};
 thread_local bool control=false,copying=false;
 uintptr_t sites[2]{};
-constexpr unsigned capacity=256,textCapacity=8192;
+#ifndef KPMETA_CAPACITY
+#define KPMETA_CAPACITY 256
+#endif
+static_assert(KPMETA_CAPACITY>=256&&KPMETA_CAPACITY<=1024,"bounded metadata capacity");
+constexpr unsigned capacity=KPMETA_CAPACITY,textCapacity=8192;
 struct Event {
     std::atomic<bool> ready{false};
     bool synthetic=false,truncated=false,descriptionPresent=false;
@@ -76,7 +80,7 @@ extern "C" NSDictionary *KPRegistryMetadataSnapshot(){
             @"characters":@(e.characters),@"characters_copied":@(e.converted)}];
     }
     return @{@"status":drained&&!pending&&!dropped.load()?@"COMPLETE":@"INCOMPLETE",
-        @"recorders_drained":@(drained),@"disabled_before_snapshot":@YES,@"calls":@(count.load()),
+        @"recorders_drained":@(drained),@"disabled_before_snapshot":@YES,@"calls":@(count.load()),@"capacity":@(capacity),
         @"dropped":@(dropped.load()),@"pending":@(pending),@"events":rows,
         @"API":@"CFRetain/CFCopyDescription/CFString public interfaces",
         @"returned_objects_or_ownership_modified":@NO,@"opaque_registry_items_dereferenced":@NO,

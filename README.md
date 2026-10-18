@@ -1,5 +1,7 @@
 # KeplerMetal
 
+Native video transport now executes the pinned decoder callback inside our test process. Twenty-four software images through that transport match the CPU exactly; the full cohort has48images. The local hardware case still returns-12906, but now exposes the actual AppleGVA10.0.20 factory path. [Sources, preserved failures and next driver boundary](docs/VIDEO_LOCAL_SERVICE.md).
+
 Video peer identity: 14 public PID/birth/path observations and two bounded log
 windows corroborate the actual Intel decoder service. A pinned static native
 path places the old selector in the `Strt` handler; its failing runtime branch

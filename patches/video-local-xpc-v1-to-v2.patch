@@ -1,0 +1,23 @@
+--- a/bridge/tools/video_local_xpc_probe.mm
++++ b/bridge/tools/video_local_xpc_probe.mm
+@@ -111,6 +111,20 @@
+     bool anonymous=xpc_connection_get_name(listener)==nullptr;
+     bool correct=listener&&endpoint&&client&&anonymous;pid_t clientPeerPID=0;NSMutableArray *trials=[NSMutableArray array];
+     if([mode isEqual:@"cancel"]){
++        // XPC may not know the peer PID until a reply has been received.
++        // Prime the connection, then cancel a second, genuinely pending RPC.
++        uint32_t word=0x89abcdef;uint64_t primeSequence=0xfedcba9876543210ull;
++        xpc_object_t primer=xpc_dictionary_create(nullptr,nullptr,0);
++        xpc_dictionary_set_data(primer,"words",&word,4);xpc_dictionary_set_uint64(primer,"seed",seed);
++        xpc_dictionary_set_uint64(primer,"sequence",primeSequence);
++        auto prime=std::make_shared<Reply>();
++        xpc_connection_send_message_with_reply(client,primer,replyQueue,^(xpc_object_t value){readReply(value,prime);});
++        xpc_release(primer);bool primed=wait(prime->done);
++        bool primeValid=primed&&prime->callbacks==1&&!prime->error&&prime->sequence==primeSequence&&
++            prime->words.size()==1&&prime->words[0]==transform(word,seed,0);
++        correct&=primeValid;
++        [trials addObject:@{@"kind":@"cancellation_primer",@"sequence":@(primeSequence),@"seed":@(seed),
++            @"input_word":@(word),@"reply_word":@(prime->words.empty()?0:prime->words[0]),@"correct":@(primeValid)}];
+         auto reply=std::make_shared<Reply>();xpc_object_t request=xpc_dictionary_create(nullptr,nullptr,0);
+         xpc_dictionary_set_bool(request,"hold",true);
+         xpc_connection_send_message_with_reply(client,request,replyQueue,^(xpc_object_t value){readReply(value,reply);});

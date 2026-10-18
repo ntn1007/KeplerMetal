@@ -1,0 +1,41 @@
+--- a/bridge/tools/video_local_service.mm
++++ b/bridge/tools/video_local_service.mm
+@@ -60,12 +60,15 @@
+     xpc_connection_t listener=nullptr;
+     xpc_endpoint_t endpoint=nullptr;
+     dispatch_queue_t queue=dispatch_queue_create("KeplerMetal.owned.decoder",DISPATCH_QUEUE_SERIAL);
++    // Client identities are borrowed. Returning +1 transfers that ownership
++    // to VideoToolbox; retaining/canceling its client here changes its lifetime.
++    // Only live connection arguments are inspected in ownedSync.
+     std::vector<xpc_connection_t> clients,peers;
+     NSMutableArray *exchanges=[[NSMutableArray alloc]init];
+     std::atomic<unsigned> constructors{0},accepted{0},callbackReturned{0},unexpected{0},inflight{0};
+     std::atomic<pid_t> clientPeerPID{0},serverPeerPID{0};
+     bool invoke=false,preflight=false,hardware=false;
+-    ~State(){for(auto p:clients)xpc_release(p);for(auto p:peers)xpc_release(p);
++    ~State(){for(auto p:peers)xpc_release(p);
+         if(endpoint)xpc_release(endpoint);if(listener)xpc_release(listener);dispatch_release(queue);[exchanges release];}
+ };
+ std::shared_ptr<State> current;
+@@ -99,7 +102,7 @@
+         state->unexpected++;state->inflight--;inside=false;errno=incoming;return xpc_connection_create(name,target);
+     }
+     xpc_connection_t result=xpc_connection_create_from_endpoint(state->endpoint);
+-    if(result){xpc_connection_set_target_queue(result,target);xpc_retain(result);
++    if(result){xpc_connection_set_target_queue(result,target);
+         std::lock_guard<std::mutex> lock(state->mutex);state->clients.push_back(result);}
+     else state->unexpected++;
+     state->inflight--;inside=false;errno=incoming;return result;
+@@ -163,9 +166,9 @@
+ extern "C" NSDictionary *KPVideoOwnedSnapshot(){
+     enabled.store(false);auto state=std::atomic_load(&current);if(!state)return @{@"status":@"NO_STATE"};
+     bool drained=state->inflight.load()==0;
+-    std::vector<xpc_connection_t> clients,peers;
+-    {std::lock_guard<std::mutex> lock(state->mutex);clients=state->clients;peers=state->peers;}
+-    for(auto p:clients)xpc_connection_cancel(p);for(auto p:peers)xpc_connection_cancel(p);
++    std::vector<xpc_connection_t> peers;
++    {std::lock_guard<std::mutex> lock(state->mutex);peers=state->peers;}
++    for(auto p:peers)xpc_connection_cancel(p);
+     if(state->listener)xpc_connection_cancel(state->listener);
+     dispatch_sync(state->queue,^{});
+     bool own=state->invoke;

@@ -1,5 +1,7 @@
 # Build from source
 
+The anonymous native video experiment and independent public-XPC controls have separate, source-only laboratory builders. [VIDEO_LOCAL_SERVICE.md](VIDEO_LOCAL_SERVICE.md) gives strict profiles, fresh-directory commands, archived-source reconstruction and the four preserved qualification failures. The completed hardware presence test still produces zero images.
+
 The schema3 routing observer adds public peer metadata and errno-preserving
 forwarding. [VIDEO_PEER_IDENTITY.md](VIDEO_PEER_IDENTITY.md) documents controlled
 on/off cases, archived-source reconstruction, bounded logs and static native
