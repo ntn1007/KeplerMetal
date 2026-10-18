@@ -1,5 +1,7 @@
 # KeplerMetal
 
+La fabrique vidéo native est maintenant identifiée et renvoie un pointeur valide. Une entrée de politique AppleGVA ajoutée uniquement dans notre processus change le refus matériel de-12906 à-12913 dans trois essais ; quatre témoins gardent-12906. Aucun décodage matériel n'est encore obtenu. Les19processus produisent30images logicielles exactes et conservent explicitement20réponses internes FinF/Inva en erreur. [Preuves, code et prochaine cible](docs/VIDEO_FACTORY_POLICY.md).
+
 Le gestionnaire vidéo natif fonctionne maintenant dans notre processus de test :24images logicielles correspondent exactement au CPU sur ce chemin. Le refus matériel-12906 persiste ; AppleGVA10.0.20 est désormais observé dans ce processus. [Preuves, sources et limites](docs/VIDEO_LOCAL_SERVICE.md).
 
 Dépendance GPU : le rôle de `IOGVACodec` dans la sélection GVA est confirmé par trois essais contrôlés, avec le même binaire. Le décodage matériel reste en échec ; 24 images logicielles sont exactes. [Preuves et reproduction](docs/VIDEO_DEPENDENCIES.md).

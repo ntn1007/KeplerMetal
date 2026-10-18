@@ -6765,9 +6765,9 @@
     {
       "path": "bridge/tools/inspect_video_cache.py",
       "source_path": "bridge/tools/inspect_video_cache.py",
-      "source_SHA256": "3e6bec43e5c3d971e0d7168782cb070f30304155f63cbe2e83a8020e99feb995",
-      "published_SHA256": "3e6bec43e5c3d971e0d7168782cb070f30304155f63cbe2e83a8020e99feb995",
-      "bytes": 16918,
+      "source_SHA256": "a70e5bd2bcf23bc0583e792fcb131b5fcb030d1566c926ca0eecbdb987940623",
+      "published_SHA256": "a70e5bd2bcf23bc0583e792fcb131b5fcb030d1566c926ca0eecbdb987940623",
+      "bytes": 17385,
       "modified_for_publication": false
     },
     {
@@ -6981,9 +6981,9 @@
     {
       "path": "bridge/tools/analyze_video_dependency.py",
       "source_path": "bridge/tools/analyze_video_dependency.py",
-      "source_SHA256": "ca75cdc92251c1299108b35d78c1f991d49c0dd82d57dc654fa86304123b7e3d",
-      "published_SHA256": "ca75cdc92251c1299108b35d78c1f991d49c0dd82d57dc654fa86304123b7e3d",
-      "bytes": 5646,
+      "source_SHA256": "72467f0f7d65a952e6b7ff040f3b0c5289a1a8f9b6ebb2c73281f44ad350b53b",
+      "published_SHA256": "72467f0f7d65a952e6b7ff040f3b0c5289a1a8f9b6ebb2c73281f44ad350b53b",
+      "bytes": 6179,
       "modified_for_publication": false
     },
     {
@@ -7141,9 +7141,9 @@
     {
       "path": "bridge/tools/native_video_local_service.py",
       "source_path": "bridge/tools/native_video_local_service.py",
-      "source_SHA256": "d218738637901bde7b7aa15cde998e1e5f55317b785dd44ec4a73f3fc1e75f3c",
-      "published_SHA256": "d218738637901bde7b7aa15cde998e1e5f55317b785dd44ec4a73f3fc1e75f3c",
-      "bytes": 9951,
+      "source_SHA256": "9778a8dca4262bdf8fc120ea9d0729d31ee148bf2caca660d7740b55628318bd",
+      "published_SHA256": "9778a8dca4262bdf8fc120ea9d0729d31ee148bf2caca660d7740b55628318bd",
+      "bytes": 10796,
       "modified_for_publication": false
     },
     {
@@ -7209,6 +7209,86 @@
       "published_SHA256": "bde3fb65d9dea12f863376dc1802497cfa1da814ac8627ff3099b51e2c2ac30d",
       "bytes": 7051,
       "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_factory_resolver.mm",
+      "source_path": "bridge/tools/video_factory_resolver.mm",
+      "source_SHA256": "209fcdcb4ab8493d2e55f5c5a98f5008add3f31edfb325e49798a6f07aa3b743",
+      "published_SHA256": "209fcdcb4ab8493d2e55f5c5a98f5008add3f31edfb325e49798a6f07aa3b743",
+      "bytes": 20627,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_factory_resolver_main.mm",
+      "source_path": "bridge/tools/video_factory_resolver_main.mm",
+      "source_SHA256": "291a9eded361c8f855a94fd60b652fbcc3dfe45d24b968df4899256d7f5039af",
+      "published_SHA256": "291a9eded361c8f855a94fd60b652fbcc3dfe45d24b968df4899256d7f5039af",
+      "bytes": 721,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/native_video_factory.py",
+      "source_path": "bridge/tools/native_video_factory.py",
+      "source_SHA256": "cda2f2230111f862421c781129399300e095ea7c87607728fa31d137d0cf2672",
+      "published_SHA256": "cda2f2230111f862421c781129399300e095ea7c87607728fa31d137d0cf2672",
+      "bytes": 8741,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/audit_video_factory.py",
+      "source_path": "bridge/tools/audit_video_factory.py",
+      "source_SHA256": "cc3b9259c2b2a994163d8f7fdfbbd40c31af87cebc1df5a85dff83ea8ec10a42",
+      "published_SHA256": "cc3b9259c2b2a994163d8f7fdfbbd40c31af87cebc1df5a85dff83ea8ec10a42",
+      "bytes": 19275,
+      "modified_for_publication": false
+    },
+    {
+      "path": "patches/video-factory-v5-to-v1.patch",
+      "source_path": "patches/video-factory-v5-to-v1.patch",
+      "source_SHA256": "a770af8b0bdc201063a4e25f6563b8dc79190bb4bc2a68380594b8d0bc758c14",
+      "published_SHA256": "a770af8b0bdc201063a4e25f6563b8dc79190bb4bc2a68380594b8d0bc758c14",
+      "bytes": 21360,
+      "modified_for_publication": false
+    },
+    {
+      "path": "patches/video-factory-v5-to-v2.patch",
+      "source_path": "patches/video-factory-v5-to-v2.patch",
+      "source_SHA256": "d809321b336c2c81b504b5aea7a25e642779222a85514eba70d2ae7daf5f1a94",
+      "published_SHA256": "d809321b336c2c81b504b5aea7a25e642779222a85514eba70d2ae7daf5f1a94",
+      "bytes": 15180,
+      "modified_for_publication": false
+    },
+    {
+      "path": "patches/video-factory-v5-to-v3.patch",
+      "source_path": "patches/video-factory-v5-to-v3.patch",
+      "source_SHA256": "a68279f410c4b6fd375bbc11d87c173fc4795ea4bf5f02229eb388ee44a49240",
+      "published_SHA256": "a68279f410c4b6fd375bbc11d87c173fc4795ea4bf5f02229eb388ee44a49240",
+      "bytes": 13531,
+      "modified_for_publication": false
+    },
+    {
+      "path": "patches/video-factory-v5-to-v4.patch",
+      "source_path": "patches/video-factory-v5-to-v4.patch",
+      "source_SHA256": "c9b83254db32bf5cc96835b366f351ccf2c693f6075200e3a4b0a4a9e7562571",
+      "published_SHA256": "c9b83254db32bf5cc96835b366f351ccf2c693f6075200e3a4b0a4a9e7562571",
+      "bytes": 11574,
+      "modified_for_publication": false
+    },
+    {
+      "path": "patches/video-factory-parent-runner-before-policy.patch",
+      "source_path": "patches/video-factory-parent-runner-before-policy.patch",
+      "source_SHA256": "731a6102f2c3f056963d735bb7d0e282d37250c96eca5535153a6ca84eda2b3b",
+      "published_SHA256": "731a6102f2c3f056963d735bb7d0e282d37250c96eca5535153a6ca84eda2b3b",
+      "bytes": 1734,
+      "modified_for_publication": false
+    },
+    {
+      "path": "tests/test_video_cache_symbols.py",
+      "source_path": "tests/test_video_cache_symbols.py",
+      "source_SHA256": "06656a4b9f9208ce0acddd4faef590b40ccc85265346bc7be07c270f4ed48bae",
+      "published_SHA256": "06656a4b9f9208ce0acddd4faef590b40ccc85265346bc7be07c270f4ed48bae",
+      "bytes": 3314,
+      "modified_for_publication": false
     }
   ],
   "excluded_source_tools": [
@@ -7250,7 +7330,30 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "747d7e32638cd32016ca3017a48435631118e43d33d3b942ff3beea28bccb5b5",
-  "previous_public_commit": "e95d40d3680497e216a184e21df7861d2c6b3194",
-  "update": "Own-process native video transport, public XPC oracle controls, complete GVA refusal capture, preserved failures and reversible original-source versions; no hardware video or system deployment claimed."
+  "previous_source_snapshot_SHA256": "f798c3e1196d58933ba5f622f275b54fb2ab3647185e273bbf2784099ae795c2",
+  "previous_public_commit": "6b7c7b30bd36b89dc7bbef1b4946a9f01e62c71f",
+  "update": {
+    "date": "2026-10-18",
+    "scope": "Native factory/result and causal AppleGVA board-policy experiment; original cache-import parser correction",
+    "source_files_updated": [
+      "bridge/tools/video_factory_resolver.mm",
+      "bridge/tools/video_factory_resolver_main.mm",
+      "bridge/tools/native_video_factory.py",
+      "bridge/tools/audit_video_factory.py",
+      "bridge/tools/analyze_video_dependency.py",
+      "bridge/tools/inspect_video_cache.py",
+      "bridge/tools/native_video_local_service.py",
+      "patches/video-factory-v5-to-v1.patch",
+      "patches/video-factory-v5-to-v2.patch",
+      "patches/video-factory-v5-to-v3.patch",
+      "patches/video-factory-v5-to-v4.patch",
+      "patches/video-factory-parent-runner-before-policy.patch",
+      "tests/test_video_cache_symbols.py"
+    ],
+    "native_hosts": 19,
+    "software_images": 30,
+    "hardware_images": 0,
+    "policy_same_binary_cases": 7,
+    "full_objective_complete": false
+  }
 }

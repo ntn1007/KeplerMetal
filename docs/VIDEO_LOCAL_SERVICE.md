@@ -163,6 +163,12 @@ python3 tools/audit_video_local_service.py --lab-root .. --out results/owned-vid
 
 ## Next driver investigation
 
+The subsequent [factory/policy experiment](VIDEO_FACTORY_POLICY.md) establishes
+the loader return and a second eligibility gate. It also explicitly records the
+nonzero FinF/Inva replies retained by the software transport; full service
+lifetime remains unqualified. The paragraph below records this milestone's
+original next step.
+
 The newly observed AppleGVA factory path is the next useful boundary. Establish
 its exact factory return and loaded implementation before attributing the
 refusal to policy, an absent legacy backend, the NVIDIA VA stubs, or hardware.

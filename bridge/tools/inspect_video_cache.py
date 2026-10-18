@@ -266,7 +266,13 @@ def stub_symbol(cache, image, target):
     require(nameoff < symbols['strings_size'], 'symbol string index')
     text = linkedit_read(cache, image, symbols['strings_offset'] + nameoff,
                          min(4096, symbols['strings_size']-nameoff))
-    return {'static_symbol': cstring(text, 0, len(text)), 'stub_VM': target,
+    name = cstring(text, 0, len(text))
+    if kind != 1:  # N_UNDF | N_EXT. Optimized caches can leave defined-symbol index0.
+        return {'static_symbol': None, 'symbol_table_candidate': name, 'stub_VM': target,
+                'symbol_index': symbol, 'nlist_type': kind, 'nlist_value': value,
+                'binding_name_proved': False, 'runtime_target_proved': False,
+                'reason': 'Indirect table entry is not an undefined external import; name is not a callee proof'}
+    return {'static_symbol': name, 'stub_VM': target,
             'symbol_index': symbol, 'nlist_type': kind, 'runtime_target_proved': False}
 
 

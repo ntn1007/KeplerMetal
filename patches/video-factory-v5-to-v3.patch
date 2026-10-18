@@ -1,0 +1,198 @@
+--- video_factory_resolver.mm
++++ video_factory_resolver.mm
+@@ -25,15 +25,8 @@
+ std::atomic<unsigned> inflight{0},count{0},dropped{0};
+ thread_local bool inside=false;
+ uintptr_t nativeSite=0;
+-uintptr_t acceleratorSite=0;
+ NSMutableArray *rows=nil,*controls=nil;
+ NSMutableArray *factoryRows=nil,*factoryControls=nil;
+-NSMutableArray *policyRows=nil;
+-CFDictionaryRef originalSupport=nullptr,replacementSupport=nullptr;
+-unsigned policyChoice=0;
+-std::atomic<uintptr_t> policySite{0};
+-std::atomic<unsigned> policyCount{0},policyChanges{0};
+-CFStringRef currentBoard=nullptr;
+ std::atomic<unsigned> factoryCount{0};
+ uintptr_t factoryCaller=0;
+ std::mutex mutex;
+@@ -64,9 +57,7 @@
+     }
+     if(at!=h->sizeofcmds||!uuid||!text)return nil;
+     return @{@"path":@(info.dli_fname),@"UUID":uuid,@"version":version?:@"",@"has_install_version":@(version!=nil),@"offset":@(delta),
+-        @"symbol":info.dli_sname?@(info.dli_sname):@"",@"symbol_present":@(info.dli_sname!=nullptr),
+-        @"symbol_exact_address":@(info.dli_saddr==address),
+-        @"nearest_symbol_image_offset":@(info.dli_saddr?(uintptr_t)info.dli_saddr-(uintptr_t)info.dli_fbase:0)};
++        @"symbol":info.dli_sname?@(info.dli_sname):@"",@"symbol_present":@(info.dli_sname!=nullptr)};
+ }
+ thread_local CFBundleRef mockBundle=nullptr;
+ thread_local CFStringRef mockName=nullptr;
+@@ -79,7 +70,7 @@
+ }
+ void *resolve(CFBundleRef bundle,CFStringRef name,uintptr_t caller,bool test){
+     int incoming=errno;
+-    if(!test&&(!enabled.load(std::memory_order_seq_cst)||inside||(caller!=nativeSite&&caller!=acceleratorSite))){
++    if(!test&&(!enabled.load(std::memory_order_seq_cst)||inside||caller!=nativeSite)){
+         errno=incoming;return CFBundleGetFunctionPointerForName(bundle,name);
+     }
+     inflight.fetch_add(1,std::memory_order_seq_cst);
+@@ -99,17 +90,7 @@
+         unsigned index=count.fetch_add(1);
+         if(index<32){
+             NSDictionary *target=identity(result);
+-            if(caller==acceleratorSite&&result&&
+-                [target[@"UUID"]isEqual:@"ca5414f369373c059ea2d82b35afd4f0"]&&
+-                [target[@"version"]isEqual:@"10.0.20"]&&[target[@"offset"]unsignedLongLongValue]==4577){
+-                Dl_info image{};if(dladdr(result,&image)&&image.dli_fbase&&
+-                    [digest([NSData dataWithBytes:(const uint8_t*)image.dli_fbase+722087 length:1192])isEqual:
+-                        @"365f8095e2d41076df73fec998db936f6518ce04b21ffdf62a9765fc646670be"])
+-                    policySite.store((uintptr_t)image.dli_fbase+722786,std::memory_order_release);
+-            }
+-            bool accelerator=caller==acceleratorSite;
+-            NSDictionary *row=@{@"ordinal":@(index),@"caller_offset":@(accelerator?4294934:135582),
+-                @"caller_module":accelerator?@"VideoToolbox":@"CoreMedia",@"arguments_are_public_CF_types":@(types),
++            NSDictionary *row=@{@"ordinal":@(index),@"caller_offset":@135582,@"arguments_are_public_CF_types":@(types),
+                 @"bundle_path":pathOK?@(path):@"",@"name":nameOK?@(symbol):@"",@"truncated":@(!pathOK||!nameOK),
+                 @"result_present":@(result!=nullptr),@"result_identity":target?:@{},
+                 @"result_in_executable_image":@(target!=nil),@"arguments_forwarded_unchanged":@YES,
+@@ -125,61 +106,6 @@
+ __attribute__((used)) static const struct{const void *replacement,*original;} interpose
+ __attribute__((section("__DATA,__interpose")))={(void*)&observed,(void*)&CFBundleGetFunctionPointerForName};
+ void ownMarker(){}
+-__attribute__((noinline)) const void *observedDictionary(CFDictionaryRef dictionary,const void *key){
+-    int incoming=errno;uintptr_t caller=(uintptr_t)__builtin_return_address(0);
+-    errno=incoming;const void *value=CFDictionaryGetValue(dictionary,key);int saved=errno;
+-    if(!enabled.load(std::memory_order_seq_cst)||inside||!policySite.load(std::memory_order_acquire)||
+-        caller!=policySite.load(std::memory_order_acquire)){errno=saved;return value;}
+-    inflight++;if(!enabled.load()){inflight--;errno=saved;return value;}
+-    inside=true;
+-    @autoreleasepool{
+-        bool type=key&&CFGetTypeID((CFTypeRef)key)==CFStringGetTypeID()&&
+-            value&&CFGetTypeID((CFTypeRef)value)==CFDictionaryGetTypeID();
+-        bool matches=type&&CFEqual(key,CFSTR("System Support"))&&originalSupport&&CFEqual(value,originalSupport);
+-        bool absent=matches&&currentBoard&&!CFDictionaryContainsKey((CFDictionaryRef)value,currentBoard);
+-        bool change=policyChoice&&replacementSupport&&matches&&absent;
+-        const void *before=value;if(change){value=replacementSupport;policyChanges++;}
+-        unsigned index=policyCount++;
+-        if(index<16){
+-            bool currentPresent=value&&currentBoard&&CFGetTypeID((CFTypeRef)value)==CFDictionaryGetTypeID()&&
+-                CFDictionaryContainsKey((CFDictionaryRef)value,currentBoard);
+-            NSDictionary *row=@{@"ordinal":@(index),@"caller_offset":@722786,@"key_is_System_Support":@(type&&CFEqual(key,CFSTR("System Support"))),
+-                @"original_matches_installed_support":@(matches),@"original_board_missing":@(absent),
+-                @"return_value_changed":@(change),@"returned_board_present":@(currentPresent),
+-                @"original_dictionary_modified":@NO,@"borrowed_return_contract":@YES,
+-                @"replacement_has_process_lifetime_owner":@(replacementSupport!=nullptr),
+-                @"returned_original_pointer":@(value==before)};
+-            std::lock_guard<std::mutex> lock(mutex);[policyRows addObject:row];
+-        }else dropped++;
+-    }
+-    inside=false;inflight--;errno=saved;return value;
+-}
+-__attribute__((used)) static const struct{const void *replacement,*original;} dictionaryInterpose
+-__attribute__((section("__DATA,__interpose")))={(void*)&observedDictionary,(void*)&CFDictionaryGetValue};
+-bool preparePolicy(NSString *assets){
+-    NSDictionary *choice=[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:
+-        [assets stringByAppendingPathComponent:@"factory-policy-choice.json"]]options:0 error:nil];
+-    if(choice.count!=1||![@[@"observe",@"wrong-board",@"current-board"]containsObject:choice[@"mode"]])return false;
+-    policyChoice=[choice[@"mode"]isEqual:@"current-board"]?2:([choice[@"mode"]isEqual:@"wrong-board"]?1:0);
+-    NSData *raw=[NSData dataWithContentsOfFile:@"/System/Library/PrivateFrameworks/AppleGVA.framework/Resources/Info.plist"];
+-    if(![digest(raw)isEqual:@"c7cefb08fe12c1da168d8baad6b92d341ff3e331a4d2c5011de5d36bff64b3e3"])return false;
+-    NSDictionary *config=[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:
+-        [assets stringByAppendingPathComponent:@"factory-policy-profile.json"]]options:0 error:nil];
+-    if(![config[@"board_id"]isEqual:@"Mac-F2268DAE"]||
+-       ![config[@"source_board"]isEqual:@"Mac-27ADBB7B4CEE8E61"])return false;
+-    CFPropertyListRef parsed=CFPropertyListCreateWithData(kCFAllocatorDefault,(CFDataRef)raw,kCFPropertyListImmutable,nullptr,nullptr);
+-    if(!parsed||CFGetTypeID(parsed)!=CFDictionaryGetTypeID()){if(parsed)CFRelease(parsed);return false;}
+-    auto support=(CFDictionaryRef)CFDictionaryGetValue((CFDictionaryRef)parsed,CFSTR("System Support"));
+-    currentBoard=(CFStringRef)CFRetain((CFStringRef)config[@"board_id"]);
+-    bool ok=support&&CFGetTypeID(support)==CFDictionaryGetTypeID()&&!CFDictionaryContainsKey(support,currentBoard);
+-    auto source=ok?CFDictionaryGetValue(support,CFSTR("Mac-27ADBB7B4CEE8E61")):nullptr;
+-    ok=ok&&source&&CFGetTypeID((CFTypeRef)source)==CFDictionaryGetTypeID();
+-    if(ok){originalSupport=(CFDictionaryRef)CFRetain(support);
+-        if(policyChoice){auto replacement=CFDictionaryCreateMutableCopy(kCFAllocatorDefault,0,support);
+-            CFDictionarySetValue(replacement,policyChoice==2?currentBoard:CFSTR("KeplerMetal-absent-board-control"),source);
+-            replacementSupport=replacement;}}
+-    CFRelease(parsed);return ok;
+-}
+ using Factory=int32_t(*)(const void *,uint32_t,void **);
+ thread_local bool forwardingFactory=false;
+ thread_local const void *factoryItem=nullptr;
+@@ -282,12 +208,8 @@
+     }
+     if(!vt||![digest([NSData dataWithBytes:(void*)(vt+6288668) length:2234])isEqual:
+         @"6b98a81482d8cce93ec6e651d4828edf574af91e6468b8436c484952da35d5ee"])return false;
+-    if(![digest([NSData dataWithBytes:(void*)(vt+4294856) length:523])isEqual:
+-        @"790c12ecc76f4959aa7db7047075e763e82d58819b54dc86c4ecc2d08fd002df"])return false;
+     factoryCaller=vt+6289489;
+-    acceleratorSite=vt+4294934;
+-    if(!preparePolicy(assets))return false;
+-    rows=[[NSMutableArray alloc]init];controls=[[NSMutableArray alloc]init];policyRows=[[NSMutableArray alloc]init];
++    rows=[[NSMutableArray alloc]init];controls=[[NSMutableArray alloc]init];
+     factoryRows=[[NSMutableArray alloc]init];factoryControls=[[NSMutableArray alloc]init];valid=calibrate();
+     enabled.store(valid,std::memory_order_seq_cst);return valid;
+ }
+@@ -295,16 +217,13 @@
+     enabled.store(false,std::memory_order_seq_cst);
+     auto end=std::chrono::steady_clock::now()+std::chrono::seconds(1);
+     while(inflight.load()&&std::chrono::steady_clock::now()<end)sched_yield();
+-    bool drained=inflight.load()==0;NSArray *events=@[],*factories=@[],*policy=@[];
+-    if(drained){std::lock_guard<std::mutex> lock(mutex);events=[NSArray arrayWithArray:rows];factories=[NSArray arrayWithArray:factoryRows];policy=[NSArray arrayWithArray:policyRows];}
++    bool drained=inflight.load()==0;NSArray *events=@[],*factories=@[];
++    if(drained){std::lock_guard<std::mutex> lock(mutex);events=[NSArray arrayWithArray:rows];factories=[NSArray arrayWithArray:factoryRows];}
+     return @{@"status":valid&&drained&&!dropped.load()?@"COMPLETE":@"INCOMPLETE",@"events":events,
+         @"calls":@(count.load()),@"dropped":@(dropped.load()),@"recorders_drained":@(drained),
+         @"controls":controls?:@[],@"synthetic_controls_valid":@(valid),@"synthetic_control_calls":@32,
+         @"factory_events":factories,@"factory_calls":@(factoryCount.load()),
+         @"factory_controls":factoryControls?:@[],@"factory_control_calls":@32,
+-        @"policy_events":policy,@"policy_calls":@(policyCount.load()),@"policy_substitutions":@(policyChanges.load()),
+-        @"policy_choice":policyChoice==2?@"current-board":(policyChoice==1?@"wrong-board":@"observe"),
+-        @"policy_system_file_modified":@NO,
+         @"public_API":@"CFBundleGetFunctionPointerForName",@"caller_module_UUID":@"7c4ae5aed528396982c6a4a534949ef3",
+         @"caller_return_offset":@135582,@"native_function_invoked_directly":@NO,
+         @"resolved_pointer_replaced":@NO,@"arguments_modified":@NO,@"original_instructions_modified":@NO,
+--- native_video_factory.py
++++ native_video_factory.py
+@@ -5,7 +5,6 @@
+ import argparse
+ import hashlib
+ import json
+-import plistlib
+ import shutil
+ import subprocess
+ import sys
+@@ -53,11 +52,6 @@
+     parent, out = args.owned_build.resolve(), args.out.resolve(); data = verify_owned(parent)
+     out.mkdir(exist_ok=False)
+     shutil.copytree(parent / 'assets', out / 'assets'); shutil.copytree(parent / 'runtime', out / 'runtime')
+-    board = plistlib.loads(subprocess.check_output(['ioreg', '-a', '-rd1', '-c', 'IOPlatformExpertDevice']))[0].get('board-id')
+-    board = board.rstrip(b'\0').decode() if isinstance(board, bytes) else board
+-    if board != 'Mac-F2268DAE': raise ValueError('Inspected machine board changed')
+-    write(out / 'assets/factory-policy-profile.json', {'board_id': board, 'source_board': 'Mac-27ADBB7B4CEE8E61'})
+-    write(out / 'assets/factory-policy-choice.json', {'mode': 'observe'})
+     sources = []
+     for name in ['video_factory_resolver.mm', 'video_factory_resolver_main.mm', 'video_registry_observer.h']:
+         shutil.copyfile(ROOT / 'tools' / name, out / name); sources.append(name)
+@@ -105,7 +99,6 @@
+         'owned_build': str(parent), 'owned_inputs_SHA256': sha(parent / 'inputs.json'),
+         'reused_objects_and_libraries_SHA256': inherited,
+         'resolver_library_SHA256': sha(library), 'executable_SHA256': sha(out / 'application'),
+-        'factory_policy_supported': True,
+         'new_main_object_SHA256': sha(out / 'main.o'),
+         'new_objects_SHA256': {p.name: sha(p) for p in out.glob('*.o')},
+         'native_function_invoked_during_build': False, 'GPU_execution': False})
+@@ -123,7 +116,6 @@
+         if sha(ROOT / 'tools' / source) != data['source_hashes'][name]:
+             raise ValueError('Executed Python dependency differs from snapshot')
+     from native_video_local_service import run as parent_run
+-    args.additional_choices = {'factory-policy-choice.json': {'mode': args.policy}}
+     parent_run(args)
+     shutil.copyfile(args.out / 'outputs/factory-resolver.json', args.out / 'factory-resolver.json')
+     shutil.copyfile(__file__, args.out / 'factory-runner.py')
+@@ -140,7 +132,6 @@
+     p.add_argument('--out', type=Path, required=True); p.add_argument('--mode', choices=['inspect', 'cpu', 'hardware'])
+     p.add_argument('--route', choices=['native', 'owned'], default='native')
+     p.add_argument('--override', choices=['native', 'wrong-key', 'present-key'], default='native')
+-    p.add_argument('--policy', choices=['observe', 'wrong-board', 'current-board'], default='observe')
+     p.add_argument('--reservation-root', type=Path, default=ROOT); args = p.parse_args()
+     args.out = args.out.resolve(); args.out.relative_to(ROOT / 'results')
+     if args.action == 'build':

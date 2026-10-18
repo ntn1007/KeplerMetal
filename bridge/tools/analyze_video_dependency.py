@@ -33,6 +33,8 @@ def analyze(args):
     out = args.out.resolve()
     out.relative_to(ROOT / 'results')
     require(1 <= len(args.capture) <= 8, 'one to eight captures')
+    require(re.fullmatch(r'[0-9a-f]{32}', args.expected_uuid) is not None,
+            'explicit lowercase image UUID required')
     cache = Cache(args.cache.resolve())
     out.mkdir(exist_ok=False)
     sources = [Path(__file__), Path(__file__).with_name('inspect_video_cache.py'),
@@ -45,9 +47,14 @@ def analyze(args):
         metadata = capture / 'metadata.json'
         m = json.loads(metadata.read_text())
         r = m['region']
-        require(m['status'] == 'PASS' and m['runtime_UUID_matched']
-                and m['region_captured_privately'] and not m['native_program_executed']
-                and m['image']['UUID'] == 'e7231bea63883d0a95c0a93ce970b96b'
+        named = m.get('expected_UUID_matched') is True
+        static_identity = (named and m.get('source_function_invoked') is False
+                           and m.get('resident_code_identity_proved') is False) or (
+                               not named and m.get('runtime_UUID_matched') is True
+                               and m.get('native_program_executed') is False)
+        require(m['status'] == 'PASS' and static_identity
+                and m['region_captured_privately']
+                and m['image']['UUID'] == args.expected_uuid
                 and r['boundary_source'] == 'LC_FUNCTION_STARTS'
                 and 0 < r['bytes'] <= 65536
                 and sha(capture / 'function-region.private.bin') == r['SHA256'], 'capture identity')
@@ -106,6 +113,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--cache', type=Path, required=True)
     parser.add_argument('--capture', type=Path, action='append', required=True)
+    parser.add_argument('--expected-uuid', default='e7231bea63883d0a95c0a93ce970b96b')
     parser.add_argument('--out', type=Path, required=True)
     analyze(parser.parse_args())
 

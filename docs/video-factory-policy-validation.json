@@ -1,0 +1,728 @@
+{
+  "status": "PASS",
+  "scope": "Recorded factory/policy cohort; auditor executes no vendor/GPU program",
+  "native_hosts": 19,
+  "terminal_nonoverlapping": true,
+  "software_images": 30,
+  "exact_CPU_pixel_bytes": 3456000,
+  "resolver_mock_controls": 608,
+  "GetFactory_mock_controls": 512,
+  "software_nonzero_native_replies": 20,
+  "policy_same_binary_hardware_cases": 7,
+  "current_board_cases": 3,
+  "unchanged_policy_controls": 2,
+  "wrong_board_controls": 2,
+  "hardware_images": 0,
+  "failed_builds_preserved": 1,
+  "failed_native_hosts": 0,
+  "cases": [
+    {
+      "case": "video-factory-resolver-inspect-20261018",
+      "version": 1,
+      "mode": "inspect",
+      "policy": "observe",
+      "PID": 45039,
+      "started_at": "2026-10-18T09:30:11.468922+00:00",
+      "completed_at": "2026-10-18T09:30:12.159927+00:00",
+      "diagnostic_status": "PASS",
+      "frames": 0,
+      "pixel_bytes": 0,
+      "policy_calls": 0,
+      "policy_substitutions": 0,
+      "software_nonzero_native_replies": 0,
+      "manifest_SHA256": "1e47aa543ca47cb50b5bdecb675eac5f73818df4f4ab8959f1fdfc7efc0a05d8",
+      "result_SHA256": "a0e5d86aa0f6162d02af01a575c217c9e4a5b218423851eaf4c50396de8b03a4",
+      "factory_SHA256": "223100bc98df33e9944a09c22036a00056fadaf6008780e64ddc76f56e478b33",
+      "original_binary_SHA256": "4a8f23bf85fa4de49da6f69c98ac7be6e583140838687ac5cb236557703b5a65",
+      "signed_binary_SHA256": "c6a85263ad4f807f7c70a5e4ee780acca6d4a9cff2ad23eddc035834d6632871",
+      "resolver_controls": 32,
+      "GetFactory_controls": 0
+    },
+    {
+      "case": "video-factory-resolver-local-cpu-20261018",
+      "version": 1,
+      "mode": "cpu",
+      "policy": "observe",
+      "PID": 45088,
+      "started_at": "2026-10-18T09:30:52.874988+00:00",
+      "completed_at": "2026-10-18T09:30:53.805786+00:00",
+      "diagnostic_status": "PASS",
+      "frames": 6,
+      "pixel_bytes": 691200,
+      "policy_calls": 0,
+      "policy_substitutions": 0,
+      "software_nonzero_native_replies": 4,
+      "manifest_SHA256": "804133e2914451c68c26626c48049e61e8b8dd0423a0dbe0e7bf41ea08858519",
+      "result_SHA256": "d35b69b90c869312f8efba42e716932cf7796b757a35b4b903aabd95736a5e0b",
+      "factory_SHA256": "0368c9367e11cd943c4e45a3e4fc0b674880d1ca48aa82684e7d75e617a046c0",
+      "original_binary_SHA256": "4a8f23bf85fa4de49da6f69c98ac7be6e583140838687ac5cb236557703b5a65",
+      "signed_binary_SHA256": "c6a85263ad4f807f7c70a5e4ee780acca6d4a9cff2ad23eddc035834d6632871",
+      "resolver_controls": 32,
+      "GetFactory_controls": 0
+    },
+    {
+      "case": "video-factory-resolver-local-hw-present-20261018",
+      "version": 1,
+      "mode": "hardware",
+      "policy": "observe",
+      "PID": 45178,
+      "started_at": "2026-10-18T09:32:04.849200+00:00",
+      "completed_at": "2026-10-18T09:32:05.580724+00:00",
+      "diagnostic_status": "PASS",
+      "frames": 0,
+      "pixel_bytes": 0,
+      "policy_calls": 0,
+      "policy_substitutions": 0,
+      "software_nonzero_native_replies": 0,
+      "manifest_SHA256": "2d17c023827c0029415eba504cdef3bae05e8fb5951f74f57c01db665565370f",
+      "result_SHA256": "8fda8ad6abadbb35b2715f8b67730b666841d5731a876affa7dd5009f199e2a4",
+      "factory_SHA256": "223100bc98df33e9944a09c22036a00056fadaf6008780e64ddc76f56e478b33",
+      "original_binary_SHA256": "4a8f23bf85fa4de49da6f69c98ac7be6e583140838687ac5cb236557703b5a65",
+      "signed_binary_SHA256": "c6a85263ad4f807f7c70a5e4ee780acca6d4a9cff2ad23eddc035834d6632871",
+      "resolver_controls": 32,
+      "GetFactory_controls": 0,
+      "create_status": -12906,
+      "error_sites": [
+        {
+          "offset": 6290187,
+          "status": -12906
+        },
+        {
+          "offset": 20163,
+          "status": -12906
+        }
+      ]
+    },
+    {
+      "case": "video-factory-resolver-v3-inspect-20261018",
+      "version": 3,
+      "mode": "inspect",
+      "policy": "observe",
+      "PID": 45548,
+      "started_at": "2026-10-18T09:40:32.525521+00:00",
+      "completed_at": "2026-10-18T09:40:33.209404+00:00",
+      "diagnostic_status": "PASS",
+      "frames": 0,
+      "pixel_bytes": 0,
+      "policy_calls": 0,
+      "policy_substitutions": 0,
+      "software_nonzero_native_replies": 0,
+      "manifest_SHA256": "a91b8b4c76abf6fe868ce0895d660a6eb42d5ab66984f940a60cf7dc094523f7",
+      "result_SHA256": "a0e5d86aa0f6162d02af01a575c217c9e4a5b218423851eaf4c50396de8b03a4",
+      "factory_SHA256": "7b53a4909ee23d903d8fcdbe0fcaeb65f6202aaca03387daece523e4f9fad89c",
+      "original_binary_SHA256": "394bdf531c8e49684b7e65a97c36787cbc887ebb31cd50f8403fb02f7861ae16",
+      "signed_binary_SHA256": "250a179f795892287dd2a6b5c954d97afa03c57e736bcdc702c75db525f8ae5b",
+      "resolver_controls": 32,
+      "GetFactory_controls": 32
+    },
+    {
+      "case": "video-factory-resolver-v3-local-cpu-20261018",
+      "version": 3,
+      "mode": "cpu",
+      "policy": "observe",
+      "PID": 45620,
+      "started_at": "2026-10-18T09:41:41.612786+00:00",
+      "completed_at": "2026-10-18T09:41:42.380152+00:00",
+      "diagnostic_status": "PASS",
+      "frames": 6,
+      "pixel_bytes": 691200,
+      "policy_calls": 0,
+      "policy_substitutions": 0,
+      "software_nonzero_native_replies": 4,
+      "manifest_SHA256": "2d52010375e9d48c7dcb621fba05a9e1a87892e3f1ab49d67d578de810930b2c",
+      "result_SHA256": "85767d7c2f96fc586b1f89d3ac9ad9dcfa1ba5727370f6c43c0b8e77d017d64b",
+      "factory_SHA256": "ded787993f1c292d4c5a9624ef4f0e1de776cc3c85e6706c2c49c583d364ee15",
+      "original_binary_SHA256": "394bdf531c8e49684b7e65a97c36787cbc887ebb31cd50f8403fb02f7861ae16",
+      "signed_binary_SHA256": "250a179f795892287dd2a6b5c954d97afa03c57e736bcdc702c75db525f8ae5b",
+      "resolver_controls": 32,
+      "GetFactory_controls": 32
+    },
+    {
+      "case": "video-factory-resolver-v3-local-hw-present-20261018",
+      "version": 3,
+      "mode": "hardware",
+      "policy": "observe",
+      "PID": 45632,
+      "started_at": "2026-10-18T09:41:46.759696+00:00",
+      "completed_at": "2026-10-18T09:41:47.543196+00:00",
+      "diagnostic_status": "PASS",
+      "frames": 0,
+      "pixel_bytes": 0,
+      "policy_calls": 0,
+      "policy_substitutions": 0,
+      "software_nonzero_native_replies": 0,
+      "manifest_SHA256": "afe0d830812cdf75ac3471dcc96530d321350570279a1d1edf34327a71e96c9d",
+      "result_SHA256": "9230023881f28217ad4e8fe7e5aa11daafa787c79f2df98b8d3cc72998ccb546",
+      "factory_SHA256": "f50730cd28bdb7bb4be90a870a48372dc4eaed8cfa5cdf2659dc3a63d70f7ab5",
+      "original_binary_SHA256": "394bdf531c8e49684b7e65a97c36787cbc887ebb31cd50f8403fb02f7861ae16",
+      "signed_binary_SHA256": "250a179f795892287dd2a6b5c954d97afa03c57e736bcdc702c75db525f8ae5b",
+      "resolver_controls": 32,
+      "GetFactory_controls": 32,
+      "create_status": -12906,
+      "error_sites": [
+        {
+          "offset": 6290187,
+          "status": -12906
+        },
+        {
+          "offset": 20163,
+          "status": -12906
+        }
+      ]
+    },
+    {
+      "case": "video-factory-resolver-v4-inspect-20261018",
+      "version": 4,
+      "mode": "inspect",
+      "policy": "observe",
+      "PID": 46000,
+      "started_at": "2026-10-18T09:47:59.681937+00:00",
+      "completed_at": "2026-10-18T09:48:00.383459+00:00",
+      "diagnostic_status": "PASS",
+      "frames": 0,
+      "pixel_bytes": 0,
+      "policy_calls": 0,
+      "policy_substitutions": 0,
+      "software_nonzero_native_replies": 0,
+      "manifest_SHA256": "004c0bb0357e7671202b64e0a63f26627d1b17515bde9fe34760f696e3790b2a",
+      "result_SHA256": "a0e5d86aa0f6162d02af01a575c217c9e4a5b218423851eaf4c50396de8b03a4",
+      "factory_SHA256": "7b53a4909ee23d903d8fcdbe0fcaeb65f6202aaca03387daece523e4f9fad89c",
+      "original_binary_SHA256": "b527c84c44a85fe9ccfe353374a9177bc03000035f52700cf09a527c0f6e4b6a",
+      "signed_binary_SHA256": "e0eef0161cdbf857bdd3d9120df9670f355500ee095293c9b694fe289c4c6d64",
+      "resolver_controls": 32,
+      "GetFactory_controls": 32
+    },
+    {
+      "case": "video-factory-resolver-v4-local-cpu-20261018",
+      "version": 4,
+      "mode": "cpu",
+      "policy": "observe",
+      "PID": 46014,
+      "started_at": "2026-10-18T09:48:04.583224+00:00",
+      "completed_at": "2026-10-18T09:48:05.449416+00:00",
+      "diagnostic_status": "PASS",
+      "frames": 6,
+      "pixel_bytes": 691200,
+      "policy_calls": 0,
+      "policy_substitutions": 0,
+      "software_nonzero_native_replies": 4,
+      "manifest_SHA256": "798a30015b519acbc5d578079423fd2c0c9f6818dea529db5fe6ca3b04cd4058",
+      "result_SHA256": "75caf1c31cc69633c58e4de47b1f88818ffa63d35e968554b1cbe78a8514bc1c",
+      "factory_SHA256": "913c5bae5d978278cd27ae103ac4acad9d793032dfed2b74a9df2a1a0b8fd13b",
+      "original_binary_SHA256": "b527c84c44a85fe9ccfe353374a9177bc03000035f52700cf09a527c0f6e4b6a",
+      "signed_binary_SHA256": "e0eef0161cdbf857bdd3d9120df9670f355500ee095293c9b694fe289c4c6d64",
+      "resolver_controls": 32,
+      "GetFactory_controls": 32
+    },
+    {
+      "case": "video-factory-resolver-v4-local-hw-present-20261018",
+      "version": 4,
+      "mode": "hardware",
+      "policy": "observe",
+      "PID": 46036,
+      "started_at": "2026-10-18T09:48:09.772655+00:00",
+      "completed_at": "2026-10-18T09:48:10.569647+00:00",
+      "diagnostic_status": "PASS",
+      "frames": 0,
+      "pixel_bytes": 0,
+      "policy_calls": 0,
+      "policy_substitutions": 0,
+      "software_nonzero_native_replies": 0,
+      "manifest_SHA256": "b6e2915f295e91c17aa38fc999ed655bd568ed2b0db9714e708c404e9c382056",
+      "result_SHA256": "aecefd4c0834af1be04a6c58f1458165a3f2b0467e6b67bed630bc5bc75693dc",
+      "factory_SHA256": "6df4b41fbc84b0686422c05c4fda2d75d9d9c32539d033feaf5bbb1ea4ad665d",
+      "original_binary_SHA256": "b527c84c44a85fe9ccfe353374a9177bc03000035f52700cf09a527c0f6e4b6a",
+      "signed_binary_SHA256": "e0eef0161cdbf857bdd3d9120df9670f355500ee095293c9b694fe289c4c6d64",
+      "resolver_controls": 32,
+      "GetFactory_controls": 32,
+      "create_status": -12906,
+      "error_sites": [
+        {
+          "offset": 6290187,
+          "status": -12906
+        },
+        {
+          "offset": 20163,
+          "status": -12906
+        }
+      ]
+    },
+    {
+      "case": "video-factory-resolver-v5-inspect-20261018",
+      "version": 5,
+      "mode": "inspect",
+      "policy": "observe",
+      "PID": 46795,
+      "started_at": "2026-10-18T10:07:31.905746+00:00",
+      "completed_at": "2026-10-18T10:07:32.662246+00:00",
+      "diagnostic_status": "PASS",
+      "frames": 0,
+      "pixel_bytes": 0,
+      "policy_calls": 0,
+      "policy_substitutions": 0,
+      "software_nonzero_native_replies": 0,
+      "manifest_SHA256": "acc3abee518e46123987e77885378b9c5820d235798084f278ccc08f1d1dab36",
+      "result_SHA256": "a0e5d86aa0f6162d02af01a575c217c9e4a5b218423851eaf4c50396de8b03a4",
+      "factory_SHA256": "f4db00d30f1d79e710d5faa00b355f3e7bc8d23f289e182b886d45de79bb4322",
+      "original_binary_SHA256": "6446102e1d2edfa9b1231fc7f9c125c3075f064cd70438ee49f71522057ac665",
+      "signed_binary_SHA256": "ecd08964c563f5a0bd7e3b24e510cfbbae7671d1911f46e42731fc803bc84347",
+      "resolver_controls": 32,
+      "GetFactory_controls": 32
+    },
+    {
+      "case": "video-factory-resolver-v5-local-cpu-20261018",
+      "version": 5,
+      "mode": "cpu",
+      "policy": "observe",
+      "PID": 47113,
+      "started_at": "2026-10-18T10:12:11.727087+00:00",
+      "completed_at": "2026-10-18T10:12:12.687442+00:00",
+      "diagnostic_status": "PASS",
+      "frames": 6,
+      "pixel_bytes": 691200,
+      "policy_calls": 0,
+      "policy_substitutions": 0,
+      "software_nonzero_native_replies": 4,
+      "manifest_SHA256": "7165d7de7fa2b6741d5a941cf1dceaa74ff77a4a77ece93db4e15c5f8f994d9b",
+      "result_SHA256": "8f004a05d4280ad8c414c4f9caf9964f9d5b96b84fe9a76b7bbfacbc825caf20",
+      "factory_SHA256": "70c437c2d013c352888d3be3eafa79467ae3709c7ba0e476e41dfc19af6a7d87",
+      "original_binary_SHA256": "6446102e1d2edfa9b1231fc7f9c125c3075f064cd70438ee49f71522057ac665",
+      "signed_binary_SHA256": "ecd08964c563f5a0bd7e3b24e510cfbbae7671d1911f46e42731fc803bc84347",
+      "resolver_controls": 32,
+      "GetFactory_controls": 32
+    },
+    {
+      "case": "video-factory-resolver-v5-local-hw-observe-20261018",
+      "version": 5,
+      "mode": "hardware",
+      "policy": "observe",
+      "PID": 47163,
+      "started_at": "2026-10-18T10:12:32.340913+00:00",
+      "completed_at": "2026-10-18T10:12:33.104060+00:00",
+      "diagnostic_status": "PASS",
+      "frames": 0,
+      "pixel_bytes": 0,
+      "policy_calls": 1,
+      "policy_substitutions": 0,
+      "software_nonzero_native_replies": 0,
+      "manifest_SHA256": "d0a8b94040ee4df808a08a237ec068c702c0aded66fb867a39e59250616632ec",
+      "result_SHA256": "79c39efaf00ecc63eba49f6492a21587516d1701ebc6b4ac67a72ef547b31f2a",
+      "factory_SHA256": "4f1e7aaa8efee9e8f651fb5f0d07652a364f0096f8c208fec23e07ed4c826e44",
+      "original_binary_SHA256": "6446102e1d2edfa9b1231fc7f9c125c3075f064cd70438ee49f71522057ac665",
+      "signed_binary_SHA256": "ecd08964c563f5a0bd7e3b24e510cfbbae7671d1911f46e42731fc803bc84347",
+      "resolver_controls": 32,
+      "GetFactory_controls": 32,
+      "create_status": -12906,
+      "error_sites": [
+        {
+          "offset": 6290187,
+          "status": -12906
+        },
+        {
+          "offset": 20163,
+          "status": -12906
+        }
+      ]
+    },
+    {
+      "case": "video-factory-resolver-v5-local-hw-wrong-board-20261018",
+      "version": 5,
+      "mode": "hardware",
+      "policy": "wrong-board",
+      "PID": 47207,
+      "started_at": "2026-10-18T10:12:50.452832+00:00",
+      "completed_at": "2026-10-18T10:12:51.159155+00:00",
+      "diagnostic_status": "PASS",
+      "frames": 0,
+      "pixel_bytes": 0,
+      "policy_calls": 1,
+      "policy_substitutions": 1,
+      "software_nonzero_native_replies": 0,
+      "manifest_SHA256": "b91598121289171c5e1810146291ce1b9455796b783c6b36f5d687d231318dde",
+      "result_SHA256": "38d001977984247b03172a63418d492c43eeea427c07df9aad2fc634cdc3e142",
+      "factory_SHA256": "59eb100f0acd6759d9868ec708ea4a4915fe7a304df1a199b6c4ab2942304847",
+      "original_binary_SHA256": "6446102e1d2edfa9b1231fc7f9c125c3075f064cd70438ee49f71522057ac665",
+      "signed_binary_SHA256": "ecd08964c563f5a0bd7e3b24e510cfbbae7671d1911f46e42731fc803bc84347",
+      "resolver_controls": 32,
+      "GetFactory_controls": 32,
+      "create_status": -12906,
+      "error_sites": [
+        {
+          "offset": 6290187,
+          "status": -12906
+        },
+        {
+          "offset": 20163,
+          "status": -12906
+        }
+      ]
+    },
+    {
+      "case": "video-factory-resolver-v5-local-hw-current-board-20261018",
+      "version": 5,
+      "mode": "hardware",
+      "policy": "current-board",
+      "PID": 47253,
+      "started_at": "2026-10-18T10:13:12.097167+00:00",
+      "completed_at": "2026-10-18T10:13:12.803733+00:00",
+      "diagnostic_status": "PASS",
+      "frames": 0,
+      "pixel_bytes": 0,
+      "policy_calls": 3,
+      "policy_substitutions": 3,
+      "software_nonzero_native_replies": 0,
+      "manifest_SHA256": "f56834491e2b5301fb57f291e42260bae006d01bd3415c44000dd3b036550d94",
+      "result_SHA256": "48153b06f4856aa88f8d363691c488ce5794ef229816ed160392e09186411634",
+      "factory_SHA256": "c467ed07d593e5e768360214f8bf6c979175257438af0227cd88ee9fa36084ff",
+      "original_binary_SHA256": "6446102e1d2edfa9b1231fc7f9c125c3075f064cd70438ee49f71522057ac665",
+      "signed_binary_SHA256": "ecd08964c563f5a0bd7e3b24e510cfbbae7671d1911f46e42731fc803bc84347",
+      "resolver_controls": 32,
+      "GetFactory_controls": 32,
+      "create_status": -12913,
+      "error_sites": [
+        {
+          "offset": 4275288,
+          "status": -12900
+        },
+        {
+          "offset": 6290187,
+          "status": -12906
+        },
+        {
+          "offset": 20163,
+          "status": -12913
+        }
+      ]
+    },
+    {
+      "case": "video-factory-resolver-v5-local-hw-current-board-02-20261018",
+      "version": 5,
+      "mode": "hardware",
+      "policy": "current-board",
+      "PID": 47387,
+      "started_at": "2026-10-18T10:14:29.856704+00:00",
+      "completed_at": "2026-10-18T10:14:30.635342+00:00",
+      "diagnostic_status": "PASS",
+      "frames": 0,
+      "pixel_bytes": 0,
+      "policy_calls": 3,
+      "policy_substitutions": 3,
+      "software_nonzero_native_replies": 0,
+      "manifest_SHA256": "04102501a46c8e322dbb1a96d6664400e75a950b809f3ff45d168a351bc76e85",
+      "result_SHA256": "9effae83bba6117873f5707ec79f31f20d4554da0ecd30c6257b99ac6285f9e6",
+      "factory_SHA256": "c467ed07d593e5e768360214f8bf6c979175257438af0227cd88ee9fa36084ff",
+      "original_binary_SHA256": "6446102e1d2edfa9b1231fc7f9c125c3075f064cd70438ee49f71522057ac665",
+      "signed_binary_SHA256": "ecd08964c563f5a0bd7e3b24e510cfbbae7671d1911f46e42731fc803bc84347",
+      "resolver_controls": 32,
+      "GetFactory_controls": 32,
+      "create_status": -12913,
+      "error_sites": [
+        {
+          "offset": 4275288,
+          "status": -12900
+        },
+        {
+          "offset": 6290187,
+          "status": -12906
+        },
+        {
+          "offset": 20163,
+          "status": -12913
+        }
+      ]
+    },
+    {
+      "case": "video-factory-resolver-v5-local-hw-wrong-board-02-20261018",
+      "version": 5,
+      "mode": "hardware",
+      "policy": "wrong-board",
+      "PID": 47403,
+      "started_at": "2026-10-18T10:14:35.003970+00:00",
+      "completed_at": "2026-10-18T10:14:35.807919+00:00",
+      "diagnostic_status": "PASS",
+      "frames": 0,
+      "pixel_bytes": 0,
+      "policy_calls": 1,
+      "policy_substitutions": 1,
+      "software_nonzero_native_replies": 0,
+      "manifest_SHA256": "5b77e829f26470a297b95e86b0d56d957fd3e35311ce007ed814572360ebf68e",
+      "result_SHA256": "ee783282848cb8600f0d0d277728db29a91786b75f92f87b0f51f4f475ac3c85",
+      "factory_SHA256": "59eb100f0acd6759d9868ec708ea4a4915fe7a304df1a199b6c4ab2942304847",
+      "original_binary_SHA256": "6446102e1d2edfa9b1231fc7f9c125c3075f064cd70438ee49f71522057ac665",
+      "signed_binary_SHA256": "ecd08964c563f5a0bd7e3b24e510cfbbae7671d1911f46e42731fc803bc84347",
+      "resolver_controls": 32,
+      "GetFactory_controls": 32,
+      "create_status": -12906,
+      "error_sites": [
+        {
+          "offset": 6290187,
+          "status": -12906
+        },
+        {
+          "offset": 20163,
+          "status": -12906
+        }
+      ]
+    },
+    {
+      "case": "video-factory-resolver-v5-local-hw-current-board-03-20261018",
+      "version": 5,
+      "mode": "hardware",
+      "policy": "current-board",
+      "PID": 47418,
+      "started_at": "2026-10-18T10:14:39.403930+00:00",
+      "completed_at": "2026-10-18T10:14:40.083667+00:00",
+      "diagnostic_status": "PASS",
+      "frames": 0,
+      "pixel_bytes": 0,
+      "policy_calls": 3,
+      "policy_substitutions": 3,
+      "software_nonzero_native_replies": 0,
+      "manifest_SHA256": "80aac8fec52b019e0b061ddd6ed3a2f869c4030923aa03976d46ee99e0ffbb4c",
+      "result_SHA256": "7250ecb7c284fa3e28f613d2f7cbe60a366363a6059acf3a70aeccdf4c94a57f",
+      "factory_SHA256": "c467ed07d593e5e768360214f8bf6c979175257438af0227cd88ee9fa36084ff",
+      "original_binary_SHA256": "6446102e1d2edfa9b1231fc7f9c125c3075f064cd70438ee49f71522057ac665",
+      "signed_binary_SHA256": "ecd08964c563f5a0bd7e3b24e510cfbbae7671d1911f46e42731fc803bc84347",
+      "resolver_controls": 32,
+      "GetFactory_controls": 32,
+      "create_status": -12913,
+      "error_sites": [
+        {
+          "offset": 4275288,
+          "status": -12900
+        },
+        {
+          "offset": 6290187,
+          "status": -12906
+        },
+        {
+          "offset": 20163,
+          "status": -12913
+        }
+      ]
+    },
+    {
+      "case": "video-factory-resolver-v5-local-hw-observe-02-20261018",
+      "version": 5,
+      "mode": "hardware",
+      "policy": "observe",
+      "PID": 47440,
+      "started_at": "2026-10-18T10:14:44.431733+00:00",
+      "completed_at": "2026-10-18T10:14:45.243064+00:00",
+      "diagnostic_status": "PASS",
+      "frames": 0,
+      "pixel_bytes": 0,
+      "policy_calls": 1,
+      "policy_substitutions": 0,
+      "software_nonzero_native_replies": 0,
+      "manifest_SHA256": "27532aae6184af26a5e78798b95ceef0c83b68fe762338d06b57157ce36eee3e",
+      "result_SHA256": "b9aee6e45fbd1873674ecd516f1eaebfa58d268695aab6b84ff833eeaf2763b2",
+      "factory_SHA256": "4f1e7aaa8efee9e8f651fb5f0d07652a364f0096f8c208fec23e07ed4c826e44",
+      "original_binary_SHA256": "6446102e1d2edfa9b1231fc7f9c125c3075f064cd70438ee49f71522057ac665",
+      "signed_binary_SHA256": "ecd08964c563f5a0bd7e3b24e510cfbbae7671d1911f46e42731fc803bc84347",
+      "resolver_controls": 32,
+      "GetFactory_controls": 32,
+      "create_status": -12906,
+      "error_sites": [
+        {
+          "offset": 6290187,
+          "status": -12906
+        },
+        {
+          "offset": 20163,
+          "status": -12906
+        }
+      ]
+    },
+    {
+      "case": "video-factory-resolver-v5-local-cpu-post-20261018",
+      "version": 5,
+      "mode": "cpu",
+      "policy": "observe",
+      "PID": 47518,
+      "started_at": "2026-10-18T10:15:59.995024+00:00",
+      "completed_at": "2026-10-18T10:16:00.867529+00:00",
+      "diagnostic_status": "PASS",
+      "frames": 6,
+      "pixel_bytes": 691200,
+      "policy_calls": 0,
+      "policy_substitutions": 0,
+      "software_nonzero_native_replies": 4,
+      "manifest_SHA256": "ad3b89d1c09cf5e50caadda22697f913cf96b689ee8bf98d02f59fdae5dc0a1b",
+      "result_SHA256": "defbdfe7e2c5d9c60d73acfce215e53277acf00c7f5252a8fb147c018ccf9f70",
+      "factory_SHA256": "70c437c2d013c352888d3be3eafa79467ae3709c7ba0e476e41dfc19af6a7d87",
+      "original_binary_SHA256": "6446102e1d2edfa9b1231fc7f9c125c3075f064cd70438ee49f71522057ac665",
+      "signed_binary_SHA256": "ecd08964c563f5a0bd7e3b24e510cfbbae7671d1911f46e42731fc803bc84347",
+      "resolver_controls": 32,
+      "GetFactory_controls": 32
+    }
+  ],
+  "protected_files_unchanged": 83,
+  "common_sources_unchanged": 36,
+  "OCLP_unchanged": true,
+  "AppleVA_policy_unchanged": true,
+  "AppleGVA_policy_unchanged": true,
+  "common_archive_unchanged": true,
+  "system_modified": false,
+  "hardware_video_execution_proved": false,
+  "performance_benchmark": false,
+  "full_objective_complete": false,
+  "limits": [
+    "Natural GetFactory forwarding changes its immediate caller return address.",
+    "All five software cases retain three FinF and one Inva reply at-12782 each; full service lifetime remains unqualified.",
+    "V1 lacks MH_BUNDLE target metadata; V3 nearest symbol is not an exact factory name.",
+    "The additional property-query error is not established as the final refusal cause.",
+    "An existing board profile is a diagnostic counterfactual, not hardware compatibility proof.",
+    "No decoder method/interface table is directly invoked or patched by the observer."
+  ],
+  "lab_audit_SHA256": "2d68546884ffdc5ee66560e0580ad7c9ba10aa5653a679994a01e85f02791064",
+  "published_auditor_identical_report": true,
+  "source_reconstruction": [
+    {
+      "path": "patches/video-factory-v5-to-v1.patch",
+      "SHA256": "a770af8b0bdc201063a4e25f6563b8dc79190bb4bc2a68380594b8d0bc758c14",
+      "source_comparisons": [
+        {
+          "file": "video_factory_resolver.mm",
+          "frozen_SHA256": "0e868f0b953ea38771a9302bc2831357e7cdeeb824664a03997f3656c62895d0"
+        },
+        {
+          "file": "video_factory_resolver_main.mm",
+          "frozen_SHA256": "291a9eded361c8f855a94fd60b652fbcc3dfe45d24b968df4899256d7f5039af"
+        },
+        {
+          "file": "native_video_factory.py",
+          "frozen_SHA256": "39dc88f197b8f267d46b9aa5161ca54c80f81ae3d1c914ea3e89790ce7cb5697"
+        }
+      ],
+      "reconstruction_status": "PASS"
+    },
+    {
+      "path": "patches/video-factory-v5-to-v2.patch",
+      "SHA256": "d809321b336c2c81b504b5aea7a25e642779222a85514eba70d2ae7daf5f1a94",
+      "source_comparisons": [
+        {
+          "file": "video_factory_resolver.mm",
+          "frozen_SHA256": "57e637a65cb1dc941f2d1385a8a80348b5e42b83ef8cd29b2a87e43e1266ff17"
+        },
+        {
+          "file": "video_factory_resolver_main.mm",
+          "frozen_SHA256": "291a9eded361c8f855a94fd60b652fbcc3dfe45d24b968df4899256d7f5039af"
+        },
+        {
+          "file": "native_video_factory.py",
+          "frozen_SHA256": "1089c9d2edcf94d27dc4b73562b20c024d102ae66bd4eef2614e93180a373773"
+        }
+      ],
+      "reconstruction_status": "PASS"
+    },
+    {
+      "path": "patches/video-factory-v5-to-v3.patch",
+      "SHA256": "a68279f410c4b6fd375bbc11d87c173fc4795ea4bf5f02229eb388ee44a49240",
+      "source_comparisons": [
+        {
+          "file": "video_factory_resolver.mm",
+          "frozen_SHA256": "80354373e19aceb517cfa9b26d0b93a73d6bf12b31ea4e86e98a960671494632"
+        },
+        {
+          "file": "video_factory_resolver_main.mm",
+          "frozen_SHA256": "291a9eded361c8f855a94fd60b652fbcc3dfe45d24b968df4899256d7f5039af"
+        },
+        {
+          "file": "native_video_factory.py",
+          "frozen_SHA256": "26753ee9248fc33a584ed4c37d9e553a3f68a25d61480d912fb36ba62ff47be1"
+        }
+      ],
+      "reconstruction_status": "PASS"
+    },
+    {
+      "path": "patches/video-factory-v5-to-v4.patch",
+      "SHA256": "c9b83254db32bf5cc96835b366f351ccf2c693f6075200e3a4b0a4a9e7562571",
+      "source_comparisons": [
+        {
+          "file": "video_factory_resolver.mm",
+          "frozen_SHA256": "7310895ce2e5136ec90bade6f9c6560f19ab4896684ce1888767c3e3ccd4a5f1"
+        },
+        {
+          "file": "video_factory_resolver_main.mm",
+          "frozen_SHA256": "291a9eded361c8f855a94fd60b652fbcc3dfe45d24b968df4899256d7f5039af"
+        },
+        {
+          "file": "native_video_factory.py",
+          "frozen_SHA256": "26753ee9248fc33a584ed4c37d9e553a3f68a25d61480d912fb36ba62ff47be1"
+        }
+      ],
+      "reconstruction_status": "PASS"
+    },
+    {
+      "path": "patches/video-factory-parent-runner-before-policy.patch",
+      "SHA256": "731a6102f2c3f056963d735bb7d0e282d37250c96eca5535153a6ca84eda2b3b",
+      "source_comparisons": [
+        {
+          "file": "native_video_local_service.py",
+          "frozen_SHA256": "d218738637901bde7b7aa15cde998e1e5f55317b785dd44ec4a73f3fc1e75f3c"
+        }
+      ],
+      "reconstruction_status": "PASS"
+    }
+  ],
+  "cache_parser_tests": {
+    "exit_code": 0,
+    "tests": 6,
+    "before_fix_failures": 3,
+    "before_fix_revision": "6b7c7b30bd36b89dc7bbef1b4946a9f01e62c71f",
+    "parser_SHA256": "a70e5bd2bcf23bc0583e792fcb131b5fcb030d1566c926ca0eecbdb987940623",
+    "test_source_SHA256": "06656a4b9f9208ce0acddd4faef590b40ccc85265346bc7be07c270f4ed48bae",
+    "stderr_SHA256": "6f4e372b5a3285646708971b88a3bee348843040ae095928f7459478b2f500b7",
+    "GPU_work": 0
+  },
+  "static_analysis": {
+    "corrected_three_region_analysis_SHA256": "02519aa8c1afc9e7ac9e552056b10689f0fc0b8393eede08dcff79e1ef100f7a",
+    "CoreMedia_REA": {
+      "evidence_id": "ev_14aef15888b5576321a587ff28fc9d5ed6b30dba449f274cea0eacb7e6a86630",
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "analysis_container_SHA256": "1ae0e33d5fa652489b7d769491d081875234bb02c4dbe9f84e192043d7498042",
+      "original_cache_VM": "0x7ff80fbc8155",
+      "provider_mapped_VM": "0x7ff80fcc8155",
+      "provider_relocation_delta": 1048576,
+      "body_bytes": 173,
+      "region_SHA256": "57a7ef8a79a22ba025e1bd3b14c42c3462ca92db447ff9c6efeead2a98c55a16",
+      "machine_ABI": "RDI opaque item, ESI 32bit load flag, RDX writable8byte output pointer, EAX 32bit status",
+      "pseudocode_is_recovered_not_source": true,
+      "original_artifact_modified": false,
+      "new_private_function_invoked_by_analysis": false,
+      "initial_wrong_address_query": "No procedure at original VM; provider inventory supplied the rebased start, then analysis completed. No annotations were applied.",
+      "bundle_SHA256": "005ff84678d9706ed4193086e47d507e82f2be6874d5fa935a45b49bdcfd6ed8",
+      "snapshot_SHA256": "f0d817b6df5bd6fc13aaa7d02a56ada2c55e20723868a569ef6aeb74a44bc10b"
+    },
+    "next_error_REA": {
+      "evidence_id": "ev_d45f92d026a8920d17f1b7ff1570b0947199e5e3ddae6582461c20b6f9adf0cd",
+      "overview_evidence_id": "ev_dbd0bd0456a5bcdca51e2c6e9d65d67b68fb8139c030388d83a239d277f10e3b",
+      "provider": "Ghidra12.1.4 via REA6.4.0",
+      "original_function_offset": 4269743,
+      "LC_FUNCTION_STARTS_bytes": 6156,
+      "Ghidra_body_bytes": 6123,
+      "original_region_SHA256": "13f823d7c988ad0db05e7f85e98e4a6e59b1e3b0323203009e5e3d7a0ccbd1ac",
+      "ELF_container_SHA256": "db04aa2078b794b39eb154632b077bac56496fc60cd2fb81f3e8820d31ffd184",
+      "provider_rebase_delta": 1048576,
+      "error_return_offset": 4275288,
+      "static_context": "Indirect CopyProperty for DecoderProducesRAWOutput; observed error is not established as final Strt failure cause",
+      "limitations": [
+        "Derived ELF omits external callees/data",
+        "Ghidra reports bad-instruction/PIC/unreachable-block warnings and6123of6156bodybytes; no complete ABI inferred from this dossier"
+      ],
+      "annotations_applied": false,
+      "original_modified": false,
+      "vendor_code_executed_by_static_analysis": false,
+      "full_objective_complete": false,
+      "bundles_SHA256": {
+        "REA-next-error.private.json": "ce117284aefc6dcf09eedd80287ccc86d9c488fc325848f34e3a3f8a4acb1778",
+        "REA-next-error.snapshot.private.json": "98f3f60703133c459077bc4429e316d4d990fcc5590d55040b7811ee812bbaa4"
+      }
+    }
+  }
+}

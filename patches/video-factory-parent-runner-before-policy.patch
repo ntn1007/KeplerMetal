@@ -1,0 +1,26 @@
+--- native_video_local_service.py
++++ native_video_local_service.py
+@@ -136,23 +136,11 @@
+     shutil.copytree(build / 'assets', out / 'assets')
+     write(out / 'assets/owned-choice.json', {'route': args.route})
+     write(out / 'assets/dependency-choice.json', {'mode': args.override})
+-    additional = getattr(args, 'additional_choices', {})
+-    if additional:
+-        if set(additional) != {'factory-policy-choice.json'} or not data.get('factory_policy_supported'):
+-            raise ValueError('Unsupported additional asset choice')
+-        value = additional['factory-policy-choice.json']
+-        if set(value) != {'mode'} or value['mode'] not in ('observe', 'wrong-board', 'current-board'):
+-            raise ValueError('Invalid factory policy choice')
+-        if value['mode'] != 'observe' and (args.mode != 'hardware' or args.route != 'owned' or args.override != 'present-key'):
+-            raise ValueError('Policy counterfactual restricted to owned hardware presence experiment')
+-        write(out / 'assets/factory-policy-choice.json', value)
+     for name in data['source_hashes']:
+         shutil.copyfile(build / name, out / name)
+     shutil.copyfile(__file__, out / 'runner.py')
+     shutil.copyfile(build / 'application', out / 'application'); (out / 'application').chmod(0o755)
+     assets = {**data['assets_SHA256'], **{n: sha(out / 'assets' / n) for n in ['owned-choice.json', 'dependency-choice.json']}}
+-    for name in additional:
+-        assets[name] = sha(out / 'assets' / name)
+     write(out / 'inputs.json', {**data, 'assets_SHA256': assets, 'mode': args.mode, 'route': args.route,
+                               'override_mode': args.override})
+     sys.path.insert(0, str(build / 'runtime'))
