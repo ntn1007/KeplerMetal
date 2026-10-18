@@ -1,6 +1,6 @@
 # Build from source
 
-The ABI-neutral registry observer, public-CF metadata observer and hardware-flag experiment reuse qualified objects and libraries. [VIDEO_REGISTRY.md](VIDEO_REGISTRY.md) lists exact-profile calibration, inspect-first steps, shared-lease requirements and the retained hardware failures.
+The public IORegistry observer and tightly scoped presence experiment reuse the qualified host, decoder and observation libraries. [VIDEO_DEPENDENCIES.md](VIDEO_DEPENDENCIES.md) documents inspect/software controls, the unchanged hardware requirement, rotated native/wrong-key/present-key cases and source-version reconstruction.
 
 The public-codec client now accepts H.264 or an original MPEG-2 fixture, with an independent software-reference generator using existing external FFmpeg tools. [VIDEO_CODEC_SELECTION.md](VIDEO_CODEC_SELECTION.md) describes the exact-profile build, inspect-first workflow and retained hardware failures.
 

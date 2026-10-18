@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "module": "/System/Library/Frameworks/VideoToolbox.framework/Versions/A/VideoToolbox",
+  "UUID": "e7231bea63883d0a95c0a93ce970b96b",
+  "version": "3330.13.105",
+  "IORegistry_search_return_offset": 6285217,
+  "functions": [
+    {
+      "offset": 6301249,
+      "bytes": 1295,
+      "SHA256": "3a57afb6d9e1f11027f865ca247960cb09ddaa72f9dfd57f2475b70319d473b8",
+      "capture": "video-dependency-matching-callback-20261016"
+    },
+    {
+      "offset": 6293691,
+      "bytes": 1172,
+      "SHA256": "c383123f0ac271a509b7e97fb41cb607d6386114cf4649094b5ccdbe406718a9",
+      "capture": "video-dependency-candidate-filter-20261016"
+    },
+    {
+      "offset": 16259,
+      "bytes": 332,
+      "SHA256": "ae2dd856fb1ca2bb409ab0e69f8c563f6e62cde57dc575e05b4d95347a29d929",
+      "capture": "video-dependency-registry-query-20261016"
+    },
+    {
+      "offset": 16591,
+      "bytes": 154,
+      "SHA256": "bef27ed109c537af88849bbedf170d42048feba3bc6c0a4b750dec5e20733ce5",
+      "capture": "video-dependency-registry-cache-20261016"
+    },
+    {
+      "offset": 6284987,
+      "bytes": 520,
+      "SHA256": "c4386b358bb7cfbf8eb38bb9817d194d249368f942a629792fc14386ff6643e4",
+      "capture": "video-dependency-registry-property-20261016"
+    }
+  ],
+  "GPU_registry_ID": 4294968458
+}

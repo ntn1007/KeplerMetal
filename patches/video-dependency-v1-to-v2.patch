@@ -1,0 +1,173 @@
+--- a/bridge/tools/video_dependency.mm
++++ b/bridge/tools/video_dependency.mm
+@@ -24,14 +24,36 @@
+ constexpr unsigned capacity=64;
+ std::atomic<bool> enabled{false},begun{false};
+ std::atomic<unsigned> inflight{0},count{0},dropped{0};
++std::atomic<unsigned> selection{0},substitutions{0};
++std::atomic<bool> hardwareScope{false};
+ thread_local bool synthetic=false,recording=false;
+ uintptr_t nativeSite=0;
+ struct Event{
+-    std::atomic<bool> ready{false};bool control=false,present=false,truncated=false;
++    std::atomic<bool> ready{false};bool control=false,present=false,originalPresent=false,changed=false,truncated=false;
+     uint64_t registryID=0;uint32_t service=0,options=0;int registryStatus=0;CFTypeID type=0;
+     uintptr_t caller=0;char key[256]{},plane[128]{},name[128]{},className[128]{};
+ };
+ Event events[capacity];
++NSString *selectionName(unsigned value){return value==2?@"present-key":(value==1?@"wrong-key":@"native");}
++bool permitsSubstitution(unsigned choice,bool native,bool hardware,uint64_t registry,CFStringRef key,
++    const char *plane,IOOptionBits options,bool originalPresent){
++    if(!choice||!native||!hardware||originalPresent||registry!=4294968458ull||!key||
++       !plane||strcmp(plane,kIOServicePlane)||options!=kIORegistryIterateRecursively)return false;
++    return CFEqual(key,choice==2?CFSTR("IOGVACodec"):CFSTR("KeplerMetal-absent-dependency"));
++}
++bool scopeContract(){
++    CFStringRef key=CFSTR("IOGVACodec");
++    return permitsSubstitution(2,true,true,4294968458ull,key,kIOServicePlane,1,false)&&
++        !permitsSubstitution(0,true,true,4294968458ull,key,kIOServicePlane,1,false)&&
++        !permitsSubstitution(1,true,true,4294968458ull,key,kIOServicePlane,1,false)&&
++        !permitsSubstitution(2,false,true,4294968458ull,key,kIOServicePlane,1,false)&&
++        !permitsSubstitution(2,true,false,4294968458ull,key,kIOServicePlane,1,false)&&
++        !permitsSubstitution(2,true,true,4294968459ull,key,kIOServicePlane,1,false)&&
++        !permitsSubstitution(2,true,true,4294968458ull,CFSTR("IOAVDHEVCDecodeCapabilities"),kIOServicePlane,1,false)&&
++        !permitsSubstitution(2,true,true,4294968458ull,key,"OtherPlane",1,false)&&
++        !permitsSubstitution(2,true,true,4294968458ull,key,kIOServicePlane,0,false)&&
++        !permitsSubstitution(2,true,true,4294968458ull,key,kIOServicePlane,1,true);
++}
+ NSString *digest(NSData *data){
+     if(!data)return @"";unsigned char h[32];CC_SHA256(data.bytes,(CC_LONG)data.length,h);
+     NSMutableString *s=[NSMutableString string];for(auto b:h)[s appendFormat:@"%02x",b];return s;
+@@ -50,9 +72,12 @@
+         [assets stringByAppendingPathComponent:@"dependency-config.json"]]options:0 error:nil];
+     NSDictionary *profile=[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:
+         [assets stringByAppendingPathComponent:@"dependency-profile.json"]]options:0 error:nil];
++    NSDictionary *choice=[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:
++        [assets stringByAppendingPathComponent:@"dependency-choice.json"]]options:0 error:nil];
+     Dl_info self{};
+     NSString *kind=KPDEP_ENABLE?@"both":(KPDEP_RECORD?@"observer":@"passive");
+-    if(!config||!profile||!dladdr((void*)KPVideoDependencyInspect,&self)||!self.dli_fname||
++    if(!config||!profile||choice.count!=1||![@[@"native",@"wrong-key",@"present-key"]containsObject:choice[@"mode"]]||
++       !dladdr((void*)KPVideoDependencyInspect,&self)||!self.dli_fname||
+        ![digest([NSData dataWithContentsOfFile:@(self.dli_fname)])isEqual:config[@"libraries"][kind]]||
+        ![digest([NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"dependency-profile.json"]])
+            isEqual:config[@"profile_SHA256"]])return nil;
+@@ -60,7 +85,8 @@
+     if(![module isEqual:@"/System/Library/Frameworks/VideoToolbox.framework/Versions/A/VideoToolbox"]||
+        ![profile[@"UUID"]isEqual:@"e7231bea63883d0a95c0a93ce970b96b"]||
+        ![profile[@"version"]isEqual:@"3330.13.105"]||[profile[@"functions"]count]!=5||
+-       [profile[@"IORegistry_search_return_offset"]unsignedLongLongValue]!=6285217)return nil;
++       [profile[@"IORegistry_search_return_offset"]unsignedLongLongValue]!=6285217||
++       [profile[@"GPU_registry_ID"]unsignedLongLongValue]!=4294968458ull||!scopeContract())return nil;
+     for(uint32_t i=0;i<_dyld_image_count();i++){
+         const char *name=_dyld_get_image_name(i);if(!name||strcmp(name,module.UTF8String))continue;
+         auto header=(const mach_header_64*)_dyld_get_image_header(i);
+@@ -89,7 +115,9 @@
+         [pins addObject:@{@"offset":@(offset),@"bytes":@(length),@"SHA256":function[@"SHA256"]}];
+     }
+     nativeSite=base+6285217;
+-    return @{@"UUID":uuid,@"version":version,@"resident_code_pins":pins};
++    selection.store([choice[@"mode"]isEqual:@"present-key"]?2:([choice[@"mode"]isEqual:@"wrong-key"]?1:0));
++    return @{@"UUID":uuid,@"version":version,@"resident_code_pins":pins,@"scope_contract_cases":@10,
++        @"scope_contract_valid":@YES,@"GPU_registry_ID":@4294968458ull};
+ }
+ __attribute__((noinline)) CFTypeRef observedSearch(io_registry_entry_t entry,const io_name_t plane,
+     CFStringRef key,CFAllocatorRef allocator,IOOptionBits options){
+@@ -102,11 +130,19 @@
+         return IORegistryEntrySearchCFProperty(entry,plane,key,allocator,options);}
+     recording=true;
+     CFTypeRef value=IORegistryEntrySearchCFProperty(entry,plane,key,allocator,options);
++    bool originalPresent=value!=nullptr;uint64_t registryID=0;
++    kern_return_t registryStatus=IORegistryEntryGetRegistryEntryID(entry,&registryID);
++    bool change=registryStatus==KERN_SUCCESS&&permitsSubstitution(selection.load(),!synthetic&&caller==nativeSite,
++        hardwareScope.load(),registryID,key,plane,options,originalPresent);
++    // This is a counterfactual presence test, never a hardware capability claim.
++    // The original null result owns no object. The returned public Boolean has
++    // the Search API's retained ownership. All other queries stay unchanged.
++    if(change){value=CFRetain(kCFBooleanTrue);substitutions.fetch_add(1);}
+     unsigned index=count.fetch_add(1,std::memory_order_relaxed);
+     if(index<capacity){
+         Event &event=events[index];event.control=synthetic;event.caller=caller;event.present=value!=nullptr;
+         event.service=entry;event.options=options;event.type=value?CFGetTypeID(value):0;
+-        event.registryStatus=IORegistryEntryGetRegistryEntryID(entry,&event.registryID);
++        event.registryStatus=registryStatus;event.registryID=registryID;event.originalPresent=originalPresent;event.changed=change;
+         IORegistryEntryGetName(entry,event.name);IOObjectGetClass(entry,event.className);
+         if(plane){size_t n=strnlen(plane,sizeof(event.plane));event.truncated=n==sizeof(event.plane);
+             memcpy(event.plane,plane,std::min(n,sizeof(event.plane)-1));}
+@@ -136,13 +172,16 @@
+         [rows addObject:@{@"ordinal":@(i),@"synthetic_control":@(e.control),@"service":@(e.service),
+             @"registry_ID":@(e.registryID),@"registry_ID_status":@(e.registryStatus),@"name":@(e.name),
+             @"class":@(e.className),@"key":@(e.key),@"plane":@(e.plane),@"options":@(e.options),
+-            @"result_present":@(e.present),@"CF_type":@(e.type),@"truncated":@(e.truncated),
++            @"result_present":@(e.present),@"original_result_present":@(e.originalPresent),
++            @"return_value_changed":@(e.changed),@"CF_type":@(e.type),@"truncated":@(e.truncated),
+             @"native_pinned_callsite":@(!e.control&&e.caller==nativeSite)}];
+     }
+     return @{@"status":drained&&!pending&&!dropped.load()?@"COMPLETE":@"INCOMPLETE",@"events":rows,
+         @"calls":@(count.load()),@"dropped":@(dropped.load()),@"pending":@(pending),@"recorders_drained":@(drained),
+         @"disabled_before_snapshot":@YES,@"native_observation_enabled":@(KPDEP_RECORD),
+-        @"system_modified":@NO,@"return_value_or_ownership_modified":@NO,@"opaque_registry_item_read":@NO,
++        @"system_modified":@NO,@"return_value_or_ownership_modified":@(substitutions.load()!=0),
++        @"return_ownership_modified":@NO,@"substitutions":@(substitutions.load()),
++        @"counterfactual_selection":selectionName(selection.load()),@"opaque_registry_item_read":@NO,
+         @"API":@"IORegistryEntrySearchCFProperty",@"private_function_invoked_directly":@NO};
+ }
+ OSStatus observedCreate(CFAllocatorRef allocator,CMVideoFormatDescriptionRef format,CFDictionaryRef specification,
+@@ -158,9 +197,12 @@
+     if(apply&&pins&&calibrated){modified=CFDictionaryCreateMutableCopy(kCFAllocatorDefault,0,specification);
+         if(modified)CFDictionarySetValue(modified,kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder,kCFBooleanTrue);}
+     CFDictionaryRef forwarded=modified?modified:specification;
++    hardwareScope.store(required&&forwarded&&CFDictionaryGetValue(forwarded,
++        kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder)==kCFBooleanTrue);
+     OSStatus status=(pins&&calibrated&&(!apply||modified))?VTDecompressionSessionCreate(
+         allocator,format,forwarded,attributes,callback,session):(OSStatus)-50;
+     NSMutableDictionary *record=[NSMutableDictionary dictionaryWithDictionary:snapshot()];
++    hardwareScope.store(false);
+     record[@"profile"]=pins?:@{};record[@"public_query_controls_valid"]=@(calibrated);
+     record[@"public_create_called"]=@(pins&&calibrated&&(!apply||modified));record[@"create_status"]=@(status);
+     record[@"original_specification"]=specification?(id)specification:@{};
+--- a/bridge/tools/native_video_dependency.py
++++ b/bridge/tools/native_video_dependency.py
+@@ -47,6 +47,7 @@
+     shutil.copytree(parent / 'assets', out / 'assets')
+     shutil.copytree(parent / 'runtime', out / 'runtime')
+     shutil.copyfile(args.profile, out / 'assets/dependency-profile.json')
++    write(out / 'assets/dependency-choice.json', {'mode': 'native'})
+     shutil.copyfile(parent / 'inputs.json', out / 'metadata-inputs.json')
+     names = []
+     for name in original['source_hashes']:
+@@ -121,6 +122,8 @@
+             raise ValueError('Dependency library changed')
+     if (args.variant == 'inspect') != (args.mode == 'inspect'):
+         raise ValueError('Inspect variant never creates a decoder')
++    if args.override != 'native' and (args.variant != 'H264-both' or args.mode != 'hardware'):
++        raise ValueError('Counterfactual is restricted to H264-both hardware')
+     binary = build_root / ('application-' + args.variant)
+     expected = data['executable_variants_SHA256'][args.variant]
+     if sha(binary) != expected:
+@@ -128,12 +131,16 @@
+     out.mkdir(exist_ok=False)
+     (out / 'outputs').mkdir()
+     shutil.copytree(build_root / 'assets', out / 'assets')
++    write(out / 'assets/dependency-choice.json', {'mode': args.override})
+     for name in data['source_hashes']:
+         shutil.copyfile(build_root / name, out / name)
+     shutil.copyfile(Path(__file__), out / 'runner.py')
+     shutil.copyfile(binary, out / 'application')
+     (out / 'application').chmod(0o755)
+-    write(out / 'inputs.json', {**data, 'selected_variant': args.variant, 'executable_SHA256': expected})
++    run_assets = dict(data['assets_SHA256'])
++    run_assets['dependency-choice.json'] = sha(out / 'assets/dependency-choice.json')
++    write(out / 'inputs.json', {**data, 'assets_SHA256': run_assets, 'selected_variant': args.variant,
++        'executable_SHA256': expected, 'override_mode': args.override})
+     sys.path.insert(0, str(build_root / 'runtime'))
+     from run_sdk_host import run_host
+     manifest = run_host(out / 'application', out / 'execution',
+@@ -163,6 +170,7 @@
+     parser.add_argument('--build', type=Path)
+     parser.add_argument('--variant', choices=['inspect'] + [c + '-' + k for c in ['H264', 'MPEG2Video'] for k in ['passive', 'observer', 'both']])
+     parser.add_argument('--mode', choices=['inspect', 'cpu', 'hardware'])
++    parser.add_argument('--override', choices=['native', 'wrong-key', 'present-key'], default='native')
+     parser.add_argument('--reservation-root', type=Path, default=ROOT)
+     args = parser.parse_args()
+     args.out.resolve().relative_to(ROOT / 'results')

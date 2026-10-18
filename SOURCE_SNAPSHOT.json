@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "date": "2026-10-16",
+  "date": "2026-10-18",
   "source_git": {
     "branch": "main",
     "commit": null,
@@ -6976,6 +6976,62 @@
       "source_SHA256": "4eb0d5914ab603e7b494d0f0070dd384771f54a6aa79b01f9b71e088c05e1024",
       "published_SHA256": "4eb0d5914ab603e7b494d0f0070dd384771f54a6aa79b01f9b71e088c05e1024",
       "bytes": 24339,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/analyze_video_dependency.py",
+      "source_path": "bridge/tools/analyze_video_dependency.py",
+      "source_SHA256": "ca75cdc92251c1299108b35d78c1f991d49c0dd82d57dc654fa86304123b7e3d",
+      "published_SHA256": "ca75cdc92251c1299108b35d78c1f991d49c0dd82d57dc654fa86304123b7e3d",
+      "bytes": 5646,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_dependency.h",
+      "source_path": "bridge/tools/video_dependency.h",
+      "source_SHA256": "972404a7a70a83de20183faee804eb361f3d2b875ac554c8a332b8f29e46f2c3",
+      "published_SHA256": "972404a7a70a83de20183faee804eb361f3d2b875ac554c8a332b8f29e46f2c3",
+      "bytes": 135,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_dependency.mm",
+      "source_path": "bridge/tools/video_dependency.mm",
+      "source_SHA256": "a7af5568bba65a211450b1bf1704743dc046a7ef15de2a439ed48db70addcfd7",
+      "published_SHA256": "a7af5568bba65a211450b1bf1704743dc046a7ef15de2a439ed48db70addcfd7",
+      "bytes": 15933,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_dependency_inspect.mm",
+      "source_path": "bridge/tools/video_dependency_inspect.mm",
+      "source_SHA256": "4e524c6f71f9399def4499035559a0e3dc10c3da13d74233893520a21671afcb",
+      "published_SHA256": "4e524c6f71f9399def4499035559a0e3dc10c3da13d74233893520a21671afcb",
+      "bytes": 1074,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/native_video_dependency.py",
+      "source_path": "bridge/tools/native_video_dependency.py",
+      "source_SHA256": "e0304d62f012a716e29a6fef40557f7cc91cb3f6a66afb600246738b4c707737",
+      "published_SHA256": "e0304d62f012a716e29a6fef40557f7cc91cb3f6a66afb600246738b4c707737",
+      "bytes": 10586,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/audit_video_dependency.py",
+      "source_path": "bridge/tools/audit_video_dependency.py",
+      "source_SHA256": "7317dff0c4e58f649632fcef8ac74b741c3f0392cf04992e201a7917012e7ec1",
+      "published_SHA256": "7317dff0c4e58f649632fcef8ac74b741c3f0392cf04992e201a7917012e7ec1",
+      "bytes": 23007,
+      "modified_for_publication": false
+    },
+    {
+      "path": "patches/video-dependency-v1-to-v2.patch",
+      "source_path": "patches/video-dependency-v1-to-v2.patch",
+      "source_SHA256": "d77ca482bfac9d5f6d72cde03166a4f23ccf679205902eb459130bc85bb4f756",
+      "published_SHA256": "d77ca482bfac9d5f6d72cde03166a4f23ccf679205902eb459130bc85bb4f756",
+      "bytes": 12240,
       "modified_for_publication": false
     }
   ],

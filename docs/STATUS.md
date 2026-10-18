@@ -1,6 +1,6 @@
 # Status at the source export, 2026-10-16
 
-New decoder-registry milestone: 25 terminal nonoverlapping processes, 3,715 known CPU ABI cases and 42 exact software images / 4,838,400 NV12 bytes. Six resident CoreMedia pins pass; 663 real CF metadata captures correlate to entry records without opaque-item reads. GVA registrations expose a missing IOGVA dependency, but both public hardware flags still leave hardware creates at -12906. No hardware video, installed correction or performance gain is proved. [Evidence and reproduction](VIDEO_REGISTRY.md).
+New dependency milestone: 19 terminal nonoverlapping processes, 24 software images / 2,764,800 exact NV12 bytes, 38 public query controls and 110 CPU scope checks. Twenty-two real queries target nvAccelerator registry ID 4294968458. Three scoped `IOGVACodec` presence substitutions change GVA selection (178 entry observations versus 87 in native/wrong-key controls), but all 13 hardware creates still fail at -12906 with zero images. This establishes a selection barrier; a complete decoder fix and hardware execution remain unproved. [Evidence and reproduction](VIDEO_DEPENDENCIES.md).
 
 The full goal remains **incomplete**. This is a development source snapshot with private ABI dependencies, not a production display-driver release. No percentage of total completion is assigned: the remaining hardware/API scope is not bounded enough to make that number meaningful.
 

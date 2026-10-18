@@ -1,0 +1,564 @@
+{
+  "status": "PASS",
+  "auditor_SHA256": "7317dff0c4e58f649632fcef8ac74b741c3f0392cf04992e201a7917012e7ec1",
+  "native_processes_terminal": 19,
+  "nonoverlapping": true,
+  "public_query_controls": 38,
+  "pure_CPU_scope_contract_cases": 110,
+  "CPU_control_frames": 24,
+  "CPU_reference_bytes": 2764800,
+  "CPU_different_bytes": 0,
+  "hardware_required_failures": 13,
+  "hardware_create_status": -12906,
+  "actual_native_property_queries": 22,
+  "actual_query_GPU_registry_ID": 4294968458,
+  "real_CF_metadata_objects_correlated": 1706,
+  "counterfactual": {
+    "repeats_per_choice": 3,
+    "same_executable_and_library": true,
+    "same_executed_signed_executable": true,
+    "only_choice_asset_varies": true,
+    "positive_scope_substitutions": 3,
+    "hardware_requirement_preserved": true,
+    "GVA_reaches_creation_loop_return_offset": 6289206,
+    "new_error_return_offset": 6290187,
+    "single_complete_root_cause_established": false,
+    "hardware_video_execution_proved": false,
+    "cases": [
+      {
+        "case": "video-dependency-counterfactual-native-r1-20261018",
+        "choice": "native",
+        "substitutions": 0,
+        "entry_calls": 87,
+        "error_return_offsets": [
+          20163
+        ],
+        "create_status": -12906,
+        "frames": 0,
+        "executable_SHA256": "c898e581fe55c8a8166497484dd72b48d6b09e60a636ae08760bb7124f164ee5",
+        "executed_signed_SHA256": "93b3499c593d94edc846bcd842e1e1d84d2f4511067bfb9b7fbf73b7d051dc14",
+        "library_SHA256": "521c1ee469e7de0b6a0924dc986461ea5ed20c4909851b3dfb8731cf37cc6f94"
+      },
+      {
+        "case": "video-dependency-counterfactual-wrong-key-r1-20261018",
+        "choice": "wrong-key",
+        "substitutions": 0,
+        "entry_calls": 87,
+        "error_return_offsets": [
+          20163
+        ],
+        "create_status": -12906,
+        "frames": 0,
+        "executable_SHA256": "c898e581fe55c8a8166497484dd72b48d6b09e60a636ae08760bb7124f164ee5",
+        "executed_signed_SHA256": "93b3499c593d94edc846bcd842e1e1d84d2f4511067bfb9b7fbf73b7d051dc14",
+        "library_SHA256": "521c1ee469e7de0b6a0924dc986461ea5ed20c4909851b3dfb8731cf37cc6f94"
+      },
+      {
+        "case": "video-dependency-counterfactual-present-key-r1-20261018",
+        "choice": "present-key",
+        "substitutions": 1,
+        "entry_calls": 178,
+        "error_return_offsets": [
+          6290187,
+          20163
+        ],
+        "create_status": -12906,
+        "frames": 0,
+        "executable_SHA256": "c898e581fe55c8a8166497484dd72b48d6b09e60a636ae08760bb7124f164ee5",
+        "executed_signed_SHA256": "93b3499c593d94edc846bcd842e1e1d84d2f4511067bfb9b7fbf73b7d051dc14",
+        "library_SHA256": "521c1ee469e7de0b6a0924dc986461ea5ed20c4909851b3dfb8731cf37cc6f94"
+      },
+      {
+        "case": "video-dependency-counterfactual-native-r2-20261018",
+        "choice": "native",
+        "substitutions": 0,
+        "entry_calls": 87,
+        "error_return_offsets": [
+          20163
+        ],
+        "create_status": -12906,
+        "frames": 0,
+        "executable_SHA256": "c898e581fe55c8a8166497484dd72b48d6b09e60a636ae08760bb7124f164ee5",
+        "executed_signed_SHA256": "93b3499c593d94edc846bcd842e1e1d84d2f4511067bfb9b7fbf73b7d051dc14",
+        "library_SHA256": "521c1ee469e7de0b6a0924dc986461ea5ed20c4909851b3dfb8731cf37cc6f94"
+      },
+      {
+        "case": "video-dependency-counterfactual-wrong-key-r2-20261018",
+        "choice": "wrong-key",
+        "substitutions": 0,
+        "entry_calls": 87,
+        "error_return_offsets": [
+          20163
+        ],
+        "create_status": -12906,
+        "frames": 0,
+        "executable_SHA256": "c898e581fe55c8a8166497484dd72b48d6b09e60a636ae08760bb7124f164ee5",
+        "executed_signed_SHA256": "93b3499c593d94edc846bcd842e1e1d84d2f4511067bfb9b7fbf73b7d051dc14",
+        "library_SHA256": "521c1ee469e7de0b6a0924dc986461ea5ed20c4909851b3dfb8731cf37cc6f94"
+      },
+      {
+        "case": "video-dependency-counterfactual-present-key-r2-20261018",
+        "choice": "present-key",
+        "substitutions": 1,
+        "entry_calls": 178,
+        "error_return_offsets": [
+          6290187,
+          20163
+        ],
+        "create_status": -12906,
+        "frames": 0,
+        "executable_SHA256": "c898e581fe55c8a8166497484dd72b48d6b09e60a636ae08760bb7124f164ee5",
+        "executed_signed_SHA256": "93b3499c593d94edc846bcd842e1e1d84d2f4511067bfb9b7fbf73b7d051dc14",
+        "library_SHA256": "521c1ee469e7de0b6a0924dc986461ea5ed20c4909851b3dfb8731cf37cc6f94"
+      },
+      {
+        "case": "video-dependency-counterfactual-native-r3-20261018",
+        "choice": "native",
+        "substitutions": 0,
+        "entry_calls": 87,
+        "error_return_offsets": [
+          20163
+        ],
+        "create_status": -12906,
+        "frames": 0,
+        "executable_SHA256": "c898e581fe55c8a8166497484dd72b48d6b09e60a636ae08760bb7124f164ee5",
+        "executed_signed_SHA256": "93b3499c593d94edc846bcd842e1e1d84d2f4511067bfb9b7fbf73b7d051dc14",
+        "library_SHA256": "521c1ee469e7de0b6a0924dc986461ea5ed20c4909851b3dfb8731cf37cc6f94"
+      },
+      {
+        "case": "video-dependency-counterfactual-wrong-key-r3-20261018",
+        "choice": "wrong-key",
+        "substitutions": 0,
+        "entry_calls": 87,
+        "error_return_offsets": [
+          20163
+        ],
+        "create_status": -12906,
+        "frames": 0,
+        "executable_SHA256": "c898e581fe55c8a8166497484dd72b48d6b09e60a636ae08760bb7124f164ee5",
+        "executed_signed_SHA256": "93b3499c593d94edc846bcd842e1e1d84d2f4511067bfb9b7fbf73b7d051dc14",
+        "library_SHA256": "521c1ee469e7de0b6a0924dc986461ea5ed20c4909851b3dfb8731cf37cc6f94"
+      },
+      {
+        "case": "video-dependency-counterfactual-present-key-r3-20261018",
+        "choice": "present-key",
+        "substitutions": 1,
+        "entry_calls": 178,
+        "error_return_offsets": [
+          6290187,
+          20163
+        ],
+        "create_status": -12906,
+        "frames": 0,
+        "executable_SHA256": "c898e581fe55c8a8166497484dd72b48d6b09e60a636ae08760bb7124f164ee5",
+        "executed_signed_SHA256": "93b3499c593d94edc846bcd842e1e1d84d2f4511067bfb9b7fbf73b7d051dc14",
+        "library_SHA256": "521c1ee469e7de0b6a0924dc986461ea5ed20c4909851b3dfb8731cf37cc6f94"
+      }
+    ]
+  },
+  "VideoToolbox_UUID": "e7231bea63883d0a95c0a93ce970b96b",
+  "VideoToolbox_version": "3330.13.105",
+  "resident_code_pins": [
+    {
+      "offset": 6301249,
+      "bytes": 1295,
+      "SHA256": "3a57afb6d9e1f11027f865ca247960cb09ddaa72f9dfd57f2475b70319d473b8"
+    },
+    {
+      "offset": 6293691,
+      "bytes": 1172,
+      "SHA256": "c383123f0ac271a509b7e97fb41cb607d6386114cf4649094b5ccdbe406718a9"
+    },
+    {
+      "offset": 16259,
+      "bytes": 332,
+      "SHA256": "ae2dd856fb1ca2bb409ab0e69f8c563f6e62cde57dc575e05b4d95347a29d929"
+    },
+    {
+      "offset": 16591,
+      "bytes": 154,
+      "SHA256": "bef27ed109c537af88849bbedf170d42048feba3bc6c0a4b750dec5e20733ce5"
+    },
+    {
+      "offset": 6284987,
+      "bytes": 520,
+      "SHA256": "c4386b358bb7cfbf8eb38bb9817d194d249368f942a629792fc14386ff6643e4"
+    }
+  ],
+  "qualified_host_and_decoder_objects_reused": true,
+  "system_files_unchanged": 83,
+  "original_source_v1_to_v2_patch_SHA256": "d77ca482bfac9d5f6d72cde03166a4f23ccf679205902eb459130bc85bb4f756",
+  "v1_source_reconstruction_verified": true,
+  "additional_video_policy_unchanged": true,
+  "OCLP_unchanged": true,
+  "common_runtime_sources_unchanged": 36,
+  "static_regions": [
+    {
+      "start_image_offset": 6301249,
+      "region_bytes": 1295,
+      "region_SHA256": "3a57afb6d9e1f11027f865ca247960cb09ddaa72f9dfd57f2475b70319d473b8"
+    },
+    {
+      "start_image_offset": 6293691,
+      "region_bytes": 1172,
+      "region_SHA256": "c383123f0ac271a509b7e97fb41cb607d6386114cf4649094b5ccdbe406718a9"
+    },
+    {
+      "start_image_offset": 16259,
+      "region_bytes": 332,
+      "region_SHA256": "ae2dd856fb1ca2bb409ab0e69f8c563f6e62cde57dc575e05b4d95347a29d929"
+    },
+    {
+      "start_image_offset": 16591,
+      "region_bytes": 154,
+      "region_SHA256": "bef27ed109c537af88849bbedf170d42048feba3bc6c0a4b750dec5e20733ce5"
+    },
+    {
+      "start_image_offset": 6284987,
+      "region_bytes": 520,
+      "region_SHA256": "c4386b358bb7cfbf8eb38bb9817d194d249368f942a629792fc14386ff6643e4"
+    },
+    {
+      "start_image_offset": 2264716,
+      "region_bytes": 947,
+      "region_SHA256": "6c637a3aed6dae8665392cdb565c09a83f45ed8260f4c0d9835784eaa944aa66"
+    },
+    {
+      "start_image_offset": 2630814,
+      "region_bytes": 450,
+      "region_SHA256": "2ab1b0cda251ce583eef4ffc22dd703ae828e28f582baf78a4c5989453f34663"
+    }
+  ],
+  "cache_files": [
+    {
+      "name": "dyld_shared_cache_x86_64",
+      "UUID": "8b9bd562bd153d14a8b6343e9b14535b",
+      "SHA256": "01d2fb67994fe5f4a6846263144432af24a1a450993f917e54de53351e6708be"
+    }
+  ],
+  "next_creator_offset": 2630814,
+  "next_creator_runtime_invocation_proved": false,
+  "system_deployment": "NOT RUN",
+  "performance_benchmark": "NOT RUN",
+  "new_M1_execution": false,
+  "Qwen_job_ids": [],
+  "hardware_video_execution_proved": false,
+  "full_objective_complete": false,
+  "processes": [
+    {
+      "case": "video-dependency-inspect-20261018",
+      "PID": 33139,
+      "result_SHA256": "fa062acecef7259fbca8d2b9654d4e791c49aedf7d92e48b541c0c977d065509",
+      "dependency_SHA256": "c6b8800891f2bea607749f6f126e09b9fc2743984abc780a0573c04a05ab9eb9",
+      "inputs_SHA256": "bb874dcefffa9010811dc0addbcd9f8f5e5d8daa6691dc7dd91db154cc3518f4",
+      "variant": "inspect",
+      "mode": "inspect",
+      "choice": "native",
+      "native_queries": 0
+    },
+    {
+      "case": "video-dependency-H264-passive-cpu-20261018",
+      "PID": 33188,
+      "result_SHA256": "ab402772f0eb6621fe8adcfef5ddd3ce7d52801004764a126771005daa5b1d93",
+      "dependency_SHA256": "48d907df766b4a732d41436bf5cb3573bae02080768cb3ed9ac7625af58ee4e3",
+      "inputs_SHA256": "89a440473cb4de2afadbf7db4630cf1d7324719e4ac206cf13b5565a02fd75c7",
+      "variant": "H264-passive",
+      "mode": "cpu",
+      "choice": "native",
+      "native_queries": 0,
+      "create_status": 0,
+      "frames": 6,
+      "entry_calls": 85,
+      "error_return_offsets": []
+    },
+    {
+      "case": "video-dependency-H264-observer-cpu-20261018",
+      "PID": 33253,
+      "result_SHA256": "5a3a904efa90f91acd90a86f48695bf1046df302f3cf2ec89d0617db16035e4b",
+      "dependency_SHA256": "5d04d00b3d64939680a58565388a1892959e42051bd99421ffa751f9d3929ef7",
+      "inputs_SHA256": "f50550aa11fca4f7f5e995488962088ffad9c3a74c743fd36ac4e8f2eb64b01d",
+      "variant": "H264-observer",
+      "mode": "cpu",
+      "choice": "native",
+      "native_queries": 0,
+      "create_status": 0,
+      "frames": 6,
+      "entry_calls": 85,
+      "error_return_offsets": []
+    },
+    {
+      "case": "video-dependency-H264-passive-hardware-20261018",
+      "PID": 33286,
+      "result_SHA256": "9d383f41b54671ddf06adff80ad79e5191501586689cd636cbe8f12733986eda",
+      "dependency_SHA256": "527f94a328d680d3b3eb293cd171e5ae3f0ff1e12296874ccbace9983325ab8d",
+      "inputs_SHA256": "89a440473cb4de2afadbf7db4630cf1d7324719e4ac206cf13b5565a02fd75c7",
+      "variant": "H264-passive",
+      "mode": "hardware",
+      "choice": "native",
+      "native_queries": 0,
+      "create_status": -12906,
+      "frames": 0,
+      "entry_calls": 87,
+      "error_return_offsets": [
+        20163
+      ]
+    },
+    {
+      "case": "video-dependency-H264-observer-hardware-20261018",
+      "PID": 33325,
+      "result_SHA256": "9751a91954d6653b09a1a3fa5c11c81c171c3a770f460876eb0bff4dc4fc0324",
+      "dependency_SHA256": "8203bd36ce26a215e7fe4c31ceeeb5ade54204c29280655cd5121a257e990ee8",
+      "inputs_SHA256": "f50550aa11fca4f7f5e995488962088ffad9c3a74c743fd36ac4e8f2eb64b01d",
+      "variant": "H264-observer",
+      "mode": "hardware",
+      "choice": "native",
+      "native_queries": 2,
+      "create_status": -12906,
+      "frames": 0,
+      "entry_calls": 87,
+      "error_return_offsets": [
+        20163
+      ]
+    },
+    {
+      "case": "video-dependency-H264-both-hardware-20261018",
+      "PID": 33376,
+      "result_SHA256": "b4627855f59eae4cae93b28ef436247011e20b38683ed50926464a27252e806b",
+      "dependency_SHA256": "e7721bf88e0e87c29137486a993bc9e419e6480e9203c2f316bf1f7130f204d8",
+      "inputs_SHA256": "60f766baa653c646e931177f151f6a3f61b1995f4dc5d99a35c2b3b633ee47c3",
+      "variant": "H264-both",
+      "mode": "hardware",
+      "choice": "native",
+      "native_queries": 2,
+      "create_status": -12906,
+      "frames": 0,
+      "entry_calls": 87,
+      "error_return_offsets": [
+        20163
+      ]
+    },
+    {
+      "case": "video-dependency-MPEG2Video-observer-cpu-20261018",
+      "PID": 33465,
+      "result_SHA256": "96508c54010e6b7fef7d969810fc28494ec1c6c1ae65b4dbbfaebacff072e46b",
+      "dependency_SHA256": "bb03ca228dbfc0fbf7e031cb02c249fe60aa9783c5710e046d7e57905c88ac7f",
+      "inputs_SHA256": "77a076d4a3bf05e5cf50f8a3723b78adc1aa52b5407eb03479f9a3db57f02100",
+      "variant": "MPEG2Video-observer",
+      "mode": "cpu",
+      "choice": "native",
+      "native_queries": 0,
+      "create_status": 0,
+      "frames": 6,
+      "entry_calls": 85,
+      "error_return_offsets": []
+    },
+    {
+      "case": "video-dependency-MPEG2Video-observer-hardware-20261018",
+      "PID": 33512,
+      "result_SHA256": "eb82627b34a2a526af3bbb6451d7d7ede09770fa3dc2b0e10ebc113e2c14dd65",
+      "dependency_SHA256": "ad8a9048450cf13b3c8e9aa540329a849314c01141cb9af483b50cb865beeb07",
+      "inputs_SHA256": "77a076d4a3bf05e5cf50f8a3723b78adc1aa52b5407eb03479f9a3db57f02100",
+      "variant": "MPEG2Video-observer",
+      "mode": "hardware",
+      "choice": "native",
+      "native_queries": 0,
+      "create_status": -12906,
+      "frames": 0,
+      "entry_calls": 79,
+      "error_return_offsets": [
+        20163
+      ]
+    },
+    {
+      "case": "video-dependency-v2-inspect-20261018",
+      "PID": 33679,
+      "result_SHA256": "314f5834619d97a407fcc66c8520f88430845468bae125d69455f7a51a8a9a5b",
+      "dependency_SHA256": "27e1e3b4c9ace70d2f18f1126276e131fbf9bc35c4a3f33c0bb01e2905957284",
+      "inputs_SHA256": "fb77730e44257701d155b5ae7c39aba27c8c5349cc63f6e84ade0d4b5b183810",
+      "variant": "inspect",
+      "mode": "inspect",
+      "choice": "native",
+      "native_queries": 0
+    },
+    {
+      "case": "video-dependency-v2-H264-both-cpu-20261018",
+      "PID": 33719,
+      "result_SHA256": "b585af7ccefedc5d29e8a82cd67d2f58023b23a501ab5b68e08ea2a35fcd11de",
+      "dependency_SHA256": "3041888677fb7c1e2ee809f5330ff3d6722b71ef7846d96402a8e0161f1223a7",
+      "inputs_SHA256": "a2a0e9cd409f8ff3e82fb540dfee918c1732ad90f7fbee143daa7db1c869bd1f",
+      "variant": "H264-both",
+      "mode": "cpu",
+      "choice": "native",
+      "native_queries": 0,
+      "create_status": 0,
+      "frames": 6,
+      "entry_calls": 85,
+      "error_return_offsets": []
+    },
+    {
+      "case": "video-dependency-counterfactual-native-r1-20261018",
+      "PID": 33809,
+      "result_SHA256": "c6f85160ce32d30912860cdbddad11e943cabf7c59a0c0fb5478f93c6626bb4f",
+      "dependency_SHA256": "d1e35f80b917f6b50be5d0656ec1a728e604858356b61bdc7a930e038ffee10a",
+      "inputs_SHA256": "a2a0e9cd409f8ff3e82fb540dfee918c1732ad90f7fbee143daa7db1c869bd1f",
+      "variant": "H264-both",
+      "mode": "hardware",
+      "choice": "native",
+      "native_queries": 2,
+      "create_status": -12906,
+      "frames": 0,
+      "entry_calls": 87,
+      "error_return_offsets": [
+        20163
+      ],
+      "substitutions": 0
+    },
+    {
+      "case": "video-dependency-counterfactual-wrong-key-r1-20261018",
+      "PID": 33861,
+      "result_SHA256": "c64e1bfba053f25a305cfe6a739e0601846e9320f57b4b8a1fa887d1f6f24813",
+      "dependency_SHA256": "c320bbffd7e7bdac32e41037a044a4d8fb1634989ca4729fab438c954312595c",
+      "inputs_SHA256": "c8da8fa351eb9a824a7d6a6dc8bcfbdf55eb2743bba8d3e42a42293bf85549ca",
+      "variant": "H264-both",
+      "mode": "hardware",
+      "choice": "wrong-key",
+      "native_queries": 2,
+      "create_status": -12906,
+      "frames": 0,
+      "entry_calls": 87,
+      "error_return_offsets": [
+        20163
+      ],
+      "substitutions": 0
+    },
+    {
+      "case": "video-dependency-counterfactual-present-key-r1-20261018",
+      "PID": 33898,
+      "result_SHA256": "a2ad7233972ddcf6d51aaf9520ddb2d31657a490275b4150c4f5aa88103b61a9",
+      "dependency_SHA256": "bd9c1b421ddb0b7fc703293a304502ba371fd384cec13bb099b98f0e2f19a18c",
+      "inputs_SHA256": "62c55e7bc1f7af32efe72181449518ddfd3e2a9f806fb0cb8d91df10b729f7e7",
+      "variant": "H264-both",
+      "mode": "hardware",
+      "choice": "present-key",
+      "native_queries": 2,
+      "create_status": -12906,
+      "frames": 0,
+      "entry_calls": 178,
+      "error_return_offsets": [
+        6290187,
+        20163
+      ],
+      "substitutions": 1
+    },
+    {
+      "case": "video-dependency-counterfactual-native-r2-20261018",
+      "PID": 34082,
+      "result_SHA256": "961bca3e3051877342a76e93e7692290b60cdd10c64c76daeaa6b27087d2c456",
+      "dependency_SHA256": "82c5be2293b1d61fbf3e7b1ec7198d9966f66771e24fadbbb82cc98d09081084",
+      "inputs_SHA256": "a2a0e9cd409f8ff3e82fb540dfee918c1732ad90f7fbee143daa7db1c869bd1f",
+      "variant": "H264-both",
+      "mode": "hardware",
+      "choice": "native",
+      "native_queries": 2,
+      "create_status": -12906,
+      "frames": 0,
+      "entry_calls": 87,
+      "error_return_offsets": [
+        20163
+      ],
+      "substitutions": 0
+    },
+    {
+      "case": "video-dependency-counterfactual-wrong-key-r2-20261018",
+      "PID": 34092,
+      "result_SHA256": "eafeea252e6c7d84775dd4678ee641377533a0721e353bc3c0bef41cd9a56ad0",
+      "dependency_SHA256": "7d5adf9e70180fd293dbfcdb1536e27853c515f7b4e104467896de2c8a4c15a8",
+      "inputs_SHA256": "c8da8fa351eb9a824a7d6a6dc8bcfbdf55eb2743bba8d3e42a42293bf85549ca",
+      "variant": "H264-both",
+      "mode": "hardware",
+      "choice": "wrong-key",
+      "native_queries": 2,
+      "create_status": -12906,
+      "frames": 0,
+      "entry_calls": 87,
+      "error_return_offsets": [
+        20163
+      ],
+      "substitutions": 0
+    },
+    {
+      "case": "video-dependency-counterfactual-present-key-r2-20261018",
+      "PID": 34062,
+      "result_SHA256": "bb5a0d7167845d251e2f1d94e4123bbe4465a5030d166ea7025f6f768779912f",
+      "dependency_SHA256": "a90eb305eaafdff249e9e227223596a88fecfaf1226b01542c802044b0e29195",
+      "inputs_SHA256": "62c55e7bc1f7af32efe72181449518ddfd3e2a9f806fb0cb8d91df10b729f7e7",
+      "variant": "H264-both",
+      "mode": "hardware",
+      "choice": "present-key",
+      "native_queries": 2,
+      "create_status": -12906,
+      "frames": 0,
+      "entry_calls": 178,
+      "error_return_offsets": [
+        6290187,
+        20163
+      ],
+      "substitutions": 1
+    },
+    {
+      "case": "video-dependency-counterfactual-native-r3-20261018",
+      "PID": 34134,
+      "result_SHA256": "de03161a8aded983c8e9bdaca772740100cbb7b9c23dcfedf4bc9cfee28d5543",
+      "dependency_SHA256": "b5300ba72130fded209d98e083bfe8e61b63f5a922836c9696c462726d366a9d",
+      "inputs_SHA256": "a2a0e9cd409f8ff3e82fb540dfee918c1732ad90f7fbee143daa7db1c869bd1f",
+      "variant": "H264-both",
+      "mode": "hardware",
+      "choice": "native",
+      "native_queries": 2,
+      "create_status": -12906,
+      "frames": 0,
+      "entry_calls": 87,
+      "error_return_offsets": [
+        20163
+      ],
+      "substitutions": 0
+    },
+    {
+      "case": "video-dependency-counterfactual-wrong-key-r3-20261018",
+      "PID": 34103,
+      "result_SHA256": "7b95feefc3dba088e1ed79914d2bf5f187cca1f52b286bdd1e9cce1d9820ae80",
+      "dependency_SHA256": "20b1e01a162c94286bbe6f5e6ab8c196c986cb5b9d789246afe5235fee064de2",
+      "inputs_SHA256": "c8da8fa351eb9a824a7d6a6dc8bcfbdf55eb2743bba8d3e42a42293bf85549ca",
+      "variant": "H264-both",
+      "mode": "hardware",
+      "choice": "wrong-key",
+      "native_queries": 2,
+      "create_status": -12906,
+      "frames": 0,
+      "entry_calls": 87,
+      "error_return_offsets": [
+        20163
+      ],
+      "substitutions": 0
+    },
+    {
+      "case": "video-dependency-counterfactual-present-key-r3-20261018",
+      "PID": 34115,
+      "result_SHA256": "aceaba3568b8b5377b2ef5e5c164b37a6fbabbb978de60b7c2fc92cecaf50ac6",
+      "dependency_SHA256": "bd0808f32125eaa0b27b2d46e07c784749e13f973e647ebf14d64e4989d0ef1a",
+      "inputs_SHA256": "62c55e7bc1f7af32efe72181449518ddfd3e2a9f806fb0cb8d91df10b729f7e7",
+      "variant": "H264-both",
+      "mode": "hardware",
+      "choice": "present-key",
+      "native_queries": 2,
+      "create_status": -12906,
+      "frames": 0,
+      "entry_calls": 178,
+      "error_return_offsets": [
+        6290187,
+        20163
+      ],
+      "substitutions": 1
+    }
+  ]
+}

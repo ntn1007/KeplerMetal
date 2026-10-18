@@ -1,6 +1,6 @@
 # KeplerMetal
 
-Decoder-registry follow-up: 25 terminal processes qualify the entry observer and public-CF metadata capture; 42 software images match the existing CPU references exactly. Nine hardware-required requests still fail, including both public hardware flags. The missing IOGVA dependency is a clue with causality untested. [Evidence and reproduction](docs/VIDEO_REGISTRY.md).
+Native GPU dependency: a pinned public API confirms missing `IOGVACodec` on the GTX 880M. Three controlled presence substitutions change the GVA selection path, while native and wrong-key controls preserve the original path. All 13 new hardware creates still fail; 24 software images match the CPU exactly. [Evidence, scope and reproduction](docs/VIDEO_DEPENDENCIES.md).
 
 Open source research for modernizing the NVIDIA Kepler graphics stack on macOS.
 
