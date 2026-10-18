@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Observe the original public CFBundle resolver at one pinned native callsite.
 #import <Foundation/Foundation.h>
+#import <CoreVideo/CoreVideo.h>
 #include <CommonCrypto/CommonDigest.h>
 #include <mach-o/loader.h>
 #include <mach-o/dyld.h>
@@ -13,6 +14,7 @@
 #include <sched.h>
 #include <chrono>
 #include <unistd.h>
+#include <execinfo.h>
 #include "video_registry_observer.h"
 
 // Exact machine ABI recovered from the complete pinned173byte body and its
@@ -26,12 +28,18 @@ std::atomic<unsigned> inflight{0},count{0},dropped{0};
 thread_local bool inside=false;
 uintptr_t nativeSite=0;
 uintptr_t acceleratorSite=0;
+uintptr_t startResolveSite=0,preferenceSite=0;
 NSMutableArray *rows=nil,*controls=nil;
 NSMutableArray *factoryRows=nil,*factoryControls=nil;
+NSMutableArray *preferenceRows=nil,*preferenceControls=nil;
+std::atomic<unsigned> preferenceCount{0},startResolveCount{0};
+NSMutableArray *poolRows=nil,*poolControls=nil;
+std::atomic<unsigned> poolCount{0},providerResolveCount{0};
 NSMutableArray *policyRows=nil;
 CFDictionaryRef originalSupport=nullptr,replacementSupport=nullptr;
 unsigned policyChoice=0;
 std::atomic<uintptr_t> policySite{0};
+std::atomic<bool> GVAStagePins{false};
 std::atomic<unsigned> policyCount{0},policyChanges{0};
 CFStringRef currentBoard=nullptr;
 std::atomic<unsigned> factoryCount{0};
@@ -79,7 +87,12 @@ void *mock(CFBundleRef bundle,CFStringRef name){
 }
 void *resolve(CFBundleRef bundle,CFStringRef name,uintptr_t caller,bool test){
     int incoming=errno;
-    if(!test&&(!enabled.load(std::memory_order_seq_cst)||inside||(caller!=nativeSite&&caller!=acceleratorSite))){
+    uintptr_t querySite=policySite.load(std::memory_order_acquire),gvaBase=querySite?querySite-722786:0;
+    Dl_info callingImage{};
+    bool provider=!test&&gvaBase&&caller>=gvaBase&&dladdr((void*)caller,&callingImage)&&
+        (uintptr_t)callingImage.dli_fbase==gvaBase;
+    if(!test&&(!enabled.load(std::memory_order_seq_cst)||inside||
+        (caller!=nativeSite&&caller!=acceleratorSite&&caller!=startResolveSite&&!provider))){
         errno=incoming;return CFBundleGetFunctionPointerForName(bundle,name);
     }
     inflight.fetch_add(1,std::memory_order_seq_cst);
@@ -104,12 +117,24 @@ void *resolve(CFBundleRef bundle,CFStringRef name,uintptr_t caller,bool test){
                 [target[@"version"]isEqual:@"10.0.20"]&&[target[@"offset"]unsignedLongLongValue]==4577){
                 Dl_info image{};if(dladdr(result,&image)&&image.dli_fbase&&
                     [digest([NSData dataWithBytes:(const uint8_t*)image.dli_fbase+722087 length:1192])isEqual:
-                        @"365f8095e2d41076df73fec998db936f6518ce04b21ffdf62a9765fc646670be"])
+                        @"365f8095e2d41076df73fec998db936f6518ce04b21ffdf62a9765fc646670be"]&&
+                    [digest([NSData dataWithBytes:(const uint8_t*)image.dli_fbase+280889 length:105])isEqual:
+                        @"496574a0765c6a36c756d3c1ca750a670d358b5d8a9d559d1f51e590a7ca335f"]&&
+                    [digest([NSData dataWithBytes:(const uint8_t*)image.dli_fbase+260544 length:315])isEqual:
+                        @"27eddfec94f057db30d6dfd5a1578db71138bc238ad197c08893ba4ef1672bb4"]&&
+                    [digest([NSData dataWithBytes:(const uint8_t*)image.dli_fbase+262270 length:2452])isEqual:
+                        @"2ce45fe6c3ffc591e794e46655393ba2848540f55c891bfbf1f189e6d0e4c9e0"]){
+                    GVAStagePins.store(true,std::memory_order_release);
                     policySite.store((uintptr_t)image.dli_fbase+722786,std::memory_order_release);
+                }
             }
-            bool accelerator=caller==acceleratorSite;
-            NSDictionary *row=@{@"ordinal":@(index),@"caller_offset":@(accelerator?4294934:135582),
-                @"caller_module":accelerator?@"VideoToolbox":@"CoreMedia",@"arguments_are_public_CF_types":@(types),
+            bool accelerator=caller==acceleratorSite,start=caller==startResolveSite;
+            if(start)startResolveCount++;
+            if(provider)providerResolveCount++;
+            NSDictionary *row=@{@"ordinal":@(index),@"caller_offset":@(accelerator?4294934:(start?4298852:(provider?caller-gvaBase:135582))),
+                @"caller_module":provider?@"AppleGVA":((accelerator||start)?@"VideoToolbox":@"CoreMedia"),
+                @"caller_role":provider?@"GVA-provider-lookup":(accelerator?@"accelerator-interface":(start?@"native-start-parser-version":@"registry-loader")),
+                @"arguments_are_public_CF_types":@(types),
                 @"bundle_path":pathOK?@(path):@"",@"name":nameOK?@(symbol):@"",@"truncated":@(!pathOK||!nameOK),
                 @"result_present":@(result!=nullptr),@"result_identity":target?:@{},
                 @"result_in_executable_image":@(target!=nil),@"arguments_forwarded_unchanged":@YES,
@@ -124,7 +149,90 @@ __attribute__((noinline)) void *observed(CFBundleRef bundle,CFStringRef name){
 }
 __attribute__((used)) static const struct{const void *replacement,*original;} interpose
 __attribute__((section("__DATA,__interpose")))={(void*)&observed,(void*)&CFBundleGetFunctionPointerForName};
+thread_local CFStringRef preferenceMockArgs[4]{};
+thread_local CFPropertyListRef preferenceMockResult=nullptr;
+CFPropertyListRef mockPreference(CFStringRef key,CFStringRef application,CFStringRef user,CFStringRef host){
+    mockValid&=key==preferenceMockArgs[0]&&application==preferenceMockArgs[1]&&
+        user==preferenceMockArgs[2]&&host==preferenceMockArgs[3]&&errno==mockIncoming;
+    errno=mockOutgoing;return preferenceMockResult;
+}
+CFPropertyListRef copyPreference(CFStringRef key,CFStringRef application,CFStringRef user,CFStringRef host,
+                                uintptr_t caller,bool test){
+    int incoming=errno;
+    bool capture=!test&&enabled.load(std::memory_order_seq_cst)&&!inside&&caller==preferenceSite;
+    if(capture){inflight++;if(!enabled.load()){inflight--;capture=false;}}
+    errno=incoming;
+    CFPropertyListRef result=test?mockPreference(key,application,user,host):CFPreferencesCopyValue(key,application,user,host);
+    int saved=errno;
+    if(capture){inside=true;@autoreleasepool{
+        unsigned index=preferenceCount++;
+        if(index<16){
+            bool keyOK=key&&CFGetTypeID(key)==CFStringGetTypeID()&&CFEqual(key,CFSTR("H264GVAPixelFormat"));
+            bool appOK=application&&CFGetTypeID(application)==CFStringGetTypeID()&&CFEqual(application,CFSTR("com.apple.coremedia"));
+            NSDictionary *row=@{@"ordinal":@(index),@"caller_offset":@4299460,
+                @"key_is_H264GVAPixelFormat":@(keyOK),@"application_is_coremedia":@(appOK),
+                @"result_present":@(result!=nullptr),@"arguments_forwarded_unchanged":@YES,
+                @"returned_pointer_unchanged":@YES,@"copy_ownership_unchanged":@YES,
+                @"user_and_host_values_not_collected":@YES};
+            std::lock_guard<std::mutex> lock(mutex);[preferenceRows addObject:row];
+        }else dropped++;
+    }inside=false;inflight--;}
+    errno=saved;return result;
+}
+__attribute__((noinline)) CFPropertyListRef observedPreference(CFStringRef key,CFStringRef application,
+                                                              CFStringRef user,CFStringRef host){
+    return copyPreference(key,application,user,host,(uintptr_t)__builtin_return_address(0),false);
+}
+__attribute__((used)) static const struct{const void *replacement,*original;} preferenceInterpose
+__attribute__((section("__DATA,__interpose")))={(void*)&observedPreference,(void*)&CFPreferencesCopyValue};
+thread_local CFAllocatorRef poolAllocator=nullptr;
+thread_local CVPixelBufferPoolRef mockPool=nullptr;
+thread_local CVPixelBufferRef *poolOutput=nullptr,poolValue=nullptr;
+thread_local CVReturn poolStatus=0;
+CVReturn mockPoolCreate(CFAllocatorRef allocator,CVPixelBufferPoolRef pool,CVPixelBufferRef *output){
+    mockValid&=allocator==poolAllocator&&pool==mockPool&&output==poolOutput&&errno==mockIncoming;
+    *output=poolValue;errno=mockOutgoing;return poolStatus;
+}
+CVReturn poolCreate(CFAllocatorRef allocator,CVPixelBufferPoolRef pool,CVPixelBufferRef *output,
+                    uintptr_t caller,bool test){
+    int incoming=errno;uintptr_t site=policySite.load(std::memory_order_acquire);
+    bool capture=!test&&enabled.load(std::memory_order_seq_cst)&&!inside&&site&&
+        caller==site-722786+263397;
+    if(capture){inflight++;if(!enabled.load()){inflight--;capture=false;}}
+    errno=incoming;
+    CVReturn status=test?mockPoolCreate(allocator,pool,output):CVPixelBufferPoolCreatePixelBuffer(allocator,pool,output);
+    int saved=errno;
+    if(capture){inside=true;@autoreleasepool{
+        unsigned index=poolCount++;
+        if(index<16){
+            // A failure need not initialize the out slot. Do not read it then.
+            bool present=status==kCVReturnSuccess&&output&&*output;
+            NSDictionary *row=@{@"ordinal":@(index),@"caller_offset":@263397,@"status_int32":@(status),
+                @"output_observed_after_success":@(status==kCVReturnSuccess&&output!=nullptr),
+                @"pixel_buffer_present":@(present),@"arguments_forwarded_unchanged":@YES,
+                @"status_and_output_unchanged":@YES,@"resource_contents_not_read":@YES,
+                @"ownership_unchanged":@YES};
+            std::lock_guard<std::mutex> lock(mutex);[poolRows addObject:row];
+        }else dropped++;
+    }inside=false;inflight--;}
+    errno=saved;return status;
+}
+__attribute__((noinline)) CVReturn observedPoolCreate(CFAllocatorRef allocator,CVPixelBufferPoolRef pool,CVPixelBufferRef *output){
+    return poolCreate(allocator,pool,output,(uintptr_t)__builtin_return_address(0),false);
+}
+__attribute__((used)) static const struct{const void *replacement,*original;} poolInterpose
+__attribute__((section("__DATA,__interpose")))={(void*)&observedPoolCreate,(void*)&CVPixelBufferPoolCreatePixelBuffer};
 void ownMarker(){}
+NSArray *publicStack(){
+    void *frames[24]{};int count=backtrace(frames,24);NSMutableArray *result=[NSMutableArray array];
+    for(int i=0;i<count;i++){
+        NSDictionary *image=identity(frames[i]);if(!image)continue;
+        [result addObject:@{@"frame":@(i),@"module":[image[@"path"]lastPathComponent],
+            @"UUID":image[@"UUID"],@"return_offset":image[@"offset"],
+            @"observed_by_public_backtrace":@YES}];
+    }
+    return result;
+}
 __attribute__((noinline)) const void *observedDictionary(CFDictionaryRef dictionary,const void *key){
     int incoming=errno;uintptr_t caller=(uintptr_t)__builtin_return_address(0);
     errno=incoming;const void *value=CFDictionaryGetValue(dictionary,key);int saved=errno;
@@ -148,7 +256,7 @@ __attribute__((noinline)) const void *observedDictionary(CFDictionaryRef diction
                 @"return_value_changed":@(change),@"returned_board_present":@(currentPresent),
                 @"original_dictionary_modified":@NO,@"borrowed_return_contract":@YES,
                 @"replacement_has_process_lifetime_owner":@(replacementSupport!=nullptr),
-                @"returned_original_pointer":@(value==before)};
+                @"returned_original_pointer":@(value==before),@"stack_frames":publicStack()};
             std::lock_guard<std::mutex> lock(mutex);[policyRows addObject:row];
         }else dropped++;
     }
@@ -248,6 +356,28 @@ bool calibrate(){
             @"factory_present":@(value!=nullptr),@"input_errno":@(mockIncoming),@"output_errno":@(actual),
             @"original_private_function_called":@NO}];
     }
+    for(unsigned i=0;i<32;i++){
+        NSString *key=[NSString stringWithFormat:@"KeplerMetalPreferenceControl%u",i];
+        preferenceMockArgs[0]=(CFStringRef)key;preferenceMockArgs[1]=CFSTR("KeplerMetalMockApplication");
+        preferenceMockArgs[2]=kCFPreferencesCurrentUser;preferenceMockArgs[3]=kCFPreferencesAnyHost;
+        preferenceMockResult=i%2?CFSTR("mock-value"):nullptr;
+        mockIncoming=900+int(i);mockOutgoing=1000+int(i);mockValid=true;errno=mockIncoming;
+        CFPropertyListRef value=copyPreference(preferenceMockArgs[0],preferenceMockArgs[1],
+            preferenceMockArgs[2],preferenceMockArgs[3],0,true);int actual=errno;
+        bool correct=mockValid&&value==preferenceMockResult&&actual==mockOutgoing;ok&=correct;
+        [preferenceControls addObject:@{@"trial":@(i),@"correct":@(correct),@"result_present":@(value!=nullptr),
+            @"input_errno":@(mockIncoming),@"output_errno":@(actual),@"native_preference_called":@NO}];
+    }
+    for(unsigned i=0;i<32;i++){
+        CVPixelBufferRef value=nullptr;poolAllocator=kCFAllocatorDefault;mockPool=(CVPixelBufferPoolRef)object;
+        poolOutput=&value;poolValue=i%3?(CVPixelBufferRef)object:nullptr;poolStatus=i%2?-6680:0;
+        mockIncoming=1100+int(i);mockOutgoing=1200+int(i);mockValid=true;errno=mockIncoming;
+        CVReturn status=poolCreate(poolAllocator,mockPool,&value,0,true);int actual=errno;
+        bool correct=mockValid&&status==poolStatus&&value==poolValue&&actual==mockOutgoing;ok&=correct;
+        [poolControls addObject:@{@"trial":@(i),@"correct":@(correct),@"status":@(status),
+            @"output_present":@(value!=nullptr),@"input_errno":@(mockIncoming),@"output_errno":@(actual),
+            @"native_pool_create_called":@NO}];
+    }
     CFRelease(object);mockBundle=nullptr;mockName=nullptr;factoryItem=nullptr;factoryOutput=nullptr;return ok;
 }
 }
@@ -284,24 +414,35 @@ extern "C" bool KPVideoFactoryBegin(NSString *assets){
         @"6b98a81482d8cce93ec6e651d4828edf574af91e6468b8436c484952da35d5ee"])return false;
     if(![digest([NSData dataWithBytes:(void*)(vt+4294856) length:523])isEqual:
         @"790c12ecc76f4959aa7db7047075e763e82d58819b54dc86c4ecc2d08fd002df"])return false;
+    if(![digest([NSData dataWithBytes:(void*)(vt+4298704) length:2061])isEqual:
+        @"f3cb75d0d4d4c97e2ca66ed815bd0fa636d96f6c955ba98d0fe8be39860a7a60"])return false;
     factoryCaller=vt+6289489;
     acceleratorSite=vt+4294934;
+    startResolveSite=vt+4298852;preferenceSite=vt+4299460;
     if(!preparePolicy(assets))return false;
     rows=[[NSMutableArray alloc]init];controls=[[NSMutableArray alloc]init];policyRows=[[NSMutableArray alloc]init];
-    factoryRows=[[NSMutableArray alloc]init];factoryControls=[[NSMutableArray alloc]init];valid=calibrate();
+    factoryRows=[[NSMutableArray alloc]init];factoryControls=[[NSMutableArray alloc]init];
+    preferenceRows=[[NSMutableArray alloc]init];preferenceControls=[[NSMutableArray alloc]init];
+    poolRows=[[NSMutableArray alloc]init];poolControls=[[NSMutableArray alloc]init];valid=calibrate();
     enabled.store(valid,std::memory_order_seq_cst);return valid;
 }
 extern "C" NSDictionary *KPVideoFactorySnapshot(){
     enabled.store(false,std::memory_order_seq_cst);
     auto end=std::chrono::steady_clock::now()+std::chrono::seconds(1);
     while(inflight.load()&&std::chrono::steady_clock::now()<end)sched_yield();
-    bool drained=inflight.load()==0;NSArray *events=@[],*factories=@[],*policy=@[];
-    if(drained){std::lock_guard<std::mutex> lock(mutex);events=[NSArray arrayWithArray:rows];factories=[NSArray arrayWithArray:factoryRows];policy=[NSArray arrayWithArray:policyRows];}
+    bool drained=inflight.load()==0;NSArray *events=@[],*factories=@[],*policy=@[],*preferences=@[],*pools=@[];
+    if(drained){std::lock_guard<std::mutex> lock(mutex);events=[NSArray arrayWithArray:rows];factories=[NSArray arrayWithArray:factoryRows];policy=[NSArray arrayWithArray:policyRows];preferences=[NSArray arrayWithArray:preferenceRows];pools=[NSArray arrayWithArray:poolRows];}
     return @{@"status":valid&&drained&&!dropped.load()?@"COMPLETE":@"INCOMPLETE",@"events":events,
         @"calls":@(count.load()),@"dropped":@(dropped.load()),@"recorders_drained":@(drained),
         @"controls":controls?:@[],@"synthetic_controls_valid":@(valid),@"synthetic_control_calls":@32,
         @"factory_events":factories,@"factory_calls":@(factoryCount.load()),
         @"factory_controls":factoryControls?:@[],@"factory_control_calls":@32,
+        @"preference_events":preferences,@"preference_calls":@(preferenceCount.load()),
+        @"preference_controls":preferenceControls?:@[],@"preference_control_calls":@32,
+        @"pool_events":pools,@"pool_calls":@(poolCount.load()),@"pool_controls":poolControls?:@[],
+        @"pool_control_calls":@32,@"provider_resolver_calls":@(providerResolveCount.load()),
+        @"start_resolver_calls":@(startResolveCount.load()),@"native_start_method_replaced":@NO,
+        @"native_interface_tables_modified":@NO,@"GVA_stage_code_pins_valid":@(GVAStagePins.load()),
         @"policy_events":policy,@"policy_calls":@(policyCount.load()),@"policy_substitutions":@(policyChanges.load()),
         @"policy_choice":policyChoice==2?@"current-board":(policyChoice==1?@"wrong-board":@"observe"),
         @"policy_system_file_modified":@NO,

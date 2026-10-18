@@ -1,5 +1,7 @@
 # KeplerMetal
 
+Native decoder start is now observed through unchanged public calls and policy-call stacks. Three final cases create the first CV pixel buffer successfully, then still refuse decoder creation at-12913. Seventeen new terminal hosts include18exact software images; zero hardware images are claimed. [Start witnesses, context boundary and source](docs/VIDEO_NATIVE_START.md).
+
 The native video factory now returns a verified non-null implementation. A same-executable AppleGVA board-policy experiment changes the hardware refusal from-12906 to-12913 in three cases; four negative controls preserve-12906. There are still zero hardware images. The19-host cohort includes30 exact software images and explicitly preserves20 nonzero internal FinF/Inva replies. [Factory, policy and next start-method boundary](docs/VIDEO_FACTORY_POLICY.md).
 
 Native video transport now executes the pinned decoder callback inside our test process. Twenty-four software images through that transport match the CPU exactly; the full cohort has48images. The local hardware case still returns-12906, but now exposes the actual AppleGVA10.0.20 factory path. [Sources, preserved failures and next driver boundary](docs/VIDEO_LOCAL_SERVICE.md).

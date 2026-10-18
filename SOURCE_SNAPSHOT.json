@@ -7213,9 +7213,9 @@
     {
       "path": "bridge/tools/video_factory_resolver.mm",
       "source_path": "bridge/tools/video_factory_resolver.mm",
-      "source_SHA256": "209fcdcb4ab8493d2e55f5c5a98f5008add3f31edfb325e49798a6f07aa3b743",
-      "published_SHA256": "209fcdcb4ab8493d2e55f5c5a98f5008add3f31edfb325e49798a6f07aa3b743",
-      "bytes": 20627,
+      "source_SHA256": "c436f565678eb98915d02520e304d2d622ce0d6bde387b522ecf962452bfe02b",
+      "published_SHA256": "c436f565678eb98915d02520e304d2d622ce0d6bde387b522ecf962452bfe02b",
+      "bytes": 30488,
       "modified_for_publication": false
     },
     {
@@ -7229,9 +7229,9 @@
     {
       "path": "bridge/tools/native_video_factory.py",
       "source_path": "bridge/tools/native_video_factory.py",
-      "source_SHA256": "cda2f2230111f862421c781129399300e095ea7c87607728fa31d137d0cf2672",
-      "published_SHA256": "cda2f2230111f862421c781129399300e095ea7c87607728fa31d137d0cf2672",
-      "bytes": 8741,
+      "source_SHA256": "9a16a6df79affb20bd5e70dd215aa754d1197f10851ac1d0fa53b11741d2d435",
+      "published_SHA256": "9a16a6df79affb20bd5e70dd215aa754d1197f10851ac1d0fa53b11741d2d435",
+      "bytes": 8768,
       "modified_for_publication": false
     },
     {
@@ -7289,6 +7289,46 @@
       "published_SHA256": "06656a4b9f9208ce0acddd4faef590b40ccc85265346bc7be07c270f4ed48bae",
       "bytes": 3314,
       "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/audit_video_start.py",
+      "source_path": "bridge/tools/audit_video_start.py",
+      "source_SHA256": "64772d4ecabd183d3c7eed50940662c6bc688372960d91cd45cb35a90a7633ae",
+      "published_SHA256": "64772d4ecabd183d3c7eed50940662c6bc688372960d91cd45cb35a90a7633ae",
+      "bytes": 13288,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/map_video_stub_targets.py",
+      "source_path": "bridge/tools/map_video_stub_targets.py",
+      "source_SHA256": "1e9daecca9ee44ce2ae2b5516410a5a0dcea31f145f093cfec05102cf768bfd4",
+      "published_SHA256": "1e9daecca9ee44ce2ae2b5516410a5a0dcea31f145f093cfec05102cf768bfd4",
+      "bytes": 5673,
+      "modified_for_publication": false
+    },
+    {
+      "path": "patches/video-start-v8-to-v5.patch",
+      "source_path": "patches/video-start-v8-to-v5.patch",
+      "source_SHA256": "8ee7cdfb779e0200d5217eb579ca58e35b812468838f6ceebb851474bbebf9a2",
+      "published_SHA256": "8ee7cdfb779e0200d5217eb579ca58e35b812468838f6ceebb851474bbebf9a2",
+      "bytes": 17577,
+      "modified_for_publication": false
+    },
+    {
+      "path": "patches/video-start-v8-to-v6.patch",
+      "source_path": "patches/video-start-v8-to-v6.patch",
+      "source_SHA256": "d860a7ffc80c5ecad0af61a3bb93366e0853420b45b5fe1a5353983d92100aa5",
+      "published_SHA256": "d860a7ffc80c5ecad0af61a3bb93366e0853420b45b5fe1a5353983d92100aa5",
+      "bytes": 13457,
+      "modified_for_publication": false
+    },
+    {
+      "path": "patches/video-start-v8-to-v7.patch",
+      "source_path": "patches/video-start-v8-to-v7.patch",
+      "source_SHA256": "046f9a8f0a092e0c0d6e8df79a7c6d21cf001107f750d7bd879539390cab9bcd",
+      "published_SHA256": "046f9a8f0a092e0c0d6e8df79a7c6d21cf001107f750d7bd879539390cab9bcd",
+      "bytes": 10340,
+      "modified_for_publication": false
     }
   ],
   "excluded_source_tools": [
@@ -7330,30 +7370,24 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "f798c3e1196d58933ba5f622f275b54fb2ab3647185e273bbf2784099ae795c2",
-  "previous_public_commit": "6b7c7b30bd36b89dc7bbef1b4946a9f01e62c71f",
+  "previous_source_snapshot_SHA256": "15db6a7b8c0aca823300f97316ccdd5902af7867aaf90d8b6f66445f62828706",
+  "previous_public_commit": "7d3d044318223012d69fc955d0a8b66f85b9f390",
   "update": {
     "date": "2026-10-18",
-    "scope": "Native factory/result and causal AppleGVA board-policy experiment; original cache-import parser correction",
+    "scope": "Native decoder start witnesses, public policy backtrace and firstCVpixelbuffer; no hardware images",
     "source_files_updated": [
       "bridge/tools/video_factory_resolver.mm",
-      "bridge/tools/video_factory_resolver_main.mm",
       "bridge/tools/native_video_factory.py",
-      "bridge/tools/audit_video_factory.py",
-      "bridge/tools/analyze_video_dependency.py",
-      "bridge/tools/inspect_video_cache.py",
-      "bridge/tools/native_video_local_service.py",
-      "patches/video-factory-v5-to-v1.patch",
-      "patches/video-factory-v5-to-v2.patch",
-      "patches/video-factory-v5-to-v3.patch",
-      "patches/video-factory-v5-to-v4.patch",
-      "patches/video-factory-parent-runner-before-policy.patch",
-      "tests/test_video_cache_symbols.py"
+      "bridge/tools/audit_video_start.py",
+      "bridge/tools/map_video_stub_targets.py",
+      "patches/video-start-v8-to-v5.patch",
+      "patches/video-start-v8-to-v6.patch",
+      "patches/video-start-v8-to-v7.patch"
     ],
-    "native_hosts": 19,
-    "software_images": 30,
+    "native_hosts": 17,
+    "software_images": 18,
     "hardware_images": 0,
-    "policy_same_binary_cases": 7,
+    "mock_controls": 1952,
     "full_objective_complete": false
   }
 }

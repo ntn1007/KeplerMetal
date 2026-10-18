@@ -1,5 +1,7 @@
 # Build from source
 
+The unchanged public-API start/CV observers and bounded cache-target mapper are documented in [VIDEO_NATIVE_START.md](VIDEO_NATIVE_START.md). V8 source can reconstruct V5/V6/V7 using original-text patches; reconstruct V5 before applying older V5-to-V1/V2/V3/V4 patches. The new17-host auditor rechecks frozen results and performs no native execution.
+
 The factory/policy observer reuses the qualified native transport without changing the common runtime. [VIDEO_FACTORY_POLICY.md](VIDEO_FACTORY_POLICY.md) gives inspect/software/original-policy/wrong-board controls before the current-board experiment, strict resident profiles, source-version reconstruction and the CPU-only historical auditor. Hardware creation remains refused; the changed status is not decoding qualification.
 
 The anonymous native video experiment and independent public-XPC controls have separate, source-only laboratory builders. [VIDEO_LOCAL_SERVICE.md](VIDEO_LOCAL_SERVICE.md) gives strict profiles, fresh-directory commands, archived-source reconstruction and the four preserved qualification failures. The completed hardware presence test still produces zero images.

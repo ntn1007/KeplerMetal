@@ -125,6 +125,10 @@ incomplete.
 
 ## Reproduction in an existing laboratory tree
 
+The later [native-start observer](VIDEO_NATIVE_START.md) is the current source.
+First apply its V8-to-V5 patch when reconstructing this milestone's original
+observer/builder text; then apply the earlier V5-to-V1/V2/V3/V4 patches if needed.
+
 These builders require the frozen prerequisites from the previous milestones;
 they are not a clean-checkout binary downloader. Obtain proprietary components
 using the publisher's tools and terms as described in [dependencies](DEPENDENCIES.md).

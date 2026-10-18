@@ -84,7 +84,7 @@ def build(args):
         linked.extend([str(out / 'main.o'), str(out / 'owned-main.o')] if value == str(parent / 'main.o') else [value])
     commands = [
         ('resolver-library', common + ['-dynamiclib', out / 'video_factory_resolver.mm', entry,
-            '-framework', 'Foundation', '-framework', 'CoreMedia', '-Wl,-undefined,dynamic_lookup',
+            '-framework', 'Foundation', '-framework', 'CoreMedia', '-framework', 'CoreVideo', '-Wl,-undefined,dynamic_lookup',
             '-install_name', library, '-o', library]),
         ('sign-resolver', ['codesign', '--force', '--sign', '-', library]),
         ('owned-main-renamed', common + ['-Dmain=KPOwnedQualifiedMain', '-c', out / 'owned-main.mm', '-o', out / 'owned-main.o']),
