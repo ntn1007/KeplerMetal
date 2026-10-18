@@ -1,5 +1,7 @@
 # KeplerMetal
 
+An optional SDK batch now snapshots native records and honors completion boundaries, including source-slot `setBarrier`. Four-entry batches interleave correctly; split batches preserve the requested atomic ordering. The laboratory qualification covers 292 correct dispatches, with a separate public-artifact qualification. [API, source-only commands and limits](docs/NATIVE_RESIDENT_BATCH.md). The human administrator port experiment also passed open/close; hardware video remains unproved. [Access evidence](docs/VIDEO_ADMIN_ACCESS.md).
+
 Two native NVIDIA-compiled kernels now have interleaved lifetimes on the GTX 880M with independent descriptor/constant state. The bounded laboratory prototype passed 34/34 candidate pairs; a separate rebuild from public sources passed 16/16 pairs and 62 correct dispatches including its serial controls. The ordinary Metal encoder remains serial; no performance gain is claimed. [Sources, controls, evidence and reproduction](docs/NATIVE_RESIDENT_OVERLAP.md).
 
 Native decoder start is now observed through unchanged public calls and policy-call stacks. Three final cases create the first CV pixel buffer successfully, then still refuse decoder creation at-12913. Seventeen new terminal hosts include18exact software images; zero hardware images are claimed. [Start witnesses, context boundary and source](docs/VIDEO_NATIVE_START.md).

@@ -1,5 +1,7 @@
 # Build from source
 
+The optional `KeplerResidentBatch` ARC object is compiled separately from the original seven-object core. [NATIVE_RESIDENT_BATCH.md](NATIVE_RESIDENT_BATCH.md) provides the standalone text build, strict native profile, preparation/serial/segmented/parallel prerequisite chain and independent CPU auditor. Its GPU runs require the same existing common host reservation; the administrator video experiment is separate.
+
 The bounded two-kernel resident-overlap client has a standalone text-only build, signed GPU runner and portable verifier. [NATIVE_RESIDENT_OVERLAP.md](NATIVE_RESIDENT_OVERLAP.md) gives the complete seven-object rebuild, separate serial qualification, guarded candidate run and common host reservation. It changes only its own validated uncommitted stream; it does not implement the ordinary concurrent encoder API or claim a speedup.
 
 The unchanged public-API start/CV observers and bounded cache-target mapper are documented in [VIDEO_NATIVE_START.md](VIDEO_NATIVE_START.md). V8 source can reconstruct V5/V6/V7 using original-text patches; reconstruct V5 before applying older V5-to-V1/V2/V3/V4 patches. The new17-host auditor rechecks frozen results and performs no native execution.

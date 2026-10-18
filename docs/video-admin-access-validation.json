@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "classification": "progress",
+  "at": "2026-10-18T17:52:10.449366+00:00",
+  "target_registry_ID": 4294968459,
+  "PCI": "10de:1198",
+  "open_status": 0,
+  "close_status": 0,
+  "open_attempts": 1,
+  "close_attempts": 1,
+  "external_method_calls": 0,
+  "host_GPU_commands_submitted": 0,
+  "hardware_video_frames": 0,
+  "hardware_video_execution_proved": false,
+  "normal_exit": true,
+  "lease_terminal": true,
+  "leaf_SHA256": "a8425158926f9a52a0e0720955c9cfd7c9d573e2223d59591991e05edd462705",
+  "signed_wrapper_SHA256": "b6c94b3a59913afbe35aaaba0160abbfbe811e01638cc55e990ee00679c7fc7c",
+  "input_manifest_SHA256": "796ea13bb1979b62b09e9b40beb9df88b399477d911238842e2a3542c3a0b0ec",
+  "execution_manifest_SHA256": "bb6b1d71b8e6c4c2f272fb3d3a215da5f5d2f41f22b334772e87e9c2118112d0",
+  "results_SHA256": "3090de81e77a6642bcd0582c719736e923b533bc41bfb8dc827d3476fbbb889d",
+  "observations_SHA256": "7ee5288779a15a9aa60d8ee33a9e7ee4e66ca190618c3304939c544858272f9d",
+  "driver_internal_hardware_effects_traced": false,
+  "new_privileged_action_by_agent": false,
+  "system_modified": false,
+  "global_objective_complete": false,
+  "next_action": "Inspect the supported native RM external-method packet contract; successful port open does not establish decoder init or a method ABI",
+  "source_SHA256": {
+    "video_rm_privileged_leaf.mm": "98fc047b5fc1b405939d14e37fcd27b10bcac7185263d89efd96f7a426c828ab",
+    "video_rm_privileged_wrapper.cpp": "118d538cd06622466ccd23ea458c18690ffe4e869fbcd6be7c212eb29aa88917",
+    "video_rm_access.mm": "740cf8a6c93e41f65f8e1523ab111991dbe98caa0cdb1d3915844d1c8701bdc5",
+    "builder.py": "429d36b860c7cc7a333e088af3294aa18f10bbf7cfa067e569c296b2b36cc717"
+  },
+  "source_base_commit": "82b3120464959a375b0ec096ecbb478ec02013a0",
+  "historical_unprivileged_result": {
+    "status": "OPEN_REFUSED",
+    "open_status": -536870201,
+    "user_client_type": "0x80000000",
+    "result_SHA256": "b863cbe1e0e5eb8d78570e0931633243d91114b87a7ffe71c6ebb6a0b7ab9b97"
+  },
+  "scope": "Human-executed local bounded port experiment; no new privileged action or GPU video execution",
+  "publication": "Sanitized local audit metadata only; generated personal host profiles and binary captures excluded"
+}

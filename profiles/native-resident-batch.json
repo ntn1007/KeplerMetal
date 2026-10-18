@@ -1,0 +1,96 @@
+{
+  "schema": 2,
+  "library_SHA256": "479a0f85935823395174b25c0ead11482796389a5c8116cc7e5929d84ec0e7ed",
+  "functions": [
+    {
+      "name": "observe_a",
+      "buffers": [
+        {
+          "name": "sync",
+          "index": 0,
+          "data_size": 4,
+          "alignment": 4,
+          "data_type": 1,
+          "access": 1,
+          "minimum_bytes": 12,
+          "per_invocation_bytes": 0
+        },
+        {
+          "name": "out",
+          "index": 1,
+          "data_size": 4,
+          "alignment": 4,
+          "data_type": 33,
+          "access": 1,
+          "minimum_bytes": 32,
+          "per_invocation_bytes": 32
+        },
+        {
+          "name": "cfg",
+          "index": 2,
+          "data_size": 16,
+          "alignment": 256,
+          "data_type": 1,
+          "access": 0,
+          "minimum_bytes": 512,
+          "per_invocation_bytes": 0
+        }
+      ],
+      "constant_buffer_index": 2,
+      "static_threadgroup_bytes": 0,
+      "max_local": 1,
+      "max_invocations": 1,
+      "qmd_register_count": 17,
+      "allow_multidimensional": false,
+      "native_literal_bank_0": {
+        "bytes": 256,
+        "address_relation": "native_code_end_aligned_256"
+      }
+    },
+    {
+      "name": "observe_b",
+      "buffers": [
+        {
+          "name": "sync",
+          "index": 0,
+          "data_size": 4,
+          "alignment": 4,
+          "data_type": 1,
+          "access": 1,
+          "minimum_bytes": 12,
+          "per_invocation_bytes": 0
+        },
+        {
+          "name": "out",
+          "index": 1,
+          "data_size": 4,
+          "alignment": 4,
+          "data_type": 33,
+          "access": 1,
+          "minimum_bytes": 32,
+          "per_invocation_bytes": 32
+        },
+        {
+          "name": "cfg",
+          "index": 2,
+          "data_size": 16,
+          "alignment": 256,
+          "data_type": 1,
+          "access": 0,
+          "minimum_bytes": 512,
+          "per_invocation_bytes": 0
+        }
+      ],
+      "constant_buffer_index": 2,
+      "static_threadgroup_bytes": 0,
+      "max_local": 1,
+      "max_invocations": 1,
+      "qmd_register_count": 17,
+      "allow_multidimensional": false,
+      "native_literal_bank_0": {
+        "bytes": 256,
+        "address_relation": "native_code_end_aligned_256"
+      }
+    }
+  ]
+}

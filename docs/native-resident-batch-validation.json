@@ -1,0 +1,416 @@
+{
+  "schema": 1,
+  "milestone": "Explicit resident batch SDK with source-slot and explicit completion boundaries",
+  "date": "2026-10-18",
+  "source_base_commit": "82b3120464959a375b0ec096ecbb478ec02013a0",
+  "device": "NVIDIA GeForce GTX 880M GK104/SM30 8GiB",
+  "platform": {
+    "macOS": "26.7.1",
+    "build": "25G241",
+    "SDK": "26.2",
+    "clang": "17.0.0 (clang-1700.6.4.2)",
+    "architecture": "x86_64"
+  },
+  "source_SHA256": {
+    "bridge/src/KeplerResidentBatch.h": "4eaff2992ab5b1f62df4d21d72257df9cc4c7be5852d690fa93168af09e88c12",
+    "bridge/src/KeplerResidentBatch.mm": "e8fff94ba98d3bedba425617121e7790c6b0f17cd16ebfde8ea4b10fa0f7a1f5",
+    "examples/native_resident_batch_probe.mm": "b1454a32f7b87c0eea90fc8845945840a3dc79e3870d76b9e8abde4413e9535f",
+    "profiles/native-resident-batch.json": "2e195e3ad4e9b8a9d68b783d856bcaf3805367061f79107ca615812f0fda6f54",
+    "tools/native_resident_batch.py": "555fa7f63b98bffb47b90deee6eb5a94bfb0f33ce5f9d034b3db1130571cc603",
+    "tools/resident_batch_contract.py": "5d98b0cd882b31c9141691c1e28515b70932d369c93350140679d98d86425205",
+    "tests/test_resident_batch_contract.py": "597917ed673edc4fe3b2c3a4a2c9cbd86b32f3279fd5f89673fb0d79fcb0f312"
+  },
+  "pins": {
+    "native_shader_SHA256": "479a0f85935823395174b25c0ead11482796389a5c8116cc7e5929d84ec0e7ed",
+    "manifest_SHA256": "2e195e3ad4e9b8a9d68b783d856bcaf3805367061f79107ca615812f0fda6f54",
+    "client_executable_SHA256": "8198ca5d1faf2b474c1cbbaf8728377103ba9138ec8658fb4e353e74ca6fdfe0",
+    "optional_object_SHA256": "d638e791baeadc544a5bc5b1b160f00f49c05373ee36f137e76a0c3fcb743bf3",
+    "laboratory_core_SHA256": "5636b0d0d158fc985bf9b1df5fd0e16b91909a9a6f48423c175272b7fe4ddb67",
+    "public_core_SHA256": "fb0b59a0fa131985f89633c21a4bacf39854fc2b6f7741d6559f6d499ec29f84",
+    "public_inputs_SHA256": "c0a97767c322eb05a3da607b6afdc101887dc3d2ca40ed6a84501ed4925c57b8",
+    "GeForceMTLDriver_SHA256": "2b89839c425d95934f5e01f16c8683fe53432df410292ec8e554b21c98d6c054"
+  },
+  "profile": {
+    "functions": [
+      "observe_a",
+      "observe_b"
+    ],
+    "entries_max": 4,
+    "groups_per_entry": 1,
+    "threads_per_group": 1,
+    "native_registers": 17,
+    "literal_bank_bytes": 256,
+    "code_bytes_per_function": 2304,
+    "descriptor_allocation_bytes": 4096,
+    "constant_allocation_bytes": 65536,
+    "config_poll_limit": 4096,
+    "config_rounds": 128,
+    "atomic_footprint_bytes": 12,
+    "output_footprint_bytes": 32,
+    "config_footprint_bytes": 16
+  },
+  "laboratory": {
+    "status": "PASS",
+    "compute_processes": 5,
+    "preparation_processes": 1,
+    "main_trials": 108,
+    "totals": {
+      "dispatches": 292,
+      "arithmetic_results": 292,
+      "raw_words": 82944,
+      "guard_words": 80284,
+      "interleaved_pairs": 130,
+      "crossed_midpoint_pairs": 40,
+      "parameter_bytes": 442368
+    },
+    "four_entry_parallel_batches": 10,
+    "four_entry_split_batches": 28,
+    "audits": {
+      "serial-audit-01.json": "c65724ddb37a821b0497ac54f531936f6b565e5f3a5169aee59eb64e5c2c0ab9",
+      "segmented-audit-02.json": "575db8a8466ebec6f7cf1c27b01fbed576b56275b2f1e4e3e34d291b4db34de2",
+      "parallel-audit-01.json": "d3b84e032bd53f2c988aefc1cf3f651e1a63e40f8e52261653c7254687aa08dc",
+      "segmented-audit-03.json": "3bbe7180f96876c02a2093330947bc3c489907bfccfc34b37697e01efa16de7f",
+      "parallel-audit-02.json": "b0d5621fc30ef46616340e5f35242d5ae2b4ff3830fde0a9958b6e7024e325ea"
+    },
+    "native_refusal_types": 13,
+    "portable_oracle_tests": 9,
+    "performance_benchmark": false,
+    "full_Metal_API": false,
+    "global_objective_complete": false
+  },
+  "public_runs": {
+    "prepare": {
+      "status": "PASS",
+      "mode": "prepare",
+      "trials": 0,
+      "totals": {
+        "dispatches": 0,
+        "arithmetic_results": 0,
+        "raw_words": 0,
+        "guard_words": 0,
+        "interleaved_pairs": 0,
+        "crossed_midpoint_pairs": 0,
+        "parameter_bytes": 0
+      },
+      "per_kind": {},
+      "input_manifest_SHA256": "c0a97767c322eb05a3da607b6afdc101887dc3d2ca40ed6a84501ed4925c57b8",
+      "execution_manifest_SHA256": "ad0a2595dfd96d9e4063c63a17550d32ca0c8603274ebbe99fd2f34923b3b913",
+      "results_SHA256": "29f7519461f87105ccceccd84abf3e50c43b9e358f0eeb17b2741242159f5cb1",
+      "auditor_SHA256": "5d98b0cd882b31c9141691c1e28515b70932d369c93350140679d98d86425205",
+      "scope": "Pinned four-record explicit SDK batch, not ordinary Metal concurrency or general data-visibility conformance",
+      "performance_benchmark": false,
+      "global_objective_complete": false,
+      "signed_executable_SHA256": "197126614d8fe5149054fb8f4eb68e69453a2fe99d7deb432931803477f06083",
+      "normal_exit": true,
+      "kill_requested": false,
+      "scope_restored": true,
+      "native_refusals": 13,
+      "state_rechecks": 4
+    },
+    "serial": {
+      "status": "PASS",
+      "mode": "serial",
+      "trials": 28,
+      "totals": {
+        "dispatches": 56,
+        "arithmetic_results": 56,
+        "raw_words": 21504,
+        "guard_words": 20972,
+        "interleaved_pairs": 0,
+        "crossed_midpoint_pairs": 0,
+        "parameter_bytes": 114688
+      },
+      "per_kind": {
+        "none": {
+          "trials": 4,
+          "interleaved_pairs": 0,
+          "crossed_midpoint_pairs": 0
+        },
+        "only-a": {
+          "trials": 4,
+          "interleaved_pairs": 0,
+          "crossed_midpoint_pairs": 0
+        },
+        "only-b": {
+          "trials": 4,
+          "interleaved_pairs": 0,
+          "crossed_midpoint_pairs": 0
+        },
+        "pair-serial-ab": {
+          "trials": 4,
+          "interleaved_pairs": 0,
+          "crossed_midpoint_pairs": 0
+        },
+        "pair-serial-ba": {
+          "trials": 4,
+          "interleaved_pairs": 0,
+          "crossed_midpoint_pairs": 0
+        },
+        "serial-ab": {
+          "trials": 4,
+          "interleaved_pairs": 0,
+          "crossed_midpoint_pairs": 0
+        },
+        "serial-ba": {
+          "trials": 4,
+          "interleaved_pairs": 0,
+          "crossed_midpoint_pairs": 0
+        }
+      },
+      "input_manifest_SHA256": "c0a97767c322eb05a3da607b6afdc101887dc3d2ca40ed6a84501ed4925c57b8",
+      "execution_manifest_SHA256": "d6569a0d86efa2841f74cb9da501b0ef117cbef13142482e95ad840a91895a29",
+      "results_SHA256": "224d543b7bd3d9aae853c16991d83acc33f9ac000e89a374c0032c5c2a9443e7",
+      "auditor_SHA256": "5d98b0cd882b31c9141691c1e28515b70932d369c93350140679d98d86425205",
+      "scope": "Pinned four-record explicit SDK batch, not ordinary Metal concurrency or general data-visibility conformance",
+      "performance_benchmark": false,
+      "global_objective_complete": false,
+      "signed_executable_SHA256": "197126614d8fe5149054fb8f4eb68e69453a2fe99d7deb432931803477f06083",
+      "normal_exit": true,
+      "kill_requested": false,
+      "scope_restored": true,
+      "native_refusals": 13,
+      "state_rechecks": 4
+    },
+    "segmented": {
+      "status": "PASS",
+      "mode": "segmented",
+      "trials": 13,
+      "totals": {
+        "dispatches": 34,
+        "arithmetic_results": 34,
+        "raw_words": 9984,
+        "guard_words": 9673,
+        "interleaved_pairs": 10,
+        "crossed_midpoint_pairs": 0,
+        "parameter_bytes": 53248
+      },
+      "per_kind": {
+        "none": {
+          "trials": 1,
+          "interleaved_pairs": 0,
+          "crossed_midpoint_pairs": 0
+        },
+        "only-a": {
+          "trials": 1,
+          "interleaved_pairs": 0,
+          "crossed_midpoint_pairs": 0
+        },
+        "only-b": {
+          "trials": 1,
+          "interleaved_pairs": 0,
+          "crossed_midpoint_pairs": 0
+        },
+        "pair-serial-ab": {
+          "trials": 1,
+          "interleaved_pairs": 0,
+          "crossed_midpoint_pairs": 0
+        },
+        "pair-serial-ba": {
+          "trials": 1,
+          "interleaved_pairs": 0,
+          "crossed_midpoint_pairs": 0
+        },
+        "serial-ab": {
+          "trials": 1,
+          "interleaved_pairs": 0,
+          "crossed_midpoint_pairs": 0
+        },
+        "serial-ba": {
+          "trials": 1,
+          "interleaved_pairs": 0,
+          "crossed_midpoint_pairs": 0
+        },
+        "pair-parallel-ab": {
+          "trials": 1,
+          "interleaved_pairs": 1,
+          "crossed_midpoint_pairs": 0
+        },
+        "pair-parallel-ba": {
+          "trials": 1,
+          "interleaved_pairs": 1,
+          "crossed_midpoint_pairs": 0
+        },
+        "segmented-ab": {
+          "trials": 1,
+          "interleaved_pairs": 2,
+          "crossed_midpoint_pairs": 0
+        },
+        "segmented-ba": {
+          "trials": 1,
+          "interleaved_pairs": 2,
+          "crossed_midpoint_pairs": 0
+        },
+        "source-barrier-ab": {
+          "trials": 1,
+          "interleaved_pairs": 2,
+          "crossed_midpoint_pairs": 0
+        },
+        "source-barrier-ba": {
+          "trials": 1,
+          "interleaved_pairs": 2,
+          "crossed_midpoint_pairs": 0
+        }
+      },
+      "input_manifest_SHA256": "c0a97767c322eb05a3da607b6afdc101887dc3d2ca40ed6a84501ed4925c57b8",
+      "execution_manifest_SHA256": "1996085789d3a95a75568534cbf92b25464b43a48cd9e9fc0f3aadfa5f12c9fd",
+      "results_SHA256": "8a3feb1d3ac8052ca18a88410e4b8e1c6cb371ac00ae7bb100f003325066228e",
+      "auditor_SHA256": "5d98b0cd882b31c9141691c1e28515b70932d369c93350140679d98d86425205",
+      "scope": "Pinned four-record explicit SDK batch, not ordinary Metal concurrency or general data-visibility conformance",
+      "performance_benchmark": false,
+      "global_objective_complete": false,
+      "signed_executable_SHA256": "197126614d8fe5149054fb8f4eb68e69453a2fe99d7deb432931803477f06083",
+      "normal_exit": true,
+      "kill_requested": false,
+      "scope_restored": true,
+      "native_refusals": 13,
+      "state_rechecks": 28
+    },
+    "parallel": {
+      "status": "PASS",
+      "mode": "parallel",
+      "trials": 21,
+      "totals": {
+        "dispatches": 66,
+        "arithmetic_results": 66,
+        "raw_words": 16128,
+        "guard_words": 15537,
+        "interleaved_pairs": 58,
+        "crossed_midpoint_pairs": 32,
+        "parameter_bytes": 86016
+      },
+      "per_kind": {
+        "none": {
+          "trials": 1,
+          "interleaved_pairs": 0,
+          "crossed_midpoint_pairs": 0
+        },
+        "only-a": {
+          "trials": 1,
+          "interleaved_pairs": 0,
+          "crossed_midpoint_pairs": 0
+        },
+        "only-b": {
+          "trials": 1,
+          "interleaved_pairs": 0,
+          "crossed_midpoint_pairs": 0
+        },
+        "pair-serial-ab": {
+          "trials": 1,
+          "interleaved_pairs": 0,
+          "crossed_midpoint_pairs": 0
+        },
+        "pair-serial-ba": {
+          "trials": 1,
+          "interleaved_pairs": 0,
+          "crossed_midpoint_pairs": 0
+        },
+        "serial-ab": {
+          "trials": 1,
+          "interleaved_pairs": 0,
+          "crossed_midpoint_pairs": 0
+        },
+        "serial-ba": {
+          "trials": 1,
+          "interleaved_pairs": 0,
+          "crossed_midpoint_pairs": 0
+        },
+        "pair-parallel-ab": {
+          "trials": 1,
+          "interleaved_pairs": 1,
+          "crossed_midpoint_pairs": 0
+        },
+        "pair-parallel-ba": {
+          "trials": 1,
+          "interleaved_pairs": 1,
+          "crossed_midpoint_pairs": 0
+        },
+        "segmented-ab": {
+          "trials": 1,
+          "interleaved_pairs": 2,
+          "crossed_midpoint_pairs": 0
+        },
+        "segmented-ba": {
+          "trials": 1,
+          "interleaved_pairs": 2,
+          "crossed_midpoint_pairs": 0
+        },
+        "source-barrier-ab": {
+          "trials": 1,
+          "interleaved_pairs": 2,
+          "crossed_midpoint_pairs": 0
+        },
+        "source-barrier-ba": {
+          "trials": 1,
+          "interleaved_pairs": 2,
+          "crossed_midpoint_pairs": 0
+        },
+        "parallel-ab": {
+          "trials": 4,
+          "interleaved_pairs": 24,
+          "crossed_midpoint_pairs": 16
+        },
+        "parallel-ba": {
+          "trials": 4,
+          "interleaved_pairs": 24,
+          "crossed_midpoint_pairs": 16
+        }
+      },
+      "input_manifest_SHA256": "c0a97767c322eb05a3da607b6afdc101887dc3d2ca40ed6a84501ed4925c57b8",
+      "execution_manifest_SHA256": "9c4a7b45aa9e872face12b93d315085c680fb156b9040f55a6d77a6b599943d6",
+      "results_SHA256": "c6b617bd8adae74449115ed56a2651a96b3a304795a2798cd32cd4665f3d208d",
+      "auditor_SHA256": "5d98b0cd882b31c9141691c1e28515b70932d369c93350140679d98d86425205",
+      "scope": "Pinned four-record explicit SDK batch, not ordinary Metal concurrency or general data-visibility conformance",
+      "performance_benchmark": false,
+      "global_objective_complete": false,
+      "signed_executable_SHA256": "197126614d8fe5149054fb8f4eb68e69453a2fe99d7deb432931803477f06083",
+      "normal_exit": true,
+      "kill_requested": false,
+      "scope_restored": true,
+      "native_refusals": 13,
+      "state_rechecks": 36
+    }
+  },
+  "public_totals": {
+    "dispatches": 156,
+    "arithmetic_results": 156,
+    "raw_words": 47616,
+    "guard_words": 46182,
+    "interleaved_pairs": 68,
+    "crossed_midpoint_pairs": 32,
+    "parameter_bytes": 253952
+  },
+  "public_main_trials": 62,
+  "source_build": {
+    "seven_common_objects_rebuilt": true,
+    "MRC_objects": 2,
+    "ARC_common_objects": 5,
+    "separate_optional_ARC_objects": 1,
+    "core_text_files": 40,
+    "CPU_only_link_check": "PASS",
+    "historical_GPU_qualification_inherited": false
+  },
+  "portable_tests": {
+    "status": "PASS",
+    "complete_suite": 57,
+    "new_oracle_controls": 9
+  },
+  "limitations": [
+    "Pinned two-function one-thread library only",
+    "Opt-in SDK prototype; ordinary concurrent encoder/factory not implemented",
+    "Atomic ordering and final output verified; general non-atomic dataflow/visibility not qualified",
+    "Interleaved intervals do not prove simultaneous instructions or SM occupancy",
+    "Plans remain alive during these runs; final-plan release before commit not separately tested",
+    "Performance and CPU relief not measured",
+    "No new M1 run"
+  ],
+  "claims": {
+    "native_shader_changed": false,
+    "shared_core_source_changed": false,
+    "system_modified": false,
+    "OCLP_modified": false,
+    "general_Metal_conformance": false,
+    "performance_benchmark": false
+  },
+  "Qwen_job_ids": [],
+  "global_objective_complete": false
+}
