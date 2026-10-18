@@ -1,5 +1,7 @@
 # KeplerMetal
 
+Deux kernels compilés par NVIDIA présentent maintenant des durées d’exécution entrelacées sur la GTX 880M, avec des descripteurs et constantes indépendants. Le prototype borné passe 34/34 paires au laboratoire ; une reconstruction distincte depuis les sources publiques passe 16/16 paires et 62 dispatchs corrects, contrôles séquentiels compris. L’encodeur Metal ordinaire reste séquentiel ; aucun gain de vitesse n’est annoncé. [Sources, preuves et reproduction](docs/NATIVE_RESIDENT_OVERLAP.md).
+
 Le démarrage natif du décodeur est maintenant observé. Trois essais finaux créent correctement le premier pixel buffer dans AppleGVA, puis la création du décodeur refuse encore-12913. Les17nouveaux processus produisent18images logicielles exactes, aucune image matérielle. [Preuves et prochaine dépendance](docs/VIDEO_NATIVE_START.md).
 
 La fabrique vidéo native est maintenant identifiée et renvoie un pointeur valide. Une entrée de politique AppleGVA ajoutée uniquement dans notre processus change le refus matériel de-12906 à-12913 dans trois essais ; quatre témoins gardent-12906. Aucun décodage matériel n'est encore obtenu. Les19processus produisent30images logicielles exactes et conservent explicitement20réponses internes FinF/Inva en erreur. [Preuves, code et prochaine cible](docs/VIDEO_FACTORY_POLICY.md).

@@ -1,0 +1,176 @@
+{
+  "schema": 1,
+  "milestone": "Bounded overlap of two native Kepler kernels",
+  "date": "2026-10-18",
+  "source_base_commit": "f8041705d59cc58c6582edb0d28d8982c94f6ad5",
+  "integration_level": 1,
+  "global_objective_complete": false,
+  "general_concurrent_Metal_API_implemented": false,
+  "device": {
+    "name": "NVIDIA GeForce GTX 880M",
+    "architecture": "GK104 / SM30",
+    "VRAM_GiB": 8
+  },
+  "platform": {
+    "macOS": "26.7.1",
+    "build": "25G241",
+    "SDK": "26.2",
+    "clang": "Apple clang 17.0.0 (clang-1700.6.4.2)",
+    "host": "x86_64"
+  },
+  "source_SHA256": {
+    "examples/native_resident_pair_probe.mm": "466ec47a2a53a840f6d9816416d30c1cdc5ba50f6bb9ed6f4ca01818549809b4",
+    "examples/native_concurrent_dispatch.metal": "06af1eda5d3d84cbf15cab2170b39849b34ccc012dad8fc9fdedf20f85d25fcc",
+    "tools/native_resident_overlap.py": "2e20f24b7ec00e89a3ecfa51cd7275f0a94f21b60b840a3a725f1ef3586fee52",
+    "tools/resident_overlap_contract.py": "c5bb493176ab3e0d5b27eb75c2068d654e3411c7b38c1d3e029863f54d0c88a1",
+    "tests/test_resident_overlap_contract.py": "52fcaee1b2e58908d27d34683566aac9ec2c38929aea8001cc550743b51768ea"
+  },
+  "pins": {
+    "native_driver_SHA256": "2b89839c425d95934f5e01f16c8683fe53432df410292ec8e554b21c98d6c054",
+    "MetalOld_SHA256": "73234b361cfce5c7095b518e6876e627b1e891cfb5964c6fe0067003d0e93d49",
+    "metallib_SHA256": "479a0f85935823395174b25c0ead11482796389a5c8116cc7e5929d84ec0e7ed",
+    "registered_manifest_SHA256": "2e195e3ad4e9b8a9d68b783d856bcaf3805367061f79107ca615812f0fda6f54",
+    "client_executable_SHA256": "33321fe9fe0c7cdc4891d02a8f869e36c2fdec82c153962caa4f3c59c117f5bf",
+    "public_input_manifest_SHA256": "97a2fce1481218264d3dfbffef9ae83afcc1677daef11956544e53f429bbac46",
+    "laboratory_archive_SHA256": "5636b0d0d158fc985bf9b1df5fd0e16b91909a9a6f48423c175272b7fe4ddb67",
+    "public_archive_SHA256": "451f24924470a7a656cadec7b7319200f6768db833b64bac3bd5febac36d987d",
+    "Mesa_cla0c0_h_SHA256": "d40acf0020184a1d5b2039918d810be8e79707d8ba289cee984a265c368c9d58"
+  },
+  "bounded_protocol": {
+    "groups_per_dispatch": 1,
+    "threads_per_group": 1,
+    "kernels": [
+      "observe_a",
+      "observe_b"
+    ],
+    "poll_limit": 4096,
+    "integer_rounds": 128,
+    "Private_QMD_allocation_bytes_per_record": 4096,
+    "QMD_readback_bytes_per_record": 256,
+    "Private_constant_bytes_per_record": 65536,
+    "native_register_count": 17,
+    "native_code_bytes_per_kernel": 2304,
+    "native_literal_bytes_per_kernel": 256,
+    "changed_stream_word_offset": 16,
+    "original_header": "0x20012044",
+    "candidate_header": "0x20012040",
+    "terminal_wait_unchanged": true,
+    "native_encoder_dispatch_type": 0
+  },
+  "laboratory": {
+    "status": "PASS",
+    "main_trials": 69,
+    "user_dispatches": 110,
+    "interleaved_pairs": 34,
+    "requested_candidate_pairs": 34,
+    "candidate_processes": 3,
+    "raw_sync_output_uint32_words": 35328,
+    "intact_guard_words": 34241,
+    "independent_raw_parameter_bytes": 100352,
+    "qualification_audit_SHA256": "3c03aa3d03e55dd54e639f27e3be8f443a2c50157c5c7bfe81731455a2788d9e",
+    "parameter_limit": "The older serial baseline checked parameter padding natively but did not archive the raw parameter arrays."
+  },
+  "public_source_build": {
+    "status": "PASS",
+    "runtime_implementations_compiled": 7,
+    "MRC_objects": 2,
+    "ARC_objects": 5,
+    "CPU_link_check": "PASS",
+    "core_build_GPU_execution": false,
+    "qualification_inherited": false,
+    "source_manifest_SHA256": "5b9eb2ecf21cb71dd14c99e2f8fdf9f8d0c29ff6476daf201452dcb0bc314f72",
+    "frozen_text_input_files": 38
+  },
+  "public_runs": {
+    "serial": {
+      "status": "PASS",
+      "mode": "serial",
+      "trials": 20,
+      "totals": {
+        "dispatches": 24,
+        "arithmetic_results": 24,
+        "raw_words": 10240,
+        "guard_words": 9988,
+        "interleaved": 0,
+        "parameter_bytes": 40960
+      },
+      "input_manifest_SHA256": "97a2fce1481218264d3dfbffef9ae83afcc1677daef11956544e53f429bbac46",
+      "execution_manifest_SHA256": "a18ff4dedc736850feefd8fdd0ebacc49d68e245537f1b11dab58485dfc9fc45",
+      "results_SHA256": "ad4a7d07b0085087baee0217d22e7f3f5d5d543a1adaee917fda16471e2cffd9",
+      "prototype_level": 1,
+      "performance_benchmark": false,
+      "simultaneous_instruction_execution_proved": false,
+      "full_Metal_API_implementation": false,
+      "signed_executable_SHA256": "a216813e9d9a9e180c0b5f060caa31d09e3c543478d6c06c62888e4211d08c3b",
+      "normal_exit": true,
+      "kill_requested": false,
+      "lease_terminal": true,
+      "scope_restored": true,
+      "stable_GPU_state_rechecks": 0
+    },
+    "overlap": {
+      "status": "PASS",
+      "mode": "overlap",
+      "trials": 21,
+      "totals": {
+        "dispatches": 38,
+        "arithmetic_results": 38,
+        "raw_words": 10752,
+        "guard_words": 10385,
+        "interleaved": 16,
+        "parameter_bytes": 43008
+      },
+      "input_manifest_SHA256": "97a2fce1481218264d3dfbffef9ae83afcc1677daef11956544e53f429bbac46",
+      "execution_manifest_SHA256": "835011acfd675f2980b9be7bba435d81bacbe2bd4ba9fd9ba746b6a2653e5cd6",
+      "results_SHA256": "d020a8ce84e440632b3cdea5fdbb83076c3b494e5ea62a869572897e2c9cb218",
+      "prototype_level": 1,
+      "performance_benchmark": false,
+      "simultaneous_instruction_execution_proved": false,
+      "full_Metal_API_implementation": false,
+      "signed_executable_SHA256": "a216813e9d9a9e180c0b5f060caa31d09e3c543478d6c06c62888e4211d08c3b",
+      "normal_exit": true,
+      "kill_requested": false,
+      "lease_terminal": true,
+      "scope_restored": true,
+      "stable_GPU_state_rechecks": 6
+    }
+  },
+  "portable_tests": {
+    "status": "PASS",
+    "count": 48,
+    "stream_contract_tests": 8
+  },
+  "claims": {
+    "arithmetic_and_guard_correctness": true,
+    "interleaved_kernel_lifetimes": true,
+    "simultaneous_instructions": false,
+    "SM_occupancy_measured": false,
+    "performance_benchmark": false,
+    "CPU_relief_measured": false,
+    "native_shader_rewritten": false,
+    "common_runtime_source_modified": false,
+    "system_modified": false,
+    "OCLP_modified": false
+  },
+  "retained_development_failures": [
+    "Encoder cleanup aborted first laboratory serial host; terminal process retained and cleanup corrected.",
+    "Second serial host rejected cursor measurement before user dispatch; resource-setup cursor accounting corrected.",
+    "Fourth builder compile failed; no native/GPU run resulted."
+  ],
+  "not_run": [
+    "Representative performance benchmark",
+    "Full general concurrent Metal encoder conformance",
+    "New M1 hardware run for this prototype",
+    "Administrator-only video experiment"
+  ],
+  "evidence_scope": "Sanitized summary and hashes of local proof files; no proprietary programs or raw captured commands are distributed. Reproduce using the published source-only builder and existing licensed dependencies.",
+  "public_totals": {
+    "dispatches": 62,
+    "arithmetic_results": 62,
+    "raw_words": 20992,
+    "guard_words": 20373,
+    "interleaved": 16,
+    "parameter_bytes": 83968,
+    "main_trials": 41
+  }
+}

@@ -1,5 +1,7 @@
 # KeplerMetal
 
+Two native NVIDIA-compiled kernels now have interleaved lifetimes on the GTX 880M with independent descriptor/constant state. The bounded laboratory prototype passed 34/34 candidate pairs; a separate rebuild from public sources passed 16/16 pairs and 62 correct dispatches including its serial controls. The ordinary Metal encoder remains serial; no performance gain is claimed. [Sources, controls, evidence and reproduction](docs/NATIVE_RESIDENT_OVERLAP.md).
+
 Native decoder start is now observed through unchanged public calls and policy-call stacks. Three final cases create the first CV pixel buffer successfully, then still refuse decoder creation at-12913. Seventeen new terminal hosts include18exact software images; zero hardware images are claimed. [Start witnesses, context boundary and source](docs/VIDEO_NATIVE_START.md).
 
 The native video factory now returns a verified non-null implementation. A same-executable AppleGVA board-policy experiment changes the hardware refusal from-12906 to-12913 in three cases; four negative controls preserve-12906. There are still zero hardware images. The19-host cohort includes30 exact software images and explicitly preserves20 nonzero internal FinF/Inva replies. [Factory, policy and next start-method boundary](docs/VIDEO_FACTORY_POLICY.md).
