@@ -1,5 +1,15 @@
 # Status at the source export, 2026-10-18
 
+New peer milestone: 13 signed terminal hosts, 18 software images / 2,073,600 exact
+NV12 bytes, 14 consistent peer observations across 7 distinct births, and two
+independent bounded service-log windows. All nine hardware creates still fail
+-12906. REA 6.4.0 / Ghidra 12.1.4 and bounded cache analysis map the native service entry
+through its callback to a `Strt` block that can propagate the old selector's
+error; the failing runtime branch and complete root cause remain unproved.
+Six same-binary cases toggle only peer observation, preserving replies. System,
+policy, OCLP and common runtime/archive remain unchanged. No new hardware codec,
+Metal feature, M1 run or benchmark. [Evidence and reproduction](VIDEO_PEER_IDENTITY.md).
+
 New routing milestone: 19 signed terminal nonoverlapping host runs, 24 software
 images / 2,764,800 exact NV12 bytes, 1,824 mock forwarding calls and 210 bounded
 summary controls. Three present-key cases reach the decoder service: `uber=0`,

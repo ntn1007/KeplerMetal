@@ -1,0 +1,318 @@
+--- a/bridge/tools/video_routing.mm
++++ b/bridge/tools/video_routing.mm
+@@ -11,6 +11,11 @@
+ #include <cstring>
+ #include <mutex>
+ #include <sched.h>
++#include <libproc.h>
++#include <sys/proc_info.h>
++#include <sys/time.h>
++#include <unistd.h>
++#include <cerrno>
+ 
+ namespace {
+ std::atomic<bool> enabled{false},begun{false};
+@@ -18,9 +23,45 @@
+ thread_local bool inside=false;
+ constexpr unsigned capacity=512;
+ std::mutex rowsMutex;
+-NSMutableArray *rows=nil,*controls=nil,*summaryControls=nil;
++NSMutableArray *rows=nil,*controls=nil,*summaryControls=nil,*peerControls=nil;
+ NSDictionary *allowed=nil;
+-bool nativeCapture=false,controlValid=false;
++bool nativeCapture=false,controlValid=false,peerCapture=false;
++
++// Public process metadata only. No task ports, memory reads or remote hooks.
++bool sameBirth(pid_t before,pid_t after,const proc_bsdinfo &a,const proc_bsdinfo &b,
++    int firstSize,int secondSize,int pathSize,bool terminated,uint64_t receiptMicros,uid_t uid){
++    if(before<=0||before!=after||firstSize!=sizeof(a)||secondSize!=sizeof(b)||
++        a.pbi_pid!=uint32_t(before)||b.pbi_pid!=uint32_t(before)||a.pbi_uid!=uid||b.pbi_uid!=uid||
++        a.pbi_start_tvsec!=b.pbi_start_tvsec||a.pbi_start_tvusec!=b.pbi_start_tvusec||
++        !a.pbi_start_tvsec||a.pbi_start_tvusec>=1000000||
++        a.pbi_start_tvsec>(UINT64_MAX-a.pbi_start_tvusec)/1000000||
++        pathSize<=0||pathSize>=PROC_PIDPATHINFO_MAXSIZE||!terminated||!receiptMicros)return false;
++    return a.pbi_start_tvsec*1000000+a.pbi_start_tvusec<=receiptMicros;
++}
++uint64_t wallMicros(){timeval t{};if(gettimeofday(&t,nullptr)||t.tv_sec<=0)return 0;
++    return uint64_t(t.tv_sec)*1000000+uint64_t(t.tv_usec);}
++NSDictionary *peerMetadata(xpc_connection_t connection,uint64_t receiptMicros,bool ownControl=false){
++    int saved=errno;pid_t before=ownControl?getpid():xpc_connection_get_pid(connection);
++    uid_t uid=ownControl?geteuid():xpc_connection_get_euid(connection);
++    proc_bsdinfo a{},b{};char path[PROC_PIDPATHINFO_MAXSIZE]{};
++    int first=0,second=0,length=0,firstErr=0,secondErr=0,pathErr=0;
++    if(before>0){errno=0;first=proc_pidinfo(before,PROC_PIDTBSDINFO,0,&a,sizeof(a));firstErr=errno;
++        errno=0;length=proc_pidpath(before,path,sizeof(path));pathErr=errno;
++        errno=0;second=proc_pidinfo(before,PROC_PIDTBSDINFO,0,&b,sizeof(b));secondErr=errno;}
++    pid_t after=ownControl?getpid():xpc_connection_get_pid(connection);
++    size_t n=strnlen(path,sizeof(path));bool terminated=n>0&&n<sizeof(path);
++    bool consistent=sameBirth(before,after,a,b,first,second,length,terminated,receiptMicros,uid);
++    NSString *name=terminated?[[[NSString alloc]initWithBytes:path length:n encoding:NSUTF8StringEncoding]autorelease]:nil;
++    NSDictionary *result=@{@"PID_before":@(before),@"PID_after":@(after),@"peer_euid":@(uid),
++        @"first_info_bytes":@(first),@"second_info_bytes":@(second),@"path_bytes":@(length),
++        @"first_errno":@(firstErr),@"second_errno":@(secondErr),@"path_errno":@(pathErr),
++        @"first_birth_seconds":@(a.pbi_start_tvsec),@"first_birth_microseconds":@(a.pbi_start_tvusec),
++        @"second_birth_seconds":@(b.pbi_start_tvsec),@"second_birth_microseconds":@(b.pbi_start_tvusec),
++        @"receipt_wall_microseconds":@(receiptMicros),@"path":name?:@"",@"consistent":@(consistent&&name),
++        @"authenticated_peer_identity_proved":@NO,@"PID_reuse_fully_excluded":@NO,
++        @"remote_memory_read":@NO,@"remote_process_modified":@NO};
++    errno=saved;return result;
++}
+ NSString *hash(NSData *data){
+     if(!data)return @"";unsigned char digest[32];CC_SHA256(data.bytes,(CC_LONG)data.length,digest);
+     NSMutableString *s=[NSMutableString string];for(auto b:digest)[s appendFormat:@"%02x",b];return s;
+@@ -97,7 +138,7 @@
+         if(!enabled.load(std::memory_order_seq_cst)){inflight.fetch_sub(1);return;}
+         inside=true;
+         if(control){caller=@{@"install_name":@"synthetic",@"UUID":@"",@"caller_offset":@0};active=true;}
+-        else if(nativeCapture){caller=identity(pc);NSDictionary *expected=allowed[caller[@"install_name"]];
++        else if(nativeCapture){caller=identity(pc);NSString *path=caller[@"install_name"];NSDictionary *expected=path?allowed[path]:nil;
+             active=expected&&[caller[@"UUID"]isEqual:expected[@"UUID"]]&&
+                 [caller[@"current_version"]isEqual:expected[@"current_version"]];}
+         if(!active){inside=false;inflight.fetch_sub(1);}
+@@ -105,13 +146,21 @@
+     ~Scope(){if(active){inside=false;inflight.fetch_sub(1,std::memory_order_seq_cst);}}
+ };
+ void record(Scope &scope,NSString *api,const char *name,xpc_connection_t connection,uint64_t flags,
+-    NSDictionary *message,NSDictionary *reply,bool resultPresent){
++    NSDictionary *message,NSDictionary *reply,bool resultPresent,uint64_t receiptMicros=0){
+     unsigned index=count.fetch_add(1,std::memory_order_relaxed);
+     if(index>=capacity){dropped.fetch_add(1);return;}
+     bool cut=false;NSString *service=text(scope.control?"synthetic":(name?name:(connection?xpc_connection_get_name(connection):nullptr)),&cut);
+-    NSDictionary *row=@{@"ordinal":@(index),@"API":api,@"synthetic_control":@(scope.control),
++    NSMutableDictionary *row=[NSMutableDictionary dictionaryWithDictionary:@{@"ordinal":@(index),@"API":api,@"synthetic_control":@(scope.control),
+         @"caller":scope.caller?:@{},@"service":service,@"flags":@(flags),@"truncated":@(cut),
+-        @"result_present":@(resultPresent),@"message":message?:@{},@"reply":reply?:@{}};
++        @"result_present":@(resultPresent),@"message":message?:@{},@"reply":reply?:@{}}];
++    if(peerCapture&&!scope.control&&[api isEqual:@"send_with_reply_sync"]&&
++        [service isEqual:@"com.apple.coremedia.videodecoder"]&&[reply[@"type"]isEqual:@"dictionary"]){
++        for(NSDictionary *item in message[@"keys"])if([item[@"key"]isEqual:@"OpCode"]&&
++            (uint64_t([item[@"scalar"]unsignedLongLongValue])==1969382770||
++             uint64_t([item[@"scalar"]unsignedLongLongValue])==1400140404)){
++            row[@"peer_metadata"]=peerMetadata(connection,receiptMicros);break;
++        }
++    }
+     std::lock_guard<std::mutex> lock(rowsMutex);[rows addObject:row];
+ }
+ thread_local xpc_object_t controlConnection=nullptr,controlMessage=nullptr,controlReply=nullptr;
+@@ -120,41 +169,49 @@
+ thread_local const char *controlName=nullptr;
+ thread_local uint64_t controlFlags=0;
+ thread_local bool argumentsValid=true;
++thread_local int controlInputErrno=0,controlOutputErrno=0;
+ xpc_connection_t mockCreate(const char *name,dispatch_queue_t queue,uint64_t flags){
+-    argumentsValid&=name==controlName&&queue==controlQueue&&flags==controlFlags;
++    argumentsValid&=name==controlName&&queue==controlQueue&&flags==controlFlags&&errno==controlInputErrno;
++    errno=controlOutputErrno;
+     return (xpc_connection_t)controlConnection;
+ }
+ xpc_object_t mockSync(xpc_connection_t connection,xpc_object_t message){
+-    argumentsValid&=connection==(xpc_connection_t)controlConnection&&message==controlMessage;
+-    return xpc_retain(controlReply);
++    argumentsValid&=connection==(xpc_connection_t)controlConnection&&message==controlMessage&&errno==controlInputErrno;
++    auto result=xpc_retain(controlReply);errno=controlOutputErrno;return result;
+ }
+ void mockAsync(xpc_connection_t connection,xpc_object_t message,dispatch_queue_t queue,xpc_handler_t handler){
+     argumentsValid&=connection==(xpc_connection_t)controlConnection&&message==controlMessage&&
+-        queue==controlQueue&&handler==controlHandler;handler(controlReply);
++        queue==controlQueue&&handler==controlHandler&&errno==controlInputErrno;handler(controlReply);errno=controlOutputErrno;
+ }
+ xpc_connection_t createImpl(const char *name,dispatch_queue_t queue,uint64_t flags,void *pc,bool mock){
++    int incoming=errno,saved=incoming;xpc_connection_t result=nullptr;
+     @autoreleasepool{
+         Scope scope(pc,mock);
+-        xpc_connection_t result=mock?mockCreate(name,queue,flags):xpc_connection_create_mach_service(name,queue,flags);
+-        if(scope.active)record(scope,@"create_mach_service",name,result,flags,nil,nil,result!=nullptr);return result;
+-    }
++        errno=incoming;result=mock?mockCreate(name,queue,flags):xpc_connection_create_mach_service(name,queue,flags);saved=errno;
++        if(scope.active)record(scope,@"create_mach_service",name,result,flags,nil,nil,result!=nullptr);
++    }
++    errno=saved;return result;
+ }
+ xpc_object_t syncImpl(xpc_connection_t connection,xpc_object_t message,void *pc,bool mock){
++    int incoming=errno,saved=incoming;xpc_object_t result=nullptr;
+     @autoreleasepool{
+         Scope scope(pc,mock);NSDictionary *sent=scope.active?summary(message):nil;
+-        xpc_object_t result=mock?mockSync(connection,message):xpc_connection_send_message_with_reply_sync(connection,message);
+-        if(scope.active)record(scope,@"send_with_reply_sync",nullptr,connection,0,sent,summary(result),result!=nullptr);
+-        return result;
+-    }
++        errno=incoming;result=mock?mockSync(connection,message):xpc_connection_send_message_with_reply_sync(connection,message);saved=errno;
++        uint64_t receipt=wallMicros();
++        if(scope.active)record(scope,@"send_with_reply_sync",nullptr,connection,0,sent,summary(result),result!=nullptr,receipt);
++    }
++    errno=saved;return result;
+ }
+ void asyncImpl(xpc_connection_t connection,xpc_object_t message,dispatch_queue_t queue,
+     xpc_handler_t handler,void *pc,bool mock){
++    int incoming=errno,saved=incoming;
+     @autoreleasepool{
+         Scope scope(pc,mock);
+         if(scope.active)record(scope,@"send_with_reply",nullptr,connection,0,summary(message),nil,false);
+-        if(mock)mockAsync(connection,message,queue,handler);
+-        else xpc_connection_send_message_with_reply(connection,message,queue,handler);
+-    }
++        errno=incoming;if(mock)mockAsync(connection,message,queue,handler);
++        else xpc_connection_send_message_with_reply(connection,message,queue,handler);saved=errno;
++    }
++    errno=saved;
+ }
+ __attribute__((noinline)) xpc_connection_t observedCreate(const char *name,dispatch_queue_t queue,uint64_t flags){
+     return createImpl(name,queue,flags,__builtin_return_address(0),false);
+@@ -175,14 +232,19 @@
+         controlQueue=i&1?dispatch_get_main_queue():nullptr;controlFlags=0x8000000000000000ull+uint64_t(i)*0x100000001ull;
+         NSString *name=[NSString stringWithFormat:@"KeplerMetal.synthetic.%u",i];controlName=name.UTF8String;
+         xpc_dictionary_set_int64(controlReply,"status",-100-int(i));xpc_dictionary_set_uint64(controlMessage,"opcode",i);
++        controlInputErrno=100+int(i);controlOutputErrno=200+int(i);errno=controlInputErrno;
+         argumentsValid=true;auto connection=createImpl(controlName,controlQueue,controlFlags,nullptr,true);
++        bool errnoValid=errno==controlOutputErrno;errno=controlInputErrno;
+         xpc_object_t reply=syncImpl(connection,controlMessage,nullptr,true);
++        errnoValid&=errno==controlOutputErrno;
+         __block unsigned callbacks=0;__block bool replyValid=false;
+         xpc_handler_t handler=^(xpc_object_t value){callbacks++;replyValid=value==controlReply;};controlHandler=handler;
+-        asyncImpl(connection,controlMessage,controlQueue,handler,nullptr,true);
++        errno=controlInputErrno;asyncImpl(connection,controlMessage,controlQueue,handler,nullptr,true);
++        errnoValid&=errno==controlOutputErrno;
+         bool correct=argumentsValid&&connection==(xpc_connection_t)controlConnection&&reply==controlReply&&
+-            xpc_dictionary_get_int64(reply,"status")==-100-int(i)&&callbacks==1&&replyValid;
+-        [controls addObject:@{@"trial":@(i),@"flags":@(controlFlags),@"correct":@(correct),@"callbacks":@(callbacks)}];
++            xpc_dictionary_get_int64(reply,"status")==-100-int(i)&&callbacks==1&&replyValid&&errnoValid;
++        [controls addObject:@{@"trial":@(i),@"flags":@(controlFlags),@"correct":@(correct),@"callbacks":@(callbacks),
++            @"input_errno":@(controlInputErrno),@"output_errno":@(controlOutputErrno),@"errno_preserved":@(errnoValid)}];
+         valid&=correct;if(reply)xpc_release(reply);
+     }
+     xpc_release(controlConnection);xpc_release(controlMessage);xpc_release(controlReply);
+@@ -234,6 +296,29 @@
+     [summaryControls addObject:@{@"trial":@(trial++),@"kind":@"dictionary_capacity",@"correct":@(bounded)}];
+     valid&=bounded;xpc_release(object);return valid;
+ }
++bool peerContracts(){
++    bool valid=true;
++    for(unsigned i=0;i<19;i++){
++        proc_bsdinfo a{},b{};a.pbi_pid=b.pbi_pid=123;a.pbi_uid=b.pbi_uid=501;
++        a.pbi_start_tvsec=b.pbi_start_tvsec=100;a.pbi_start_tvusec=b.pbi_start_tvusec=50;
++        pid_t first=123,last=123;int n1=sizeof(a),n2=sizeof(b),path=20;bool nul=true;uint64_t receipt=101000000;
++        switch(i){case 1:first=0;break;case 2:last=124;break;case 3:a.pbi_pid=124;break;
++            case 4:b.pbi_pid=124;break;case 5:n1--;break;case 6:n2--;break;
++            case 7:b.pbi_start_tvsec++;break;case 8:b.pbi_start_tvusec++;break;
++            case 9:a.pbi_uid++;break;case 10:path=0;break;case 11:nul=false;break;
++            case 12:receipt=99000000;break;case 13:a.pbi_start_tvusec=b.pbi_start_tvusec=1000000;break;
++            case 14:a.pbi_start_tvsec=b.pbi_start_tvsec=0;break;case 15:path=PROC_PIDPATHINFO_MAXSIZE;break;
++            case 16:a.pbi_start_tvsec=b.pbi_start_tvsec=UINT64_MAX;break;
++            case 17:b.pbi_uid++;break;case 18:receipt=0;break;default:break;}
++        bool actual=sameBirth(first,last,a,b,n1,n2,path,nul,receipt,501),correct=actual==(i==0);
++        [peerControls addObject:@{@"trial":@(i),@"kind":@"pure_PID_birth_path_predicate",@"accepted":@(actual),@"correct":@(correct)}];
++        valid&=correct;
++    }
++    NSDictionary *self=peerMetadata(nullptr,wallMicros(),true);bool selfValid=[self[@"consistent"]boolValue]&&
++        [self[@"PID_before"]intValue]==getpid()&&[self[@"PID_after"]intValue]==getpid();
++    [peerControls addObject:@{@"trial":@19,@"kind":@"public_own_process_metadata",@"correct":@(selfValid),
++        @"remote_process_queried":@NO}];return valid&&selfValid;
++}
+ #define KP_ROUTE_PAIR(function,original) \
+     __attribute__((used)) static const struct{const void *replacement,*original_;} pair_##function \
+     __attribute__((section("__DATA,__interpose")))={(void*)&function,(void*)&original};
+@@ -249,7 +334,10 @@
+     NSDictionary *profile=[NSJSONSerialization JSONObjectWithData:profileData options:0 error:nil];
+     NSDictionary *choice=[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:
+         [assets stringByAppendingPathComponent:@"routing-choice.json"]]options:0 error:nil];
++    NSDictionary *peerChoice=[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:
++        [assets stringByAppendingPathComponent:@"peer-choice.json"]]options:0 error:nil];
+     Dl_info self{};if(!config||!profile||choice.count!=1||![@[@"passive",@"observe"]containsObject:choice[@"mode"]]||
++        peerChoice.count!=1||![@[@"passive",@"observe"]containsObject:peerChoice[@"mode"]]||
+         ![hash(profileData)isEqual:config[@"profile_SHA256"]]||!dladdr((void*)KPVideoRoutingBegin,&self)||!self.dli_fname||
+         ![hash([NSData dataWithContentsOfFile:@(self.dli_fname)])isEqual:config[@"library_SHA256"]])return false;
+     NSMutableDictionary *table=[NSMutableDictionary dictionary];
+@@ -262,9 +350,10 @@
+             matched=[actual[@"UUID"]isEqual:expected[@"UUID"]]&&[actual[@"current_version"]isEqual:expected[@"current_version"]];
+         }if(!matched)return false;
+     }
+-    allowed=[table copy];rows=[[NSMutableArray alloc]init];controls=[[NSMutableArray alloc]init];summaryControls=[[NSMutableArray alloc]init];
++    allowed=[table copy];rows=[[NSMutableArray alloc]init];controls=[[NSMutableArray alloc]init];summaryControls=[[NSMutableArray alloc]init];peerControls=[[NSMutableArray alloc]init];
++    peerCapture=[peerChoice[@"mode"]isEqual:@"observe"];
+     nativeCapture=[choice[@"mode"]isEqual:@"observe"];enabled.store(true,std::memory_order_seq_cst);
+-    bool abi=calibrate(),summaries=summaryContracts();controlValid=abi&&summaries;
++    bool abi=calibrate(),summaries=summaryContracts(),peers=peerContracts();controlValid=abi&&summaries&&peers;
+     if(!controlValid)enabled.store(false);return controlValid;
+ }
+ extern "C" NSDictionary *KPVideoRoutingSnapshot(){
+@@ -273,10 +362,12 @@
+     bool drained=!inflight.load();NSArray *events=@[];
+     if(drained){std::lock_guard<std::mutex>lock(rowsMutex);events=[[[rows sortedArrayUsingDescriptors:
+         @[[NSSortDescriptor sortDescriptorWithKey:@"ordinal" ascending:YES]]]copy]autorelease];}
+-    return @{@"schema":@2,@"status":drained&&!dropped.load()?@"COMPLETE":@"INCOMPLETE",@"recorders_drained":@(drained),
++    return @{@"schema":@3,@"status":drained&&!dropped.load()?@"COMPLETE":@"INCOMPLETE",@"recorders_drained":@(drained),
+         @"disabled_before_snapshot":@YES,@"calls":@(count.load()),@"dropped":@(dropped.load()),@"events":events?:@[],
+         @"controls":controls?:@[],@"synthetic_ABI_calls":@96,@"synthetic_controls_valid":@(controlValid),
+         @"scalar_summary_controls":summaryControls?:@[],@"scalar_summary_controls_calls":@(summaryControls.count),
++        @"peer_controls":peerControls?:@[],@"peer_control_cases":@(peerControls.count),@"peer_capture_enabled":@(peerCapture),
++        @"errno_preserved_around_interposed_calls":@YES,@"remote_memory_read":@NO,@"PID_reuse_fully_excluded":@NO,
+         @"synthetic_native_IPC_calls":@0,@"native_capture_enabled":@(nativeCapture),@"system_modified":@NO,
+         @"arguments_or_return_values_modified":@NO,@"async_handler_replaced":@NO,@"observer_generated_native_messages":@0,
+         @"message_binary_or_string_values_copied":@NO,@"own_process_only":@YES,@"other_process_injected":@NO};
+--- a/bridge/tools/native_video_routing.py
++++ b/bridge/tools/native_video_routing.py
+@@ -67,6 +67,7 @@
+     shutil.copytree(base / 'runtime', out / 'runtime')
+     shutil.copyfile(args.profile, out / 'assets/routing-profile.json')
+     write(out / 'assets/routing-choice.json', {'mode': 'observe'})
++    write(out / 'assets/peer-choice.json', {'mode': 'observe'})
+     shutil.copyfile(base / 'inputs.json', out / 'dependency-inputs.json')
+     names = []
+     for name in data['source_hashes']:
+@@ -109,7 +110,7 @@
+     write(out / 'assets/routing-config.json', {'library_SHA256': sha(library),
+           'profile_SHA256': sha(out / 'assets/routing-profile.json')})
+     write(out / 'inputs.json', {
+-        'source_hashes': {n: sha(out / n) for n in names},
++        'routing_schema': 3, 'source_hashes': {n: sha(out / n) for n in names},
+         'assets_SHA256': {str(p.relative_to(out / 'assets')): sha(p) for p in (out / 'assets').rglob('*') if p.is_file()},
+         'runtime_SHA256': {p.name: sha(p) for p in (out / 'runtime').iterdir()},
+         'dependency_build': str(base), 'dependency_inputs_SHA256': sha(base / 'inputs.json'),
+@@ -138,6 +139,9 @@
+         raise ValueError('Routing library changed')
+     if args.override != 'native' and (args.codec != 'H264' or args.mode != 'hardware'):
+         raise ValueError('Counterfactual restricted to H264 hardware')
++    has_peer = data.get('routing_schema') == 3
++    if args.peer is not None and not has_peer:
++        raise ValueError('Peer metadata mode requires observer schema 3')
+     binary = build_root / ('application-' + args.codec)
+     expected = data['executable_variants_SHA256'][args.codec]
+     if sha(binary) != expected:
+@@ -147,16 +151,19 @@
+     shutil.copytree(build_root / 'assets', out / 'assets')
+     write(out / 'assets/dependency-choice.json', {'mode': args.override})
+     write(out / 'assets/routing-choice.json', {'mode': args.routing})
++    if has_peer:
++        write(out / 'assets/peer-choice.json', {'mode': args.peer or 'observe'})
+     for name in data['source_hashes']:
+         shutil.copyfile(build_root / name, out / name)
+     shutil.copyfile(Path(__file__), out / 'runner.py')
+     shutil.copyfile(binary, out / 'application')
+     (out / 'application').chmod(0o755)
+     assets = dict(data['assets_SHA256'])
+-    for name in ['dependency-choice.json', 'routing-choice.json']:
++    for name in ['dependency-choice.json', 'routing-choice.json'] + (['peer-choice.json'] if has_peer else []):
+         assets[name] = sha(out / 'assets' / name)
+     write(out / 'inputs.json', {**data, 'assets_SHA256': assets, 'selected_codec': args.codec,
+-        'override_mode': args.override, 'routing_mode': args.routing, 'executable_SHA256': expected})
++        'override_mode': args.override, 'routing_mode': args.routing, 'peer_mode': (args.peer or 'observe') if has_peer else None,
++        'executable_SHA256': expected})
+     sys.path.insert(0, str(build_root / 'runtime'))
+     from run_sdk_host import run_host
+     manifest = run_host(out / 'application', out / 'execution',
+@@ -175,6 +182,7 @@
+     print(json.dumps({'status': 'PROCESS_COMPLETED', 'codec': args.codec, 'mode': args.mode,
+         'override': args.override, 'routing': args.routing, 'PID': manifest['pid'], 'exit_code': manifest['exit_code'],
+         'synthetic_ABI_calls': routing['synthetic_ABI_calls'], 'native_XPC_records': len(native),
++        'peer_records': sum('peer_metadata' in e for e in native),
+         'create_status': decoded['decode']['create_status'] if decoded else None,
+         'frames': decoded['output_frames'] if decoded else 0, 'hardware_video_execution_proved': False}))
+ 
+@@ -190,6 +198,7 @@
+     parser.add_argument('--mode', choices=['inspect', 'cpu', 'hardware'])
+     parser.add_argument('--override', choices=['native', 'wrong-key', 'present-key'], default='native')
+     parser.add_argument('--routing', choices=['passive', 'observe'], default='observe')
++    parser.add_argument('--peer', choices=['passive', 'observe'], default=None)
+     parser.add_argument('--reservation-root', type=Path, default=ROOT)
+     args = parser.parse_args()
+     args.out.resolve().relative_to(ROOT / 'results')

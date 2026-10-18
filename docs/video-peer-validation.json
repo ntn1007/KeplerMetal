@@ -1,0 +1,329 @@
+{
+  "status": "PASS",
+  "auditor_SHA256": "95459641906df36e6dd46faf00d3e12b867ac31a40b330bcdfaf7c0b90a84170",
+  "native_host_processes_terminal": 13,
+  "nonoverlapping": true,
+  "counts": {
+    "mock_ABI_and_errno_calls": 1248,
+    "summary_controls": 182,
+    "peer_controls": 260,
+    "native_XPC_records": 269,
+    "peer_metadata_records": 14,
+    "real_GPU_queries": 18,
+    "public_query_controls": 24,
+    "dependency_scope_cases": 120,
+    "CF_metadata_associations": 1639,
+    "CPU_images": 18,
+    "CPU_bytes": 2073600,
+    "hardware_failures": 9
+  },
+  "CPU_different_bytes": 0,
+  "hardware_video_execution_proved": false,
+  "hardware_create_status": -12906,
+  "observed_peer_path": "/System/Library/Frameworks/VideoToolbox.framework/Versions/A/XPCServices/VTDecoderXPCService.xpc/Contents/MacOS/VTDecoderXPCService",
+  "observed_peer_image_UUID": "1cfa17825c4533bdbe30d374732a91c5",
+  "installed_service_file_SHA256": "a2b9bc6cf92cb58e06506d338c7363cde19303aee9b878730e20b73a69b4efbb",
+  "distinct_consistent_peer_births": 7,
+  "logs": [
+    {
+      "case": "video-peer-H264-cpu-20261018",
+      "log_SHA256": "ec543a655ae9e94ae2c7808bda0190b34700c5a0f61de8e78bbb08e85db984f2",
+      "entries": 36,
+      "client_PID_correlated": true,
+      "image_UUID_and_path_match": true,
+      "private_message_entries": 3,
+      "root_cause_proved": false
+    },
+    {
+      "case": "video-peer-H264-present-first-20261018",
+      "log_SHA256": "a1b896629ccebe74e5e15c442900f739f18db7ec0283d991721c8298db4affc2",
+      "entries": 27,
+      "client_PID_correlated": true,
+      "image_UUID_and_path_match": true,
+      "private_message_entries": 0,
+      "root_cause_proved": false
+    }
+  ],
+  "crossover": [
+    {
+      "case": "video-peer-crossover-observe-r1-20261018",
+      "peer_mode": "observe",
+      "peer_records": 2,
+      "create_status": -12906,
+      "raw_executable_SHA256": "e74978a7b38f7a91e958348a51d513e1ffff3a8558dbb4d699479f5b44f32918",
+      "signed_executable_SHA256": "7732dd60416cb4d0445bf04cf1e694d9dd83c83843c533b544031cd7ad7eb455"
+    },
+    {
+      "case": "video-peer-crossover-passive-r1-20261018",
+      "peer_mode": "passive",
+      "peer_records": 0,
+      "create_status": -12906,
+      "raw_executable_SHA256": "e74978a7b38f7a91e958348a51d513e1ffff3a8558dbb4d699479f5b44f32918",
+      "signed_executable_SHA256": "7732dd60416cb4d0445bf04cf1e694d9dd83c83843c533b544031cd7ad7eb455"
+    },
+    {
+      "case": "video-peer-crossover-passive-r2-20261018",
+      "peer_mode": "passive",
+      "peer_records": 0,
+      "create_status": -12906,
+      "raw_executable_SHA256": "e74978a7b38f7a91e958348a51d513e1ffff3a8558dbb4d699479f5b44f32918",
+      "signed_executable_SHA256": "7732dd60416cb4d0445bf04cf1e694d9dd83c83843c533b544031cd7ad7eb455"
+    },
+    {
+      "case": "video-peer-crossover-observe-r2-20261018",
+      "peer_mode": "observe",
+      "peer_records": 2,
+      "create_status": -12906,
+      "raw_executable_SHA256": "e74978a7b38f7a91e958348a51d513e1ffff3a8558dbb4d699479f5b44f32918",
+      "signed_executable_SHA256": "7732dd60416cb4d0445bf04cf1e694d9dd83c83843c533b544031cd7ad7eb455"
+    },
+    {
+      "case": "video-peer-crossover-observe-r3-20261018",
+      "peer_mode": "observe",
+      "peer_records": 2,
+      "create_status": -12906,
+      "raw_executable_SHA256": "e74978a7b38f7a91e958348a51d513e1ffff3a8558dbb4d699479f5b44f32918",
+      "signed_executable_SHA256": "7732dd60416cb4d0445bf04cf1e694d9dd83c83843c533b544031cd7ad7eb455"
+    },
+    {
+      "case": "video-peer-crossover-passive-r3-20261018",
+      "peer_mode": "passive",
+      "peer_records": 0,
+      "create_status": -12906,
+      "raw_executable_SHA256": "e74978a7b38f7a91e958348a51d513e1ffff3a8558dbb4d699479f5b44f32918",
+      "signed_executable_SHA256": "7732dd60416cb4d0445bf04cf1e694d9dd83c83843c533b544031cd7ad7eb455"
+    }
+  ],
+  "source_version_patch_SHA256": "97759777543dfcea5b9434b1d2f093873e8cf41984b7d678754b399a019a533f",
+  "v2_source_reconstruction_verified": true,
+  "system_files_unchanged": 83,
+  "video_policy_unchanged": true,
+  "OCLP_unchanged": true,
+  "common_runtime_sources_unchanged": 36,
+  "common_runtime_archive_SHA256": "5636b0d0d158fc985bf9b1df5fd0e16b91909a9a6f48423c175272b7fe4ddb67",
+  "authenticated_peer_identity_proved": false,
+  "PID_reuse_fully_excluded": false,
+  "remote_memory_read": false,
+  "remote_process_modified": false,
+  "remote_provider_inventory_complete": false,
+  "service_refusal_root_cause_proved": false,
+  "full_objective_complete": false,
+  "performance_benchmark": "NOT RUN",
+  "system_deployment": "NOT RUN",
+  "new_M1_execution": false,
+  "Qwen_job_ids": [],
+  "static_entry": {
+    "REA_evidence_id": "ev_63ad658ae6dc86220b197dcba7812bbaa15f9db653fa28ec035b18101a832b1a",
+    "REA_provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.1.4"
+    },
+    "REA_bundle_SHA256": "ddb77747b9cd3f948683be64d068c842c381243510098a4fbab8b2d441eca43a",
+    "entry_address": "0x100000578",
+    "entry_bytes": 16,
+    "service_slice_SHA256": "9b1a189d3f9dba534cadfe44e852b3740227471f890ee94ae012856689e01612",
+    "regions": [
+      {
+        "role": "handler",
+        "image_offset": 4268444,
+        "bytes": 101,
+        "SHA256": "100deacc2722bfbba2cee35dcf2ddcd00628d9840991e9d6f2ff82d426cab3b9"
+      },
+      {
+        "role": "callback",
+        "image_offset": 4268545,
+        "bytes": 14,
+        "SHA256": "a0defd910be05a0245b350e3d594d087b1dec19194393afd3d00637fb69a76ca"
+      },
+      {
+        "role": "dispatch",
+        "image_offset": 4268559,
+        "bytes": 140,
+        "SHA256": "17dd2e2fca716d83c776bc3064de9ee5089f16957c768a42469d824810e63e9f"
+      },
+      {
+        "role": "messages",
+        "image_offset": 4269743,
+        "bytes": 6156,
+        "SHA256": "13f823d7c988ad0db05e7f85e98e4a6e59b1e3b0323203009e5e3d7a0ccbd1ac"
+      }
+    ],
+    "Strt_opcode": 1400140404,
+    "Strt_static_selector_call_offset": 4272141,
+    "selector_target_offset": 6288668,
+    "runtime_server_branch_proved": false,
+    "native_private_callback_ABI_and_initialization_fully_qualified": false,
+    "vendor_code_invoked_by_analysis": false,
+    "source_or_cache_modified": false
+  },
+  "processes": [
+    {
+      "case": "video-peer-inspect-20261018",
+      "codec": "H264",
+      "mode": "inspect",
+      "choice": "native",
+      "peer_mode": "observe",
+      "peer_records": 0,
+      "result_SHA256": "a0e5d86aa0f6162d02af01a575c217c9e4a5b218423851eaf4c50396de8b03a4",
+      "routing_SHA256": "c26e908600d2c542b2a1c1b9b6e9acf626cf57da9eb16dcf2b2efb4bac588ace",
+      "inputs_SHA256": "5b6b7a71962fb46e6a408f6f4c1ac33d5666f7f44eb086d5261d9677d9acb147"
+    },
+    {
+      "case": "video-peer-H264-cpu-20261018",
+      "codec": "H264",
+      "mode": "cpu",
+      "choice": "native",
+      "peer_mode": "observe",
+      "peer_records": 2,
+      "result_SHA256": "4dce620c292d21ba8dce12d9ecae84d7e2a46706734b6f25215f432bab13e5e5",
+      "routing_SHA256": "72ffb62134ac4255c36f05175b4419f01b6b8c6cd1efe10d40fc663540f004a6",
+      "inputs_SHA256": "5b6b7a71962fb46e6a408f6f4c1ac33d5666f7f44eb086d5261d9677d9acb147",
+      "create_status": 0,
+      "frames": 6
+    },
+    {
+      "case": "video-peer-H264-present-first-20261018",
+      "codec": "H264",
+      "mode": "hardware",
+      "choice": "present-key",
+      "peer_mode": "observe",
+      "peer_records": 2,
+      "result_SHA256": "8800ff96782fbc0e69b7150decc852bc4357f4f068759885bd2ddc5ea6c12dde",
+      "routing_SHA256": "c77a57b7fac26f50f78b068e479510eadc0a3a6833bf9b429262cbfc2bae853d",
+      "inputs_SHA256": "8c570455ed6f5d2c651d746a815636139d613955e42cf74c9a7d80c10e2d5509",
+      "create_status": -12906,
+      "frames": 0
+    },
+    {
+      "case": "video-peer-H264-native-20261018",
+      "codec": "H264",
+      "mode": "hardware",
+      "choice": "native",
+      "peer_mode": "observe",
+      "peer_records": 0,
+      "result_SHA256": "80c2e50b87ac1d719bb0b172339c4aa28f0cb95b5ecf29cb19d0b6da3bdc3a8f",
+      "routing_SHA256": "8585e4cd57a0f0aee4426aadc57f5501321a72be0654efa9d4c1553393687a4e",
+      "inputs_SHA256": "5b6b7a71962fb46e6a408f6f4c1ac33d5666f7f44eb086d5261d9677d9acb147",
+      "create_status": -12906,
+      "frames": 0
+    },
+    {
+      "case": "video-peer-H264-wrong-key-20261018",
+      "codec": "H264",
+      "mode": "hardware",
+      "choice": "wrong-key",
+      "peer_mode": "observe",
+      "peer_records": 0,
+      "result_SHA256": "c166c783c1b33c74910851a7f1970b6a73d7385fa32c2f18c8cf3cf1409895da",
+      "routing_SHA256": "8585e4cd57a0f0aee4426aadc57f5501321a72be0654efa9d4c1553393687a4e",
+      "inputs_SHA256": "28e8f143beafaeb3bb958b36b1c286b359d92b7219a26aff976383697254c36c",
+      "create_status": -12906,
+      "frames": 0
+    },
+    {
+      "case": "video-peer-MPEG2Video-cpu-20261018",
+      "codec": "MPEG2Video",
+      "mode": "cpu",
+      "choice": "native",
+      "peer_mode": "observe",
+      "peer_records": 2,
+      "result_SHA256": "21207c02bd4da9aa83c2e953d8db3aedecf5aa97592a4250f34fbf7bf730d2b5",
+      "routing_SHA256": "1d8fdb91f56d5cdcde608e06b17680c4973ae5599db8893e6127d5270c2c0f83",
+      "inputs_SHA256": "5c5a171b85a2914e1f0c13fdae3ca30e2578b57a5a367714a96575c450625444",
+      "create_status": 0,
+      "frames": 6
+    },
+    {
+      "case": "video-peer-crossover-observe-r1-20261018",
+      "codec": "H264",
+      "mode": "hardware",
+      "choice": "present-key",
+      "peer_mode": "observe",
+      "peer_records": 2,
+      "result_SHA256": "509d754249390ca7e7dbe5fec653cf125f83e2c200742bd5235dcc1fae06e3ad",
+      "routing_SHA256": "880ae758b0241f021a144dc80f62bac6b2737f1c3360de3f82850028a744ba87",
+      "inputs_SHA256": "8c570455ed6f5d2c651d746a815636139d613955e42cf74c9a7d80c10e2d5509",
+      "create_status": -12906,
+      "frames": 0
+    },
+    {
+      "case": "video-peer-crossover-passive-r1-20261018",
+      "codec": "H264",
+      "mode": "hardware",
+      "choice": "present-key",
+      "peer_mode": "passive",
+      "peer_records": 0,
+      "result_SHA256": "0ec1dca6b90de8fbb359d8a93c0ac8dd68f7c28ae6040d83913f023a631cd12d",
+      "routing_SHA256": "8732205ce4427a99186fc754511ca86c31371d977f43f28abf3b4e7c95ebcc06",
+      "inputs_SHA256": "6371fa7b73bc4c347174f733d502c9376415a53ccb4db458ca9c10ef3a43bc25",
+      "create_status": -12906,
+      "frames": 0
+    },
+    {
+      "case": "video-peer-crossover-passive-r2-20261018",
+      "codec": "H264",
+      "mode": "hardware",
+      "choice": "present-key",
+      "peer_mode": "passive",
+      "peer_records": 0,
+      "result_SHA256": "cf96091f85de0e0153e7222a5d594030ac1d5c44833cdc43186ec67c0b0fca0b",
+      "routing_SHA256": "8732205ce4427a99186fc754511ca86c31371d977f43f28abf3b4e7c95ebcc06",
+      "inputs_SHA256": "6371fa7b73bc4c347174f733d502c9376415a53ccb4db458ca9c10ef3a43bc25",
+      "create_status": -12906,
+      "frames": 0
+    },
+    {
+      "case": "video-peer-crossover-observe-r2-20261018",
+      "codec": "H264",
+      "mode": "hardware",
+      "choice": "present-key",
+      "peer_mode": "observe",
+      "peer_records": 2,
+      "result_SHA256": "22b04017205bbf995d44c98f098de0ce1ad92cbe3ed946e352ed5be3bb783008",
+      "routing_SHA256": "fad90f0027306423398e5af105183f40f79f923e7a8295ae040cb18a78101c81",
+      "inputs_SHA256": "8c570455ed6f5d2c651d746a815636139d613955e42cf74c9a7d80c10e2d5509",
+      "create_status": -12906,
+      "frames": 0
+    },
+    {
+      "case": "video-peer-crossover-observe-r3-20261018",
+      "codec": "H264",
+      "mode": "hardware",
+      "choice": "present-key",
+      "peer_mode": "observe",
+      "peer_records": 2,
+      "result_SHA256": "c06cf43a712e03ccc482c2fbfb07a2a239e77eebe0def23583298f125ca361e0",
+      "routing_SHA256": "5a4dc5adf1d6452466bcfe0b698834639b128a419f8f27a99b1cc1e8825be8e3",
+      "inputs_SHA256": "8c570455ed6f5d2c651d746a815636139d613955e42cf74c9a7d80c10e2d5509",
+      "create_status": -12906,
+      "frames": 0
+    },
+    {
+      "case": "video-peer-crossover-passive-r3-20261018",
+      "codec": "H264",
+      "mode": "hardware",
+      "choice": "present-key",
+      "peer_mode": "passive",
+      "peer_records": 0,
+      "result_SHA256": "5dcbcd4be2de88fea9badf469a7867d0472bc5b6817623dfd64a9615290afc51",
+      "routing_SHA256": "8732205ce4427a99186fc754511ca86c31371d977f43f28abf3b4e7c95ebcc06",
+      "inputs_SHA256": "6371fa7b73bc4c347174f733d502c9376415a53ccb4db458ca9c10ef3a43bc25",
+      "create_status": -12906,
+      "frames": 0
+    },
+    {
+      "case": "video-peer-H264-cpu-after-20261018",
+      "codec": "H264",
+      "mode": "cpu",
+      "choice": "native",
+      "peer_mode": "observe",
+      "peer_records": 2,
+      "result_SHA256": "5665115707b97c33c21213f8e4fb8b991673b3b42d70853b6be727f26e8f1be7",
+      "routing_SHA256": "1b63ffd3f8fe2f918dfe8e8db27528b67817a92e132b3a0a2440353108a242d8",
+      "inputs_SHA256": "5b6b7a71962fb46e6a408f6f4c1ac33d5666f7f44eb086d5261d9677d9acb147",
+      "create_status": 0,
+      "frames": 6
+    }
+  ]
+}

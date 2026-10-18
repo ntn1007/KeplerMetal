@@ -1,5 +1,11 @@
 # KeplerMetal
 
+Video peer identity: 14 public PID/birth/path observations and two bounded log
+windows corroborate the actual Intel decoder service. A pinned static native
+path places the old selector in the `Strt` handler; its failing runtime branch
+is still unproved. Thirteen new hosts include 18 exact software images, while
+nine hardware creates still fail. [Evidence and next integration step](docs/VIDEO_PEER_IDENTITY.md).
+
 Native video routing: three controlled presence cases reach the decoder service,
 which replies `uber=0` then `Strt=-12906`; native and wrong-key controls have no
 such observed exchanges. All hardware creates still fail. Nineteen terminal

@@ -4,6 +4,8 @@ Original KeplerMetal code is MIT-licensed. The export excludes complete external
 
 | Project | Reference used in the lab | Role | License / notice |
 | --- | --- | --- | --- |
+| [REA](https://github.com/morluto/rea) | rea-agents 6.4.0, local MCP | Static native entry evidence and retained snapshot | External analysis tool, not bundled; upstream terms apply. |
+| [Ghidra](https://github.com/NationalSecurityAgency/ghidra) | 12.1.4 | REA's native analysis provider | External installation, not linked or bundled; upstream terms apply. |
 | [OpenNVDA](https://github.com/bdwithganesh/OpenNVDA) | `da0c53d0a2a0b69b658c9e26b4cfa51946fff5f5` | AIR/NIR frontend, patch target | [Upstream MIT notice](third_party/licenses/OpenNVDA-MIT.txt), copyright 2026 bdwithganesh |
 | [Mesa](https://gitlab.freedesktop.org/mesa/mesa) | 26.2.4, `96cb43121031992b85767f9c1be8f3f48e22b1d2` | NIR and NAK SM30 compiler | [MIT text](third_party/licenses/Mesa-MIT.txt); consult each upstream SPDX header. Patched NAK files include copyright 2025 Collabora, Ltd.; meson.build includes copyright 2017–2020 Intel Corporation. |
 | [envytools](https://github.com/envytools/envytools) | `f102b82381f3f11cee113d16374c87091db039d9` | NVIDIA instruction and command documentation, assembler/disassembler | [Upstream MIT notice](third_party/licenses/envytools-MIT.txt) |

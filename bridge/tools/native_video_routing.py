@@ -67,6 +67,7 @@ def build(args):
     shutil.copytree(base / 'runtime', out / 'runtime')
     shutil.copyfile(args.profile, out / 'assets/routing-profile.json')
     write(out / 'assets/routing-choice.json', {'mode': 'observe'})
+    write(out / 'assets/peer-choice.json', {'mode': 'observe'})
     shutil.copyfile(base / 'inputs.json', out / 'dependency-inputs.json')
     names = []
     for name in data['source_hashes']:
@@ -109,7 +110,7 @@ def build(args):
     write(out / 'assets/routing-config.json', {'library_SHA256': sha(library),
           'profile_SHA256': sha(out / 'assets/routing-profile.json')})
     write(out / 'inputs.json', {
-        'source_hashes': {n: sha(out / n) for n in names},
+        'routing_schema': 3, 'source_hashes': {n: sha(out / n) for n in names},
         'assets_SHA256': {str(p.relative_to(out / 'assets')): sha(p) for p in (out / 'assets').rglob('*') if p.is_file()},
         'runtime_SHA256': {p.name: sha(p) for p in (out / 'runtime').iterdir()},
         'dependency_build': str(base), 'dependency_inputs_SHA256': sha(base / 'inputs.json'),
@@ -138,6 +139,9 @@ def run(args):
         raise ValueError('Routing library changed')
     if args.override != 'native' and (args.codec != 'H264' or args.mode != 'hardware'):
         raise ValueError('Counterfactual restricted to H264 hardware')
+    has_peer = data.get('routing_schema') == 3
+    if args.peer is not None and not has_peer:
+        raise ValueError('Peer metadata mode requires observer schema 3')
     binary = build_root / ('application-' + args.codec)
     expected = data['executable_variants_SHA256'][args.codec]
     if sha(binary) != expected:
@@ -147,16 +151,19 @@ def run(args):
     shutil.copytree(build_root / 'assets', out / 'assets')
     write(out / 'assets/dependency-choice.json', {'mode': args.override})
     write(out / 'assets/routing-choice.json', {'mode': args.routing})
+    if has_peer:
+        write(out / 'assets/peer-choice.json', {'mode': args.peer or 'observe'})
     for name in data['source_hashes']:
         shutil.copyfile(build_root / name, out / name)
     shutil.copyfile(Path(__file__), out / 'runner.py')
     shutil.copyfile(binary, out / 'application')
     (out / 'application').chmod(0o755)
     assets = dict(data['assets_SHA256'])
-    for name in ['dependency-choice.json', 'routing-choice.json']:
+    for name in ['dependency-choice.json', 'routing-choice.json'] + (['peer-choice.json'] if has_peer else []):
         assets[name] = sha(out / 'assets' / name)
     write(out / 'inputs.json', {**data, 'assets_SHA256': assets, 'selected_codec': args.codec,
-        'override_mode': args.override, 'routing_mode': args.routing, 'executable_SHA256': expected})
+        'override_mode': args.override, 'routing_mode': args.routing, 'peer_mode': (args.peer or 'observe') if has_peer else None,
+        'executable_SHA256': expected})
     sys.path.insert(0, str(build_root / 'runtime'))
     from run_sdk_host import run_host
     manifest = run_host(out / 'application', out / 'execution',
@@ -175,6 +182,7 @@ def run(args):
     print(json.dumps({'status': 'PROCESS_COMPLETED', 'codec': args.codec, 'mode': args.mode,
         'override': args.override, 'routing': args.routing, 'PID': manifest['pid'], 'exit_code': manifest['exit_code'],
         'synthetic_ABI_calls': routing['synthetic_ABI_calls'], 'native_XPC_records': len(native),
+        'peer_records': sum('peer_metadata' in e for e in native),
         'create_status': decoded['decode']['create_status'] if decoded else None,
         'frames': decoded['output_frames'] if decoded else 0, 'hardware_video_execution_proved': False}))
 
@@ -190,6 +198,7 @@ def main():
     parser.add_argument('--mode', choices=['inspect', 'cpu', 'hardware'])
     parser.add_argument('--override', choices=['native', 'wrong-key', 'present-key'], default='native')
     parser.add_argument('--routing', choices=['passive', 'observe'], default='observe')
+    parser.add_argument('--peer', choices=['passive', 'observe'], default=None)
     parser.add_argument('--reservation-root', type=Path, default=ROOT)
     args = parser.parse_args()
     args.out.resolve().relative_to(ROOT / 'results')

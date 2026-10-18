@@ -7045,9 +7045,9 @@
     {
       "path": "bridge/tools/video_routing.mm",
       "source_path": "bridge/tools/video_routing.mm",
-      "source_SHA256": "d330d03f2ef754ca879796fdc8755ccb5ea27d62f78c37b3c8927f5a49608040",
-      "published_SHA256": "d330d03f2ef754ca879796fdc8755ccb5ea27d62f78c37b3c8927f5a49608040",
-      "bytes": 18735,
+      "source_SHA256": "d2c3387329ced95c862431d64c98287b608e7696c2a3fbb11b72a9bb4b3713db",
+      "published_SHA256": "d2c3387329ced95c862431d64c98287b608e7696c2a3fbb11b72a9bb4b3713db",
+      "bytes": 25595,
       "modified_for_publication": false
     },
     {
@@ -7061,9 +7061,9 @@
     {
       "path": "bridge/tools/native_video_routing.py",
       "source_path": "bridge/tools/native_video_routing.py",
-      "source_SHA256": "f40353fd96d71fcb1de29ca085ea413c52547c715777e4d8e67f963cda0d7d09",
-      "published_SHA256": "f40353fd96d71fcb1de29ca085ea413c52547c715777e4d8e67f963cda0d7d09",
-      "bytes": 11011,
+      "source_SHA256": "4a52126ee94cbfefdeca752b7d0c34dd3d45c9c013c6ad23a992feb44c77193e",
+      "published_SHA256": "4a52126ee94cbfefdeca752b7d0c34dd3d45c9c013c6ad23a992feb44c77193e",
+      "bytes": 11623,
       "modified_for_publication": false
     },
     {
@@ -7080,6 +7080,22 @@
       "source_SHA256": "4c2e625dc202da011746397d963778aa784c8c4329e2d9f6e2ea9388f67dad6b",
       "published_SHA256": "4c2e625dc202da011746397d963778aa784c8c4329e2d9f6e2ea9388f67dad6b",
       "bytes": 7835,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/audit_video_peer.py",
+      "source_path": "bridge/tools/audit_video_peer.py",
+      "source_SHA256": "95459641906df36e6dd46faf00d3e12b867ac31a40b330bcdfaf7c0b90a84170",
+      "published_SHA256": "95459641906df36e6dd46faf00d3e12b867ac31a40b330bcdfaf7c0b90a84170",
+      "bytes": 29820,
+      "modified_for_publication": false
+    },
+    {
+      "path": "patches/video-routing-v2-to-v3.patch",
+      "source_path": "patches/video-routing-v2-to-v3.patch",
+      "source_SHA256": "97759777543dfcea5b9434b1d2f093873e8cf41984b7d678754b399a019a533f",
+      "published_SHA256": "97759777543dfcea5b9434b1d2f093873e8cf41984b7d678754b399a019a533f",
+      "bytes": 22109,
       "modified_for_publication": false
     }
   ],
@@ -7122,7 +7138,7 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "6f9adcbe11a6857cdcac3d0c69c3cb08561fe16316a4b2759c1c2f03a88f1321",
-  "previous_public_commit": "a8d6c406c16841c299220a9a31f072cb5922dc8d",
-  "update": "Public-XPC own-process video routing observation, bounded signed-status decoding and independent archive auditor; unchanged common runtime and system; hardware video still fails"
+  "previous_source_snapshot_SHA256": "f84c34b56987eb4ea0edb6b6ce161dba4518cbf9728dc7e02a2df03bcff8b761",
+  "previous_public_commit": "22920b5fde4ad546f7a343cdad56fa3fe0314804",
+  "update": "Bounded XPC peer PID/birth/path observation, errno-transparent forwarding, independent service-log corroboration and static native entry/Strt selector mapping; hardware video remains unqualified"
 }

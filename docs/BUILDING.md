@@ -1,5 +1,10 @@
 # Build from source
 
+The schema3 routing observer adds public peer metadata and errno-preserving
+forwarding. [VIDEO_PEER_IDENTITY.md](VIDEO_PEER_IDENTITY.md) documents controlled
+on/off cases, archived-source reconstruction, bounded logs and static native
+entry/selector mapping. No new hardware-video success is implied.
+
 The public XPC observer preserves the existing codec implementation and observes
 the next service refusal. [VIDEO_ROUTING.md](VIDEO_ROUTING.md) covers exact
 caller identities, two logger source versions, bounded status decoding,

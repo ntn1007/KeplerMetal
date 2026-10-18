@@ -1,5 +1,9 @@
 # Native video routing: a second refusal at the service boundary
 
+Follow-up: [VIDEO_PEER_IDENTITY.md](VIDEO_PEER_IDENTITY.md) adds schema3 peer
+metadata and a bounded native entry/selector map. The results below remain
+the frozen v1/v2 cohorts at source commit `22920b5`.
+
 Three fresh positive H.264 processes reach `com.apple.coremedia.videodecoder`
 after the narrowly pinned, process-local `IOGVACodec` presence substitution.
 The observed `uber` exchange returns **0**; the following `Strt` exchange
