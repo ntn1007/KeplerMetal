@@ -1,5 +1,20 @@
 # KeplerMetal
 
+**Objectif ultime : créer un pilote NVIDIA modernisé pour macOS qui exploite au maximum les capacités matérielles des GPU Kepler et prenne en charge le plus grand nombre de fonctionnalités Metal réellement réalisables sur ce matériel.** La carte de référence est une GeForce GTX 880M, GK104 / SM30, de 8 Gio de VRAM dans un iMac Intel.
+
+À terme, nous visons une intégration native à macOS permettant aux applications Metal habituelles de bénéficier de ces capacités sans adaptation spécifique. Les progrès sont évalués par la justesse des calculs GPU, la stabilité et des benchmarks sur des charges précises.
+
+Le travail suit deux axes complémentaires :
+
+1. **Moderniser le pilote NVIDIA :** corriger le compilateur et le runtime natifs, améliorer la gestion du GPU et de la mémoire, la soumission des commandes et la synchronisation, puis vérifier la stabilité et les performances.
+2. **Étendre les fonctionnalités Metal :** faire évoluer le compilateur, le runtime, les ressources et les commandes, en évaluant les fonctions de Metal 2/3/4 une par une selon les capacités réelles du matériel.
+
+**État actuel : recherche et prototypes expérimentaux validés.** Le dépôt partage le code lisible, les correctifs ciblés, les outils de reproduction et les preuves GPU qui préparent ce pilote. L’intégration actuelle passe encore par des applications adaptées ; le pilote système complet et la prise en charge générale de Metal 3/4 restent à réaliser. Les composants propriétaires Apple/NVIDIA sont récupérés séparément et ne sont pas redistribués ici.
+
+[English](README.md) · [Compilation](docs/BUILDING.md) · [Dépendances](docs/DEPENDENCIES.md) · [État des travaux](docs/STATUS.md) · [Architecture](docs/ARCHITECTURE.md)
+
+## Avancées récentes
+
 L’import explicite accepte maintenant des profils de mémoire privée de 8 et 16 Kio par thread. L’archive publique reconstruite avec ses sept objets passe 226 dispatchs sur la GTX 880M, 612 120 valeurs exactes et les contrôles de coexistence CAS. [Commandes, empreintes et limites](docs/LARGE_LOCAL_MEMORY.md). Cette extension reste expérimentale ; aucun pilote système ni gain de performances n’est annoncé.
 
 Le nouveau module SDK conserve un instantané des commandes natives et respecte les frontières demandées, y compris `setBarrier`. Quatre commandes s’entrelacent correctement ; deux groupes séparés respectent l’ordre atomique attendu. La qualification laboratoire couvre 292 dispatchs corrects, avec une qualification distincte de l’artefact public. [API, sources et limites](docs/NATIVE_RESIDENT_BATCH.md). Le témoin administrateur exécuté par l’utilisateur réussit aussi l’ouverture/fermeture du port ; la vidéo matérielle reste non démontrée. [Preuves d’accès](docs/VIDEO_ADMIN_ACCESS.md).
@@ -18,13 +33,7 @@ Les essais par l’API publique H.264 et MPEG‑2 produisent des images CPU exac
 
 Une barrière d’éligibilité vidéo est maintenant reproduite : la requête AppleVA passe de −8973 à 0 dans trois processus de test recevant seulement une entrée `iMac11,1` en mémoire. Sept contrôles gardent le refus. Le système reste inchangé et le décodage matériel demeure non démontré. [Preuves et limites](docs/VIDEO_ELIGIBILITY.md).
 
-Recherche open source pour moderniser la pile NVIDIA Kepler sous macOS, avec une GTX 880M GK104 / SM30 de 8 Gio comme matériel de référence.
-
 Dernière enquête vidéo : six images décodées en logiciel sur l’iMac correspondent exactement à une référence CPU FFmpeg indépendante. Le décodage matériel reste refusé. Le WebVA NVIDIA officiel contient les mêmes deux stubs que la copie de support examinée ; aucun remplacement vidéo fonctionnel ni gain n’est annoncé. [Sources, preuves et suite](docs/VIDEO_TRANSPORT.md).
-
-Deux branches restent distinctes : corriger ou améliorer la pile NVIDIA existante, et étendre les fonctions Metal accessibles aux applications. Le dépôt partage le code lisible, les tests, les vérificateurs CPU et les correctifs des outils libres.
-
-**État expérimental :** intégration dans des applications adaptées. Le projet ne fournit pas encore un pilote système de remplacement ni une compatibilité Metal 3/4 complète. Les essais historiques qualifient des fonctions précises ; ils ne prouvent pas un gain général de performances.
 
 ## Démarrer
 

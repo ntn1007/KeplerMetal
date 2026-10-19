@@ -1,5 +1,20 @@
 # KeplerMetal
 
+**Ultimate goal: develop a modernized NVIDIA driver for macOS that makes full use of Kepler's hardware capabilities and supports as many Metal features as the hardware can actually implement.** The reference GPU is a GeForce GTX 880M, GK104 / SM30, with 8 GiB VRAM in an Intel iMac.
+
+The long-term target is native macOS integration, allowing ordinary Metal applications to use these capabilities without application-specific adaptations. Progress is measured through correct GPU execution, stability and workload-specific benchmarks.
+
+The work follows two complementary tracks:
+
+1. **NVIDIA driver modernization:** diagnose and correct native compiler/runtime behavior, improve GPU and memory management, command submission and synchronization, and validate stability and performance.
+2. **Metal feature support:** extend compiler, runtime, resource and command functionality, evaluating Metal 2/3/4 features individually against the hardware's actual capabilities.
+
+**Current stage: experimental research and validated prototypes.** This repository shares readable code, targeted fixes, reproduction tools and GPU evidence toward that driver. Current integration still requires adapted applications; a complete replacement system driver and general Metal 3/4 support remain work to be done. Proprietary Apple/NVIDIA components are obtained separately and are not redistributed here.
+
+[Français](README.fr.md) · [Build from source](docs/BUILDING.md) · [Dependencies](docs/DEPENDENCIES.md) · [Status](docs/STATUS.md) · [Architecture](docs/ARCHITECTURE.md)
+
+## Recent progress
+
 The opt-in local-memory import now accepts qualified 8/16 KiB private frames. A fresh seven-object build from public sources passed 226 GTX 880M compute dispatches, 612,120 exact output values and the CAS coexistence controls. [Reproduction, artifact hashes and limits](docs/LARGE_LOCAL_MEMORY.md). This extends the experimental import path; no system driver or performance improvement is claimed.
 
 An optional SDK batch now snapshots native records and honors completion boundaries, including source-slot `setBarrier`. Four-entry batches interleave correctly; split batches preserve the requested atomic ordering. The laboratory qualification covers 292 correct dispatches, with a separate public-artifact qualification. [API, source-only commands and limits](docs/NATIVE_RESIDENT_BATCH.md). The human administrator port experiment also passed open/close; hardware video remains unproved. [Access evidence](docs/VIDEO_ADMIN_ACCESS.md).
@@ -26,8 +41,6 @@ controls. [Evidence, source and limits](docs/VIDEO_ROUTING.md).
 
 Native GPU dependency: a pinned public API confirms missing `IOGVACodec` on the GTX 880M. Three controlled presence substitutions change the GVA selection path, while native and wrong-key controls preserve the original path. All 13 new hardware creates still fail; 24 software images match the CPU exactly. [Evidence, scope and reproduction](docs/VIDEO_DEPENDENCIES.md).
 
-Open source research for modernizing the NVIDIA Kepler graphics stack on macOS.
-
 Public-codec follow-up: H.264 and a new independent MPEG-2 fixture decode exactly in software, but nine hardware-required attempts still fail before images. The pinned model-policy site is not observed on our thread, so the availability result alone does not fix these paths. [Tests, source and next selection investigation](docs/VIDEO_CODEC_SELECTION.md).
 
 Availability-query milestone: an exact-profile AppleVA query refuses the original model table but succeeds in three fresh processes when only our test process receives an `iMac11,1` entry. Seven native/wrong-model controls retain the refusal. This identifies an eligibility gate, not hardware decoding or a system fix. [Loaded providers, causal test and limits](docs/VIDEO_ELIGIBILITY.md).
@@ -43,15 +56,6 @@ The unchanged API also passes new source-nesting104/120programs, with24additiona
 Read-only native command snapshots now map the local-memory and CRS fields on two profiles. A metadata reserve of4,096 produces a prepared CRS field of4,608; nine corrected trials pass while six native failures remain preserved. No packet patch/replay, resident-QMD readback or general allocator is claimed. [Field mapping and reproduction](docs/NATIVE_ALLOCATION_QMD.md).
 
 New sequential blocks of 65 and 55 levels pass at a tested reserve of 2,560 while the fully nested program with 120 levels failed at 3,584. The segmented program contains more `joinat` instructions, so total counts do not explain the different sufficient reserves. Nine new trials pass and six numerical failures remain preserved; no automatic rule or VRAM saving is claimed. [Discriminating control shapes](docs/NATIVE_SEGMENTED_CONTROL.md).
-
-[Français](README.fr.md) · [Build from source](docs/BUILDING.md) · [Dependencies](docs/DEPENDENCIES.md) · [Status](docs/STATUS.md) · [Architecture](docs/ARCHITECTURE.md)
-
-The reference device is a GeForce GTX 880M, GK104 / SM30, with 8 GiB VRAM in an Intel iMac. The project studies two independent areas:
-
-1. **NVIDIA stack modernization:** diagnose and correct specific native shader/runtime behavior, compare driver generations, and measure any improvement.
-2. **Metal extensions:** implement selected missing resource and command functionality using the working native driver and scoped, application-side adapters.
-
-This is an experimental source release. It is **not an installable replacement display driver**, a claim of Metal 3/4 conformance, or a Linux-to-XNU driver port. The integration currently requires an explicitly adapted application. Existing macOS/OCLP components stay in place.
 
 ## Included
 
