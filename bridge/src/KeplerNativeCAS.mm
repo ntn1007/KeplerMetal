@@ -265,12 +265,14 @@ extern "C" id<MTLComputePipelineState> KPCreateLocalMemoryPipeline(
  else if([function isEqual:@"local32"])bytes=128;
  else if([function isEqual:@"local256"])bytes=1024;
  else if([function isEqual:@"local1024"])bytes=4096;
+ else if([function isEqual:@"local2048"])bytes=8192;
+ else if([function isEqual:@"local4096"])bytes=16384;
  else if([function isEqual:@"pressure96"]){bytes=224;spill=224;barriers=1;}
  else{fail(error,@"Native local-memory carrier function is not qualified");return nil;}
  if(config.carrier_local_bytes!=bytes||config.carrier_spill_bytes!=spill||config.carrier_control_barriers!=barriers){fail(error,@"Native local-memory profile differs");return nil;}
  NSData*snapshot=[[NSData alloc]initWithBytes:library.bytes length:library.length];
  unsigned char digest[32];CC_SHA256(snapshot.bytes,(CC_LONG)snapshot.length,digest);char hex[65];for(unsigned i=0;i<32;i++)sprintf(hex+i*2,"%02x",digest[i]);hex[64]=0;
- if(strcmp(hex,"bb052086f1a0f8ce1a2cad8da00c74926ac47abe0d0b95d3b1f66cf24f4d3d5d")){[snapshot release];fail(error,@"Native local-memory library fingerprint differs");return nil;}
+ if(strcmp(hex,bytes>4096?"62a49cf2ea3a3e4daec94cb7cf6c35abb2828101b74c47a8ea6d16d042137424":"bb052086f1a0f8ce1a2cad8da00c74926ac47abe0d0b95d3b1f66cf24f4d3d5d")){[snapshot release];fail(error,@"Native local-memory library fingerprint differs");return nil;}
  id<MTLComputePipelineState>pipeline=nil;
  @try{certifiedLibraryData=snapshot;localMemoryContract=&config;pipeline=KPInternalCASCreatePipeline(device,nil,function,code,{config.registers,0,0},error,evidence);}
  @finally{localMemoryContract=nullptr;certifiedLibraryData=nil;[snapshot release];}

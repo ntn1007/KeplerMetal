@@ -1,5 +1,7 @@
 # Local memory and register spills
 
+The later [8/16 KiB extension](LARGE_LOCAL_MEMORY.md) qualifies two additional private-frame profiles on a separately rebuilt public archive. The original 128–4,096-byte and spilling results below remain historical evidence for their own artifacts.
+
 This milestone qualifies the existing native private-memory path and extends our SM30 import transport to use it. It adds no device family, installed driver or general Metal version support. The API is explicit and restricted to the recorded carrier profiles.
 
 ## Distinct evidence

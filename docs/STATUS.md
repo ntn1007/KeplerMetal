@@ -1,4 +1,6 @@
-# Status at the source export, 2026-10-18
+# Status at the source export, 2026-10-19
+
+The exact qualified 8/16 KiB private-frame profile change is integrated into the common MRC import implementation. A new seven-object public source rebuild has its own GTX qualification: 226 compute dispatches, 612,120 exact output uint32 values, 111,872 guard bytes and 77,376 expected computation words absent in no-dispatch controls. A one-instruction differential yields 704 changed witnesses with 2,112 other arithmetic words identical; CAS coexistence preserves 106,650 correct operations. Constructor/refusal controls and legacy local/spill profiles pass. This is a bounded opt-in import extension, with no installed-driver change, hardware-video success or performance claim. [Commands, exact archive and limits](LARGE_LOCAL_MEMORY.md).
 
 The optional resident-batch SDK snapshots records, source-slot barriers and resource footprints. Its bounded laboratory cohort passes 292 dispatches across 108 main trials: ten four-entry batches have all six pairwise intervals interleaved; 28 split batches preserve their midpoint boundary. Thirteen actual refusal cases run in each successful process; source slots are reset before user execution. The module owns its carrier encoder; ordinary Metal concurrency and general memory visibility remain unqualified. [Contract and independent public-artifact results](NATIVE_RESIDENT_BATCH.md).
 

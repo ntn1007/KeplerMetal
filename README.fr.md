@@ -1,5 +1,7 @@
 # KeplerMetal
 
+L’import explicite accepte maintenant des profils de mémoire privée de 8 et 16 Kio par thread. L’archive publique reconstruite avec ses sept objets passe 226 dispatchs sur la GTX 880M, 612 120 valeurs exactes et les contrôles de coexistence CAS. [Commandes, empreintes et limites](docs/LARGE_LOCAL_MEMORY.md). Cette extension reste expérimentale ; aucun pilote système ni gain de performances n’est annoncé.
+
 Le nouveau module SDK conserve un instantané des commandes natives et respecte les frontières demandées, y compris `setBarrier`. Quatre commandes s’entrelacent correctement ; deux groupes séparés respectent l’ordre atomique attendu. La qualification laboratoire couvre 292 dispatchs corrects, avec une qualification distincte de l’artefact public. [API, sources et limites](docs/NATIVE_RESIDENT_BATCH.md). Le témoin administrateur exécuté par l’utilisateur réussit aussi l’ouverture/fermeture du port ; la vidéo matérielle reste non démontrée. [Preuves d’accès](docs/VIDEO_ADMIN_ACCESS.md).
 
 Deux kernels compilés par NVIDIA présentent maintenant des durées d’exécution entrelacées sur la GTX 880M, avec des descripteurs et constantes indépendants. Le prototype borné passe 34/34 paires au laboratoire ; une reconstruction distincte depuis les sources publiques passe 16/16 paires et 62 dispatchs corrects, contrôles séquentiels compris. L’encodeur Metal ordinaire reste séquentiel ; aucun gain de vitesse n’est annoncé. [Sources, preuves et reproduction](docs/NATIVE_RESIDENT_OVERLAP.md).

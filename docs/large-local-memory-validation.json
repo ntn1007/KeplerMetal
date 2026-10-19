@@ -1,0 +1,225 @@
+{
+  "schema": 1,
+  "date": "2026-10-19",
+  "status": "PASS_BOUNDED_PUBLIC_ARCHIVE_QUALIFICATION",
+  "source_base_commit": "4f37f9e1e279890ec33015b2097bce2549dad428",
+  "source_snapshot_SHA256": "a4d745e2eb480d9b04173e51c802cf539cea7f8237276d371240112e8787eec1",
+  "device": "NVIDIA GeForce GTX 880M",
+  "architecture": "Kepler GK104 / SM30",
+  "macOS": {
+    "version": "26.7.1",
+    "build": "25G241"
+  },
+  "build": {
+    "architecture": "x86_64",
+    "SDK": "26.2",
+    "compiler": "Apple clang 17.0.0 (clang-1700.6.4.2)",
+    "core_objects": 7,
+    "static_library_SHA256": "364bf6599f0ff10cc389449189a3c6a5ca96dba138d99f90144a07878d88e585",
+    "manifest_SHA256": "2ef0ed43698e68f8f1e87fc54abadbfb84b15d1402f9bef412a8363432f7b697",
+    "native_CAS_source_SHA256": "ed17e1d36acdfb938e194d2020d86261af2a4d829e4de284887c15f5f39efd1b",
+    "whole_archive_link": "PASS",
+    "CPU_link_check": "PASS"
+  },
+  "changed_runtime": {
+    "source": "bridge/src/KeplerNativeCAS.mm",
+    "change": "Add two frame profiles and a separate exact carrier hash above 4096 bytes",
+    "new_private_frame_bytes": [
+      8192,
+      16384
+    ],
+    "other_common_sources_unchanged": 35
+  },
+  "prior_six_object_candidate": {
+    "static_library_SHA256": "e9832d3fd12dcfa06208ede1eb9b1106bb783ca9f1ccfe24da91f33e3e54ae43",
+    "qualification_inherited": false,
+    "files_rechecked_unchanged": 1446
+  },
+  "historical_native_reference_files_rechecked_unchanged": 239,
+  "cohorts": [
+    {
+      "name": "baseline",
+      "cases": 4,
+      "kernel_dispatches": 6,
+      "exact_uint32_results": 2816,
+      "guard_bytes": 6144,
+      "negative_expected_words_absent": 2816
+    },
+    {
+      "name": "extended",
+      "cases": 4,
+      "kernel_dispatches": 24,
+      "exact_uint32_results": 35872,
+      "guard_bytes": 24576,
+      "negative_expected_words_absent": 35872
+    },
+    {
+      "name": "legacy",
+      "cases": 10,
+      "kernel_dispatches": 96,
+      "exact_uint32_results": 143488,
+      "guard_bytes": 61440,
+      "negative_expected_words_absent": 35872
+    },
+    {
+      "name": "witness",
+      "cases": 4,
+      "kernel_dispatches": 6,
+      "exact_uint32_results": 2816,
+      "guard_bytes": 6144,
+      "negative_expected_words_absent": 2816
+    }
+  ],
+  "CAS_coexistence": {
+    "kernel_dispatches": 94,
+    "CAS_dispatches": 90,
+    "compute_postludes": 4,
+    "correct_CAS_operations": 106650,
+    "exact_uint32_results": 427128,
+    "guard_bytes": 13568,
+    "refusal_controls": 8,
+    "refusal_command_buffers": 0
+  },
+  "totals": {
+    "kernel_dispatches": 226,
+    "exact_uint32_results": 612120,
+    "guard_bytes": 111872,
+    "negative_expected_words_absent": 77376,
+    "signed_hosts": 26,
+    "command_buffers_including_no_kernel_controls": 286
+  },
+  "controls": {
+    "no_kernel_command_buffers": 60,
+    "constructor_only_valid_cases": 2,
+    "mixed_constructor_cases": 28,
+    "mixed_expected_refusals": 26,
+    "mixed_valid_recoveries": 2,
+    "constructor_command_buffers": 0,
+    "nonoverlapping_hosts": true,
+    "all_signed_hosts_terminal": true
+  },
+  "differential_witness": {
+    "integration_level": 1,
+    "changed_instruction_words_per_program": 1,
+    "changed_word_index": 407,
+    "byte_offset": 3256,
+    "normal_magic": "cafe0000",
+    "tagged_magic": "4e414b00",
+    "varying_witnesses": 704,
+    "other_arithmetic_words_identical": 2112,
+    "same_host_and_carrier": true,
+    "caller_inputs_wiped_before_commit": true,
+    "CPU_answers_uploaded": false
+  },
+  "Mesa": {
+    "version": "26.2.4",
+    "upstream_reference_commit": "96cb43121031992b85767f9c1be8f3f48e22b1d2",
+    "effective_tree": "extracted source with local SM30 patches; no nested Git revision",
+    "linked_archives_SHA256": {
+      "src/nouveau/compiler/libnak.a": "08b37b25b4def558916ef256e5835901072e11f311c5775676d9773742bff089",
+      "src/nouveau/compiler/libnak_rs.a": "d9da6bbfe0c06393dda55197103dc9e1e13825c7b597d42278d6ab8ea16d4231",
+      "src/compiler/nir/libnir.a": "d75f2c0567cd1749b877e8b5ca979e1a62ce9f568c0c1b0eb272bfe1e08b4653",
+      "src/compiler/libcompiler.a": "1c01648ee4dbd3fd96898aa6f6a982b1bf9601ea6af3d59427d8e5a0d840e544",
+      "src/nouveau/headers/libnvidia_headers_c.a": "43fc144e5690fff925003045e11beff286f00b87c8e811e72227c129148a40ae",
+      "src/util/libmesa_util.a": "be04faeafb3167e2b67884388d1b066221c96bd3c8dc5174a5483c1ca800dbd4",
+      "src/util/libmesa_util_simd.a": "f0af7efe2eb38556e546b828509a716c5ba941bb896a4e60e5606d8b31a99e1b",
+      "src/util/blake3/libblake3.a": "0a6ecf3f78b24e041f71e9dce22005e9c032cff129196bd4af41002eeda255d3",
+      "src/c11/impl/libmesa_util_c11.a": "a9f07eb1c32bafbcbf0dfc7cf4fb55236b14d412cbee13de7b27ce2d554bb18e",
+      "src/compiler/rust/libcompiler_c_helpers.a": "409596ef8bffe60893903ced08aeb0bf6aa721e2eba8381dab63351a4094b34a",
+      "src/compiler/rust/libcompiler_bindings.a": "7c3ce248151d3370f4d43032557824603ed4cbdf9c9d3f43ad4a8d3f1e9e88c9"
+    }
+  },
+  "program_source_SHA256": "e7fbfdaa3e9912bd478b8e7567b7d66bc5c72dbecd2ece3074a068132dd99916",
+  "regenerated_programs_identical_to_prior_qualified_assets": 10,
+  "new_programs": [
+    {
+      "name": "local2048",
+      "info": {
+        "semantic": "local2048",
+        "uniform_full_workgroups_required": true,
+        "sm": 30,
+        "registers": 24,
+        "actual_registers": 24,
+        "code_bytes": 3456,
+        "scratch_bytes": 8192,
+        "crs_bytes": 0,
+        "control_barriers": 0,
+        "spills_to_memory": 0,
+        "fills_from_memory": 0
+      },
+      "code_SHA256": "6b5edc45107ffd0180ed857b707375d082f10a2d3e4b06799f216c8b31f7ab94",
+      "tagged_code_SHA256": "aadac9f3057c2eb13370817baa1b525385e5b46bf292df89a320a2a21f4a14cd"
+    },
+    {
+      "name": "local4096",
+      "info": {
+        "semantic": "local4096",
+        "uniform_full_workgroups_required": true,
+        "sm": 30,
+        "registers": 24,
+        "actual_registers": 24,
+        "code_bytes": 3456,
+        "scratch_bytes": 16384,
+        "crs_bytes": 0,
+        "control_barriers": 0,
+        "spills_to_memory": 0,
+        "fills_from_memory": 0
+      },
+      "code_SHA256": "8269596533ddfc873865bdbe1759eca7b1ccf8c870954c45801290cc7a2e6025",
+      "tagged_code_SHA256": "4ebf214ac4c99ec5aaa6f197d1d66a39d5f5c66ed9d9e75160bb9df21441e4b0"
+    }
+  ],
+  "carrier_SHA256": {
+    "large": "62a49cf2ea3a3e4daec94cb7cf6c35abb2828101b74c47a8ea6d16d042137424",
+    "legacy": "bb052086f1a0f8ce1a2cad8da00c74926ac47abe0d0b95d3b1f66cf24f4d3d5d"
+  },
+  "validation": {
+    "portable_CPU_tests": "PASS",
+    "portable_CPU_test_count": 62,
+    "new_provenance_guard_tests": 5,
+    "raw_evidence_recalculation": "PASS",
+    "private_audit_SHA256": "8c46365897df1f01eb6e0aef580457017cc99756bd7d3cb065e6dfd3e0dfd9c0",
+    "command_buffer_count_recheck_SHA256": "ce98c44b6f8a2766e6ff4c6f8aac02267eedadc740dc6aec60385d074e2748be",
+    "tracked_system_files_unchanged": 83,
+    "additional_system_pins_unchanged": 4
+  },
+  "public_tool_SHA256": {
+    "public_large_scratch.py": "b9c15e6a976d1278f214d7fd0f27e7feba6ea771f44a50ca73ad061974da5620",
+    "qualify_public_large_scratch.py": "fff0629546d2b98f7b09ffd025314fcd84ff40b1a5dcf0b30dfdacbdbb2d36e3",
+    "public_large_scratch_cas.py": "69f7104eef1da07c35bcaebbe89598fd049769be912db0faebff7f4ce5252bf4",
+    "verify_local_memory.py": "8769fb470b9f49683b33f7d884fc4aa844038fe2e291e47bd008d3347553d417",
+    "verify_native_cas_sdk.py": "247c97e9fdbc0c0ae2098251210b01fbe5129a79be181e2e5772b6a618cf7bbf"
+  },
+  "Qwen_job_ids": [],
+  "root_RM_calls": 0,
+  "installed_driver_modified": false,
+  "OCLP_modified": false,
+  "full_objective_complete": false,
+  "limits": {
+    "integration_level": 1,
+    "all_historical_feature_cohorts_rerun": false,
+    "physical_VRAM": "NOT RUN",
+    "scratch_occupancy_or_maximum_pressure": "NOT RUN",
+    "hardware_resident_instruction_readback": "NOT RUN",
+    "performance_benchmark": "NOT RUN",
+    "general_Metal_3_4_conformance": false,
+    "transparent_unmodified_application_integration": false,
+    "all_older_CAS_fixtures_clean_checkout_bootstrap": false
+  },
+  "source_publication_identity": {
+    "status": "PASS",
+    "base_audit_SHA256": "8c46365897df1f01eb6e0aef580457017cc99756bd7d3cb065e6dfd3e0dfd9c0",
+    "before_source_snapshot_SHA256": "1222a9c7ba0f6ebf6d479c4cc841bdcd437f680d1334b6dacf9003faf5d29877",
+    "published_source_snapshot_SHA256": "a4d745e2eb480d9b04173e51c802cf539cea7f8237276d371240112e8787eec1",
+    "source_delta": "Remove one space on each of five otherwise blank lines; line count unchanged",
+    "qualified_source_SHA256": "3df8068e7b0b8aa8416351ccec762c0ea2e0ab3149f7aa47eeef09237383903f",
+    "published_source_SHA256": "9f7aa5a7062721260462c7bf28c185ec1ab6f3811de0d9482be35520501ddfe8",
+    "independently_rebuilt_executable_SHA256": "630b0444a6a929b6a31eb55d835016470c0b13b8d1de7eaa7468c82d30bc8b93",
+    "GPU_qualified_executable_SHA256": "630b0444a6a929b6a31eb55d835016470c0b13b8d1de7eaa7468c82d30bc8b93",
+    "byte_identical_executable": true,
+    "archive_SHA256": "364bf6599f0ff10cc389449189a3c6a5ca96dba138d99f90144a07878d88e585",
+    "assets_and_runtime_unchanged": true,
+    "new_GPU_launches": 0,
+    "private_identity_record_SHA256": "5109d7de261b4d1a74983f37ee9c79bce667ab1e6026ff5db267d55cda43012e"
+  }
+}

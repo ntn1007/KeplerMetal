@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "date": "2026-10-18",
+  "date": "2026-10-19",
   "source_git": {
     "branch": "main",
     "commit": null,
@@ -127,11 +127,11 @@
     {
       "path": "bridge/src/KeplerNativeCAS.mm",
       "source_path": "bridge/src/KeplerNativeCAS.mm",
-      "source_SHA256": "57f598600dbbea9d9da2e60ebb1cbcf677d7bf18d8e420a8c2754425dd0e3f1c",
-      "published_SHA256": "57f598600dbbea9d9da2e60ebb1cbcf677d7bf18d8e420a8c2754425dd0e3f1c",
-      "bytes": 28837,
+      "source_SHA256": "ed17e1d36acdfb938e194d2020d86261af2a4d829e4de284887c15f5f39efd1b",
+      "published_SHA256": "ed17e1d36acdfb938e194d2020d86261af2a4d829e4de284887c15f5f39efd1b",
+      "bytes": 29022,
       "modified_for_publication": false,
-      "previous_published_SHA256": "0e90972d9024a7d5b1b9ab918fb46dcd3e6af6110d9b4b59233d7cb79d59d712"
+      "previous_published_SHA256": "57f598600dbbea9d9da2e60ebb1cbcf677d7bf18d8e420a8c2754425dd0e3f1c"
     },
     {
       "path": "bridge/src/KeplerNativeCASAdapter.inc",
@@ -7329,6 +7329,79 @@
       "published_SHA256": "046f9a8f0a092e0c0d6e8df79a7c6d21cf001107f750d7bd879539390cab9bcd",
       "bytes": 10340,
       "modified_for_publication": false
+    },
+    {
+      "path": "bridge/src/kepler_large_scratch.metal",
+      "source_path": "bridge/src/kepler_large_scratch.metal",
+      "source_SHA256": "9b1501983669340eaf16bd3160d690e3b97e9127498932236b0649df3eca48d5",
+      "published_SHA256": "9b1501983669340eaf16bd3160d690e3b97e9127498932236b0649df3eca48d5",
+      "bytes": 3908,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/local_memory_large_scratch_compile.c",
+      "source_path": "bridge/tools/local_memory_large_scratch_compile.c",
+      "source_SHA256": "e7fbfdaa3e9912bd478b8e7567b7d66bc5c72dbecd2ece3074a068132dd99916",
+      "published_SHA256": "e7fbfdaa3e9912bd478b8e7567b7d66bc5c72dbecd2ece3074a068132dd99916",
+      "bytes": 6142,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/native_large_scratch_import_contract.mm",
+      "source_path": "bridge/tools/native_large_scratch_import_contract.mm",
+      "source_SHA256": "7e527d54769f687613d6db4fc2528524fb085815b6b527539cabeddb4ef6ae30",
+      "published_SHA256": "7e527d54769f687613d6db4fc2528524fb085815b6b527539cabeddb4ef6ae30",
+      "bytes": 5219,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/native_large_scratch_probe.mm",
+      "source_path": "bridge/tools/native_large_scratch_probe.mm",
+      "source_SHA256": "d8c4a4761f6d662cfa015c39e331749395336783eccadac498ea551191dd3eb4",
+      "published_SHA256": "d8c4a4761f6d662cfa015c39e331749395336783eccadac498ea551191dd3eb4",
+      "bytes": 7837,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/public_large_scratch.py",
+      "source_path": "bridge/tools/public_large_scratch.py",
+      "source_SHA256": "b9c15e6a976d1278f214d7fd0f27e7feba6ea771f44a50ca73ad061974da5620",
+      "published_SHA256": "b9c15e6a976d1278f214d7fd0f27e7feba6ea771f44a50ca73ad061974da5620",
+      "bytes": 12795,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/public_large_scratch_cas.py",
+      "source_path": "bridge/tools/public_large_scratch_cas.py",
+      "source_SHA256": "69f7104eef1da07c35bcaebbe89598fd049769be912db0faebff7f4ce5252bf4",
+      "published_SHA256": "69f7104eef1da07c35bcaebbe89598fd049769be912db0faebff7f4ce5252bf4",
+      "bytes": 7047,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/public_large_scratch_cas_probe.mm",
+      "source_path": "bridge/tools/public_large_scratch_cas_probe.mm",
+      "source_SHA256": "3df8068e7b0b8aa8416351ccec762c0ea2e0ab3149f7aa47eeef09237383903f",
+      "published_SHA256": "9f7aa5a7062721260462c7bf28c185ec1ab6f3811de0d9482be35520501ddfe8",
+      "bytes": 13971,
+      "modified_for_publication": true,
+      "publication_change": "Remove spaces on five blank lines; rebuilt host is byte-identical to GPU-qualified executable"
+    },
+    {
+      "path": "bridge/tools/qualify_public_large_scratch.py",
+      "source_path": "bridge/tools/qualify_public_large_scratch.py",
+      "source_SHA256": "fff0629546d2b98f7b09ffd025314fcd84ff40b1a5dcf0b30dfdacbdbb2d36e3",
+      "published_SHA256": "fff0629546d2b98f7b09ffd025314fcd84ff40b1a5dcf0b30dfdacbdbb2d36e3",
+      "bytes": 3652,
+      "modified_for_publication": false
+    },
+    {
+      "path": "tests/test_large_scratch_public.py",
+      "source_path": "tests/test_large_scratch_public.py",
+      "source_SHA256": "e1bf278ec57e11ff4e0b9fe9ab0d671978ef964fbde36551551f769fe85e0e4e",
+      "published_SHA256": "e1bf278ec57e11ff4e0b9fe9ab0d671978ef964fbde36551551f769fe85e0e4e",
+      "bytes": 3206,
+      "modified_for_publication": false
     }
   ],
   "excluded_source_tools": [
@@ -7370,24 +7443,27 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "15db6a7b8c0aca823300f97316ccdd5902af7867aaf90d8b6f66445f62828706",
-  "previous_public_commit": "7d3d044318223012d69fc955d0a8b66f85b9f390",
+  "previous_source_snapshot_SHA256": "86882ab16b4024ed5c08ba8bd2face706d7bec42b6ccc7160ca1830791c88262",
+  "previous_public_commit": "4f37f9e1e279890ec33015b2097bce2549dad428",
   "update": {
-    "date": "2026-10-18",
-    "scope": "Native decoder start witnesses, public policy backtrace and firstCVpixelbuffer; no hardware images",
+    "date": "2026-10-19",
+    "scope": "Qualified 8/16 KiB private local-memory profiles on a new seven-object public source rebuild",
     "source_files_updated": [
-      "bridge/tools/video_factory_resolver.mm",
-      "bridge/tools/native_video_factory.py",
-      "bridge/tools/audit_video_start.py",
-      "bridge/tools/map_video_stub_targets.py",
-      "patches/video-start-v8-to-v5.patch",
-      "patches/video-start-v8-to-v6.patch",
-      "patches/video-start-v8-to-v7.patch"
+      "bridge/src/KeplerNativeCAS.mm",
+      "bridge/src/kepler_large_scratch.metal",
+      "bridge/tools/local_memory_large_scratch_compile.c",
+      "bridge/tools/native_large_scratch_import_contract.mm",
+      "bridge/tools/native_large_scratch_probe.mm",
+      "bridge/tools/public_large_scratch.py",
+      "bridge/tools/public_large_scratch_cas.py",
+      "bridge/tools/public_large_scratch_cas_probe.mm",
+      "bridge/tools/qualify_public_large_scratch.py",
+      "tests/test_large_scratch_public.py"
     ],
-    "native_hosts": 17,
-    "software_images": 18,
-    "hardware_images": 0,
-    "mock_controls": 1952,
+    "public_static_library_SHA256": "364bf6599f0ff10cc389449189a3c6a5ca96dba138d99f90144a07878d88e585",
+    "prior_six_object_candidate_SHA256": "e9832d3fd12dcfa06208ede1eb9b1106bb783ca9f1ccfe24da91f33e3e54ae43",
+    "compute_dispatches": 226,
+    "exact_uint32_results": 612120,
     "full_objective_complete": false
   }
 }

@@ -1,5 +1,7 @@
 # Build from source
 
+The 8/16 KiB private local-memory import has a separate public seven-object archive qualification. [LARGE_LOCAL_MEMORY.md](LARGE_LOCAL_MEMORY.md) gives source-only program/carrier generation, strict profile checks, serialized GPU suites and the CAS coexistence prerequisites. These GPU tests are separate from the standard CPU-only build.
+
 The optional `KeplerResidentBatch` ARC object is compiled separately from the original seven-object core. [NATIVE_RESIDENT_BATCH.md](NATIVE_RESIDENT_BATCH.md) provides the standalone text build, strict native profile, preparation/serial/segmented/parallel prerequisite chain and independent CPU auditor. Its GPU runs require the same existing common host reservation; the administrator video experiment is separate.
 
 The bounded two-kernel resident-overlap client has a standalone text-only build, signed GPU runner and portable verifier. [NATIVE_RESIDENT_OVERLAP.md](NATIVE_RESIDENT_OVERLAP.md) gives the complete seven-object rebuild, separate serial qualification, guarded candidate run and common host reservation. It changes only its own validated uncommitted stream; it does not implement the ordinary concurrent encoder API or claim a speedup.
