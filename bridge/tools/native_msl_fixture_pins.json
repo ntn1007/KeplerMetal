@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "assets": {
+    "consumer.metallib": "7b415aef3f5feb660698dfa0816b11a62d35da9ccc71cd83be170fabd904349f",
+    "consumer.json": "408b71ba8c668d7327783aeefa0b7da755399f91b42295cd0dad3edcfe28c066",
+    "gpu_command_selector.metallib": "b6d3f29fc4f85dd020f96fff3fc5f2586548aad483ea2649172b56545a9e581c",
+    "gpu_command_geometry.metallib": "f6cc04a4c2555a2555dc06a2f02687ffe5a63fb5304619b1d9662ec1f0176441",
+    "gpu_command_bindings.metallib": "ce99cdc66f55f4ce7069b9518ed1f074feea2bee6daded2d320098e29b43f290",
+    "materializer.metallib": "a16652f21d39de58e16dbb4704b98813565b5ec3e9e2f0f926c0eb6d77015997",
+    "carrier.metallib": "11af926e34fe9995690960860b227d01020f5707139a1367ea4823f07565d3bb",
+    "basic.sass": "5cdfc6d87bd93ce548c352d6c381040ddfa89a30845e230bc9f1847a0bca0706",
+    "basic.json": "96af6b5b27ce6532795e841f2c8c42bfff986df9f5460994669c442b04fa13f2",
+    "barrier.sass": "ee6795c70b59af06255dec645649dc2e6df7bd1fe3df9a89781e7d6df95259f2",
+    "barrier.json": "ff8b34600b81f5aa83fc2ad5090869134a742cbe6e743ddf0b16d49e14acb75f",
+    "copy.sass": "c69c0871abbea0078e28fc8a33193d1fa1b3bb0beb920c174d066d64f0b6720e",
+    "copy.json": "9f5e68b9ae25a7a55fbe1bfe759bff30f1171e0b0818df734c88fd8071c9de43",
+    "no_seed.sass": "92f6fdc3b84a87a90790e7a2f4abb7baf6317741946661dc3ca6838ca3e36280",
+    "no_seed.json": "7c822e71f724f197cab9821ffd54bd296571c6a39a1214b73da2de9f828d8d75",
+    "no_gather.sass": "6e11881158dd0ea88a593d8f554e0dc29ff3a73241db39d47b410e1f41b74647",
+    "no_gather.json": "7c822e71f724f197cab9821ffd54bd296571c6a39a1214b73da2de9f828d8d75",
+    "no_finish.sass": "d632f0f64a2e6e2f1cd1cba31b985f7865542531e8c7ab38450266e4373fa17a",
+    "no_finish.json": "7c822e71f724f197cab9821ffd54bd296571c6a39a1214b73da2de9f828d8d75"
+  }
+}

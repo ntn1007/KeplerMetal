@@ -1,5 +1,7 @@
 # Build from source
 
+[NATIVE_MSL_COMMANDS.md](NATIVE_MSL_COMMANDS.md) gives the native source-lowered producer build, complete GPU record/dataflow matrix and prior-NAK comparison. Native-only builds need six existing native fixtures; archived NAK programs are optional. The builder generates workspace-only include/readonly-member adaptations and explicitly checks two compiler refusal cases.
+
 [NATIVE_RESOURCE_IDENTITIES.md](NATIVE_RESOURCE_IDENTITIES.md) gives an Xcode-only source build, direct native texture/sampler GPU tests across three requested language standards, a construction-only ICB compiler diagnostic and a portable 41-process auditor. It uses no runtime archive or prebuilt shader fixtures.
 
 [SHARED_GENERIC_IMPORT.md](SHARED_GENERIC_IMPORT.md) gives the fresh compute/vertex/fragment/tessellation reception builder and portable 39-host raw-output auditor. The C ABI facade now requires the complete seven-object archive; current `KeplerProgramImport.mm` alone is not a standalone dylib build. Historical frozen source/builds remain separate.

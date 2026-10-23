@@ -2,6 +2,7 @@
 """Recompute each dependency stage using integer CPU arithmetic and verify guards."""
 from pathlib import Path
 import argparse,hashlib,json,struct
+from verify_local_memory import verify_device_identity
 sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
 MASK=(1<<32)-1
 CANARY=0xa5a5a5a5
@@ -14,9 +15,16 @@ def verify(directory):
   inp=json.loads((root/'inputs.json').read_text());assert sha(root/'application')==inp['executable_SHA256']==m['original_binary_sha256']
   for n,h in inp['source_hashes'].items():assert sha(root/n)==h
   for n,h in inp['assets_SHA256'].items():assert sha(root/'assets'/n)==h
-  assert d['device']=='NVIDIA GeForce GTX 880M'and d['registry_id']==4294968458 and d['producer_info']['command_ir_version']==2 and d['producer_import']['contract_verified']and not d['producer_import']['rejected_import']
-  for e in d['producer_import']['events']:
-   if e.get('code_replaced'):assert e['imported_code_identical']and e['decoded_code_bytes']==d['producer_info']['code_bytes']and e['decoded_registers']==d['producer_info']['registers']
+  verify_device_identity(d)
+  assert d['producer_info']['command_ir_version']==2
+  if d.get('producer_backend')=='native_msl':
+   info=d['producer_info'];assert d['producer_import']=={} and not info['instruction_import'] and not info['Apple_ICB_layout']
+   assert info['producer_backend']=='native_msl' and info['root_bytes']==48 and info['thread_width']==32 and info['pipeline_class']=='NVMTLComputePipelineState'
+   assert info['library_SHA256']==sha(root/'assets/native_producer.metallib')
+  else:
+   assert d['producer_import']['contract_verified']and not d['producer_import']['rejected_import']
+   for e in d['producer_import']['events']:
+    if e.get('code_replaced'):assert e['imported_code_identical']and e['decoded_code_bytes']==d['producer_info']['code_bytes']and e['decoded_registers']==d['producer_info']['registers']
  assert d['API_refusals']==(8 if mode=='refusals'else 0)
  sizes=[256,1024,4096,32768];locals_=[[32,128,1024],[33,256,512],[128,33,1024],[1024,256,33]];files={};comparisons=invocations=guardbytes=0
  def load(name):
@@ -103,7 +111,9 @@ def verify(directory):
     assert a[12:14]==b[14:16]and(mode=='bad_counter'or a[26:28]==b[26:28])and a[16:18]!=b[16:18]
    if 1 in recordwords and 2 in recordwords:
     a,b=recordwords[1],recordwords[2];assert a[12:14]==b[14:16]and a[26:28]==b[26:28]and a[16:18]!=b[16:18]
- return {'status':'PASS','mode':mode,'native_reference':native,'trials':4,'exact_uint32_results':comparisons,'consumer_invocations':invocations,'guard_bytes':guardbytes,'API_refusals':d['API_refusals'],'raw_files':len(files),'raw_SHA256':files,'performance_benchmark':False,'full_objective_complete':False}
+ report={'status':'PASS','mode':mode,'native_reference':native,'trials':4,'exact_uint32_results':comparisons,'consumer_invocations':invocations,'guard_bytes':guardbytes,'API_refusals':d['API_refusals'],'raw_files':len(files),'raw_SHA256':files,'performance_benchmark':False,'full_objective_complete':False}
+ if d.get('producer_backend')=='native_msl':report.update(producer_backend='native_msl',producer_instruction_import=False)
+ return report
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('directory',type=Path);p.add_argument('--receipt',type=Path);a=p.parse_args();r=verify(a.directory)
  with(a.receipt or a.directory/'independent-verification.json').open('x')as f:json.dump(r,f,indent=2);f.write('\n')

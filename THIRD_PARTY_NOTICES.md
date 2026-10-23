@@ -21,3 +21,8 @@ Original KeplerMetal code is MIT-licensed. The export excludes complete external
 The FP64 include contains an allowlist of program hashes, dimensions, and register counts, not program bytes. Other profile JSON files likewise describe test contracts and expected hashes; they do not grant rights to any external dependency.
 
 Apple Metal, Xcode, macOS frameworks, restored Apple/NVIDIA drivers, NVIDIA Linux/FreeBSD packages, and firmware remain proprietary dependencies under their publishers' terms. They are not covered by this repository's MIT license and are not redistributed here. See [recovery instructions](docs/DEPENDENCIES.md).
+
+`KeplerNativeMSLCommands.h` is an original implementation of the bounded
+CommandIR operation semantics using public MSL API spellings. The builder
+selects it from a workspace-only include directory; no Apple SDK implementation
+is copied into this repository or replaced on the machine.

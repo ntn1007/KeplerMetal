@@ -15,6 +15,8 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
+A new opt-in source lowering compiles supported `compute_command` producers through NVIDIA’s native backend, then executes the existing GPU command-record pipeline. Sixteen native processes pass 5,035,008 consumer uint32 checks; 48 stage/counter files match the prior NAK reference. A 23-case record probe exposed and corrected an address-representation mismatch through registered readonly-member lowering. This is adapted-client CommandIR support, not Apple’s native ICB ABI or a system-driver replacement. [Implementation, controls and reproduction](docs/NATIVE_MSL_COMMANDS.md).
+
 Native texture/sampler `gpuResourceID` values now have a direct-binding GPU qualification: 90 dispatches, 48,672 checked words and 18 byte-identical native/direct output pairs, without the KeplerMetal runtime or NAK. The tested older-operation shader also runs when compiled as MSL 3.0/4.0; this is not Metal 3/4 conformance. A native ICB kernel is refused specifically at `air.command_buffer` argument metadata. [Evidence, limits and reproduction](docs/NATIVE_RESOURCE_IDENTITIES.md).
 
 Generic compute, vertex, fragment and tessellation imports now share the CAS transport’s constructor lock and restoration checks. A fresh complete archive passes 39 reception processes, 270,336 raster channels and 52,576 tessellation values with CPU oracles and explicit nested/cache refusals. [Source build, evidence and scope](docs/SHARED_GENERIC_IMPORT.md).

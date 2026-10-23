@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "date": "2026-10-23",
+  "date": "2026-10-24",
   "source_git": {
     "branch": "main",
     "commit": null,
@@ -1264,9 +1264,10 @@
       "path": "bridge/tools/command_ir_dataflow_client.mm",
       "source_path": "bridge/tools/command_ir_dataflow_client.mm",
       "source_SHA256": "b7b2d1617fc7c98ad36c807dbdf3c0dc63a374eddc6e240b5bd23caa949fb321",
-      "published_SHA256": "b7b2d1617fc7c98ad36c807dbdf3c0dc63a374eddc6e240b5bd23caa949fb321",
-      "bytes": 23142,
-      "modified_for_publication": false
+      "published_SHA256": "2c8cadf27b823071ef7a904f433c091422478e58380d1632c59b581e809600bc",
+      "bytes": 25344,
+      "modified_for_publication": true,
+      "previous_published_SHA256": "b7b2d1617fc7c98ad36c807dbdf3c0dc63a374eddc6e240b5bd23caa949fb321"
     },
     {
       "path": "bridge/tools/command_ir_grid3d_client.mm",
@@ -4202,9 +4203,10 @@
       "path": "bridge/tools/verify_command_ir_dataflow.py",
       "source_path": "bridge/tools/verify_command_ir_dataflow.py",
       "source_SHA256": "2acb8cecde8b8e4ee22e27d7bf64bedb609036dd86ba217931088c8c7cc3c33c",
-      "published_SHA256": "2acb8cecde8b8e4ee22e27d7bf64bedb609036dd86ba217931088c8c7cc3c33c",
-      "bytes": 8317,
-      "modified_for_publication": false
+      "published_SHA256": "9df5464f22faa2974967400519282489efd704cb4369c77879c396365050b7c2",
+      "bytes": 8891,
+      "modified_for_publication": true,
+      "previous_published_SHA256": "2acb8cecde8b8e4ee22e27d7bf64bedb609036dd86ba217931088c8c7cc3c33c"
     },
     {
       "path": "bridge/tools/verify_command_ir_grid3d.py",
@@ -7470,16 +7472,17 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "9c6eb1d93c048ecc2b8fa5a1f54bdf1282404d9238e7d3d3c8b107c6abd0a76d",
-  "previous_public_commit": "d34de6966252ebfb118fe7cbe7b583c493fed995",
+  "previous_source_snapshot_SHA256": "f74f8788d4b9b5eee9e34642d081705edc880f52e7f6b988ab6007e270c69aa7",
+  "previous_public_commit": "1b2b798ca6b95e1ecf57ae5c26de6d5c1bf89c63",
   "update": {
-    "date": "2026-10-23",
-    "scope": "Native resource identity qualification and exact ICB compiler boundary",
-    "original_source_rows_modified": [],
-    "native_dispatches": 90,
-    "native_uint32_checks": 48672,
-    "qualified_processes": 41,
-    "CPU_tests_passed": 106,
+    "date": "2026-10-24",
+    "scope": "Native NVIDIA source lowering for command-record producers and dependent execution",
+    "source_files_updated": [
+      "bridge/tools/command_ir_dataflow_client.mm",
+      "bridge/tools/verify_command_ir_dataflow.py"
+    ],
+    "native_consumer_uint32": 5035008,
+    "qualified_processes": 22,
     "core_runtime_modified": false,
     "full_objective_complete": false
   }

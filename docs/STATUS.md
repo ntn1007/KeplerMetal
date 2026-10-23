@@ -1,4 +1,6 @@
-# Status, 2026-10-23
+# Status, 2026-10-24
+
+Native NVIDIA command producers now compile from supported public MSL calls through an opt-in header/type lowering, then feed the unchanged CommandIR v2 materializer and consumers. Sixteen native processes check 5,035,008 uint32 results / 1,258,752 active consumer invocations; record/error/guard probes and three NAK references complete a 22-host matrix. This implements a new source backend without NAK instruction import for the native producer. Original Apple ICB identities and transparent application integration remain open. [Exact implementation, pointer correction and limits](NATIVE_MSL_COMMANDS.md).
 
 Native texture/sampler resource IDs are now GPU-qualified through direct argument writes, including a restricted mip view and sampler addressing controls: 90 dispatches, 48,672 checked uint32 words, 27,648 guard bytes and 18 native/direct identical raw pairs. No core runtime or system change is needed for this existing capability. The separate native ICB kernel fails specifically at `air.command_buffer` argument metadata; downstream command intrinsics remain unqualified. MSL 3.0/4.0 compilation of the old-operation test is not full feature support. [Evidence and reproduction](NATIVE_RESOURCE_IDENTITIES.md).
 
