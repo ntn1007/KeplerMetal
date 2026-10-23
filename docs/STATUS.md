@@ -1,4 +1,6 @@
-# Status at the source export, 2026-10-19
+# Status, 2026-10-23
+
+The new memory-accounting client and constructor host compile against the unchanged qualified runtime archive. Its independent ledger and pre-launch driver-profile refusal have portable CPU coverage. Fresh GPU qualification is **BLOCKED**: seven system reference files changed since 19 October, including `GeForceMTLDriver` following the root-patch record dated 20 October. No pins were changed and no new GPU execution is claimed. [Accounting semantics, exact profile and reproduction](MEMORY_ACCOUNTING.md).
 
 The exact qualified 8/16 KiB private-frame profile change is integrated into the common MRC import implementation. A new seven-object public source rebuild has its own GTX qualification: 226 compute dispatches, 612,120 exact output uint32 values, 111,872 guard bytes and 77,376 expected computation words absent in no-dispatch controls. A one-instruction differential yields 704 changed witnesses with 2,112 other arithmetic words identical; CAS coexistence preserves 106,650 correct operations. Constructor/refusal controls and legacy local/spill profiles pass. This is a bounded opt-in import extension, with no installed-driver change, hardware-video success or performance claim. [Commands, exact archive and limits](LARGE_LOCAL_MEMORY.md).
 

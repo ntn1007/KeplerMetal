@@ -15,6 +15,8 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
+Memory-accounting groundwork now separates requested buffer lengths, logical scratch demand and Metal allocation counters. It compiles and has CPU contract tests; fresh GPU qualification is blocked by a changed installed driver profile, which is explicitly refused before launch. [Evidence and next step](docs/MEMORY_ACCOUNTING.md).
+
 The opt-in local-memory import now accepts qualified 8/16 KiB private frames. A fresh seven-object build from public sources passed 226 GTX 880M compute dispatches, 612,120 exact output values and the CAS coexistence controls. [Reproduction, artifact hashes and limits](docs/LARGE_LOCAL_MEMORY.md). This extends the experimental import path; no system driver or performance improvement is claimed.
 
 An optional SDK batch now snapshots native records and honors completion boundaries, including source-slot `setBarrier`. Four-entry batches interleave correctly; split batches preserve the requested atomic ordering. The laboratory qualification covers 292 correct dispatches, with a separate public-artifact qualification. [API, source-only commands and limits](docs/NATIVE_RESIDENT_BATCH.md). The human administrator port experiment also passed open/close; hardware video remains unproved. [Access evidence](docs/VIDEO_ADMIN_ACCESS.md).

@@ -15,6 +15,8 @@ Le travail suit deux axes complémentaires :
 
 ## Avancées récentes
 
+Le nouveau suivi mémoire distingue les tailles de buffers demandées, la demande logique de mémoire privée et les compteurs Metal. Il compile et possède des tests CPU ; sa qualification GPU est bloquée par un changement du pilote installé, refusé explicitement avant le lancement. [Preuves et prochaine étape](docs/MEMORY_ACCOUNTING.md).
+
 L’import explicite accepte maintenant des profils de mémoire privée de 8 et 16 Kio par thread. L’archive publique reconstruite avec ses sept objets passe 226 dispatchs sur la GTX 880M, 612 120 valeurs exactes et les contrôles de coexistence CAS. [Commandes, empreintes et limites](docs/LARGE_LOCAL_MEMORY.md). Cette extension reste expérimentale ; aucun pilote système ni gain de performances n’est annoncé.
 
 Le nouveau module SDK conserve un instantané des commandes natives et respecte les frontières demandées, y compris `setBarrier`. Quatre commandes s’entrelacent correctement ; deux groupes séparés respectent l’ordre atomique attendu. La qualification laboratoire couvre 292 dispatchs corrects, avec une qualification distincte de l’artefact public. [API, sources et limites](docs/NATIVE_RESIDENT_BATCH.md). Le témoin administrateur exécuté par l’utilisateur réussit aussi l’ouverture/fermeture du port ; la vidéo matérielle reste non démontrée. [Preuves d’accès](docs/VIDEO_ADMIN_ACCESS.md).

@@ -1,5 +1,7 @@
 # Build from source
 
+The new [memory-accounting cohort](MEMORY_ACCOUNTING.md) compiles from the same sources and requires an extended host build. Its GPU run is currently blocked by an installed driver-profile mismatch; the launcher refuses before signing or launching a Metal host. Compilation is not GPU qualification.
+
 The 8/16 KiB private local-memory import has a separate public seven-object archive qualification. [LARGE_LOCAL_MEMORY.md](LARGE_LOCAL_MEMORY.md) gives source-only program/carrier generation, strict profile checks, serialized GPU suites and the CAS coexistence prerequisites. These GPU tests are separate from the standard CPU-only build.
 
 The optional `KeplerResidentBatch` ARC object is compiled separately from the original seven-object core. [NATIVE_RESIDENT_BATCH.md](NATIVE_RESIDENT_BATCH.md) provides the standalone text build, strict native profile, preparation/serial/segmented/parallel prerequisite chain and independent CPU auditor. Its GPU runs require the same existing common host reservation; the administrator video experiment is separate.

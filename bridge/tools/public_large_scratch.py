@@ -18,6 +18,8 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 MAGIC = 0x4e414b00
+DRIVER = Path('/System/Library/Extensions/GeForceMTLDriver.bundle/Contents/MacOS/GeForceMTLDriver')
+DRIVER_SHA256 = '2b89839c425d95934f5e01f16c8683fe53432df410292ec8e554b21c98d6c054'
 ARCHIVES = ['src/nouveau/compiler/libnak.a', 'src/nouveau/compiler/libnak_rs.a',
     'src/compiler/nir/libnir.a', 'src/compiler/libcompiler.a',
     'src/nouveau/headers/libnvidia_headers_c.a', 'src/util/libmesa_util.a',
@@ -32,6 +34,14 @@ def sha(path):
 
 def read(path):
     return json.loads(Path(path).read_text())
+
+
+def check_driver_profile():
+    """Reject before signing, reserving or starting a Metal process. No repinning."""
+    actual = sha(DRIVER)
+    if actual != DRIVER_SHA256:
+        raise RuntimeError(f'Installed GeForceMTLDriver profile changed: expected {DRIVER_SHA256}, got {actual}; GPU execution NOT RUN; qualify a new profile separately')
+    return actual
 
 
 def write(path, value):
@@ -140,7 +150,8 @@ def build(a):
         static_library_SHA256=lm['static_library_SHA256'], library_manifest_SHA256=sha(lib / 'manifest.json'),
         programs_manifest_SHA256=sha(source_programs / 'manifest.json'), executable_SHA256=sha(out / 'application'),
         contract_executable_SHA256=sha(out / 'contracts'), extended_profile=a.extended, carrier=a.carrier,
-        execution_witness_magic=pm.get('execution_witness_magic'), builder_SHA256=sha(__file__), GPU_execution=False))
+        execution_witness_magic=pm.get('execution_witness_magic'), memory_ledger_schema=1,
+        oracle_SHA256=sha(ROOT / 'tools/verify_local_memory.py'), builder_SHA256=sha(__file__), GPU_execution=False))
 
 
 def run(a):
@@ -155,7 +166,10 @@ def run(a):
     executable = 'contracts' if a.contracts else 'application'
     digest = inputs['contract_executable_SHA256' if a.contracts else 'executable_SHA256']
     assert sha(build / executable) == digest
+    if inputs.get('memory_ledger_schema') == 1:
+        assert sha(ROOT / 'tools/verify_local_memory.py') == inputs['oracle_SHA256'], 'Oracle changed after build; freeze a new build'
     if a.contracts: assert a.mode in ['construct', 'negative'] and not inputs.get('execution_witness_magic')
+    check_driver_profile()
     out.mkdir(); (out / 'outputs').mkdir()
     for name in inputs['source_hashes']: shutil.copyfile(build / name, out / name)
     shutil.copyfile(build / executable, out / 'application'); (out / 'application').chmod(0o755)
@@ -181,7 +195,7 @@ def run(a):
                     x, y, z, unused = original(name, gid, seed)
                     return x, y, z, MAGIC ^ gid
                 oracle.result = tagged
-            proof = oracle.verify(out)
+            proof = oracle.verify(out, require_memory_ledger=inputs.get('memory_ledger_schema') == 1)
         finally:
             oracle.result = original
         if inputs.get('execution_witness_magic'): proof['execution_witness_magic'] = MAGIC

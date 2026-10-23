@@ -4,7 +4,9 @@ import importlib.util
 import json
 from pathlib import Path
 import tempfile
+from types import SimpleNamespace
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location('public_large_scratch', ROOT / 'bridge/tools/public_large_scratch.py')
@@ -33,6 +35,32 @@ def fixture(root):
 
 
 class PublicLargeScratchTests(unittest.TestCase):
+    def test_matching_driver_profile(self):
+        with patch.object(tool, 'sha', return_value=tool.DRIVER_SHA256):
+            self.assertEqual(tool.check_driver_profile(), tool.DRIVER_SHA256)
+
+    def test_changed_driver_profile_rejected(self):
+        with patch.object(tool, 'sha', return_value='0'*64):
+            with self.assertRaisesRegex(RuntimeError, 'GPU execution NOT RUN'):
+                tool.check_driver_profile()
+
+    def test_host_and_launcher_pin_agree(self):
+        self.assertIn(tool.DRIVER_SHA256, (ROOT / 'bridge/tools/native_large_scratch_probe.mm').read_text())
+
+    def test_profile_refusal_creates_no_run_directory(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder); build = root / 'build'; build.mkdir()
+            reservation = root / 'reservation'; (reservation / 'results').mkdir(parents=True)
+            (build / 'application').write_bytes(b'offline fixture; never executed')
+            (build / 'inputs.json').write_text(json.dumps(dict(execution_witness_magic=None,
+                source_hashes={},assets_SHA256={},runtime_SHA256={},executable_SHA256=sha(build / 'application'))))
+            a = SimpleNamespace(build=build,out=root / 'run',reservation_root=reservation,
+                contracts=False,mode='nak:local4096')
+            with patch.object(tool, 'check_driver_profile', side_effect=RuntimeError('profile changed')):
+                with self.assertRaisesRegex(RuntimeError, 'profile changed'): tool.run(a)
+            self.assertFalse(a.out.exists())
+            self.assertEqual(list((reservation / 'results').iterdir()), [])
+
     def test_seven_object_provenance_accepts_matching_text(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder); m = fixture(root)

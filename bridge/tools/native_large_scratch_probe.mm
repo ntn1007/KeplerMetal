@@ -18,6 +18,13 @@ static NSString *sha(NSData *data) {
  unsigned char d[32]; CC_SHA256(data.bytes,(CC_LONG)data.length,d);
  NSMutableString *s=[NSMutableString new];for(unsigned char b:d)[s appendFormat:@"%02x",b];return s;
 }
+// Source array size, not the native compiler's frame or physical residency.
+static unsigned sourceArrayBytes(NSString *name) {
+ return [name hasPrefix:@"local"] && ![name isEqual:@"local_control"] ? [name substringFromIndex:5].intValue*4u : 0u;
+}
+static id allocatedBytes(id<MTLDevice>device) {
+ return [device respondsToSelector:@selector(currentAllocatedSize)] ? (id)@([device currentAllocatedSize]) : (id)[NSNull null];
+}
 int main(int argc,char **argv){@autoreleasepool{
  if(argc!=4)return 1;NSString *assets=@(argv[1]),*out=@(argv[2]),*mode=@(argv[3]);
  BOOL imported=[mode hasPrefix:@"nak:"];NSString*selection=imported?[mode substringFromIndex:4]:mode;
@@ -27,12 +34,14 @@ int main(int argc,char **argv){@autoreleasepool{
  NSData*driver=[NSData dataWithContentsOfFile:@"/System/Library/Extensions/GeForceMTLDriver.bundle/Contents/MacOS/GeForceMTLDriver"];
  if(![sha(driver)isEqual:@"2b89839c425d95934f5e01f16c8683fe53432df410292ec8e554b21c98d6c054"])return 2;
  NSError*error=nil;NSDictionary*proof=@{},*info=@{};id<MTLComputePipelineState>pipeline=nil;NSString*carrierName=name;
+ unsigned arrayBytes=sourceArrayBytes(name),carrierBytes=0,scratchBytes=0;
  if(imported){
 #if KP_LOCAL_IMPORT
   info=[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:[program stringByAppendingString:@".json"]]]options:0 error:&error];
   if(![info[@"semantic"]isEqual:name]||[info[@"sm"]unsignedIntValue]!=30||[info[@"crs_bytes"]unsignedIntValue])return 3;
   BOOL pressure=[name hasPrefix:@"pressure"];if(pressure)carrierName=@"pressure96";unsigned frame=pressure?224:([name isEqual:@"local_control"]?0:[name substringFromIndex:5].intValue*4);
   KeplerLocalMemoryConfig config={[info[@"registers"]unsignedIntValue],[info[@"scratch_bytes"]unsignedIntValue],frame,pressure?224u:0u,pressure?1u:0u};
+  carrierBytes=frame;scratchBytes=config.required_scratch_bytes;
   if([info[@"control_barriers"]unsignedIntValue]!=config.carrier_control_barriers)return 3;
   NSMutableData*libraryBytes=[[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"local_memory.metallib"]]mutableCopy],*code=[[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:[program stringByAppendingString:@".sass"]]]mutableCopy];
   pipeline=KPCreateLocalMemoryPipeline(d,libraryBytes,carrierName,code,config,&error,&proof);
@@ -52,11 +61,25 @@ int main(int argc,char **argv){@autoreleasepool{
  const unsigned counts[]={32,64,256},locals[]={32,32,64};
 #endif
  const unsigned trials=sizeof(counts)/sizeof(counts[0]);
- for(unsigned trial=0;trial<trials;trial++){@autoreleasepool{
+ const uint64_t bufferCap=8ull<<20,localCap=64ull<<20;
+ id allocatedBeforeTrials=allocatedBytes(d);
+ for(unsigned trial=0;trial<trials;trial++){
+ NSMutableDictionary*ledger=[NSMutableDictionary new];
+ @autoreleasepool{
   Params p={uint32_t(0x13579+trial*971),counts[trial],129,0};NSUInteger inputBytes=256+p.count*p.stride*4,outputBytes=256+p.count*16;
+  uint64_t privateBytes=inputBytes+outputBytes,sharedBytes=privateBytes+sizeof(Params);
+  uint64_t arrayDemand=dispatch?(uint64_t)p.count*arrayBytes:0,carrierDemand=dispatch?(uint64_t)p.count*carrierBytes:0;
+  if(privateBytes>bufferCap||sharedBytes>bufferCap||arrayDemand>localCap||carrierDemand>localCap){fprintf(stderr,"memory ledger request cap exceeded before allocation\n");return 8;}
+  [ledger addEntriesFromDictionary:@{@"requested_private_bytes":@(privateBytes),@"requested_shared_bytes":@(sharedBytes),
+   @"source_array_bytes_per_thread":@(arrayBytes),@"logical_array_bytes":@(arrayDemand),
+   @"imported_carrier_bytes_per_thread":imported?(id)@(carrierBytes):(id)[NSNull null],
+   @"required_scratch_bytes_per_thread":imported?(id)@(scratchBytes):(id)[NSNull null],
+   @"logical_carrier_bytes":imported?(id)@(carrierDemand):(id)[NSNull null],
+   @"allocated_before_buffers":allocatedBytes(d)}];
   id<MTLBuffer>input=[d newBufferWithLength:inputBytes options:MTLResourceStorageModePrivate],output=[d newBufferWithLength:outputBytes options:MTLResourceStorageModePrivate];
   id<MTLBuffer>hostInput=[d newBufferWithLength:inputBytes options:MTLResourceStorageModeShared],hostOutput=[d newBufferWithLength:outputBytes options:MTLResourceStorageModeShared];
   id<MTLBuffer>params=[d newBufferWithBytes:&p length:sizeof(p) options:MTLResourceStorageModeShared];if(!input||!output||!hostInput||!hostOutput||!params)return 4;
+  ledger[@"allocated_after_buffers"]=allocatedBytes(d);
   memset(hostInput.contents,0xa5,inputBytes);memset(hostOutput.contents,0xa5,outputBytes);
   uint32_t*values=(uint32_t*)((uint8_t*)hostInput.contents+128);for(uint32_t i=0;i<p.count*p.stride;i++)values[i]=(i*1664525u+1013904223u)^p.seed;
   id<MTLCommandBuffer>cb=[queue commandBuffer];id<MTLBlitCommandEncoder>blit=[cb blitCommandEncoder];
@@ -67,10 +90,18 @@ int main(int argc,char **argv){@autoreleasepool{
    [e dispatchThreadgroups:MTLSizeMake(p.count/locals[trial],1,1)threadsPerThreadgroup:MTLSizeMake(locals[trial],1,1)];[e endEncoding];}
   blit=[cb blitCommandEncoder];[blit copyFromBuffer:input sourceOffset:0 toBuffer:hostInput destinationOffset:0 size:inputBytes];[blit copyFromBuffer:output sourceOffset:0 toBuffer:hostOutput destinationOffset:0 size:outputBytes];[blit endEncoding];
   [cb commit];[cb waitUntilCompleted];if(cb.status!=MTLCommandBufferStatusCompleted){fprintf(stderr,"%s\n",cb.error.description.UTF8String);return 6;}
+  ledger[@"allocated_after_completion"]=allocatedBytes(d);
   NSString*inputFile=[NSString stringWithFormat:@"trial-%u-input.bin",trial],*outputFile=[NSString stringWithFormat:@"trial-%u-output.bin",trial];
   if(![[NSData dataWithBytes:hostInput.contents length:inputBytes]writeToFile:[out stringByAppendingPathComponent:inputFile]atomically:YES]||![[NSData dataWithBytes:hostOutput.contents length:outputBytes]writeToFile:[out stringByAppendingPathComponent:outputFile]atomically:YES])return 7;
-  [runs addObject:@{@"trial":@(trial),@"threads":@(p.count),@"local":@(locals[trial]),@"groups":@(p.count/locals[trial]),@"seed":@(p.seed),@"stride":@(p.stride),@"command_status":@(cb.status),@"kernel_dispatches":@(dispatch?1:0),@"input_file":inputFile,@"output_file":outputFile,@"input_bytes":@(inputBytes),@"output_bytes":@(outputBytes)}];
- }}
+  [runs addObject:@{@"trial":@(trial),@"threads":@(p.count),@"local":@(locals[trial]),@"groups":@(p.count/locals[trial]),@"seed":@(p.seed),@"stride":@(p.stride),@"command_status":@(cb.status),@"kernel_dispatches":@(dispatch?1:0),@"input_file":inputFile,@"output_file":outputFile,@"input_bytes":@(inputBytes),@"output_bytes":@(outputBytes),@"memory_ledger":ledger}];
+ }
+ // All trial buffer/encoder/command-buffer references leave scope before sampling.
+ ledger[@"allocated_after_release"]=allocatedBytes(d);
+ }
+ NSDictionary*memoryLedger=@{@"schema":@1,@"buffer_request_cap_bytes":@(bufferCap),@"logical_local_cap_bytes":@(localCap),
+  @"allocated_before_trials":allocatedBeforeTrials,@"allocated_after_trials":allocatedBytes(d),
+  @"physical_VRAM_measured":@NO,@"scratch_occupancy_measured":@NO,@"maximum_pressure_measured":@NO};
  NSDictionary*r=@{@"device":d.name,@"registry_id":@(d.registryID),@"driver_SHA256":sha(driver),@"mode":mode,@"function":name,@"program":program,@"carrier_function":carrierName,@"native_reference":@(!imported),@"program_replaced":@(imported),@"caller_inputs_mutated_after_import":@(imported),@"import":proof,@"program_info":info,@"trial_profile":KP_LOCAL_EXTENDED?@"extended":@"baseline",@"GPU_command_buffers":@(trials),@"thread_width":@(pipeline.threadExecutionWidth),@"max_threads":@(pipeline.maxTotalThreadsPerThreadgroup),@"static_threadgroup_bytes":@(pipeline.staticThreadgroupMemoryLength),@"CPU_expected_answers_uploaded":@NO,@"performance_benchmark":@NO,@"system_modified":@NO,@"runs":runs};
- NSData*j=[NSJSONSerialization dataWithJSONObject:r options:NSJSONWritingPrettyPrinted error:nil];fwrite(j.bytes,1,j.length,stdout);puts("");return 0;
+ NSMutableDictionary*report=[r mutableCopy];report[@"memory_ledger"]=memoryLedger;
+ NSData*j=[NSJSONSerialization dataWithJSONObject:report options:NSJSONWritingPrettyPrinted error:nil];fwrite(j.bytes,1,j.length,stdout);puts("");return 0;
 }}
