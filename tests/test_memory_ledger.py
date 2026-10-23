@@ -28,6 +28,36 @@ def record(imported=True, dispatch=True, pressure=False):
 
 
 class MemoryLedgerTests(unittest.TestCase):
+    def identity(self, registry=4294968456):
+        return dict(device='NVIDIA GeForce GTX 880M',registry_id=registry,device_identity=dict(schema=1,
+            name='NVIDIA GeForce GTX 880M',registry_id=registry,PCI_registry_id=4294967841,
+            PCI_vendor_id=0x10de,PCI_device_id=0x1198))
+
+    def test_identity_survives_boot_entry_changes(self):
+        for entry in [4294968456,4294968458,4294969000]:oracle.verify_device_identity(self.identity(entry))
+
+    def test_wrong_pci_device_rejected(self):
+        for key,value in [('PCI_vendor_id',0x8086),('PCI_device_id',0xe0a)]:
+            with self.subTest(key=key):
+                d=self.identity();d['device_identity'][key]=value
+                with self.assertRaises(AssertionError):oracle.verify_device_identity(d)
+
+    def test_identity_registry_mismatch_rejected(self):
+        d=self.identity();d['registry_id']+=1
+        with self.assertRaises(AssertionError):oracle.verify_device_identity(d)
+
+    def test_identity_missing_pci_rejected(self):
+        d=self.identity();del d['device_identity']['PCI_registry_id']
+        with self.assertRaises(KeyError):oracle.verify_device_identity(d)
+
+    def test_old_identity_keeps_old_contract(self):
+        oracle.verify_device_identity(dict(device='NVIDIA GeForce GTX 880M',registry_id=4294968458))
+        with self.assertRaises(AssertionError):oracle.verify_device_identity(dict(device='NVIDIA GeForce GTX 880M',registry_id=4294968456))
+
+    def test_identity_gpu_name_rejected(self):
+        d=self.identity();d['device']='different GPU'
+        with self.assertRaises(AssertionError):oracle.verify_device_identity(d)
+
     def test_complete_accounting(self):
         result = oracle.verify_memory_ledger(record(), required=True)
         self.assertEqual(result['logical_carrier_bytes_max'], 524288)

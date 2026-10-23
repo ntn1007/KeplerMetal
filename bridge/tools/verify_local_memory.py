@@ -62,6 +62,16 @@ def verify_memory_ledger(d, required=False):
   API_completion_delta_bytes_min=min(deltas) if deltas else None,API_completion_delta_bytes_max=max(deltas) if deltas else None,
   physical_VRAM_measured=False,scratch_occupancy_measured=False,maximum_pressure_measured=False)
 
+def verify_device_identity(d):
+ assert d['device']=='NVIDIA GeForce GTX 880M'
+ if 'device_identity' not in d:
+  assert d['registry_id']==4294968458  # historical boot; do not rewrite old evidence
+  return
+ i=d['device_identity']
+ assert i['schema']==1 and i['name']==d['device'] and i['registry_id']==d['registry_id']
+ assert type(i['registry_id']) is int and i['registry_id']>0 and type(i['PCI_registry_id']) is int and i['PCI_registry_id']>0
+ assert i['PCI_vendor_id']==0x10de and i['PCI_device_id']==0x1198
+
 def verify(root, require_memory_ledger=False):
  root=Path(root);d=json.loads((root/'results.json').read_text());m=json.loads((root/'execution/manifest.json').read_text());inp=json.loads((root/'inputs.json').read_text())
  sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
@@ -69,11 +79,14 @@ def verify(root, require_memory_ledger=False):
  assert sha(root/'application')==inp['executable_SHA256']==m['original_binary_sha256']
  for n,h in inp['source_hashes'].items():assert sha(root/n)==h
  for n,h in inp['assets_SHA256'].items():assert sha(root/'assets'/n)==h
- assert d['device']=='NVIDIA GeForce GTX 880M'and d['registry_id']==4294968458 and not d['CPU_expected_answers_uploaded']and not d['system_modified']and not d['performance_benchmark']
+ verify_device_identity(d)
+ if require_memory_ledger:assert 'device_identity' in d
+ assert not d['CPU_expected_answers_uploaded']and not d['system_modified']and not d['performance_benchmark']
  imported=d['mode'].startswith('nak:');mode=d['mode'][4:]if imported else d['mode'];dispatch=not mode.startswith('no_dispatch:');checked=guards=negative=0;files={}
  if imported:
   assert not d['native_reference']and d['program_replaced']and d['caller_inputs_mutated_after_import']
   proof=d['import'];assert proof['contract_verified']and not proof['rejected_import']
+  assert proof['driver_sha256']==d['driver_SHA256']
   for e in proof['events']:
    if not e.get('code_replaced'):continue
    assert e['imported_code_identical']and e['native_local_metadata_verified']and e.get('native_local_allocation_fields_preserved',e.get('native_allocation_metadata_preserved'))and e['decoded_local_contract_verified']

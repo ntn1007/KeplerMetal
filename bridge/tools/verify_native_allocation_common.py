@@ -6,6 +6,8 @@ from verify_native_control_reserve import terminal,load,sha,require,DRIVER
 from verify_control_flow import result as native_result
 from verify_local_memory import result as local_result
 from verify_native_cas_sdk import verify as cas_suite
+from public_large_scratch import DRIVER_PROFILES
+from verify_local_memory import verify_device_identity
 
 ROOT=Path(__file__).resolve().parents[1]
 
@@ -49,6 +51,10 @@ def cas_record(root,row):
 
 def allocation_proof(proof,library,certificate):
     c=load(certificate);w=c['metadata_words']
+    if 'actual_driver_sha256' in proof:
+        require(proof['actual_driver_sha256'] in DRIVER_PROFILES,'actual driver profile')
+        identity=proof['device_identity']
+        verify_device_identity(dict(device=identity['name'],registry_id=identity['registry_id'],device_identity=identity))
     for flag in ['gate_accepted','constructor_entered','contract_verified','constructor_restored',
                  'immutable_library_data','inputs_snapshotted','shares_import_mutex','thread_local_scope']:
         require(proof[flag]is True,'allocation proof: '+flag)

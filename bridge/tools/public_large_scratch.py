@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MAGIC = 0x4e414b00
 DRIVER = Path('/System/Library/Extensions/GeForceMTLDriver.bundle/Contents/MacOS/GeForceMTLDriver')
 DRIVER_SHA256 = '2b89839c425d95934f5e01f16c8683fe53432df410292ec8e554b21c98d6c054'
+DRIVER_PROFILES = (DRIVER_SHA256, 'e240d54a4cd64b7e54fbc15250de82e88451132e1d9f3a4f9879607c8b0e7645')
 ARCHIVES = ['src/nouveau/compiler/libnak.a', 'src/nouveau/compiler/libnak_rs.a',
     'src/compiler/nir/libnir.a', 'src/compiler/libcompiler.a',
     'src/nouveau/headers/libnvidia_headers_c.a', 'src/util/libmesa_util.a',
@@ -39,8 +40,8 @@ def read(path):
 def check_driver_profile():
     """Reject before signing, reserving or starting a Metal process. No repinning."""
     actual = sha(DRIVER)
-    if actual != DRIVER_SHA256:
-        raise RuntimeError(f'Installed GeForceMTLDriver profile changed: expected {DRIVER_SHA256}, got {actual}; GPU execution NOT RUN; qualify a new profile separately')
+    if actual not in DRIVER_PROFILES:
+        raise RuntimeError(f'Installed GeForceMTLDriver profile changed: expected one of {DRIVER_PROFILES}, got {actual}; GPU execution NOT RUN; qualify a new profile separately')
     return actual
 
 
@@ -140,11 +141,12 @@ def build(a):
     names = ['native_large_scratch_probe.mm', 'native_large_scratch_import_contract.mm']
     for name in names: shutil.copyfile(ROOT / 'tools' / name, out / name)
     shutil.copyfile(lib / 'src/KeplerProgramImport.h', out / 'KeplerProgramImport.h')
+    shutil.copyfile(lib / 'src/KeplerGPUIdentity.h', out / 'KeplerGPUIdentity.h')
     for name, src in [('application', names[0]), ('contracts', names[1])]:
         run(name, ['xcrun', 'clang++', '-arch', 'x86_64', '-O2', '-std=c++17', '-fobjc-arc', '-DKP_LOCAL_IMPORT=1', '-DKP_LOCAL_EXTENDED=' + str(int(a.extended)), '-I', out, out / src, lib / 'libKeplerMetal.a', '-Wl,-ObjC', '-framework', 'Metal', '-framework', 'Foundation', '-o', out / name])
     for name, origin in [('lab_gpu_reservation.py', ROOT / 'tools/lab_gpu_reservation.py'), ('run_sdk_host.py', ROOT / 'sdk-combined/runtime/run_sdk_host.py')]:
         shutil.copyfile(origin, out / 'runtime' / name)
-    write(out / 'inputs.json', dict(source_hashes={n:sha(out / n) for n in [*names, 'KeplerProgramImport.h', source.name]},
+    write(out / 'inputs.json', dict(source_hashes={n:sha(out / n) for n in [*names, 'KeplerProgramImport.h', 'KeplerGPUIdentity.h', source.name]},
         assets_SHA256={p.name:sha(p) for p in (out / 'assets').iterdir()},
         runtime_SHA256={p.name:sha(p) for p in (out / 'runtime').iterdir()},
         static_library_SHA256=lm['static_library_SHA256'], library_manifest_SHA256=sha(lib / 'manifest.json'),

@@ -71,7 +71,7 @@ extern "C" id<MTLComputePipelineState> KPCreateCertifiedNativeCASPipeline(
  if(error)*error=nil;if(evidence)*evidence=nil;
  if(![libraryData isKindOfClass:NSData.class]||!libraryData.length||libraryData.length>64*1024*1024||
     ![certificateData isKindOfClass:NSData.class]||!certificateData.length||certificateData.length>1024*1024||
-    !device||device.registryID!=4294968458){fail(error,@"Unqualified CAS input/device");return nil;}
+    !KPKepler880MIdentity(device)){fail(error,@"Unqualified CAS input/device");return nil;}
  NSData *library=[[libraryData copy]autorelease],*certificate=[[certificateData copy]autorelease];
  bool identities=kpCASHash(library,expectedLibrarySHA256)&&kpCASHash(certificate,expectedCertificateSHA256);
  if(!identities){fail(error,@"CAS library/certificate fingerprint differs");if(evidence)*evidence=@{@"gate_accepted":@NO,@"constructor_entered":@NO};return nil;}

@@ -1,5 +1,10 @@
 # Qualified 8/16 KiB private local-memory imports
 
+The original 19 October results below retain their original system profile.
+The separately investigated 23 October signature variant and current-boot GPU
+identity are described in [DRIVER_PROFILES.md](DRIVER_PROFILES.md); fresh
+accounting/CAS qualification is tracked in [MEMORY_ACCOUNTING.md](MEMORY_ACCOUNTING.md).
+
 The opt-in `KPCreateLocalMemoryPipeline` path now accepts two additional native
 carrier profiles: `local2048` (8,192 bytes per thread) and `local4096` (16,384
 bytes per thread). This is private local/scratch memory, separate from shared

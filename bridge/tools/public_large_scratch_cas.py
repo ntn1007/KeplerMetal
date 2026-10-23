@@ -10,7 +10,7 @@ import argparse
 import shutil
 import sys
 
-from public_large_scratch import ROOT, check_library, preflight, commands, read, write, sha
+from public_large_scratch import ROOT, check_library, check_driver_profile, preflight, commands, read, write, sha
 
 
 def build(a):
@@ -21,7 +21,7 @@ def build(a):
     assert large_inputs['static_library_SHA256'] == lm['static_library_SHA256']
     for name, digest in source_inputs['assets'].items(): assert sha(asset_build / 'assets' / name) == digest
     out.mkdir(); shutil.copyfile(client, out / 'cas_client.mm')
-    names = ['KeplerNativeCAS.h', 'KeplerProgramImport.h', 'KeplerNativeAllocation.h']
+    names = ['KeplerNativeCAS.h', 'KeplerProgramImport.h', 'KeplerNativeAllocation.h', 'KeplerGPUIdentity.h']
     for name in names:
         assert sha(library / 'src' / name) == sha(ROOT / 'src' / name)
         shutil.copyfile(ROOT / 'src' / name, out / name)
@@ -50,6 +50,7 @@ def run(a):
     for key, sub in [('source_hashes', ''), ('assets', 'assets'), ('runtime_SHA256', 'runtime')]:
         for name, digest in inputs[key].items(): assert sha(build / sub / name) == digest
     assert sha(build / 'cas_example') == inputs['executable_SHA256']
+    check_driver_profile()
     out.mkdir(); (out / 'outputs').mkdir()
     for name in inputs['source_hashes']: shutil.copyfile(build / name, out / name)
     shutil.copyfile(build / 'cas_example', out / 'cas_example'); (out / 'cas_example').chmod(0o755)

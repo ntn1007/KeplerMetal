@@ -1,6 +1,6 @@
 # Build from source
 
-The new [memory-accounting cohort](MEMORY_ACCOUNTING.md) compiles from the same sources and requires an extended host build. Its GPU run is currently blocked by an installed driver-profile mismatch; the launcher refuses before signing or launching a Metal host. Compilation is not GPU qualification.
+The new [memory-accounting cohort](MEMORY_ACCOUNTING.md) requires extended builds of both separately pinned large/legacy carriers against the same runtime archive. The investigated signature-only driver variant has a separate bounded compute/CAS qualification; unknown profiles still refuse before host launch. [Exact profiles and PCI identity](DRIVER_PROFILES.md). Compilation is not GPU qualification.
 
 The 8/16 KiB private local-memory import has a separate public seven-object archive qualification. [LARGE_LOCAL_MEMORY.md](LARGE_LOCAL_MEMORY.md) gives source-only program/carrier generation, strict profile checks, serialized GPU suites and the CAS coexistence prerequisites. These GPU tests are separate from the standard CPU-only build.
 

@@ -12,6 +12,7 @@ import sys
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--build', type=Path, required=True)
+    p.add_argument('--legacy-build', type=Path, help='Required for accounting control/spill cases; same runtime archive')
     p.add_argument('--out', type=Path, required=True)
     p.add_argument('--reservation-root', type=Path, required=True)
     p.add_argument('--suite', choices=['baseline', 'extended', 'legacy', 'witness', 'accounting'], required=True)
@@ -24,6 +25,12 @@ def main():
         if a.suite == 'legacy' else ['nak:local2048', 'nak:no_dispatch:local2048', 'nak:local4096', 'nak:no_dispatch:local4096'])
     if a.suite == 'accounting':
         assert inputs['memory_ledger_schema'] == 1
+        assert a.legacy_build, 'Accounting requires both separately pinned carrier libraries'
+        legacy_inputs = json.loads((a.legacy_build.resolve() / 'inputs.json').read_text())
+        assert legacy_inputs['carrier'] == 'legacy' and legacy_inputs['extended_profile'] and legacy_inputs['memory_ledger_schema'] == 1
+        assert legacy_inputs['static_library_SHA256'] == inputs['static_library_SHA256']
+        assert legacy_inputs['source_hashes']['native_large_scratch_probe.mm'] == inputs['source_hashes']['native_large_scratch_probe.mm']
+        assert legacy_inputs['oracle_SHA256'] == inputs['oracle_SHA256']
         modes = ['local2048', 'nak:local2048', 'local4096', 'nak:local4096',
             'pressure96', 'nak:pressure96', 'nak:pressure32_forced_spill', 'nak:local_control',
             'no_dispatch:local4096', 'nak:no_dispatch:local4096', 'nak:no_dispatch:pressure96']
@@ -32,7 +39,8 @@ def main():
     sha = lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
     for mode in modes:
         case = out / mode.replace(':', '-')
-        cmd = list(map(str, [sys.executable, '-B', tool, 'run', '--build', build, '--out', case,
+        selected_build = a.legacy_build.resolve() if a.suite == 'accounting' and ('pressure' in mode or 'local_control' in mode) else build
+        cmd = list(map(str, [sys.executable, '-B', tool, 'run', '--build', selected_build, '--out', case,
             '--reservation-root', a.reservation_root.resolve(), '--mode', mode]))
         r = subprocess.run(cmd, capture_output=True, text=True)
         (out / (case.name + '.stdout')).write_text(r.stdout); (out / (case.name + '.stderr')).write_text(r.stderr)

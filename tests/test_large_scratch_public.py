@@ -36,8 +36,9 @@ def fixture(root):
 
 class PublicLargeScratchTests(unittest.TestCase):
     def test_matching_driver_profile(self):
-        with patch.object(tool, 'sha', return_value=tool.DRIVER_SHA256):
-            self.assertEqual(tool.check_driver_profile(), tool.DRIVER_SHA256)
+        for digest in tool.DRIVER_PROFILES:
+            with self.subTest(digest=digest),patch.object(tool, 'sha', return_value=digest):
+                self.assertEqual(tool.check_driver_profile(), digest)
 
     def test_changed_driver_profile_rejected(self):
         with patch.object(tool, 'sha', return_value='0'*64):
@@ -45,7 +46,9 @@ class PublicLargeScratchTests(unittest.TestCase):
                 tool.check_driver_profile()
 
     def test_host_and_launcher_pin_agree(self):
-        self.assertIn(tool.DRIVER_SHA256, (ROOT / 'bridge/tools/native_large_scratch_probe.mm').read_text())
+        for digest in tool.DRIVER_PROFILES:
+            self.assertIn(digest, (ROOT / 'bridge/tools/native_large_scratch_probe.mm').read_text())
+            self.assertIn(digest, (ROOT / 'bridge/src/KeplerNativeCAS.mm').read_text())
 
     def test_profile_refusal_creates_no_run_directory(self):
         with tempfile.TemporaryDirectory() as folder:

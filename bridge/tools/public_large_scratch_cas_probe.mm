@@ -2,6 +2,7 @@
 #include <cstring>
 #include "NativeAllocationExecution.inc"
 #import "KeplerProgramImport.h"
+#import "KeplerGPUIdentity.h"
 #import <Foundation/Foundation.h>
 #import <Metal/Metal.h>
 #import "KeplerNativeCAS.h"
@@ -28,7 +29,7 @@ int main(int argc,char**argv){@autoreleasepool {
  if(!negative&&!prepare&&!baseline&&![mode isEqual:@"execute"])return 1;
  NSDictionary *manifest=[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:@(argv[2])] options:0 error:nil];
  NSMutableData *library=[NSMutableData dataWithContentsOfFile:[assets stringByAppendingPathComponent:manifest[@"library"]]];
- id<MTLDevice>device=nil;for(id<MTLDevice>d in MTLCopyAllDevices())if(d.registryID==4294968458)device=d;if(!device)return 2;
+ id<MTLDevice>device=nil;for(id<MTLDevice>d in MTLCopyAllDevices())if(KPKepler880MIdentity(d)){if(device)return 2;device=d;}if(!device)return 2;
  NSMutableArray *certificates=[NSMutableArray new];for(NSDictionary *profile in manifest[@"profiles"])[certificates addObject:[NSMutableData dataWithContentsOfFile:[assets stringByAppendingPathComponent:profile[@"certificate"]]]];
  NSError *error=nil;
  NSMutableArray *largePipelines=[NSMutableArray new],*largeProofs=[NSMutableArray new];
@@ -124,5 +125,5 @@ NSMutableArray *proofs=[NSMutableArray new],*pipelines=[NSMutableArray new],*run
    if(!row)return 12;row[@"kind"]=@"local";row[@"function"]=function;[row removeObjectForKey:@"depth"];[largePostludes addObject:row];
   }
  }
- NSDictionary *result=@{@"mode":mode,@"large_local_imports":largeProofs,@"large_local_postludes":largePostludes,@"large_inputs_wiped_before_commit":@YES,@"descriptor_transport_prelude":@YES,@"descriptor_transport_import":descriptorProof,@"local_memory_prelude":@YES,@"local_memory_import":localProof,@"native_allocation_prelude":@YES,@"native_allocation_import":allocationProof,@"native_allocation_postlude":allocationPostlude,@"local_postlude":localPostlude,@"allocation_inputs_wiped_before_commit":@YES,@"device":device.name,@"registry_id":@(device.registryID),@"proofs":proofs,@"runs":runs,@"caller_inputs_wiped_before_commit":@(!negative),@"system_modified":@NO,@"performance_benchmark":@NO};NSData *data=json(result);fwrite(data.bytes,1,data.length,stdout);puts("");return 0;
+ NSDictionary *result=@{@"mode":mode,@"large_local_imports":largeProofs,@"large_local_postludes":largePostludes,@"large_inputs_wiped_before_commit":@YES,@"descriptor_transport_prelude":@YES,@"descriptor_transport_import":descriptorProof,@"local_memory_prelude":@YES,@"local_memory_import":localProof,@"native_allocation_prelude":@YES,@"native_allocation_import":allocationProof,@"native_allocation_postlude":allocationPostlude,@"local_postlude":localPostlude,@"allocation_inputs_wiped_before_commit":@YES,@"device":device.name,@"registry_id":@(device.registryID),@"device_identity":KPKepler880MIdentity(device),@"proofs":proofs,@"runs":runs,@"caller_inputs_wiped_before_commit":@(!negative),@"system_modified":@NO,@"performance_benchmark":@NO};NSData *data=json(result);fwrite(data.bytes,1,data.length,stdout);puts("");return 0;
 }}

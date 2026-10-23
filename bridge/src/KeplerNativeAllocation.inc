@@ -129,7 +129,7 @@ extern "C" id<MTLComputePipelineState> KPCreateCertifiedNativeAllocationPipeline
  id<MTLDevice>device,NSData*libraryData,NSString*expectedLibrarySHA256,
  NSData*certificateData,NSString*expectedCertificateSHA256,NSError**error,NSDictionary**evidence) {
     if(error)*error=nil;if(evidence)*evidence=@{@"gate_accepted":@NO,@"constructor_entered":@NO};
-    if(!device||![device.name isEqual:@"NVIDIA GeForce GTX 880M"]||device.registryID!=4294968458||
+    if(!KPKepler880MIdentity(device)||
        ![libraryData isKindOfClass:NSData.class]||!libraryData.length||libraryData.length>64*1024*1024||
        ![certificateData isKindOfClass:NSData.class]||!certificateData.length||certificateData.length>1024*1024) {
         fail(error,@"Unqualified native allocation input/device");return nil;
@@ -170,7 +170,7 @@ extern "C" id<MTLComputePipelineState> KPCreateCertifiedNativeAllocationPipeline
         if(!method||strcmp(method_getTypeEncoding(method),"@40@0:8r^v16Q24@32")) {
             fail(error,@"Unexpected native allocation constructor ABI");return nil;
         }
-        IMP saved=method_getImplementation(method);if(!driverProfile(saved,error))return nil;
+        NSString*actualDriverHash=nil;IMP saved=method_getImplementation(method);if(!driverProfile(saved,error,&actualDriverHash))return nil;
         kpNativeAllocation::State state{metadata,codeHash,codeBytes,reserve,[NSMutableArray array],[NSMutableArray array]};
         uint64_t beforePassthrough=kpNativeAllocation::passthroughCalls.load(std::memory_order_relaxed);
         kpNativeAllocation::original.store(saved,std::memory_order_release);
@@ -199,7 +199,7 @@ extern "C" id<MTLComputePipelineState> KPCreateCertifiedNativeAllocationPipeline
             @"immutable_library_data":@YES,@"inputs_snapshotted":@YES,@"shares_import_mutex":@YES,
             @"thread_local_scope":@YES,@"function":name,@"library_SHA256":kpCASDigest(library),
             @"unrelated_constructor_passthrough_calls":@(kpNativeAllocation::passthroughCalls.load(std::memory_order_relaxed)-beforePassthrough),
-            @"certificate_SHA256":kpCASDigest(certificate)};
+            @"certificate_SHA256":kpCASDigest(certificate),@"actual_driver_sha256":actualDriverHash,@"device_identity":KPKepler880MIdentity(device)};
         if(!verified) {
             if(pipeline){[pipeline release];pipeline=nil;}
             if(!error||!*error)fail(error,@"Native allocation contract failed or constructor callback missing; dispatch prohibited");

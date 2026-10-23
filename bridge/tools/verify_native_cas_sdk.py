@@ -2,11 +2,14 @@
 """Independent raw uint32 CAS oracle; never create a pipeline or dispatch."""
 from pathlib import Path
 import argparse,hashlib,json,struct
+from verify_local_memory import verify_device_identity
+from public_large_scratch import DRIVER_PROFILES
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def verify(root,portable=False):
  d=json.loads((root/'results.json').read_text());m=json.loads((root/'execution/manifest.json').read_text());mode=d['mode']
  assert m['exit_code']==0 and not m['SIGKILL_requested'] and not m['authoritative_ps_status']
- assert d['registry_id']==4294968458 and d['device']=='NVIDIA GeForce GTX 880M' and not d['system_modified'] and not d['performance_benchmark']
+ verify_device_identity(d)
+ assert not d['system_modified'] and not d['performance_benchmark']
  if not portable:
   assert sha(Path(m['original_executable']))==m['original_binary_sha256']
   assert sha(Path(m['signed_executable']))==m['signed_binary_sha256']
@@ -27,6 +30,7 @@ def verify(root,portable=False):
   assert p['pipeline_max_threads']>=1024
   if not native and function!='sdk_keep_comparand':
    e=p['evidence'];assert e['gate_accepted'] and e['immutable_library_data'] and e['constructor_restored'] and e['native_import']['contract_verified']
+   assert e['native_import']['driver_sha256'] in DRIVER_PROFILES and e['native_import']['registry_id']==d['registry_id']
    assert e['native_import']['target_imports']==e['native_import']['verified_imports']>0
    for event in e['native_import']['events']:
     assert event['expected_original_code_identical'] and event['native_metadata_identical_to_certificate'] and event['imported_code_identical']

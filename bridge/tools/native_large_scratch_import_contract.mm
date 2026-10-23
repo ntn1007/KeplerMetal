@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Constructor-only qualification. No queues, command buffers or GPU dispatches.
 #import "KeplerProgramImport.h"
+#import "KeplerGPUIdentity.h"
 #import <objc/runtime.h>
 #include <cstdio>
 
@@ -11,7 +12,7 @@ int main(int argc, char **argv) { @autoreleasepool {
  if (!old && !negative && ![mode isEqual:@"construct"]) return 1;
  id<MTLDevice> device = nil;
  for (id<MTLDevice> candidate in MTLCopyAllDevices())
-  if (candidate.registryID == 4294968458 && [candidate.name isEqual:@"NVIDIA GeForce GTX 880M"]) device = candidate;
+  if (KPKepler880MIdentity(candidate)) { if(device)return 2;device = candidate; }
  if (!device) return 2;
  Method method = class_getInstanceMethod(objc_getClass("NVMTLFunctionVariant"), sel_registerName("initWithCompilerOutput:size:device:"));
  if (!method) return 2;

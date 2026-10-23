@@ -15,7 +15,7 @@ Le travail suit deux axes complémentaires :
 
 ## Avancées récentes
 
-Le nouveau suivi mémoire distingue les tailles de buffers demandées, la demande logique de mémoire privée et les compteurs Metal. Il compile et possède des tests CPU ; sa qualification GPU est bloquée par un changement du pilote installé, refusé explicitement avant le lancement. [Preuves et prochaine étape](docs/MEMORY_ACCOUNTING.md).
+Le changement de signature du pilote et d’identifiant de démarrage est maintenant traité par un second profil exact et une identité PCI. Une nouvelle archive à sept objets passe 190 dispatchs, 570 616 valeurs exactes et 106 650 opérations CAS correctes, avec un suivi mémoire vérifié. Les adaptateurs ICB/rendu/FP64 restent à qualifier ; aucun pilote système ni gain de vitesse n’est annoncé. [Profils](docs/DRIVER_PROFILES.md) · [Résultats et reproduction](docs/MEMORY_ACCOUNTING.md).
 
 L’import explicite accepte maintenant des profils de mémoire privée de 8 et 16 Kio par thread. L’archive publique reconstruite avec ses sept objets passe 226 dispatchs sur la GTX 880M, 612 120 valeurs exactes et les contrôles de coexistence CAS. [Commandes, empreintes et limites](docs/LARGE_LOCAL_MEMORY.md). Cette extension reste expérimentale ; aucun pilote système ni gain de performances n’est annoncé.
 

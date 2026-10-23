@@ -15,7 +15,7 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
-Memory-accounting groundwork now separates requested buffer lengths, logical scratch demand and Metal allocation counters. It compiles and has CPU contract tests; fresh GPU qualification is blocked by a changed installed driver profile, which is explicitly refused before launch. [Evidence and next step](docs/MEMORY_ACCOUNTING.md).
+The signature-only driver change and changed boot registry ID are now handled by an exact second profile and PCI-based identity. A new seven-object archive passes 190 compute dispatches, 570,616 exact uint32 results and 106,650 correct CAS operations, with a verified memory-accounting ledger. Other ICB/render/FP64 gates still need qualification; no system driver or performance change is claimed. [Profiles](docs/DRIVER_PROFILES.md) · [Results and reproduction](docs/MEMORY_ACCOUNTING.md).
 
 The opt-in local-memory import now accepts qualified 8/16 KiB private frames. A fresh seven-object build from public sources passed 226 GTX 880M compute dispatches, 612,120 exact output values and the CAS coexistence controls. [Reproduction, artifact hashes and limits](docs/LARGE_LOCAL_MEMORY.md). This extends the experimental import path; no system driver or performance improvement is claimed.
 

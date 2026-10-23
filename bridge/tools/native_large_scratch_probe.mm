@@ -2,6 +2,7 @@
 // Native reference: private buffers, no program replacement or expected answers.
 #import <Foundation/Foundation.h>
 #import <Metal/Metal.h>
+#import "KeplerGPUIdentity.h"
 #include <CommonCrypto/CommonDigest.h>
 #include <cstring>
 #ifndef KP_LOCAL_IMPORT
@@ -30,9 +31,9 @@ int main(int argc,char **argv){@autoreleasepool{
  BOOL imported=[mode hasPrefix:@"nak:"];NSString*selection=imported?[mode substringFromIndex:4]:mode;
  BOOL dispatch=![selection hasPrefix:@"no_dispatch:"];NSString *program=dispatch?selection:[selection substringFromIndex:12];NSString*name=[program stringByReplacingOccurrencesOfString:@"_forced_spill" withString:@""];
  if(![@[@"local_control",@"local32",@"local256",@"local1024",@"local2048",@"local4096",@"pressure32",@"pressure64",@"pressure96"]containsObject:name])return 1;
- id<MTLDevice>d=nil;for(id<MTLDevice>x in MTLCopyAllDevices())if(x.registryID==4294968458&&[x.name isEqual:@"NVIDIA GeForce GTX 880M"])d=x;if(!d)return 2;
+ id<MTLDevice>d=nil;NSDictionary*deviceIdentity=nil;for(id<MTLDevice>x in MTLCopyAllDevices()){NSDictionary*i=KPKepler880MIdentity(x);if(i){if(d)return 2;d=x;deviceIdentity=i;}}if(!d)return 2;
  NSData*driver=[NSData dataWithContentsOfFile:@"/System/Library/Extensions/GeForceMTLDriver.bundle/Contents/MacOS/GeForceMTLDriver"];
- if(![sha(driver)isEqual:@"2b89839c425d95934f5e01f16c8683fe53432df410292ec8e554b21c98d6c054"])return 2;
+ if(![@[@"2b89839c425d95934f5e01f16c8683fe53432df410292ec8e554b21c98d6c054",@"e240d54a4cd64b7e54fbc15250de82e88451132e1d9f3a4f9879607c8b0e7645"]containsObject:sha(driver)])return 2;
  NSError*error=nil;NSDictionary*proof=@{},*info=@{};id<MTLComputePipelineState>pipeline=nil;NSString*carrierName=name;
  unsigned arrayBytes=sourceArrayBytes(name),carrierBytes=0,scratchBytes=0;
  if(imported){
@@ -102,6 +103,6 @@ int main(int argc,char **argv){@autoreleasepool{
   @"allocated_before_trials":allocatedBeforeTrials,@"allocated_after_trials":allocatedBytes(d),
   @"physical_VRAM_measured":@NO,@"scratch_occupancy_measured":@NO,@"maximum_pressure_measured":@NO};
  NSDictionary*r=@{@"device":d.name,@"registry_id":@(d.registryID),@"driver_SHA256":sha(driver),@"mode":mode,@"function":name,@"program":program,@"carrier_function":carrierName,@"native_reference":@(!imported),@"program_replaced":@(imported),@"caller_inputs_mutated_after_import":@(imported),@"import":proof,@"program_info":info,@"trial_profile":KP_LOCAL_EXTENDED?@"extended":@"baseline",@"GPU_command_buffers":@(trials),@"thread_width":@(pipeline.threadExecutionWidth),@"max_threads":@(pipeline.maxTotalThreadsPerThreadgroup),@"static_threadgroup_bytes":@(pipeline.staticThreadgroupMemoryLength),@"CPU_expected_answers_uploaded":@NO,@"performance_benchmark":@NO,@"system_modified":@NO,@"runs":runs};
- NSMutableDictionary*report=[r mutableCopy];report[@"memory_ledger"]=memoryLedger;
+ NSMutableDictionary*report=[r mutableCopy];report[@"memory_ledger"]=memoryLedger;report[@"device_identity"]=deviceIdentity;
  NSData*j=[NSJSONSerialization dataWithJSONObject:report options:NSJSONWritingPrettyPrinted error:nil];fwrite(j.bytes,1,j.length,stdout);puts("");return 0;
 }}

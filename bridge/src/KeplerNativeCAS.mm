@@ -1,5 +1,6 @@
 // Derived from a frozen qualified transport; source provenance in native-CAS SDK build.
 #import "KeplerProgramImport.h"
+#import "KeplerGPUIdentity.h"
 #import <objc/runtime.h>
 #include <mach/mach_vm.h>
 #include <dlfcn.h>
@@ -198,14 +199,18 @@ void fail(NSError**error,NSString*message){if(error)*error=[NSError errorWithDom
 bool complete(const Context&c){return c.verified&&!c.rejected&&c.targetImports>0&&c.targetImports==c.verifiedImports;}
 const char*qualifiedDriver="/System/Library/Extensions/GeForceMTLDriver.bundle/Contents/MacOS/GeForceMTLDriver";
 const char*qualifiedHash="2b89839c425d95934f5e01f16c8683fe53432df410292ec8e554b21c98d6c054";
-bool driverProfile(IMP implementation,NSError**error){
+// Exact second file: all bytes outside the CMS payload and its CodeDirectory
+// match the original. No signature stripping/normalization is used at runtime.
+const char*qualifiedResignedHash="e240d54a4cd64b7e54fbc15250de82e88451132e1d9f3a4f9879607c8b0e7645";
+bool driverProfile(IMP implementation,NSError**error,NSString**actualHash=nullptr){
  Dl_info image={};
  if(!dladdr((const void*)implementation,&image)||!image.dli_fname||strcmp(image.dli_fname,qualifiedDriver)){fail(error,@"Unexpected constructor implementation image");return false;}
  NSData *driver=[NSData dataWithContentsOfFile:@(qualifiedDriver)];
  if(!driver.length||driver.length>UINT32_MAX){fail(error,@"Cannot validate qualified driver image");return false;}
  unsigned char digest[CC_SHA256_DIGEST_LENGTH];CC_SHA256(driver.bytes,(CC_LONG)driver.length,digest);char hex[65];
  for(unsigned i=0;i<sizeof digest;i++)sprintf(hex+i*2,"%02x",digest[i]);hex[64]=0;
- if(strcmp(hex,qualifiedHash)){fail(error,@"Installed driver hash differs from qualified profile; import prohibited");return false;}
+ if(strcmp(hex,qualifiedHash)&&strcmp(hex,qualifiedResignedHash)){fail(error,@"Installed driver hash differs from qualified profile; import prohibited");return false;}
+ if(actualHash)*actualHash=[NSString stringWithUTF8String:hex];
  return true;
 }
 }
@@ -214,12 +219,12 @@ extern "C" id<MTLComputePipelineState> KPInternalCASCreatePipeline(id<MTLDevice>
  if(error)*error=nil;if(evidence)*evidence=nil;
  if(nativeAllocationScopeActive){fail(error,@"Nested import in native allocation scope");return nil;}
  sm30Code=[[sm30Code copy]autorelease];
- if(!device||![device.name isEqual:@"NVIDIA GeForce GTX 880M"]||!sm30Code.length||sm30Code.length%64||sm30Code.length>65536||config.registers<24||config.registers>63){fail(error,@"Unqualified GPU, code size or register contract");return nil;}
+ if(!KPKepler880MIdentity(device)||!sm30Code.length||sm30Code.length%64||sm30Code.length>65536||config.registers<24||config.registers>63){fail(error,@"Unqualified GPU, code size or register contract");return nil;}
  if((config.launch_word_9!=0&&config.launch_word_9!=576)||(config.launch_word_11!=0&&config.launch_word_11!=576)){fail(error,@"Unqualified launch metadata values");return nil;}
  std::lock_guard<std::mutex>lock(importMutex);
  Class cls=objc_getClass("NVMTLFunctionVariant");Method method=class_getInstanceMethod(cls,sel_registerName("initWithCompilerOutput:size:device:"));
  if(!method||strcmp(method_getTypeEncoding(method),"@40@0:8r^v16Q24@32")){fail(error,@"Unexpected NVIDIA constructor ABI");return nil;}
- IMP saved=method_getImplementation(method);if(!driverProfile(saved,error))return nil;
+ NSString*actualDriverHash=nil;IMP saved=method_getImplementation(method);if(!driverProfile(saved,error,&actualDriverHash))return nil;
  Context context{sm30Code,config,[NSMutableArray array],[NSMutableArray array],false};
  originalInit.store(saved,std::memory_order_release);activeContext=&context;IMP replaced=method_setImplementation(method,(IMP)importInit);
  if(replaced!=saved){method_setImplementation(method,replaced);activeContext=nullptr;fail(error,@"Constructor changed during import setup");return nil;}
@@ -243,7 +248,7 @@ extern "C" id<MTLComputePipelineState> KPInternalCASCreatePipeline(id<MTLDevice>
  bool constructorRestored=method_getImplementation(method)==saved;
  if(!constructorRestored)context.rejected=true;
  [entry release];[library release];
- if(evidence)*evidence=@{@"device":device.name,@"registry_id":@(device.registryID),@"contract_verified":@(complete(context)),@"constructor_restored":@(constructorRestored),@"target_imports":@(context.targetImports),@"verified_imports":@(context.verifiedImports),@"rejected_import":@(context.rejected),@"driver_sha256":@(qualifiedHash),@"events":context.events,@"scope":@"constructor payload and decoded metadata validation; GPU execution requires separate dispatch/result checks"};
+ if(evidence)*evidence=@{@"device":device.name,@"registry_id":@(device.registryID),@"contract_verified":@(complete(context)),@"constructor_restored":@(constructorRestored),@"target_imports":@(context.targetImports),@"verified_imports":@(context.verifiedImports),@"rejected_import":@(context.rejected),@"driver_sha256":actualDriverHash,@"events":context.events,@"scope":@"constructor payload and decoded metadata validation; GPU execution requires separate dispatch/result checks"};
  if(pipeline&&!complete(context)){[pipeline release];pipeline=nil;fail(error,@"Decoded program contract did not match; dispatch prohibited");}
  if(pipeline)objc_setAssociatedObject(pipeline,&retainedPayloadKey,context.payloads,OBJC_ASSOCIATION_RETAIN_NONATOMIC);
  return pipeline;
@@ -320,7 +325,7 @@ static id<MTLRenderPipelineState> createGraphicsStage(id<MTLDevice>device,MTLRen
  std::lock_guard<std::mutex>lock(importMutex);
  Class cls=objc_getClass("NVMTLFunctionVariant");Method method=class_getInstanceMethod(cls,sel_registerName("initWithCompilerOutput:size:device:"));
  if(!method||strcmp(method_getTypeEncoding(method),"@40@0:8r^v16Q24@32")){fail(error,@"Unexpected NVIDIA graphics constructor ABI");return nil;}
- IMP saved=method_getImplementation(method);if(!driverProfile(saved,error))return nil;
+ NSString*actualDriverHash=nil;IMP saved=method_getImplementation(method);if(!driverProfile(saved,error,&actualDriverHash))return nil;
  Context context{code,config,[NSMutableArray array],[NSMutableArray array],false,stage,80};
  context.additionalVertex=vertex;context.vertexConfig=vertexConfig;
  originalInit.store(saved,std::memory_order_release);activeContext=&context;IMP replaced=method_setImplementation(method,(IMP)importInit);
@@ -330,7 +335,7 @@ static id<MTLRenderPipelineState> createGraphicsStage(id<MTLDevice>device,MTLRen
  @catch(NSException*exception){fail(error,exception.reason?:@"Render pipeline exception");}
  @finally {method_setImplementation(method,saved);activeContext=nullptr;}
  bool verified=complete(context)&&(!vertex||context.vertexVerified);
- if(evidence)*evidence=@{@"device":device.name,@"registry_id":@(device.registryID),@"contract_verified":@(verified),@"events":context.events,@"scope":vertex?@"own-process vertex and fragment import; native headers and installed driver transport preserved":(stage==2?@"own-process tessellation evaluation import; native tessellator/header/fragment preserved":(stage==0?@"own-process vertex import; native fragment/header transport preserved":@"own-process fragment import; native vertex/header transport preserved"))};
+ if(evidence)*evidence=@{@"device":device.name,@"registry_id":@(device.registryID),@"driver_sha256":actualDriverHash,@"contract_verified":@(verified),@"events":context.events,@"scope":vertex?@"own-process vertex and fragment import; native headers and installed driver transport preserved":(stage==2?@"own-process tessellation evaluation import; native tessellator/header/fragment preserved":(stage==0?@"own-process vertex import; native fragment/header transport preserved":@"own-process fragment import; native vertex/header transport preserved"))};
  if(pipeline&&!verified){[pipeline release];pipeline=nil;fail(error,@"Decoded graphics contract mismatch; draw prohibited");}
  if(pipeline)objc_setAssociatedObject(pipeline,&retainedPayloadKey,context.payloads,OBJC_ASSOCIATION_RETAIN_NONATOMIC);
  return pipeline;
