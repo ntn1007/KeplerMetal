@@ -129,19 +129,19 @@
       "path": "bridge/src/KeplerNativeCAS.mm",
       "source_path": "bridge/src/KeplerNativeCAS.mm",
       "source_SHA256": "ed17e1d36acdfb938e194d2020d86261af2a4d829e4de284887c15f5f39efd1b",
-      "published_SHA256": "0ae9139f45da529f9cadbb0c098744698121270e5e1713b08aa7ae7cae036061",
-      "bytes": 29320,
+      "published_SHA256": "59f56ab25157ce0b1df2ee1905b9ae82eed95db3ef3d63c71d07b62f25dcba78",
+      "bytes": 29686,
       "modified_for_publication": true,
-      "previous_published_SHA256": "4bb43d54e295b4a574eda4c7b9b35e755172aba589017eb166bab2175ae974ac"
+      "previous_published_SHA256": "0ae9139f45da529f9cadbb0c098744698121270e5e1713b08aa7ae7cae036061"
     },
     {
       "path": "bridge/src/KeplerNativeCASAdapter.inc",
       "source_path": "bridge/src/KeplerNativeCASAdapter.inc",
       "source_SHA256": "57b86d64a0006d37418b418180b893a778a0da39035ec765efbd23d5ee0a2dfe",
-      "published_SHA256": "cdd32884ba293cd160eced53dff9ce0031ba3bf69def322c061b53fed3341b81",
-      "bytes": 11235,
+      "published_SHA256": "8c55319f9c2f2b46957ac1b0140a3c06d8dccf1c21adf0818a40de7835c72d51",
+      "bytes": 11653,
       "modified_for_publication": true,
-      "previous_published_SHA256": "57b86d64a0006d37418b418180b893a778a0da39035ec765efbd23d5ee0a2dfe"
+      "previous_published_SHA256": "cdd32884ba293cd160eced53dff9ce0031ba3bf69def322c061b53fed3341b81"
     },
     {
       "path": "bridge/src/KeplerNativeCommands.h",
@@ -190,9 +190,10 @@
       "path": "bridge/src/KeplerProgramImport.mm",
       "source_path": "bridge/src/KeplerProgramImport.mm",
       "source_SHA256": "24fea73a6b15b85fb0c6a15cf5a5a16ce69be890d8f67636eb8a97a87a72f326",
-      "published_SHA256": "24fea73a6b15b85fb0c6a15cf5a5a16ce69be890d8f67636eb8a97a87a72f326",
-      "bytes": 16217,
-      "modified_for_publication": false
+      "published_SHA256": "0c47e6173b4cfe3300fb29fad0392cea0828e3c28e95ee5db6ff7aff00dca45f",
+      "bytes": 3151,
+      "modified_for_publication": true,
+      "previous_published_SHA256": "24fea73a6b15b85fb0c6a15cf5a5a16ce69be890d8f67636eb8a97a87a72f326"
     },
     {
       "path": "bridge/src/KeplerResourceABI.h",
@@ -4072,9 +4073,10 @@
       "path": "bridge/tools/tessellation_capture_probe.mm",
       "source_path": "bridge/tools/tessellation_capture_probe.mm",
       "source_SHA256": "2103702b497c0c16b9390e4dd9966d727c47018ce914f9cae47c1576b0cb4b13",
-      "published_SHA256": "2103702b497c0c16b9390e4dd9966d727c47018ce914f9cae47c1576b0cb4b13",
-      "bytes": 6662,
-      "modified_for_publication": false
+      "published_SHA256": "7253c825e76abda07d4c200a4ee32f436d201e85e06b46d00039a238043da44e",
+      "bytes": 6928,
+      "modified_for_publication": true,
+      "previous_published_SHA256": "2103702b497c0c16b9390e4dd9966d727c47018ce914f9cae47c1576b0cb4b13"
     },
     {
       "path": "bridge/tools/tessellation_compile.c",
@@ -5010,9 +5012,10 @@
       "path": "bridge/tools/vertex_io_probe.mm",
       "source_path": "bridge/tools/vertex_io_probe.mm",
       "source_SHA256": "889c3ae211de09cd306acc32686c388a990b1f7d290c1acdee5a9189288d205a",
-      "published_SHA256": "889c3ae211de09cd306acc32686c388a990b1f7d290c1acdee5a9189288d205a",
-      "bytes": 15232,
-      "modified_for_publication": false
+      "published_SHA256": "101ef8e4f0bc97f0bee8e4cc924fe1abcc263c5392e14e0dff2ccbc3b1dd2cc1",
+      "bytes": 15711,
+      "modified_for_publication": true,
+      "previous_published_SHA256": "889c3ae211de09cd306acc32686c388a990b1f7d290c1acdee5a9189288d205a"
     },
     {
       "path": "bridge/tools/video_engine_probe.mm",
@@ -7467,34 +7470,27 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "c704b74482f68f32fd27afd3cb2b5fcb16780c4bde9ae9f632d7913665e87557",
-  "previous_public_commit": "016c713aa2dacee5d94508fe371c85f8c84bf1c3",
+  "previous_source_snapshot_SHA256": "da266374270bf34aa085fe1f840702735946949a311d9769aca2ab3dfc979cc5",
+  "previous_public_commit": "87df07022597fa9905e5fe5921cf7a98543a9d19",
   "update": {
     "date": "2026-10-23",
-    "scope": "Shared exact-profile/PCI checks and fresh FP64, indirect compute, render qualification",
+    "scope": "Shared generic/CAS constructor transport, nested refusal and current-profile graphics qualification",
     "source_files_updated": [
-      "bridge/src/KeplerCPUICB.mm",
-      "bridge/src/KeplerFP64.mm",
       "bridge/src/KeplerNativeCAS.mm",
-      "bridge/src/KeplerNativeCommands.mm",
-      "bridge/src/KeplerNativeRenderDraws.mm",
-      "bridge/tools/cpu_icb_render_probe.mm",
-      "bridge/tools/verify_cpu_icb_render.py",
-      "bridge/sdk-combined/examples/client.mm",
-      "bridge/sdk-combined/examples/fp64_client.mm",
-      "bridge/sdk-combined/examples/fp64_conversion_client.mm",
-      "bridge/sdk-combined/examples/fp64_reverse_client.mm",
-      "bridge/sdk-combined/examples/verify_example.py",
-      "bridge/sdk-combined/examples/verify_fp64_client.py",
-      "bridge/sdk-combined/examples/verify_fp64_conversion_client.py",
-      "bridge/sdk-combined/examples/verify_fp64_reverse_client.py",
-      "bridge/src/KeplerNativeThreadLimits.inc",
-      "tests/test_large_scratch_public.py"
+      "bridge/src/KeplerNativeCASAdapter.inc",
+      "bridge/src/KeplerProgramImport.mm",
+      "bridge/tools/tessellation_capture_probe.mm",
+      "bridge/tools/vertex_io_probe.mm"
     ],
-    "public_static_library_SHA256": "6ac7a6c15718aee68883bdcf9fc601af75496b8ee5e709c26c0a2af0f83aeefa",
-    "FP64_checked_results": 6095853,
-    "FP64_dispatches": 1269,
-    "correct_render_channels": 135168,
-    "full_objective_complete": false
+    "public_static_library_SHA256": "70818a656f9cb518d77da924cb48f0225ba78a5a2c5fc1b24370675aaa8e58c4",
+    "full_objective_complete": false,
+    "generic_reception_hosts": 39,
+    "total_qualified_hosts": 62,
+    "CPU_tests_passed": 100,
+    "render_float32_channels": 270336,
+    "tessellation_value_channels": 52576,
+    "FP64_conversion_dispatches": 1269,
+    "FP64_conversion_checked_results": 6095853,
+    "system_references_unchanged": 87
   }
 }

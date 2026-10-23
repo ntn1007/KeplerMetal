@@ -1,5 +1,7 @@
 # Build from source
 
+[SHARED_GENERIC_IMPORT.md](SHARED_GENERIC_IMPORT.md) gives the fresh compute/vertex/fragment/tessellation reception builder and portable 39-host raw-output auditor. The C ABI facade now requires the complete seven-object archive; current `KeplerProgramImport.mm` alone is not a standalone dylib build. Historical frozen source/builds remain separate.
+
 [ADAPTER_PROFILES.md](ADAPTER_PROFILES.md) describes the five-client reception builder for a new complete public archive and an existing locally generated 60-program asset SDK. It checks the original asset manifest, regenerates input recipes, freezes independent oracles and links clients without reusing old runtime objects. GPU qualification remains separate from source compilation.
 
 The new [memory-accounting cohort](MEMORY_ACCOUNTING.md) requires extended builds of both separately pinned large/legacy carriers against the same runtime archive. The investigated signature-only driver variant has a separate bounded compute/CAS qualification; unknown profiles still refuse before host launch. [Exact profiles and PCI identity](DRIVER_PROFILES.md). Compilation is not GPU qualification.

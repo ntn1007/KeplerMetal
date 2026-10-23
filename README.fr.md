@@ -15,6 +15,8 @@ Le travail suit deux axes complémentaires :
 
 ## Avancées récentes
 
+Les imports calcul, vertex, fragment et tessellation partagent maintenant le verrou et les contrôles de restauration du chemin CAS. Une archive complète reconstruite passe 39 processus de réception, 270 336 canaux de rendu et 52 576 valeurs de tessellation, avec références CPU et refus explicites des imports imbriqués ou sans callback. [Compilation, preuves et limites](docs/SHARED_GENERIC_IMPORT.md).
+
 Les adaptateurs FP64, commandes indirectes encodées par le CPU et rendu natif utilisent maintenant les contrôles de profil exact et d’identité PCI qualifiés. Une nouvelle archive passe 1 269 dispatchs FP64/conversions avec 6 095 853 résultats vérifiés, 29 440 opérations CAS réparées via ICB et 135 168 canaux de rendu. Les témoins sans producteur et les défauts natifs restent distingués. [Archive, reproduction et limites](docs/ADAPTER_PROFILES.md).
 
 Le changement de signature du pilote et d’identifiant de démarrage est maintenant traité par un second profil exact et une identité PCI. Une nouvelle archive à sept objets passe 190 dispatchs, 570 616 valeurs exactes et 106 650 opérations CAS correctes, avec un suivi mémoire vérifié. Cette première cohorte couvrait le calcul/CAS ; les adaptateurs supplémentaires sont qualifiés ci-dessus. Aucun pilote système ni gain de vitesse n’est annoncé. [Profils](docs/DRIVER_PROFILES.md) · [Résultats et reproduction](docs/MEMORY_ACCOUNTING.md).

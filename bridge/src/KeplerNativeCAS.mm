@@ -215,7 +215,7 @@ bool driverProfile(IMP implementation,NSError**error,NSString**actualHash=nullpt
 
 extern "C" id<MTLComputePipelineState> KPInternalCASCreatePipeline(id<MTLDevice> device,NSURL*carrierLibrary,NSString*function,NSData*sm30Code,KeplerImportConfig config,NSError**error,NSDictionary**evidence){
  if(error)*error=nil;if(evidence)*evidence=nil;
- if(nativeAllocationScopeActive){fail(error,@"Nested import in native allocation scope");return nil;}
+ if(activeContext||nativeAllocationScopeActive){fail(error,@"Nested import context");return nil;}
  sm30Code=[[sm30Code copy]autorelease];
  if(!KPKepler880MIdentity(device)||!sm30Code.length||sm30Code.length%64||sm30Code.length>65536||config.registers<24||config.registers>63){fail(error,@"Unqualified GPU, code size or register contract");return nil;}
  if((config.launch_word_9!=0&&config.launch_word_9!=576)||(config.launch_word_11!=0&&config.launch_word_11!=576)){fail(error,@"Unqualified launch metadata values");return nil;}
@@ -261,7 +261,7 @@ extern "C" id<MTLComputePipelineState> KPCreateLocalMemoryPipeline(
  if(![library isKindOfClass:NSData.class]||!library.length||library.length>UINT32_MAX||
     ![code isKindOfClass:NSData.class]||!code.length||code.length%64||code.length>65536||
     config.registers<24||config.registers>63||config.required_scratch_bytes>config.carrier_local_bytes||
-    expectedNativeOriginal||keepNativeMetadata||certifiedLibraryData||certifiedNativeMetadata||
+    activeContext||nativeAllocationScopeActive||expectedNativeOriginal||keepNativeMetadata||certifiedLibraryData||certifiedNativeMetadata||
     certifiedSuppliedFunction||certifiedReflection||approvedPipelineDescriptor||localMemoryContract){fail(error,@"Invalid local-memory import or nested context");return nil;}
  uint32_t bytes=0,spill=0,barriers=0;
  if([function isEqual:@"local_control"]){}
@@ -289,7 +289,7 @@ extern "C" id<MTLComputePipelineState> KPInternalCreateApprovedSM30Pipeline(
  id<MTLDevice>device,NSData*library,NSString*function,NSData*code,
  KeplerImportConfig config,NSError**error,NSDictionary**evidence){
  if(error)*error=nil;if(evidence)*evidence=nil;
- if(!library.length||library.length>UINT32_MAX||expectedNativeOriginal||keepNativeMetadata||
+ if(activeContext||nativeAllocationScopeActive||!library.length||library.length>UINT32_MAX||expectedNativeOriginal||keepNativeMetadata||
     certifiedLibraryData||certifiedNativeMetadata||certifiedSuppliedFunction||certifiedReflection||approvedPipelineDescriptor){
   fail(error,@"Missing carrier or nested import context");return nil;
  }
@@ -305,7 +305,7 @@ extern "C" id<MTLComputePipelineState> KPInternalCreateApprovedSM30PipelineWithD
  id<MTLDevice>device,NSData*library,NSString*function,NSData*code,
  KeplerImportConfig config,MTLComputePipelineDescriptor*descriptor,NSError**error,NSDictionary**evidence){
  if(error)*error=nil;if(evidence)*evidence=nil;
- if(!library.length||library.length>UINT32_MAX||!descriptor||expectedNativeOriginal||keepNativeMetadata||
+ if(activeContext||nativeAllocationScopeActive||!library.length||library.length>UINT32_MAX||!descriptor||expectedNativeOriginal||keepNativeMetadata||
     certifiedLibraryData||certifiedNativeMetadata||certifiedSuppliedFunction||certifiedReflection||approvedPipelineDescriptor){fail(error,@"Missing descriptor/carrier or nested import context");return nil;}
  NSData*snapshot=[library copy];MTLComputePipelineDescriptor*settings=[descriptor copy];id<MTLComputePipelineState>pipeline=nil;
  @try{certifiedLibraryData=snapshot;approvedPipelineDescriptor=settings;pipeline=KPInternalCASCreatePipeline(device,nil,function,code,config,error,evidence);}
@@ -315,9 +315,9 @@ extern "C" id<MTLComputePipelineState> KPInternalCreateApprovedSM30PipelineWithD
 
 static id<MTLRenderPipelineState> createGraphicsStage(id<MTLDevice>device,MTLRenderPipelineDescriptor*descriptor,NSData*code,KeplerImportConfig config,uint32_t stage,NSError**error,NSDictionary**evidence,NSData*vertex=nil,KeplerImportConfig vertexConfig={}){
  if(error)*error=nil;if(evidence)*evidence=nil;
- if(nativeAllocationScopeActive){fail(error,@"Nested graphics import in native allocation scope");return nil;}
+ if(activeContext||nativeAllocationScopeActive){fail(error,@"Nested graphics import context");return nil;}
  code=[[code copy]autorelease];vertex=[[vertex copy]autorelease];
- if(!device||![device.name isEqual:@"NVIDIA GeForce GTX 880M"]||!code.length||code.length%64||code.length>65536||config.registers<1||config.registers>63){fail(error,@"Unqualified render GPU, code or register contract");return nil;}
+ if(!KPKepler880MIdentity(device)||!code.length||code.length%64||code.length>65536||config.registers<1||config.registers>63){fail(error,@"Unqualified render GPU, code or register contract");return nil;}
  if(config.launch_word_9||config.launch_word_11){fail(error,@"Graphics control-stack metadata not yet qualified");return nil;}
  if(vertex&&(!vertex.length||vertex.length%64||vertex.length>65536||vertexConfig.registers<1||vertexConfig.registers>63||vertexConfig.launch_word_9||vertexConfig.launch_word_11)){fail(error,@"Unqualified additional vertex contract");return nil;}
  std::lock_guard<std::mutex>lock(importMutex);
@@ -332,8 +332,10 @@ static id<MTLRenderPipelineState> createGraphicsStage(id<MTLDevice>device,MTLRen
  @try {pipeline=[device newRenderPipelineStateWithDescriptor:descriptor error:error];}
  @catch(NSException*exception){fail(error,exception.reason?:@"Render pipeline exception");}
  @finally {method_setImplementation(method,saved);activeContext=nullptr;}
- bool verified=complete(context)&&(!vertex||context.vertexVerified);
- if(evidence)*evidence=@{@"device":device.name,@"registry_id":@(device.registryID),@"driver_sha256":actualDriverHash,@"contract_verified":@(verified),@"events":context.events,@"scope":vertex?@"own-process vertex and fragment import; native headers and installed driver transport preserved":(stage==2?@"own-process tessellation evaluation import; native tessellator/header/fragment preserved":(stage==0?@"own-process vertex import; native fragment/header transport preserved":@"own-process fragment import; native vertex/header transport preserved"))};
+ bool constructorRestored=method_getImplementation(method)==saved;
+ if(!constructorRestored)context.rejected=true;
+ bool verified=complete(context)&&(!vertex||context.vertexVerified)&&constructorRestored;
+ if(evidence)*evidence=@{@"device":device.name,@"registry_id":@(device.registryID),@"driver_sha256":actualDriverHash,@"contract_verified":@(verified),@"constructor_restored":@(constructorRestored),@"events":context.events,@"scope":vertex?@"own-process vertex and fragment import; native headers and installed driver transport preserved":(stage==2?@"own-process tessellation evaluation import; native tessellator/header/fragment preserved":(stage==0?@"own-process vertex import; native fragment/header transport preserved":@"own-process fragment import; native vertex/header transport preserved"))};
  if(pipeline&&!verified){[pipeline release];pipeline=nil;fail(error,@"Decoded graphics contract mismatch; draw prohibited");}
  if(pipeline)objc_setAssociatedObject(pipeline,&retainedPayloadKey,context.payloads,OBJC_ASSOCIATION_RETAIN_NONATOMIC);
  return pipeline;
@@ -364,7 +366,7 @@ extern "C" id<MTLBuffer> KPInternalCASCreateHostBuffer(id<MTLDevice>device,const
 extern "C" id<MTLComputePipelineState> KPInternalCASCreatePinnedNativeCASPipeline(
  id<MTLDevice>device,NSURL*library,NSString*function,NSData*originalCode,NSData*newCode,
  KeplerImportConfig config,NSError**error,NSDictionary**evidence){
- if(expectedNativeOriginal||!originalCode.length){fail(error,@"Missing or nested native input contract");return nil;}
+ if(activeContext||nativeAllocationScopeActive||expectedNativeOriginal||!originalCode.length){fail(error,@"Missing or nested native input contract");return nil;}
  expectedNativeOriginal=originalCode;
  @try{return KPInternalCASCreatePipeline(device,library,function,newCode,config,error,evidence);}
  @finally{expectedNativeOriginal=nullptr;}
@@ -372,7 +374,7 @@ extern "C" id<MTLComputePipelineState> KPInternalCASCreatePinnedNativeCASPipelin
 
 extern "C" id<MTLComputePipelineState> KPInternalCASCreatePreservingNativeCASPipeline(
  id<MTLDevice>d,NSURL*l,NSString*f,NSData*original,NSData*replacement,NSError**error,NSDictionary**proof){
- if(keepNativeMetadata){fail(error,@"Nested native preservation context");return nil;}
+ if(activeContext||nativeAllocationScopeActive||keepNativeMetadata){fail(error,@"Nested native preservation context");return nil;}
  keepNativeMetadata=true;
  @try{return KPInternalCASCreatePinnedNativeCASPipeline(d,l,f,original,replacement,{24,576,576},error,proof);}
  @finally{keepNativeMetadata=false;}

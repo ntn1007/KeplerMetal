@@ -69,6 +69,9 @@ extern "C" id<MTLComputePipelineState> KPCreateCertifiedNativeCASPipeline(
  NSData *certificateData,NSString *expectedCertificateSHA256,
  NSError **error,NSDictionary **evidence) {
  if(error)*error=nil;if(evidence)*evidence=nil;
+ // Refuse before parsing: a malformed nested certificate must not reach
+ // exception cleanup that belongs to the active outer import.
+ if(activeContext||nativeAllocationScopeActive||expectedNativeOriginal||keepNativeMetadata||certifiedLibraryData||certifiedNativeMetadata){fail(error,@"Nested CAS context refused");return nil;}
  if(![libraryData isKindOfClass:NSData.class]||!libraryData.length||libraryData.length>64*1024*1024||
     ![certificateData isKindOfClass:NSData.class]||!certificateData.length||certificateData.length>1024*1024||
     !KPKepler880MIdentity(device)){fail(error,@"Unqualified CAS input/device");return nil;}
@@ -118,7 +121,7 @@ extern "C" id<MTLComputePipelineState> KPCreateCertifiedNativeCASPipeline(
     if(i!=redirect&&memcmp(a+i,b+i,8))structure=false;
   }
   if(!structure){fail(error,@"CAS trampoline/metadata structure refused");if(evidence)*evidence=@{@"gate_accepted":@NO,@"constructor_entered":@NO};return nil;}
-  if(expectedNativeOriginal||keepNativeMetadata||certifiedLibraryData||certifiedNativeMetadata){fail(error,@"Nested CAS context refused");return nil;}
+  if(activeContext||nativeAllocationScopeActive||expectedNativeOriginal||keepNativeMetadata||certifiedLibraryData||certifiedNativeMetadata){fail(error,@"Nested CAS context refused");return nil;}
   certifiedLibraryData=library;certifiedNativeMetadata=metadata;
   @try {
    pipeline=KPInternalCASCreatePreservingNativeCASPipeline(device,nil,function,original,replacement,error,&proof);
@@ -160,7 +163,7 @@ extern "C" id<MTLComputePipelineState> KPCreateCertifiedNativeCASPipeline(
       reflection:(MTLComputePipelineReflection**)reflection error:(NSError**)error
       evidence:(NSDictionary**)evidence {
  if(reflection)*reflection=nil;
- if(certifiedSuppliedFunction||!function||function.device!=device||
+ if(activeContext||nativeAllocationScopeActive||certifiedSuppliedFunction||!function||function.device!=device||
     options!=(MTLPipelineOptionArgumentInfo|MTLPipelineOptionBufferTypeInfo)){
   fail(error,@"Unqualified native CAS reflection interoperability context");return nil;
  }

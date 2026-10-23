@@ -15,6 +15,8 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
+Generic compute, vertex, fragment and tessellation imports now share the CAS transport’s constructor lock and restoration checks. A fresh complete archive passes 39 reception processes, 270,336 raster channels and 52,576 tessellation values with CPU oracles and explicit nested/cache refusals. [Source build, evidence and scope](docs/SHARED_GENERIC_IMPORT.md).
+
 FP64, CPU-encoded indirect commands and native draw adapters now use the qualified exact-profile/PCI identity checks. A new seven-object archive passes 1,269 FP64/conversion dispatches with 6,095,853 checked results, 29,440 repaired CAS operations through ICBs, and 135,168 render channels. Missing-producer/native-defect controls remain explicit. [Artifact, reproduction and remaining limits](docs/ADAPTER_PROFILES.md).
 
 The signature-only driver change and changed boot registry ID are now handled by an exact second profile and PCI-based identity. A new seven-object archive passes 190 compute dispatches, 570,616 exact uint32 results and 106,650 correct CAS operations, with a verified memory-accounting ledger. That initial cohort covered compute/CAS; the additional adapter qualification is described above. No system driver or performance change is claimed. [Profiles](docs/DRIVER_PROFILES.md) · [Results and reproduction](docs/MEMORY_ACCOUNTING.md).

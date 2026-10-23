@@ -2,7 +2,7 @@
 
 ## Branch A: native NVIDIA behavior
 
-`KeplerProgramImport` studies the driver's existing native program constructor and validates program/resource metadata. `KeplerNativeCAS` recognizes a bounded native shader defect and applies a certified process-local repair. `KeplerNativeCommands` and `KeplerNativeRenderDraws` handle narrowly qualified native command/profile data.
+`KeplerProgramImport` preserves the retained-return C API as a facade over the same MRC constructor transport used by `KeplerNativeCAS`. Generic compute, graphics, FP64 and certified CAS imports share its mutex/context, strict driver/PCI checks and constructor restoration; nested imports and cached no-callback pipelines are refused. [Reception and build contract](SHARED_GENERIC_IMPORT.md). `KeplerNativeCAS` recognizes a bounded native shader defect and applies a certified process-local repair. `KeplerNativeCommands` and `KeplerNativeRenderDraws` handle narrowly qualified native command/profile data.
 
 The installed driver continues to allocate resources, submit work and manage the device. No kernel driver or system framework is replaced. Linux/FreeBSD references help identify possible future improvements; their proprietary implementations are not part of this code.
 

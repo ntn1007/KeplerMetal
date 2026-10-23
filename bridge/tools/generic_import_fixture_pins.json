@@ -1,0 +1,31 @@
+{
+  "vertex": {
+    "vertex_io_carrier.metallib": "c0e24e5a5534e10f0eca591b5ace2112d76eafde74ed297ce1b3df0d95b5ca43",
+    "vertex.sass": "97fad5732cc1901f558fd59521e4b900ab1ea7a7b72c6407e695a6bd54221423",
+    "vertex-info.json": "cb1b510ea8b6038080f7d3b9b90281727e9b8ca034e937666afc3619a0161760",
+    "smooth.sass": "c81a2782f713f36fe4ee7df5c74478396274ebc3bb48f7423c52914de0031beb",
+    "smooth-info.json": "7e03a69a8862ee45664d038ce80b9af469fb8738199032d866798745b6accdac",
+    "linear.sass": "69114ee846b392ad81039afa36af8799b460bcdf160ac03b41e2559391e383e4",
+    "linear-info.json": "4095a4344ea8f7eaffe98ccb8213f81736031dd33dbc53d2d8e344cea38ce335",
+    "flat.sass": "d575020ddd4a5dfacef0c4db241ee26bb941685d2306f257bb10626025f22d8d",
+    "flat-info.json": "6a7b2a4a8eae6417329f270d53683b4610970bcb22a2d75a371802c0311cef6d",
+    "arguments.sass": "782049eee8d11f7089c56cd5332820bcfd2175b3430967883126bdfcb9a5bc15",
+    "arguments-info.json": "11b9355cca1b013622bebafb3aa31904977ceccfe30767964629e618b6004b03"
+  },
+  "tess": {
+    "carrier.metallib": "d5bca7a8f201b3a00f3e0df6e374ab82276d3ec66aa8182e08da11a5141645af",
+    "capture.sass": "47b9ae41ca3966394d9f7912b126d5d23b87615f0c5f78793ed663e4b86ea37e",
+    "capture-info.json": "d0bddadaa966db8eefc443fef29449615dcaf9454c32c62fb8021b92fb788370"
+  },
+  "cas": {
+    "client-manifest.json": "1311b50f8d02890ef2b30bf6ddc0d89c2ebc27adcca7f4c1933627d8666d4504",
+    "cas_client.metallib": "92b1560d30a6f29bb8d28c758a8f9b917257452e1a52ffd3761972c4e451c573",
+    "sdk_cas_expected.certificate.json": "adf1cee8b9d24a460747084157518f22a26b64e4df2b3c3595f0adcd08d4921e"
+  },
+  "schema": 1,
+  "cas_library": "cas_client.metallib",
+  "cas_library_SHA256": "92b1560d30a6f29bb8d28c758a8f9b917257452e1a52ffd3761972c4e451c573",
+  "cas_certificate": "sdk_cas_expected.certificate.json",
+  "cas_certificate_SHA256": "adf1cee8b9d24a460747084157518f22a26b64e4df2b3c3595f0adcd08d4921e",
+  "cas_function": "sdk_cas_expected"
+}

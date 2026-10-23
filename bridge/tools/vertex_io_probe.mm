@@ -1,4 +1,5 @@
 #import "KeplerProgramImport.h"
+#import "KeplerGPUIdentity.h"
 #include <array>
 #include <algorithm>
 #include <cmath>
@@ -26,7 +27,7 @@ int main(int argc,char**argv){@autoreleasepool{
  int baseVertex=draw=="base-vertex"||draw=="indirect-indexed"?2:(draw=="negative-base-vertex"?-2:0);
  unsigned prefix=(baseVertex!=0)?2:(draw=="vertex-start"?5:0),vertexStart=draw=="vertex-start"?5:0;
  bool index32=draw=="indexed32";unsigned indexStart=draw=="indirect-indexed"?3:0,indexByteOffset=indexed?16:0,indexPrefix=indexed?(indexByteOffset/(index32?4:2)+indexStart):0;
- id<MTLDevice>device=MTLCreateSystemDefaultDevice();if(!device||![device.name containsString:@"880M"])return 2;
+ id<MTLDevice>device=MTLCreateSystemDefaultDevice();NSDictionary*identity=KPKepler880MIdentity(device);if(!identity)return 2;
  NSError*error=nil;id<MTLLibrary>library=[device newLibraryWithURL:[NSURL fileURLWithPath:@(argv[1])] error:&error];if(!library)return 3;
  const float xLeft=-1,xRight=instanced?0:1;
  const float xy[4][2]={{xLeft,-1},{xRight,-1},{xLeft,1},{xRight,1}};
@@ -111,6 +112,10 @@ int main(int argc,char**argv){@autoreleasepool{
   for(unsigned c=0;c<4;c++){double actual=out[(y*W+x)*4+c],delta=std::abs(actual-expected[c]);maxError=std::max(maxError,delta);if(!std::isfinite(actual)||delta>2e-6)mismatches++;if(!x&&!y)[first addObject:@(actual)];}
  }
  unsigned argumentMismatches=0,changedGuards=0;if(indirect){const uint32_t*actual=(const uint32_t*)argumentReadback.contents;for(unsigned i=0;i<argumentCount;i++){[actualArguments addObject:@(actual[i])];if(actual[i]!=(emptyControl?0:args[i]))argumentMismatches++;}for(unsigned i=argumentCount;i<8;i++)if(actual[i]!=initial[i])changedGuards++;}
- emit(@{@"device":device.name,@"registry_id":@(device.registryID),@"draw":@(draw.c_str()),@"mode":@(mode.c_str()),@"memory":@(memory.c_str()),@"interpolation":interpolation,@"pixels_checked":@(W*H),@"expected_covered_pixels":@(coveredPixels),@"mismatched_channels":@(mismatches),@"maximum_float_error":@(maxError),@"tolerance":@(2e-6),@"first_pixel":first,@"render_import":renderEvidence?:@{},@"compute_import":computeEvidence?:@{},@"argument_words":actualArguments,@"argument_mismatches":@(argumentMismatches),@"changed_argument_guards":@(changedGuards),@"arguments_produced_on_GPU":@(indirect),@"argument_buffer_private":@(indirect&&argumentBuffer.storageMode==MTLStorageModePrivate),@"argument_reported_storage_mode":@(indirect?argumentBuffer.storageMode:0),@"argument_contents_available":@(indirect&&argumentBuffer.contents!=nullptr),@"argument_CPU_read_before_submit":@NO,@"native_empty_control":@(emptyControl),@"command_status":@(command.status),@"scope":@"application-local vertex/fragment import and CPU raster oracle; indirect parameters produced within same GPU command buffer; no performance benchmark"});
+ const char*capturePrefix=getenv("KEPLER_GRAPHICS_CAPTURE_PREFIX");if(capturePrefix){
+  [[NSData dataWithBytes:readback.contents length:W*H*16]writeToFile:[@(capturePrefix) stringByAppendingString:@".image.bin"] atomically:YES];
+  if(indirect)[[NSData dataWithBytes:argumentReadback.contents length:sizeof initial]writeToFile:[@(capturePrefix) stringByAppendingString:@".arguments.bin"] atomically:YES];
+ }
+ emit(@{@"device":device.name,@"registry_id":@(device.registryID),@"device_identity":identity,@"draw":@(draw.c_str()),@"mode":@(mode.c_str()),@"memory":@(memory.c_str()),@"interpolation":interpolation,@"pixels_checked":@(W*H),@"expected_covered_pixels":@(coveredPixels),@"mismatched_channels":@(mismatches),@"maximum_float_error":@(maxError),@"tolerance":@(2e-6),@"first_pixel":first,@"render_import":renderEvidence?:@{},@"compute_import":computeEvidence?:@{},@"argument_words":actualArguments,@"argument_mismatches":@(argumentMismatches),@"changed_argument_guards":@(changedGuards),@"arguments_produced_on_GPU":@(indirect),@"argument_buffer_private":@(indirect&&argumentBuffer.storageMode==MTLStorageModePrivate),@"argument_reported_storage_mode":@(indirect?argumentBuffer.storageMode:0),@"argument_contents_available":@(indirect&&argumentBuffer.contents!=nullptr),@"argument_CPU_read_before_submit":@NO,@"native_empty_control":@(emptyControl),@"command_status":@(command.status),@"scope":@"application-local vertex/fragment import and CPU raster oracle; indirect parameters produced within same GPU command buffer; no performance benchmark"});
  return mismatches||argumentMismatches||changedGuards?10:0;
 }}

@@ -1,4 +1,5 @@
 #import "KeplerProgramImport.h"
+#import "KeplerGPUIdentity.h"
 #include <algorithm>
 #include <cmath>
 #include <cstdio>
@@ -7,10 +8,10 @@
 static void emit(NSDictionary *d){NSData *j=[NSJSONSerialization dataWithJSONObject:d options:NSJSONWritingPrettyPrinted error:nil];if(j)fwrite(j.bytes,1,j.length,stdout);puts("");}
 int main(int argc,char **argv){@autoreleasepool{
  if(argc!=3&&argc!=5)return 1;bool nak=argc==5;unsigned factor=(unsigned)strtoul(argv[2],nullptr,10);if(factor>64)return 1;
- id<MTLDevice>device=MTLCreateSystemDefaultDevice();if(!device||![device.name containsString:@"880M"])return 2;
+ id<MTLDevice>device=MTLCreateSystemDefaultDevice();NSDictionary*identity=KPKepler880MIdentity(device);if(!identity)return 2;
  NSError *error=nil;id<MTLLibrary>library=[device newLibraryWithURL:[NSURL fileURLWithPath:@(argv[1])] error:&error];
  MTLRenderPipelineDescriptor *desc=[MTLRenderPipelineDescriptor new];desc.vertexFunction=[library newFunctionWithName:@"tess_capture"];desc.rasterizationEnabled=NO;desc.colorAttachments[0].pixelFormat=MTLPixelFormatRGBA32Float;desc.maxTessellationFactor=64;desc.tessellationPartitionMode=MTLTessellationPartitionModeInteger;desc.tessellationFactorStepFunction=MTLTessellationFactorStepFunctionConstant;desc.tessellationOutputWindingOrder=MTLWindingCounterClockwise;
- NSMutableDictionary *result=[NSMutableDictionary dictionaryWithDictionary:@{@"device":device.name,@"registry_id":@(device.registryID),@"factor":@(factor),@"NAK_imported":@(nak),@"rasterization_enabled":@NO,@"capacity":@32768}];
+ NSMutableDictionary *result=[NSMutableDictionary dictionaryWithDictionary:@{@"device":device.name,@"registry_id":@(device.registryID),@"device_identity":identity,@"factor":@(factor),@"NAK_imported":@(nak),@"rasterization_enabled":@NO,@"capacity":@32768}];
  id<MTLRenderPipelineState>pipeline=nil;NSDictionary *evidence=nil;
  @try{if(nak){NSDictionary *info=[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:@(argv[4])] options:0 error:nil];pipeline=KPCreateTessellationPipeline(device,desc,[NSData dataWithContentsOfFile:@(argv[3])],{[info[@"registers"]unsignedIntValue],0,0},&error,&evidence);}else pipeline=[device newRenderPipelineStateWithDescriptor:desc error:&error];}@catch(NSException *e){result[@"exception"]=e.reason?:e.name;}
  result[@"pipeline_created"]=@(pipeline!=nil);result[@"import"]=evidence?:@{};if(!pipeline){result[@"error"]=error.description?:@"no pipeline";emit(result);return 3;}
@@ -49,5 +50,6 @@ int main(int argc,char **argv){@autoreleasepool{
  }
  if((factor==0&&count!=0)||(factor>0&&count<3))bad++;
  const char *prefix=getenv("KEPLER_TESS_CAPTURE_PREFIX");if(prefix){for(unsigned b=1;b<3;b++)[[NSData dataWithBytes:(unsigned char*)readback[b].contents+guard length:count*16]writeToFile:[@(prefix) stringByAppendingString:b==1?@".coords.bin":@".values.bin"] atomically:YES];}
+ if(prefix)for(unsigned b=0;b<3;b++)[[NSData dataWithBytes:readback[b].contents length:dataBytes[b]+2*guard]writeToFile:[NSString stringWithFormat:@"%s.buffer-%u.bin",prefix,b] atomically:YES];
  result[@"mismatches"]=@(bad);result[@"guard_mismatches"]=@(guardBad);result[@"tail_mismatches"]=@(tailBad);result[@"max_error_vs_cpu_double"]=@(maxError);result[@"max_coordinate_sum_error"]=@(maxSumError);result[@"examples"]=examples;result[@"oracle"]=@"Independent CPU double square per captured coordinate; native tessellator coordinates, no topology oracle";emit(result);return bad||guardBad||tailBad?10:0;
 }}

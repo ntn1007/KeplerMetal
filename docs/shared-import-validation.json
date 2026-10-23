@@ -1,0 +1,631 @@
+{
+  "schema": 1,
+  "date": "2026-10-23",
+  "status": "PASS",
+  "base_public_commit": "87df07022597fa9905e5fe5921cf7a98543a9d19",
+  "macOS": "26.7.1",
+  "macOS_build": "25G241",
+  "SDK": "26.2",
+  "architecture": "x86_64",
+  "static_library_SHA256": "70818a656f9cb518d77da924cb48f0225ba78a5a2c5fc1b24370675aaa8e58c4",
+  "object_SHA256": {
+    "KeplerCPUICB.o": "ad9ae636f8f14c4b46bd04bb832cca6e656f8b8d234832afc6a409c84ec80235",
+    "KeplerNativeCommands.o": "27cf9c0002da125a466428b02c92e845eb45e83e7f282c48daf12cc1eb47dfc6",
+    "KeplerNativeRenderDraws.o": "50fda028d823954c1277df53f58f1e6ef90caa095f50ed428460813dbf60ab1a",
+    "KeplerNativeCAS.o": "b7c8487953b5dacee0ab96b008ac04006914b05a2d87613015e864c5637b114b",
+    "KeplerFP64.o": "c3d3795e6a1c96976185f0713f5f128fca9bafd5a591a3395f3904f57cceba1a",
+    "KeplerProgramImport.o": "50723ba0d5cde121e24e4805c121d26a85a86b560259cdb067b01c054689bd82",
+    "KeplerCommandIRProducerFactory.o": "de1d001b387596f51fbd012d3399f173fe8fe7d404a5a4deab8a7587b5de836e"
+  },
+  "runtime_source_SHA256": {
+    "IOKitKeplerBridge.h": "d2c7facff48becf375b04a2bba3d2a86a3ba2fa874c2756c77a28a6a737f5653",
+    "KeplerAutomaticComputeFactories.inc": "284380c15920b1cd37c40243ddd654a774036dbbdbd0706f16e05fc08764ceb9",
+    "KeplerCPUICB.h": "263dede0101967e1bfa32fe3b081b73c476d9e09e8a9b5446ae04cf4f425ee0a",
+    "KeplerCPUICB.mm": "fea8fdf8e557d4f688ec16c347af3ee1057ade47754c3908a3bab1683e8c61a6",
+    "KeplerCommandIR.h": "749bab3ecb3f90dcece448bc3e37fbece387bfa8db832fc859fd0981831276c8",
+    "KeplerCommandIRArgumentEncoder.inc": "1b616974075a4346aa5bb7922a3c1ed51c8d6083d2a2bda049a6d8fde2c4f895",
+    "KeplerCommandIRFunction.inc": "0f8b29ecfe9a4fd6326d391dc023a595d511fdae3cd0876cb769c9ddf6983b3f",
+    "KeplerCommandIRFunctionScope.inc": "33a5e6fd7b30f454fdf1744e2bb6f18ea14b7012cdf50f933a6ae1ec7b7abfd9",
+    "KeplerCommandIRLibrary.inc": "5d279956b7ac9e9d9cf9cdd0cf5475318dece08d9006b172c8a46cef796ab151",
+    "KeplerCommandIRLibraryScope.inc": "f6f9d5a7da0a545b4ddc3ae4337664fba7ae3fd323974eadd9e4a0c93ca2e675",
+    "KeplerCommandIRPipelineContracts.inc": "1ca0c10cdaedcf9f16f27ed7ff50cf1ca9c6af2745e53b5ce0fe7c7a8828a764",
+    "KeplerCommandIRPlan.inc": "fb5db32241a80bb180e0a814403035637fd51d707f49925fde4606bf0b8f44c1",
+    "KeplerCommandIRProducer.inc": "a4735f5aae97ce67a99f7f9203b650c8f1af9407a2a3538fe836814b4c98ad0b",
+    "KeplerCommandIRProducerFactory.mm": "fbff151f7dd7d08a35241077567ba961bea7f16cb711c2e756d7d58bc6735cf0",
+    "KeplerCommandIRProducerScope.inc": "d7811aab5ffd96d81b902816f28ed05e3665315b9b79f901e01efc82963865de",
+    "KeplerCommandIRReflection.inc": "fcd35912167195bf04375dc6ca3637b6843e80906318593a71e89f38e66d4bd5",
+    "KeplerCommandIRScope.inc": "e6ac54290780cb71058e0d7ffe5e33fcb5b4849dd8e6be9905ce480930db3e3f",
+    "KeplerCommandIRv2Scope.inc": "33e8c08e9c6d93bceb42337064efef5b619011f82886040a318a4b3b5c084d2a",
+    "KeplerDriverProfile.h": "084feb8ad943f42e1109f92de89b9b9c63887fa61f84fc2d64745e31d897c842",
+    "KeplerFP64.h": "3773417d97e5248610e20a25c3ed54cf1e89f048f4cffe753c0e9d49eb017dd2",
+    "KeplerFP64.mm": "4f15ef49e7626ad3c3314939aaae935999852a53b6a7e568b963a380f8af8432",
+    "KeplerFP64Programs.inc": "7f1ca3ca89e90591fd34af24764edde3207afda69ca5dda3dee904a629e1e352",
+    "KeplerGPUIdentity.h": "da4583794f422cea638a1999e13f551f9a60c2054d1979d49efb3c425b105733",
+    "KeplerLocalAIRLowering.inc": "c4eb047211f4292369af07ab654622a92c75bf9b7b5e14a25eff5f81ed579d5f",
+    "KeplerNativeAllocation.h": "e213281efe74d6d4c01476d87055ec110c70217974e7b20115f3683acd870c19",
+    "KeplerNativeAllocation.inc": "361dd5acdb50d74c2b7e6d4902f6d0b14f3c1cb5039f6b765e657ce4b381dd31",
+    "KeplerNativeCAS.h": "6784419770799f4041d1a76877821dc14644a473eb47e41242f103d8dba58714",
+    "KeplerNativeCAS.mm": "59f56ab25157ce0b1df2ee1905b9ae82eed95db3ef3d63c71d07b62f25dcba78",
+    "KeplerNativeCASAdapter.inc": "8c55319f9c2f2b46957ac1b0140a3c06d8dccf1c21adf0818a40de7835c72d51",
+    "KeplerNativeCommands.h": "1331ef47a734b342ed1e332887f328be3a8f3401546e5398914cd8cf5613aa96",
+    "KeplerNativeCommands.mm": "dd49bec4bc8b9fdfbef7904f8f3015748c83ad388082eb58a8e3ebc3789425bc",
+    "KeplerNativeRenderDraws.h": "7ab14bb10f26ceff779a456990e212e966ddb76ccb9ded570d125eb7e41c30c2",
+    "KeplerNativeRenderDraws.mm": "ab893268a9ca9383b430b203cc8896b095c4e891d76d7c3728730fdaa2ed06cb",
+    "KeplerNativeResourceLowering.inc": "12fe056b55ef0107391e7f53855c8b70786334decdb50fe654030739794e39f8",
+    "KeplerNativeThreadLimits.inc": "3e30ed28e5515758f1cd018d8b82988078348fc773dfedf4badec0785b5d621b",
+    "KeplerProgramImport.h": "b3fc98e9c6183cddd445dfe29609608388d9d3b0f52137154d6ff2caa3596e34",
+    "KeplerProgramImport.mm": "0c47e6173b4cfe3300fb29fad0392cea0828e3c28e95ee5db6ff7aff00dca45f",
+    "KeplerResidentBatch.h": "4eaff2992ab5b1f62df4d21d72257df9cc4c7be5852d690fa93168af09e88c12",
+    "KeplerResidentBatch.mm": "e8fff94ba98d3bedba425617121e7790c6b0f17cd16ebfde8ea4b10fa0f7a1f5",
+    "KeplerResourceABI.h": "a73ff7001370743a987495ac792ca3b43c3718d67c98c96677da42fb43d70034",
+    "metal_submission_probe.mm": "72805b9623970857fd230001c1a6fd8fedb65344bc5bb417321b9dd284df7e25",
+    "opennvda-command-ir.inc": "ad2ac05f936e869ae5bca8b1f1bae445600cd3c67f00a47c65cf7037ca73d14e"
+  },
+  "generic_reception": {
+    "status": "PASS",
+    "static_library_SHA256": "70818a656f9cb518d77da924cb48f0225ba78a5a2c5fc1b24370675aaa8e58c4",
+    "signed_terminal_processes": 39,
+    "nonoverlapping": true,
+    "vertex_trials": 22,
+    "vertex_float32_channels": 270336,
+    "tessellation_trials": 16,
+    "tessellation_invocations": 13144,
+    "tessellation_float32_channels": 52576,
+    "tessellation_guard_bytes": 6144,
+    "tessellation_untouched_tail_bytes": 16356608,
+    "verified_constructor_imports": 46,
+    "argument_words": 13,
+    "constructor_only_processes": 1,
+    "nested_refusals": 4,
+    "cached_pipeline_refusals": 1,
+    "GPU_render_command_buffers": 38,
+    "tessellation_pairs": [
+      {
+        "factor": 0,
+        "vertices": 0,
+        "coordinate_multisets_equal": true
+      },
+      {
+        "factor": 1,
+        "vertices": 3,
+        "coordinate_multisets_equal": true
+      },
+      {
+        "factor": 2,
+        "vertices": 7,
+        "coordinate_multisets_equal": true
+      },
+      {
+        "factor": 4,
+        "vertices": 19,
+        "coordinate_multisets_equal": true
+      },
+      {
+        "factor": 8,
+        "vertices": 90,
+        "coordinate_multisets_equal": true
+      },
+      {
+        "factor": 16,
+        "vertices": 336,
+        "coordinate_multisets_equal": true
+      },
+      {
+        "factor": 32,
+        "vertices": 1243,
+        "coordinate_multisets_equal": true
+      },
+      {
+        "factor": 64,
+        "vertices": 4874,
+        "coordinate_multisets_equal": true
+      }
+    ],
+    "distinct_native_controls": [
+      {
+        "interpolation": "smooth",
+        "mode": "vertex",
+        "changed_channels": 9216
+      },
+      {
+        "interpolation": "smooth",
+        "mode": "fragment",
+        "changed_channels": 9213
+      },
+      {
+        "interpolation": "smooth",
+        "mode": "both",
+        "changed_channels": 9216
+      },
+      {
+        "interpolation": "linear",
+        "mode": "vertex",
+        "changed_channels": 9203
+      },
+      {
+        "interpolation": "linear",
+        "mode": "fragment",
+        "changed_channels": 9203
+      },
+      {
+        "interpolation": "linear",
+        "mode": "both",
+        "changed_channels": 9203
+      },
+      {
+        "interpolation": "flat",
+        "mode": "vertex",
+        "changed_channels": 6144
+      },
+      {
+        "interpolation": "flat",
+        "mode": "fragment",
+        "changed_channels": 6144
+      },
+      {
+        "interpolation": "flat",
+        "mode": "both",
+        "changed_channels": 7680
+      }
+    ],
+    "cases": [
+      {
+        "label": "contract",
+        "status": "PASS",
+        "imports": 4,
+        "nested_refusals": 4,
+        "concurrent_callers": 3,
+        "cached_pipeline_refusals": 1,
+        "GPU_dispatches": 0
+      },
+      {
+        "label": "tess-native-0",
+        "status": "PASS",
+        "invocations": 0,
+        "float32_channels": 0,
+        "guard_bytes": 384,
+        "untouched_tail_bytes": 1048576,
+        "imports": 0,
+        "max_error": 0.0
+      },
+      {
+        "label": "tess-imported-0",
+        "status": "PASS",
+        "invocations": 0,
+        "float32_channels": 0,
+        "guard_bytes": 384,
+        "untouched_tail_bytes": 1048576,
+        "imports": 1,
+        "max_error": 0.0
+      },
+      {
+        "label": "tess-native-1",
+        "status": "PASS",
+        "invocations": 3,
+        "float32_channels": 12,
+        "guard_bytes": 384,
+        "untouched_tail_bytes": 1048480,
+        "imports": 0,
+        "max_error": 0.0
+      },
+      {
+        "label": "tess-imported-1",
+        "status": "PASS",
+        "invocations": 3,
+        "float32_channels": 12,
+        "guard_bytes": 384,
+        "untouched_tail_bytes": 1048480,
+        "imports": 1,
+        "max_error": 0.0
+      },
+      {
+        "label": "tess-native-2",
+        "status": "PASS",
+        "invocations": 7,
+        "float32_channels": 28,
+        "guard_bytes": 384,
+        "untouched_tail_bytes": 1048352,
+        "imports": 0,
+        "max_error": 1.6298145055770874e-09
+      },
+      {
+        "label": "tess-imported-2",
+        "status": "PASS",
+        "invocations": 7,
+        "float32_channels": 28,
+        "guard_bytes": 384,
+        "untouched_tail_bytes": 1048352,
+        "imports": 1,
+        "max_error": 6.6356733441352844e-09
+      },
+      {
+        "label": "tess-native-4",
+        "status": "PASS",
+        "invocations": 19,
+        "float32_channels": 76,
+        "guard_bytes": 384,
+        "untouched_tail_bytes": 1047968,
+        "imports": 0,
+        "max_error": 1.3271346688270569e-08
+      },
+      {
+        "label": "tess-imported-4",
+        "status": "PASS",
+        "invocations": 19,
+        "float32_channels": 76,
+        "guard_bytes": 384,
+        "untouched_tail_bytes": 1047968,
+        "imports": 1,
+        "max_error": 6.6356733441352844e-09
+      },
+      {
+        "label": "tess-native-8",
+        "status": "PASS",
+        "invocations": 90,
+        "float32_channels": 360,
+        "guard_bytes": 384,
+        "untouched_tail_bytes": 1045696,
+        "imports": 0,
+        "max_error": 1.3271346688270569e-08
+      },
+      {
+        "label": "tess-imported-8",
+        "status": "PASS",
+        "invocations": 90,
+        "float32_channels": 360,
+        "guard_bytes": 384,
+        "untouched_tail_bytes": 1045696,
+        "imports": 1,
+        "max_error": 6.6356733441352844e-09
+      },
+      {
+        "label": "tess-native-16",
+        "status": "PASS",
+        "invocations": 336,
+        "float32_channels": 1344,
+        "guard_bytes": 384,
+        "untouched_tail_bytes": 1037824,
+        "imports": 0,
+        "max_error": 1.3271346688270569e-08
+      },
+      {
+        "label": "tess-imported-16",
+        "status": "PASS",
+        "invocations": 336,
+        "float32_channels": 1344,
+        "guard_bytes": 384,
+        "untouched_tail_bytes": 1037824,
+        "imports": 1,
+        "max_error": 2.6542693376541138e-08
+      },
+      {
+        "label": "tess-native-32",
+        "status": "PASS",
+        "invocations": 1243,
+        "float32_channels": 4972,
+        "guard_bytes": 384,
+        "untouched_tail_bytes": 1008800,
+        "imports": 0,
+        "max_error": 1.3271346688270569e-08
+      },
+      {
+        "label": "tess-imported-32",
+        "status": "PASS",
+        "invocations": 1243,
+        "float32_channels": 4972,
+        "guard_bytes": 384,
+        "untouched_tail_bytes": 1008800,
+        "imports": 1,
+        "max_error": 2.6542693376541138e-08
+      },
+      {
+        "label": "tess-native-64",
+        "status": "PASS",
+        "invocations": 4874,
+        "float32_channels": 19496,
+        "guard_bytes": 384,
+        "untouched_tail_bytes": 892608,
+        "imports": 0,
+        "max_error": 1.3271346688270569e-08
+      },
+      {
+        "label": "tess-imported-64",
+        "status": "PASS",
+        "invocations": 4874,
+        "float32_channels": 19496,
+        "guard_bytes": 384,
+        "untouched_tail_bytes": 892608,
+        "imports": 1,
+        "max_error": 2.6542693376541138e-08
+      },
+      {
+        "label": "vertex-smooth-direct-native",
+        "status": "PASS",
+        "float32_channels": 12288,
+        "argument_words": 0,
+        "imports": 0,
+        "max_error": 1.451243524241974e-07
+      },
+      {
+        "label": "vertex-smooth-direct-vertex",
+        "status": "PASS",
+        "float32_channels": 12288,
+        "argument_words": 0,
+        "imports": 1,
+        "max_error": 1.0152840101973482e-07
+      },
+      {
+        "label": "vertex-smooth-direct-fragment",
+        "status": "PASS",
+        "float32_channels": 12288,
+        "argument_words": 0,
+        "imports": 1,
+        "max_error": 1.2315009245700281e-07
+      },
+      {
+        "label": "vertex-smooth-direct-both",
+        "status": "PASS",
+        "float32_channels": 12288,
+        "argument_words": 0,
+        "imports": 2,
+        "max_error": 1.0458238286492616e-07
+      },
+      {
+        "label": "vertex-linear-direct-native",
+        "status": "PASS",
+        "float32_channels": 12288,
+        "argument_words": 0,
+        "imports": 0,
+        "max_error": 5.960464477539063e-08
+      },
+      {
+        "label": "vertex-linear-direct-vertex",
+        "status": "PASS",
+        "float32_channels": 12288,
+        "argument_words": 0,
+        "imports": 1,
+        "max_error": 2.9802322387695312e-08
+      },
+      {
+        "label": "vertex-linear-direct-fragment",
+        "status": "PASS",
+        "float32_channels": 12288,
+        "argument_words": 0,
+        "imports": 1,
+        "max_error": 5.960464477539063e-08
+      },
+      {
+        "label": "vertex-linear-direct-both",
+        "status": "PASS",
+        "float32_channels": 12288,
+        "argument_words": 0,
+        "imports": 2,
+        "max_error": 2.9802322387695312e-08
+      },
+      {
+        "label": "vertex-flat-direct-native",
+        "status": "PASS",
+        "float32_channels": 12288,
+        "argument_words": 0,
+        "imports": 0,
+        "max_error": 0.0
+      },
+      {
+        "label": "vertex-flat-direct-vertex",
+        "status": "PASS",
+        "float32_channels": 12288,
+        "argument_words": 0,
+        "imports": 1,
+        "max_error": 0.0
+      },
+      {
+        "label": "vertex-flat-direct-fragment",
+        "status": "PASS",
+        "float32_channels": 12288,
+        "argument_words": 0,
+        "imports": 1,
+        "max_error": 0.0
+      },
+      {
+        "label": "vertex-flat-direct-both",
+        "status": "PASS",
+        "float32_channels": 12288,
+        "argument_words": 0,
+        "imports": 2,
+        "max_error": 0.0
+      },
+      {
+        "label": "vertex-smooth-vertex-start-both",
+        "status": "PASS",
+        "float32_channels": 12288,
+        "argument_words": 0,
+        "imports": 2,
+        "max_error": 1.0458238286492616e-07
+      },
+      {
+        "label": "vertex-smooth-indexed16-both",
+        "status": "PASS",
+        "float32_channels": 12288,
+        "argument_words": 0,
+        "imports": 2,
+        "max_error": 1.0458238286492616e-07
+      },
+      {
+        "label": "vertex-smooth-indexed32-both",
+        "status": "PASS",
+        "float32_channels": 12288,
+        "argument_words": 0,
+        "imports": 2,
+        "max_error": 1.0458238286492616e-07
+      },
+      {
+        "label": "vertex-smooth-base-vertex-both",
+        "status": "PASS",
+        "float32_channels": 12288,
+        "argument_words": 0,
+        "imports": 2,
+        "max_error": 1.0458238286492616e-07
+      },
+      {
+        "label": "vertex-smooth-negative-base-vertex-both",
+        "status": "PASS",
+        "float32_channels": 12288,
+        "argument_words": 0,
+        "imports": 2,
+        "max_error": 1.0458238286492616e-07
+      },
+      {
+        "label": "vertex-smooth-instanced-both",
+        "status": "PASS",
+        "float32_channels": 12288,
+        "argument_words": 0,
+        "imports": 2,
+        "max_error": 1.0652745019434917e-07
+      },
+      {
+        "label": "vertex-smooth-base-instance-both",
+        "status": "PASS",
+        "float32_channels": 12288,
+        "argument_words": 0,
+        "imports": 2,
+        "max_error": 1.4449610852285133e-07
+      },
+      {
+        "label": "vertex-smooth-indirect-both",
+        "status": "PASS",
+        "float32_channels": 12288,
+        "argument_words": 4,
+        "imports": 3,
+        "max_error": 1.4449610852285133e-07
+      },
+      {
+        "label": "vertex-smooth-indirect-indexed-both",
+        "status": "PASS",
+        "float32_channels": 12288,
+        "argument_words": 5,
+        "imports": 3,
+        "max_error": 1.4449610852285133e-07
+      },
+      {
+        "label": "vertex-smooth-indirect-control-both",
+        "status": "PASS",
+        "float32_channels": 12288,
+        "argument_words": 4,
+        "imports": 2,
+        "max_error": 0.0
+      }
+    ],
+    "performance_benchmark": false,
+    "transparent_application_integration": false,
+    "full_objective_complete": false
+  },
+  "regression": {
+    "status": "PASS",
+    "public_static_library_SHA256": "70818a656f9cb518d77da924cb48f0225ba78a5a2c5fc1b24370675aaa8e58c4",
+    "signed_terminal_nonoverlapping_hosts": 62,
+    "regression_hosts": 23,
+    "system_references_unchanged": 87,
+    "FP64_conversion_dispatches": 1269,
+    "FP64_conversion_checked_results": 6095853,
+    "missing_producer_expected_differences": 259092,
+    "local_compute_dispatches": 12,
+    "local_exact_uint32": 5632,
+    "local_guard_bytes": 9216,
+    "local_absent_without_dispatch": 2816,
+    "Qwen_job_ids": [],
+    "performance_benchmark": false,
+    "full_objective_complete": false
+  },
+  "CPU_tests": {
+    "passed": 100,
+    "failed": 0
+  },
+  "Qwen_job_ids": [],
+  "system_driver_modified": false,
+  "OCLP_modified": false,
+  "performance_benchmark": false,
+  "integration_level": "explicit/adapted application",
+  "full_objective_complete": false,
+  "selected_regression_results": {
+    "icb-execute": {
+      "status": "PASS",
+      "mode": "execute",
+      "main_command_buffers": 6,
+      "encoded_records": 23,
+      "correct_CAS_operations": 29440,
+      "exact_uint32_words": 117760,
+      "expected_native_wrong_words": 0,
+      "guard_bytes_verified": 285568,
+      "native_CAS_pipelines_in_CPU_ICB": true,
+      "inactive_argument_reflection_qualified": true,
+      "bind_grid_refusals": 3,
+      "copy_reset_range_empty_precommit_closure_qualified": true,
+      "scope_restored": true,
+      "all_children_terminal": true,
+      "general_CAS_repair": false,
+      "GPU_generated_ICB": false,
+      "integration_level": 2,
+      "performance_benchmark": false
+    },
+    "icb-native": {
+      "status": "PASS",
+      "mode": "native",
+      "main_command_buffers": 6,
+      "encoded_records": 23,
+      "correct_CAS_operations": 4352,
+      "exact_uint32_words": 17408,
+      "expected_native_wrong_words": 25066,
+      "guard_bytes_verified": 285568,
+      "native_CAS_pipelines_in_CPU_ICB": false,
+      "inactive_argument_reflection_qualified": true,
+      "bind_grid_refusals": 3,
+      "copy_reset_range_empty_precommit_closure_qualified": true,
+      "scope_restored": true,
+      "all_children_terminal": true,
+      "general_CAS_repair": false,
+      "GPU_generated_ICB": false,
+      "integration_level": 1,
+      "performance_benchmark": false
+    },
+    "render-execute": {
+      "status": "PASS",
+      "mode": "execute",
+      "GPU_render_command_buffers": 11,
+      "correct_float32_channels": 135168,
+      "purple_pixels": 956,
+      "caller_native_red_pixels": 187,
+      "public_render_ICB_selectors_exercised": true,
+      "inherited_scissor_qualified": true,
+      "caller_pipeline_after_ICB_qualified": true,
+      "ranges_reset_CPU_copy_overlap_qualified": true,
+      "private_indices_data_dependence_qualified": true,
+      "materialized_commands": 4,
+      "API_rejection_controls": 7,
+      "scope_restored": true,
+      "all_children_terminal": true,
+      "raw_files_verified": 48,
+      "integration_level": 1,
+      "full_ICB_contract": false,
+      "GPU_resident_ICB": false,
+      "performance_benchmark": false,
+      "system_modified": false,
+      "portable_raw_verification_only": false,
+      "host_executable_SHA256_rechecked": true,
+      "verifier_SHA256": "e856e56c0373e65e40827c51fb1c184199dd6e9dc68f1fce27b7526c9e1f3bae"
+    },
+    "local-construct": {
+      "status": "PASS",
+      "contract_cases": 2,
+      "expected_rejections": 0,
+      "pipelines_created": 2,
+      "kernel_dispatches": 0
+    },
+    "local-negative": {
+      "status": "PASS",
+      "contract_cases": 28,
+      "expected_rejections": 26,
+      "pipelines_created": 2,
+      "kernel_dispatches": 0
+    }
+  }
+}
