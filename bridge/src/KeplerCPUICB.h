@@ -207,6 +207,18 @@
                                        functionName:(NSString *)name
                                     rootBufferIndex:(NSUInteger)index
                                               error:(NSError **)error;
+// Source-lowered MSL variant: dense {context pointer, ulong token,3/4 pointers}
+// with the complete reflected KPCommandContext layout. The caller explicitly
+// opts into our wire ABI and supplies the exact library digest. This does not
+// validate arbitrary shader semantics or confer Apple ICB/PSO resource IDs.
+// Native pipeline factories remain native; getters return the existing owned
+// resource encoder. Validate plan bindings before producer commit. Scope restore
+// restores both function getters. Registered bytes are retained as a snapshot.
+- (id<MTLFunction>)newNativeSourceCommandIRFunctionWithLibraryData:(NSData *)data
+                                               expectedSHA256:(NSString *)expected
+                                                 functionName:(NSString *)name
+                                              rootBufferIndex:(NSUInteger)index
+                                                        error:(NSError **)error;
 // Register a pinned, offline-compiled native-resource-ABI producer for this
 // real function. The device's ordinary synchronous function factory then
 // returns its native PSO. No general shader compilation/reflection extension.

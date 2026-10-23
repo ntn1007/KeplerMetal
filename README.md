@@ -15,6 +15,8 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
+Native source-lowered producers now bind through the real function’s public argument-encoder getters and the existing owned resource catalogue, while all six pipeline factory variants stay native. This removes manual argument-root construction in the adapted client; stable ICB/pipeline identities and transparent applications remain open. [Contract and reproduction](docs/NATIVE_SOURCE_FUNCTION_ARGUMENTS.md).
+
 A new opt-in source lowering compiles supported `compute_command` producers through NVIDIA’s native backend, then executes the existing GPU command-record pipeline. Sixteen native processes pass 5,035,008 consumer uint32 checks; 48 stage/counter files match the prior NAK reference. A 23-case record probe exposed and corrected an address-representation mismatch through registered readonly-member lowering. This is adapted-client CommandIR support, not Apple’s native ICB ABI or a system-driver replacement. [Implementation, controls and reproduction](docs/NATIVE_MSL_COMMANDS.md).
 
 Native texture/sampler `gpuResourceID` values now have a direct-binding GPU qualification: 90 dispatches, 48,672 checked words and 18 byte-identical native/direct output pairs, without the KeplerMetal runtime or NAK. The tested older-operation shader also runs when compiled as MSL 3.0/4.0; this is not Metal 3/4 conformance. A native ICB kernel is refused specifically at `air.command_buffer` argument metadata. [Evidence, limits and reproduction](docs/NATIVE_RESOURCE_IDENTITIES.md).

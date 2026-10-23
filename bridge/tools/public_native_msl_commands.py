@@ -13,6 +13,7 @@ from public_large_scratch import ROOT,check_library,check_driver_profile,command
 FLOW_MODES=['basic','barrier','copy','no_seed','no_gather','no_finish','split',
     'no_producer','no_consumer','bad_parameters','bad_counter','bad_pipeline',
     'bad_buffer3_flag','bad_groups','bad_reserved','refusals']
+FUNCTION_FLOW_MODES=FLOW_MODES+['encoder_reuse']
 
 
 def msl_abi(text):
@@ -71,6 +72,7 @@ def build(a):
     for name,digest in pins.items():assert Path(name).name==name and sha(assets/name)==digest,name
     out.mkdir()
     for folder in ['src','lowered','include','assets','runtime','oracles']:(out/folder).mkdir()
+    shutil.copyfile(Path(__file__),out/'src/public_native_msl_commands.py')
     for name in pins:shutil.copyfile(assets/name,out/'assets'/name)
     for name in ['KeplerCPUICB.h','KeplerGPUIdentity.h','KeplerProgramImport.h','KeplerCommandIR.h',
                  'KeplerNativeMSLCommands.h','gpu_command_frontend_dataflow.metal',
@@ -78,12 +80,15 @@ def build(a):
         shutil.copyfile(ROOT/'src'/name,out/'src'/name)
     for name in ['command_ir_dataflow_client.mm','native_command_records_probe.mm']:
         shutil.copyfile(ROOT/'tools'/name,out/'src'/name)
+    if a.function_arguments:
+        shutil.copyfile(ROOT/'src/native_source_function_contracts.metal',out/'src/native_source_function_contracts.metal')
+        shutil.copyfile(ROOT/'tools/native_source_function_contracts.mm',out/'src/native_source_function_contracts.mm')
     (out/'include/KeplerCommandIR.h').write_text(msl_abi((out/'src/KeplerCommandIR.h').read_text()))
     shutil.copyfile(out/'src/KeplerNativeMSLCommands.h',out/'include/metal_command_buffer')
     for source,profile in [('gpu_command_frontend_dataflow',{'parameters':('uint',4)}),
                            ('native_command_records_probe',{'constants':('uint',3)})]:
         (out/'lowered'/(source+'.metal')).write_text(lower_readonly_members((out/'src'/(source+'.metal')).read_text(),profile))
-    for name in ['verify_command_ir_dataflow.py','verify_native_msl_records.py','verify_local_memory.py','public_large_scratch.py']:
+    for name in ['verify_command_ir_dataflow.py','verify_native_msl_records.py','verify_native_function_contracts.py','verify_local_memory.py','public_large_scratch.py']:
         shutil.copyfile(ROOT/'tools'/name,out/'oracles'/name)
     shutil.copyfile(ROOT/'tools/lab_gpu_reservation.py',out/'runtime/lab_gpu_reservation.py')
     shutil.copyfile(ROOT/'sdk-combined/runtime/run_sdk_host.py',out/'runtime/run_sdk_host.py')
@@ -93,10 +98,21 @@ def build(a):
         source_folder='src'if name=='field'else'lowered'
         run(name+'-metal',['xcrun','metal','-std=macos-metal2.3',*flags,'-c',out/source_folder/(source+'.metal'),'-o',out/(name+'.air')])
         run(name+'-metallib',['xcrun','metallib',out/(name+'.air'),'-o',out/'assets'/(name+'.metallib')])
+    if a.function_arguments:
+        for name,source in [('opaque_producer','gpu_command_frontend_dataflow'),('function_contracts','native_source_function_contracts')]:
+            run(name+'-metal',['xcrun','metal','-std=macos-metal2.3','-c',out/'src'/(source+'.metal'),'-o',out/(name+'.air')])
+            run(name+'-metallib',['xcrun','metallib',out/(name+'.air'),'-o',out/'assets'/(name+'.metallib')])
+        if a.nak_baseline:
+            assert sha(out/'assets/opaque_producer.metallib')=='a9367d4492cd100adfcde990efe0b043e4b070536a3615be5b9b2f63bfb473db'
+            shutil.copyfile(out/'assets/opaque_producer.metallib',out/'assets/producer.metallib')
     kinds=['dataflow','nak','records']if a.nak_baseline else['dataflow','records']
+    if a.function_arguments:kinds.append('contracts')
+    if a.function_arguments and a.nak_baseline:kinds.append('nak_function')
     for kind in kinds:
-        source='native_command_records_probe.mm' if kind=='records' else 'command_ir_dataflow_client.mm'
-        flags=[] if kind=='records' else ['-DKP_DATAFLOW_NATIVE=0','-DKP_NATIVE_MSL_COMMANDS='+str(int(kind=='dataflow'))]
+        source={'records':'native_command_records_probe.mm','contracts':'native_source_function_contracts.mm'}.get(kind,'command_ir_dataflow_client.mm')
+        flags=[] if kind in ['records','contracts'] else ['-DKP_DATAFLOW_NATIVE=0','-DKP_NATIVE_MSL_COMMANDS='+str(int(kind=='dataflow'))]
+        if kind in ['dataflow','nak_function'] and a.function_arguments:
+            flags+=['-DKP_PUBLIC_ARGUMENT_ENCODER=1','-DKP_FUNCTION_ARGUMENT_ENCODER=1']
         link=[] if kind=='records' else [library/'libKeplerMetal.a','-Wl,-ObjC']
         run(kind,['xcrun','clang++','-arch','x86_64','-O2','-std=c++17','-fobjc-arc',*flags,
             '-I',out/'src',out/'src'/source,*link,'-framework','Metal','-framework','Foundation','-o',out/kind])
@@ -107,13 +123,15 @@ def build(a):
         static_library_SHA256=lm['static_library_SHA256'],library_manifest_SHA256=sha(library/'manifest.json'),
         existing_fixture_pins_SHA256=sha(ROOT/'tools/native_msl_fixture_pins.json'),builder_SHA256=sha(__file__),
         shader_call_sites_modified=False,readonly_argument_pointer_members_lowered=True,NAK_baseline_built=a.nak_baseline,
+        native_function_arguments=a.function_arguments,
         compile_refusals=refusals,SDK_modified=False,GPU_execution=False))
 
 
 def run(a):
     b,out=a.build.resolve(),a.out.resolve();assert not out.exists() and out.parent.is_dir()
-    assert a.mode in (['execute','no_dispatch']if a.kind=='records'else FLOW_MODES)
+    assert a.mode in (['inspect']if a.kind=='contracts'else ['execute','no_dispatch']if a.kind=='records'else FUNCTION_FLOW_MODES)
     inputs=read(b/'inputs.json');assert a.kind in inputs['executables'],'Requested backend was not built'
+    if a.mode=='encoder_reuse':assert a.kind=='dataflow' and inputs.get('native_function_arguments')
     for key,folder in [('source_hashes',''),('assets_SHA256','assets'),('runtime_SHA256','runtime'),('oracle_SHA256','oracles')]:
         for name,digest in inputs[key].items():assert sha(b/folder/name)==digest,name
     assert sha(b/a.kind)==inputs['executables'][a.kind];driver=check_driver_profile()
@@ -123,12 +141,13 @@ def run(a):
     write(out/'inputs.json',dict(inputs,executable_SHA256=sha(out/'application'),kind=a.kind,mode=a.mode,
         driver_SHA256=driver,source_build_inputs_SHA256=sha(b/'inputs.json'),public_runner_SHA256=sha(__file__)))
     sys.path.insert(0,str(out/'runtime'));from run_sdk_host import run_host
-    argv=[out/'assets/records.metallib',a.mode,out/'outputs']if a.kind=='records'else[out/'assets',out/'outputs',a.mode]
+    argv=[out/'assets']if a.kind=='contracts'else [out/'assets/records.metallib',a.mode,out/'outputs']if a.kind=='records'else[out/'assets',out/'outputs',a.mode]
     m=run_host(out/'application',out/'execution',list(map(str,argv)),a.reservation_root.resolve())
     result=read(out/'execution/execution.stdout');write(out/'results.json',result)
-    assert a.kind=='records' or result['producer_backend']==('native_msl'if a.kind=='dataflow'else'NAK')
+    assert a.kind in ['records','contracts'] or result['producer_backend']==('native_msl'if a.kind=='dataflow'else'NAK')
     sys.path.insert(0,str(out/'oracles'))
-    if a.kind=='records':import verify_native_msl_records as oracle
+    if a.kind=='contracts':import verify_native_function_contracts as oracle
+    elif a.kind=='records':import verify_native_msl_records as oracle
     else:import verify_command_ir_dataflow as oracle
     proof=oracle.verify(out);proof.update(kind=a.kind,PID=m['pid'],static_library_SHA256=inputs['static_library_SHA256'])
     write(out/'independent-verification.json',proof)
@@ -140,9 +159,10 @@ def main():
     q=s.add_parser('build')
     for name in ['library','assets','out']:q.add_argument('--'+name,type=Path,required=True)
     q.add_argument('--nak-baseline',action='store_true',help='Also require the archived SM30 fixtures and build the comparison client')
+    q.add_argument('--function-arguments',action='store_true',help='Bind native producers through registered public function argument encoders')
     q.set_defaults(fn=build);q=s.add_parser('run')
     for name in ['build','out','reservation-root']:q.add_argument('--'+name,type=Path,required=True)
-    q.add_argument('--kind',choices=['dataflow','nak','records'],required=True);q.add_argument('--mode',required=True);q.set_defaults(fn=run)
+    q.add_argument('--kind',choices=['dataflow','nak','records','contracts','nak_function'],required=True);q.add_argument('--mode',required=True);q.set_defaults(fn=run)
     a=p.parse_args();a.fn(a)
 
 

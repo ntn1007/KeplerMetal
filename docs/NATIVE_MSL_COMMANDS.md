@@ -1,5 +1,7 @@
 # Command producers compiled by the native NVIDIA backend
 
+The subsequent [public function-encoder extension](NATIVE_SOURCE_FUNCTION_ARGUMENTS.md) removes manual argument-root construction for an explicitly registered native source producer. The original qualification below belongs to the earlier unchanged runtime archive.
+
 The supported public MSL `compute_command` call sites can now produce the
 existing CommandIR v2 records through the installed NVIDIA compiler, then drive
 the existing GPU materializer and registered native consumers on the GTX 880M.

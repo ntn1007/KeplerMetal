@@ -6,6 +6,26 @@ from verify_local_memory import verify_device_identity
 sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
 MASK=(1<<32)-1
 CANARY=0xa5a5a5a5
+def verify_native_function_arguments(d,inputs):
+ assert d['producer_backend']=='native_msl' and inputs['native_function_arguments']
+ assert d['public_argument_encoder'] and d['function_argument_encoder'] and not d['argument_refusal_probe']
+ events=d['function_events'];registrations=[e for e in events if e.get('operation')=='register_native_source_IRv2_function']
+ assert len(registrations)==1
+ e=registrations[0];assert e['library_SHA256']==inputs['assets_SHA256']['native_producer.metallib']
+ assert e['function']==d['producer_info']['function'] and not e['instruction_import'] and e['native_pipeline_factories_preserved'] and not e['Apple_ICB_identity'] and not e['GPU_execution']
+ schema=e['schema'];assert schema['buffer_index']==0 and schema['binding_count']==4 and schema['encoded_length']==48 and schema['alignment']==8
+ assert [(m['type'],m['offset'],m['index'])for m in schema['members']]==[(t,i*8,i)for i,t in enumerate([60,85,60,60,60,60])]
+ getters=[e for e in events if e.get('operation')=='function_IRv2_argument_encoder']
+ # One initial getter checks the compiled root stride before trial encoders.
+ assert len(getters)==(2 if d['mode']=='encoder_reuse'else 5)
+ if d['mode']!='encoder_reuse':assert sum(e['reflection_requested']for e in getters)==2
+ assert all(e.get('native_reflection_preserved')for e in getters if e['reflection_requested'])
+ restores=[e for e in events if e.get('operation')=='restore_IRv2_functions'];assert len(restores)==1 and restores[0]['live_functions_restored']==1
+ assert not any(e.get('operation')in ['register_native_IRv2_producer','new_registered_IRv2_pipeline']for e in events)
+ for r in d['runs']:
+  encoded=[e for e in r['events']if e.get('operation')=='encode_public_IRv2_arguments']
+  assert len(encoded)==4 and all(not e['native_Apple_ICB_identity']and e['bytes']==48 for e in encoded)
+
 def verify(directory):
  root=Path(directory);d=json.loads((root/'results.json').read_text());m=json.loads((root/'execution/manifest.json').read_text());mode=d['mode'];native=d['native_reference'];copy=mode=='copy';rows=4 if copy else 3;slots=3+rows
  assert m['exit_code']==0 and not m['SIGKILL_requested']and not m['authoritative_ps_status']and m['GPU_reservation']['state']=='terminal'
@@ -21,6 +41,7 @@ def verify(directory):
    info=d['producer_info'];assert d['producer_import']=={} and not info['instruction_import'] and not info['Apple_ICB_layout']
    assert info['producer_backend']=='native_msl' and info['root_bytes']==48 and info['thread_width']==32 and info['pipeline_class']=='NVMTLComputePipelineState'
    assert info['library_SHA256']==sha(root/'assets/native_producer.metallib')
+   if inp.get('native_function_arguments'):verify_native_function_arguments(d,inp)
   else:
    assert d['producer_import']['contract_verified']and not d['producer_import']['rejected_import']
    for e in d['producer_import']['events']:
@@ -113,6 +134,7 @@ def verify(directory):
     a,b=recordwords[1],recordwords[2];assert a[12:14]==b[14:16]and a[26:28]==b[26:28]and a[16:18]!=b[16:18]
  report={'status':'PASS','mode':mode,'native_reference':native,'trials':4,'exact_uint32_results':comparisons,'consumer_invocations':invocations,'guard_bytes':guardbytes,'API_refusals':d['API_refusals'],'raw_files':len(files),'raw_SHA256':files,'performance_benchmark':False,'full_objective_complete':False}
  if d.get('producer_backend')=='native_msl':report.update(producer_backend='native_msl',producer_instruction_import=False)
+ if d.get('producer_backend')=='native_msl' and inp.get('native_function_arguments'):report.update(native_function_arguments=True,function_getters_restored=True)
  return report
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('directory',type=Path);p.add_argument('--receipt',type=Path);a=p.parse_args();r=verify(a.directory)

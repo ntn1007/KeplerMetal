@@ -50,8 +50,12 @@ int main(int argc,char**argv){@autoreleasepool{
  for(NSArray*a in @[@[@"gpu_command_selector.metallib",@0],@[@"gpu_command_geometry.metallib",@1],@[@"gpu_command_bindings.metallib",@2],@[@"materializer.metallib",@3]]){NSData*b=[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:a[0]]];BOOL ok=NO;switch([a[1]intValue]){case 0:ok=[scope enableGPUCommandSelectionWithLibraryData:b expectedSHA256:hash(b)error:&error];break;case 1:ok=[scope enableGPUCommandGeometryWithLibraryData:b expectedSHA256:hash(b)error:&error];break;case 2:ok=[scope enableGPUCommandBindingsWithLibraryData:b expectedSHA256:hash(b)error:&error];break;case 3:ok=[scope enableGPUCommandIRv2WithLibraryData:b expectedSHA256:hash(b)error:&error];}if(!ok){emit(@{@"failure":@"enable",@"error":error.description?:@"nil"});return 3;}}
 #if KP_NATIVE_MSL_COMMANDS
  NSData*producerData=[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"native_producer.metallib"]];
+#if KP_FUNCTION_ARGUMENT_ENCODER
+ producerFunction=[scope newNativeSourceCommandIRFunctionWithLibraryData:producerData expectedSHA256:hash(producerData) functionName:[@"encode_dataflow_" stringByAppendingString:semantic]rootBufferIndex:0 error:&error];
+#else
  id<MTLLibrary>producerLibrary=load(d,[assets stringByAppendingPathComponent:@"native_producer.metallib"],&error);
  producerFunction=[producerLibrary newFunctionWithName:[@"encode_dataflow_" stringByAppendingString:semantic]];
+#endif
  if(!producerFunction){emit(@{@"failure":@"native_producer_function",@"error":error.description?:@"nil"});return 3;}
  writer=[d newComputePipelineStateWithFunction:producerFunction error:&error];
  id<MTLArgumentEncoder>nativeArguments=[producerFunction newArgumentEncoderWithBufferIndex:0];
@@ -63,7 +67,7 @@ int main(int argc,char**argv){@autoreleasepool{
  writer=KPCreatePipeline(d,[NSURL fileURLWithPath:[assets stringByAppendingPathComponent:@"carrier.metallib"]],@"command_ir_carrier",[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:[semantic stringByAppendingString:@".sass"]]],{[info[@"registers"]unsignedIntValue],576,576},&error,&importProof);id<MTLLibrary>f=load(d,[assets stringByAppendingPathComponent:@"field.metallib"],&error);fieldPSO=[d newComputePipelineStateWithFunction:[f newFunctionWithName:@"mutate_command_ir_data"]error:&error];
 #endif
 #endif
-#if KP_FUNCTION_ARGUMENT_ENCODER && !KP_DATAFLOW_NATIVE
+#if KP_FUNCTION_ARGUMENT_ENCODER && !KP_DATAFLOW_NATIVE && !KP_NATIVE_MSL_COMMANDS
  NSData*functionLibrary=[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"producer.metallib"]];producerFunction=[scope newCommandIRFunctionWithLibraryData:functionLibrary expectedSHA256:@"a9367d4492cd100adfcde990efe0b043e4b070536a3615be5b9b2f63bfb473db" functionName:[@"encode_dataflow_" stringByAppendingString:semantic]rootBufferIndex:0 error:&error];if(!producerFunction){emit(@{@"failure":@"function_registration",@"error":error.description?:@"nil"});return 3;}
 #endif
  if(!writer)return 3;unsigned sizes[4]={256,1024,4096,32768},locals[4][3]={{32,128,1024},{33,256,512},{128,33,1024},{1024,256,33}};NSUInteger APIrefusals=0;NSMutableArray*runs=[NSMutableArray new];
