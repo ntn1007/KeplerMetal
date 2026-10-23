@@ -15,6 +15,8 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
+Native texture/sampler `gpuResourceID` values now have a direct-binding GPU qualification: 90 dispatches, 48,672 checked words and 18 byte-identical native/direct output pairs, without the KeplerMetal runtime or NAK. The tested older-operation shader also runs when compiled as MSL 3.0/4.0; this is not Metal 3/4 conformance. A native ICB kernel is refused specifically at `air.command_buffer` argument metadata. [Evidence, limits and reproduction](docs/NATIVE_RESOURCE_IDENTITIES.md).
+
 Generic compute, vertex, fragment and tessellation imports now share the CAS transport’s constructor lock and restoration checks. A fresh complete archive passes 39 reception processes, 270,336 raster channels and 52,576 tessellation values with CPU oracles and explicit nested/cache refusals. [Source build, evidence and scope](docs/SHARED_GENERIC_IMPORT.md).
 
 FP64, CPU-encoded indirect commands and native draw adapters now use the qualified exact-profile/PCI identity checks. A new seven-object archive passes 1,269 FP64/conversion dispatches with 6,095,853 checked results, 29,440 repaired CAS operations through ICBs, and 135,168 render channels. Missing-producer/native-defect controls remain explicit. [Artifact, reproduction and remaining limits](docs/ADAPTER_PROFILES.md).

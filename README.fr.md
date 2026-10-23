@@ -15,6 +15,8 @@ Le travail suit deux axes complémentaires :
 
 ## Avancées récentes
 
+Les IDs natifs textures/samplers sont maintenant qualifiés avec écriture directe sur la GTX : 90 dispatchs, 48 672 mots vérifiés et 18 paires de sorties identiques, sans runtime KeplerMetal ni NAK. Le shader utilise des opérations anciennes et fonctionne aussi compilé sous MSL 3.0/4.0 ; cela ne démontre pas la conformité Metal 3/4. Le kernel ICB natif est précisément refusé sur le type d’argument `air.command_buffer`. [Preuves, limites et reproduction](docs/NATIVE_RESOURCE_IDENTITIES.md).
+
 Les imports calcul, vertex, fragment et tessellation partagent maintenant le verrou et les contrôles de restauration du chemin CAS. Une archive complète reconstruite passe 39 processus de réception, 270 336 canaux de rendu et 52 576 valeurs de tessellation, avec références CPU et refus explicites des imports imbriqués ou sans callback. [Compilation, preuves et limites](docs/SHARED_GENERIC_IMPORT.md).
 
 Les adaptateurs FP64, commandes indirectes encodées par le CPU et rendu natif utilisent maintenant les contrôles de profil exact et d’identité PCI qualifiés. Une nouvelle archive passe 1 269 dispatchs FP64/conversions avec 6 095 853 résultats vérifiés, 29 440 opérations CAS réparées via ICB et 135 168 canaux de rendu. Les témoins sans producteur et les défauts natifs restent distingués. [Archive, reproduction et limites](docs/ADAPTER_PROFILES.md).

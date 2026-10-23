@@ -7470,27 +7470,17 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "da266374270bf34aa085fe1f840702735946949a311d9769aca2ab3dfc979cc5",
-  "previous_public_commit": "87df07022597fa9905e5fe5921cf7a98543a9d19",
+  "previous_source_snapshot_SHA256": "9c6eb1d93c048ecc2b8fa5a1f54bdf1282404d9238e7d3d3c8b107c6abd0a76d",
+  "previous_public_commit": "d34de6966252ebfb118fe7cbe7b583c493fed995",
   "update": {
     "date": "2026-10-23",
-    "scope": "Shared generic/CAS constructor transport, nested refusal and current-profile graphics qualification",
-    "source_files_updated": [
-      "bridge/src/KeplerNativeCAS.mm",
-      "bridge/src/KeplerNativeCASAdapter.inc",
-      "bridge/src/KeplerProgramImport.mm",
-      "bridge/tools/tessellation_capture_probe.mm",
-      "bridge/tools/vertex_io_probe.mm"
-    ],
-    "public_static_library_SHA256": "70818a656f9cb518d77da924cb48f0225ba78a5a2c5fc1b24370675aaa8e58c4",
-    "full_objective_complete": false,
-    "generic_reception_hosts": 39,
-    "total_qualified_hosts": 62,
-    "CPU_tests_passed": 100,
-    "render_float32_channels": 270336,
-    "tessellation_value_channels": 52576,
-    "FP64_conversion_dispatches": 1269,
-    "FP64_conversion_checked_results": 6095853,
-    "system_references_unchanged": 87
+    "scope": "Native resource identity qualification and exact ICB compiler boundary",
+    "original_source_rows_modified": [],
+    "native_dispatches": 90,
+    "native_uint32_checks": 48672,
+    "qualified_processes": 41,
+    "CPU_tests_passed": 106,
+    "core_runtime_modified": false,
+    "full_objective_complete": false
   }
 }

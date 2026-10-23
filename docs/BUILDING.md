@@ -1,5 +1,7 @@
 # Build from source
 
+[NATIVE_RESOURCE_IDENTITIES.md](NATIVE_RESOURCE_IDENTITIES.md) gives an Xcode-only source build, direct native texture/sampler GPU tests across three requested language standards, a construction-only ICB compiler diagnostic and a portable 41-process auditor. It uses no runtime archive or prebuilt shader fixtures.
+
 [SHARED_GENERIC_IMPORT.md](SHARED_GENERIC_IMPORT.md) gives the fresh compute/vertex/fragment/tessellation reception builder and portable 39-host raw-output auditor. The C ABI facade now requires the complete seven-object archive; current `KeplerProgramImport.mm` alone is not a standalone dylib build. Historical frozen source/builds remain separate.
 
 [ADAPTER_PROFILES.md](ADAPTER_PROFILES.md) describes the five-client reception builder for a new complete public archive and an existing locally generated 60-program asset SDK. It checks the original asset manifest, regenerates input recipes, freezes independent oracles and links clients without reusing old runtime objects. GPU qualification remains separate from source compilation.
