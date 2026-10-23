@@ -8,7 +8,7 @@ BOOL configureNativeProducerThreadLimit(id<MTLComputePipelineState>pipeline,NSUI
  NSDictionary*proof=objc_getAssociatedObject(pipeline,sel_registerName("KeplerMetalProducerEvidence-v1"));
  Class native=objc_getClass("NVMTLComputePipelineState");Ivar slot=class_getInstanceVariable(native,"maxTotalThreadsPerThreadgroup");
  NSUInteger before=pipeline.maxTotalThreadsPerThreadgroup;
- if(![proof[@"contract_verified"]boolValue]||![proof[@"driver_sha256"]isEqual:@"2b89839c425d95934f5e01f16c8683fe53432df410292ec8e554b21c98d6c054"]||object_getClass(pipeline)!=native||class_getInstanceSize(native)!=104||!slot||ivar_getOffset(slot)!=88||strcmp(ivar_getTypeEncoding(slot),"Q")||pipeline.threadExecutionWidth!=32||requested<32||requested>before)return fail(error,@"Unqualified native thread-limit field/profile");
+ if(![proof[@"contract_verified"]boolValue]||!KPKeplerDriverHashIsQualified(proof[@"driver_sha256"])||object_getClass(pipeline)!=native||class_getInstanceSize(native)!=104||!slot||ivar_getOffset(slot)!=88||strcmp(ivar_getTypeEncoding(slot),"Q")||pipeline.threadExecutionWidth!=32||requested<32||requested>before)return fail(error,@"Unqualified native thread-limit field/profile");
  SEL getter=@selector(maxTotalThreadsPerThreadgroup);IMP implementation=class_getMethodImplementation(native,getter);
  uint64_t actual=0;auto*field=(unsigned char*)(__bridge void*)pipeline+88;memcpy(&actual,field,8);
  if(actual!=before||objc_getAssociatedObject(pipeline,&nativeThreadLimitKey))return fail(error,@"Native thread-limit field differs or was already configured");

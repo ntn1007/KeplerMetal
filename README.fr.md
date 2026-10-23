@@ -15,7 +15,9 @@ Le travail suit deux axes complémentaires :
 
 ## Avancées récentes
 
-Le changement de signature du pilote et d’identifiant de démarrage est maintenant traité par un second profil exact et une identité PCI. Une nouvelle archive à sept objets passe 190 dispatchs, 570 616 valeurs exactes et 106 650 opérations CAS correctes, avec un suivi mémoire vérifié. Les adaptateurs ICB/rendu/FP64 restent à qualifier ; aucun pilote système ni gain de vitesse n’est annoncé. [Profils](docs/DRIVER_PROFILES.md) · [Résultats et reproduction](docs/MEMORY_ACCOUNTING.md).
+Les adaptateurs FP64, commandes indirectes encodées par le CPU et rendu natif utilisent maintenant les contrôles de profil exact et d’identité PCI qualifiés. Une nouvelle archive passe 1 269 dispatchs FP64/conversions avec 6 095 853 résultats vérifiés, 29 440 opérations CAS réparées via ICB et 135 168 canaux de rendu. Les témoins sans producteur et les défauts natifs restent distingués. [Archive, reproduction et limites](docs/ADAPTER_PROFILES.md).
+
+Le changement de signature du pilote et d’identifiant de démarrage est maintenant traité par un second profil exact et une identité PCI. Une nouvelle archive à sept objets passe 190 dispatchs, 570 616 valeurs exactes et 106 650 opérations CAS correctes, avec un suivi mémoire vérifié. Cette première cohorte couvrait le calcul/CAS ; les adaptateurs supplémentaires sont qualifiés ci-dessus. Aucun pilote système ni gain de vitesse n’est annoncé. [Profils](docs/DRIVER_PROFILES.md) · [Résultats et reproduction](docs/MEMORY_ACCOUNTING.md).
 
 L’import explicite accepte maintenant des profils de mémoire privée de 8 et 16 Kio par thread. L’archive publique reconstruite avec ses sept objets passe 226 dispatchs sur la GTX 880M, 612 120 valeurs exactes et les contrôles de coexistence CAS. [Commandes, empreintes et limites](docs/LARGE_LOCAL_MEMORY.md). Cette extension reste expérimentale ; aucun pilote système ni gain de performances n’est annoncé.
 

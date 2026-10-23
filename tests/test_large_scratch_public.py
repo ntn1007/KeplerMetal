@@ -48,7 +48,7 @@ class PublicLargeScratchTests(unittest.TestCase):
     def test_host_and_launcher_pin_agree(self):
         for digest in tool.DRIVER_PROFILES:
             self.assertIn(digest, (ROOT / 'bridge/tools/native_large_scratch_probe.mm').read_text())
-            self.assertIn(digest, (ROOT / 'bridge/src/KeplerNativeCAS.mm').read_text())
+            self.assertIn(digest, (ROOT / 'bridge/src/KeplerDriverProfile.h').read_text())
 
     def test_profile_refusal_creates_no_run_directory(self):
         with tempfile.TemporaryDirectory() as folder:

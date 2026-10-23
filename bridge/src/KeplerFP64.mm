@@ -1,5 +1,6 @@
 #import "KeplerFP64.h"
 #import "KeplerProgramImport.h"
+#import "KeplerGPUIdentity.h"
 #import <objc/runtime.h>
 #include <CommonCrypto/CommonDigest.h>
 #include <cstring>
@@ -38,7 +39,7 @@ static BOOL rangeFits(NSUInteger offset,NSUInteger extent,NSUInteger length){ret
 + (instancetype)libraryWithDevice:(id<MTLDevice>)d carrierData:(NSData*)carrier
  programs:(NSDictionary<NSString*,NSData*>*)programs error:(NSError**)error{
  if(error)*error=nil;
- if(!d||d.registryID!=4294968458||![d.name isEqual:@"NVIDIA GeForce GTX 880M"]){fail(error,@"Unqualified FP64 device");return nil;}
+ if(!KPKepler880MIdentity(d)){fail(error,@"Unqualified FP64 device");return nil;}
  NSData*c=[carrier copy];NSMutableDictionary*snapshots=[NSMutableDictionary dictionary];
  if(![digest(c)isEqual:@(KPFP64CarrierSHA)]||programs.count!=sizeof(KPFP64Pins)/sizeof(KPFP64Pins[0])){fail(error,@"Carrier/program count differs from build pins");return nil;}
  for(const KPFP64Pin&p:KPFP64Pins){

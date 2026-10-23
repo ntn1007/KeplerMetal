@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Recompute conversion bits and dependent addition from independent raw data."""
 from pathlib import Path
+import sys
+sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'tools'))
+from verify_local_memory import verify_device_identity
 import argparse, hashlib, json, struct
 from fp64_conversion_inputs import OPS, columns, packed, expected_bits, equivalent
 
@@ -10,7 +13,8 @@ bits=lambda number:struct.unpack('<Q',struct.pack('<d',number))[0]
 
 def verify(root,portable=False):
  root=Path(root);read=lambda name:json.loads((root/name).read_text());d=read('results.json');inp=read('inputs.json');m=read('execution/manifest.json');pins=read('assets/fp64_manifest.json');q=d['qualification'];prep=d['mode']=='prepare';negative=d['mode']=='no_producer'
- assert d['mode'] in ['prepare','execute','no_producer'] and d['registry_id']==4294968458 and d['constructor_restored'] and d['device_class_restored'] and d['bad_program_rejected'] and d['caller_program_data_wiped']
+ if 'device_identity' in d:verify_device_identity(d)
+ assert d['mode'] in ['prepare','execute','no_producer'] and ('device_identity' in d or d['registry_id']==4294968458) and d['constructor_restored'] and d['device_class_restored'] and d['bad_program_rejected'] and d['caller_program_data_wiped']
  assert not any(d[k] for k in ['system_modified','performance_benchmark','CPU_expected_answers_uploaded','intermediate_CPU_readback'])
  assert m['exit_code']==0 and not m['SIGKILL_requested'] and not m['authoritative_ps_status'] and m['GPU_reservation']['state']=='terminal'
  for name,h in inp['source_hashes'].items():assert sha(root/name)==h

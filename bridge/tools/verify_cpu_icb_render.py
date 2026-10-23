@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Independent public CPU-render-ICB packet, state and pixel oracle."""
 from pathlib import Path
+import sys
+sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'tools'))
+from verify_local_memory import verify_device_identity
 import argparse,base64,hashlib,json,struct
 from decode_native_commands import decode
 LIBRARY='965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7'
@@ -24,11 +27,12 @@ def draw(raw,meta,kind):
  require(all(p['subchannel']==0 for p in ps) and ps[-1]['kind']=='one_increment' and ps[-1]['method']==('0x3840' if kind else '0x3830') and ps[-1]['values']==[4,3,2 if kind==2 else 1,0,0]+([0] if kind else []),'draw macro differs')
 def verify(root,current=False,portable=False):
  inp=json.loads((root/'inputs.json').read_text());d=json.loads((root/'results.json').read_text());m=json.loads((root/'execution/manifest.json').read_text());mode=d['mode']
- require(mode in ('prepare','execute') and d['passed'] and d['registry_id']==4294968458 and d['scope_restored'],'mode/device/restore differs')
+ if 'device_identity' in d:verify_device_identity(d)
+ require(mode in ('prepare','execute') and d['passed'] and ('device_identity' in d or d['registry_id']==4294968458) and d['scope_restored'],'mode/device/restore differs')
  require(d['integration_level']==1 and not d['system_modified'] and not d['full_ICB_contract'] and not d['GPU_resident_ICB'],'scope differs')
  require(sha(root/'render_state_carrier.metallib')==inp['library_SHA256']==d['library_SHA256']==LIBRARY,'library differs')
  require(m['exit_code']==0 and not m['SIGKILL_requested'] and not m['authoritative_ps_status'],'child not successfully terminal')
- if not portable:require(sha(root/'cpu_icb_render_probe')==m['original_binary_sha256'] and sha(root/'execution/cpu_icb_render_probe')==m['signed_binary_sha256'],'host binaries differ')
+ if not portable:require(sha(Path(m['original_executable']))==m['original_binary_sha256'] and sha(Path(m['signed_executable']))==m['signed_binary_sha256'],'host binaries differ')
  for name,h in inp['source_hashes'].items():
   require(sha(root/name)==h,'frozen source differs')
   if current:require(sha(Path(__file__).resolve().parents[1]/('src' if name.startswith('Kepler') else 'tools')/name)==h,'current source differs: '+name)

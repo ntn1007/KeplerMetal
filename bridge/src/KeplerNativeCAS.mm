@@ -1,6 +1,7 @@
 // Derived from a frozen qualified transport; source provenance in native-CAS SDK build.
 #import "KeplerProgramImport.h"
 #import "KeplerGPUIdentity.h"
+#import "KeplerDriverProfile.h"
 #import <objc/runtime.h>
 #include <mach/mach_vm.h>
 #include <dlfcn.h>
@@ -199,9 +200,6 @@ void fail(NSError**error,NSString*message){if(error)*error=[NSError errorWithDom
 bool complete(const Context&c){return c.verified&&!c.rejected&&c.targetImports>0&&c.targetImports==c.verifiedImports;}
 const char*qualifiedDriver="/System/Library/Extensions/GeForceMTLDriver.bundle/Contents/MacOS/GeForceMTLDriver";
 const char*qualifiedHash="2b89839c425d95934f5e01f16c8683fe53432df410292ec8e554b21c98d6c054";
-// Exact second file: all bytes outside the CMS payload and its CodeDirectory
-// match the original. No signature stripping/normalization is used at runtime.
-const char*qualifiedResignedHash="e240d54a4cd64b7e54fbc15250de82e88451132e1d9f3a4f9879607c8b0e7645";
 bool driverProfile(IMP implementation,NSError**error,NSString**actualHash=nullptr){
  Dl_info image={};
  if(!dladdr((const void*)implementation,&image)||!image.dli_fname||strcmp(image.dli_fname,qualifiedDriver)){fail(error,@"Unexpected constructor implementation image");return false;}
@@ -209,7 +207,7 @@ bool driverProfile(IMP implementation,NSError**error,NSString**actualHash=nullpt
  if(!driver.length||driver.length>UINT32_MAX){fail(error,@"Cannot validate qualified driver image");return false;}
  unsigned char digest[CC_SHA256_DIGEST_LENGTH];CC_SHA256(driver.bytes,(CC_LONG)driver.length,digest);char hex[65];
  for(unsigned i=0;i<sizeof digest;i++)sprintf(hex+i*2,"%02x",digest[i]);hex[64]=0;
- if(strcmp(hex,qualifiedHash)&&strcmp(hex,qualifiedResignedHash)){fail(error,@"Installed driver hash differs from qualified profile; import prohibited");return false;}
+ if(!KPKeplerDriverHashIsQualified([NSString stringWithUTF8String:hex])){fail(error,@"Installed driver hash differs from qualified profile; import prohibited");return false;}
  if(actualHash)*actualHash=[NSString stringWithUTF8String:hex];
  return true;
 }

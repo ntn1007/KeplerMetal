@@ -1,3 +1,5 @@
+#import "KeplerGPUIdentity.h"
+#import "KeplerDriverProfile.h"
 #import "KeplerCPUICB.h"
 #import "KeplerNativeCommands.h"
 #include "KeplerCommandIR.h"
@@ -495,7 +497,7 @@ BOOL installRenderOverride(Class dynamic,Class original,SEL selector,IMP impleme
 @implementation KPCPUICBScope
 - (instancetype)init{if((self=[super init]))_factoryLock=[NSObject new];return self;}
 + (instancetype)installOnDevice:(id<MTLDevice>)device queue:(id<MTLCommandQueue>)queue pipeline:(id<MTLComputePipelineState>)pipeline error:(NSError**)error {
- std::lock_guard<std::mutex>lock(installMutex);NSData*d=[NSData dataWithContentsOfFile:@"/System/Library/Extensions/GeForceMTLDriver.bundle/Contents/MacOS/GeForceMTLDriver"];if(![hash(d)isEqual:@"2b89839c425d95934f5e01f16c8683fe53432df410292ec8e554b21c98d6c054"]||device.registryID!=4294968458||queue.device!=device||pipeline.device!=device||objc_getAssociatedObject(device,&contextKey)){fail(error,@"Device/driver/queue/pipeline or existing scope mismatch");return nil;}
+ std::lock_guard<std::mutex>lock(installMutex);NSData*d=[NSData dataWithContentsOfFile:@"/System/Library/Extensions/GeForceMTLDriver.bundle/Contents/MacOS/GeForceMTLDriver"];if(!KPKeplerDriverHashIsQualified(hash(d))||!KPKepler880MIdentity(device)||queue.device!=device||pipeline.device!=device||objc_getAssociatedObject(device,&contextKey)){fail(error,@"Device/driver/queue/pipeline or existing scope mismatch");return nil;}
  KPCPUICBScope*s=[self new];s.device=device;s.queue=queue;s.pipeline=pipeline;s.eventRows=[NSMutableArray new];s.adapted=[NSMutableArray new];s.profiles=[NSMutableDictionary new];s.namedPipelines=[NSMutableDictionary new];s.originalDeviceClass=object_getClass(device);s.profiles[[NSValue valueWithPointer:(__bridge const void*)pipeline]]=@{@"function":@"consume_grid",@"library_SHA256":@"b15f9b198ba326811f0a61f64fc32ac7cc185d04db63fa8e04f86075e8450a8d",@"static_threadgroup_bytes":@0};s.namedPipelines[@"consume_grid"]=pipeline;
  Class dynamic=scopedClass(deviceClasses,s.originalDeviceClass,@"KPICBDevice_",@selector(newIndirectCommandBufferWithDescriptor:maxCommandCount:options:),(IMP)createICB,error);if(!dynamic)return nil;linkScope(device,s);object_setClass(device,dynamic);[s.eventRows addObject:@{@"operation":@"scope_install",@"original_class":NSStringFromClass(s.originalDeviceClass),@"dynamic_class":NSStringFromClass(dynamic),@"cached_device_classes":@(deviceClasses.size()),@"capabilities_spoofed":@NO,@"scope":@"Own device object only; no shared-class method replacement"}];return s;
 }
@@ -514,7 +516,7 @@ BOOL installRenderOverride(Class dynamic,Class original,SEL selector,IMP impleme
 }
 + (instancetype)installRenderingOnDevice:(id<MTLDevice>)device queue:(id<MTLCommandQueue>)queue libraryData:(NSData*)data expectedSHA256:(NSString*)expected error:(NSError**)error {
     std::lock_guard<std::mutex>lock(installMutex);NSData*snapshot=[data copy];Class transport=NSClassFromString(@"KPNativeRenderDrawBatch");
-    if(!transport||device.registryID!=4294968458||queue.device!=device||objc_getAssociatedObject(device,&contextKey)||!digestString(expected)||![hash(snapshot)isEqual:expected]){fail(error,@"Rendering module, queue, snapshot or scope mismatch");return nil;}
+    if(!transport||!KPKepler880MIdentity(device)||queue.device!=device||objc_getAssociatedObject(device,&contextKey)||!digestString(expected)||![hash(snapshot)isEqual:expected]){fail(error,@"Rendering module, queue, snapshot or scope mismatch");return nil;}
     id<KPCPURenderTransport>engine=[(id<KPCPURenderTransport>)[transport alloc]initWithQueue:queue libraryData:snapshot error:error];if(!engine)return nil;
     KPCPUICBScope*s=[self new];s.device=device;s.queue=queue;s.renderEngine=engine;s.profiles=[NSMutableDictionary new];s.namedPipelines=[NSMutableDictionary new];s.eventRows=[NSMutableArray new];s.adapted=[NSMutableArray new];s.originalDeviceClass=object_getClass(device);
     Class dynamic=scopedClass(deviceClasses,s.originalDeviceClass,@"KPICBDevice_",@selector(newIndirectCommandBufferWithDescriptor:maxCommandCount:options:),(IMP)createICB,error);if(!dynamic)return nil;linkScope(device,s);object_setClass(device,dynamic);

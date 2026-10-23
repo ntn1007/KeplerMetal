@@ -74,10 +74,11 @@ Fresh compute/CAS qualification and accounting observations are documented in
 new NVIDIA hardware feature, a replacement installed driver, a performance
 improvement, or a claim that every graphics/video path was requalified.
 
-Other adapters still have historical gates: `KeplerCPUICB.mm`,
-`KeplerNativeRenderDraws.mm` and `KeplerFP64.mm` retain old boot-ID checks, and
-some also require the original file hash. They have not been silently admitted
-by this change. Extending the same identity/profile contract to those adapters
-requires their own command, rendering and numerical regression suites. Hardware
-video, power/display integration and transparent ordinary-application support
-also remain separate unfinished work.
+The subsequently qualified combined adapters (`KeplerCPUICB.mm`,
+`KeplerNativeCommands.mm`, `KeplerNativeRenderDraws.mm`, `KeplerFP64.mm`) now use
+the shared policy and PCI identity. Their separate artifact, numerical/draw
+cohorts and limits are recorded in [ADAPTER_PROFILES.md](ADAPTER_PROFILES.md).
+The separate legacy generic importer retains its historical gate; optional
+producer-limit and broader command/graphics paths require their own suites.
+Hardware video, power/display integration and transparent ordinary-application
+support remain unfinished.

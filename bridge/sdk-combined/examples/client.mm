@@ -1,3 +1,4 @@
+#import "KeplerGPUIdentity.h"
 #import "KeplerCPUICB.h"
 #import <objc/runtime.h>
 #include <CommonCrypto/CommonDigest.h>
@@ -12,7 +13,7 @@ int main(int argc,char**argv){@autoreleasepool{
  NSDictionary*input=[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"client-manifest.json"]] options:0 error:nil];
  NSMutableData*lib=[NSMutableData dataWithContentsOfFile:[assets stringByAppendingPathComponent:input[@"library"]]],*abi=[NSMutableData dataWithContentsOfFile:@(argv[2])];NSString*libSHA=sha(lib),*abiSHA=sha(abi);if(![libSHA isEqual:input[@"library_SHA256"]]||![abiSHA isEqual:@(argv[4])])return 2;
  NSMutableDictionary*certificates=[NSMutableDictionary new],*pins=[NSMutableDictionary new];for(NSDictionary*p in input[@"profiles"])if([p[@"candidate"]boolValue]){certificates[p[@"function"]]=[NSMutableData dataWithContentsOfFile:[assets stringByAppendingPathComponent:p[@"certificate"]]];pins[p[@"function"]]=p[@"certificate_SHA256"];}
- id<MTLDevice>d=nil;for(id<MTLDevice>x in MTLCopyAllDevices())if(x.registryID==4294968458)d=x;if(!d)return 2;Class original=object_getClass(d);id<MTLCommandQueue>q=[d newCommandQueue];NSError*error=nil;
+ id<MTLDevice>d=nil;for(id<MTLDevice>x in MTLCopyAllDevices())if(KPKepler880MIdentity(x)){if(d)return 2;d=x;}if(!d)return 2;Class original=object_getClass(d);id<MTLCommandQueue>q=[d newCommandQueue];NSError*error=nil;
  KPCPUICBScope*s=baseline?[KPCPUICBScope installOnDevice:d queue:q libraryData:lib expectedSHA256:libSHA manifestData:abi expectedManifestSHA256:abiSHA error:&error]:[KPCPUICBScope installOnDevice:d queue:q libraryData:lib expectedSHA256:libSHA manifestData:abi expectedManifestSHA256:abiSHA nativeCASCertificates:certificates expectedCertificateSHA256:pins error:&error];
  if(!s){emit(@{@"failure_stage":@"register",@"error":error.description?:@"nil",@"device_class_unchanged":@(object_getClass(d)==original)});return 3;}
  NSDictionary*registered=s.events.lastObject;memset(lib.mutableBytes,0,lib.length);memset(abi.mutableBytes,0,abi.length);for(NSMutableData*c in certificates.allValues)memset(c.mutableBytes,0,c.length);[certificates removeAllObjects];
@@ -41,5 +42,5 @@ int main(int argc,char**argv){@autoreleasepool{
    [runs addObject:@{@"trial":@(trial),@"outputs":outputs,@"command_status":@(cb.status),@"committed":@(!prepare),@"preparation_outputs_untouched":@YES,@"execution_event":event,@"scope_restored_before_commit":@(restoredBefore)}];
   }}
  }
- if(s)[s restore];BOOL restored=object_getClass(d)==original;emit(@{@"mode":mode,@"device":d.name,@"registry_id":@(d.registryID),@"registration":registered,@"runs":runs,@"refusals":refusals,@"caller_data_wiped_before_materialization":@YES,@"scope_restored":@(restored),@"system_modified":@NO,@"performance_benchmark":@NO});return restored?0:14;
+ if(s)[s restore];BOOL restored=object_getClass(d)==original;emit(@{@"mode":mode,@"device":d.name,@"registry_id":@(d.registryID),@"device_identity":KPKepler880MIdentity(d),@"registration":registered,@"runs":runs,@"refusals":refusals,@"caller_data_wiped_before_materialization":@YES,@"scope_restored":@(restored),@"system_modified":@NO,@"performance_benchmark":@NO});return restored?0:14;
 }}

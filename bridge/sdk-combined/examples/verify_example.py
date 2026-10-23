@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 """Raw CPU CAS oracle and native-CAS ownership/QMD checks; no GPU actions."""
 from pathlib import Path
+import sys
+sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'tools'))
+from verify_local_memory import verify_device_identity
 import argparse,hashlib,json,struct
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def verify(root,current=False,portable=False):
  inp=json.loads((root/'inputs.json').read_text());d=json.loads((root/'results.json').read_text());m=json.loads((root/'execution/manifest.json').read_text());mode=d['mode'];prepare=mode=='prepare';native=mode=='native'
- assert d['registry_id']==4294968458 and d['scope_restored'] and d['caller_data_wiped_before_materialization'] and not d['system_modified'] and not d['performance_benchmark'];assert m['exit_code']==0 and not m['SIGKILL_requested'] and not m['authoritative_ps_status']
+ if 'device_identity' in d:verify_device_identity(d)
+ assert ('device_identity' in d or d['registry_id']==4294968458) and d['scope_restored'] and d['caller_data_wiped_before_materialization'] and not d['system_modified'] and not d['performance_benchmark'];assert m['exit_code']==0 and not m['SIGKILL_requested'] and not m['authoritative_ps_status']
  assert inp['core_source_compilations']==0
  for name,h in inp['source_hashes'].items():assert sha(root/name)==h
  if not portable:assert sha(root/'application')==inp['executable_SHA256']

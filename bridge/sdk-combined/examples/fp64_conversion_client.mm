@@ -1,3 +1,4 @@
+#import "KeplerGPUIdentity.h"
 // Independent adapted client: only the public header and extracted static SDK.
 // CPU creates raw input bits; conversions and dependent arithmetic run on GPU.
 #import "KeplerFP64.h"
@@ -18,7 +19,7 @@ static uint64_t inputBits(unsigned kind,NSUInteger local,NSUInteger i,NSUInteger
 int main(int argc,char**argv){@autoreleasepool{
  if(argc!=5)return 1;NSString*assets=@(argv[1]),*out=@(argv[2]),*mode=@(argv[3]);NSUInteger trials=strtoul(argv[4],nullptr,10);
  BOOL prep=[mode isEqual:@"prepare"],negative=[mode isEqual:@"no_producer"];if((!prep&&!negative&&![mode isEqual:@"execute"])||(trials!=1&&trials!=9))return 1;
- id<MTLDevice>d=nil;for(id<MTLDevice>x in MTLCopyAllDevices())if(x.registryID==4294968458)d=x;if(!d)return 2;
+ id<MTLDevice>d=nil;for(id<MTLDevice>x in MTLCopyAllDevices())if(KPKepler880MIdentity(x)){if(d)return 2;d=x;}if(!d)return 2;
  Method method=class_getInstanceMethod(objc_getClass("NVMTLFunctionVariant"),sel_registerName("initWithCompilerOutput:size:device:"));IMP before=method?method_getImplementation(method):nil;Class deviceClass=object_getClass(d);if(!before)return 2;
  NSDictionary*manifest=[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"fp64_manifest.json"]]options:0 error:nil];if([manifest[@"programs"]count]!=24&&[manifest[@"programs"]count]!=60)return 3;
  NSMutableData*carrier=[[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"fp64_carrier.metallib"]]mutableCopy];NSMutableDictionary*programs=[NSMutableDictionary dictionary];
@@ -65,5 +66,5 @@ int main(int argc,char**argv){@autoreleasepool{
   NSMutableArray*inputFiles=[NSMutableArray array],*outputFiles=[NSMutableArray array];for(unsigned i=0;i<6;i++){id<MTLBuffer>h=readInputs[i],original=hostInputs[i];if(memcmp(h.contents,original.contents,inputBytes))return 14;NSString*f=[NSString stringWithFormat:@"trial-%lu-input-%u.bin",(unsigned long)t,i];if(![[NSData dataWithBytes:h.contents length:h.length]writeToFile:[out stringByAppendingPathComponent:f]atomically:YES])return 15;[inputFiles addObject:f];}
   for(unsigned k=0;k<9;k++){id<MTLBuffer>h=hostOutputs[k];NSString*f=[NSString stringWithFormat:@"trial-%lu-output-%u.bin",(unsigned long)t,k];if(![[NSData dataWithBytes:h.contents length:h.length]writeToFile:[out stringByAppendingPathComponent:f]atomically:YES])return 15;[outputFiles addObject:f];}
   [runs addObject:@{@"trial":@(t),@"recipe_trial":@(recipeTrial),@"count":@(n),@"local":@(local),@"inputs":inputFiles,@"outputs":outputFiles,@"events":events,@"before_commit_untouched":@YES,@"library_released_before_commit":@(closed),@"committed":@(!prep),@"command_status":@(main.status)}];
- }}emit(@{@"mode":mode,@"registry_id":@(d.registryID),@"runs":runs,@"refusals":refusals,@"bad_program_rejected":@YES,@"caller_program_data_wiped":@YES,@"qualification":qualification,@"constructor_restored":@(method_getImplementation(method)==before),@"device_class_restored":@(object_getClass(d)==deviceClass),@"CPU_expected_answers_uploaded":@NO,@"intermediate_CPU_readback":@NO,@"system_modified":@NO,@"performance_benchmark":@NO});return method_getImplementation(method)==before?0:16;
+ }}emit(@{@"mode":mode,@"registry_id":@(d.registryID),@"device_identity":KPKepler880MIdentity(d),@"device":d.name,@"runs":runs,@"refusals":refusals,@"bad_program_rejected":@YES,@"caller_program_data_wiped":@YES,@"qualification":qualification,@"constructor_restored":@(method_getImplementation(method)==before),@"device_class_restored":@(object_getClass(d)==deviceClass),@"CPU_expected_answers_uploaded":@NO,@"intermediate_CPU_readback":@NO,@"system_modified":@NO,@"performance_benchmark":@NO});return method_getImplementation(method)==before?0:16;
 }}

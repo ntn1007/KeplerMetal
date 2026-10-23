@@ -1,4 +1,6 @@
 #import "KeplerNativeCommands.h"
+#import "KeplerDriverProfile.h"
+#import "KeplerGPUIdentity.h"
 #import <objc/runtime.h>
 #include <mach/mach_vm.h>
 #include <mach/vm_region.h>
@@ -70,7 +72,7 @@ BOOL KPResidentProfilePermitsInactiveCB0(NSDictionary*p,id<MTLComputePipelineSta
 }
 + (instancetype)recordedCommands:(NSData*)commands queue:(id<MTLCommandQueue>)queue pipeline:(id<MTLComputePipelineState>)pipeline output:(id<MTLBuffer>)output counter:(id<MTLBuffer>)counter parameters:(id<MTLBuffer>)parameters nativeConstants:(id<MTLBuffer>)nativeConstants nativeDescriptor:(id<MTLBuffer>)nativeDescriptor constantSnapshot:(NSData*)snapshot groups:(NSUInteger)groups local:(NSUInteger)local profile:(NSDictionary*)profile error:(NSError**)error {
  NSData*driver=[NSData dataWithContentsOfFile:@"/System/Library/Extensions/GeForceMTLDriver.bundle/Contents/MacOS/GeForceMTLDriver"];
- if(![sha(driver)isEqual:@"2b89839c425d95934f5e01f16c8683fe53432df410292ec8e554b21c98d6c054"]){fail(error,@"Driver identity changed");return nil;}
+ if(!KPKeplerDriverHashIsQualified(sha(driver))||!KPKepler880MIdentity(queue.device)){fail(error,@"Driver identity changed");return nil;}
  BOOL extended=[profile[@"binding_layout_v2"]boolValue];NSDictionary*bindings=profile[@"binding_state_v2"];NSUInteger parameterOffset=extended?[bindings[profile[@"constant_buffer_index"]][@"offset"]unsignedIntegerValue]:0;NSUInteger limit=extended?[profile[@"max_invocations"]unsignedIntegerValue]:640;MTLSize groupsShape=shape(profile[@"groups_shape"],groups),localShape=shape(profile[@"local_shape"],local);NSUInteger localCount=volume(localShape,pipeline.maxTotalThreadsPerThreadgroup),groupCount=volume(groupsShape,limit);
  if(!queue||!pipeline||pipeline.device!=queue.device||(!extended&&(output.length!=10368||counter.length<132))||parameterOffset>parameters.length||parameters.length-parameterOffset<512||parameters.length-parameterOffset>65536||snapshot.length!=65536||nativeConstants.length!=393216||nativeDescriptor.length!=4096||!groups||!local||!localCount||!groupCount||groupsShape.width!=groups||localShape.width!=local||localShape.width>1024||localShape.height>1024||localShape.depth>64||groupsShape.width>0x7fffffff||groupsShape.height>65535||groupsShape.depth>65535||groupCount>limit/localCount||(![profile[@"multidimensional_grid"]boolValue]&&(groupsShape.height!=1||groupsShape.depth!=1||localShape.height!=1||localShape.depth!=1))){fail(error,@"Unqualified binding/geometry/allocation profile");return nil;}
  BOOL manifestProfile=[profile[@"native_registration_v1"]boolValue];NSUInteger dynamicBytes=[profile[@"dynamic_threadgroup_length"]unsignedIntegerValue],staticBytes=[profile[@"static_threadgroup_bytes"]unsignedIntegerValue];

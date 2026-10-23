@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Reconstruct inputs and exact CPU references; check direct and GPU chains."""
 from pathlib import Path
+import sys
+sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'tools'))
+from verify_local_memory import verify_device_identity
 import argparse,hashlib,json,struct,sys
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 from fp64_cpu_oracle import expected,equivalent,value,bits
@@ -21,7 +24,8 @@ def reconstruct(n,t):
  return columns
 def verify(root,portable=False):
  root=Path(root);d=json.loads((root/'results.json').read_text());inp=json.loads((root/'inputs.json').read_text());m=json.loads((root/'execution/manifest.json').read_text());prep=d['mode']=='prepare';negative=d['mode']=='no_producer'
- assert d['mode'] in ['prepare','execute','no_producer'] and d['registry_id']==4294968458
+ if 'device_identity' in d:verify_device_identity(d)
+ assert d['mode'] in ['prepare','execute','no_producer'] and ('device_identity' in d or d['registry_id']==4294968458)
  assert d['bad_program_rejected'] and d['caller_program_data_wiped'] and d['constructor_restored'] and d['device_class_restored']
  assert not any(d[k] for k in ['CPU_expected_answers_uploaded','intermediate_CPU_readback','system_modified','performance_benchmark'])
  assert m['exit_code']==0 and not m['SIGKILL_requested'] and not m['authoritative_ps_status'] and m['GPU_reservation']['state']=='terminal'

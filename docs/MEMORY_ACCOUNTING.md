@@ -103,8 +103,9 @@ refusal, and obsolete CAS boot-ID gate remain preserved separately. Preliminary
 and failed cohorts do not contribute to the final table. [Machine-readable
 summary](driver-profile-validation.json).
 
-Full graphics/ICB/FP64, video and power/display qualification on this profile
-remains unfinished. There is no new performance benchmark, maximum-pressure
+The subsequent bounded FP64/ICB/basic-render cohorts are recorded in
+[ADAPTER_PROFILES.md](ADAPTER_PROFILES.md). Broader graphics/ICB, video and
+power/display qualification remains unfinished. There is no new performance benchmark, maximum-pressure
 qualification, physical VRAM measurement or general Metal 3/4 claim.
 
 ## Reproduction

@@ -1,3 +1,5 @@
+#import "KeplerGPUIdentity.h"
+#import "KeplerDriverProfile.h"
 #import "KeplerNativeRenderDraws.h"
 #import <objc/runtime.h>
 #include <CommonCrypto/CommonDigest.h>
@@ -99,7 +101,7 @@ BOOL validate(NSData*d,NSUInteger kind,id<MTLBuffer>indices,NSUInteger offset,NS
 - (instancetype)initWithQueue:(id<MTLCommandQueue>)queue libraryData:(NSData*)data error:(NSError**)error {
     self=[super init];if(!self)return nil;NSData*snapshot=[data copy];
     NSData*driver=[NSData dataWithContentsOfFile:@"/System/Library/Extensions/GeForceMTLDriver.bundle/Contents/MacOS/GeForceMTLDriver"];
-    if(queue.device.registryID!=4294968458||![sha(driver)isEqual:@"2b89839c425d95934f5e01f16c8683fe53432df410292ec8e554b21c98d6c054"]||![sha(snapshot)isEqual:@"965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"]){fail(error,@"Driver/device/library outside pinned profile");return nil;}
+    if(!KPKepler880MIdentity(queue.device)||!KPKeplerDriverHashIsQualified(sha(driver))||![sha(snapshot)isEqual:@"965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"]){fail(error,@"Driver/device/library outside pinned profile");return nil;}
     _queue=queue;_queueCpp=pointerIvar(queue,"_queue",680);if(!_queueCpp){fail(error,@"Queue layout changed");return nil;}
     dispatch_data_t payload=dispatch_data_create(snapshot.bytes,snapshot.length,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),^{(void)snapshot.length;});
     _library=[queue.device newLibraryWithData:payload error:error];if(!_library)return nil;

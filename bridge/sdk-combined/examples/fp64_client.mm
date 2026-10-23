@@ -1,3 +1,4 @@
+#import "KeplerGPUIdentity.h"
 // Public API adapted client. CPU creates input bits, never expected answers.
 #import "KeplerFP64.h"
 #import <objc/runtime.h>
@@ -7,7 +8,7 @@ static void emit(id x){NSData*j=[NSJSONSerialization dataWithJSONObject:x option
 static NSArray*views(NSArray*buffers,NSUInteger offset,NSUInteger stride){NSMutableArray*r=[NSMutableArray array];for(id<MTLBuffer>b in buffers)[r addObject:[KPBinary64Input inputWithBuffer:b offset:offset stride:stride]];return r;}
 int main(int argc,char**argv){@autoreleasepool{
  if(argc!=5)return 1;NSString*assets=@(argv[1]),*out=@(argv[2]),*mode=@(argv[3]);NSUInteger trials=strtoul(argv[4],nullptr,10);BOOL prep=[mode isEqual:@"prepare"],negative=[mode isEqual:@"no_producer"];if((!prep&&!negative&&![mode isEqual:@"execute"])||(trials!=1&&trials!=9))return 1;
- id<MTLDevice>d=nil;for(id<MTLDevice>x in MTLCopyAllDevices())if(x.registryID==4294968458)d=x;if(!d)return 2;
+ id<MTLDevice>d=nil;for(id<MTLDevice>x in MTLCopyAllDevices())if(KPKepler880MIdentity(x)){if(d)return 2;d=x;}if(!d)return 2;
  Class deviceClass=object_getClass(d);Method constructor=class_getInstanceMethod(objc_getClass("NVMTLFunctionVariant"),sel_registerName("initWithCompilerOutput:size:device:"));IMP before=constructor?method_getImplementation(constructor):nil;if(!before)return 2;
  NSMutableData*carrier=[[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"fp64_carrier.metallib"]]mutableCopy];NSMutableDictionary*programs=[NSMutableDictionary dictionary];
  NSDictionary*manifest=[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"fp64_manifest.json"]]options:0 error:nil];
@@ -57,5 +58,5 @@ int main(int argc,char**argv){@autoreleasepool{
   NSMutableArray*inputFiles=[NSMutableArray array],*outputFiles=[NSMutableArray array];for(unsigned i=0;i<6;i++){id<MTLBuffer>h=readInputs[i],original=hostInputs[i];if(memcmp(h.contents,original.contents,inputBytes))return 14;NSString*f=[NSString stringWithFormat:@"trial-%lu-input-%u.bin",(unsigned long)t,i];if(![[NSData dataWithBytes:h.contents length:h.length]writeToFile:[out stringByAppendingPathComponent:f]atomically:YES])return 15;[inputFiles addObject:f];}
   for(NSUInteger i=0;i<totalOutputs;i++){id<MTLBuffer>h=hostOutputs[i];NSString*f=i<directCount?[NSString stringWithFormat:@"trial-%lu-direct-%@-m%@.bin",(unsigned long)t,directSpecs[i][@"operation"],directSpecs[i][@"mask"]]:[NSString stringWithFormat:@"trial-%lu-chain-%@.bin",(unsigned long)t,@[@"div",@"sqrt",@"fma",@"add",@"mul"][i-directCount]];if(![[NSData dataWithBytes:h.contents length:h.length]writeToFile:[out stringByAppendingPathComponent:f]atomically:YES])return 15;[outputFiles addObject:f];}
   [runs addObject:@{@"trial":@(t),@"count":@(n),@"local":@(local),@"inputs":inputFiles,@"outputs":outputFiles,@"direct_events":events,@"chain_events":chainEvents,@"before_commit_untouched":@YES,@"library_released_before_commit":@(closed),@"committed":@(!prep),@"command_status":@(main.status),@"input_offset":@256,@"output_offset":@128}];
- }}emit(@{@"mode":mode,@"registry_id":@(d.registryID),@"runs":runs,@"refusals":refusals,@"bad_program_rejected":@YES,@"caller_program_data_wiped":@YES,@"qualification":qualification,@"constructor_restored":@(method_getImplementation(constructor)==before),@"device_class_restored":@(object_getClass(d)==deviceClass),@"CPU_expected_answers_uploaded":@NO,@"intermediate_CPU_readback":@NO,@"system_modified":@NO,@"performance_benchmark":@NO});return method_getImplementation(constructor)==before?0:16;
+ }}emit(@{@"mode":mode,@"registry_id":@(d.registryID),@"device_identity":KPKepler880MIdentity(d),@"device":d.name,@"runs":runs,@"refusals":refusals,@"bad_program_rejected":@YES,@"caller_program_data_wiped":@YES,@"qualification":qualification,@"constructor_restored":@(method_getImplementation(constructor)==before),@"device_class_restored":@(object_getClass(d)==deviceClass),@"CPU_expected_answers_uploaded":@NO,@"intermediate_CPU_readback":@NO,@"system_modified":@NO,@"performance_benchmark":@NO});return method_getImplementation(constructor)==before?0:16;
 }}
