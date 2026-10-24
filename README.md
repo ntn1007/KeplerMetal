@@ -15,6 +15,8 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
+The existing CPU-encoded compute ICB path now has native texture/sampler argument-buffer qualification: 31 terminal hosts, 72 consumer dispatches and 32,448 exact computed values, with direct/ICB comparisons, mip-view/addressing controls and full guards. The runtime stays unchanged; callers retain and declare indirect resources. [Evidence, limits and reproduction](docs/ICB_TEXTURE_ARGUMENTS.md).
+
 One native source-library registration now enables ordinary library/function/pipeline factories and automatic compute encoders for both pointer and reusable roots. Native PSO compilation/reflection stay native; no per-function registration or NAK producer import is needed on this route. The scoped application integration and its controls are documented [here](docs/NATIVE_SOURCE_LIBRARY_FACTORIES.md).
 
 Reusable compute ICB contexts now keep one owned GPU buffer across completed generations, reject stale CPU plans/GPU roots and track pending consumers. The 20-process reusable cohort checks 6,411,264 exact native consumer results; the full 52-process reception includes the preceding 32-process regression. This remains an adapted-application extension, with no installed-driver change or speedup claim. [Lifecycle, controls and reproduction](docs/REUSABLE_ICB_CONTEXTS.md).

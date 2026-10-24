@@ -1,0 +1,54 @@
+{
+  "schema": 2,
+  "library_SHA256": "6543a1f560c0dcfe7f1421c20c9e9fc3a5ea911644a6dfd0d14d1f20d5db3e71",
+  "functions": [
+    {
+      "name": "sample_icb_arguments",
+      "static_threadgroup_bytes": 0,
+      "max_local": 1024,
+      "qmd_register_count": 17,
+      "constant_buffer_index": 2,
+      "max_invocations": 65536,
+      "allow_multidimensional": false,
+      "buffers": [
+        {
+          "index": 0,
+          "name": "args",
+          "data_size": 24,
+          "alignment": 8,
+          "data_type": 1,
+          "access": 1,
+          "active": true,
+          "minimum_bytes": 24,
+          "per_invocation_bytes": 0
+        },
+        {
+          "index": 1,
+          "name": "output",
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 36,
+          "access": 1,
+          "active": true,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 16
+        },
+        {
+          "index": 2,
+          "name": "p",
+          "data_size": 16,
+          "alignment": 256,
+          "data_type": 1,
+          "access": 0,
+          "active": true,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 0
+        }
+      ],
+      "native_literal_bank_0": {
+        "bytes": 256,
+        "address_relation": "native_code_end_aligned_256"
+      }
+    }
+  ]
+}

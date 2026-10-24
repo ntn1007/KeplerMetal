@@ -7478,7 +7478,7 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "927cee918936d48c0e94eec4cef809712b73f843e4f990ab4cc1c18723577ab9",
-  "previous_public_commit": "2d496afddd2cff756870d30f699f81f2d5505669",
-  "update": "One native source library registration followed by ordinary library/function/pipeline calls and automatic queue factories; both dense pointer/generation root schemas; preserve legacy NAK registration."
+  "previous_source_snapshot_SHA256": "7c256300742b7be5f0c5841aa3f5d0b65875743cd371673d406eb6b4d136130d",
+  "previous_public_commit": "fb739c7dbd1067a2b4bc73faa2818f76f2313bf8",
+  "update": "Qualify existing CPU compute ICB transport with complete native texture/sampler/nested-buffer argument encoding, numeric controls and guards; no runtime change."
 }

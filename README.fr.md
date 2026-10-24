@@ -15,6 +15,8 @@ Le travail suit deux axes complémentaires :
 
 ## Avancées récentes
 
+Le chemin ICB de calcul encodé par le CPU est désormais qualifié avec des argument buffers natifs contenant texture, sampler et buffer imbriqué : 31 processus terminés, 72 dispatchs et 32 448 résultats calculés exacts. Le runtime reste inchangé ; l’application conserve et déclare les ressources indirectes. [Preuves, limites et reproduction](docs/ICB_TEXTURE_ARGUMENTS.md).
+
 Une seule inscription de bibliothèque relie désormais les producteurs compilés par NVIDIA aux factories Metal ordinaires et aux encodeurs automatiques, avec racines pointeur ou réutilisables. Les pipelines et leur réflexion restent natifs ; ce chemin évite l’inscription manuelle de chaque fonction et l’import d’un producteur NAK. [Contrat, contrôles et reproduction](docs/NATIVE_SOURCE_LIBRARY_FACTORIES.md).
 
 Les contextes ICB de calcul sont désormais réutilisables après achèvement, avec contrôle de génération et suivi des consommateurs en attente. Les 20 processus du nouveau mode vérifient 6 411 264 valeurs natives ; la réception complète compte 52 processus avec la non-régression précédente. Cela reste une extension pour applications adaptées, sans modification du pilote installé ni gain de vitesse annoncé. [Durée de vie, contrôles et reproduction](docs/REUSABLE_ICB_CONTEXTS.md).
