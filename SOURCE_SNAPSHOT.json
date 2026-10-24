@@ -28,64 +28,64 @@
       "path": "bridge/src/KeplerCPUICB.h",
       "source_path": "bridge/src/KeplerCPUICB.h",
       "source_SHA256": "263dede0101967e1bfa32fe3b081b73c476d9e09e8a9b5446ae04cf4f425ee0a",
-      "published_SHA256": "b4c13fbf317e48c3a4f6c0b79a82564bbecb2342bce4fbe11325d4961f2e62b9",
-      "bytes": 20827,
+      "published_SHA256": "3e2a451be0060a6d9dc304ecfca083d8a74c9106431f2b44689882878efffdc5",
+      "bytes": 22842,
       "modified_for_publication": false,
-      "previous_published_SHA256": "7e0280348bf7210fc41b075946d475e8c407b458555a6087f16f0afe50e806bc"
+      "previous_published_SHA256": "b4c13fbf317e48c3a4f6c0b79a82564bbecb2342bce4fbe11325d4961f2e62b9"
     },
     {
       "path": "bridge/src/KeplerCPUICB.mm",
       "source_path": "bridge/src/KeplerCPUICB.mm",
       "source_SHA256": "3d59c2c609611ddc387e616b8945e903f6378dbd4a3b66a02cb22087ada84b60",
-      "published_SHA256": "2ade3defcdaf1e9823dfe73598d1cfe580059af2ac4c91477a2322f937458f8f",
-      "bytes": 129229,
+      "published_SHA256": "792d7bb560f3c2eaa2ecf876c0436ea323bc2c59cb0f414630d99e0a4fd145e8",
+      "bytes": 132638,
       "modified_for_publication": true,
-      "previous_published_SHA256": "fea8fdf8e557d4f688ec16c347af3ee1057ade47754c3908a3bab1683e8c61a6"
+      "previous_published_SHA256": "2ade3defcdaf1e9823dfe73598d1cfe580059af2ac4c91477a2322f937458f8f"
     },
     {
       "path": "bridge/src/KeplerCommandIR.h",
       "source_path": "bridge/src/KeplerCommandIR.h",
       "source_SHA256": "749bab3ecb3f90dcece448bc3e37fbece387bfa8db832fc859fd0981831276c8",
-      "published_SHA256": "9c7b60223082ca3bd6e8cf0458e5f4fa01bf16d54ff699567e6cf9a651535d90",
-      "bytes": 2752,
+      "published_SHA256": "884d23eb4b834701a9dbfc9fe08c5020ee48bbef09c015b8fe6ec39633dc9d0e",
+      "bytes": 2956,
       "modified_for_publication": false,
-      "previous_published_SHA256": "749bab3ecb3f90dcece448bc3e37fbece387bfa8db832fc859fd0981831276c8"
+      "previous_published_SHA256": "9c7b60223082ca3bd6e8cf0458e5f4fa01bf16d54ff699567e6cf9a651535d90"
     },
     {
       "path": "bridge/src/KeplerCommandIRArgumentEncoder.inc",
       "source_path": "bridge/src/KeplerCommandIRArgumentEncoder.inc",
       "source_SHA256": "1b616974075a4346aa5bb7922a3c1ed51c8d6083d2a2bda049a6d8fde2c4f895",
-      "published_SHA256": "6826cc8bba7622ed7f7023fb1b6b7fcdb810402289f33a84502011885da55109",
-      "bytes": 12721,
+      "published_SHA256": "090461ca9d6037c644d80c842cfa59bc0d6f22a7cf08f32644988042e58f313e",
+      "bytes": 12880,
       "modified_for_publication": false,
-      "previous_published_SHA256": "1b616974075a4346aa5bb7922a3c1ed51c8d6083d2a2bda049a6d8fde2c4f895"
+      "previous_published_SHA256": "6826cc8bba7622ed7f7023fb1b6b7fcdb810402289f33a84502011885da55109"
     },
     {
       "path": "bridge/src/KeplerCommandIRFunction.inc",
       "source_path": "bridge/src/KeplerCommandIRFunction.inc",
       "source_SHA256": "0f8b29ecfe9a4fd6326d391dc023a595d511fdae3cd0876cb769c9ddf6983b3f",
-      "published_SHA256": "e3777b6f901b2980743c34b655ebf7eb6476eb79409db583f86a5cdb7503283c",
-      "bytes": 9378,
+      "published_SHA256": "946396af3d38941ecf7f76840d4378f22bf67f18004903e1f8f0ca8d8e55c2b5",
+      "bytes": 9675,
       "modified_for_publication": false,
-      "previous_published_SHA256": "0f8b29ecfe9a4fd6326d391dc023a595d511fdae3cd0876cb769c9ddf6983b3f"
+      "previous_published_SHA256": "e3777b6f901b2980743c34b655ebf7eb6476eb79409db583f86a5cdb7503283c"
     },
     {
       "path": "bridge/src/KeplerCommandIRFunctionScope.inc",
       "source_path": "bridge/src/KeplerCommandIRFunctionScope.inc",
       "source_SHA256": "33a5e6fd7b30f454fdf1744e2bb6f18ea14b7012cdf50f933a6ae1ec7b7abfd9",
-      "published_SHA256": "a4c7aa8bbcb403bdb260e2ef4513e81f0fe297691279275a17e095d083662a93",
-      "bytes": 2752,
+      "published_SHA256": "7287ca4a086066590cfc0bea21ac1e7d5d2ea5e7cfbf63a57bf286bb903dafc4",
+      "bytes": 3562,
       "modified_for_publication": false,
-      "previous_published_SHA256": "33a5e6fd7b30f454fdf1744e2bb6f18ea14b7012cdf50f933a6ae1ec7b7abfd9"
+      "previous_published_SHA256": "a4c7aa8bbcb403bdb260e2ef4513e81f0fe297691279275a17e095d083662a93"
     },
     {
       "path": "bridge/src/KeplerCommandIRPlan.inc",
       "source_path": "bridge/src/KeplerCommandIRPlan.inc",
       "source_SHA256": "fb5db32241a80bb180e0a814403035637fd51d707f49925fde4606bf0b8f44c1",
-      "published_SHA256": "7fcba17b2405f5f352c8081470a854aabc60ec86c4fbbab991d59858eb94cbde",
-      "bytes": 3594,
+      "published_SHA256": "c430e64d606e3b80c6737d25b0105913ded44c79ca31b40aeeaa7d70d98f4608",
+      "bytes": 4574,
       "modified_for_publication": false,
-      "previous_published_SHA256": "fb5db32241a80bb180e0a814403035637fd51d707f49925fde4606bf0b8f44c1"
+      "previous_published_SHA256": "7fcba17b2405f5f352c8081470a854aabc60ec86c4fbbab991d59858eb94cbde"
     },
     {
       "path": "bridge/src/KeplerCommandIRScope.inc",
@@ -99,10 +99,10 @@
       "path": "bridge/src/KeplerCommandIRv2Scope.inc",
       "source_path": "bridge/src/KeplerCommandIRv2Scope.inc",
       "source_SHA256": "33e8c08e9c6d93bceb42337064efef5b619011f82886040a318a4b3b5c084d2a",
-      "published_SHA256": "9e56c056be133d50caeb9055c491de10ce58f2f1ab82329d363f61c1c0ed7de3",
-      "bytes": 17835,
+      "published_SHA256": "653e83e0f4135bd3ff68017e0ad3da0c9d22c1ccbbc4298f59d9e90aaaf2933c",
+      "bytes": 21358,
       "modified_for_publication": false,
-      "previous_published_SHA256": "33e8c08e9c6d93bceb42337064efef5b619011f82886040a318a4b3b5c084d2a"
+      "previous_published_SHA256": "9e56c056be133d50caeb9055c491de10ce58f2f1ab82329d363f61c1c0ed7de3"
     },
     {
       "path": "bridge/src/KeplerFP64.h",
@@ -1268,10 +1268,10 @@
       "path": "bridge/tools/command_ir_dataflow_client.mm",
       "source_path": "bridge/tools/command_ir_dataflow_client.mm",
       "source_SHA256": "b7b2d1617fc7c98ad36c807dbdf3c0dc63a374eddc6e240b5bd23caa949fb321",
-      "published_SHA256": "3e7532522cfc87c89ac2e24b0bfd9dd67b5db3a3b38c2e8d53f298da93e51dd2",
-      "bytes": 27560,
+      "published_SHA256": "3f2b247ddaea556f4077281b6209d33f553e25bf1e0ccd332081a5cab8b1431a",
+      "bytes": 33303,
       "modified_for_publication": true,
-      "previous_published_SHA256": "9578e9b68171ee2d4d7431522593318d27ba81c6237dcb45915ba1472334b534"
+      "previous_published_SHA256": "3e7532522cfc87c89ac2e24b0bfd9dd67b5db3a3b38c2e8d53f298da93e51dd2"
     },
     {
       "path": "bridge/tools/command_ir_grid3d_client.mm",
@@ -4207,10 +4207,10 @@
       "path": "bridge/tools/verify_command_ir_dataflow.py",
       "source_path": "bridge/tools/verify_command_ir_dataflow.py",
       "source_SHA256": "2acb8cecde8b8e4ee22e27d7bf64bedb609036dd86ba217931088c8c7cc3c33c",
-      "published_SHA256": "c0ebf0852fe726dec5c745c001472977dea06da0ffa014cdf12136a7bd240d40",
-      "bytes": 13530,
+      "published_SHA256": "f0b26762fe8df7a0e99be78de6c89430bfabf5c62c212461f76ff3075020f689",
+      "bytes": 16416,
       "modified_for_publication": true,
-      "previous_published_SHA256": "7ed8c45eab49ff3827557fe091d3f8ea46f6672e778b592b8d06927230ddb340"
+      "previous_published_SHA256": "c0ebf0852fe726dec5c745c001472977dea06da0ffa014cdf12136a7bd240d40"
     },
     {
       "path": "bridge/tools/verify_command_ir_grid3d.py",
@@ -7476,29 +7476,7 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "3dcff74cd49a603306c97a94b9c7b9904aae1eadbeb6e45d17b41ddb963a24e8",
-  "previous_public_commit": "15501cd3fce6c9d83bf66b42ea6ec3f545c44d70",
-  "update": {
-    "date": "2026-10-24",
-    "scope": "Stable scope-owned pipeline IDs with GPU template resolution, duplicate roots and shared-default control",
-    "source_files_updated": [
-      "bridge/src/KeplerCPUICB.h",
-      "bridge/src/KeplerCPUICB.mm",
-      "bridge/src/KeplerCommandIR.h",
-      "bridge/src/KeplerCommandIRArgumentEncoder.inc",
-      "bridge/src/KeplerCommandIRPlan.inc",
-      "bridge/src/KeplerCommandIRv2Scope.inc",
-      "bridge/tools/command_ir_dataflow_client.mm",
-      "bridge/tools/verify_command_ir_dataflow.py"
-    ],
-    "GPU_qualification": "PASS",
-    "core_runtime_modified": true,
-    "full_objective_complete": false,
-    "system_modified": false,
-    "qualified_processes": 32,
-    "native_consumer_uint32": 5950464,
-    "stable_pipeline_identities": true,
-    "duplicate_template_consumer_test": "PASS",
-    "default_shared_before_after": "PASS"
-  }
+  "previous_source_snapshot_SHA256": "4b2f1979953f7fd84fe4bca993470841678eb3f43e08169664f8e5a4aebe8f9f",
+  "previous_public_commit": "45daa78953814885f051009408325cc8e3e288d7",
+  "update": "Generation-tagged reusable ICB contexts, explicit producer/materializer/consumer leases, persistent retired-slot checks, native source ABI and independent reproduction/receipt tools."
 }

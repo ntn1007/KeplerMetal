@@ -15,6 +15,8 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
+Reusable compute ICB contexts now keep one owned GPU buffer across completed generations, reject stale CPU plans/GPU roots and track pending consumers. The 20-process reusable cohort checks 6,411,264 exact native consumer results; the full 52-process reception includes the preceding 32-process regression. This remains an adapted-application extension, with no installed-driver change or speedup claim. [Lifecycle, controls and reproduction](docs/REUSABLE_ICB_CONTEXTS.md).
+
 Stable scope-owned pipeline identities now resolve on the GTX despite template permutations and duplicate local-size variants. A final 32-host matrix checks 5,950,464 native consumer results, retired-scope ID refusals and both NAK references. These are project ABI identities; native Apple ICB/PSO resource IDs and transparent applications remain open. [Contract, source and evidence](docs/STABLE_PIPELINE_IDENTITIES.md).
 
 Native source-lowered producers now bind through the real function’s public argument-encoder getters and the existing owned resource catalogue, while all six pipeline factory variants stay native. This removes manual argument-root construction in the adapted client; stable ICB/pipeline identities and transparent applications remain open. [Contract and reproduction](docs/NATIVE_SOURCE_FUNCTION_ARGUMENTS.md).

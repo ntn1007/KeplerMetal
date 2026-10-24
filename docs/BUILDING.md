@@ -1,5 +1,7 @@
 # Build from source
 
+[REUSABLE_ICB_CONTEXTS.md](REUSABLE_ICB_CONTEXTS.md) adds `--reusable-contexts`, an explicit generation-tagged source ABI, producer/materializer/consumer leases, CPU lifetime contracts and a 52-process reusable/regression auditor. Workspace-header builds disable compiler modules to avoid importing definitions from an earlier build directory.
+
 [STABLE_PIPELINE_IDENTITIES.md](STABLE_PIPELINE_IDENTITIES.md) adds `--stable-identities`, a private extended context with unchanged executable record ABI, duplicate-template binding and retired-scope GPU controls.
 
 [NATIVE_SOURCE_FUNCTION_ARGUMENTS.md](NATIVE_SOURCE_FUNCTION_ARGUMENTS.md) adds `--function-arguments` to the native producer workflow, with public function encoders, native pipeline factories, ownership/reuse tests and two legacy reference routes.

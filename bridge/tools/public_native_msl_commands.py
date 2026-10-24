@@ -15,6 +15,7 @@ FLOW_MODES=['basic','barrier','copy','no_seed','no_gather','no_finish','split',
     'bad_buffer3_flag','bad_groups','bad_reserved','refusals']
 FUNCTION_FLOW_MODES=FLOW_MODES+['encoder_reuse']
 STABLE_FLOW_MODES=FUNCTION_FLOW_MODES+['duplicate_templates']
+REUSABLE_FLOW_MODES=STABLE_FLOW_MODES+['delayed_consumer','stale_root']
 
 
 def msl_abi(text):
@@ -54,7 +55,7 @@ def compile_refusals(out):
         ('strided_binding','device uint *p [[buffer(1)]]','c.set_kernel_buffer(p,4ul,0u);')]:
         source=folder/(name+'.metal')
         source.write_text('#include <metal_stdlib>\n#include <metal_command_buffer>\nusing namespace metal;\nstruct Args {command_buffer commands [[id(0)]];};\nkernel void unsupported(device Args &a [[buffer(0)]],'+argument+') {compute_command c(a.commands,0);'+call+'}\n')
-        argv=['xcrun','metal','-std=macos-metal2.3','-I',str(out/'include'),'-c',str(source),'-o',str(folder/(name+'.air'))]
+        argv=['xcrun','metal','-std=macos-metal2.3','-fmodules=none','-I',str(out/'include'),'-c',str(source),'-o',str(folder/(name+'.air'))]
         r=subprocess.run(argv,capture_output=True,text=True,timeout=30)
         (folder/(name+'.stdout')).write_text(r.stdout);(folder/(name+'.stderr')).write_text(r.stderr)
         rows.append(dict(case=name,argv=argv,exit_code=r.returncode,expected_deleted_overload=True))
@@ -65,6 +66,7 @@ def compile_refusals(out):
 
 def build(a):
     assert not a.stable_identities or a.function_arguments,'Stable contexts require the native function binding route'
+    assert not a.reusable_contexts or a.stable_identities,'Reusable contexts require stable identities'
     out,library,assets=a.out.resolve(),a.library.resolve(),a.assets.resolve()
     preflight(out);lm=check_library(library);pins=read(ROOT/'tools/native_msl_fixture_pins.json')['assets']
     if not a.nak_baseline:
@@ -88,6 +90,9 @@ def build(a):
     if a.stable_identities:
         shutil.copyfile(ROOT/'src/stable_pipeline_record_probe.metal',out/'src/stable_pipeline_record_probe.metal')
         shutil.copyfile(ROOT/'tools/stable_pipeline_record_probe.mm',out/'src/stable_pipeline_record_probe.mm')
+    if a.reusable_contexts:
+        shutil.copyfile(ROOT/'src/KeplerReusableIRContext.inc',out/'src/KeplerReusableIRContext.inc')
+        shutil.copyfile(ROOT/'tools/reusable_context_lease_contract.mm',out/'src/reusable_context_lease_contract.mm')
     (out/'include/KeplerCommandIR.h').write_text(msl_abi((out/'src/KeplerCommandIR.h').read_text()))
     shutil.copyfile(out/'src/KeplerNativeMSLCommands.h',out/'include/metal_command_buffer')
     for source,profile in [('gpu_command_frontend_dataflow',{'parameters':('uint',4)}),
@@ -99,13 +104,16 @@ def build(a):
     shutil.copyfile(ROOT/'sdk-combined/runtime/run_sdk_host.py',out/'runtime/run_sdk_host.py')
     run=commands(out)
     for name,source in [('native_producer','gpu_command_frontend_dataflow'),('records','native_command_records_probe'),('field','command_ir_field_probe')]:
-        flags=['-I',out/'include'] if name!='field' else []
+        flags=['-fmodules=none','-I',out/'include'] if name!='field' else []
         source_folder='src'if name=='field'else'lowered'
         run(name+'-metal',['xcrun','metal','-std=macos-metal2.3',*flags,'-c',out/source_folder/(source+'.metal'),'-o',out/(name+'.air')])
         run(name+'-metallib',['xcrun','metallib',out/(name+'.air'),'-o',out/'assets'/(name+'.metallib')])
     if a.stable_identities:
-        run('stable-records-metal',['xcrun','metal','-std=macos-metal2.3','-I',out/'include','-c',out/'src/stable_pipeline_record_probe.metal','-o',out/'stable_records.air'])
+        run('stable-records-metal',['xcrun','metal','-std=macos-metal2.3','-fmodules=none','-I',out/'include','-c',out/'src/stable_pipeline_record_probe.metal','-o',out/'stable_records.air'])
         run('stable-records-metallib',['xcrun','metallib',out/'stable_records.air','-o',out/'assets/stable_records.metallib'])
+    if a.reusable_contexts:
+        run('reusable-producer-metal',['xcrun','metal','-std=macos-metal2.3','-fmodules=none','-DKP_COMMAND_TAGGED_CONTEXT=1','-I',out/'include','-c',out/'lowered/gpu_command_frontend_dataflow.metal','-o',out/'reusable_producer.air'])
+        run('reusable-producer-metallib',['xcrun','metallib',out/'reusable_producer.air','-o',out/'assets/reusable_producer.metallib'])
     if a.function_arguments:
         for name,source in [('opaque_producer','gpu_command_frontend_dataflow'),('function_contracts','native_source_function_contracts')]:
             run(name+'-metal',['xcrun','metal','-std=macos-metal2.3','-c',out/'src'/(source+'.metal'),'-o',out/(name+'.air')])
@@ -117,16 +125,21 @@ def build(a):
     if a.function_arguments:kinds.append('contracts')
     if a.function_arguments and a.nak_baseline:kinds.append('nak_function')
     if a.stable_identities:kinds.append('stable_records')
+    if a.reusable_contexts:kinds.append('reusable')
     for kind in kinds:
         source={'records':'native_command_records_probe.mm','stable_records':'stable_pipeline_record_probe.mm','contracts':'native_source_function_contracts.mm'}.get(kind,'command_ir_dataflow_client.mm')
-        flags=[] if kind in ['records','stable_records','contracts'] else ['-DKP_DATAFLOW_NATIVE=0','-DKP_NATIVE_MSL_COMMANDS='+str(int(kind=='dataflow'))]
-        if kind in ['dataflow','nak_function'] and a.function_arguments:
+        flags=[] if kind in ['records','stable_records','contracts'] else ['-DKP_DATAFLOW_NATIVE=0','-DKP_NATIVE_MSL_COMMANDS='+str(int(kind in ['dataflow','reusable']))]
+        if kind in ['dataflow','nak_function','reusable'] and a.function_arguments:
             flags+=['-DKP_PUBLIC_ARGUMENT_ENCODER=1','-DKP_FUNCTION_ARGUMENT_ENCODER=1']
         if kind=='dataflow' and a.stable_identities:flags+=['-DKP_STABLE_PIPELINE_IDENTITIES=1']
+        if kind=='reusable':flags+=['-DKP_REUSABLE_CONTEXTS=1','-DKP_STABLE_PIPELINE_IDENTITIES=1']
         link=[] if kind=='records' else [library/'libKeplerMetal.a','-Wl,-ObjC']
         run(kind,['xcrun','clang++','-arch','x86_64','-O2','-std=c++17','-fobjc-arc',*flags,
             '-I',out/'src',out/'src'/source,*link,'-framework','Metal','-framework','Foundation','-o',out/kind])
     refusals=compile_refusals(out)
+    if a.reusable_contexts:
+        run('cpu-lease-build',['xcrun','clang++','-arch','x86_64','-O2','-std=c++17','-fobjc-arc','-I',out/'src',out/'src/reusable_context_lease_contract.mm','-framework','Metal','-framework','Foundation','-o',out/'cpu-leases'])
+        lease_contract=json.loads(run('cpu-lease-contract',[out/'cpu-leases']));assert lease_contract['status']=='PASS' and not lease_contract['GPU_dispatches']
     write(out/'inputs.json',dict(source_hashes={str(p.relative_to(out)):sha(p)for folder in ['src','lowered','include']for p in (out/folder).iterdir()},
         assets_SHA256={p.name:sha(p)for p in (out/'assets').iterdir()},runtime_SHA256={p.name:sha(p)for p in (out/'runtime').iterdir()},
         oracle_SHA256={p.name:sha(p)for p in (out/'oracles').iterdir()},executables={k:sha(out/k)for k in kinds},
@@ -135,15 +148,16 @@ def build(a):
         shader_call_sites_modified=False,readonly_argument_pointer_members_lowered=True,NAK_baseline_built=a.nak_baseline,
         native_function_arguments=a.function_arguments,
         native_stable_pipeline_identities=a.stable_identities,
+        reusable_contexts_built=a.reusable_contexts,
         compile_refusals=refusals,SDK_modified=False,GPU_execution=False))
 
 
 def run(a):
     b,out=a.build.resolve(),a.out.resolve();assert not out.exists() and out.parent.is_dir()
-    assert a.mode in (['inspect']if a.kind=='contracts'else ['execute','no_dispatch']if a.kind in ['records','stable_records']else STABLE_FLOW_MODES)
+    assert a.mode in (['inspect']if a.kind=='contracts'else ['execute','no_dispatch']if a.kind in ['records','stable_records']else REUSABLE_FLOW_MODES if a.kind=='reusable'else STABLE_FLOW_MODES)
     inputs=read(b/'inputs.json');assert a.kind in inputs['executables'],'Requested backend was not built'
-    if a.mode=='encoder_reuse':assert a.kind=='dataflow' and inputs.get('native_function_arguments')
-    if a.mode=='duplicate_templates':assert a.kind=='dataflow' and inputs.get('native_stable_pipeline_identities')
+    if a.mode=='encoder_reuse':assert a.kind in ['dataflow','reusable'] and inputs.get('native_function_arguments')
+    if a.mode=='duplicate_templates':assert a.kind in ['dataflow','reusable'] and inputs.get('native_stable_pipeline_identities')
     for key,folder in [('source_hashes',''),('assets_SHA256','assets'),('runtime_SHA256','runtime'),('oracle_SHA256','oracles')]:
         for name,digest in inputs[key].items():assert sha(b/folder/name)==digest,name
     assert sha(b/a.kind)==inputs['executables'][a.kind];driver=check_driver_profile()
@@ -156,7 +170,7 @@ def run(a):
     argv=[out/'assets']if a.kind=='contracts'else [out/'assets'/(a.kind+'.metallib'),a.mode,out/'outputs']if a.kind in ['records','stable_records']else[out/'assets',out/'outputs',a.mode]
     m=run_host(out/'application',out/'execution',list(map(str,argv)),a.reservation_root.resolve())
     result=read(out/'execution/execution.stdout');write(out/'results.json',result)
-    assert a.kind in ['records','stable_records','contracts'] or result['producer_backend']==('native_msl'if a.kind=='dataflow'else'NAK')
+    assert a.kind in ['records','stable_records','contracts'] or result['producer_backend']==('native_msl'if a.kind in ['dataflow','reusable']else'NAK')
     sys.path.insert(0,str(out/'oracles'))
     if a.kind=='contracts':import verify_native_function_contracts as oracle
     elif a.kind=='stable_records':import verify_stable_pipeline_records as oracle
@@ -174,9 +188,10 @@ def main():
     q.add_argument('--nak-baseline',action='store_true',help='Also require the archived SM30 fixtures and build the comparison client')
     q.add_argument('--function-arguments',action='store_true',help='Bind native producers through registered public function argument encoders')
     q.add_argument('--stable-identities',action='store_true',help='Use stable scope-owned pipeline IDs and permuted native template catalogues')
+    q.add_argument('--reusable-contexts',action='store_true',help='Also build generation-tagged reusable-context producers and CPU lease contracts')
     q.set_defaults(fn=build);q=s.add_parser('run')
     for name in ['build','out','reservation-root']:q.add_argument('--'+name,type=Path,required=True)
-    q.add_argument('--kind',choices=['dataflow','nak','records','stable_records','contracts','nak_function'],required=True);q.add_argument('--mode',required=True);q.set_defaults(fn=run)
+    q.add_argument('--kind',choices=['dataflow','nak','records','stable_records','contracts','nak_function','reusable'],required=True);q.add_argument('--mode',required=True);q.set_defaults(fn=run)
     a=p.parse_args();a.fn(a)
 
 

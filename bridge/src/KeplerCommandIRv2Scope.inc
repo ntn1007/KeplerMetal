@@ -28,11 +28,38 @@
  }
 }
 - (KPGPUCommandSelection*)newGPUCommandIRv2FromBuffer:(id<MTLIndirectCommandBuffer>)source sourceRange:(NSRange)range destination:(id<MTLIndirectCommandBuffer>)destination destinationRange:(NSRange)targetRange resources:(NSArray<NSDictionary*>*)resources records:(id<MTLBuffer>)records recordOffset:(NSUInteger)offset stablePipelineIdentities:(BOOL)stable error:(NSError**)error {
+ return[self newGPUCommandIRv2FromBuffer:source sourceRange:range destination:destination destinationRange:targetRange resources:resources records:records recordOffset:offset stablePipelineIdentities:stable reusable:nil generation:0 error:error];
+}
+- (KPGPUCommandSelection*)newGPUReusableCommandIRFromBuffer:(id<MTLIndirectCommandBuffer>)source sourceRange:(NSRange)range destination:(id<MTLIndirectCommandBuffer>)destination destinationRange:(NSRange)targetRange resources:(NSArray<NSDictionary*>*)resources records:(id<MTLBuffer>)records recordOffset:(NSUInteger)offset error:(NSError**)error {
+ if(error)*error=nil;
+ if(_restored||!_GPUCommandIRv2Selector||![destination isKindOfClass:KPComputeICB.class]||[destination isKindOfClass:KPRenderICB.class]||((KPComputeICB*)destination).scope!=self){fail(error,@"Reusable ICB scope/domain differs");return nil;}
+ KPComputeICB*d=(KPComputeICB*)destination;KPReusableIRContext*storage=d.reusableContext;
+ if(!storage){storage=[KPReusableIRContext new];storage.queue=_queue;storage.buffer=[_device newBufferWithLength:sizeof(KPStableCommandContext)options:MTLResourceStorageModePrivate];uint64_t a=storage.buffer.gpuAddress;if(!a||a>>40||storage.buffer.length>((uint64_t(1)<<40)-a)){fail(error,@"Reusable context address span differs");return nil;}d.reusableContext=storage;}
+ uint32_t generation=0;
+ @synchronized(storage){
+  if(![storage idle:error])return nil;
+  if(!storage.retired){fail(error,@"Reset the prior reusable generation before preparing another");return nil;}
+  generation=allocateContextGeneration();if(!generation){fail(error,@"Reusable context generation namespace exhausted");return nil;}
+  storage.preparing=YES;
+ }
+ KPGPUCommandSelection*plan=nil;
+ @try{plan=[self newGPUCommandIRv2FromBuffer:source sourceRange:range destination:destination destinationRange:targetRange resources:resources records:records recordOffset:offset stablePipelineIdentities:YES reusable:storage generation:generation error:error];}
+ @finally{@synchronized(storage){storage.preparing=NO;}}
+ if(!plan)return nil;
+ @synchronized(storage){
+  if(storage.poisoned){fail(error,@"Reusable context was poisoned during preparation");return nil;}
+  storage.generation=generation;storage.retired=NO;storage.plan=plan;storage.resources=plan.commandIRProducerResources;
+  for(KPComputeICBCommand*c in plan.targetCommands){c.reusableContext=storage;c.reusableGeneration=generation;}
+ }
+ [plan.eventRows addObject:@{@"operation":@"prepare_reusable_IR_context",@"generation":@(generation),@"context_GPU_address":@(storage.buffer.gpuAddress),@"generation_tag_shift":@40}];return plan;
+}
+- (KPGPUCommandSelection*)newGPUCommandIRv2FromBuffer:(id<MTLIndirectCommandBuffer>)source sourceRange:(NSRange)range destination:(id<MTLIndirectCommandBuffer>)destination destinationRange:(NSRange)targetRange resources:(NSArray<NSDictionary*>*)resources records:(id<MTLBuffer>)records recordOffset:(NSUInteger)offset stablePipelineIdentities:(BOOL)stable reusable:(KPReusableIRContext*)reusable generation:(uint32_t)generation error:(NSError**)error {
  if(!_GPUCommandIRv2Selector||!resources.count||resources.count>4||![records conformsToProtocol:@protocol(MTLBuffer)]||records.storageMode!=MTLStorageModePrivate||records.device!=_device){fail(error,@"IR v2 resources/records/scope differ");return nil;}
  if(![source isKindOfClass:KPComputeICB.class]||![destination isKindOfClass:KPComputeICB.class]||[source isKindOfClass:KPRenderICB.class]||[destination isKindOfClass:KPRenderICB.class]){fail(error,@"IR v2 command domain differs");return nil;}
  KPComputeICB*s=(KPComputeICB*)source,*d=(KPComputeICB*)destination;
+ if(d.reusableContext&&!reusable){fail(error,@"A reusable ICB requires its generation-aware constructor");return nil;}
  KPCommandIRArgumentContext*prior=d.commandIRArgumentContext;KPGPUCommandSelection*priorPlan=prior.plan;
- if(prior.roots.count&&priorPlan&&priorPlan.selectionBuffer.status!=MTLCommandBufferStatusCompleted){fail(error,@"An exported argument context still owns the target ICB");return nil;}
+ if(prior.roots.count&&priorPlan&&priorPlan.selectionBuffer.status!=MTLCommandBufferStatusCompleted&&!(reusable&&priorPlan.reusableContext==reusable&&reusable.retired)){fail(error,@"An exported argument context still owns the target ICB");return nil;}
  if(s.scope!=self||d.scope!=self||!range.length||range.length>8||range.location>s.size||range.length>s.size-range.location||!targetRange.length||targetRange.length>8||targetRange.location>d.size||targetRange.length>d.size-targetRange.location){fail(error,@"IR v2 scope/ranges differ");return nil;}
  NSMutableArray*blocked=[NSMutableArray arrayWithObject:records];NSMutableArray<KPComputeICBCommand*>*sourceCommands=[NSMutableArray new];NSUInteger n=0,constantIndex=NSNotFound;
  uint64_t ra=records.gpuAddress;if(!ra||ra>>40||records.length>((uint64_t(1)<<40)-ra)){fail(error,@"IR v2 record address span differs");return nil;}
@@ -67,7 +94,8 @@
  }
  KPGPUCommandSelection*plan=[self newGPUCommandSelectionFromBuffer:source sourceRange:range destination:destination destinationRange:targetRange input:records inputOffset:offset nonce:0 error:error];if(!plan)return nil;
  plan.commandIRStablePipelineIdentities=stable;
- plan.resourceOwners=[owners copy];plan.resourceAddresses=[_device newBufferWithBytes:addresses.bytes length:addresses.length options:MTLResourceStorageModeShared];plan.constantTemplates=[_device newBufferWithLength:range.length*65536 options:MTLResourceStorageModePrivate];plan.generatedGeometry=[_device newBufferWithLength:128+targetRange.length*64 options:MTLResourceStorageModePrivate];plan.commandIRLimits=[_device newBufferWithLength:range.length*48 options:MTLResourceStorageModeShared];plan.commandIRContext=[_device newBufferWithLength:stable?sizeof(KPStableCommandContext):sizeof(KPCommandContext)options:MTLResourceStorageModePrivate];
+ plan.reusableContext=reusable;plan.reusableGeneration=generation;
+ plan.resourceOwners=[owners copy];plan.resourceAddresses=[_device newBufferWithBytes:addresses.bytes length:addresses.length options:MTLResourceStorageModeShared];plan.constantTemplates=[_device newBufferWithLength:range.length*65536 options:MTLResourceStorageModePrivate];plan.generatedGeometry=[_device newBufferWithLength:128+targetRange.length*64 options:MTLResourceStorageModePrivate];plan.commandIRLimits=[_device newBufferWithLength:range.length*48 options:MTLResourceStorageModeShared];plan.commandIRContext=reusable?reusable.buffer:[_device newBufferWithLength:stable?sizeof(KPStableCommandContext):sizeof(KPCommandContext)options:MTLResourceStorageModePrivate];
  if(!plan.resourceAddresses||!plan.constantTemplates||!plan.generatedGeometry||!plan.commandIRLimits||!plan.commandIRContext){fail(error,@"IR v2 owned allocation failed");return nil;}
  NSMutableArray*parameters=[NSMutableArray new],*parameterAddresses=[NSMutableArray new];
  for(NSUInteger i=0;i<range.length;i++){
@@ -89,6 +117,7 @@
  if(!plan.commandIRNativeBindings){fail(error,@"IR v2 native binding table allocation failed");return nil;}
  NSMutableArray*configs=[NSMutableArray new];for(NSUInteger i=0;i<targetRange.length;i++){id<MTLBuffer>c=[_device newBufferWithLength:256 options:MTLResourceStorageModeShared];if(!c){fail(error,@"IR v2 config allocation failed");return nil;}memset(c.contents,0,256);memcpy(c.contents,plan.selectorConfigs[i].contents,16);uint64_t a=plan.targetRecords[i].constants.gpuAddress;uint32_t w[4]={(uint32_t)resources.count,(uint32_t)a,(uint32_t)(a>>32),0};memcpy((char*)c.contents+16,w,16);[configs addObject:c];}plan.selectorConfigs=[configs copy];
  KPStableCommandContext context={};context.base={stable?KP_COMMAND_STABLE_CONTEXT_MAGIC:KP_COMMAND_CONTEXT_MAGIC,stable?KP_COMMAND_STABLE_CONTEXT_VERSION:KP_COMMAND_IR_VERSION2,(uint32_t)targetRange.length,(uint32_t)n,records.gpuAddress+offset,KP_COMMAND_RECORD_BYTES,(uint32_t)range.length};
+ if(reusable){context.base.magic=KP_COMMAND_REUSABLE_CONTEXT_MAGIC;context.base.version=(generation<<8)|KP_COMMAND_REUSABLE_CONTEXT_VERSION;}
  NSMutableArray*identities=[NSMutableArray new];
  if(stable)for(NSUInteger i=0;i<sourceCommands.count;i++){
   KPComputeICBCommand*c=sourceCommands[i];uint64_t identity=[self commandIRIdentityForPipeline:c.pipeline error:error];if(!identity)return nil;[identities addObject:@(identity)];
@@ -100,7 +129,7 @@
  id<MTLCommandBuffer>cb=[_queue commandBuffer];id<MTLBlitCommandEncoder>b=[cb blitCommandEncoder];if(!initial||!b){fail(error,@"IR v2 initializer missing");return nil;}
  for(NSUInteger i=0;i<range.length;i++)[b copyFromBuffer:sourceCommands[i].record.constants sourceOffset:0 toBuffer:plan.constantTemplates destinationOffset:i*65536 size:65536];
  for(NSUInteger i=0;i<bindingRecords.count;i++)[b copyFromBuffer:((KPRecordedNativeCompute*)bindingRecords[i]).constants sourceOffset:0 toBuffer:plan.commandIRNativeBindings destinationOffset:i*128 size:128];
- [b fillBuffer:plan.generatedGeometry range:NSMakeRange(0,plan.generatedGeometry.length)value:0xa5];[b fillBuffer:plan.generatedGeometry range:NSMakeRange(64,targetRange.length*64)value:0];[b copyFromBuffer:initial sourceOffset:0 toBuffer:plan.commandIRContext destinationOffset:0 size:contextBytes];[b endEncoding];if(!complete(cb)){fail(error,@"IR v2 initialization failed");return nil;}
+ [b fillBuffer:plan.generatedGeometry range:NSMakeRange(0,plan.generatedGeometry.length)value:0xa5];[b fillBuffer:plan.generatedGeometry range:NSMakeRange(64,targetRange.length*64)value:0];[b copyFromBuffer:initial sourceOffset:0 toBuffer:plan.commandIRContext destinationOffset:0 size:contextBytes];[b endEncoding];if(!complete(cb)){if(reusable)reusable.poisoned=YES;fail(error,@"IR v2 initialization failed");return nil;}
  KPCommandIRArgumentContext*ac=[KPCommandIRArgumentContext new];ac.plan=plan;ac.context=plan.commandIRContext;NSMutableArray*leases=[NSMutableArray arrayWithObjects:plan.input,plan.commandIRContext,nil];[leases addObjectsFromArray:plan.commandIRParameters];[leases addObjectsFromArray:plan.resourceOwners];[leases addObjectsFromArray:blocked];ac.resources=[leases copy];ac.bindingCount=n;ac.constantIndex=constantIndex;ac.ownerThread=NSThread.currentThread;ac.roots=[NSMutableArray new];
  NSMutableArray*ap=[NSMutableArray new],*ab=[NSMutableArray new],*ar=[NSMutableArray new];
  for(KPComputeICBCommand*c in sourceCommands){[ap addObject:c.pipeline];NSDictionary*b=c.bindings[@(constantIndex)];[ab addObject:@{@"buffer":b[@"buffer"],@"offset":@([b[@"offset"]unsignedIntegerValue])}];}

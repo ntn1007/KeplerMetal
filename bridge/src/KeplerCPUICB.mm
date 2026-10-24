@@ -12,7 +12,7 @@
 #include <cmath>
 #include <atomic>
 
-@class KPComputeICB,KPComputeICBCommand,KPRenderICB,KPRenderICBCommand,KPCommandIRArgumentContext;
+@class KPComputeICB,KPComputeICBCommand,KPRenderICB,KPRenderICBCommand,KPCommandIRArgumentContext,KPReusableIRContext;
 @protocol KPOptionalNativeCASFactory <NSObject>
 + (id<MTLComputePipelineState>)newPipelineForDevice:(id<MTLDevice>)device
       function:(id<MTLFunction>)function libraryData:(NSData*)library
@@ -80,6 +80,8 @@ std::mutex installMutex;
 // Saturate at the 32-bit namespace boundary rather than wrapping.
 std::atomic<uint64_t>stablePipelineIdentityCounter{1};
 uint64_t allocateStablePipelineIdentity(){uint64_t n=stablePipelineIdentityCounter.load();while(n<=UINT32_MAX){if(stablePipelineIdentityCounter.compare_exchange_weak(n,n+1))return(uint64_t(KP_COMMAND_STABLE_PIPELINE_MAGIC)<<32)|n;}return 0;}
+std::atomic<uint32_t>contextGenerationCounter{1};
+uint32_t allocateContextGeneration(){uint32_t n=contextGenerationCounter.load();while(n<=0xffffffu){if(contextGenerationCounter.compare_exchange_weak(n,n+1))return n;}return 0;}
 std::map<uintptr_t,Class>deviceClasses,encoderClasses,renderEncoderClasses,blitEncoderClasses;
 KPCPUICBScope *scopeFor(id object){return ((KPScopeLink*)objc_getAssociatedObject(object,&contextKey)).scope;}
 void linkScope(id object,KPCPUICBScope *scope){KPScopeLink*link=[KPScopeLink new];link.scope=scope;objc_setAssociatedObject(object,&contextKey,link,OBJC_ASSOCIATION_RETAIN_NONATOMIC);}
@@ -154,7 +156,11 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 - (KPRecordedNativeCompute*)materialize:(KPComputeICBCommand*)command;
 - (KPGPUCommandSelection*)newGPUCommandBindingPlanFromBuffer:(id<MTLIndirectCommandBuffer>)source sourceRange:(NSRange)range destination:(id<MTLIndirectCommandBuffer>)destination destinationRange:(NSRange)targetRange resources:(NSArray<NSDictionary*>*)resources input:(id<MTLBuffer>)input inputOffset:(NSUInteger)offset nonce:(uint32_t)nonce IR:(BOOL)IR error:(NSError**)error;
 - (KPGPUCommandSelection*)newGPUCommandIRv2FromBuffer:(id<MTLIndirectCommandBuffer>)source sourceRange:(NSRange)range destination:(id<MTLIndirectCommandBuffer>)destination destinationRange:(NSRange)targetRange resources:(NSArray<NSDictionary*>*)resources records:(id<MTLBuffer>)records recordOffset:(NSUInteger)offset stablePipelineIdentities:(BOOL)stable error:(NSError**)error;
+- (KPGPUCommandSelection*)newGPUCommandIRv2FromBuffer:(id<MTLIndirectCommandBuffer>)source sourceRange:(NSRange)range destination:(id<MTLIndirectCommandBuffer>)destination destinationRange:(NSRange)targetRange resources:(NSArray<NSDictionary*>*)resources records:(id<MTLBuffer>)records recordOffset:(NSUInteger)offset stablePipelineIdentities:(BOOL)stable reusable:(KPReusableIRContext*)reusable generation:(uint32_t)generation error:(NSError**)error;
+- (id<MTLFunction>)newNativeSourceCommandIRFunctionWithLibraryData:(NSData*)data expectedSHA256:(NSString*)expected functionName:(NSString*)name rootBufferIndex:(NSUInteger)index generationTagged:(BOOL)tagged error:(NSError**)error;
 @end
+
+#include "KeplerReusableIRContext.inc"
 
 @interface KPComputeICBCommand : NSObject<MTLIndirectComputeCommand>
 @property(nonatomic,weak) KPComputeICB *owner;
@@ -170,12 +176,16 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 @property(nonatomic,strong) NSArray<KPRecordedNativeCompute*> *residentOwners;
 @property(nonatomic,strong) id<MTLCommandBuffer> residentCopyBuffer;
 @property(nonatomic) BOOL GPUGenerated;
+@property(nonatomic,weak) KPReusableIRContext *reusableContext;
+@property(nonatomic) uint32_t reusableGeneration;
+- (void)checkReusableMutation;
 - (void)copyStateFrom:(KPComputeICBCommand*)source;
 @end
 
 @interface KPComputeICB : NSObject<MTLIndirectCommandBuffer>
 @property(nonatomic,strong) KPCPUICBScope *scope;
 @property(nonatomic,strong) KPCommandIRArgumentContext *commandIRArgumentContext;
+@property(nonatomic,strong) KPReusableIRContext *reusableContext;
 @property(nonatomic,strong) id<MTLBuffer> metadata;
 @property(nonatomic,strong) NSMutableArray *commands;
 @property(atomic,copy) NSString *label;
@@ -202,19 +212,20 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 
 @implementation KPComputeICBCommand
 - (instancetype)init{if((self=[super init])){_bindings=[NSMutableDictionary new];_threadgroupLengths=[NSMutableDictionary new];}return self;}
+- (void)checkReusableMutation{if(_reusableContext){NSError*error=nil;if(![_reusableContext idle:&error])reject(error.localizedDescription);if(_reusableGeneration==_reusableContext.generation&&![_reusableContext retire:&error])reject(error.localizedDescription);}}
 - (void)invalidate{_record=nil;_residentOwners=nil;_residentCopyBuffer=nil;_GPUResourceOwners=nil;_GPUGenerated=NO;}
-- (void)setComputePipelineState:(id<MTLComputePipelineState>)pipeline {if(_GPUGenerated)reject(@"GPU-selected command requires reset before CPU re-encoding");if(!_owner||![_owner.scope profileForPipeline:pipeline])reject(@"Pipeline is not owned by this registered scope");_pipeline=pipeline;[self invalidate];}
-- (void)setKernelBuffer:(id<MTLBuffer>)buffer offset:(NSUInteger)offset atIndex:(NSUInteger)index {if(_GPUGenerated)reject(@"GPU-selected command requires reset before CPU re-encoding");NSDictionary*p=[_owner.scope profileForPipeline:_pipeline],*spec=p[@"binding_specs"][@(index)];BOOL extended=[p[@"binding_layout_v2"]boolValue];if(!_owner||(!extended&&index>=3)||(extended&&!spec)||buffer.device!=_owner.scope.device||offset>buffer.length||(extended&&offset%[spec[@"alignment"]unsignedIntegerValue]))reject(@"Unqualified kernel buffer/index/offset alignment");_bindings[@(index)]=@{@"buffer":buffer,@"offset":@(offset)};[self invalidate];}
+- (void)setComputePipelineState:(id<MTLComputePipelineState>)pipeline {[self checkReusableMutation];if(_GPUGenerated)reject(@"GPU-selected command requires reset before CPU re-encoding");if(!_owner||![_owner.scope profileForPipeline:pipeline])reject(@"Pipeline is not owned by this registered scope");_pipeline=pipeline;[self invalidate];}
+- (void)setKernelBuffer:(id<MTLBuffer>)buffer offset:(NSUInteger)offset atIndex:(NSUInteger)index {[self checkReusableMutation];if(_GPUGenerated)reject(@"GPU-selected command requires reset before CPU re-encoding");NSDictionary*p=[_owner.scope profileForPipeline:_pipeline],*spec=p[@"binding_specs"][@(index)];BOOL extended=[p[@"binding_layout_v2"]boolValue];if(!_owner||(!extended&&index>=3)||(extended&&!spec)||buffer.device!=_owner.scope.device||offset>buffer.length||(extended&&offset%[spec[@"alignment"]unsignedIntegerValue]))reject(@"Unqualified kernel buffer/index/offset alignment");_bindings[@(index)]=@{@"buffer":buffer,@"offset":@(offset)};[self invalidate];}
 - (void)setKernelBuffer:(id<MTLBuffer>)buffer offset:(NSUInteger)offset attributeStride:(NSUInteger)stride atIndex:(NSUInteger)index{reject(@"Dynamic attribute stride is not implemented");}
-- (void)concurrentDispatchThreadgroups:(MTLSize)groups threadsPerThreadgroup:(MTLSize)local {if(_GPUGenerated)reject(@"GPU-selected command requires reset before CPU re-encoding");NSDictionary*p=[_owner.scope profileForPipeline:_pipeline];BOOL multidimensional=[p[@"multidimensional_grid"]boolValue];NSUInteger limit=[p[@"max_local"]unsignedIntegerValue];if(!limit)limit=[p[@"static_threadgroup_bytes"]unsignedIntegerValue]?128:1024;NSUInteger maxInvocations=[p[@"max_invocations"]unsignedIntegerValue]?:640;NSUInteger localCount=volume(local,limit),groupCount=volume(groups,maxInvocations);if(!localCount||!groupCount||local.width>1024||local.height>1024||local.depth>64||groups.width>0x7fffffff||groups.height>65535||groups.depth>65535||groupCount>maxInvocations/localCount||(!multidimensional&&(groups.height!=1||groups.depth!=1||local.height!=1||local.depth!=1)))reject(@"Grid exceeds registered dimension/thread bounds");_groups=groups;_local=local;_hasDispatch=YES;[self invalidate];}
+- (void)concurrentDispatchThreadgroups:(MTLSize)groups threadsPerThreadgroup:(MTLSize)local {[self checkReusableMutation];if(_GPUGenerated)reject(@"GPU-selected command requires reset before CPU re-encoding");NSDictionary*p=[_owner.scope profileForPipeline:_pipeline];BOOL multidimensional=[p[@"multidimensional_grid"]boolValue];NSUInteger limit=[p[@"max_local"]unsignedIntegerValue];if(!limit)limit=[p[@"static_threadgroup_bytes"]unsignedIntegerValue]?128:1024;NSUInteger maxInvocations=[p[@"max_invocations"]unsignedIntegerValue]?:640;NSUInteger localCount=volume(local,limit),groupCount=volume(groups,maxInvocations);if(!localCount||!groupCount||local.width>1024||local.height>1024||local.depth>64||groups.width>0x7fffffff||groups.height>65535||groups.depth>65535||groupCount>maxInvocations/localCount||(!multidimensional&&(groups.height!=1||groups.depth!=1||local.height!=1||local.depth!=1)))reject(@"Grid exceeds registered dimension/thread bounds");_groups=groups;_local=local;_hasDispatch=YES;[self invalidate];}
 - (void)concurrentDispatchThreads:(MTLSize)grid threadsPerThreadgroup:(MTLSize)local{reject(@"Nonuniform thread grids are not implemented");}
-- (void)setBarrier{_barrier=YES;}
-- (void)clearBarrier{_barrier=NO;}
+- (void)setBarrier{[self checkReusableMutation];_barrier=YES;}
+- (void)clearBarrier{[self checkReusableMutation];_barrier=NO;}
 - (void)setImageblockWidth:(NSUInteger)width height:(NSUInteger)height{reject(@"Imageblock state is not implemented");}
-- (void)setThreadgroupMemoryLength:(NSUInteger)length atIndex:(NSUInteger)index{if(_GPUGenerated)reject(@"GPU-selected command requires reset before CPU re-encoding");NSDictionary*p=[_owner.scope profileForPipeline:_pipeline],*memory=p[@"dynamic_threadgroup"];if(![p[@"native_registration_v1"]boolValue]||!memory||index!=[memory[@"index"]unsignedIntegerValue]||length%16||length<[memory[@"min_bytes"]unsignedIntegerValue]||length>[memory[@"max_bytes"]unsignedIntegerValue]||length+[p[@"static_threadgroup_bytes"]unsignedIntegerValue]>49152)reject(@"Threadgroup memory index/length outside registered native ABI");_threadgroupLengths[@(index)]=@(length);[self invalidate];}
+- (void)setThreadgroupMemoryLength:(NSUInteger)length atIndex:(NSUInteger)index{[self checkReusableMutation];if(_GPUGenerated)reject(@"GPU-selected command requires reset before CPU re-encoding");NSDictionary*p=[_owner.scope profileForPipeline:_pipeline],*memory=p[@"dynamic_threadgroup"];if(![p[@"native_registration_v1"]boolValue]||!memory||index!=[memory[@"index"]unsignedIntegerValue]||length%16||length<[memory[@"min_bytes"]unsignedIntegerValue]||length>[memory[@"max_bytes"]unsignedIntegerValue]||length+[p[@"static_threadgroup_bytes"]unsignedIntegerValue]>49152)reject(@"Threadgroup memory index/length outside registered native ABI");_threadgroupLengths[@(index)]=@(length);[self invalidate];}
 - (void)setStageInRegion:(MTLRegion)region{reject(@"Stage-in regions are not implemented");}
-- (void)reset{_pipeline=nil;[_bindings removeAllObjects];[_threadgroupLengths removeAllObjects];_hasDispatch=NO;_barrier=NO;_groups=MTLSizeMake(0,0,0);_local=MTLSizeMake(0,0,0);[self invalidate];}
-- (void)copyStateFrom:(KPComputeICBCommand*)s{_pipeline=s.pipeline;_bindings=[s.bindings mutableCopy];_threadgroupLengths=[s.threadgroupLengths mutableCopy];_groups=s.groups;_local=s.local;_hasDispatch=s.hasDispatch;_barrier=s.barrier;_record=s.record;_residentOwners=s.residentOwners;_residentCopyBuffer=s.residentCopyBuffer;_GPUResourceOwners=s.GPUResourceOwners;_GPUGenerated=s.GPUGenerated;}
+- (void)reset{[self checkReusableMutation];_reusableContext=nil;_reusableGeneration=0;_pipeline=nil;[_bindings removeAllObjects];[_threadgroupLengths removeAllObjects];_hasDispatch=NO;_barrier=NO;_groups=MTLSizeMake(0,0,0);_local=MTLSizeMake(0,0,0);[self invalidate];}
+- (void)copyStateFrom:(KPComputeICBCommand*)s{[self checkReusableMutation];if(s.reusableContext)reject(@"Copying reusable command state is not qualified");_pipeline=s.pipeline;_bindings=[s.bindings mutableCopy];_threadgroupLengths=[s.threadgroupLengths mutableCopy];_groups=s.groups;_local=s.local;_hasDispatch=s.hasDispatch;_barrier=s.barrier;_record=s.record;_residentOwners=s.residentOwners;_residentCopyBuffer=s.residentCopyBuffer;_GPUResourceOwners=s.GPUResourceOwners;_GPUGenerated=s.GPUGenerated;}
 @end
 
 // Validate the current public command state, not just a cached native record.
@@ -264,6 +275,8 @@ static NSString*residentBindingError(KPComputeICBCommand*c,KPCPUICBScope*scope){
 @property(nonatomic,strong) NSArray<NSNumber*> *commandIRParameterAddresses;
 @property(nonatomic,strong) KPCommandIRArgumentContext *commandIRArgumentContext;
 @property(nonatomic,strong) NSMutableArray<NSMutableDictionary*> *commandIRArgumentRoots;
+@property(nonatomic,strong) KPReusableIRContext *reusableContext;
+@property(nonatomic) uint32_t reusableGeneration;
 @end
 
 @implementation KPGPUCommandSelection
@@ -271,6 +284,8 @@ static NSString*residentBindingError(KPComputeICBCommand*c,KPCPUICBScope*scope){
 #include "KeplerCommandIRPlan.inc"
 - (BOOL)validateOwners:(NSError**)error {
  if(_scope.restored)return fail(error,@"GPU selection scope was restored");
+ if(_commandIRVersion==2&&_commandIRArgumentContext&&_targetICB.commandIRArgumentContext!=_commandIRArgumentContext)return fail(error,@"Command IR target belongs to a newer plan");
+ if(_reusableContext&&(_reusableContext.retired||_reusableContext.poisoned||_reusableContext.generation!=_reusableGeneration||_reusableContext.plan!=self))return fail(error,@"Reusable command IR generation was retired");
  for(KPRecordedNativeCompute*r in _owners)if(![r validateResidentThreadgroupMemory:error])return NO;
  for(NSUInteger i=0;i<_targetCommands.count;i++)if(_targetCommands[i].record!=_targetRecords[i])return fail(error,@"GPU selection destination changed after preparation");
  return YES;
@@ -336,21 +351,22 @@ static NSString*residentBindingError(KPComputeICBCommand*c,KPCPUICBScope*scope){
 - (MTLPurgeableState)setPurgeableState:(MTLPurgeableState)state{if(state!=MTLPurgeableStateKeepCurrent&&state!=MTLPurgeableStateNonVolatile)reject(@"Volatile/purgeable command state is not implemented");return MTLPurgeableStateNonVolatile;}
 - (kern_return_t)setOwnerWithIdentity:(task_id_token_t)token{return [_metadata setOwnerWithIdentity:token];}
 - (MTLResourceID)gpuResourceID{reject(@"GPU argument-buffer ICB identity is not implemented");return MTLResourceID{0};}
-- (void)resetWithRange:(NSRange)range{bounds(range,self.size);for(NSUInteger i=range.location;i<NSMaxRange(range);i++)[_commands[i] reset];[_scope.eventRows addObject:@{@"operation":@"CPU_reset",@"location":@(range.location),@"length":@(range.length)}];}
+- (void)resetWithRange:(NSRange)range{bounds(range,self.size);if(range.length&&_reusableContext){NSError*e=nil;if(![_reusableContext retire:&e])reject(e.localizedDescription);}for(NSUInteger i=range.location;i<NSMaxRange(range);i++)[_commands[i] reset];[_scope.eventRows addObject:@{@"operation":@"CPU_reset",@"location":@(range.location),@"length":@(range.length)}];}
 - (id<MTLIndirectComputeCommand>)indirectComputeCommandAtIndex:(NSUInteger)i{bounds(NSMakeRange(i,1),self.size);return _commands[i];}
 - (id<MTLIndirectRenderCommand>)indirectRenderCommandAtIndex:(NSUInteger)i{reject(@"Render ICBs are not implemented");return nil;}
 - (void)executeRange:(NSRange)range encoder:(id<MTLComputeCommandEncoder>)encoder {
- bounds(range,self.size);if(_scope.restored)reject(@"Scope was restored");if(encoder.dispatchType!=MTLDispatchTypeSerial)reject(@"Concurrent encoders are not qualified");NSMutableArray*records=[NSMutableArray new];NSMutableArray*indices=[NSMutableArray new];
+ bounds(range,self.size);if(_scope.restored)reject(@"Scope was restored");for(NSUInteger i=range.location;i<NSMaxRange(range);i++){KPComputeICBCommand*c=_commands[i];if(c.reusableContext&&(!c.GPUGenerated||c.reusableContext.retired||c.reusableContext.generation!=c.reusableGeneration))reject(@"Reusable consumer generation is not materialized/active");}if(encoder.dispatchType!=MTLDispatchTypeSerial)reject(@"Concurrent encoders are not qualified");NSMutableArray*records=[NSMutableArray new];NSMutableArray*indices=[NSMutableArray new];
  BOOL resident=NO;for(NSUInteger i=range.location;i<NSMaxRange(range);i++)if(((KPComputeICBCommand*)_commands[i]).residentOwners.count)resident=YES;
  if(resident){
   Ivar v=class_getInstanceVariable(object_getClass(encoder),"_commandBuffer");if(!v||ivar_getOffset(v)!=32)reject(@"Resident consumer command-buffer ABI differs");id<MTLCommandBuffer>cb=object_getIvar(encoder,v);
   NSMutableArray*owners=[NSMutableArray array];NSMutableArray*ordering=[NSMutableArray array];NSMutableArray*resources=[NSMutableArray array];
   for(NSUInteger i=range.location;i<NSMaxRange(range);i++){
-   KPComputeICBCommand*c=_commands[i];NSString*bindingError=residentBindingError(c,_scope);if(bindingError)reject(bindingError);if(!c.record.residentDescriptorReady)reject(@"Resident ranges require every slot to be occupied and prepared");
+   KPComputeICBCommand*c=_commands[i];if(c.reusableContext&&!c.GPUGenerated)reject(@"Reusable consumer has no materialized generation");NSString*bindingError=residentBindingError(c,_scope);if(bindingError)reject(bindingError);if(!c.record.residentDescriptorReady)reject(@"Resident ranges require every slot to be occupied and prepared");
    if(c.residentOwners.count){NSDictionary*proof=residentPredecessorOrder(c.residentCopyBuffer,cb);if(!proof)reject(@"Resident copy must precede execution in this CB or be committed on the same queue before this consumer is enqueued");[ordering addObject:proof];}
    [records addObject:c.record];[indices addObject:@(i)];for(KPRecordedNativeCompute*r in c.residentOwners.count?c.residentOwners:@[c.record])if(![owners containsObject:r])[owners addObject:r];
    for(id<MTLBuffer>r in c.GPUResourceOwners)if(![resources containsObject:r])[resources addObject:r];
   }
+  for(NSUInteger i=range.location;i<NSMaxRange(range);i++){KPComputeICBCommand*c=_commands[i];if(c.reusableContext){NSError*e=nil;if(![c.reusableContext track:cb generation:c.reusableGeneration error:&e])reject(e.localizedDescription);}}
   for(id<MTLBuffer>r in resources)[encoder useResource:r usage:MTLResourceUsageRead|MTLResourceUsageWrite];if(resources.count){NSArray*keep=[resources copy];[cb addCompletedHandler:^(id<MTLCommandBuffer>done){(void)keep.count;}];}
   NSDictionary*proof=nil;NSError*error=nil;if(![records[0] encodeResidentSequence:records owners:owners encoder:encoder suppressElementIndexes:[NSIndexSet indexSet] evidence:&proof error:&error])reject(error.localizedDescription);
   [_scope.eventRows addObject:@{@"operation":@"executeCommandsInBuffer",@"location":@(range.location),@"length":@(range.length),@"executed_indices":indices,@"resident_GPU_descriptor":@YES,@"predecessor_order":ordering,@"extra_GPU_resource_owners":@(resources.count),@"evidence":proof}];return;
@@ -439,7 +455,7 @@ void copyResidentICB(id self,SEL selector,id source,NSRange range,id destination
  // are records, never command objects; chains therefore do not create cycles.
  NSMutableArray*plans=[NSMutableArray array];NSMutableArray*retained=[NSMutableArray array];NSMutableArray*ordering=[NSMutableArray array];
  for(NSUInteger k=0;k<range.length;k++){
-  KPComputeICBCommand*a=s.commands[range.location+k],*b=d.commands[index+k];
+  KPComputeICBCommand*a=s.commands[range.location+k],*b=d.commands[index+k];if(a.reusableContext||b.reusableContext)reject(@"GPU copying reusable command state is not qualified");
   for(KPComputeICBCommand*c in @[a,b]){NSString*bindingError=residentBindingError(c,scope);if(bindingError)reject(bindingError);if(!c.record.residentDescriptorReady)reject(@"Resident copy requires prepared registered native profiles");}
   if(!sameResidentRegistration([scope profileForPipeline:a.pipeline],[scope profileForPipeline:b.pipeline]))reject(@"Resident copy registration domain differs");
   for(KPComputeICBCommand*c in @[a,b])if(c.residentOwners.count){NSDictionary*proof=residentPredecessorOrder(c.residentCopyBuffer,cb);if(!proof)reject(@"A prior source/destination copy must be ordered in this CB or committed on the same queue before this consumer is enqueued");[ordering addObject:proof];}
@@ -788,7 +804,7 @@ BOOL installRenderOverride(Class dynamic,Class original,SEL selector,IMP impleme
 
 BOOL KPCopyCPUICBCommands(id<MTLIndirectCommandBuffer>source,NSRange range,id<MTLIndirectCommandBuffer>destination,NSUInteger index,NSError**error){
  if(![source isKindOfClass:[KPComputeICB class]]||![destination isKindOfClass:[KPComputeICB class]]||[source isKindOfClass:[KPRenderICB class]]!=[destination isKindOfClass:[KPRenderICB class]]||((KPComputeICB*)source).scope!=((KPComputeICB*)destination).scope||range.location>source.size||range.length>source.size-range.location||index>destination.size||range.length>destination.size-index)return fail(error,@"CPU ICB copy type/context/range mismatch");
- BOOL render=[source isKindOfClass:[KPRenderICB class]];KPComputeICB*s=(KPComputeICB*)source,*d=(KPComputeICB*)destination;if(!render)for(NSUInteger i=range.location;i<NSMaxRange(range);i++)if(((KPComputeICBCommand*)s.commands[i]).GPUGenerated)return fail(error,@"GPU-selected command cannot be copied as a CPU snapshot");
+ BOOL render=[source isKindOfClass:[KPRenderICB class]];KPComputeICB*s=(KPComputeICB*)source,*d=(KPComputeICB*)destination;if(!render)for(NSUInteger k=0;k<range.length;k++)if(((KPComputeICBCommand*)s.commands[range.location+k]).reusableContext||((KPComputeICBCommand*)d.commands[index+k]).reusableContext)return fail(error,@"CPU copying reusable command state is not qualified");if(!render)for(NSUInteger i=range.location;i<NSMaxRange(range);i++)if(((KPComputeICBCommand*)s.commands[i]).GPUGenerated)return fail(error,@"GPU-selected command cannot be copied as a CPU snapshot");
  if(render&&((((KPRenderICB*)s).allowedTypes&~((KPRenderICB*)d).allowedTypes)||((KPRenderICB*)s).maxVertexBuffers>((KPRenderICB*)d).maxVertexBuffers||((KPRenderICB*)s).maxFragmentBuffers>((KPRenderICB*)d).maxFragmentBuffers))return fail(error,@"Destination render descriptor cannot hold source types");
  NSMutableArray*snapshots=[NSMutableArray new];for(NSUInteger i=0;i<range.length;i++){id c=render?[KPRenderICBCommand new]:[KPComputeICBCommand new];[c copyStateFrom:s.commands[range.location+i]];[snapshots addObject:c];}for(NSUInteger i=0;i<range.length;i++)[d.commands[index+i]copyStateFrom:snapshots[i]];
  [s.scope.eventRows addObject:@{@"operation":@"CPU_snapshot_copy",@"source_location":@(range.location),@"length":@(range.length),@"destination_index":@(index),@"GPU_timeline_copy":@NO}];return YES;

@@ -11,14 +11,16 @@ def verify_native_function_arguments(d,inputs):
  assert d['public_argument_encoder'] and d['function_argument_encoder'] and not d['argument_refusal_probe']
  events=d['function_events'];registrations=[e for e in events if e.get('operation')=='register_native_source_IRv2_function']
  assert len(registrations)==1
- e=registrations[0];assert e['library_SHA256']==inputs['assets_SHA256']['native_producer.metallib']
+ tagged=bool(d['producer_info'].get('generation_tagged_root'))
+ e=registrations[0];assert e['library_SHA256']==inputs['assets_SHA256']['reusable_producer.metallib'if tagged else'native_producer.metallib']
+ assert bool(e.get('generation_tagged_root'))==tagged
  assert e['function']==d['producer_info']['function'] and not e['instruction_import'] and e['native_pipeline_factories_preserved'] and not e['Apple_ICB_identity'] and not e['GPU_execution']
  schema=e['schema'];assert schema['buffer_index']==0 and schema['binding_count']==4 and schema['encoded_length']==48 and schema['alignment']==8
- assert [(m['type'],m['offset'],m['index'])for m in schema['members']]==[(t,i*8,i)for i,t in enumerate([60,85,60,60,60,60])]
+ assert [(m['type'],m['offset'],m['index'])for m in schema['members']]==[(t,i*8,i)for i,t in enumerate([85 if tagged else 60,85,60,60,60,60])]
  getters=[e for e in events if e.get('operation')=='function_IRv2_argument_encoder']
  # One initial getter checks the compiled root stride before trial encoders.
- assert len(getters)==(2 if d['mode']=='encoder_reuse'else 5)
- if d['mode']!='encoder_reuse':assert sum(e['reflection_requested']for e in getters)==2
+ assert len(getters)==(2 if tagged or d['mode']=='encoder_reuse'else 5)
+ if not tagged and d['mode']!='encoder_reuse':assert sum(e['reflection_requested']for e in getters)==2
  assert all(e.get('native_reflection_preserved')for e in getters if e['reflection_requested'])
  restores=[e for e in events if e.get('operation')=='restore_IRv2_functions'];assert len(restores)==1 and restores[0]['live_functions_restored']==1
  assert not any(e.get('operation')in ['register_native_IRv2_producer','new_registered_IRv2_pipeline']for e in events)
@@ -26,13 +28,35 @@ def verify_native_function_arguments(d,inputs):
   encoded=[e for e in r['events']if e.get('operation')=='encode_public_IRv2_arguments']
   assert len(encoded)==4 and all(not e['native_Apple_ICB_identity']and e['bytes']==48 for e in encoded)
 
+def verify_reusable_lease_receipts(runs,mode):
+ """Check the recorded lease contract separately from raw GPU numerical data."""
+ assert len(runs)==4
+ generations=[];addresses=[];refusals=0
+ phases=(['producer_reserved']if mode!='no_producer'else[])+['materializer_recording']+(['consumer_after_completed_materializer'if mode=='delayed_consumer'else'consumer_recording']if mode!='no_consumer'else[])
+ for trial,r in enumerate(runs):
+  g=r['generation'];a=r['GPU_addresses']['producerContext']
+  assert isinstance(g,int)and 0<g<=0xffffff and 0<a<1<<40
+  generations.append(g);addresses.append(a)
+  assert [e['phase']for e in r['lease_checks']]==phases
+  for e in r['lease_checks']:
+   assert e['PASS']and e['prepare_refused']and e['reset_refused']
+   assert 'uncompleted'in e['prepare_error']and'uncompleted'in e['reset_error']
+   assert e['materializer_status']==(4 if e['phase']=='consumer_after_completed_materializer'else 0)
+   refusals+=2
+  assert r['intermediate_CPU_waits']==(1 if mode=='delayed_consumer'else 0)
+  assert (not r['stale_plan_error'])if trial==0 else('inactive'in r['stale_plan_error']or'retired'in r['stale_plan_error'])
+  assert 'requires reset'in r['retired_mutation_error']and'not materialized/active'in r['retired_consumer_error']
+ assert len(set(addresses))==1 and all(a<b for a,b in zip(generations,generations[1:]))
+ return dict(generations=generations,stable_context_address_checks=4,lease_refusals=refusals,stale_CPU_plans_refused=3,retired_slot_consumers_refused=4)
+
 def verify(directory):
- root=Path(directory);d=json.loads((root/'results.json').read_text());m=json.loads((root/'execution/manifest.json').read_text());mode=d['mode'];native=d['native_reference'];copy=mode=='copy';duplicate=mode=='duplicate_templates';source_count=6 if duplicate else 3;rows=4 if copy else 3;slots=source_count+rows;stable=False
+ root=Path(directory);d=json.loads((root/'results.json').read_text());m=json.loads((root/'execution/manifest.json').read_text());mode=d['mode'];native=d['native_reference'];copy=mode=='copy';duplicate=mode=='duplicate_templates';source_count=6 if duplicate else 3;rows=4 if copy else 3;slots=source_count+rows;stable=False;reusable=False
  assert m['exit_code']==0 and not m['SIGKILL_requested']and not m['authoritative_ps_status']and m['GPU_reservation']['state']=='terminal'
  assert d['scope_restored']and not d['CPU_expected_answers_uploaded']and not d['IR_CPU_read_before_execution']and not d['performance_benchmark']and not d['system_modified']and len(d['runs'])==4
  if native:assert d['device']=='Apple M1 Max'
  else:
   inp=json.loads((root/'inputs.json').read_text());assert sha(root/'application')==inp['executable_SHA256']==m['original_binary_sha256']
+  reusable=inp.get('kind')=='reusable'
   for n,h in inp['source_hashes'].items():assert sha(root/n)==h
   for n,h in inp['assets_SHA256'].items():assert sha(root/'assets'/n)==h
   verify_device_identity(d)
@@ -40,18 +64,19 @@ def verify(directory):
   if d.get('producer_backend')=='native_msl':
    info=d['producer_info'];assert d['producer_import']=={} and not info['instruction_import'] and not info['Apple_ICB_layout']
    assert info['producer_backend']=='native_msl' and info['root_bytes']==48 and info['thread_width']==32 and info['pipeline_class']=='NVMTLComputePipelineState'
-   assert info['library_SHA256']==sha(root/'assets/native_producer.metallib')
+   assert info['library_SHA256']==sha(root/'assets'/('reusable_producer.metallib'if reusable else'native_producer.metallib'))
+   assert bool(info.get('generation_tagged_root'))==reusable
    if inp.get('native_function_arguments'):verify_native_function_arguments(d,inp)
    stable=bool(inp.get('native_stable_pipeline_identities'))
    if stable:
     ids=d['producer_info']['stable_pipeline_IDs'];assert len(ids)==len(set(ids))==3 and all(x>>32==0x4b505350 and x&0xffffffff for x in ids)
-    assert d['producer_info']['context_version']==3
+    assert d['producer_info']['context_version']==(4 if reusable else 3)
   else:
    assert d['producer_import']['contract_verified']and not d['producer_import']['rejected_import']
    for e in d['producer_import']['events']:
     if e.get('code_replaced'):assert e['imported_code_identical']and e['decoded_code_bytes']==d['producer_info']['code_bytes']and e['decoded_registers']==d['producer_info']['registers']
  assert d['API_refusals']==(8 if mode=='refusals'else 0)
- sizes=[256,1024,4096,32768];locals_=[[32,128,1024],[33,256,512],[128,33,1024],[1024,256,33]];files={};comparisons=invocations=guardbytes=0;duplicate_GPU_choices=0
+ sizes=[256,1024,4096,32768];locals_=[[32,128,1024],[33,256,512],[128,33,1024],[1024,256,33]];files={};comparisons=invocations=guardbytes=0;duplicate_GPU_choices=0;generations=[];context_addresses=[];lease_refusals=0
  def load(name):
   p=root/'outputs'/name;files[name]=sha(p);return p.read_bytes()
  for trial,r in enumerate(d['runs']):
@@ -67,11 +92,12 @@ def verify(directory):
    assert len(events)==4
    for e,stage in zip(events,[0,1,2,0]):assert e['root_template_index']==last_for_stage[stage] and e['execution_template_resolved_on_GPU'] and 'candidate'not in e
    duplicate_GPU_choices+=sum(a!=b for a,b in zip(last_for_stage,candidate_for_stage))
-  assert r['trial']==trial and r['specs']==specs and r['buffer_bytes']==length and r['rows']==rows and r['command_status']==4 and r['intermediate_CPU_waits']==0
+  assert r['trial']==trial and r['specs']==specs and r['buffer_bytes']==length and r['rows']==rows and r['command_status']==4 and r['intermediate_CPU_waits']==(1 if reusable and mode=='delayed_consumer'else 0)
   assert r['producer_present']==(mode!='no_producer')and r['consumer_present']==(mode!='no_consumer')
   outputs=[];counts=[0,0,0]
+  stale=reusable and mode=='stale_root'and trial>0
   for stage in range(3):
-   enabled=mode not in ['no_producer','no_consumer']and mode!=['no_seed','no_gather','no_finish'][stage]and not(stage==0 and mode.startswith('bad_'))
+   enabled=not stale and mode not in ['no_producer','no_consumer']and mode!=['no_seed','no_gather','no_finish'][stage]and not(stage==0 and mode.startswith('bad_'))
    values=[(CANARY,)*4 for _ in range(n)];seed=specs[stage]['seed'];salt=specs[stage]['salt']
    if enabled:
     for i in range(n):
@@ -96,15 +122,20 @@ def verify(directory):
    roots=struct.unpack('<18Q',load(r['root_file']));assert len(roots)==18
    for stage in range(3):
     offset=stage*6
-    assert roots[offset]==r['GPU_addresses']['producerContext'] and roots[offset+1]==ids[stage]
+    address=r['GPU_addresses']['producerContext'];wanted=address|(r['generation']<<40)if reusable else address
+    assert roots[offset]==wanted and roots[offset+1]==ids[stage]
     assert roots[offset+2]==r['GPU_addresses'][f'stage{stage}']+128
     assert roots[offset+3]==r['GPU_addresses'][f'stage{stage-1}'if stage else'input']+128
     assert 0<roots[offset+4]<1<<40 and roots[offset+5]==r['GPU_addresses']['counter']+128
    assert len({roots[s*6+4]for s in range(3)})==3
-   context=struct.pack('<4IQ2I',0x4b505343,3,rows,4,r['GPU_addresses']['records']+128,128,source_count)
+   context=struct.pack('<4IQ2I',0x4b505243 if reusable else 0x4b505343,(r['generation']<<8)|4 if reusable else 3,rows,4,r['GPU_addresses']['records']+128,128,source_count)
    for stage,local in zip(source_order,source_locals):context+=struct.pack('<QQ10I',ids[stage],roots[stage*6+4],(n+local-1)//local,1,1,local,1,1,0,2,0,0)
    context+=bytes((8-source_count)*56)
    assert load(r['files']['producerContext'])==context
+   if reusable:
+    generations.append(r['generation']);context_addresses.append(r['GPU_addresses']['producerContext']);assert 0<r['generation']<=0xffffff
+    if stale:
+     old=struct.unpack('<18Q',load(r['stale_root_file']));assert old[0]&((1<<40)-1)==context_addresses[0] and old[0]>>40==generations[-2] and old[0]>>40<generations[-1]
   if native:assert raw==b'\xa5'*1216
   else:
    assert raw[:128]==b'\xa5'*128 and raw[128+rows*128:]==b'\xa5'*(1216-128-rows*128)
@@ -124,7 +155,7 @@ def verify(directory):
    for row in range(rows):
     stage=0 if row==3 else row;part=raw[128+row*128:256+row*128];empty=(copy and row==0)or mode==['no_seed','no_gather','no_finish'][stage]
     resource=0;bank=0;groups=[0,1,1];local=[source_locals[0],1,1]
-    if mode=='no_producer':assert part==b'\xa5'*128;status=2
+    if mode=='no_producer'or stale:assert part==b'\xa5'*128;status=2
     elif empty:assert part==struct.pack('<I',0x4b504952)+bytes(124);status=0
     else:
      w=list(struct.unpack('<32I',part));want=[0]*32;want[:12]=[0x4b504952,379 if mode=='barrier'else 371,candidate_for_stage[stage],0x4b504950,specs[stage]['groups'],1,1,0,specs[stage]['local'],1,1,0]
@@ -164,6 +195,9 @@ def verify(directory):
  if d.get('producer_backend')=='native_msl':report.update(producer_backend='native_msl',producer_instruction_import=False)
  if d.get('producer_backend')=='native_msl' and inp.get('native_function_arguments'):report.update(native_function_arguments=True,function_getters_restored=True)
  if stable:report.update(stable_pipeline_identities=True,immutable_contexts_checked=4,template_permutations_checked=4)
+ if reusable:
+  assert len(set(context_addresses))==1 and len(generations)==4 and all(a<b for a,b in zip(generations,generations[1:]))
+  report.update(reusable_context=True,**verify_reusable_lease_receipts(d['runs'],mode),GPU_stale_roots_refused=3 if mode=='stale_root'else 0,materializer_completed_before_consumer=mode=='delayed_consumer')
  if duplicate:assert duplicate_GPU_choices==6;report.update(duplicate_templates=True,duplicate_GPU_choices_different_from_root_representative=duplicate_GPU_choices)
  return report
 if __name__=='__main__':

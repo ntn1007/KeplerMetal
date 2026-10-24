@@ -6,6 +6,9 @@
 #ifndef KP_STABLE_PIPELINE_IDENTITIES
 #define KP_STABLE_PIPELINE_IDENTITIES 0
 #endif
+#ifndef KP_REUSABLE_CONTEXTS
+#define KP_REUSABLE_CONTEXTS 0
+#endif
 #ifndef KP_PUBLIC_ARGUMENT_ENCODER
 #define KP_PUBLIC_ARGUMENT_ENCODER 0
 #endif
@@ -32,10 +35,12 @@ static BOOL done(id<MTLCommandBuffer>b){[b commit];[b waitUntilCompleted];return
 static id<MTLLibrary>load(id<MTLDevice>d,NSString*p,NSError**e){return[d newLibraryWithURL:[NSURL fileURLWithPath:p]error:e];}
 int main(int argc,char**argv){@autoreleasepool{
  if(argc!=4)return 1;NSString*assets=@(argv[1]),*out=@(argv[2]),*mode=@(argv[3]);
- BOOL reuseEncoder=[mode isEqual:@"encoder_reuse"];id<MTLArgumentEncoder>reusableEncoder=nil;__weak id priorArgumentPlan=nil;
+ BOOL reuseEncoder=[mode isEqual:@"encoder_reuse"]||KP_REUSABLE_CONTEXTS;id<MTLArgumentEncoder>reusableEncoder=nil;__weak id priorArgumentPlan=nil;
+ BOOL delayedConsumer=[mode isEqual:@"delayed_consumer"],staleRoot=[mode isEqual:@"stale_root"];
+ NSString*stalePlanError=nil;id<MTLIndirectCommandBuffer>persistentTarget=nil;id<MTLBuffer>previousRoot=nil;NSArray*previousResources=nil;
  BOOL duplicate=[mode isEqual:@"duplicate_templates"];
  BOOL producer=![mode isEqual:@"no_producer"],consumerPresent=![mode isEqual:@"no_consumer"],copy=[mode isEqual:@"copy"],split=[mode isEqual:@"split"],bad=[mode hasPrefix:@"bad_"];NSUInteger rows=copy?4:3,sourceCount=duplicate?6:3,slots=sourceCount+rows;
- NSString*semantic=(!producer||!consumerPresent||split||bad||reuseEncoder||duplicate||[mode isEqual:@"refusals"])?@"basic":mode;
+ NSString*semantic=(!producer||!consumerPresent||split||bad||delayedConsumer||staleRoot||[mode isEqual:@"encoder_reuse"]||duplicate||[mode isEqual:@"refusals"])?@"basic":mode;
  if(![@[@"basic",@"barrier",@"copy",@"no_seed",@"no_gather",@"no_finish"]containsObject:semantic])return 1;
  id<MTLDevice>d=nil;
 #if KP_DATAFLOW_NATIVE
@@ -53,9 +58,14 @@ int main(int argc,char**argv){@autoreleasepool{
  scope=[KPCPUICBScope installOnDevice:d queue:q libraryData:lib expectedSHA256:hash(lib)manifestData:manifest expectedManifestSHA256:hash(manifest)error:&error];if(!scope){emit(@{@"failure":@"register",@"error":error.description?:@"nil"});return 3;}for(NSString*n in names)[pipelines addObject:[scope pipelineForFunction:n]];
  for(NSArray*a in @[@[@"gpu_command_selector.metallib",@0],@[@"gpu_command_geometry.metallib",@1],@[@"gpu_command_bindings.metallib",@2],@[@"materializer.metallib",@3]]){NSData*b=[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:a[0]]];BOOL ok=NO;switch([a[1]intValue]){case 0:ok=[scope enableGPUCommandSelectionWithLibraryData:b expectedSHA256:hash(b)error:&error];break;case 1:ok=[scope enableGPUCommandGeometryWithLibraryData:b expectedSHA256:hash(b)error:&error];break;case 2:ok=[scope enableGPUCommandBindingsWithLibraryData:b expectedSHA256:hash(b)error:&error];break;case 3:ok=[scope enableGPUCommandIRv2WithLibraryData:b expectedSHA256:hash(b)error:&error];}if(!ok){emit(@{@"failure":@"enable",@"error":error.description?:@"nil"});return 3;}}
 #if KP_NATIVE_MSL_COMMANDS
- NSData*producerData=[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"native_producer.metallib"]];
+ NSString*producerFile=KP_REUSABLE_CONTEXTS?@"reusable_producer.metallib":@"native_producer.metallib";
+ NSData*producerData=[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:producerFile]];
 #if KP_FUNCTION_ARGUMENT_ENCODER
+#if KP_REUSABLE_CONTEXTS
+ producerFunction=[scope newReusableCommandIRFunctionWithLibraryData:producerData expectedSHA256:hash(producerData) functionName:[@"encode_dataflow_" stringByAppendingString:semantic]rootBufferIndex:0 error:&error];
+#else
  producerFunction=[scope newNativeSourceCommandIRFunctionWithLibraryData:producerData expectedSHA256:hash(producerData) functionName:[@"encode_dataflow_" stringByAppendingString:semantic]rootBufferIndex:0 error:&error];
+#endif
 #else
  id<MTLLibrary>producerLibrary=load(d,[assets stringByAppendingPathComponent:@"native_producer.metallib"],&error);
  producerFunction=[producerLibrary newFunctionWithName:[@"encode_dataflow_" stringByAppendingString:semantic]];
@@ -64,7 +74,7 @@ int main(int argc,char**argv){@autoreleasepool{
  writer=[d newComputePipelineStateWithFunction:producerFunction error:&error];
  id<MTLArgumentEncoder>nativeArguments=[producerFunction newArgumentEncoderWithBufferIndex:0];
  if(!writer||writer.threadExecutionWidth!=32||writer.maxTotalThreadsPerThreadgroup<32||nativeArguments.encodedLength!=48||nativeArguments.alignment!=8){emit(@{@"failure":@"native_producer_contract",@"error":error.description?:@"nil",@"root_bytes":@(nativeArguments.encodedLength)});return 3;}
- info=@{@"command_ir_version":@2,@"root_bytes":@48,@"thread_width":@(writer.threadExecutionWidth),@"pipeline_class":NSStringFromClass(object_getClass(writer)),@"function":producerFunction.name,@"library_SHA256":hash(producerData),@"producer_backend":@"native_msl",@"instruction_import":@NO,@"Apple_ICB_layout":@NO};
+ info=@{@"command_ir_version":@2,@"root_bytes":@48,@"thread_width":@(writer.threadExecutionWidth),@"pipeline_class":NSStringFromClass(object_getClass(writer)),@"function":producerFunction.name,@"library_SHA256":hash(producerData),@"library_file":producerFile,@"generation_tagged_root":@(KP_REUSABLE_CONTEXTS),@"producer_backend":@"native_msl",@"instruction_import":@NO,@"Apple_ICB_layout":@NO};
  id<MTLLibrary>f=load(d,[assets stringByAppendingPathComponent:@"field.metallib"],&error);fieldPSO=[d newComputePipelineStateWithFunction:[f newFunctionWithName:@"mutate_command_ir_data"]error:&error];
 #else
  info=[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:[semantic stringByAppendingString:@".json"]]]options:0 error:nil];if([info[@"command_ir_version"]intValue]!=2||[info[@"sm"]intValue]!=30||[info[@"buffer_slots"]intValue]!=1||[info[@"push_bytes"]intValue]!=32||[info[@"grid_offset"]intValue]!=8||[info[@"scratch_bytes"]intValue]||[info[@"crs_bytes"]intValue])return 3;
@@ -77,7 +87,7 @@ int main(int argc,char**argv){@autoreleasepool{
  NSMutableArray*stableIDs=[NSMutableArray new];
 #if KP_STABLE_PIPELINE_IDENTITIES
  for(id<MTLComputePipelineState>p in pipelines){uint64_t identity=[scope commandIRIdentityForPipeline:p error:&error];if(!identity||error)return 3;[stableIDs addObject:@(identity)];}
- NSMutableDictionary*stableInfo=[info mutableCopy];stableInfo[@"stable_pipeline_IDs"]=stableIDs;stableInfo[@"context_version"]=@3;info=stableInfo;
+ NSMutableDictionary*stableInfo=[info mutableCopy];stableInfo[@"stable_pipeline_IDs"]=stableIDs;stableInfo[@"context_version"]=KP_REUSABLE_CONTEXTS?@4:@3;info=stableInfo;
 #endif
  if(!writer)return 3;unsigned sizes[4]={256,1024,4096,32768},locals[4][3]={{32,128,1024},{33,256,512},{128,33,1024},{1024,256,33}};NSUInteger APIrefusals=0;NSMutableArray*runs=[NSMutableArray new];
  for(unsigned trial=0;trial<4;trial++){@autoreleasepool{
@@ -98,9 +108,18 @@ int main(int argc,char**argv){@autoreleasepool{
   for(unsigned stage=0;stage<3;stage++){[ae setArgumentBuffer:root offset:stage*48];[ae setIndirectCommandBuffer:target atIndex:0];[ae setComputePipelineState:pipelines[stage]atIndex:1];[ae setBuffer:buffers[[@"stage" stringByAppendingFormat:@"%u",stage]]offset:128 atIndex:2];[ae setBuffer:buffers[stage?[@"stage" stringByAppendingFormat:@"%u",stage-1]:@"input"]offset:128 atIndex:3];[ae setBuffer:params[stage]offset:256 atIndex:4];[ae setBuffer:buffers[@"counter"]offset:128 atIndex:5];}
 #else
   if(![scope prepareResidentComputeCommands:icb range:NSMakeRange(0,slots)error:&error]){emit(@{@"failure":@"prepare",@"error":error.description?:@"nil"});return 7;}
+#if KP_REUSABLE_CONTEXTS
+  if(!persistentTarget)persistentTarget=[d newIndirectCommandBufferWithDescriptor:desc maxCommandCount:rows options:MTLResourceStorageModeShared];
+  [persistentTarget resetWithRange:NSMakeRange(0,rows)];target=persistentTarget;first=0;
+  for(unsigned k=0;k<rows;k++){unsigned stage=k%3,source=sourceCount+k;id<MTLIndirectComputeCommand>c=[target indirectComputeCommandAtIndex:k];[c setComputePipelineState:pipelines[stage]];[c setKernelBuffer:buffers[[NSString stringWithFormat:@"dummy%u",source]]offset:128 atIndex:0];if(stage)[c setKernelBuffer:buffers[@"dummySrc"]offset:128 atIndex:1];[c setKernelBuffer:params[source]offset:256 atIndex:2];[c setKernelBuffer:buffers[@"dummyCounter"]offset:128 atIndex:3];[c concurrentDispatchThreadgroups:MTLSizeMake((n+locals[trial][stage]-1)/locals[trial][stage],1,1)threadsPerThreadgroup:MTLSizeMake(locals[trial][stage],1,1)];}
+  if(![scope prepareResidentComputeCommands:target range:NSMakeRange(0,rows)error:&error])return 7;
+  stalePlanError=nil;if(reusableEncoder){id old=[(id)reusableEncoder valueForKey:@"plan"];NSError*e=nil;if(!old||[old validateCommandIRArgumentBindings:&e]||!e)return 31;stalePlanError=e.localizedDescription;}
+#endif
   NSMutableArray*entries=[NSMutableArray new];for(unsigned stage=0;stage<3;stage++)[entries addObject:@{@"bindings":@[@{@"buffer":buffers[[@"stage" stringByAppendingFormat:@"%u",stage]],@"offset":@128},@{@"buffer":buffers[stage?[@"stage" stringByAppendingFormat:@"%u",stage-1]:@"input"],@"offset":@128},@{@"buffer":buffers[@"counter"],@"offset":@128}]}];
   auto makePlan=[&](NSArray*catalogue,id<MTLBuffer>records,NSUInteger off)->KPGPUCommandSelection*{
-#if KP_STABLE_PIPELINE_IDENTITIES
+#if KP_REUSABLE_CONTEXTS
+   return[scope newGPUReusableCommandIRFromBuffer:icb sourceRange:NSMakeRange(0,sourceCount)destination:target destinationRange:NSMakeRange(0,rows)resources:catalogue records:records recordOffset:off error:&error];
+#elif KP_STABLE_PIPELINE_IDENTITIES
    return[scope newGPUStableCommandIRFromBuffer:icb sourceRange:NSMakeRange(0,sourceCount)destination:icb destinationRange:NSMakeRange(sourceCount,rows)resources:catalogue records:records recordOffset:off error:&error];
 #else
    return[scope newGPUCommandIRv2FromBuffer:icb sourceRange:NSMakeRange(0,sourceCount)destination:icb destinationRange:NSMakeRange(sourceCount,rows)resources:catalogue records:records recordOffset:off error:&error];
@@ -142,15 +161,23 @@ int main(int argc,char**argv){@autoreleasepool{
   witness=plan.generatedGeometry;witnessHost=[d newBufferWithLength:witness.length options:MTLResourceStorageModeShared];
 #endif
   id<MTLCommandBuffer>main=[q commandBuffer],pbuf=split?[q commandBuffer]:main;
+  NSMutableArray*leaseChecks=[NSMutableArray new];
+#if KP_REUSABLE_CONTEXTS
+  auto busyCheck=[&](NSString*phase){NSError*blocked=nil;id next=[scope newGPUReusableCommandIRFromBuffer:icb sourceRange:NSMakeRange(0,sourceCount)destination:target destinationRange:NSMakeRange(0,rows)resources:entries records:buffers[@"records"]recordOffset:128 error:&blocked];BOOL resetBlocked=NO;NSString*resetError=nil;@try{[target resetWithRange:NSMakeRange(0,rows)];}@catch(NSException*x){resetError=x.reason;resetBlocked=[x.reason containsString:@"uncompleted"];}BOOL ok=!next&&[blocked.localizedDescription containsString:@"uncompleted"]&&resetBlocked;[leaseChecks addObject:@{@"phase":phase,@"PASS":@(ok),@"prepare_refused":@(!next),@"prepare_error":blocked.localizedDescription?:@"",@"reset_refused":@(resetBlocked),@"reset_error":resetError?:@"",@"materializer_status":@(((id<MTLCommandBuffer>)[plan valueForKey:@"selectionBuffer"]).status)}];return ok;};
+  if(producer&&![plan reserveCommandIRProducerInCommandBuffer:pbuf error:&error]){emit(@{@"failure":@"reserve",@"error":error.description?:@""});return 32;}
+  if(producer&&!busyCheck(@"producer_reserved"))return 33;
+#endif
   if(producer){id<MTLComputeCommandEncoder>e=[pbuf computeCommandEncoder];[e setComputePipelineState:writer];
 #if KP_DATAFLOW_NATIVE
    [e setBuffer:root offset:0 atIndex:0];[e useResource:target usage:MTLResourceUsageRead|MTLResourceUsageWrite];for(id<MTLBuffer>r in buffers.allValues)[e useResource:r usage:MTLResourceUsageRead|MTLResourceUsageWrite];for(id<MTLBuffer>r in params)[e useResource:r usage:MTLResourceUsageRead];[e dispatchThreadgroups:MTLSizeMake(1,1,1)threadsPerThreadgroup:MTLSizeMake(1,1,1)];
 #else
 #if KP_NATIVE_MSL_COMMANDS
-   [e setBuffer:root offset:0 atIndex:0];
+   id<MTLBuffer>executionRoot=KP_REUSABLE_CONTEXTS&&staleRoot&&trial?previousRoot:root;
+   [e setBuffer:executionRoot offset:0 atIndex:0];
    for(id<MTLBuffer>r in plan.commandIRProducerResources)[e useResource:r usage:MTLResourceUsageRead|MTLResourceUsageWrite];
+   if(KP_REUSABLE_CONTEXTS&&staleRoot&&trial){[e useResource:previousRoot usage:MTLResourceUsageRead];for(id<MTLBuffer>r in previousResources)[e useResource:r usage:MTLResourceUsageRead|MTLResourceUsageWrite];}
    [e dispatchThreadgroups:MTLSizeMake(1,1,1)threadsPerThreadgroup:MTLSizeMake(32,1,1)];
-   NSArray*keep=@[root,writer,plan.commandIRProducerResources];[pbuf addCompletedHandler:^(id<MTLCommandBuffer>c){(void)keep.count;}];
+   NSArray*keep=KP_REUSABLE_CONTEXTS&&staleRoot&&trial?@[root,writer,plan.commandIRProducerResources,previousRoot,previousResources]:@[root,writer,plan.commandIRProducerResources];[pbuf addCompletedHandler:^(id<MTLCommandBuffer>c){(void)keep.count;}];
 #else
    Push push={root.gpuAddress,{32,1,1},{32,1,1}};id<MTLBuffer>p=[d newBufferWithBytes:&push length:sizeof push options:MTLResourceStorageModeShared];[e setBuffer:p offset:0 atIndex:0];[e setBuffer:buffers[@"records"]offset:128 atIndex:1];[e useResource:root usage:MTLResourceUsageRead];for(id<MTLBuffer>r in plan.commandIRProducerResources)[e useResource:r usage:MTLResourceUsageRead|MTLResourceUsageWrite];[e dispatchThreadgroups:MTLSizeMake(1,1,1)threadsPerThreadgroup:MTLSizeMake(32,1,1)];NSArray*keep=@[root,p,writer,plan.commandIRProducerResources];[pbuf addCompletedHandler:^(id<MTLCommandBuffer>c){(void)keep.count;}];
 #endif
@@ -163,12 +190,19 @@ int main(int argc,char**argv){@autoreleasepool{
 #if !KP_DATAFLOW_NATIVE
   if(![plan encodeCommandIRInCommandBuffer:main afterProducer:producer?pbuf:nil error:&error]){emit(@{@"failure":@"materialize",@"error":error.description?:@"nil"});return 10;}
 #endif
+#if KP_REUSABLE_CONTEXTS
+  if(!busyCheck(@"materializer_recording"))return 33;
+  if(delayedConsumer){if(!done(main))return 34;main=[q commandBuffer];}
+#endif
   if(consumerPresent){id<MTLComputeCommandEncoder>e=[main computeCommandEncoder];
 #if !KP_DATAFLOW_NATIVE
    if(![scope adaptComputeEncoder:e error:&error])return 11;
 #endif
    for(id<MTLBuffer>r in buffers.allValues)[e useResource:r usage:MTLResourceUsageRead|MTLResourceUsageWrite];for(id<MTLBuffer>r in params)[e useResource:r usage:MTLResourceUsageRead];
    @try{if(copy){[e executeCommandsInBuffer:target withRange:NSMakeRange(first,1)];[e executeCommandsInBuffer:target withRange:NSMakeRange(first+3,1)];[e executeCommandsInBuffer:target withRange:NSMakeRange(first+1,2)];}else[e executeCommandsInBuffer:target withRange:NSMakeRange(first,3)];}@catch(NSException*x){[e endEncoding];emit(@{@"failure":@"execute",@"trial":@(trial),@"error":x.reason?:@"nil"});return 11;}[e endEncoding];}
+#if KP_REUSABLE_CONTEXTS
+  if(consumerPresent&&!busyCheck(delayedConsumer?@"consumer_after_completed_materializer":@"consumer_recording"))return 33;
+#endif
 #if !KP_DATAFLOW_NATIVE
   NSArray*targetRecords=[plan valueForKey:@"targetRecords"];for(NSUInteger k=0;k<targetRecords.count;k++){id<MTLBuffer>v=[targetRecords[k]valueForKey:@"constants"];NSString*key=[NSString stringWithFormat:@"CB1-%lu",(unsigned long)k];buffers[key]=v;hosts[key]=[d newBufferWithLength:v.length options:MTLResourceStorageModeShared];}
   id<MTLBuffer>templates=[plan valueForKey:@"constantTemplates"];buffers[@"nativeTemplates"]=templates;hosts[@"nativeTemplates"]=[d newBufferWithLength:templates.length options:MTLResourceStorageModeShared];
@@ -185,6 +219,17 @@ int main(int argc,char**argv){@autoreleasepool{
 #if KP_STABLE_PIPELINE_IDENTITIES
   NSString*rootFile=[NSString stringWithFormat:@"trial-%u-roots.bin",trial];[[NSData dataWithBytes:root.contents length:144]writeToFile:[out stringByAppendingPathComponent:rootFile]atomically:YES];trialInfo[@"root_file"]=rootFile;
   NSMutableArray*currentIDs=[NSMutableArray new];for(id<MTLComputePipelineState>p in pipelines){error=nil;uint64_t identity=[scope commandIRIdentityForPipeline:p error:&error];if(error||!identity)return 12;[currentIDs addObject:@(identity)];}trialInfo[@"queried_pipeline_IDs"]=currentIDs;
+#endif
+#if KP_REUSABLE_CONTEXTS
+  trialInfo[@"stale_plan_error"]=stalePlanError?:@"";trialInfo[@"generation"]=[plan valueForKey:@"reusableGeneration"];trialInfo[@"lease_checks"]=leaseChecks;trialInfo[@"intermediate_CPU_waits"]=delayedConsumer?@1:@0;
+  if(staleRoot&&trial){NSString*f=[NSString stringWithFormat:@"trial-%u-stale-roots.bin",trial];[[NSData dataWithBytes:previousRoot.contents length:144]writeToFile:[out stringByAppendingPathComponent:f]atomically:YES];trialInfo[@"stale_root_file"]=f;}
+  // A rejected direct mutation must not detach a retired slot from its lease.
+  NSString*mutationError=nil,*retiredConsumerError=nil;@try{[[target indirectComputeCommandAtIndex:0]setComputePipelineState:pipelines[0]];}@catch(NSException*x){mutationError=x.reason;}
+  id<MTLCommandBuffer>retiredCB=[q commandBuffer];id<MTLComputeCommandEncoder>retiredEncoder=[retiredCB computeCommandEncoder];if(![scope adaptComputeEncoder:retiredEncoder error:&error])return 35;
+  @try{[retiredEncoder executeCommandsInBuffer:target withRange:NSMakeRange(0,1)];}@catch(NSException*x){retiredConsumerError=x.reason;}[retiredEncoder endEncoding];
+  if(![mutationError containsString:@"requires reset"]||![retiredConsumerError containsString:@"not materialized/active"]){emit(@{@"failure":@"retired_slot_detached",@"mutation":mutationError?:@"",@"consumer":retiredConsumerError?:@""});return 35;}
+  trialInfo[@"retired_mutation_error"]=mutationError;trialInfo[@"retired_consumer_error"]=retiredConsumerError;
+  previousRoot=root;previousResources=plan.commandIRProducerResources;
 #endif
   [runs addObject:trialInfo];
  }}

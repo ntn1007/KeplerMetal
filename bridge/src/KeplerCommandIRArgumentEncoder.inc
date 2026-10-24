@@ -14,6 +14,7 @@
 @interface KPCommandIRArgumentEncoder : NSObject<MTLArgumentEncoder>
 @property(nonatomic,strong) KPCPUICBScope *scope;
 @property(nonatomic) NSUInteger bindingCount,argumentOffset;
+@property(nonatomic) BOOL generationTaggedRoot;
 @property(nonatomic,strong) id<MTLBuffer> argumentBuffer;
 @property(nonatomic,strong) KPComputeICB *ICB;
 @property(nonatomic,strong) KPGPUCommandSelection *plan;
@@ -88,6 +89,7 @@
  [self active];if(index||![buffer isKindOfClass:KPComputeICB.class]||[buffer isKindOfClass:KPRenderICB.class]||((KPComputeICB*)buffer).scope!=_scope)reject(@"Argument ICB is not an owned compute target");
  KPComputeICB*b=(KPComputeICB*)buffer;KPCommandIRArgumentContext*c=b.commandIRArgumentContext;KPGPUCommandSelection*p=c.plan;
  if(!p||c.bindingCount!=_bindingCount||p.targetICB!=b||c.ownerThread!=NSThread.currentThread||(_plan&&_plan!=p))reject(@"Argument ICB has no matching live IRv2 representation");
+ if(_generationTaggedRoot!=(p.reusableContext!=nil))reject(@"Function and ICB context generation ABI differ");
  _ICB=b;_plan=p;[self refresh];
 }
 - (void)setComputePipelineState:(id<MTLComputePipelineState>)pipeline atIndex:(NSUInteger)index {

@@ -122,6 +122,19 @@
                                                  records:(id<MTLBuffer>)records
                                             recordOffset:(NSUInteger)recordOffset
                                                    error:(NSError **)error;
+// Explicit reusable mode: one stable Private context per destination ICB,
+// generation-tagged source root and producer/materializer/consumer leases.
+// Reset only after every tracked CB completes. Uncommitted CBs must eventually
+// be committed; no cancellation/recovery from Error is implemented. A fresh
+// ICB is required after a poisoned submission. Single owner thread for encoding.
+- (KPGPUCommandSelection *)newGPUReusableCommandIRFromBuffer:(id<MTLIndirectCommandBuffer>)source
+                                               sourceRange:(NSRange)sourceRange
+                                               destination:(id<MTLIndirectCommandBuffer>)destination
+                                          destinationRange:(NSRange)destinationRange
+                                                 resources:(NSArray<NSDictionary *> *)resources
+                                                   records:(id<MTLBuffer>)records
+                                              recordOffset:(NSUInteger)recordOffset
+                                                     error:(NSError **)error;
 // At most8 candidates and8 destinations, nonoverlapping, same registration.
 // Cold initialization uses GPU blits and waits; it dispatches no user kernel.
 // Input is Private uint[32] per destination. No CPU choice readback is needed.
@@ -236,6 +249,14 @@
                                                  functionName:(NSString *)name
                                               rootBufferIndex:(NSUInteger)index
                                                         error:(NSError **)error;
+// Same explicit source contract with an UInt64 generation-tagged context
+// handle, not a native pointer/Apple resource ID. Compile the workspace header
+// with KP_COMMAND_TAGGED_CONTEXT=1; other root constructors reject this schema.
+- (id<MTLFunction>)newReusableCommandIRFunctionWithLibraryData:(NSData *)data
+                                             expectedSHA256:(NSString *)expected
+                                               functionName:(NSString *)name
+                                            rootBufferIndex:(NSUInteger)index
+                                                      error:(NSError **)error;
 // Register a pinned, offline-compiled native-resource-ABI producer for this
 // real function. The device's ordinary synchronous function factory then
 // returns its native PSO. No general shader compilation/reflection extension.
@@ -269,6 +290,10 @@
 // ICB identity. Validate after bindings and before ANY producer commit.
 // The target ICB owns its context. gpuResourceID remains unsupported.
 - (BOOL)validateCommandIRArgumentBindings:(NSError **)error;
+// Required BEFORE encoding any native producer for a reusable plan. The CB
+// lease survives plan release and is closed only by terminal completion.
+- (BOOL)reserveCommandIRProducerInCommandBuffer:(id<MTLCommandBuffer>)buffer
+                                         error:(NSError **)error;
 // Declare the indirect producer resources and retain its pipeline/root/push
 // through completion. Producer must precede materialization on this same queue.
 - (BOOL)encodeCommandIRInCommandBuffer:(id<MTLCommandBuffer>)buffer

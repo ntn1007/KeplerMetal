@@ -15,6 +15,8 @@ Le travail suit deux axes complémentaires :
 
 ## Avancées récentes
 
+Les contextes ICB de calcul sont désormais réutilisables après achèvement, avec contrôle de génération et suivi des consommateurs en attente. Les 20 processus du nouveau mode vérifient 6 411 264 valeurs natives ; la réception complète compte 52 processus avec la non-régression précédente. Cela reste une extension pour applications adaptées, sans modification du pilote installé ni gain de vitesse annoncé. [Durée de vie, contrôles et reproduction](docs/REUSABLE_ICB_CONTEXTS.md).
+
 Les pipelines possèdent désormais une identité stable dans notre périmètre, résolue sur la GTX malgré les permutations et les variantes de taille de groupe. La matrice finale compte 32 processus et 5 950 464 résultats natifs vérifiés. Les identités Apple ICB/PSO et les applications ordinaires restent à raccorder. [Contrat, code et preuves](docs/STABLE_PIPELINE_IDENTITIES.md).
 
 Les producteurs compilés par NVIDIA passent désormais par les encodeurs publics de leur véritable fonction Metal et le catalogue de ressources du projet. Les six variantes de création de pipeline restent natives. Le client adapté évite la construction manuelle des racines ; les identités stables et les applications ordinaires restent à raccorder. [Contrat et reproduction](docs/NATIVE_SOURCE_FUNCTION_ARGUMENTS.md).
