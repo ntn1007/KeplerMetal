@@ -15,6 +15,8 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
+Private native code buffers now have guarded Metal-blit readback before/after uncommitted encoding. A 60-host diagnostic cohort checks 56 matching readbacks and confirms the raw command entry call remains in the observed bytes; no suspect compute CB is submitted. [Evidence and limits](docs/NATIVE_COMMAND_BINDING_READBACK.md).
+
 A new construction-only compiler investigation separates the native ICB metadata refusal from raw diagnostic PSO acceptance and captures the resulting native programs before/after construction. Native ICB execution remains unqualified. [Evidence and reproduction](docs/NATIVE_COMMAND_COMPILER_BOUNDARY.md).
 
 Native source shaders can now write, copy and reset certified render commands through an explicit project interface, compiled by NVIDIA’s native backend. A twelve-process GTX reception checks 1,093,632 exact float channels and matches the raw-record reference. This remains an adapted-application interface with CPU-expanded state candidates. [Contract and reproduction](docs/NATIVE_RENDER_SOURCE_COMMANDS.md).

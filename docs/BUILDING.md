@@ -115,3 +115,5 @@ The scoped GPU render-range extension has a source-only client builder, pinned n
 [NATIVE_RENDER_SOURCE_COMMANDS.md](NATIVE_RENDER_SOURCE_COMMANDS.md) adds `--source-commands` to the catalogue client builder, an explicit MSL render-command header, native shader compilation and a twelve-mode raw-record-equivalence auditor. The default raw-record producer remains available.
 
 [NATIVE_COMMAND_COMPILER_BOUNDARY.md](NATIVE_COMMAND_COMPILER_BOUNDARY.md) provides standalone construction-only typed/raw command probes, optional process-local MRC capture, frozen AIR text and a strict observation auditor. No diagnostic kernel is dispatched.
+
+[NATIVE_COMMAND_BINDING_READBACK.md](NATIVE_COMMAND_BINDING_READBACK.md) adds owned private-code range validation, guarded blit-only readback, uncommitted compute/QMD snapshots and missing-copy controls. The host has no compute-CB submission mode.

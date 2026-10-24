@@ -1,0 +1,22 @@
+{
+  "driver_SHA256": "e240d54a4cd64b7e54fbc15250de82e88451132e1d9f3a4f9879607c8b0e7645",
+  "provider": "Ghidra 12.1.4 / REA 6.4.0",
+  "buffer_allocator": {
+    "address": "0x171858",
+    "evidence_id": "ev_c007082b7b3efe92405f7f43c672603c9af1428f61a3d474535d2db8d4ed213c",
+    "observed_static_operations": "allocates NVMTLBuffer; init options 0x21; returns object used in compute variant resource preparation"
+  },
+  "field_mapping": {
+    "pipeline_native_state": "NVMTLComputePipelineState::_computePipeline +72",
+    "variant_owner": "native_state+16",
+    "variant_object_data": "NVMTLFunctionVariant::_variant +32",
+    "code_buffer_object": "variant+0x898",
+    "CPU_code_copy_pointer": "variant+0x8a8",
+    "code_GPU_address": "variant+0x10",
+    "code_byte_count": "variant+0x18",
+    "buffer_code_offset": "variant+0x24"
+  },
+  "original_artifact_modified": false,
+  "annotation_changes": false,
+  "scope": "static field interpretation supported by owned-object identity checks, native buffer GPU range, private storage mode and blit readbacks; not a shader execution trace"
+}

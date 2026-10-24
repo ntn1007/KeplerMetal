@@ -15,6 +15,8 @@ Le travail suit deux axes complémentaires :
 
 ## Avancées récentes
 
+Le code des tampons privés natifs est désormais relu par blit avant/après encodage non soumis : 56 readbacks concordants sur 60 hosts de diagnostic. L’appel relatif observé reste présent ; aucun shader suspect n’est exécuté. [Preuves et limites](docs/NATIVE_COMMAND_BINDING_READBACK.md).
+
 Une nouvelle investigation distingue le refus des métadonnées ICB et l’acceptation de pipelines de diagnostic. Les programmes natifs sont comparés avant/après construction ; leur exécution ICB reste non qualifiée. [Preuves et reproduction](docs/NATIVE_COMMAND_COMPILER_BOUNDARY.md).
 
 Une interface source MSL permet désormais d’écrire, copier et réinitialiser les commandes de rendu certifiées, avec compilation NVIDIA native. Douze processus de réception GTX vérifient 1 093 632 composantes exactes. Cette interface nécessite une application adaptée et conserve l’encodage CPU des candidats. [Contrat et reproduction](docs/NATIVE_RENDER_SOURCE_COMMANDS.md).

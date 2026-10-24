@@ -1,5 +1,7 @@
 # Status, 2026-10-24
 
+Native code-buffer binding/readback observation now checks 56 matching private-buffer code copies, 46 unsubmitted QMDs and 28 repeat file pairs across 60 final hosts. All 48 raw-operation readbacks retain a PC-relative call to local program entry. CPU code and buffer identity stay unchanged; committed work is blit-only. Native ICB semantics and commit-time resolution remain unqualified. [Exact scope and evidence](NATIVE_COMMAND_BINDING_READBACK.md).
+
 Native-command construction probes now separate typed ICB metadata refusal from raw diagnostic PSO acceptance. Six raw operations share a 64-byte native block with a local call target zero; witness cases retain that call, with vertex binding differing from the other five. Fourteen CPU staging copies remain identical after the original constructor. This is diagnostic evidence, not native ICB execution or a proven late-linker defect. [Scope and exact evidence](NATIVE_COMMAND_COMPILER_BOUNDARY.md).
 
 The native MSL source render-command interface now covers reset, state assignment, direct/indexed draws and ordered command copying. Twelve new terminal processes check 1,093,632 exact float channels, 68,448 guard bytes and 33 native-reference image pairs, with raw-record equivalence on the unchanged runtime/materializer. This is an explicit project namespace and adapted source, not Apple native render-command ABI or reduced CPU state encoding. [Contract and exact evidence](NATIVE_RENDER_SOURCE_COMMANDS.md).
