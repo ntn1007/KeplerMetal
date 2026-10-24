@@ -1,5 +1,9 @@
 # GPU-controlled render execution ranges
 
+The later [GPU draw-record qualification](GPU_RENDER_COMMAND_RECORDS.md) adds
+scalar draw arguments and closes the nonempty release-before-commit boundary.
+The results below remain the preceding range-only cohort.
+
 The scoped render adapter now implements the ordinary
 `executeCommandsInBuffer:indirectBuffer:indirectBufferOffset:` selector for
 its **own CPU-encoded render ICBs**. A native NVIDIA-compiled compute kernel

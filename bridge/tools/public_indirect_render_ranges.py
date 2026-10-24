@@ -14,16 +14,18 @@ def build(a):
     for folder in ['src','assets','runtime','oracles','library-src']:(out/folder).mkdir()
     shutil.copyfile(lib/'manifest.json',out/'runtime-manifest.json')
     for name in m['source_SHA256']:shutil.copyfile(lib/'src'/name,out/'library-src'/name)
-    for name in ['KeplerCPUICB.h','KeplerGPUIdentity.h','render_state_carrier.metal','vertex_io_carrier.metal','combined_render_resources.metal','cpu_icb_combined_profiles.json','indirect_render_range.metal','indirect_render_test.metal','cpu_icb_indexed_profiles.json','KeplerIndirectRenderRangePins.h']:shutil.copyfile(ROOT/'src'/name,out/'src'/name)
+    for name in ['KeplerCPUICB.h','KeplerGPUIdentity.h','render_state_carrier.metal','vertex_io_carrier.metal','combined_render_resources.metal','cpu_icb_combined_profiles.json','indirect_render_range.metal','indirect_render_test.metal','render_command_records.metal','KeplerRenderCommandRecords.h','cpu_icb_indexed_profiles.json','KeplerIndirectRenderRangePins.h']:shutil.copyfile(ROOT/'src'/name,out/'src'/name)
     for name in ['indirect_render_range_client.mm','public_indirect_render_ranges.py']:shutil.copyfile(ROOT/'tools'/name,out/'src'/name)
     for name in ['verify_indirect_render_ranges.py','verify_local_memory.py','public_large_scratch.py']:shutil.copyfile(ROOT/'tools'/name,out/'oracles'/name)
     shutil.copyfile(ROOT/'tools/lab_gpu_reservation.py',out/'runtime/lab_gpu_reservation.py');shutil.copyfile(ROOT/'sdk-combined/runtime/run_sdk_host.py',out/'runtime/run_sdk_host.py')
     for p in(out/'oracles').glob('*.py'):py_compile.compile(str(p),doraise=True)
     run=commands(out)
-    for source,name in [('render_state_carrier','render_state_carrier'),('vertex_io_carrier','vertex_io_carrier'),('combined_render_resources','combined_render_resources'),('indirect_render_range','range'),('indirect_render_test','test')]:
-        flags=['-fmodules=none']if name in ['range','test']else[]
+    for source,name in [('render_state_carrier','render_state_carrier'),('vertex_io_carrier','vertex_io_carrier'),('combined_render_resources','combined_render_resources'),('indirect_render_range','range'),('render_command_records','records'),('indirect_render_test','test')]:
+        flags=['-fmodules=none']if name in ['range','records','test']else[]
+        if name=='records':flags+=['-I',out/'src']
         run(name+'-metal',['xcrun','metal','-std=macos-metal2.4',*flags,'-c',out/'src'/(source+'.metal'),'-o',out/(name+'.air')]);run(name+'-metallib',['xcrun','metallib',out/(name+'.air'),'-o',out/'assets'/(name+'.metallib')])
     for name,digest in [('render_state_carrier','965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7'),('vertex_io_carrier','c0e24e5a5534e10f0eca591b5ace2112d76eafde74ed297ce1b3df0d95b5ca43'),('combined_render_resources','3f07a5bb05487244b82001dff6edeed23ace2bd10a32824be1cb727f29f17775')]:assert sha(out/'assets'/(name+'.metallib'))==digest
+    assert sha(out/'assets/records.metallib')in(out/'src/KeplerIndirectRenderRangePins.h').read_text()
     assert sha(out/'assets/range.metallib')in(out/'src/KeplerIndirectRenderRangePins.h').read_text()
     shutil.copyfile(out/'src/cpu_icb_indexed_profiles.json',out/'assets/vertex.json')
     shutil.copyfile(out/'src/cpu_icb_combined_profiles.json',out/'assets/combined.json')
@@ -50,5 +52,5 @@ def run(a):
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);s=p.add_subparsers(required=True)
     b=s.add_parser('build');b.add_argument('--library',type=Path,required=True);b.add_argument('--out',type=Path,required=True);b.set_defaults(func=build)
-    r=s.add_parser('run');r.add_argument('--build',type=Path,required=True);r.add_argument('--out',type=Path,required=True);r.add_argument('--mode',choices=['gpu','native','no_consumer','lifetime','contracts','fragment','fragment_native','fragment_lifetime','legacy','legacy_native'],required=True);r.add_argument('--reservation-root',type=Path,required=True);r.set_defaults(func=run)
+    r=s.add_parser('run');r.add_argument('--build',type=Path,required=True);r.add_argument('--out',type=Path,required=True);r.add_argument('--mode',choices=['gpu','native','no_consumer','lifetime','contracts','fragment','fragment_native','fragment_lifetime','legacy','legacy_native','release','fragment_release','records','records_native','fragment_records','fragment_records_native','records_no_consumer','records_no_producer','records_release','fragment_records_release'],required=True);r.add_argument('--reservation-root',type=Path,required=True);r.set_defaults(func=run)
     a=p.parse_args();a.func(a)

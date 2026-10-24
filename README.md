@@ -15,6 +15,8 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
+GPU-generated render draw arguments now pass the scoped public indirect-range route, including GPU validation of malformed scalar records. A 42-process reception covers 638,976 new exact raster channels and nonempty rendering after scope/ICB destruction; pipeline and resource bindings remain CPU-certified. [Contract, evidence and reproduction](docs/GPU_RENDER_COMMAND_RECORDS.md).
+
 GPU-controlled render execution ranges now work through the scoped public indirect-range selector, with an explicit prepass. A new complete runtime passes 983,040 raster-channel checks, 48 native-reference image pairs and compute/FP64/CAS/render regression. This still uses CPU-encoded render commands and adapted applications. [Contract, evidence and reproduction](docs/GPU_RENDER_EXECUTION_RANGES.md).
 
 GPU-generated compute commands now select between two native texture/sampler/nested-buffer argument banks. The 18-process native-source cohort checks 16,224 exact texture values, records, GPU binding tables and missing-stage controls; ten direct/CPU-ICB processes cover regression. The runtime remains unchanged, and the four auxiliary shaders rebuild from public source. [Contract and reproduction](docs/GPU_ICB_TEXTURE_ARGUMENTS.md).

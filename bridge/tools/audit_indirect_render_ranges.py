@@ -7,7 +7,8 @@ import importlib
 import sys
 
 from public_large_scratch import read, sha, write
-from verify_indirect_render_ranges import MODES, verify
+from verify_indirect_render_ranges import verify
+MODES=("gpu","native","no_consumer","lifetime","contracts","fragment","fragment_native","fragment_lifetime","legacy","legacy_native")
 from verify_gpu_icb_texture import verify as verify_gpu_compute
 from verify_gpu_icb_texture_rows import MODES as GPU_MODES
 from verify_icb_texture import verify as verify_cpu_compute, MODES as CPU_MODES

@@ -1,3 +1,4 @@
+#import "KeplerRenderCommandRecords.h"
 #import "KeplerGPUIdentity.h"
 #import "KeplerDriverProfile.h"
 #import "KeplerCPUICB.h"
@@ -144,6 +145,8 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 @property(nonatomic,strong) id<KPCPURenderTransport> renderEngine;
 @property(nonatomic,strong) id<MTLLibrary> indirectRenderRangeLibrary;
 @property(nonatomic,strong) id<MTLComputePipelineState> indirectRenderRangePipeline;
+@property(nonatomic,strong) id<MTLLibrary> indirectRenderCommandLibrary;
+@property(nonatomic,strong) id<MTLComputePipelineState> indirectRenderCommandPipeline;
 @property(nonatomic,strong) id<MTLLibrary> GPUSelectionLibrary;
 @property(nonatomic,strong) id<MTLComputePipelineState> GPUChoiceProducer;
 @property(nonatomic,strong) id<MTLComputePipelineState> GPUCommandSelector;
@@ -217,7 +220,7 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 
 @interface KPIndirectRenderPlan : NSObject
 @property(nonatomic,weak) id<MTLCommandBuffer> commandBuffer;
-@property(nonatomic,strong) id<MTLBuffer> range,arguments,witness,templates,config;
+@property(nonatomic,strong) id<MTLBuffer> range,arguments,witness,templates,config,commandRecords;
 @property(nonatomic,strong) NSArray *records;
 @property(nonatomic,strong) NSArray *owners;
 @property(nonatomic) NSUInteger rangeOffset;

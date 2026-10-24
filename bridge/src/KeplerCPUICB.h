@@ -243,6 +243,21 @@
                  indirectBufferOffset:(NSUInteger)offset
                         commandBuffer:(id<MTLCommandBuffer>)commandBuffer
                                 error:(NSError **)error;
+// GPU-generated scalar draw records, within each CPU-certified slot's geometry
+// envelope. Pipeline/resource bindings and base vertex/instance remain sealed.
+// Same prepass, ownership, mutation and completion rules as the range route.
+// Records use KeplerRenderCommandRecords.h; the GPU validator emits zero draws
+// for invalid records. No CPU readback or GPU-provided resource address occurs.
+- (BOOL)enableGPURenderCommandRecordsWithLibraryData:(NSData *)data
+                                    expectedSHA256:(NSString *)expected
+                                             error:(NSError **)error;
+- (BOOL)prepareIndirectRenderCommands:(id<MTLIndirectCommandBuffer>)buffer
+                       commandRecords:(id<MTLBuffer>)records
+                 commandRecordsOffset:(NSUInteger)recordOffset
+                       indirectBuffer:(id<MTLBuffer>)range
+                 indirectBufferOffset:(NSUInteger)offset
+                        commandBuffer:(id<MTLCommandBuffer>)commandBuffer
+                                error:(NSError **)error;
 // Returns a real native MTLFunction from an immutable library snapshot. Only
 // its two root-encoder getters are adapted to our IRv2 ABI after validating
 // native reflection. The installed native compiler is not replaced.

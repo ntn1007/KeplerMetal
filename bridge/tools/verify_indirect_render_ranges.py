@@ -7,18 +7,19 @@ import struct
 from public_large_scratch import read,sha
 from verify_local_memory import verify_device_identity
 
-MODES=("gpu","native","no_consumer","lifetime","contracts","fragment","fragment_native","fragment_lifetime","legacy","legacy_native")
+MODES=("gpu","native","no_consumer","lifetime","contracts","fragment","fragment_native","fragment_lifetime","legacy","legacy_native","release","fragment_release","records","records_native","fragment_records","fragment_records_native","records_no_consumer","records_no_producer","records_release","fragment_records_release")
 
 
 def values(trial):return[((0x13579bd+i*97+trial*17)&0xffffffff)^0xa3b5c7d9 for i in range(16)]
 
 
-def requested(trial):
+def requested(trial,records=False,no_producer=False):
+    if records:return (0,0 if trial==7 or no_producer else 4)
     v=values(trial)[(trial*5+3)%16]
     return [(0,4),(v%4,1),(0,1+v%4),(v%4,4-v%4),(v%4,0),(5,0),(0xfffffffe,3),(0,0)][trial]
 
 
-def expected_buffers(trial,legacy=False):
+def expected_buffers(trial,legacy=False,records=False,no_producer=False):
     def rectangle(first,indexed,rect,color):
         data=bytearray(b'\xa5'*4096);x0,y0,x1,y1=rect;xy=[(x0,y1),(x1,y1),(x0,y0),(x1,y0)];order=range(4)if indexed else[0,1,2,2,1,3]
         for i,j in enumerate(order):
@@ -31,9 +32,32 @@ def expected_buffers(trial,legacy=False):
     result.append(rectangle(0,False,(0,0,8,48),(.25,.125,.75,1)))
     marker=bytearray(b'\xa5'*512);struct.pack_into('<4f',marker,128,0,0,.625,0);result.append(marker)
     data=bytearray(b'\xa5'*192);data[64:128]=struct.pack('<16I',*values(trial));result.append(data)
-    data=bytearray(b'\xa5'*136);struct.pack_into('<2I',data,64,*requested(trial));result.append(data)
-    data=bytearray(b'\xa5'*132);struct.pack_into('<I',data,64,0 if trial==7 else values(trial)[(trial*5+3)%16]^0x4b505257);result.append(data)
+    data=bytearray(b'\xa5'*136);struct.pack_into('<2I',data,64,*requested(trial,records,no_producer));result.append(data)
+    data=bytearray(b'\xa5'*132);struct.pack_into('<I',data,64,0 if trial==7 or no_producer else values(trial)[(trial*5+3)%16]^0x4b505257);result.append(data)
+    if records:
+        data=bytearray(b'\xa5'*256)
+        for slot in range(4):struct.pack_into('<8I',data,64+slot*32,*expected_record(trial,slot,not no_producer and trial!=7))
+        result.append(data)
     return result
+
+
+def expected_record(trial,slot,producer=True):
+    if not producer or slot==2:return [0]*8
+    kind={0:0,1:1,3:2}[slot];value=values(trial)[(trial*5+3)%16]
+    record=[0x4b505244,kind,3,1,(5 if slot==0 else 0)+3*((value>>kind)&1),0 if slot==0 else 2 if slot==1 else 0xfffffffe,0 if slot==0 else 1 if slot==1 else 2,0]
+    if trial==1 and slot==1:record[0]=0
+    if trial==2 and slot==3:record[1]=1
+    if trial==3 and slot==0:record[2]=0xfffffffe
+    if trial==4 and slot==1:record[4]=0xfffffffe
+    if trial==5 and slot==3:record[5]=0
+    if trial==6 and slot==0:record[3]=2
+    return record
+
+
+def record_reason(trial,slot,producer=True):
+    if slot==2:return 4
+    if not producer:return 1
+    return {(1,1):1,(2,3):2,(3,0):3,(4,1):3,(5,3):3,(6,0):3}.get((trial,slot),0)
 
 
 def texel(bank,x,y):
@@ -56,24 +80,28 @@ def verify_rows(d,out):
     assert d['status']=='COMPLETED'and d['scope_restored']is True and d['range_CPU_read_before_render']is False and d['performance_benchmark']is False
     mode=d['mode'];assert mode in MODES;assert d['CPU_resolved_range_supplied']is(mode=='native'or mode.endswith('_native'))
     reference=mode=='native'or mode.endswith('_native');fragment=mode.startswith('fragment');legacy=mode.startswith('legacy')
-    assert len(d['runs'])==8;checked=guards=draws=0;max_error=0;files={}
+    records='records'in mode;no_producer=mode=='records_no_producer';consumer=mode not in ['no_consumer','records_no_consumer']
+    release=mode.endswith('release');trials=1 if release else 8
+    assert len(d['runs'])==trials;checked=guards=draws=0;max_error=0;files={}
     occupied={0:(0,0,32,48,(.25,.125,.75,1)),1:(32,0,64,48,(.125,.75,.25+1/64,1)),3:(16,12,48,36,(.75,.5,.125+2/64,1))}
     templates=[[3,1,0,0,0],[3,1,0,0,0],[0]*5,[3,1,0,0,0]]if legacy else[[6,1,5,0,0],[6,1,0,2,1],[0]*5,[6,1,0,0xfffffffe,2]];kinds=[0,1,0,2]
     for trial,r in enumerate(d['runs']):
-        assert r['trial']==trial and r['command_status']==4 and r['expected_range']==list(requested(trial))
+        assert r['trial']==trial and r['command_status']==4 and r['expected_range']==list(requested(trial,records,no_producer))
         assert r['fragment_resources']is fragment and r['legacy_geometry']is legacy and r['inline_marker_parameter']is bool(trial%2)
-        assert r['native_reference']is reference and r['consumer_encoded']is(mode!='no_consumer')and r['producer_dispatches']==(0 if trial==7 else 1)
-        first,count=requested(trial);valid=first<=4 and count<=4-min(first,4)
-        selected=[i for i in occupied if valid and first<=i and i-first<count]
+        assert r['native_reference']is reference and r['consumer_encoded']is consumer and r['producer_dispatches']==(0 if trial==7 or no_producer else 1)
+        first,count=requested(trial,records,no_producer);valid=first<=4 and count<=4-min(first,4)
+        selected=[i for i in occupied if valid and first<=i and i-first<count and(not records or record_reason(trial,i,trial!=7 and not no_producer)==0)]
         scissor=[3,4,57,39]if trial%2 else[0,0,64,48];assert r['scissor']==scissor
-        for i,expected in enumerate(expected_buffers(trial,legacy)):
+        for i,expected in enumerate(expected_buffers(trial,legacy,records,no_producer)):
             p=out/'outputs'/f'trial-{trial}.buffer-{i}.bin';assert p.read_bytes()==expected,(trial,i);files[p.name]=sha(p)
         if not reference:
             p=out/'outputs'/f'trial-{trial}.arguments.bin';args=p.read_bytes();assert len(args)==256 and args[:64]==args[192:]==b'\xa5'*64
             p2=out/'outputs'/f'trial-{trial}.witness.bin';w=p2.read_bytes();assert len(w)==192 and w[:64]==w[128:]==b'\xa5'*64
             for slot in range(4):
-                assert struct.unpack_from('<8I',args,64+slot*32)==tuple((templates[slot]if slot in selected else[0]*5)+[0xa5a5a5a5]*3)
-                assert struct.unpack_from('<4I',w,64+slot*16)==(int(valid),int(slot in selected),kinds[slot],0x4b505247)
+                words=expected_record(trial,slot,trial!=7 and not no_producer)[2:7]if records else templates[slot]
+                assert struct.unpack_from('<8I',args,64+slot*32)==tuple((words if slot in selected else[0]*5)+[0xa5a5a5a5]*3)
+                tag=(0x4b520000|record_reason(trial,slot,trial!=7 and not no_producer))if records else 0x4b505247
+                assert struct.unpack_from('<4I',w,64+slot*16)==(int(valid),int(slot in selected),kinds[slot],tag)
             files[p.name]=sha(p);files[p2.name]=sha(p2);guards+=256+48
         if fragment:
             for bank in range(2):
@@ -87,26 +115,40 @@ def verify_rows(d,out):
             for x in range(64):
                 color=(0,0,0,0)
                 if scissor[0]<=x<scissor[0]+scissor[2]and scissor[1]<=y<scissor[1]+scissor[3]:
-                    if mode!='no_consumer':
+                    if consumer:
                         for slot in selected:
                             x0,y0,x1,y1,c=occupied[slot]
                             if legacy:color=(.75,.125,.25,1)
-                            elif x0<=x<x1 and y0<=y<y1:color=fragment_color(slot,x,y,c)if fragment else c
+                            elif x0<=x<x1 and y0<=y<y1:
+                                inside=True
+                                if records:
+                                    start=expected_record(trial,slot)[4]-(5 if slot==0 else 0)
+                                    lhs=(2*x+1-2*x0)*(y1-y0);rhs=(2*y+1-2*y0)*(x1-x0)
+                                    assert lhs!=rhs  # These fixture extents avoid diagonal pixel-center ties.
+                                    inside=lhs<rhs if start==0 else lhs>rhs
+                                if inside:color=fragment_color(slot,x,y,c)if fragment else c
                     if x<8:color=(.875,.625,.625,1)
                 for c in range(4):
                     value=actual[(y*64+x)*4+c];error=abs(value-color[c]);assert math.isfinite(value)and error<=2e-6,(trial,x,y,c,value,color[c]);max_error=max(max_error,error);checked+=1
-        draws+=len(selected)if mode!='no_consumer'else 0;guards+=512
+        draws+=len(selected)if consumer else 0;guards+=512
     if mode.endswith('lifetime'):
         assert len({r['ICB_object_identity']for r in d['runs']})==1
         assert [r['released_before_commit']for r in d['runs']]==[False]*7+[True]
         assert d['runs'][-1]['classes_restored_before_commit']is True
+    if release:
+        row=d['runs'][0]
+        for key in ['released_before_commit','classes_restored_before_commit','autorelease_pool_drained_before_commit','scope_deallocated_before_commit','ICB_deallocated_before_commit']:assert row[key]is True,key
+        assert row['fragment_texture_alive_before_commit']is fragment
+        assert row['fragment_sampler_alive_before_commit']is fragment
     if mode=='contracts':
         expected=['pending_reprepare','misaligned_range','short_range','foreign_queue','unretained_command_buffer','wrong_kernel_pin','wrong_range_object','wrong_range_offset','copied_ICB_has_no_preparation','mutated_command','duplicate_execution']
         reset_expected=expected.copy();reset_expected[9]='reset_command'
         assert [r['api_refusals']for r in d['runs']]==[expected,reset_expected]+[[]for _ in range(6)]
     events=d['scope_events'];prepare=[e for e in events if e['operation']=='prepare_GPU_indirect_render_range'];execute=[e for e in events if e['operation']=='execute_GPU_indirect_render_range']
-    assert len(prepare)==(0 if reference else 8)and len(execute)==(8 if not reference and mode!='no_consumer'else 0)
+    assert len(prepare)==(0 if reference else trials)and len(execute)==(trials if not reference and consumer else 0)
+    for e in prepare:assert e.get('GPU_generated_draw_records',False)is records
     for e in execute:
+        assert e.get('GPU_generated_draw_records',False)is records and e.get('record_CPU_read',False)is False
         assert e['slot_capacity']==4 and e['range_offset']==64
         assert e['range_CPU_read']is False and e['caller_pipeline_restored']is True and e['caller_vertex_slots_restored']==(0 if legacy else 2)and e['caller_fragment_slots_restored']==(1 if fragment else 0)
         proof=e['evidence'];assert proof['operation']=='native_GPU_range_indirect_draws'and proof['resource_leases_until_completion']is True and proof['system_modified']is False

@@ -50,5 +50,5 @@ void executeIndirectRenderICB(id self,SEL selector,id buffer,id range,NSUInteger
         link.encodingRenderICB=NO;
     }
     if(!ok)reject([error.localizedDescription?:@"Indirect render encoding failed" stringByAppendingString:@"; discard command buffer"]);
-    [scope.eventRows addObject:@{@"operation":@"execute_GPU_indirect_render_range",@"slot_capacity":@(icb.size),@"range_offset":@(offset),@"range_CPU_read":@NO,@"caller_pipeline_restored":@(link.callerRenderPipeline!=nil),@"caller_vertex_slots_restored":@(vertex.count),@"caller_fragment_slots_restored":@(fragment.count),@"evidence":proof?:@{}}];
+    [scope.eventRows addObject:@{@"operation":@"execute_GPU_indirect_render_range",@"slot_capacity":@(icb.size),@"GPU_generated_draw_records":@(plan.commandRecords!=nil),@"record_CPU_read":@NO,@"range_offset":@(offset),@"range_CPU_read":@NO,@"caller_pipeline_restored":@(link.callerRenderPipeline!=nil),@"caller_vertex_slots_restored":@(vertex.count),@"caller_fragment_slots_restored":@(fragment.count),@"evidence":proof?:@{}}];
 }

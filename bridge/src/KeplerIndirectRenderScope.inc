@@ -18,11 +18,54 @@
         [_eventRows addObject:@{@"operation":@"enable_GPU_indirect_render_ranges",@"library_SHA256":expected,@"native_pipeline":@YES,@"GPU_submissions":@0}];return YES;
     }
 }
+- (BOOL)enableGPURenderCommandRecordsWithLibraryData:(NSData*)data expectedSHA256:(NSString*)expected error:(NSError**)error {
+    @synchronized(_factoryLock){
+        NSData *snapshot=data?[NSData dataWithBytes:data.bytes length:data.length]:nil;
+        if(_restored||!_renderEngine||!snapshot||![expected isEqual:KP_RENDER_COMMAND_RECORDS_SHA256]||![hash(snapshot)isEqual:expected])
+            return fail(error,@"Render record materializer identity/scope differs");
+        if(_indirectRenderCommandPipeline)return YES;
+        id<MTLLibrary>library=libraryFromSnapshot(_device,snapshot,error);
+        id<MTLFunction>function=[library newFunctionWithName:@"materialize_render_command_records"];
+        MTLComputePipelineReflection *reflection=nil;
+        id<MTLComputePipelineState>pipeline=function?[_device newComputePipelineStateWithFunction:function
+            options:MTLPipelineOptionArgumentInfo|MTLPipelineOptionBufferTypeInfo reflection:&reflection error:error]:nil;
+        if(!pipeline||pipeline.threadExecutionWidth!=32||pipeline.maxTotalThreadsPerThreadgroup<32||
+            pipeline.staticThreadgroupMemoryLength||reflection.arguments.count!=6)
+            return fail(error,@"Render record native pipeline/reflection differs");
+        NSArray *names=@[@"range",@"records",@"templates",@"arguments",@"witness",@"config"];
+        NSUInteger sizes[]={4,32,4,4,16,16},alignments[]={4,4,4,4,16,256};
+        MTLDataType types[]={MTLDataTypeUInt,MTLDataTypeStruct,MTLDataTypeUInt,MTLDataTypeUInt,MTLDataTypeUInt4,MTLDataTypeStruct};
+        unsigned mask=0;
+        for(MTLArgument *argument in reflection.arguments){
+            NSUInteger i=argument.index;
+            if(i>=6||argument.type!=MTLArgumentTypeBuffer||!argument.active||(mask&(1u<<i))||
+                ![argument.name isEqual:names[i]]||argument.bufferDataSize!=sizes[i]||
+                argument.bufferAlignment!=alignments[i]||argument.bufferDataType!=types[i]||
+                argument.access!=((i==3||i==4)?MTLArgumentAccessReadWrite:MTLArgumentAccessReadOnly))
+                return fail(error,@"Render record native buffer ABI differs");
+            mask|=1u<<i;
+        }
+        if(mask!=63)return fail(error,@"Render record materializer coverage differs");
+        _indirectRenderCommandLibrary=library;_indirectRenderCommandPipeline=pipeline;
+        [_eventRows addObject:@{@"operation":@"enable_GPU_render_command_records",@"library_SHA256":expected,
+            @"native_pipeline":@YES,@"GPU_submissions":@0}];
+        return YES;
+    }
+}
 - (BOOL)prepareIndirectRenderCommands:(id<MTLIndirectCommandBuffer>)buffer indirectBuffer:(id<MTLBuffer>)range indirectBufferOffset:(NSUInteger)offset commandBuffer:(id<MTLCommandBuffer>)cb error:(NSError**)error {
-    if(_restored||!_renderEngine||!_indirectRenderRangePipeline||![buffer isKindOfClass:KPRenderICB.class]||((KPRenderICB*)buffer).scope!=self||![range conformsToProtocol:@protocol(MTLBuffer)]||range.device!=_device||offset%4||offset>range.length||range.length-offset<8||!cb||cb.commandQueue!=_queue||cb.status!=MTLCommandBufferStatusNotEnqueued||!cb.retainedReferences)return fail(error,@"Indirect render preparation range/queue/scope differs");
+    return [self prepareRenderPlan:buffer records:nil recordOffset:0 range:range rangeOffset:offset commandBuffer:cb error:error];
+}
+- (BOOL)prepareIndirectRenderCommands:(id<MTLIndirectCommandBuffer>)buffer commandRecords:(id<MTLBuffer>)records commandRecordsOffset:(NSUInteger)recordOffset indirectBuffer:(id<MTLBuffer>)range indirectBufferOffset:(NSUInteger)offset commandBuffer:(id<MTLCommandBuffer>)cb error:(NSError**)error {
+    if(!records)return fail(error,@"GPU render command records are required");
+    return [self prepareRenderPlan:buffer records:records recordOffset:recordOffset range:range rangeOffset:offset commandBuffer:cb error:error];
+}
+- (BOOL)prepareRenderPlan:(id<MTLIndirectCommandBuffer>)buffer records:(id<MTLBuffer>)commandRecords recordOffset:(NSUInteger)recordOffset range:(id<MTLBuffer>)range rangeOffset:(NSUInteger)offset commandBuffer:(id<MTLCommandBuffer>)cb error:(NSError**)error {
+    id<MTLComputePipelineState>materializer=commandRecords?_indirectRenderCommandPipeline:_indirectRenderRangePipeline;
+    if(_restored||!_renderEngine||!materializer||![buffer isKindOfClass:KPRenderICB.class]||((KPRenderICB*)buffer).scope!=self||![range conformsToProtocol:@protocol(MTLBuffer)]||range.device!=_device||offset%4||offset>range.length||range.length-offset<8||!cb||cb.commandQueue!=_queue||cb.status!=MTLCommandBufferStatusNotEnqueued||!cb.retainedReferences)return fail(error,@"Indirect render preparation range/queue/scope differs");
     KPRenderICB*icb=(KPRenderICB*)buffer;KPIndirectRenderPlan*old=icb.indirectRenderPlan;
     if(old){@synchronized(old){MTLCommandBufferStatus status=old.commandBuffer.status;if(status==MTLCommandBufferStatusCompleted||status==MTLCommandBufferStatusError){old.completed=YES;old.failed=status==MTLCommandBufferStatusError;}if(!old.completed||old.failed)return fail(error,@"Prior indirect render preparation is pending or failed");}}
     if(!icb.size||icb.size>16)return fail(error,@"Indirect render slot capacity differs");
+    if(commandRecords&&(![commandRecords conformsToProtocol:@protocol(MTLBuffer)]||commandRecords.device!=_device||recordOffset%4||recordOffset>commandRecords.length||icb.size*KP_RENDER_COMMAND_BYTES>commandRecords.length-recordOffset))return fail(error,@"GPU render record buffer/extent differs");
     NSMutableArray*records=[NSMutableArray new];NSMutableData*table=[NSMutableData dataWithLength:icb.size*32];
     for(NSUInteger slot=0;slot<icb.size;slot++){
         KPRenderICBCommand*c=icb.commands[slot];id record=prepareIndirectRenderRecord(c,self,error);if(!record)return NO;[records addObject:record];
@@ -30,7 +73,7 @@
         uint32_t*words=(uint32_t*)table.mutableBytes+slot*8;words[0]=(uint32_t)c.vertexCount;words[1]=(uint32_t)c.instances;
         words[2]=c.kind?0:(uint32_t)c.vertexStart;words[3]=c.kind?(uint32_t)(int32_t)c.baseVertex:(uint32_t)c.baseInstance;words[4]=c.kind?(uint32_t)c.baseInstance:0;words[5]=(uint32_t)c.kind;words[6]=1;
     }
-    KPIndirectRenderPlan*plan=[KPIndirectRenderPlan new];plan.commandBuffer=cb;plan.range=range;plan.rangeOffset=offset;plan.records=[records copy];
+    KPIndirectRenderPlan*plan=[KPIndirectRenderPlan new];plan.commandBuffer=cb;plan.commandRecords=commandRecords;plan.range=range;plan.rangeOffset=offset;plan.records=[records copy];
     plan.templates=[_device newBufferWithBytes:table.bytes length:table.length options:MTLResourceStorageModeShared];
     plan.arguments=[_device newBufferWithLength:128+icb.size*32 options:MTLResourceStorageModePrivate];plan.witness=[_device newBufferWithLength:128+icb.size*16 options:MTLResourceStorageModePrivate];plan.config=[_device newBufferWithLength:256 options:MTLResourceStorageModeShared];
     if(!plan.templates||!plan.arguments||!plan.witness||!plan.config)return fail(error,@"Indirect render plan allocation failed");
@@ -40,9 +83,9 @@
     id<MTLBlitCommandEncoder>b=[cb blitCommandEncoder];if(!b)return fail(error,@"Indirect render initializer encoder failed; discard command buffer");
     [b copyFromBuffer:initialArgs sourceOffset:0 toBuffer:plan.arguments destinationOffset:0 size:initialArgs.length];[b copyFromBuffer:initialWitness sourceOffset:0 toBuffer:plan.witness destinationOffset:0 size:initialWitness.length];[b endEncoding];
     id<MTLComputeCommandEncoder>e=[cb computeCommandEncoder];if(!e)return fail(error,@"Indirect render materializer encoder failed; discard command buffer");
-    [e setComputePipelineState:_indirectRenderRangePipeline];[e setBuffer:range offset:offset atIndex:0];[e setBuffer:plan.templates offset:0 atIndex:1];[e setBuffer:plan.arguments offset:64 atIndex:2];[e setBuffer:plan.witness offset:64 atIndex:3];[e setBuffer:plan.config offset:0 atIndex:4];[e dispatchThreadgroups:MTLSizeMake(1,1,1)threadsPerThreadgroup:MTLSizeMake(32,1,1)];[e endEncoding];
-    plan.owners=@[_indirectRenderRangeLibrary,_indirectRenderRangePipeline,initialArgs,initialWitness];
+    [e setComputePipelineState:materializer];[e setBuffer:range offset:offset atIndex:0];NSUInteger shift=commandRecords?1:0;if(commandRecords)[e setBuffer:commandRecords offset:recordOffset atIndex:1];[e setBuffer:plan.templates offset:0 atIndex:1+shift];[e setBuffer:plan.arguments offset:64 atIndex:2+shift];[e setBuffer:plan.witness offset:64 atIndex:3+shift];[e setBuffer:plan.config offset:0 atIndex:4+shift];[e dispatchThreadgroups:MTLSizeMake(1,1,1)threadsPerThreadgroup:MTLSizeMake(32,1,1)];[e endEncoding];
+    plan.owners=@[commandRecords?_indirectRenderCommandLibrary:_indirectRenderRangeLibrary,materializer,initialArgs,initialWitness];
     [cb addCompletedHandler:^(id<MTLCommandBuffer>done){@synchronized(plan){plan.failed=done.status!=MTLCommandBufferStatusCompleted;plan.completed=YES;}(void)plan.records.count;}];
     icb.indirectRenderPlan=plan;
-    [_eventRows addObject:@{@"operation":@"prepare_GPU_indirect_render_range",@"slots":@(icb.size),@"range_offset":@(offset),@"range_CPU_read":@NO,@"native_materializer_dispatches":@1,@"same_command_buffer_required":@YES,@"single_consumption":@YES}];return YES;
+    [_eventRows addObject:@{@"operation":@"prepare_GPU_indirect_render_range",@"slots":@(icb.size),@"GPU_generated_draw_records":@(commandRecords!=nil),@"record_offset":@(recordOffset),@"range_offset":@(offset),@"range_CPU_read":@NO,@"native_materializer_dispatches":@1,@"same_command_buffer_required":@YES,@"single_consumption":@YES}];return YES;
 }
