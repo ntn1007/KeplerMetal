@@ -1,5 +1,7 @@
 # Build from source
 
+[NATIVE_SOURCE_LIBRARY_FACTORIES.md](NATIVE_SOURCE_LIBRARY_FACTORIES.md) adds `--library-factories`, ordinary native source library/function/PSO routes, zero-submission contracts, optional legacy-library references and a complete 94-host auditor.
+
 [REUSABLE_ICB_CONTEXTS.md](REUSABLE_ICB_CONTEXTS.md) adds `--reusable-contexts`, an explicit generation-tagged source ABI, producer/materializer/consumer leases, CPU lifetime contracts and a 52-process reusable/regression auditor. Workspace-header builds disable compiler modules to avoid importing definitions from an earlier build directory.
 
 [STABLE_PIPELINE_IDENTITIES.md](STABLE_PIPELINE_IDENTITIES.md) adds `--stable-identities`, a private extended context with unchanged executable record ABI, duplicate-template binding and retired-scope GPU controls.

@@ -28,12 +28,18 @@ id<MTLFunction>attachRegisteredLibraryFunction(KPCPUICBScope*s,id<MTLFunction>fu
  if(!function||!profile||!s)return function;
  @synchronized(s.factoryLock){
   if(s.restored)return function;
-  if(!adoptNativeIRFunction(s,function,registration[@"source_SHA256"],0,YES,error))return nil;
+  BOOL lowered=[registration[@"native_source_lowering"]boolValue],tagged=[registration[@"reusable_contexts"]boolValue];
+  if(!adoptNativeIRFunction(s,function,registration[@"source_SHA256"],0,YES,error,lowered,tagged))return nil;
   KPIRFunctionLink*link=objc_getAssociatedObject(function,&IRFunctionKey);
   if(!link||![link.schema isEqual:profile[@"schema"]]||function.functionConstantsDictionary.count){fail(error,@"Returned native function metadata differs from the registered source");return nil;}
-  if(link.nativeRootPipeline&&link.nativeRootPipeline!=profile[@"pipeline"]){fail(error,@"Function already has a different producer pipeline");return nil;}
-  link.nativeProducerCarrier=registration[@"carrier"];link.nativeProducerProgram=profile[@"program"];link.nativeRootPipeline=profile[@"pipeline"];link.nativeProducerProfile=profile[@"profile"];
-  libraryEvent(s,@{@"operation":@"automatic_IRv2_function",@"selector":NSStringFromSelector(selector),@"source_function":profile[@"profile"][@"function"],@"returned_function":function.name,@"library_SHA256":registration[@"source_SHA256"],@"native_function":@YES,@"pipeline_imports_during_lookup":@0});return function;
+  if(lowered){
+   if(link.nativeRootPipeline||link.nativeProducerCarrier||link.nativeProducerProgram){fail(error,@"Native source function already owns an imported producer");return nil;}
+   // Keep producerLink() empty: all six PSO factories must take their native path.
+  }else{
+   if(link.nativeRootPipeline&&link.nativeRootPipeline!=profile[@"pipeline"]){fail(error,@"Function already has a different producer pipeline");return nil;}
+   link.nativeProducerCarrier=registration[@"carrier"];link.nativeProducerProgram=profile[@"program"];link.nativeRootPipeline=profile[@"pipeline"];link.nativeProducerProfile=profile[@"profile"];
+  }
+  libraryEvent(s,@{@"operation":@"automatic_IRv2_function",@"selector":NSStringFromSelector(selector),@"source_function":profile[@"profile"][@"function"],@"returned_function":function.name,@"library_SHA256":registration[@"source_SHA256"],@"native_function":@YES,@"native_source_lowering":@(lowered),@"generation_tagged_root":@(tagged),@"pipeline_imports_during_lookup":@0});return function;
  }
 }
 id<MTLFunction>IRLibraryFunction(id,SEL,NSString*) NS_RETURNS_RETAINED;

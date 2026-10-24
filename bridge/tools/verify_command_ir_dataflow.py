@@ -56,7 +56,7 @@ def verify(directory):
  if native:assert d['device']=='Apple M1 Max'
  else:
   inp=json.loads((root/'inputs.json').read_text());assert sha(root/'application')==inp['executable_SHA256']==m['original_binary_sha256']
-  reusable=inp.get('kind')=='reusable'
+  reusable=inp.get('kind')in ['reusable','library_reusable']
   for n,h in inp['source_hashes'].items():assert sha(root/n)==h
   for n,h in inp['assets_SHA256'].items():assert sha(root/'assets'/n)==h
   verify_device_identity(d)
@@ -66,7 +66,9 @@ def verify(directory):
    assert info['producer_backend']=='native_msl' and info['root_bytes']==48 and info['thread_width']==32 and info['pipeline_class']=='NVMTLComputePipelineState'
    assert info['library_SHA256']==sha(root/'assets'/('reusable_producer.metallib'if reusable else'native_producer.metallib'))
    assert bool(info.get('generation_tagged_root'))==reusable
-   if inp.get('native_function_arguments'):verify_native_function_arguments(d,inp)
+   if inp.get('native_library_factory_run'):
+    from verify_native_library_reception import verify as verify_library;verify_library(d,inp)
+   elif inp.get('native_function_arguments'):verify_native_function_arguments(d,inp)
    stable=bool(inp.get('native_stable_pipeline_identities'))
    if stable:
     ids=d['producer_info']['stable_pipeline_IDs'];assert len(ids)==len(set(ids))==3 and all(x>>32==0x4b505350 and x&0xffffffff for x in ids)
@@ -193,6 +195,8 @@ def verify(directory):
     a,b=recordwords[1],recordwords[2];assert a[12:14]==b[14:16]and a[26:28]==b[26:28]and a[16:18]!=b[16:18]
  report={'status':'PASS','mode':mode,'native_reference':native,'trials':4,'exact_uint32_results':comparisons,'consumer_invocations':invocations,'guard_bytes':guardbytes,'API_refusals':d['API_refusals'],'raw_files':len(files),'raw_SHA256':files,'performance_benchmark':False,'full_objective_complete':False}
  if d.get('producer_backend')=='native_msl':report.update(producer_backend='native_msl',producer_instruction_import=False)
+ if d.get('producer_backend')=='native_msl' and inp.get('native_library_factory_run'):
+  from verify_native_library_reception import verify as verify_library;report.update(**verify_library(d,inp))
  if d.get('producer_backend')=='native_msl' and inp.get('native_function_arguments'):report.update(native_function_arguments=True,function_getters_restored=True)
  if stable:report.update(stable_pipeline_identities=True,immutable_contexts_checked=4,template_permutations_checked=4)
  if reusable:

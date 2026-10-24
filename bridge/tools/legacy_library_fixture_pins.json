@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "scope": "Existing native-root ABI fixtures for the pinned legacy ordinary-library NAK path, distinct from manual-push NAK fixtures. No compiled bytes included.",
+  "assets": {
+    "gpu_command_bindings.metallib": "ce99cdc66f55f4ce7069b9518ed1f074feea2bee6daded2d320098e29b43f290",
+    "no_seed.json": "3982153a9e7d6651e9fc0b4df02ee855a4e13faca75225e43458d20a061530c4",
+    "no_finish.json": "3982153a9e7d6651e9fc0b4df02ee855a4e13faca75225e43458d20a061530c4",
+    "gpu_command_selector.metallib": "b6d3f29fc4f85dd020f96fff3fc5f2586548aad483ea2649172b56545a9e581c",
+    "copy.json": "9971c1067de5779f16d7798ece383b4b1f31dec436226c431269d0ef8db13360",
+    "no_seed.sass": "f23da37c9ee8eddfbe343ff73663565fcdda8298e18be358995e2bb2aaab55e1",
+    "gpu_command_geometry.metallib": "f6cc04a4c2555a2555dc06a2f02687ffe5a63fb5304619b1d9662ec1f0176441",
+    "no_finish.sass": "92dca0817ba9b17a1f4f17068c37fc412979531ec08488f39d6adad3cf6c714e",
+    "materializer.metallib": "a16652f21d39de58e16dbb4704b98813565b5ec3e9e2f0f926c0eb6d77015997",
+    "consumer.json": "408b71ba8c668d7327783aeefa0b7da755399f91b42295cd0dad3edcfe28c066",
+    "copy.sass": "f2ae6bd728e63391edb4093655a1e6e997414f4533160b810f5867fd5ae08e0b",
+    "barrier.json": "08724970b457817abaed8c70d711d790ce679ceee5e69f9690710571425178c4",
+    "consumer.metallib": "7b415aef3f5feb660698dfa0816b11a62d35da9ccc71cd83be170fabd904349f",
+    "producer.metallib": "a9367d4492cd100adfcde990efe0b043e4b070536a3615be5b9b2f63bfb473db",
+    "no_gather.json": "3982153a9e7d6651e9fc0b4df02ee855a4e13faca75225e43458d20a061530c4",
+    "basic.sass": "e99dbc3cdd06c94fe12fa4c7844171d798db19008511cef4631c88cf8bd5a408",
+    "barrier.sass": "7e1f63516f6c950f3214ae467a65e6463e7284224d6244e4290ea33b05ba9744",
+    "carrier.metallib": "bf5065e2db01161839efe25eac67a2052fc3324367d3c4754182550857014574",
+    "field.metallib": "28a9d4e6c05d50d9d87cd04c4d5f06d48c0afb48821efc5a37212fb8ef092e98",
+    "no_gather.sass": "5c04b0889ce20063b09456f33306c9eac3712a66a27de9ee2a6163c54ed586ca",
+    "basic.json": "7148a4e8d0c60786cdcfa2bafd5c9a83647463692ec883495acde359d11a0758"
+  }
+}

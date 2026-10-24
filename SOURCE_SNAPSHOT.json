@@ -28,10 +28,10 @@
       "path": "bridge/src/KeplerCPUICB.h",
       "source_path": "bridge/src/KeplerCPUICB.h",
       "source_SHA256": "263dede0101967e1bfa32fe3b081b73c476d9e09e8a9b5446ae04cf4f425ee0a",
-      "published_SHA256": "3e2a451be0060a6d9dc304ecfca083d8a74c9106431f2b44689882878efffdc5",
-      "bytes": 22842,
+      "published_SHA256": "4a4cc125330bbc877806365ff3e841a9dc464e3a40c173f5526c17daa32ed7f0",
+      "bytes": 23496,
       "modified_for_publication": false,
-      "previous_published_SHA256": "b4c13fbf317e48c3a4f6c0b79a82564bbecb2342bce4fbe11325d4961f2e62b9"
+      "previous_published_SHA256": "3e2a451be0060a6d9dc304ecfca083d8a74c9106431f2b44689882878efffdc5"
     },
     {
       "path": "bridge/src/KeplerCPUICB.mm",
@@ -1268,10 +1268,10 @@
       "path": "bridge/tools/command_ir_dataflow_client.mm",
       "source_path": "bridge/tools/command_ir_dataflow_client.mm",
       "source_SHA256": "b7b2d1617fc7c98ad36c807dbdf3c0dc63a374eddc6e240b5bd23caa949fb321",
-      "published_SHA256": "3f2b247ddaea556f4077281b6209d33f553e25bf1e0ccd332081a5cab8b1431a",
-      "bytes": 33303,
+      "published_SHA256": "4c1926a1dd8de5d7609b9a08f91560a7c78a2fc61c6e0ba59812b5f612056d37",
+      "bytes": 34400,
       "modified_for_publication": true,
-      "previous_published_SHA256": "3e7532522cfc87c89ac2e24b0bfd9dd67b5db3a3b38c2e8d53f298da93e51dd2"
+      "previous_published_SHA256": "3f2b247ddaea556f4077281b6209d33f553e25bf1e0ccd332081a5cab8b1431a"
     },
     {
       "path": "bridge/tools/command_ir_grid3d_client.mm",
@@ -4207,10 +4207,10 @@
       "path": "bridge/tools/verify_command_ir_dataflow.py",
       "source_path": "bridge/tools/verify_command_ir_dataflow.py",
       "source_SHA256": "2acb8cecde8b8e4ee22e27d7bf64bedb609036dd86ba217931088c8c7cc3c33c",
-      "published_SHA256": "f0b26762fe8df7a0e99be78de6c89430bfabf5c62c212461f76ff3075020f689",
-      "bytes": 16416,
+      "published_SHA256": "6fbfe7685cba561083e3654ef1be32741df2baba7e4adc331b586ccee738215a",
+      "bytes": 16777,
       "modified_for_publication": true,
-      "previous_published_SHA256": "c0ebf0852fe726dec5c745c001472977dea06da0ffa014cdf12136a7bd240d40"
+      "previous_published_SHA256": "f0b26762fe8df7a0e99be78de6c89430bfabf5c62c212461f76ff3075020f689"
     },
     {
       "path": "bridge/tools/verify_command_ir_grid3d.py",
@@ -5975,10 +5975,10 @@
       "path": "examples/command_ir_pipeline_contracts.mm",
       "source_path": "bridge/results/library-function-reception-client-build-20261015-06/command_ir_dataflow_client.mm",
       "source_SHA256": "d8bcfe74ece542667d4a4c9a46f706fcbabfd149c48520dccb7cdfad1c312e73",
-      "published_SHA256": "d8bcfe74ece542667d4a4c9a46f706fcbabfd149c48520dccb7cdfad1c312e73",
-      "bytes": 28344,
+      "published_SHA256": "f2848bf8ca2b024eb34264ad1ce474c9dd65d60b77f8d3889e928026e6a48534",
+      "bytes": 28514,
       "modified_for_publication": false,
-      "previous_published_SHA256": "afc737a978d961dd753194423b7182ec4ae9fd40de8034c5312c7bfada7c9a22"
+      "previous_published_SHA256": "d8bcfe74ece542667d4a4c9a46f706fcbabfd149c48520dccb7cdfad1c312e73"
     },
     {
       "path": "bridge/src/KeplerNativeThreadLimits.inc",
@@ -6105,17 +6105,19 @@
       "path": "bridge/src/KeplerCommandIRLibrary.inc",
       "source_path": "bridge/src/KeplerCommandIRLibrary.inc",
       "source_SHA256": "5d279956b7ac9e9d9cf9cdd0cf5475318dece08d9006b172c8a46cef796ab151",
-      "published_SHA256": "5d279956b7ac9e9d9cf9cdd0cf5475318dece08d9006b172c8a46cef796ab151",
-      "bytes": 14564,
-      "modified_for_publication": false
+      "published_SHA256": "cb81baedd15dc9885f93926b7e2dcdbfb9a9893204adfc18bbea44a860aec9e8",
+      "bytes": 15058,
+      "modified_for_publication": false,
+      "previous_published_SHA256": "5d279956b7ac9e9d9cf9cdd0cf5475318dece08d9006b172c8a46cef796ab151"
     },
     {
       "path": "bridge/src/KeplerCommandIRLibraryScope.inc",
       "source_path": "bridge/src/KeplerCommandIRLibraryScope.inc",
       "source_SHA256": "f6f9d5a7da0a545b4ddc3ae4337664fba7ae3fd323974eadd9e4a0c93ca2e675",
-      "published_SHA256": "f6f9d5a7da0a545b4ddc3ae4337664fba7ae3fd323974eadd9e4a0c93ca2e675",
-      "bytes": 4321,
-      "modified_for_publication": false
+      "published_SHA256": "871676e54e4bab87d5bef10328c445f9bd169914cf52c5720d06ace8395345aa",
+      "bytes": 8064,
+      "modified_for_publication": false,
+      "previous_published_SHA256": "f6f9d5a7da0a545b4ddc3ae4337664fba7ae3fd323974eadd9e4a0c93ca2e675"
     },
     {
       "path": "bridge/tools/LibraryFunctionContractCases.inc",
@@ -7476,7 +7478,7 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "4b2f1979953f7fd84fe4bca993470841678eb3f43e08169664f8e5a4aebe8f9f",
-  "previous_public_commit": "45daa78953814885f051009408325cc8e3e288d7",
-  "update": "Generation-tagged reusable ICB contexts, explicit producer/materializer/consumer leases, persistent retired-slot checks, native source ABI and independent reproduction/receipt tools."
+  "previous_source_snapshot_SHA256": "927cee918936d48c0e94eec4cef809712b73f843e4f990ab4cc1c18723577ab9",
+  "previous_public_commit": "2d496afddd2cff756870d30f699f81f2d5505669",
+  "update": "One native source library registration followed by ordinary library/function/pipeline calls and automatic queue factories; both dense pointer/generation root schemas; preserve legacy NAK registration."
 }

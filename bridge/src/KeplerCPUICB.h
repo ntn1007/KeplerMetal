@@ -244,6 +244,15 @@
 // Native pipeline factories remain native; getters return the existing owned
 // resource encoder. Validate plan bindings before producer commit. Scope restore
 // restores both function getters. Registered bytes are retained as a snapshot.
+// Register a native source-lowered producer library once, then use ordinary
+// device library constructors and library function factories. Only these named
+// dense root0 functions are adapted; other functions stay native. No NAK program
+// or carrier is required. The compiler/runtime must support the selected ABI.
+- (BOOL)registerNativeSourceCommandIRLibraryData:(NSData *)data
+                                expectedSHA256:(NSString *)expected
+                                 functionNames:(NSArray<NSString *> *)names
+                              reusableContexts:(BOOL)reusable
+                                         error:(NSError **)error;
 - (id<MTLFunction>)newNativeSourceCommandIRFunctionWithLibraryData:(NSData *)data
                                                expectedSHA256:(NSString *)expected
                                                  functionName:(NSString *)name

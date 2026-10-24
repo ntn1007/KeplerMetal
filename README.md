@@ -15,6 +15,8 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
+One native source-library registration now enables ordinary library/function/pipeline factories and automatic compute encoders for both pointer and reusable roots. Native PSO compilation/reflection stay native; no per-function registration or NAK producer import is needed on this route. The scoped application integration and its controls are documented [here](docs/NATIVE_SOURCE_LIBRARY_FACTORIES.md).
+
 Reusable compute ICB contexts now keep one owned GPU buffer across completed generations, reject stale CPU plans/GPU roots and track pending consumers. The 20-process reusable cohort checks 6,411,264 exact native consumer results; the full 52-process reception includes the preceding 32-process regression. This remains an adapted-application extension, with no installed-driver change or speedup claim. [Lifecycle, controls and reproduction](docs/REUSABLE_ICB_CONTEXTS.md).
 
 Stable scope-owned pipeline identities now resolve on the GTX despite template permutations and duplicate local-size variants. A final 32-host matrix checks 5,950,464 native consumer results, retired-scope ID refusals and both NAK references. These are project ABI identities; native Apple ICB/PSO resource IDs and transparent applications remain open. [Contract, source and evidence](docs/STABLE_PIPELINE_IDENTITIES.md).

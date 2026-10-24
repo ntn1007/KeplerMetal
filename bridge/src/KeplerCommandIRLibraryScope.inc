@@ -25,3 +25,33 @@
   libraryEvent(self,@{@"operation":@"register_IRv2_library",@"source_SHA256":expected,@"functions":[pins.allKeys sortedArrayUsingSelector:@selector(compare:)],@"prepared_native_pipelines":@6,@"source_function_constants":@0,@"GPU_execution":@NO});return YES;
  }
 }
+
+// The native compiler already understands the lowered pointer/scalar root ABI.
+// Prepare immutable metadata once; returned functions keep their native PSOs.
+- (BOOL)registerNativeSourceCommandIRLibraryData:(NSData*)data expectedSHA256:(NSString*)expected functionNames:(NSArray<NSString*>*)names reusableContexts:(BOOL)tagged error:(NSError**)error {
+ if(error)*error=nil;
+ if(_restored||!_GPUCommandIRv2Selector||![data isKindOfClass:NSData.class]||!data.length||data.length>16*1024*1024||!digestString(expected)||![names isKindOfClass:NSArray.class]||!names.count||names.count>64)return fail(error,@"Active IRv2 scope, library fingerprint and bounded function names required");
+ expected=[expected copy];NSData*source=[NSData dataWithBytes:data.bytes length:data.length];NSMutableSet*unique=[NSMutableSet new];NSMutableArray*selected=[NSMutableArray new];
+ for(id name in [names copy]){if(![name isKindOfClass:NSString.class]||![name length]||[name length]>256||[unique containsObject:name])return fail(error,@"Producer function names must be unique nonempty strings");NSString*n=[name copy];[unique addObject:n];[selected addObject:n];}
+ if(![hash(source)isEqual:expected])return fail(error,@"Native source library fingerprint differs");
+ @synchronized(_factoryLock){if(_restored||_registeredIRLibraries[expected])return fail(error,@"Native source library registration is inactive or already present");}
+ id<MTLLibrary>library=libraryFromSnapshot(_device,source,error);if(!library)return NO;NSMutableDictionary*profiles=[NSMutableDictionary new];
+ for(NSString*name in selected){
+  id<MTLFunction>function=[library newFunctionWithName:name];if(!function||function.functionType!=MTLFunctionTypeKernel||function.device!=_device||function.functionConstantsDictionary.count)return fail(error,@"Native source producer declaration differs");
+  MTLArgument*root=nil;id<MTLArgumentEncoder>native=nil;nativeFunctionArgumentDepth++;
+  @try{native=[function newArgumentEncoderWithBufferIndex:0 reflection:&root];}@catch(NSException*x){fail(error,x.reason?:@"Native source producer reflection failed");}@finally{nativeFunctionArgumentDepth--;}
+  NSDictionary*schema=functionArgumentSchema(root,native,0,YES,tagged);if(!schema)return fail(error,@"Native source library root schema differs");
+  id<MTLComputePipelineState>pipeline=[_device newComputePipelineStateWithFunction:function error:error];
+  if(!pipeline||pipeline.device!=_device||pipeline.threadExecutionWidth!=32||pipeline.maxTotalThreadsPerThreadgroup<32)return fail(error,@"Native source producer pipeline/limits differ");
+  // Do not retain a source PSO here: native library caching could otherwise
+  // form library -> registration -> PSO/function -> library cycles.
+  profiles[name]=@{@"schema":schema,@"profile":@{@"function":name,@"source_SHA256":expected,@"producer_backend":@"native_msl"}};
+ }
+ NSDictionary*registration=@{@"source_SHA256":expected,@"source_bytes":source,@"functions":[profiles copy],@"native_source_lowering":@YES,@"reusable_contexts":@(tagged)};
+ @synchronized(_factoryLock){
+  if(_restored||_registeredIRLibraries[expected])return fail(error,@"Native source library changed while preparing immutable profiles");
+  if(!installIRLibraryFactories(self,error)||!enableAutomaticComputeFactories(self,error))return NO;
+  if(!_registeredIRLibraries)_registeredIRLibraries=[NSMutableDictionary new];_registeredIRLibraries[expected]=registration;
+  libraryEvent(self,@{@"operation":@"register_native_source_IRv2_library",@"source_SHA256":expected,@"functions":[selected copy],@"prepared_native_pipelines":@(selected.count),@"generation_tagged_root":@(tagged),@"instruction_import":@NO,@"native_pipeline_factories_preserved":@YES,@"GPU_execution":@NO});return YES;
+ }
+}

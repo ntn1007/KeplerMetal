@@ -1,5 +1,8 @@
 #import "KeplerCPUICB.h"
 #import "KeplerGPUIdentity.h"
+#ifndef KP_NATIVE_LIBRARY_FACTORIES
+#define KP_NATIVE_LIBRARY_FACTORIES 0
+#endif
 #ifndef KP_NATIVE_MSL_COMMANDS
 #define KP_NATIVE_MSL_COMMANDS 0
 #endif
@@ -33,8 +36,11 @@ static NSString*hash(NSData*d){unsigned char b[32];CC_SHA256(d.bytes,(CC_LONG)d.
 static void emit(id x){NSData*d=[NSJSONSerialization dataWithJSONObject:x options:NSJSONWritingPrettyPrinted error:nil];fwrite(d.bytes,1,d.length,stdout);puts("");}
 static BOOL done(id<MTLCommandBuffer>b){[b commit];[b waitUntilCompleted];return b.status==MTLCommandBufferStatusCompleted;}
 static id<MTLLibrary>load(id<MTLDevice>d,NSString*p,NSError**e){return[d newLibraryWithURL:[NSURL fileURLWithPath:p]error:e];}
+#if KP_NATIVE_LIBRARY_FACTORIES
+#include "NativeSourceLibraryReception.inc"
+#endif
 int main(int argc,char**argv){@autoreleasepool{
- if(argc!=4)return 1;NSString*assets=@(argv[1]),*out=@(argv[2]),*mode=@(argv[3]);
+ if(argc!=(KP_NATIVE_LIBRARY_FACTORIES?5:4))return 1;NSString*assets=@(argv[1]),*out=@(argv[2]),*mode=@(argv[3]);
  BOOL reuseEncoder=[mode isEqual:@"encoder_reuse"]||KP_REUSABLE_CONTEXTS;id<MTLArgumentEncoder>reusableEncoder=nil;__weak id priorArgumentPlan=nil;
  BOOL delayedConsumer=[mode isEqual:@"delayed_consumer"],staleRoot=[mode isEqual:@"stale_root"];
  NSString*stalePlanError=nil;id<MTLIndirectCommandBuffer>persistentTarget=nil;id<MTLBuffer>previousRoot=nil;NSArray*previousResources=nil;
@@ -48,7 +54,7 @@ int main(int argc,char**argv){@autoreleasepool{
 #else
  for(id<MTLDevice>x in MTLCopyAllDevices())if(KPKepler880MIdentity(x)){if(d)return 2;d=x;}
 #endif
- if(!d)return 2;id<MTLCommandQueue>q=[d newCommandQueue];Class original=object_getClass(d);NSError*error=nil;KPCPUICBScope*scope=nil;NSMutableArray*pipelines=[NSMutableArray new];NSArray*names=@[@"dependency_seed",@"dependency_gather",@"dependency_finish"];
+ if(!d)return 2;id<MTLCommandQueue>q=[d newCommandQueue];Class original=object_getClass(d),originalQueue=object_getClass(q);NSError*error=nil;KPCPUICBScope*scope=nil;NSMutableArray*pipelines=[NSMutableArray new];NSArray*names=@[@"dependency_seed",@"dependency_gather",@"dependency_finish"];
  NSDictionary*info=@{},*importProof=@{};id<MTLComputePipelineState>writer=nil,fieldPSO=nil;id<MTLFunction>producerFunction=nil;
 #if KP_DATAFLOW_NATIVE
  id<MTLLibrary>lib=load(d,[assets stringByAppendingPathComponent:@"consumer.metallib"],&error);for(NSString*n in names){MTLComputePipelineDescriptor*p=[MTLComputePipelineDescriptor new];p.computeFunction=[lib newFunctionWithName:n];p.supportIndirectCommandBuffers=YES;id<MTLComputePipelineState>x=[d newComputePipelineStateWithDescriptor:p options:MTLPipelineOptionNone reflection:nil error:&error];if(!x)return 3;[pipelines addObject:x];}
@@ -61,7 +67,9 @@ int main(int argc,char**argv){@autoreleasepool{
  NSString*producerFile=KP_REUSABLE_CONTEXTS?@"reusable_producer.metallib":@"native_producer.metallib";
  NSData*producerData=[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:producerFile]];
 #if KP_FUNCTION_ARGUMENT_ENCODER
-#if KP_REUSABLE_CONTEXTS
+#if KP_NATIVE_LIBRARY_FACTORIES
+ producerFunction=nativeLibraryFunction(scope,d,[assets stringByAppendingPathComponent:producerFile],[@"encode_dataflow_" stringByAppendingString:semantic],@(argv[4]),KP_REUSABLE_CONTEXTS,&error);
+#elif KP_REUSABLE_CONTEXTS
  producerFunction=[scope newReusableCommandIRFunctionWithLibraryData:producerData expectedSHA256:hash(producerData) functionName:[@"encode_dataflow_" stringByAppendingString:semantic]rootBufferIndex:0 error:&error];
 #else
  producerFunction=[scope newNativeSourceCommandIRFunctionWithLibraryData:producerData expectedSHA256:hash(producerData) functionName:[@"encode_dataflow_" stringByAppendingString:semantic]rootBufferIndex:0 error:&error];
@@ -71,7 +79,11 @@ int main(int argc,char**argv){@autoreleasepool{
  producerFunction=[producerLibrary newFunctionWithName:[@"encode_dataflow_" stringByAppendingString:semantic]];
 #endif
  if(!producerFunction){emit(@{@"failure":@"native_producer_function",@"error":error.description?:@"nil"});return 3;}
+#if KP_NATIVE_LIBRARY_FACTORIES
+ writer=nativeLibraryPipeline(d,producerFunction,KP_REUSABLE_CONTEXTS,&error);
+#else
  writer=[d newComputePipelineStateWithFunction:producerFunction error:&error];
+#endif
  id<MTLArgumentEncoder>nativeArguments=[producerFunction newArgumentEncoderWithBufferIndex:0];
  if(!writer||writer.threadExecutionWidth!=32||writer.maxTotalThreadsPerThreadgroup<32||nativeArguments.encodedLength!=48||nativeArguments.alignment!=8){emit(@{@"failure":@"native_producer_contract",@"error":error.description?:@"nil",@"root_bytes":@(nativeArguments.encodedLength)});return 3;}
  info=@{@"command_ir_version":@2,@"root_bytes":@48,@"thread_width":@(writer.threadExecutionWidth),@"pipeline_class":NSStringFromClass(object_getClass(writer)),@"function":producerFunction.name,@"library_SHA256":hash(producerData),@"library_file":producerFile,@"generation_tagged_root":@(KP_REUSABLE_CONTEXTS),@"producer_backend":@"native_msl",@"instruction_import":@NO,@"Apple_ICB_layout":@NO};
@@ -196,7 +208,7 @@ int main(int argc,char**argv){@autoreleasepool{
 #endif
   if(consumerPresent){id<MTLComputeCommandEncoder>e=[main computeCommandEncoder];
 #if !KP_DATAFLOW_NATIVE
-   if(![scope adaptComputeEncoder:e error:&error])return 11;
+   if(!KP_NATIVE_LIBRARY_FACTORIES&&![scope adaptComputeEncoder:e error:&error])return 11;
 #endif
    for(id<MTLBuffer>r in buffers.allValues)[e useResource:r usage:MTLResourceUsageRead|MTLResourceUsageWrite];for(id<MTLBuffer>r in params)[e useResource:r usage:MTLResourceUsageRead];
    @try{if(copy){[e executeCommandsInBuffer:target withRange:NSMakeRange(first,1)];[e executeCommandsInBuffer:target withRange:NSMakeRange(first+3,1)];[e executeCommandsInBuffer:target withRange:NSMakeRange(first+1,2)];}else[e executeCommandsInBuffer:target withRange:NSMakeRange(first,3)];}@catch(NSException*x){[e endEncoding];emit(@{@"failure":@"execute",@"trial":@(trial),@"error":x.reason?:@"nil"});return 11;}[e endEncoding];}
@@ -225,7 +237,7 @@ int main(int argc,char**argv){@autoreleasepool{
   if(staleRoot&&trial){NSString*f=[NSString stringWithFormat:@"trial-%u-stale-roots.bin",trial];[[NSData dataWithBytes:previousRoot.contents length:144]writeToFile:[out stringByAppendingPathComponent:f]atomically:YES];trialInfo[@"stale_root_file"]=f;}
   // A rejected direct mutation must not detach a retired slot from its lease.
   NSString*mutationError=nil,*retiredConsumerError=nil;@try{[[target indirectComputeCommandAtIndex:0]setComputePipelineState:pipelines[0]];}@catch(NSException*x){mutationError=x.reason;}
-  id<MTLCommandBuffer>retiredCB=[q commandBuffer];id<MTLComputeCommandEncoder>retiredEncoder=[retiredCB computeCommandEncoder];if(![scope adaptComputeEncoder:retiredEncoder error:&error])return 35;
+  id<MTLCommandBuffer>retiredCB=[q commandBuffer];id<MTLComputeCommandEncoder>retiredEncoder=[retiredCB computeCommandEncoder];if(!KP_NATIVE_LIBRARY_FACTORIES&&![scope adaptComputeEncoder:retiredEncoder error:&error])return 35;
   @try{[retiredEncoder executeCommandsInBuffer:target withRange:NSMakeRange(0,1)];}@catch(NSException*x){retiredConsumerError=x.reason;}[retiredEncoder endEncoding];
   if(![mutationError containsString:@"requires reset"]||![retiredConsumerError containsString:@"not materialized/active"]){emit(@{@"failure":@"retired_slot_detached",@"mutation":mutationError?:@"",@"consumer":retiredConsumerError?:@""});return 35;}
   trialInfo[@"retired_mutation_error"]=mutationError;trialInfo[@"retired_consumer_error"]=retiredConsumerError;
@@ -238,5 +250,9 @@ int main(int argc,char**argv){@autoreleasepool{
 #if KP_FUNCTION_ARGUMENT_ENCODER && !KP_DATAFLOW_NATIVE
  MTLArgument*restoredReflection=nil;id<MTLArgumentEncoder>restoredEncoder=[producerFunction newArgumentEncoderWithBufferIndex:0 reflection:&restoredReflection];if(![NSStringFromClass(object_getClass(producerFunction))isEqual:@"_MTLFunctionInternal"]||![NSStringFromClass(object_getClass(restoredEncoder))isEqual:@"NVMTLIndirectArgumentEncoder"]||restoredEncoder.encodedLength!=48||restoredReflection.bufferDataSize!=48){emit(@{@"failure":@"native_function_restore"});return 13;}
 #endif
- BOOL restored=object_getClass(d)==original;emit(@{@"mode":mode,@"native_reference":@(KP_DATAFLOW_NATIVE),@"public_argument_encoder":@(KP_PUBLIC_ARGUMENT_ENCODER),@"function_argument_encoder":@(KP_FUNCTION_ARGUMENT_ENCODER),@"function_events":scope?scope.events:@[],@"argument_refusal_probe":@(KP_ARGUMENT_REFUSALS),@"device":d.name,@"registry_id":@(d.registryID),@"device_identity":KP_DATAFLOW_NATIVE?@{}:KPKepler880MIdentity(d),@"producer_backend":KP_NATIVE_MSL_COMMANDS?@"native_msl":(KP_DATAFLOW_NATIVE?@"apple_icb":@"NAK"),@"runs":runs,@"API_refusals":@(APIrefusals),@"producer_info":info,@"producer_import":importProof,@"scope_restored":@(restored),@"CPU_expected_answers_uploaded":@NO,@"IR_CPU_read_before_execution":@NO,@"performance_benchmark":@NO,@"system_modified":@NO});return restored?0:13;
+ NSDictionary*libraryEvidence=@{};
+#if KP_NATIVE_LIBRARY_FACTORIES
+ NSMutableDictionary*le=[nativeLibraryReception mutableCopy];le[@"native_library_restored"]=@([NSStringFromClass(object_getClass(nativeLibraryOwner))isEqual:@"_MTLLibrary"]);le[@"native_queue_restored"]=@(object_getClass(q)==originalQueue);libraryEvidence=le;nativeLibraryOwner=nil;
+#endif
+ BOOL restored=object_getClass(d)==original;emit(@{@"mode":mode,@"native_reference":@(KP_DATAFLOW_NATIVE),@"public_argument_encoder":@(KP_PUBLIC_ARGUMENT_ENCODER),@"function_argument_encoder":@(KP_FUNCTION_ARGUMENT_ENCODER),@"function_events":scope?scope.events:@[],@"native_library_factories":@(KP_NATIVE_LIBRARY_FACTORIES),@"library_reception":libraryEvidence,@"argument_refusal_probe":@(KP_ARGUMENT_REFUSALS),@"device":d.name,@"registry_id":@(d.registryID),@"device_identity":KP_DATAFLOW_NATIVE?@{}:KPKepler880MIdentity(d),@"producer_backend":KP_NATIVE_MSL_COMMANDS?@"native_msl":(KP_DATAFLOW_NATIVE?@"apple_icb":@"NAK"),@"runs":runs,@"API_refusals":@(APIrefusals),@"producer_info":info,@"producer_import":importProof,@"scope_restored":@(restored),@"CPU_expected_answers_uploaded":@NO,@"IR_CPU_read_before_execution":@NO,@"performance_benchmark":@NO,@"system_modified":@NO});return restored?0:13;
 }}
