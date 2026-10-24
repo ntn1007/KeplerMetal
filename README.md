@@ -15,6 +15,8 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
+Public argument encoders now bind the typed render-reset producer to an owned context, without client GPU-address construction. A new runtime passes 27 reception hosts / 2,654,208 exact float channels and 16 render/compute regression hosts; native PSO creation stays native. [Contract, ownership and reproduction](docs/RENDER_RECORD_ARGUMENTS.md).
+
 The translated typed reset producer now changes a real rendered image through the existing state-record pipeline. A 21-process reception checks 168 images / 2,064,384 float channels exactly, including direct-draw references, a native MSL reset reference and missing/invalid-context controls. The seven-object runtime stays unchanged. [Ordering, ownership and reproduction](docs/AIR_RESET_RENDER.md).
 
 AIR reset lowering now preserves a typed producer's arithmetic, branches, index permutation and ordinary buffer bindings. Three native candidate/reference pairs pass 96 total dispatches, 1,548 exact uint32 outputs and 300 record resets. Structural recognition also rebuilds the first qualified shader byte-identically; GPU use still requires an exact qualified input. [Evidence and limits](docs/AIR_RESET_DATAFLOW.md).

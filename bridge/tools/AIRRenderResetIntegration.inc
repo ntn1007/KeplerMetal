@@ -3,9 +3,11 @@
 #import "AIRCertifiedResetPipeline.h"
 static id<MTLComputePipelineState>airResetPipeline;
 static NSDictionary *airResetReceipt;
-static bool airAppliesReset(NSString *mode){return [@[@"air_gpu",@"air_native",@"air_reference"]containsObject:mode];}
-static bool airDispatchesReset(NSString *mode){return ![mode hasPrefix:@"air_no_reset"];}
+static NSString *airResetOutputDirectory;
+static bool airAppliesReset(NSString *mode){return [mode hasPrefix:@"arguments_"]?![mode hasPrefix:@"arguments_no_reset"]:[@[@"air_gpu",@"air_native",@"air_reference"]containsObject:mode];}
+static bool airDispatchesReset(NSString *mode){return ![mode hasPrefix:@"air_no_reset"]&&![mode hasPrefix:@"arguments_no_reset"];}
 static void airInitializeReset(id<MTLDevice>device,NSString *assets,NSString *directory,NSString *mode){
+    airResetOutputDirectory=directory;
     NSString *variant=[mode isEqual:@"air_reference"]?@"reference":@"lowered";
     NSError *error=nil;NSDictionary *receipt=nil;
     airResetPipeline=KPNewCertifiedResetPipeline(device,

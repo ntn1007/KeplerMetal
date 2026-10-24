@@ -139,6 +139,8 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 @property(nonatomic,strong) NSObject *factoryLock;
 @property(nonatomic,strong) NSMutableArray *adaptedFunctions,*functionLibraries,*adaptedIRLibraries;
 @property(nonatomic,strong) NSMutableDictionary *registeredIRLibraries;
+@property(nonatomic) BOOL renderRecordArgumentsEnabled;
+@property(nonatomic,strong) NSHashTable *renderArgumentContexts;
 @property(nonatomic,strong) NSMutableDictionary *stablePipelineIdentities;
 @property(nonatomic) BOOL restored;
 @property(nonatomic) NSUInteger releasedEncoderCount;
@@ -162,6 +164,7 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 @property(nonatomic,strong) id<MTLLibrary> GPUCommandIRv2Library;
 @property(nonatomic,strong) id<MTLComputePipelineState> GPUCommandIRv2Selector;
 - (NSDictionary*)profileForPipeline:(id<MTLComputePipelineState>)pipeline;
+- (BOOL)validateRenderCommandArgumentContext:(KPRenderCommandArgumentContext*)context error:(NSError**)error;
 - (KPRecordedNativeCompute*)materialize:(KPComputeICBCommand*)command;
 - (KPGPUCommandSelection*)newGPUCommandBindingPlanFromBuffer:(id<MTLIndirectCommandBuffer>)source sourceRange:(NSRange)range destination:(id<MTLIndirectCommandBuffer>)destination destinationRange:(NSRange)targetRange resources:(NSArray<NSDictionary*>*)resources input:(id<MTLBuffer>)input inputOffset:(NSUInteger)offset nonce:(uint32_t)nonce IR:(BOOL)IR error:(NSError**)error;
 - (KPGPUCommandSelection*)newGPUCommandIRv2FromBuffer:(id<MTLIndirectCommandBuffer>)source sourceRange:(NSRange)range destination:(id<MTLIndirectCommandBuffer>)destination destinationRange:(NSRange)targetRange resources:(NSArray<NSDictionary*>*)resources records:(id<MTLBuffer>)records recordOffset:(NSUInteger)offset stablePipelineIdentities:(BOOL)stable error:(NSError**)error;
@@ -203,6 +206,7 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 
 @class KPIndirectRenderPlan;
 @interface KPRenderICB : KPComputeICB
+@property(nonatomic,strong) KPRenderCommandArgumentContext *renderArgumentContext;
 @property(nonatomic) MTLIndirectCommandType allowedTypes;
 @property(nonatomic,strong) KPIndirectRenderPlan *indirectRenderPlan;
 @property(nonatomic) NSUInteger maxVertexBuffers,maxFragmentBuffers;
@@ -369,6 +373,7 @@ static NSString*residentBindingError(KPComputeICBCommand*c,KPCPUICBScope*scope){
 }
 @end
 
+#include "KeplerRenderCommandArguments.inc"
 #include "KeplerCommandIRArgumentEncoder.inc"
 #include "KeplerCommandIRFunction.inc"
 #include "KeplerCommandIRReflection.inc"
@@ -843,6 +848,7 @@ BOOL installRenderOverride(Class dynamic,Class original,SEL selector,IMP impleme
 }
 #include "KeplerIndirectRenderScope.inc"
 #include "KeplerRenderStateCatalogueScope.inc"
+#include "KeplerRenderCommandArgumentsScope.inc"
 - (void)restore{@synchronized(_factoryLock){if(_restored)return;_restored=YES;NSUInteger liveFunctions=0;for(KPAdaptedFunction*r in _adaptedFunctions){id f=r.function;if(f){liveFunctions++;object_setClass(f,r.originalClass);objc_setAssociatedObject(f,&IRFunctionKey,nil,OBJC_ASSOCIATION_ASSIGN);}}[_adaptedFunctions removeAllObjects];[_functionLibraries removeAllObjects];restoreIRLibraries(self);if(liveFunctions)[_eventRows addObject:@{@"operation":@"restore_IRv2_functions",@"live_functions_restored":@(liveFunctions),@"cached_function_classes":@(functionClasses.size())}];NSUInteger live=0,expired=_releasedEncoderCount;for(KPAdaptedEncoder*r in _adapted){id e=r.encoder;if(!e){expired++;continue;}live++;object_setClass(e,r.originalClass);objc_setAssociatedObject(e,&contextKey,nil,OBJC_ASSOCIATION_ASSIGN);}[_adapted removeAllObjects];restoreAutomaticComputeFactories(self);object_setClass(_device,_originalDeviceClass);objc_setAssociatedObject(_device,&contextKey,nil,OBJC_ASSOCIATION_ASSIGN);_restored=YES;[_eventRows addObject:@{@"operation":@"scope_restore",@"device_class_restored":@(object_getClass(_device)==_originalDeviceClass),@"live_encoder_classes_restored":@(live),@"already_released_encoders":@(expired),@"cached_device_classes":@(deviceClasses.size()),@"cached_encoder_classes":@(encoderClasses.size()),@"system_modified":@NO}];}}
 - (void)dealloc{[self restore];}
 @end

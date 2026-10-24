@@ -1,5 +1,7 @@
 # Build from source
 
+[RENDER_RECORD_ARGUMENTS.md](RENDER_RECORD_ARGUMENTS.md) adds `--render-argument-encoders` to the AIR render builder, owned context APIs, ordinary native PSO checks and separate 27-host reception / 16-host regression auditors. The fresh seven-object runtime changes its ICB object only.
+
 [AIR_RESET_RENDER.md](AIR_RESET_RENDER.md) adds `--air-reset-build` plus `--air-reset-inspections` to the render catalogue builder. A separate MRC factory with C linkage verifies the previously certified program for the ARC host. The source-built runtime and materializer remain unchanged; seven opt-in modes qualify the final image and negative controls.
 
 [AIR_RESET_DATAFLOW.md](AIR_RESET_DATAFLOW.md) adds structural command-root metadata recognition and the separate qualified typed producer, preserving its arithmetic, branches and ordinary buffer metadata. Its source-only builder, certificate gate and auditor reuse the preceding native capture/section parser without changing the core runtime.

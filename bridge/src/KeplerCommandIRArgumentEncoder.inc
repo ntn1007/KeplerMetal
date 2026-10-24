@@ -128,6 +128,12 @@ namespace {
 id<MTLArgumentEncoder> createIRArgumentEncoder(id self,SEL selector,NSArray*arguments) NS_RETURNS_RETAINED;
 id<MTLArgumentEncoder> createIRArgumentEncoder(id self,SEL selector,NSArray*arguments){
  KPCPUICBScope*s=scopeFor(self);BOOL special=NO;
+ if(s&&!s.restored&&s.renderRecordArgumentsEnabled&&arguments.count==1&&[arguments[0]isKindOfClass:MTLArgumentDescriptor.class]&&((MTLArgumentDescriptor*)arguments[0]).dataType==MTLDataTypeIndirectCommandBuffer){
+  MTLArgumentDescriptor*a=arguments[0];
+  if(![a isKindOfClass:MTLArgumentDescriptor.class]||a.dataType!=MTLDataTypeIndirectCommandBuffer||a.index||a.arrayLength!=1)reject(@"Render root descriptor must contain one ICB at index0");
+  KPRenderCommandArgumentEncoder*e=[KPRenderCommandArgumentEncoder new];e.scope=s;
+  [s.eventRows addObject:@{@"operation":@"new_public_render_record_argument_encoder",@"bytes":@8,@"alignment":@8,@"Apple_native_ICB_identity":@NO}];return e;
+ }
  for(MTLArgumentDescriptor*a in arguments)if([a isKindOfClass:MTLArgumentDescriptor.class]&&(a.dataType==MTLDataTypeIndirectCommandBuffer||a.dataType==MTLDataTypeComputePipeline))special=YES;
  if(!s||s.restored||!s.GPUCommandIRv2Selector||!special){
   Class original=s?s.originalDeviceClass:class_getSuperclass(object_getClass(self));Method m=class_getInstanceMethod(original,selector);

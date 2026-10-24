@@ -1,0 +1,249 @@
+{
+  "base_commit": "a938cb98030f3e58aa733358848bc5090fefd984",
+  "entries": [
+    {
+      "path": "bridge/src/KeplerCPUICB.h",
+      "SHA256": "9256d0ea08974bb5d34387959672f63421db4f04821c56e98ac0ffe39c94e14d",
+      "frozen_build_copies": [
+        {
+          "build": "client-build-03",
+          "folder": "src",
+          "SHA256": "9256d0ea08974bb5d34387959672f63421db4f04821c56e98ac0ffe39c94e14d"
+        },
+        {
+          "build": "legacy-render-build",
+          "folder": "src",
+          "SHA256": "9256d0ea08974bb5d34387959672f63421db4f04821c56e98ac0ffe39c94e14d"
+        },
+        {
+          "build": "compute-regression-build",
+          "folder": "src",
+          "SHA256": "9256d0ea08974bb5d34387959672f63421db4f04821c56e98ac0ffe39c94e14d"
+        },
+        {
+          "build": "render-record-arguments-20261024-02",
+          "folder": "src",
+          "SHA256": "9256d0ea08974bb5d34387959672f63421db4f04821c56e98ac0ffe39c94e14d"
+        }
+      ]
+    },
+    {
+      "path": "bridge/src/KeplerCPUICB.mm",
+      "SHA256": "6b18d56fe0b3975df3bc168376e571bcf7b39310cafc37d59eb9bda500dd7bcc",
+      "frozen_build_copies": [
+        {
+          "build": "render-record-arguments-20261024-02",
+          "folder": "src",
+          "SHA256": "6b18d56fe0b3975df3bc168376e571bcf7b39310cafc37d59eb9bda500dd7bcc"
+        }
+      ]
+    },
+    {
+      "path": "bridge/src/KeplerCommandIRArgumentEncoder.inc",
+      "SHA256": "546cca92ef918b9cc46447bdefee879fa329cff3a0ea4fc35622ed29e9b7441d",
+      "frozen_build_copies": [
+        {
+          "build": "render-record-arguments-20261024-02",
+          "folder": "src",
+          "SHA256": "546cca92ef918b9cc46447bdefee879fa329cff3a0ea4fc35622ed29e9b7441d"
+        }
+      ]
+    },
+    {
+      "path": "bridge/src/KeplerCommandIRFunction.inc",
+      "SHA256": "0dfbbd00924d21efe59f77a1cc4d9d39e52a00bbb5472eb90750d9159c894bd5",
+      "frozen_build_copies": [
+        {
+          "build": "render-record-arguments-20261024-02",
+          "folder": "src",
+          "SHA256": "0dfbbd00924d21efe59f77a1cc4d9d39e52a00bbb5472eb90750d9159c894bd5"
+        }
+      ]
+    },
+    {
+      "path": "bridge/src/KeplerRenderCommandArguments.inc",
+      "SHA256": "47603a3da47122cdda33f0851d736dfb8284f30b2f7d16c4e1f62da6524c6c27",
+      "frozen_build_copies": [
+        {
+          "build": "render-record-arguments-20261024-02",
+          "folder": "src",
+          "SHA256": "47603a3da47122cdda33f0851d736dfb8284f30b2f7d16c4e1f62da6524c6c27"
+        }
+      ]
+    },
+    {
+      "path": "bridge/src/KeplerRenderCommandArgumentsScope.inc",
+      "SHA256": "ec653127f68b67f041ead20902977072739d4226d7c4f6446089af60aba961c5",
+      "frozen_build_copies": [
+        {
+          "build": "render-record-arguments-20261024-02",
+          "folder": "src",
+          "SHA256": "ec653127f68b67f041ead20902977072739d4226d7c4f6446089af60aba961c5"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/AIRCertifiedResetPipeline.h",
+      "SHA256": "d055435046ce582effe695f94a547ea8158f3817c83e57408a709c85abb2c15f",
+      "frozen_build_copies": [
+        {
+          "build": "client-build-03",
+          "folder": "src",
+          "SHA256": "d055435046ce582effe695f94a547ea8158f3817c83e57408a709c85abb2c15f"
+        },
+        {
+          "build": "legacy-render-build",
+          "folder": "src",
+          "SHA256": "d055435046ce582effe695f94a547ea8158f3817c83e57408a709c85abb2c15f"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/AIRCertifiedResetPipeline.mm",
+      "SHA256": "22326e18e09d6d23992d6b0e7771bef187fc34ff0c16b380d5f267e52bfccf96",
+      "frozen_build_copies": [
+        {
+          "build": "client-build-03",
+          "folder": "src",
+          "SHA256": "22326e18e09d6d23992d6b0e7771bef187fc34ff0c16b380d5f267e52bfccf96"
+        },
+        {
+          "build": "legacy-render-build",
+          "folder": "src",
+          "SHA256": "22326e18e09d6d23992d6b0e7771bef187fc34ff0c16b380d5f267e52bfccf96"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/AIRRenderResetIntegration.inc",
+      "SHA256": "4cf4d4797b5be076767f204ecc4f5e9e740aebe4c3a276b25744af26d635cd66",
+      "frozen_build_copies": [
+        {
+          "build": "client-build-03",
+          "folder": "src",
+          "SHA256": "4cf4d4797b5be076767f204ecc4f5e9e740aebe4c3a276b25744af26d635cd66"
+        },
+        {
+          "build": "legacy-render-build",
+          "folder": "src",
+          "SHA256": "4cf4d4797b5be076767f204ecc4f5e9e740aebe4c3a276b25744af26d635cd66"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/OwnedKeplerComputeCode.inc",
+      "SHA256": "3467c8b680203be6831303d56d77126df972b3babb978e649eb26b902e5278f2",
+      "frozen_build_copies": [
+        {
+          "build": "client-build-03",
+          "folder": "src",
+          "SHA256": "3467c8b680203be6831303d56d77126df972b3babb978e649eb26b902e5278f2"
+        },
+        {
+          "build": "legacy-render-build",
+          "folder": "src",
+          "SHA256": "3467c8b680203be6831303d56d77126df972b3babb978e649eb26b902e5278f2"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/RenderRecordArgumentsContracts.inc",
+      "SHA256": "783d5b9a2b1775b96ffa41ab78419391825b474ef86529511bf6cee4bf755057",
+      "frozen_build_copies": [
+        {
+          "build": "client-build-03",
+          "folder": "src",
+          "SHA256": "783d5b9a2b1775b96ffa41ab78419391825b474ef86529511bf6cee4bf755057"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/RenderRecordArgumentsEncode.inc",
+      "SHA256": "1527fbd50ce9c0748b963beb9579822b4c5f1591a087de689dfcb4581f1202d4",
+      "frozen_build_copies": [
+        {
+          "build": "client-build-03",
+          "folder": "src",
+          "SHA256": "1527fbd50ce9c0748b963beb9579822b4c5f1591a087de689dfcb4581f1202d4"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/RenderRecordArgumentsSetup.inc",
+      "SHA256": "baf2e98bbf94b550aee13b55adc5ae44c5fcc87fdf9f48f8bfd7e6741c8f4972",
+      "frozen_build_copies": [
+        {
+          "build": "client-build-03",
+          "folder": "src",
+          "SHA256": "baf2e98bbf94b550aee13b55adc5ae44c5fcc87fdf9f48f8bfd7e6741c8f4972"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/audit_render_record_arguments.py",
+      "SHA256": "9deda35a1e159c53581768d175295674ad2bfca17197bffbbebacd79582c6329"
+    },
+    {
+      "path": "bridge/tools/audit_render_record_regression.py",
+      "SHA256": "f2b4f283e936c67f26fc154b1252f9be3deab684c79f1b694712c746421af4df"
+    },
+    {
+      "path": "bridge/tools/public_render_state_catalogue.py",
+      "SHA256": "aff53845286fd27885abf2e791b7bb3cf1b3f1629d763c6ddb9462eb42ba99e9",
+      "frozen_build_copies": [
+        {
+          "build": "client-build-03",
+          "folder": "src",
+          "SHA256": "aff53845286fd27885abf2e791b7bb3cf1b3f1629d763c6ddb9462eb42ba99e9"
+        },
+        {
+          "build": "legacy-render-build",
+          "folder": "src",
+          "SHA256": "aff53845286fd27885abf2e791b7bb3cf1b3f1629d763c6ddb9462eb42ba99e9"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/render_state_catalogue_client.mm",
+      "SHA256": "362bc567ea335c6ce71612372cce3875ea14dfc8cebe02c433f83eff4061070d",
+      "frozen_build_copies": [
+        {
+          "build": "client-build-03",
+          "folder": "src",
+          "SHA256": "362bc567ea335c6ce71612372cce3875ea14dfc8cebe02c433f83eff4061070d"
+        },
+        {
+          "build": "legacy-render-build",
+          "folder": "src",
+          "SHA256": "362bc567ea335c6ce71612372cce3875ea14dfc8cebe02c433f83eff4061070d"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/verify_air_reset_render.py",
+      "SHA256": "6fb196e869a422304d4542d7983b1206e48aa12d7af5b412b634bb9df5a6451f",
+      "frozen_build_copies": [
+        {
+          "build": "client-build-03",
+          "folder": "oracles",
+          "SHA256": "6fb196e869a422304d4542d7983b1206e48aa12d7af5b412b634bb9df5a6451f"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/verify_render_record_arguments.py",
+      "SHA256": "94881675d3425fe7dac07729bfd8355381c16cf3f4ae3841fcce515d5c7853f2",
+      "frozen_build_copies": [
+        {
+          "build": "client-build-03",
+          "folder": "oracles",
+          "SHA256": "94881675d3425fe7dac07729bfd8355381c16cf3f4ae3841fcce515d5c7853f2"
+        }
+      ]
+    },
+    {
+      "path": "tests/test_render_record_arguments.py",
+      "SHA256": "4a935a3f69dee54b5da3ff2fae03abd4cc5abfb1fb3448aa6dadd57d1f9d8bc6"
+    }
+  ]
+}

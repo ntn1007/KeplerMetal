@@ -9,6 +9,9 @@
 #include <cstring>
 #include <stdexcept>
 #include <vector>
+#if KP_RENDER_ARGUMENT_ENCODERS
+#include <thread>
+#endif
 
 static void require(bool value,const char *message){if(!value)throw std::runtime_error(message);}
 static NSString *sha(NSData *data){unsigned char h[32];CC_SHA256(data.bytes,(CC_LONG)data.length,h);NSMutableString *s=[NSMutableString new];for(auto b:h)[s appendFormat:@"%02x",b];return s;}
@@ -63,6 +66,9 @@ static StateCapture *encodeFrame(id<MTLDevice>device,id<MTLCommandQueue>queue,NS
     KPCPUICBScope *scope=[KPCPUICBScope installRenderingOnDevice:device queue:queue libraryData:legacy expectedSHA256:sha(legacy)error:&error];
     BOOL registered=scope&&[scope registerRenderVertexLibraryData:library expectedSHA256:sha(library)manifestData:profile expectedManifestSHA256:sha(profile)error:&error];require(registered,error.description.UTF8String?:"scope registration");
     BOOL enabled=[scope enableGPURenderStateCatalogueWithLibraryData:materializer expectedSHA256:sha(materializer)error:&error];require(enabled,error.description.UTF8String?:"state registration");
+#if KP_RENDER_ARGUMENT_ENCODERS
+#include "RenderRecordArgumentsSetup.inc"
+#endif
     StateCapture *capture=[StateCapture new];capture.readbacks=[NSMutableDictionary new];
     id<MTLCommandBuffer>cb=[queue commandBuffer];require(cb&&cb.retainedReferences,"retained command buffer");capture.commandBuffer=cb;
     NSMutableDictionary<NSString*,id<MTLBuffer>> *buffers=[NSMutableDictionary new];
@@ -124,7 +130,11 @@ static StateCapture *encodeFrame(id<MTLDevice>device,id<MTLCommandQueue>queue,NS
     uint32_t config[4]={trial,trial,4,[mode isEqual:@"forced_0"]?1u:[mode isEqual:@"forced_1"]?2u:0u};id<MTLBuffer>cfg=[device newBufferWithLength:256 options:MTLResourceStorageModeShared];memset(cfg.contents,0,256);memcpy(cfg.contents,config,16);
     if(produce){id<MTLComputeCommandEncoder>e=[cb computeCommandEncoder];[e setComputePipelineState:producer];[e setBuffer:buffers[@"seeds"]offset:64 atIndex:0];[e setBuffer:buffers[@"range"]offset:64 atIndex:1];[e setBuffer:buffers[@"counter"]offset:64 atIndex:2];[e setBuffer:cfg offset:0 atIndex:3];[e setBuffer:buffers[@"identities"]offset:64 atIndex:4];[e setBuffer:buffers[@"records"]offset:64 atIndex:5];[e setBuffer:buffers[@"foreign-identities"]offset:64 atIndex:6];[e dispatchThreadgroups:MTLSizeMake(1,1,1)threadsPerThreadgroup:MTLSizeMake(32,1,1)];[e endEncoding];}
 #if KP_AIR_RENDER_RESET
+#if KP_RENDER_ARGUMENT_ENCODERS
+#include "RenderRecordArgumentsEncode.inc"
+#else
 #include "AIRRenderResetEncode.inc"
+#endif
 #endif
     NSMutableArray *refusals=[NSMutableArray new];
     id<MTLIndirectCommandBuffer>backup=nil,backupAlternative=nil;
@@ -188,6 +198,12 @@ static StateCapture *encodeFrame(id<MTLDevice>device,id<MTLCommandQueue>queue,NS
     for(unsigned bank=0;bank<2;bank++){[b copyFromTexture:textures[bank]sourceSlice:0 sourceLevel:0 sourceOrigin:MTLOriginMake(0,0,0)sourceSize:MTLSizeMake(64,48,1)toBuffer:textureRead[bank]destinationOffset:0 destinationBytesPerRow:1024 destinationBytesPerImage:49152];capture.readbacks[[NSString stringWithFormat:@"texture-%u",bank]]=textureRead[bank];}[b endEncoding];
     capture.weakOwners=@[weak(scope),weak(commands[0]),weak(commands[1]),weak(samplers[0][1]),weak(samplers[1][1])];
     [scope restore];require(object_getClass(device)==original&&object_getClass(e)==nativeClass,"class restoration");capture.events=scope.events;
+#if KP_RENDER_ARGUMENT_ENCODERS
+    require(object_getClass(recordProducerFunction)==recordProducerNativeClass,"render root function class restoration");
+    require([recordProducerFunction newArgumentEncoderWithBufferIndex:0].encodedLength==0,"native root getter restoration");
+    if([mode isEqual:@"arguments_contracts"]&&trial==0){BOOL refused=NO;@try{[recordArgumentEncoder setArgumentBuffer:resetRootGPU offset:64];}@catch(NSException*x){refused=YES;}require(refused,"restored encoder must refuse");[recordRefusals addObject:@"setter_after_restore"];}
+    capture.weakOwners=[capture.weakOwners arrayByAddingObjectsFromArray:@[weak(recordArgumentContext),weak(recordArgumentEncoder)]];
+#endif
     capture.row=[@{@"trial":@(trial),@"native_reference":@(native),@"producer_dispatches":@(produce?1u:0u),@"api_refusals":refusals,@"consumer_encoded":@(consume),@"identifiers":ids,@"foreign_identifiers":foreignIDs,@"scissor":@[@(scissor.x),@(scissor.y),@(scissor.width),@(scissor.height)],@"classes_restored_before_commit":@YES}mutableCopy];
 #if KP_AIR_RENDER_RESET
     capture.row[@"AIR_reset"]=resetRow;
@@ -197,7 +213,9 @@ static StateCapture *encodeFrame(id<MTLDevice>device,id<MTLCommandQueue>queue,NS
 
 int main(int argc,char **argv){@autoreleasepool{@try{try{
     require(argc==4,"arguments");NSString *assets=@(argv[1]),*directory=@(argv[2]),*mode=@(argv[3]);
-#if KP_AIR_RENDER_RESET
+#if KP_RENDER_ARGUMENT_ENCODERS
+    require([@[@"arguments_gpu",@"arguments_native",@"arguments_device",@"arguments_reflection",@"arguments_arrays",@"arguments_reuse",@"arguments_no_reset",@"arguments_no_reset_native",@"arguments_contracts"]containsObject:mode],"render argument mode");
+#elif KP_AIR_RENDER_RESET
     require([@[@"air_gpu",@"air_native",@"air_reference",@"air_no_reset",@"air_no_reset_native",@"air_bad_context",@"air_bad_context_native"]containsObject:mode],"AIR mode");
 #else
     require([@[@"gpu",@"native",@"pipeline_only",@"pipeline_only_native",@"resources_only",@"resources_only_native",@"forced_0",@"forced_1",@"no_producer",@"no_consumer",@"release",@"contracts"]containsObject:mode],"mode");
@@ -213,6 +231,10 @@ int main(int argc,char **argv){@autoreleasepool{@try{try{
     for(unsigned trial=0;trial<trials;trial++){
         StateCapture *capture=nil;@autoreleasepool{capture=encodeFrame(device,queue,assets,producer,marker,trial,mode);}
         for(unsigned i=0;i<3;i++)require(capture.weakOwners[i].value==nil,"software owner retained after pool drain");
+#if KP_RENDER_ARGUMENT_ENCODERS
+        require(capture.weakOwners[5].value!=nil&&capture.weakOwners[6].value==nil,"owned root context lease/encoder release");
+        capture.row[@"root_context_alive_before_commit"]=@YES;capture.row[@"argument_encoder_released_before_commit"]=@YES;capture.row[@"root_function_restored_before_commit"]=@YES;
+#endif
         [capture.row addEntriesFromDictionary:@{@"autorelease_pool_drained_before_commit":@YES,@"scope_deallocated_before_commit":@YES,@"ICBs_deallocated_before_commit":@YES,@"sampler_0_alive_before_commit":@(capture.weakOwners[3].value!=nil),@"sampler_1_alive_before_commit":@(capture.weakOwners[4].value!=nil)}];
         [capture.commandBuffer commit];[capture.commandBuffer waitUntilCompleted];require(capture.commandBuffer.status==MTLCommandBufferStatusCompleted,"GPU completion");capture.row[@"command_status"]=@(capture.commandBuffer.status);
         for(NSString *name in capture.readbacks){id<MTLBuffer>buffer=capture.readbacks[name];NSString *file=[directory stringByAppendingPathComponent:[NSString stringWithFormat:@"trial-%u.%@.bin",trial,name]];require([[NSData dataWithBytes:buffer.contents length:buffer.length]writeToFile:file atomically:YES],"readback save");}

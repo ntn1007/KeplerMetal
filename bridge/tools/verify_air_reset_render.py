@@ -18,10 +18,10 @@ def reset_witness(gid,index):
     return (((x<<shift)|(x>>(32-shift)))^(index*0x9e3779b9))&0xffffffff
 
 
-def extra_buffers(row,mode):
+def extra_buffers(row,mode,root_storage_mode=2):
     r=row['AIR_reset'];dispatch=not mode.startswith('air_no_reset')
     assert r['dispatched']is dispatch and[r[k]for k in ['capacity','count','seed','mask','target_slot']]==[4,4,3,0,3]
-    for field in ['context_storage_mode','records_storage_mode','root_storage_mode','indices_storage_mode','output_storage_mode']:assert r[field]==2
+    for field in ['context_storage_mode','records_storage_mode','root_storage_mode','indices_storage_mode','output_storage_mode']:assert r[field]==(root_storage_mode if field=='root_storage_mode'else 2)
     addresses=[r[k]for k in ['context_GPU_address','records_GPU_address','root_GPU_address']]
     assert len(set(addresses))==3 and all(type(a)is int and 0<a<2**40 and a%16==0 for a in addresses)
     ctx=bytearray(b'\xa5'*160);struct.pack_into('<4I2Q',ctx,64,0x4b505243^int(mode.startswith('air_bad_context')),1,4,64,r['records_GPU_address'],0)

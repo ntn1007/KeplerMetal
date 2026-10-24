@@ -15,6 +15,8 @@ Le travail suit deux axes complémentaires :
 
 ## Avancées récentes
 
+Les encodeurs d’arguments publics raccordent maintenant le producteur typé de rendu à un contexte détenu par la bibliothèque, sans construction d’adresses GPU par l’application. Le nouveau runtime passe 27 processus de réception / 2 654 208 canaux exacts et 16 régressions rendu/compute ; les pipelines restent compilés nativement. [Contrat, durées de vie et reproduction](docs/RENDER_RECORD_ARGUMENTS.md).
+
 Le producteur typé traduit en AIR agit maintenant sur un rendu réel : 21 processus vérifient 168 images et 2 064 384 canaux exacts, avec références natives et contrôles sans réinitialisation ou avec contexte invalide. Le runtime à sept objets reste inchangé. [Preuves, durées de vie et reproduction](docs/AIR_RESET_RENDER.md).
 
 La traduction AIR préserve maintenant les calculs, branches, indices permutés et buffers ordinaires d'un producteur typé : 96 dispatchs candidat/référence, 1 548 résultats uint32 exacts et 300 réinitialisations. La reconnaissance structurelle reconstruit aussi le premier shader qualifié à l'identique ; l'exécution reste limitée aux entrées qualifiées. [Preuves et limites](docs/AIR_RESET_DATAFLOW.md).

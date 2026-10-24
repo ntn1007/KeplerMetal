@@ -9,6 +9,15 @@
 // setBarrier/clearBarrier state is preserved through copy/reset and recorded in
 // events, but clearing it does not enable concurrency in this serial transport.
 @class KPGPUCommandSelection,KPRenderStateCatalogue;
+// Owned render-record ABI, separate from compute IRv2 and Apple ICB identity.
+// The context buffer is exposed for diagnostics. Encode roots through the
+// public MTLArgumentEncoder setter instead of writing GPU addresses by hand.
+@interface KPRenderCommandArgumentContext : NSObject
+@property(nonatomic,readonly,strong) id<MTLBuffer> contextBuffer,commandRecords;
+@property(nonatomic,readonly) NSUInteger contextOffset,commandRecordsOffset,capacity;
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+@end
 // Immutable catalogue of certified state snapshots. Identities are process-local
 // project tokens. Keep the source ICBs alive and unchanged through consumption.
 @interface KPRenderStateCatalogue : NSObject
@@ -282,6 +291,29 @@
                  indirectBufferOffset:(NSUInteger)offset
                         commandBuffer:(id<MTLCommandBuffer>)commandBuffer
                                 error:(NSError **)error;
+// Render-record root getters are enabled explicitly for an immutable lowered
+// native library. Their reflection remains the compiled scalar-root reflection,
+// not a fabricated Apple command-resource descriptor. Registration is not GPU
+// shader qualification; pipeline factories stay native.
+- (id<MTLFunction>)newRenderCommandFunctionWithLibraryData:(NSData *)data
+                                         expectedSHA256:(NSString *)expected
+                                           functionName:(NSString *)name
+                                        rootBufferIndex:(NSUInteger)index
+                                                  error:(NSError **)error;
+- (KPRenderCommandArgumentContext *)newRenderCommandArgumentContextWithCommands:(id<MTLIndirectCommandBuffer>)commands
+                                                               stateCatalogue:(KPRenderStateCatalogue *)catalogue
+                                                               commandRecords:(id<MTLBuffer>)records
+                                                         commandRecordsOffset:(NSUInteger)offset
+                                                                commandBuffer:(id<MTLCommandBuffer>)commandBuffer
+                                                                        error:(NSError **)error;
+// Seal one exported Shared root, declare its indirect resources and retain
+// them until this same uncommitted command buffer completes. Roots must not
+// be modified until completion. Restoring the scope after encoding is allowed.
+- (BOOL)prepareRenderCommandArgumentContext:(KPRenderCommandArgumentContext *)context
+                            argumentBuffer:(id<MTLBuffer>)root offset:(NSUInteger)offset
+                            computeEncoder:(id<MTLComputeCommandEncoder>)encoder
+                             commandBuffer:(id<MTLCommandBuffer>)commandBuffer
+                                     error:(NSError **)error;
 // Returns a real native MTLFunction from an immutable library snapshot. Only
 // its two root-encoder getters are adapted to our IRv2 ABI after validating
 // native reflection. The installed native compiler is not replaced.
