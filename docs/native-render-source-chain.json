@@ -1,0 +1,31 @@
+{
+  "base_commit": "65674e4536aa9b83a1bbf693793ed380a5d4677f",
+  "files": [
+    {
+      "path": "bridge/src/KeplerNativeRenderCommands.h",
+      "SHA256": "c6f0ff6ff34228685d662eba12523ba8263cf04e94b6bcbe866f067d098d994c"
+    },
+    {
+      "path": "bridge/src/render_source_commands_test.metal",
+      "SHA256": "f4c4f3bffcba2879d47e7f4965e3d058299e9204b21bf2a962c5ef97542609b2"
+    },
+    {
+      "path": "bridge/tools/public_render_state_catalogue.py",
+      "SHA256": "b100909dabbf10ed1fd3f9e128309b826e4615307ffe091af05ee260beee845d"
+    },
+    {
+      "path": "bridge/tools/audit_render_source_commands.py",
+      "SHA256": "b55ebf9b1d3368b9b0539f7f17ca37673ed465324c2eaa833149ef9978015871"
+    },
+    {
+      "path": "bridge/tools/render_state_catalogue_client.mm",
+      "SHA256": "eb6a5af6006ea694806c6debbaccda2be4d59c4a08ec6b609744f8316a96ce5b"
+    },
+    {
+      "path": "bridge/tools/verify_render_state_catalogue.py",
+      "SHA256": "80f2ae49d1edc7b11da6169009ea15f328809178476081ff5c7cef6cfbe812e9"
+    }
+  ],
+  "runtime_archive_SHA256": "796d6703bdee6b0697492cab7b7c1a5586b21d757813c389c416ce0edc68ad68",
+  "runtime_sources_unchanged": true
+}

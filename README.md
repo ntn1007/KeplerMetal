@@ -15,6 +15,8 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
+Native source shaders can now write, copy and reset certified render commands through an explicit project interface, compiled by NVIDIA’s native backend. A twelve-process GTX reception checks 1,093,632 exact float channels and matches the raw-record reference. This remains an adapted-application interface with CPU-expanded state candidates. [Contract and reproduction](docs/NATIVE_RENDER_SOURCE_COMMANDS.md).
+
 The GPU now chooses among certified render pipeline/resource candidates, with separate pipeline-only and resource-only controls. A 54-process reception checks 1,093,632 new exact float channels and 33 native-reference image pairs. The CPU encodes candidate states and GPU indirect-draw predicates select their visible effect; no speedup is claimed. [Contract, mechanism and reproduction](docs/GPU_RENDER_STATE_CATALOGUE.md).
 
 GPU-generated render draw arguments now pass the scoped public indirect-range route, including GPU validation of malformed scalar records. A 42-process reception covers 638,976 new exact raster channels and nonempty rendering after scope/ICB destruction; pipeline and resource bindings remain CPU-certified. [Contract, evidence and reproduction](docs/GPU_RENDER_COMMAND_RECORDS.md).

@@ -22,6 +22,9 @@ def build(a):
         'render_state_carrier.metal','combined_render_resources.metal','cpu_icb_combined_profiles.json','indirect_render_test.metal','render_state_catalogue.metal','render_state_catalogue_test.metal']:
         shutil.copyfile(ROOT/'src'/name,out/'src'/name)
     for name in ['render_state_catalogue_client.mm','public_render_state_catalogue.py']:shutil.copyfile(ROOT/'tools'/name,out/'src'/name)
+    if a.source_commands:
+        for name in ['KeplerNativeRenderCommands.h','render_source_commands_test.metal']:
+            shutil.copyfile(ROOT/'src'/name,out/'src'/name)
     for name in ['verify_render_state_catalogue.py','verify_indirect_render_ranges.py','verify_local_memory.py','public_large_scratch.py']:
         shutil.copyfile(ROOT/'tools'/name,out/'oracles'/name);py_compile.compile(str(out/'oracles'/name),doraise=True)
     shutil.copyfile(ROOT/'tools/lab_gpu_reservation.py',out/'runtime/lab_gpu_reservation.py')
@@ -29,6 +32,7 @@ def build(a):
     run=commands(out)
     for source,name,modules in [('render_state_carrier','render_state_carrier',True),('combined_render_resources','combined_render_resources',True),
         ('indirect_render_test','test',False),('render_state_catalogue','state',False),('render_state_catalogue_test','producer',False)]:
+        if name=='producer'and a.source_commands:source='render_source_commands_test'
         flags=[]if modules else['-fmodules=none']
         if name in ['state','producer']:flags+=['-I',out/'src']
         run(name+'-metal',['xcrun','metal','-std=macos-metal2.4',*flags,'-c',out/'src'/(source+'.metal'),'-o',out/(name+'.air')])
@@ -41,7 +45,7 @@ def build(a):
     write(out/'inputs.json',dict(source_SHA256={str(p.relative_to(out)):sha(p)for p in(out/'src').iterdir()},
         runtime_sources_SHA256=m['source_SHA256'],runtime_SHA256={p.name:sha(p)for p in(out/'runtime').iterdir()},oracle_SHA256={p.name:sha(p)for p in(out/'oracles').iterdir()},
         assets_SHA256={p.name:sha(p)for p in(out/'assets').iterdir()},executable_SHA256=sha(out/'application'),
-        static_library_SHA256=m['static_library_SHA256'],library_manifest_SHA256=sha(library/'manifest.json'),GPU_execution=False))
+        static_library_SHA256=m['static_library_SHA256'],library_manifest_SHA256=sha(library/'manifest.json'),source_commands=a.source_commands,GPU_execution=False))
 
 
 def run(a):
@@ -70,6 +74,6 @@ def run(a):
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);s=p.add_subparsers(required=True)
-    b=s.add_parser('build');b.add_argument('--library',type=Path,required=True);b.add_argument('--out',type=Path,required=True);b.set_defaults(func=build)
+    b=s.add_parser('build');b.add_argument('--library',type=Path,required=True);b.add_argument('--out',type=Path,required=True);b.add_argument('--source-commands',action='store_true');b.set_defaults(func=build)
     r=s.add_parser('run');r.add_argument('--build',type=Path,required=True);r.add_argument('--out',type=Path,required=True);r.add_argument('--mode',choices=MODES,required=True);r.add_argument('--reservation-root',type=Path,required=True);r.set_defaults(func=run)
     a=p.parse_args();a.func(a)

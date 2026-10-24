@@ -26,3 +26,7 @@ Apple Metal, Xcode, macOS frameworks, restored Apple/NVIDIA drivers, NVIDIA Linu
 CommandIR operation semantics using public MSL API spellings. The builder
 selects it from a workspace-only include directory; no Apple SDK implementation
 is copied into this repository or replaced on the machine.
+
+`KeplerNativeRenderCommands.h` is an original MIT-licensed MSL source interface
+for project-owned certified state records. It uses an explicit project namespace,
+contains no copied Apple SDK implementation, and replaces no SDK header or type.
