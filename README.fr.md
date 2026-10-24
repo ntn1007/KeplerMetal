@@ -15,6 +15,8 @@ Le travail suit deux axes complémentaires :
 
 ## Avancées récentes
 
+Les pipelines possèdent désormais une identité stable dans notre périmètre, résolue sur la GTX malgré les permutations et les variantes de taille de groupe. La matrice finale compte 32 processus et 5 950 464 résultats natifs vérifiés. Les identités Apple ICB/PSO et les applications ordinaires restent à raccorder. [Contrat, code et preuves](docs/STABLE_PIPELINE_IDENTITIES.md).
+
 Les producteurs compilés par NVIDIA passent désormais par les encodeurs publics de leur véritable fonction Metal et le catalogue de ressources du projet. Les six variantes de création de pipeline restent natives. Le client adapté évite la construction manuelle des racines ; les identités stables et les applications ordinaires restent à raccorder. [Contrat et reproduction](docs/NATIVE_SOURCE_FUNCTION_ARGUMENTS.md).
 
 Un nouvel abaissement de source compile les producteurs `compute_command` pris en charge avec le compilateur NVIDIA natif, puis exécute notre chaîne GPU de records. Seize processus natifs passent 5 035 008 vérifications uint32 ; 48 fichiers de sorties correspondent à la référence NAK. Une sonde de 23 cas a détecté puis permis de corriger un écart de représentation d’adresse par abaissement ciblé des membres en lecture seule. Ce support CommandIR demande une application adaptée et reste distinct de l’ABI ICB Apple. [Code, contrôles et reproduction](docs/NATIVE_MSL_COMMANDS.md).

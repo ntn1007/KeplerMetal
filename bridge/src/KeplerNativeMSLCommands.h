@@ -26,8 +26,8 @@ class compute_command {
     uint index;
 
     device KPCommandRecordV2* record() const thread {
-        if(!context || context->magic!=KP_COMMAND_CONTEXT_MAGIC ||
-           context->version!=KP_COMMAND_IR_VERSION2 || context->capacity>KP_COMMAND_MAX_RECORDS ||
+        if(!context || !((context->magic==KP_COMMAND_CONTEXT_MAGIC && context->version==KP_COMMAND_IR_VERSION2) ||
+           (context->magic==KP_COMMAND_STABLE_CONTEXT_MAGIC && context->version==KP_COMMAND_STABLE_CONTEXT_VERSION)) || context->capacity>KP_COMMAND_MAX_RECORDS ||
            index>=context->capacity || context->record_bytes!=KP_COMMAND_RECORD_BYTES)return nullptr;
         ulong base=context->records_address,span=ulong(context->capacity)*KP_COMMAND_RECORD_BYTES;
         // SM30 laboratory address domain. These checks do not replace the
@@ -43,11 +43,43 @@ class compute_command {
         if(r && r->magic!=KP_COMMAND_RECORD_MAGIC){fail(r,4);return nullptr;}
         return r;
     }
+    device const KPCommandPipelineIdentity* identities() const thread {
+        return reinterpret_cast<device const KPStableCommandContext*>(context)->pipelines;
+    }
+    void resolve(device KPCommandRecordV2*r) const thread {
+        if(context->version!=KP_COMMAND_STABLE_CONTEXT_VERSION || !(r->flags&KP_COMMAND_FLAG_PIPELINE) ||
+           context->pipeline_count>KP_COMMAND_MAX_PIPELINES || uint(r->pipeline_token>>32)!=KP_COMMAND_PIPELINE_MAGIC ||
+           uint(r->pipeline_token)>=context->pipeline_count)return;
+        device const KPCommandPipelineIdentity*table=identities();
+        ulong identity=table[uint(r->pipeline_token)].identity;
+        for(uint i=0;i<context->pipeline_count;i++){
+            device const KPCommandPipelineIdentity&e=table[i];
+            if(e.identity!=identity || e.constant_index>=context->max_bindings ||
+               e.constant_index>=KP_COMMAND_V2_MAX_BINDINGS || e.reserved[0] || e.reserved[1])continue;
+            uint slot=e.constant_index,flag=slot==3?KP_COMMAND_FLAG_BUFFER3:KP_COMMAND_FLAG_BUFFER0<<slot;
+            ulong address=slot==3?r->buffer3:r->buffers012[slot];
+            if((r->flags&flag) && address!=e.parameters_address)continue;
+            if(r->shared_bytes!=e.shared_bytes)continue;
+            bool matches=true;
+            if(r->flags&KP_COMMAND_FLAG_DISPATCH)for(uint a=0;a<3;a++){
+                uint local=r->local[a],g=r->groups[a];
+                if(!local || local!=e.local[a]){matches=false;continue;}
+                if(r->dispatch_kind==1){if(g%local)matches=false;g/=local;}
+                else if(r->dispatch_kind!=0)matches=false;
+                if(!g || g>e.groups[a])matches=false;
+            }
+            if(matches){r->pipeline_token=(ulong(KP_COMMAND_PIPELINE_MAGIC)<<32)|i;return;}
+        }
+        // Keep the same pipeline identity if its current arguments match no
+        // template. The existing materializer independently rejects that state;
+        // later ordinary setters can still select another matching template.
+    }
     void binding(ulong address,uint slot) const thread {
         device KPCommandRecordV2*r=ready();if(!r)return;
         if(slot>=KP_COMMAND_V2_MAX_BINDINGS || slot>=context->max_bindings){fail(r,2);return;}
         if(slot==3){r->buffer3=address;r->flags|=KP_COMMAND_FLAG_BUFFER3;}
         else{r->buffers012[slot]=address;r->flags|=KP_COMMAND_FLAG_BUFFER0<<slot;}
+        resolve(r);
     }
 public:
     explicit compute_command(command_buffer c,uint i) thread:context(c),index(i){}
@@ -68,6 +100,14 @@ public:
     }
     void set_compute_pipeline_state(compute_pipeline_state token) const thread {
         device KPCommandRecordV2*r=ready();if(!r)return;
+        if(context->version==KP_COMMAND_STABLE_CONTEXT_VERSION){
+            if(uint(token>>32)!=KP_COMMAND_STABLE_PIPELINE_MAGIC || !uint(token) || context->pipeline_count>KP_COMMAND_MAX_PIPELINES){fail(r,1);return;}
+            device const KPCommandPipelineIdentity*table=identities();
+            for(uint i=0;i<context->pipeline_count;i++)if(table[i].identity==token){
+                r->pipeline_token=(ulong(KP_COMMAND_PIPELINE_MAGIC)<<32)|i;r->flags|=KP_COMMAND_FLAG_PIPELINE;resolve(r);return;
+            }
+            fail(r,1);return;
+        }
         if(uint(token>>32)!=KP_COMMAND_PIPELINE_MAGIC || context->pipeline_count>KP_COMMAND_MAX_PIPELINES ||
            uint(token)>=context->pipeline_count){fail(r,1);return;}
         r->pipeline_token=token;r->flags|=KP_COMMAND_FLAG_PIPELINE;
@@ -85,14 +125,15 @@ public:
         device KPCommandRecordV2*r=ready();if(!r)return;
         for(uint i=0;i<3;i++){r->groups[i]=groups[i];r->local[i]=local[i];}
         r->dispatch_kind=0;r->flags|=KP_COMMAND_FLAG_DISPATCH;
+        resolve(r);
     }
     void concurrent_dispatch_threads(uint3 threads,uint3 local) const thread {
         concurrent_dispatch_threadgroups(threads,local);
-        device KPCommandRecordV2*r=ready();if(r)r->dispatch_kind=1;
+        device KPCommandRecordV2*r=ready();if(r){r->dispatch_kind=1;resolve(r);}
     }
     void set_threadgroup_memory_length(uint bytes,uint slot) const thread {
         device KPCommandRecordV2*r=ready();if(!r)return;
-        if(slot){fail(r,3);return;}r->shared_bytes=bytes;r->flags|=KP_COMMAND_FLAG_SHARED;
+        if(slot){fail(r,3);return;}r->shared_bytes=bytes;r->flags|=KP_COMMAND_FLAG_SHARED;resolve(r);
     }
     void set_barrier() const thread {device KPCommandRecordV2*r=ready();if(r)r->flags|=KP_COMMAND_FLAG_BARRIER;}
     void clear_barrier() const thread {device KPCommandRecordV2*r=ready();if(r)r->flags&=~KP_COMMAND_FLAG_BARRIER;}

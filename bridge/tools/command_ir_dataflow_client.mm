@@ -3,6 +3,9 @@
 #ifndef KP_NATIVE_MSL_COMMANDS
 #define KP_NATIVE_MSL_COMMANDS 0
 #endif
+#ifndef KP_STABLE_PIPELINE_IDENTITIES
+#define KP_STABLE_PIPELINE_IDENTITIES 0
+#endif
 #ifndef KP_PUBLIC_ARGUMENT_ENCODER
 #define KP_PUBLIC_ARGUMENT_ENCODER 0
 #endif
@@ -30,8 +33,9 @@ static id<MTLLibrary>load(id<MTLDevice>d,NSString*p,NSError**e){return[d newLibr
 int main(int argc,char**argv){@autoreleasepool{
  if(argc!=4)return 1;NSString*assets=@(argv[1]),*out=@(argv[2]),*mode=@(argv[3]);
  BOOL reuseEncoder=[mode isEqual:@"encoder_reuse"];id<MTLArgumentEncoder>reusableEncoder=nil;__weak id priorArgumentPlan=nil;
- BOOL producer=![mode isEqual:@"no_producer"],consumerPresent=![mode isEqual:@"no_consumer"],copy=[mode isEqual:@"copy"],split=[mode isEqual:@"split"],bad=[mode hasPrefix:@"bad_"];NSUInteger rows=copy?4:3,slots=3+rows;
- NSString*semantic=(!producer||!consumerPresent||split||bad||reuseEncoder||[mode isEqual:@"refusals"])?@"basic":mode;
+ BOOL duplicate=[mode isEqual:@"duplicate_templates"];
+ BOOL producer=![mode isEqual:@"no_producer"],consumerPresent=![mode isEqual:@"no_consumer"],copy=[mode isEqual:@"copy"],split=[mode isEqual:@"split"],bad=[mode hasPrefix:@"bad_"];NSUInteger rows=copy?4:3,sourceCount=duplicate?6:3,slots=sourceCount+rows;
+ NSString*semantic=(!producer||!consumerPresent||split||bad||reuseEncoder||duplicate||[mode isEqual:@"refusals"])?@"basic":mode;
  if(![@[@"basic",@"barrier",@"copy",@"no_seed",@"no_gather",@"no_finish"]containsObject:semantic])return 1;
  id<MTLDevice>d=nil;
 #if KP_DATAFLOW_NATIVE
@@ -70,6 +74,11 @@ int main(int argc,char**argv){@autoreleasepool{
 #if KP_FUNCTION_ARGUMENT_ENCODER && !KP_DATAFLOW_NATIVE && !KP_NATIVE_MSL_COMMANDS
  NSData*functionLibrary=[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:@"producer.metallib"]];producerFunction=[scope newCommandIRFunctionWithLibraryData:functionLibrary expectedSHA256:@"a9367d4492cd100adfcde990efe0b043e4b070536a3615be5b9b2f63bfb473db" functionName:[@"encode_dataflow_" stringByAppendingString:semantic]rootBufferIndex:0 error:&error];if(!producerFunction){emit(@{@"failure":@"function_registration",@"error":error.description?:@"nil"});return 3;}
 #endif
+ NSMutableArray*stableIDs=[NSMutableArray new];
+#if KP_STABLE_PIPELINE_IDENTITIES
+ for(id<MTLComputePipelineState>p in pipelines){uint64_t identity=[scope commandIRIdentityForPipeline:p error:&error];if(!identity||error)return 3;[stableIDs addObject:@(identity)];}
+ NSMutableDictionary*stableInfo=[info mutableCopy];stableInfo[@"stable_pipeline_IDs"]=stableIDs;stableInfo[@"context_version"]=@3;info=stableInfo;
+#endif
  if(!writer)return 3;unsigned sizes[4]={256,1024,4096,32768},locals[4][3]={{32,128,1024},{33,256,512},{128,33,1024},{1024,256,33}};NSUInteger APIrefusals=0;NSMutableArray*runs=[NSMutableArray new];
  for(unsigned trial=0;trial<4;trial++){@autoreleasepool{
   unsigned n=sizes[trial],maximum=0;for(unsigned k=0;k<3;k++)maximum=MAX(maximum,((n+locals[trial][k]-1)/locals[trial][k])*locals[trial][k]);NSUInteger bytes=maximum*16+512;
@@ -82,14 +91,21 @@ int main(int argc,char**argv){@autoreleasepool{
   for(unsigned k=0;k<slots;k++){unsigned stage=k%3,seed=0x13579+trial*97+stage*101,salt=0x7654321+trial*31+stage*137;NSString*name=[NSString stringWithFormat:@"dummy%u",k];if(!allocate(name,bytes))return 4;id<MTLBuffer>p=[d newBufferWithLength:1536 options:MTLResourceStorageModeShared];if(!p)return 4;memset(p.contents,0xa5,p.length);uint32_t words[8]={n,seed,salt,stage,locals[trial][stage],0,0,0};memcpy((char*)p.contents+256,words,sizeof words);[params addObject:p];if(k<3)[specs addObject:@{@"stage":@(stage),@"count":@(n),@"seed":@(seed),@"salt":@(salt),@"local":@(words[4]),@"groups":@((n+words[4]-1)/words[4])}];}
   id<MTLCommandBuffer>init=[q commandBuffer];id<MTLBlitCommandEncoder>b=[init blitCommandEncoder];for(NSString*name in buffers){id<MTLBuffer>h=hosts[name];[b copyFromBuffer:h sourceOffset:0 toBuffer:buffers[name]destinationOffset:0 size:h.length];}[b endEncoding];if(!done(init))return 5;
   MTLIndirectCommandBufferDescriptor*desc=[MTLIndirectCommandBufferDescriptor new];desc.commandTypes=MTLIndirectCommandTypeConcurrentDispatch;desc.maxKernelBufferBindCount=4;desc.inheritBuffers=NO;desc.inheritPipelineState=NO;id<MTLIndirectCommandBuffer>icb=[d newIndirectCommandBufferWithDescriptor:desc maxCommandCount:slots options:MTLResourceStorageModeShared];if(!icb)return 6;
-  for(unsigned k=0;k<slots;k++){unsigned stage=k%3;id<MTLIndirectComputeCommand>c=[icb indirectComputeCommandAtIndex:k];[c setComputePipelineState:pipelines[stage]];[c setKernelBuffer:buffers[[NSString stringWithFormat:@"dummy%u",k]]offset:128 atIndex:0];if(stage)[c setKernelBuffer:buffers[@"dummySrc"]offset:128 atIndex:1];[c setKernelBuffer:params[k]offset:256 atIndex:2];[c setKernelBuffer:buffers[@"dummyCounter"]offset:128 atIndex:3];[c concurrentDispatchThreadgroups:MTLSizeMake((n+locals[trial][stage]-1)/locals[trial][stage],1,1)threadsPerThreadgroup:MTLSizeMake(locals[trial][stage],1,1)];}
-  id<MTLIndirectCommandBuffer>target=icb;NSUInteger first=3;id<MTLBuffer>root=nil,witness=nil,witnessHost=nil;KPGPUCommandSelection*plan=nil;
+  for(unsigned k=0;k<slots;k++){unsigned stage=KP_STABLE_PIPELINE_IDENTITIES&&k<sourceCount?(trial+k)%3:k%3,param=KP_STABLE_PIPELINE_IDENTITIES&&k<sourceCount?stage:k,local=locals[trial][stage];if(duplicate&&k<sourceCount&&((trial+stage)&1u)==k/3)local=local==32?64:32;id<MTLIndirectComputeCommand>c=[icb indirectComputeCommandAtIndex:k];[c setComputePipelineState:pipelines[stage]];[c setKernelBuffer:buffers[[NSString stringWithFormat:@"dummy%u",k]]offset:128 atIndex:0];if(stage)[c setKernelBuffer:buffers[@"dummySrc"]offset:128 atIndex:1];[c setKernelBuffer:params[param]offset:256 atIndex:2];[c setKernelBuffer:buffers[@"dummyCounter"]offset:128 atIndex:3];[c concurrentDispatchThreadgroups:MTLSizeMake((n+local-1)/local,1,1)threadsPerThreadgroup:MTLSizeMake(local,1,1)];}
+  id<MTLIndirectCommandBuffer>target=icb;NSUInteger first=sourceCount;id<MTLBuffer>root=nil,witness=nil,witnessHost=nil;KPGPUCommandSelection*plan=nil;
 #if KP_DATAFLOW_NATIVE
   target=[d newIndirectCommandBufferWithDescriptor:desc maxCommandCount:rows options:MTLResourceStorageModeShared];[target resetWithRange:NSMakeRange(0,rows)];first=0;id<MTLArgumentEncoder>ae=(KP_FUNCTION_ARGUMENT_ENCODER||!KP_PUBLIC_ARGUMENT_ENCODER)?[producerFunction newArgumentEncoderWithBufferIndex:0]:publicArgumentEncoder(d);if(ae.encodedLength!=48){emit(@{@"failure":@"root_stride",@"actual":@(ae.encodedLength)});return 7;}root=[d newBufferWithLength:144 options:MTLResourceStorageModeShared];
   for(unsigned stage=0;stage<3;stage++){[ae setArgumentBuffer:root offset:stage*48];[ae setIndirectCommandBuffer:target atIndex:0];[ae setComputePipelineState:pipelines[stage]atIndex:1];[ae setBuffer:buffers[[@"stage" stringByAppendingFormat:@"%u",stage]]offset:128 atIndex:2];[ae setBuffer:buffers[stage?[@"stage" stringByAppendingFormat:@"%u",stage-1]:@"input"]offset:128 atIndex:3];[ae setBuffer:params[stage]offset:256 atIndex:4];[ae setBuffer:buffers[@"counter"]offset:128 atIndex:5];}
 #else
   if(![scope prepareResidentComputeCommands:icb range:NSMakeRange(0,slots)error:&error]){emit(@{@"failure":@"prepare",@"error":error.description?:@"nil"});return 7;}
   NSMutableArray*entries=[NSMutableArray new];for(unsigned stage=0;stage<3;stage++)[entries addObject:@{@"bindings":@[@{@"buffer":buffers[[@"stage" stringByAppendingFormat:@"%u",stage]],@"offset":@128},@{@"buffer":buffers[stage?[@"stage" stringByAppendingFormat:@"%u",stage-1]:@"input"],@"offset":@128},@{@"buffer":buffers[@"counter"],@"offset":@128}]}];
+  auto makePlan=[&](NSArray*catalogue,id<MTLBuffer>records,NSUInteger off)->KPGPUCommandSelection*{
+#if KP_STABLE_PIPELINE_IDENTITIES
+   return[scope newGPUStableCommandIRFromBuffer:icb sourceRange:NSMakeRange(0,sourceCount)destination:icb destinationRange:NSMakeRange(sourceCount,rows)resources:catalogue records:records recordOffset:off error:&error];
+#else
+   return[scope newGPUCommandIRv2FromBuffer:icb sourceRange:NSMakeRange(0,sourceCount)destination:icb destinationRange:NSMakeRange(sourceCount,rows)resources:catalogue records:records recordOffset:off error:&error];
+#endif
+  };
   if(trial==0&&[mode isEqual:@"refusals"]){
    id command=[icb indirectComputeCommandAtIndex:0];id native=[command valueForKey:@"record"];
    for(NSString*test in @[@"duplicate_entry",@"intra_entry_alias",@"partial_overlap",@"descriptor_records_alias",@"original_binding_alias",@"unaligned",@"undersized",@"wrong_entry_type"]){NSArray*catalogue=entries;id<MTLBuffer>records=buffers[@"records"];NSUInteger off=128;
@@ -97,10 +113,10 @@ int main(int argc,char**argv){@autoreleasepool{
     else if([test isEqual:@"descriptor_records_alias"]){records=[native valueForKey:@"descriptor"];off=0;}
     else if([test isEqual:@"wrong_entry_type"])catalogue=@[NSNull.null];
     else{NSMutableArray*e=[entries mutableCopy],*bindings=[entries[[test isEqual:@"partial_overlap"]?1:0][@"bindings"]mutableCopy];NSUInteger slot=[test isEqual:@"partial_overlap"]?2:0;NSMutableDictionary*v=[bindings[slot]mutableCopy];if([test isEqual:@"intra_entry_alias"])v[@"buffer"]=bindings[1][@"buffer"];if([test isEqual:@"partial_overlap"])v[@"offset"]=@132;if([test isEqual:@"original_binding_alias"])v[@"buffer"]=buffers[@"dummy0"];if([test isEqual:@"unaligned"])v[@"offset"]=@129;if([test isEqual:@"undersized"]){v[@"buffer"]=[d newBufferWithLength:16 options:MTLResourceStorageModePrivate];v[@"offset"]=@0;}bindings[slot]=v;e[[test isEqual:@"partial_overlap"]?1:0]=@{@"bindings":bindings};catalogue=e;}
-    NSError*rejection=nil;id invalid=[scope newGPUCommandIRv2FromBuffer:icb sourceRange:NSMakeRange(0,3)destination:icb destinationRange:NSMakeRange(3,rows)resources:catalogue records:records recordOffset:off error:&rejection];if(invalid||!rejection){emit(@{@"failure":@"API_refusal",@"case":test});return 21;}APIrefusals++;
+    error=nil;id invalid=makePlan(catalogue,records,off);if(invalid||!error){emit(@{@"failure":@"API_refusal",@"case":test});return 21;}APIrefusals++;
    }
   }
-  plan=[scope newGPUCommandIRv2FromBuffer:icb sourceRange:NSMakeRange(0,3)destination:icb destinationRange:NSMakeRange(3,rows)resources:entries records:buffers[@"records"]recordOffset:128 error:&error];if(!plan){emit(@{@"failure":@"plan",@"error":error.description?:@"nil"});return 8;}
+  error=nil;plan=makePlan(entries,buffers[@"records"],128);if(!plan){emit(@{@"failure":@"plan",@"error":error.description?:@"nil"});return 8;}
 #if KP_ARGUMENT_REFUSALS
   plan=nil;NSArray*refusals=runPublicArgumentRefusals(d,scope,icb,entries,buffers,params,pipelines,writer,trial);[runs addObject:@{@"trial":@(trial),@"argument_refusals":refusals}];continue;
 #endif
@@ -157,12 +173,20 @@ int main(int argc,char**argv){@autoreleasepool{
   NSArray*targetRecords=[plan valueForKey:@"targetRecords"];for(NSUInteger k=0;k<targetRecords.count;k++){id<MTLBuffer>v=[targetRecords[k]valueForKey:@"constants"];NSString*key=[NSString stringWithFormat:@"CB1-%lu",(unsigned long)k];buffers[key]=v;hosts[key]=[d newBufferWithLength:v.length options:MTLResourceStorageModeShared];}
   id<MTLBuffer>templates=[plan valueForKey:@"constantTemplates"];buffers[@"nativeTemplates"]=templates;hosts[@"nativeTemplates"]=[d newBufferWithLength:templates.length options:MTLResourceStorageModeShared];
   id<MTLBuffer>bindingTable=[plan valueForKey:@"commandIRNativeBindings"];buffers[@"nativeBindings"]=bindingTable;hosts[@"nativeBindings"]=[d newBufferWithLength:bindingTable.length options:MTLResourceStorageModeShared];
+#if KP_STABLE_PIPELINE_IDENTITIES
+  id<MTLBuffer>context=[plan valueForKey:@"commandIRContext"];buffers[@"producerContext"]=context;hosts[@"producerContext"]=[d newBufferWithLength:context.length options:MTLResourceStorageModeShared];
+#endif
 #endif
   b=[main blitCommandEncoder];for(NSString*name in buffers){id<MTLBuffer>h=hosts[name];[b copyFromBuffer:buffers[name]sourceOffset:0 toBuffer:h destinationOffset:0 size:h.length];}if(witness)[b copyFromBuffer:witness sourceOffset:0 toBuffer:witnessHost destinationOffset:0 size:witness.length];[b endEncoding];if(!done(main))return 12;
   NSMutableDictionary*files=[NSMutableDictionary new];for(NSString*name in buffers){NSString*f=[NSString stringWithFormat:@"trial-%u-%@.bin",trial,name];id<MTLBuffer>h=hosts[name];[[NSData dataWithBytes:h.contents length:h.length]writeToFile:[out stringByAppendingPathComponent:f]atomically:YES];files[name]=f;}
   if(witnessHost){NSString*f=[NSString stringWithFormat:@"trial-%u-witness.bin",trial];[[NSData dataWithBytes:witnessHost.contents length:witnessHost.length]writeToFile:[out stringByAppendingPathComponent:f]atomically:YES];files[@"witness"]=f;}
   NSMutableDictionary*addresses=[NSMutableDictionary new];for(NSString*k in buffers)addresses[k]=@(((id<MTLBuffer>)buffers[k]).gpuAddress);
-  [runs addObject:@{@"trial":@(trial),@"specs":specs,@"buffer_bytes":@(bytes),@"files":files,@"GPU_addresses":addresses,@"rows":@(rows),@"command_status":@(main.status),@"producer_present":@(producer),@"consumer_present":@(consumerPresent),@"intermediate_CPU_waits":@0,@"events":scope?plan.events:@[],@"scope_events":scope?scope.events:@[]}];
+  NSMutableDictionary*trialInfo=[@{@"trial":@(trial),@"specs":specs,@"buffer_bytes":@(bytes),@"files":files,@"GPU_addresses":addresses,@"rows":@(rows),@"command_status":@(main.status),@"producer_present":@(producer),@"consumer_present":@(consumerPresent),@"intermediate_CPU_waits":@0,@"events":scope?plan.events:@[],@"scope_events":scope?scope.events:@[]}mutableCopy];
+#if KP_STABLE_PIPELINE_IDENTITIES
+  NSString*rootFile=[NSString stringWithFormat:@"trial-%u-roots.bin",trial];[[NSData dataWithBytes:root.contents length:144]writeToFile:[out stringByAppendingPathComponent:rootFile]atomically:YES];trialInfo[@"root_file"]=rootFile;
+  NSMutableArray*currentIDs=[NSMutableArray new];for(id<MTLComputePipelineState>p in pipelines){error=nil;uint64_t identity=[scope commandIRIdentityForPipeline:p error:&error];if(error||!identity)return 12;[currentIDs addObject:@(identity)];}trialInfo[@"queried_pipeline_IDs"]=currentIDs;
+#endif
+  [runs addObject:trialInfo];
  }}
  __weak id finalArgumentEncoder=reusableEncoder;reusableEncoder=nil;if(finalArgumentEncoder||priorArgumentPlan){emit(@{@"failure":@"reused_argument_encoder_lifetime"});return 8;}
  if(scope)[scope restore];

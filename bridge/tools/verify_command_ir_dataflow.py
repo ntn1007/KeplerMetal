@@ -27,7 +27,7 @@ def verify_native_function_arguments(d,inputs):
   assert len(encoded)==4 and all(not e['native_Apple_ICB_identity']and e['bytes']==48 for e in encoded)
 
 def verify(directory):
- root=Path(directory);d=json.loads((root/'results.json').read_text());m=json.loads((root/'execution/manifest.json').read_text());mode=d['mode'];native=d['native_reference'];copy=mode=='copy';rows=4 if copy else 3;slots=3+rows
+ root=Path(directory);d=json.loads((root/'results.json').read_text());m=json.loads((root/'execution/manifest.json').read_text());mode=d['mode'];native=d['native_reference'];copy=mode=='copy';duplicate=mode=='duplicate_templates';source_count=6 if duplicate else 3;rows=4 if copy else 3;slots=source_count+rows;stable=False
  assert m['exit_code']==0 and not m['SIGKILL_requested']and not m['authoritative_ps_status']and m['GPU_reservation']['state']=='terminal'
  assert d['scope_restored']and not d['CPU_expected_answers_uploaded']and not d['IR_CPU_read_before_execution']and not d['performance_benchmark']and not d['system_modified']and len(d['runs'])==4
  if native:assert d['device']=='Apple M1 Max'
@@ -42,17 +42,31 @@ def verify(directory):
    assert info['producer_backend']=='native_msl' and info['root_bytes']==48 and info['thread_width']==32 and info['pipeline_class']=='NVMTLComputePipelineState'
    assert info['library_SHA256']==sha(root/'assets/native_producer.metallib')
    if inp.get('native_function_arguments'):verify_native_function_arguments(d,inp)
+   stable=bool(inp.get('native_stable_pipeline_identities'))
+   if stable:
+    ids=d['producer_info']['stable_pipeline_IDs'];assert len(ids)==len(set(ids))==3 and all(x>>32==0x4b505350 and x&0xffffffff for x in ids)
+    assert d['producer_info']['context_version']==3
   else:
    assert d['producer_import']['contract_verified']and not d['producer_import']['rejected_import']
    for e in d['producer_import']['events']:
     if e.get('code_replaced'):assert e['imported_code_identical']and e['decoded_code_bytes']==d['producer_info']['code_bytes']and e['decoded_registers']==d['producer_info']['registers']
  assert d['API_refusals']==(8 if mode=='refusals'else 0)
- sizes=[256,1024,4096,32768];locals_=[[32,128,1024],[33,256,512],[128,33,1024],[1024,256,33]];files={};comparisons=invocations=guardbytes=0
+ sizes=[256,1024,4096,32768];locals_=[[32,128,1024],[33,256,512],[128,33,1024],[1024,256,33]];files={};comparisons=invocations=guardbytes=0;duplicate_GPU_choices=0
  def load(name):
   p=root/'outputs'/name;files[name]=sha(p);return p.read_bytes()
  for trial,r in enumerate(d['runs']):
+  source_order=[(trial+i)%3 for i in range(source_count)]if stable else[0,1,2]
   n=sizes[trial];specs=[{'stage':s,'count':n,'seed':0x13579+trial*97+s*101,'salt':0x7654321+trial*31+s*137,'local':locals_[trial][s],'groups':(n+locals_[trial][s]-1)//locals_[trial][s]}for s in range(3)]
   length=max(s['groups']*s['local']for s in specs)*16+512
+  source_locals=[(64 if specs[stage]['local']==32 else 32)if duplicate and ((trial+stage)&1)==i//3 else specs[stage]['local']for i,stage in enumerate(source_order)]
+  candidate_for_stage=[next(i for i,stage in enumerate(source_order)if stage==s and source_locals[i]==specs[s]['local'])for s in range(3)]
+  if duplicate:
+   assert stable
+   last_for_stage=[max(i for i,stage in enumerate(source_order)if stage==s)for s in range(3)]
+   events=[e for e in r['events']if e.get('operation')=='encode_public_IRv2_arguments']
+   assert len(events)==4
+   for e,stage in zip(events,[0,1,2,0]):assert e['root_template_index']==last_for_stage[stage] and e['execution_template_resolved_on_GPU'] and 'candidate'not in e
+   duplicate_GPU_choices+=sum(a!=b for a,b in zip(last_for_stage,candidate_for_stage))
   assert r['trial']==trial and r['specs']==specs and r['buffer_bytes']==length and r['rows']==rows and r['command_status']==4 and r['intermediate_CPU_waits']==0
   assert r['producer_present']==(mode!='no_producer')and r['consumer_present']==(mode!='no_consumer')
   outputs=[];counts=[0,0,0]
@@ -77,6 +91,20 @@ def verify(directory):
   for name,data in expected.items():
    got=load(r['files'][name]);assert got==data,(mode,trial,name,next((i for i,(a,b)in enumerate(zip(got,data))if a!=b),None));guardbytes+=len(data)-(n*16 if name.startswith('stage')else 12 if name in ['counter','dummyCounter']else 0)
   raw=load(r['files']['records']);assert len(raw)==1216
+  if stable:
+   assert r['queried_pipeline_IDs']==ids
+   roots=struct.unpack('<18Q',load(r['root_file']));assert len(roots)==18
+   for stage in range(3):
+    offset=stage*6
+    assert roots[offset]==r['GPU_addresses']['producerContext'] and roots[offset+1]==ids[stage]
+    assert roots[offset+2]==r['GPU_addresses'][f'stage{stage}']+128
+    assert roots[offset+3]==r['GPU_addresses'][f'stage{stage-1}'if stage else'input']+128
+    assert 0<roots[offset+4]<1<<40 and roots[offset+5]==r['GPU_addresses']['counter']+128
+   assert len({roots[s*6+4]for s in range(3)})==3
+   context=struct.pack('<4IQ2I',0x4b505343,3,rows,4,r['GPU_addresses']['records']+128,128,source_count)
+   for stage,local in zip(source_order,source_locals):context+=struct.pack('<QQ10I',ids[stage],roots[stage*6+4],(n+local-1)//local,1,1,local,1,1,0,2,0,0)
+   context+=bytes((8-source_count)*56)
+   assert load(r['files']['producerContext'])==context
   if native:assert raw==b'\xa5'*1216
   else:
    assert raw[:128]==b'\xa5'*128 and raw[128+rows*128:]==b'\xa5'*(1216-128-rows*128)
@@ -84,22 +112,22 @@ def verify(directory):
    nativeTemplates=load(r['files']['nativeTemplates'])if'nativeTemplates'in r['files']else None
    nativeBindings=load(r['files']['nativeBindings'])if'nativeBindings'in r['files']else None
    if nativeBindings is not None:
-    assert len(nativeTemplates)==3*65536 and len(nativeBindings)==3*3*128
-    for candidate in range(3):
+    assert len(nativeTemplates)==source_count*65536 and len(nativeBindings)==source_count*3*128
+    for candidate in range(source_count):
      for resource in range(3):
       names=[f'stage{resource}',f'stage{resource-1}'if resource else'input',None,'counter']
       for slot in [0,1,3]:
-       if candidate==0 and slot==1:continue
+       if source_order[candidate]==0 and slot==1:continue
        at=(candidate*3+resource)*128+slot*32
        assert struct.unpack_from('<Q',nativeBindings,at+8)[0]==r['GPU_addresses'][names[slot]]+128
        assert struct.unpack_from('<I',nativeBindings,at+16)[0]==128
    for row in range(rows):
     stage=0 if row==3 else row;part=raw[128+row*128:256+row*128];empty=(copy and row==0)or mode==['no_seed','no_gather','no_finish'][stage]
-    resource=0;bank=0;groups=[0,1,1];local=[specs[0]['local'],1,1]
+    resource=0;bank=0;groups=[0,1,1];local=[source_locals[0],1,1]
     if mode=='no_producer':assert part==b'\xa5'*128;status=2
     elif empty:assert part==struct.pack('<I',0x4b504952)+bytes(124);status=0
     else:
-     w=list(struct.unpack('<32I',part));want=[0]*32;want[:12]=[0x4b504952,379 if mode=='barrier'else 371,stage,0x4b504950,specs[stage]['groups'],1,1,0,specs[stage]['local'],1,1,0]
+     w=list(struct.unpack('<32I',part));want=[0]*32;want[:12]=[0x4b504952,379 if mode=='barrier'else 371,candidate_for_stage[stage],0x4b504950,specs[stage]['groups'],1,1,0,specs[stage]['local'],1,1,0]
      mutated=mode.startswith('bad_')and row==0
      changes={'bad_parameters':(16,1),'bad_counter':(26,1),'bad_pipeline':(2,8),'bad_buffer3_flag':(1,115),'bad_groups':(4,0),'bad_reserved':(28,1)}
      pointerwords=[12,13,14,15,16,17,26,27]
@@ -111,7 +139,7 @@ def verify(directory):
       if i!=change:assert 0<(w[i]|w[i+1]<<32)<1<<40
      recordwords[row]=w
      status=2 if mutated else 1
-     if status==1:bank=stage;resource=stage;groups=[specs[stage]['groups'],1,1];local=[specs[stage]['local'],1,1]
+     if status==1:bank=candidate_for_stage[stage];resource=stage;groups=[specs[stage]['groups'],1,1];local=[specs[stage]['local'],1,1]
     struct.pack_into('<16I',witness,64+row*64,*groups,bank,*local,resource,status,0x4b504952,3,2,0,0,0,0x4b50524d)
     if nativeTemplates is not None:
      expectedCB=bytearray(nativeTemplates[bank*65536:(bank+1)*65536])
@@ -135,6 +163,8 @@ def verify(directory):
  report={'status':'PASS','mode':mode,'native_reference':native,'trials':4,'exact_uint32_results':comparisons,'consumer_invocations':invocations,'guard_bytes':guardbytes,'API_refusals':d['API_refusals'],'raw_files':len(files),'raw_SHA256':files,'performance_benchmark':False,'full_objective_complete':False}
  if d.get('producer_backend')=='native_msl':report.update(producer_backend='native_msl',producer_instruction_import=False)
  if d.get('producer_backend')=='native_msl' and inp.get('native_function_arguments'):report.update(native_function_arguments=True,function_getters_restored=True)
+ if stable:report.update(stable_pipeline_identities=True,immutable_contexts_checked=4,template_permutations_checked=4)
+ if duplicate:assert duplicate_GPU_choices==6;report.update(duplicate_templates=True,duplicate_GPU_choices_different_from_root_representative=duplicate_GPU_choices)
  return report
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('directory',type=Path);p.add_argument('--receipt',type=Path);a=p.parse_args();r=verify(a.directory)

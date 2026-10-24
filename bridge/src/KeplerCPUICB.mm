@@ -10,6 +10,7 @@
 #include <mutex>
 #include <map>
 #include <cmath>
+#include <atomic>
 
 @class KPComputeICB,KPComputeICBCommand,KPRenderICB,KPRenderICBCommand,KPCommandIRArgumentContext;
 @protocol KPOptionalNativeCASFactory <NSObject>
@@ -75,6 +76,10 @@
 namespace {
 char contextKey;
 std::mutex installMutex;
+// Never reuse an identity in this process, including after a scope is restored.
+// Saturate at the 32-bit namespace boundary rather than wrapping.
+std::atomic<uint64_t>stablePipelineIdentityCounter{1};
+uint64_t allocateStablePipelineIdentity(){uint64_t n=stablePipelineIdentityCounter.load();while(n<=UINT32_MAX){if(stablePipelineIdentityCounter.compare_exchange_weak(n,n+1))return(uint64_t(KP_COMMAND_STABLE_PIPELINE_MAGIC)<<32)|n;}return 0;}
 std::map<uintptr_t,Class>deviceClasses,encoderClasses,renderEncoderClasses,blitEncoderClasses;
 KPCPUICBScope *scopeFor(id object){return ((KPScopeLink*)objc_getAssociatedObject(object,&contextKey)).scope;}
 void linkScope(id object,KPCPUICBScope *scope){KPScopeLink*link=[KPScopeLink new];link.scope=scope;objc_setAssociatedObject(object,&contextKey,link,OBJC_ASSOCIATION_RETAIN_NONATOMIC);}
@@ -129,6 +134,7 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 @property(nonatomic,strong) NSObject *factoryLock;
 @property(nonatomic,strong) NSMutableArray *adaptedFunctions,*functionLibraries,*adaptedIRLibraries;
 @property(nonatomic,strong) NSMutableDictionary *registeredIRLibraries;
+@property(nonatomic,strong) NSMutableDictionary *stablePipelineIdentities;
 @property(nonatomic) BOOL restored;
 @property(nonatomic) NSUInteger releasedEncoderCount;
 @property(nonatomic) NSUInteger maxKernelBindings;
@@ -147,6 +153,7 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 - (NSDictionary*)profileForPipeline:(id<MTLComputePipelineState>)pipeline;
 - (KPRecordedNativeCompute*)materialize:(KPComputeICBCommand*)command;
 - (KPGPUCommandSelection*)newGPUCommandBindingPlanFromBuffer:(id<MTLIndirectCommandBuffer>)source sourceRange:(NSRange)range destination:(id<MTLIndirectCommandBuffer>)destination destinationRange:(NSRange)targetRange resources:(NSArray<NSDictionary*>*)resources input:(id<MTLBuffer>)input inputOffset:(NSUInteger)offset nonce:(uint32_t)nonce IR:(BOOL)IR error:(NSError**)error;
+- (KPGPUCommandSelection*)newGPUCommandIRv2FromBuffer:(id<MTLIndirectCommandBuffer>)source sourceRange:(NSRange)range destination:(id<MTLIndirectCommandBuffer>)destination destinationRange:(NSRange)targetRange resources:(NSArray<NSDictionary*>*)resources records:(id<MTLBuffer>)records recordOffset:(NSUInteger)offset stablePipelineIdentities:(BOOL)stable error:(NSError**)error;
 @end
 
 @interface KPComputeICBCommand : NSObject<MTLIndirectComputeCommand>
@@ -247,6 +254,8 @@ static NSString*residentBindingError(KPComputeICBCommand*c,KPCPUICBScope*scope){
 @property(nonatomic) BOOL gridPrefix;
 @property(nonatomic) BOOL bindingGeneration;
 @property(nonatomic) BOOL commandIRGeneration;
+@property(nonatomic) BOOL commandIRStablePipelineIdentities;
+@property(nonatomic,strong) NSArray<NSNumber*> *commandIRPipelineIdentities;
 @property(nonatomic) NSUInteger commandIRVersion,commandIRBufferCount,commandIRConstantIndex;
 @property(nonatomic,strong) id<MTLBuffer> commandIRLimits,commandIRContext;
 @property(nonatomic,strong) id<MTLBuffer> commandIRNativeBindings;

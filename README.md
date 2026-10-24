@@ -15,6 +15,8 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
+Stable scope-owned pipeline identities now resolve on the GTX despite template permutations and duplicate local-size variants. A final 32-host matrix checks 5,950,464 native consumer results, retired-scope ID refusals and both NAK references. These are project ABI identities; native Apple ICB/PSO resource IDs and transparent applications remain open. [Contract, source and evidence](docs/STABLE_PIPELINE_IDENTITIES.md).
+
 Native source-lowered producers now bind through the real function’s public argument-encoder getters and the existing owned resource catalogue, while all six pipeline factory variants stay native. This removes manual argument-root construction in the adapted client; stable ICB/pipeline identities and transparent applications remain open. [Contract and reproduction](docs/NATIVE_SOURCE_FUNCTION_ARGUMENTS.md).
 
 A new opt-in source lowering compiles supported `compute_command` producers through NVIDIA’s native backend, then executes the existing GPU command-record pipeline. Sixteen native processes pass 5,035,008 consumer uint32 checks; 48 stage/counter files match the prior NAK reference. A 23-case record probe exposed and corrected an address-representation mismatch through registered readonly-member lowering. This is adapted-client CommandIR support, not Apple’s native ICB ABI or a system-driver replacement. [Implementation, controls and reproduction](docs/NATIVE_MSL_COMMANDS.md).

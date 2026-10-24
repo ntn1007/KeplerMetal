@@ -178,12 +178,12 @@ legacy NAK/function baseline.
 ## Limits and next integration boundary
 
 Function registration remains explicit, and shaders need our opt-in source
-lowering. The current metadata adapter does not load arbitrary shipped metallibs
-or provide a stable pipeline/ICB identity independent of a prepared plan. Pipeline
-tokens still encode that plan's candidate index. A stable identity contract needs
-its own namespace, retained ownership, per-plan resolution and stale/in-flight
-lifetime handling; returning those tokens from native `gpuResourceID` would be
-incorrect. Command execution remains serial. Rendering commands, arbitrary root
+lowering. The default mode uses plan-positional pipeline tokens. The subsequent
+[stable identity extension](STABLE_PIPELINE_IDENTITIES.md) now resolves scope-owned
+pipeline IDs against each plan on the GPU, including duplicate local-size
+templates. Those identities are distinct from native PSO/ICB `gpuResourceID`;
+ICB context identities and automatic loading of arbitrary shipped metallibs
+remain open. Command execution remains serial. Rendering commands, arbitrary root
 schemas, strided/remaining constant-space bindings, automatic application-wide
 registration and transparent ordinary-application integration remain open.
 No performance improvement, complete Metal 3/4 support or hardware-video decoding

@@ -16,6 +16,7 @@
  if(_commandIRVersion==2){
   if(!_commandIRGeneration||_selectionBuffer||candidate>=_candidateCount||resource>=_resourceAddresses.length/32||![self validateOwners:error]){fail(error,@"Command IR v2 root candidate/resource/state differs");return nil;}
   uint64_t a[4]={};memcpy(a,(const char*)_resourceAddresses.contents+resource*32,32);uint64_t root[6]={_commandIRContext.gpuAddress,(uint64_t(KP_COMMAND_PIPELINE_MAGIC)<<32)|candidate,0,0,0,0};NSUInteger mutableIndex=0;
+  if(_commandIRStablePipelineIdentities)root[1]=[_commandIRPipelineIdentities[candidate]unsignedLongLongValue];
   for(NSUInteger slot=0;slot<_commandIRBufferCount;slot++)root[2+slot]=slot==_commandIRConstantIndex?[_commandIRParameterAddresses[candidate]unsignedLongLongValue]:a[mutableIndex++];
   id<MTLBuffer>argument=[_scope.device newBufferWithBytes:root length:sizeof root options:MTLResourceStorageModeShared];if(!argument)fail(error,@"Command IR v2 root allocation failed");return argument;
  }

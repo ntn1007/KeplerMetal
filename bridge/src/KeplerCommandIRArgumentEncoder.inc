@@ -49,22 +49,30 @@
  _rootRecord[@"complete"]=@NO;[_rootRecord removeObjectForKey:@"expected"];
  memset((char*)_argumentBuffer.contents+_argumentOffset,0,self.encodedLength);
  if(!_pipeline||_buffers.count!=_bindingCount){_rootRecord[@"reason"]=@"Argument bindings are incomplete";return;}
- NSUInteger candidate=NSNotFound,bank=NSNotFound,matches=0;
+ NSUInteger candidate=NSNotFound,bank=NSNotFound,matches=0;BOOL differentStableRoot=NO;
  for(NSUInteger i=0;i<c.pipelines.count;i++){
   NSDictionary*p=c.parameters[i],*bound=_buffers[@(c.constantIndex)];
   if(c.pipelines[i]!=_pipeline||p[@"buffer"]!=bound[@"buffer"]||![p[@"offset"]isEqual:bound[@"offset"]])continue;
   for(NSUInteger j=0;j<c.catalogue.count;j++){
    NSArray*entry=c.catalogue[j];BOOL same=YES;NSUInteger mutableSlot=0;
    for(NSUInteger slot=0;slot<_bindingCount;slot++)if(slot!=c.constantIndex){NSDictionary*x=entry[mutableSlot++],*y=_buffers[@(slot)];same&=x[@"buffer"]==y[@"buffer"]&&[x[@"offset"]isEqual:y[@"offset"]];}
-   if(same){candidate=i;bank=j;matches++;}
+   if(same){
+    if(matches&&_plan.commandIRStablePipelineIdentities&&(bank!=j||![_plan.commandIRPipelineIdentities[candidate]isEqual:_plan.commandIRPipelineIdentities[i]]))differentStableRoot=YES;
+    candidate=i;bank=j;matches++;
+   }
   }
  }
- if(matches!=1){_rootRecord[@"reason"]=@"Argument combination is absent or ambiguous in the sealed catalogue";return;}
+ // Repeated templates with the same PSO, parameter binding and resource bank
+ // have an identical stable root. Their local/grid requirements are resolved
+ // later by GPU command setters; positional tokens retain the old refusal.
+ if(matches!=1&&(!_plan.commandIRStablePipelineIdentities||!matches||differentStableRoot)){_rootRecord[@"reason"]=@"Argument combination is absent or ambiguous in the sealed catalogue";return;}
  NSError*e=nil;id<MTLBuffer>canonical=[_plan newCommandIRArgumentsForCandidateIndex:candidate resourceIndex:bank error:&e];
  if(canonical.length<self.encodedLength)reject(@"Cannot resolve an owned argument representation");
  NSData*bytes=[NSData dataWithBytes:canonical.contents length:self.encodedLength];memcpy((char*)_argumentBuffer.contents+_argumentOffset,bytes.bytes,bytes.length);
  _rootRecord[@"expected"]=bytes;_rootRecord[@"complete"]=@YES;[_rootRecord removeObjectForKey:@"reason"];
- [_plan.eventRows addObject:@{@"operation":@"encode_public_IRv2_arguments",@"candidate":@(candidate),@"resource":@(bank),@"bytes":@(bytes.length),@"offset":@(_argumentOffset),@"native_Apple_ICB_identity":@NO}];
+ NSMutableDictionary*event=[@{@"operation":@"encode_public_IRv2_arguments",@"resource":@(bank),@"bytes":@(bytes.length),@"offset":@(_argumentOffset),@"native_Apple_ICB_identity":@NO}mutableCopy];
+ if(_plan.commandIRStablePipelineIdentities){event[@"root_template_index"]=@(candidate);event[@"execution_template_resolved_on_GPU"]=@YES;}else event[@"candidate"]=@(candidate);
+ [_plan.eventRows addObject:event];
 }
 - (void)setArgumentBuffer:(id<MTLBuffer>)buffer offset:(NSUInteger)offset {
  // Detaching a destination does not mutate the prior exported root. Its plan

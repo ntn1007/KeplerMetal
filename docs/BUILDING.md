@@ -1,5 +1,7 @@
 # Build from source
 
+[STABLE_PIPELINE_IDENTITIES.md](STABLE_PIPELINE_IDENTITIES.md) adds `--stable-identities`, a private extended context with unchanged executable record ABI, duplicate-template binding and retired-scope GPU controls.
+
 [NATIVE_SOURCE_FUNCTION_ARGUMENTS.md](NATIVE_SOURCE_FUNCTION_ARGUMENTS.md) adds `--function-arguments` to the native producer workflow, with public function encoders, native pipeline factories, ownership/reuse tests and two legacy reference routes.
 
 [NATIVE_MSL_COMMANDS.md](NATIVE_MSL_COMMANDS.md) gives the native source-lowered producer build, complete GPU record/dataflow matrix and prior-NAK comparison. Native-only builds need six existing native fixtures; archived NAK programs are optional. The builder generates workspace-only include/readonly-member adaptations and explicitly checks two compiler refusal cases.

@@ -28,35 +28,37 @@
       "path": "bridge/src/KeplerCPUICB.h",
       "source_path": "bridge/src/KeplerCPUICB.h",
       "source_SHA256": "263dede0101967e1bfa32fe3b081b73c476d9e09e8a9b5446ae04cf4f425ee0a",
-      "published_SHA256": "7e0280348bf7210fc41b075946d475e8c407b458555a6087f16f0afe50e806bc",
-      "bytes": 19457,
+      "published_SHA256": "b4c13fbf317e48c3a4f6c0b79a82564bbecb2342bce4fbe11325d4961f2e62b9",
+      "bytes": 20827,
       "modified_for_publication": false,
-      "previous_published_SHA256": "263dede0101967e1bfa32fe3b081b73c476d9e09e8a9b5446ae04cf4f425ee0a"
+      "previous_published_SHA256": "7e0280348bf7210fc41b075946d475e8c407b458555a6087f16f0afe50e806bc"
     },
     {
       "path": "bridge/src/KeplerCPUICB.mm",
       "source_path": "bridge/src/KeplerCPUICB.mm",
       "source_SHA256": "3d59c2c609611ddc387e616b8945e903f6378dbd4a3b66a02cb22087ada84b60",
-      "published_SHA256": "fea8fdf8e557d4f688ec16c347af3ee1057ade47754c3908a3bab1683e8c61a6",
-      "bytes": 128173,
+      "published_SHA256": "2ade3defcdaf1e9823dfe73598d1cfe580059af2ac4c91477a2322f937458f8f",
+      "bytes": 129229,
       "modified_for_publication": true,
-      "previous_published_SHA256": "3d59c2c609611ddc387e616b8945e903f6378dbd4a3b66a02cb22087ada84b60"
+      "previous_published_SHA256": "fea8fdf8e557d4f688ec16c347af3ee1057ade47754c3908a3bab1683e8c61a6"
     },
     {
       "path": "bridge/src/KeplerCommandIR.h",
       "source_path": "bridge/src/KeplerCommandIR.h",
       "source_SHA256": "749bab3ecb3f90dcece448bc3e37fbece387bfa8db832fc859fd0981831276c8",
-      "published_SHA256": "749bab3ecb3f90dcece448bc3e37fbece387bfa8db832fc859fd0981831276c8",
-      "bytes": 1964,
-      "modified_for_publication": false
+      "published_SHA256": "9c7b60223082ca3bd6e8cf0458e5f4fa01bf16d54ff699567e6cf9a651535d90",
+      "bytes": 2752,
+      "modified_for_publication": false,
+      "previous_published_SHA256": "749bab3ecb3f90dcece448bc3e37fbece387bfa8db832fc859fd0981831276c8"
     },
     {
       "path": "bridge/src/KeplerCommandIRArgumentEncoder.inc",
       "source_path": "bridge/src/KeplerCommandIRArgumentEncoder.inc",
       "source_SHA256": "1b616974075a4346aa5bb7922a3c1ed51c8d6083d2a2bda049a6d8fde2c4f895",
-      "published_SHA256": "1b616974075a4346aa5bb7922a3c1ed51c8d6083d2a2bda049a6d8fde2c4f895",
-      "bytes": 11993,
-      "modified_for_publication": false
+      "published_SHA256": "6826cc8bba7622ed7f7023fb1b6b7fcdb810402289f33a84502011885da55109",
+      "bytes": 12721,
+      "modified_for_publication": false,
+      "previous_published_SHA256": "1b616974075a4346aa5bb7922a3c1ed51c8d6083d2a2bda049a6d8fde2c4f895"
     },
     {
       "path": "bridge/src/KeplerCommandIRFunction.inc",
@@ -80,9 +82,10 @@
       "path": "bridge/src/KeplerCommandIRPlan.inc",
       "source_path": "bridge/src/KeplerCommandIRPlan.inc",
       "source_SHA256": "fb5db32241a80bb180e0a814403035637fd51d707f49925fde4606bf0b8f44c1",
-      "published_SHA256": "fb5db32241a80bb180e0a814403035637fd51d707f49925fde4606bf0b8f44c1",
-      "bytes": 3482,
-      "modified_for_publication": false
+      "published_SHA256": "7fcba17b2405f5f352c8081470a854aabc60ec86c4fbbab991d59858eb94cbde",
+      "bytes": 3594,
+      "modified_for_publication": false,
+      "previous_published_SHA256": "fb5db32241a80bb180e0a814403035637fd51d707f49925fde4606bf0b8f44c1"
     },
     {
       "path": "bridge/src/KeplerCommandIRScope.inc",
@@ -96,9 +99,10 @@
       "path": "bridge/src/KeplerCommandIRv2Scope.inc",
       "source_path": "bridge/src/KeplerCommandIRv2Scope.inc",
       "source_SHA256": "33e8c08e9c6d93bceb42337064efef5b619011f82886040a318a4b3b5c084d2a",
-      "published_SHA256": "33e8c08e9c6d93bceb42337064efef5b619011f82886040a318a4b3b5c084d2a",
-      "bytes": 14624,
-      "modified_for_publication": false
+      "published_SHA256": "9e56c056be133d50caeb9055c491de10ce58f2f1ab82329d363f61c1c0ed7de3",
+      "bytes": 17835,
+      "modified_for_publication": false,
+      "previous_published_SHA256": "33e8c08e9c6d93bceb42337064efef5b619011f82886040a318a4b3b5c084d2a"
     },
     {
       "path": "bridge/src/KeplerFP64.h",
@@ -1264,10 +1268,10 @@
       "path": "bridge/tools/command_ir_dataflow_client.mm",
       "source_path": "bridge/tools/command_ir_dataflow_client.mm",
       "source_SHA256": "b7b2d1617fc7c98ad36c807dbdf3c0dc63a374eddc6e240b5bd23caa949fb321",
-      "published_SHA256": "9578e9b68171ee2d4d7431522593318d27ba81c6237dcb45915ba1472334b534",
-      "bytes": 25637,
+      "published_SHA256": "3e7532522cfc87c89ac2e24b0bfd9dd67b5db3a3b38c2e8d53f298da93e51dd2",
+      "bytes": 27560,
       "modified_for_publication": true,
-      "previous_published_SHA256": "2c8cadf27b823071ef7a904f433c091422478e58380d1632c59b581e809600bc"
+      "previous_published_SHA256": "9578e9b68171ee2d4d7431522593318d27ba81c6237dcb45915ba1472334b534"
     },
     {
       "path": "bridge/tools/command_ir_grid3d_client.mm",
@@ -4203,10 +4207,10 @@
       "path": "bridge/tools/verify_command_ir_dataflow.py",
       "source_path": "bridge/tools/verify_command_ir_dataflow.py",
       "source_SHA256": "2acb8cecde8b8e4ee22e27d7bf64bedb609036dd86ba217931088c8c7cc3c33c",
-      "published_SHA256": "7ed8c45eab49ff3827557fe091d3f8ea46f6672e778b592b8d06927230ddb340",
-      "bytes": 10977,
+      "published_SHA256": "c0ebf0852fe726dec5c745c001472977dea06da0ffa014cdf12136a7bd240d40",
+      "bytes": 13530,
       "modified_for_publication": true,
-      "previous_published_SHA256": "9df5464f22faa2974967400519282489efd704cb4369c77879c396365050b7c2"
+      "previous_published_SHA256": "7ed8c45eab49ff3827557fe091d3f8ea46f6672e778b592b8d06927230ddb340"
     },
     {
       "path": "bridge/tools/verify_command_ir_grid3d.py",
@@ -7472,24 +7476,29 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "71f019af4d0de0b37061810ae13f7633bb29b4c81875b3faeb9294e86eadf795",
-  "previous_public_commit": "7d03cfbe4b3703563bbd1c4ff9992fd91d445620",
+  "previous_source_snapshot_SHA256": "3dcff74cd49a603306c97a94b9c7b9904aae1eadbeb6e45d17b41ddb963a24e8",
+  "previous_public_commit": "15501cd3fce6c9d83bf66b42ea6ec3f545c44d70",
   "update": {
-    "scope": "Native source-lowered function arguments through the existing public resource encoder",
-    "changed_original_snapshot_files": [
+    "date": "2026-10-24",
+    "scope": "Stable scope-owned pipeline IDs with GPU template resolution, duplicate roots and shared-default control",
+    "source_files_updated": [
       "bridge/src/KeplerCPUICB.h",
-      "bridge/src/KeplerCommandIRFunction.inc",
-      "bridge/src/KeplerCommandIRFunctionScope.inc",
+      "bridge/src/KeplerCPUICB.mm",
+      "bridge/src/KeplerCommandIR.h",
+      "bridge/src/KeplerCommandIRArgumentEncoder.inc",
+      "bridge/src/KeplerCommandIRPlan.inc",
+      "bridge/src/KeplerCommandIRv2Scope.inc",
       "bridge/tools/command_ir_dataflow_client.mm",
       "bridge/tools/verify_command_ir_dataflow.py"
     ],
-    "system_modified": false,
-    "full_objective_complete": false,
     "GPU_qualification": "PASS",
-    "date": "2026-10-24",
-    "qualified_processes": 28,
-    "native_consumer_uint32": 5492736,
-    "native_function_arguments": true,
-    "core_runtime_modified": true
+    "core_runtime_modified": true,
+    "full_objective_complete": false,
+    "system_modified": false,
+    "qualified_processes": 32,
+    "native_consumer_uint32": 5950464,
+    "stable_pipeline_identities": true,
+    "duplicate_template_consumer_test": "PASS",
+    "default_shared_before_after": "PASS"
   }
 }

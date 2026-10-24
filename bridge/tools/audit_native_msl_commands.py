@@ -5,26 +5,30 @@ from pathlib import Path
 import argparse
 import json
 from public_large_scratch import read,sha
-from public_native_msl_commands import FLOW_MODES,FUNCTION_FLOW_MODES,msl_abi,lower_readonly_members
+from public_native_msl_commands import FLOW_MODES,FUNCTION_FLOW_MODES,STABLE_FLOW_MODES,msl_abi,lower_readonly_members
 import verify_native_msl_records
 import verify_command_ir_dataflow
 import verify_native_function_contracts
+import verify_stable_pipeline_records
 
 
-def audit(root,*,function_arguments=False):
-    root=Path(root);expected={f'native-{m}':('dataflow',m)for m in (FUNCTION_FLOW_MODES if function_arguments else FLOW_MODES)}
+def audit(root,*,function_arguments=False,stable_identities=False):
+    assert not stable_identities or function_arguments
+    root=Path(root);expected={f'native-{m}':('dataflow',m)for m in (STABLE_FLOW_MODES if stable_identities else FUNCTION_FLOW_MODES if function_arguments else FLOW_MODES)}
     expected.update({f'nak-{m}':('nak',m)for m in ['basic','barrier','copy']})
     expected.update({'records-execute-0':('records','execute'),'records-execute-1':('records','execute'),
                      'records-no_dispatch':('records','no_dispatch')})
     if function_arguments:
         expected.update({f'contracts-{i}':('contracts','inspect')for i in range(2)})
         expected.update({f'nak-function-{m}':('nak_function',m)for m in ['basic','barrier','copy']})
+    if stable_identities:expected.update({'stable-records-execute-0':('stable_records','execute'),'stable-records-execute-1':('stable_records','execute'),'stable-records-no_dispatch':('stable_records','no_dispatch')})
     assert {p.name for p in root.iterdir()if p.is_dir()}==set(expected)
     results=[];intervals=[];libraries=set()
     for label,(kind,mode)in expected.items():
         path=root/label;inp=read(path/'inputs.json');m=read(path/'execution/manifest.json');d=read(path/'results.json')
         assert inp['kind']==kind and inp['mode']==mode
         if kind=='dataflow':assert bool(inp.get('native_function_arguments'))==function_arguments
+        if kind=='dataflow':assert bool(inp.get('native_stable_pipeline_identities'))==stable_identities
         assert m['exit_code']==0 and not m['SIGKILL_requested'] and not m['authoritative_ps_status']and m['GPU_reservation']['state']=='terminal'
         assert sha(path/'application')==inp['executable_SHA256']==m['original_binary_sha256']
         assert sha(path/'execution/application')==m['signed_binary_sha256']
@@ -33,10 +37,10 @@ def audit(root,*,function_arguments=False):
         assert (path/'include/KeplerCommandIR.h').read_text()==msl_abi((path/'src/KeplerCommandIR.h').read_text())
         for source,profile in [('gpu_command_frontend_dataflow',{'parameters':('uint',4)}),('native_command_records_probe',{'constants':('uint',3)})]:
             assert (path/'lowered'/(source+'.metal')).read_text()==lower_readonly_members((path/'src'/(source+'.metal')).read_text(),profile)
-        proof=(verify_native_function_contracts.verify(path)if kind=='contracts'else verify_native_msl_records.verify(path)if kind=='records'else verify_command_ir_dataflow.verify(path))
+        proof=(verify_stable_pipeline_records.verify(path)if kind=='stable_records'else verify_native_function_contracts.verify(path)if kind=='contracts'else verify_native_msl_records.verify(path)if kind=='records'else verify_command_ir_dataflow.verify(path))
         saved=read(path/'independent-verification.json')
         for key,value in proof.items():assert saved[key]==value,(label,key)
-        if kind not in ['records','contracts']:assert d['producer_backend']==('native_msl'if kind=='dataflow'else'NAK')
+        if kind not in ['records','stable_records','contracts']:assert d['producer_backend']==('native_msl'if kind=='dataflow'else'NAK')
         if kind=='nak_function':
             assert d['function_argument_encoder'] and d['public_argument_encoder']
             events=d['function_events'];registered=[e for e in events if e.get('operation')=='register_native_IRv2_function']
@@ -77,11 +81,17 @@ def audit(root,*,function_arguments=False):
             native_pipeline_factory_variants_per_process=6,legacy_function_processes=len(legacy),
             legacy_function_exact_consumer_uint32=sum(r['exact_uint32_results']for r in legacy),
             native_legacy_function_identical_stage_counter_files=legacy_pairs)
+    if stable_identities:
+        sr=[r for r in results if r['kind']=='stable_records']
+        report.update(stable_pipeline_identities=True,stable_identity_contexts=sum(r['immutable_contexts_checked']for r in native),stable_identity_permutations=sum(r['template_permutations_checked']for r in native),
+            duplicate_template_processes=sum(bool(r.get('duplicate_templates'))for r in native),duplicate_GPU_choices_different_from_root_representative=sum(r.get('duplicate_GPU_choices_different_from_root_representative',0)for r in native),
+            stable_record_cases=sum(r['cases']for r in sr),stable_record_dispatches=sum(r['user_dispatches']for r in sr),stable_record_bytes=sum(r['record_bytes_checked']for r in sr),stable_record_guard_bytes=sum(r['guard_bytes_checked']for r in sr),
+            stable_record_context_and_guard_bytes=sum(r['context_and_guard_bytes_checked']for r in sr),stable_record_identity_API_refusals=sum(r['identity_API_refusals']for r in sr))
     return report
 
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('root',type=Path);p.add_argument('--out',type=Path);p.add_argument('--function-arguments',action='store_true');a=p.parse_args();r=audit(a.root,function_arguments=a.function_arguments)
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('root',type=Path);p.add_argument('--out',type=Path);p.add_argument('--function-arguments',action='store_true');p.add_argument('--stable-identities',action='store_true');a=p.parse_args();r=audit(a.root,function_arguments=a.function_arguments,stable_identities=a.stable_identities)
     if a.out:
         with a.out.open('x')as f:json.dump(r,f,indent=2);f.write('\n')
     print(json.dumps({k:v for k,v in r.items()if k!='cases'},indent=2))

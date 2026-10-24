@@ -105,6 +105,23 @@
                                              records:(id<MTLBuffer>)records
                                         recordOffset:(NSUInteger)recordOffset
                                                error:(NSError **)error;
+// Stable identities belong to this active scope's retained native pipelines,
+// not candidate positions, process-independent IDs or Apple's gpuResourceID.
+// They are never reused in this process; nil/foreign/restored scopes return0.
+- (uint64_t)commandIRIdentityForPipeline:(id<MTLComputePipelineState>)pipeline
+                                  error:(NSError **)error;
+// Native source-lowered producers only. Allocate the extended context before
+// exporting roots. GPU setters resolve stable pipeline IDs against each plan's
+// immutable template/parameter/local-size catalogue; records stay ABI v2.
+// Existing AIR/NAK producers must use the original v2 constructor instead.
+- (KPGPUCommandSelection *)newGPUStableCommandIRFromBuffer:(id<MTLIndirectCommandBuffer>)source
+                                             sourceRange:(NSRange)sourceRange
+                                             destination:(id<MTLIndirectCommandBuffer>)destination
+                                        destinationRange:(NSRange)destinationRange
+                                               resources:(NSArray<NSDictionary *> *)resources
+                                                 records:(id<MTLBuffer>)records
+                                            recordOffset:(NSUInteger)recordOffset
+                                                   error:(NSError **)error;
 // At most8 candidates and8 destinations, nonoverlapping, same registration.
 // Cold initialization uses GPU blits and waits; it dispatches no user kernel.
 // Input is Private uint[32] per destination. No CPU choice readback is needed.
