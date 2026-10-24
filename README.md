@@ -15,6 +15,8 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
+A new construction-only compiler investigation separates the native ICB metadata refusal from raw diagnostic PSO acceptance and captures the resulting native programs before/after construction. Native ICB execution remains unqualified. [Evidence and reproduction](docs/NATIVE_COMMAND_COMPILER_BOUNDARY.md).
+
 Native source shaders can now write, copy and reset certified render commands through an explicit project interface, compiled by NVIDIA’s native backend. A twelve-process GTX reception checks 1,093,632 exact float channels and matches the raw-record reference. This remains an adapted-application interface with CPU-expanded state candidates. [Contract and reproduction](docs/NATIVE_RENDER_SOURCE_COMMANDS.md).
 
 The GPU now chooses among certified render pipeline/resource candidates, with separate pipeline-only and resource-only controls. A 54-process reception checks 1,093,632 new exact float channels and 33 native-reference image pairs. The CPU encodes candidate states and GPU indirect-draw predicates select their visible effect; no speedup is claimed. [Contract, mechanism and reproduction](docs/GPU_RENDER_STATE_CATALOGUE.md).

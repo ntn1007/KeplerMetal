@@ -1,0 +1,30 @@
+{
+  "base_commit": "e1c358e4c13dc780e06a43e6db33b16db970d90c",
+  "files": [
+    {
+      "path": "bridge/tools/native_command_boundary_probe.mm",
+      "SHA256": "d706f7149bb97053e203828a7d782b2981bd67da176c28498f6abac3bc3fc9a2"
+    },
+    {
+      "path": "bridge/tools/NativeCommandBoundaryCapture.inc",
+      "SHA256": "c073cfdcdc15ef6ce17c3ab299c8701c6db1109b2754e9dc44c6289cd0e4ebcd"
+    },
+    {
+      "path": "bridge/tools/public_native_command_boundary.py",
+      "SHA256": "cb773b422c5b15682b30872993798d362c387c7de24abe4b84a0f5503bae4388"
+    },
+    {
+      "path": "bridge/tools/verify_native_command_boundary.py",
+      "SHA256": "9a5e7d96f400ee2e11fe83512b5e02885dc00c3a6451666278a3acdf31c026e1"
+    },
+    {
+      "path": "bridge/tools/audit_native_command_boundary.py",
+      "SHA256": "72727a945a218f0727ce1c4fae9632eda16316dade02e73e691b8ac0733826ac"
+    },
+    {
+      "path": "tests/test_native_command_boundary.py",
+      "SHA256": "9b8d9b772311be7889aaf2173e86d0e448593689030caf075371a0ac5b134d28"
+    }
+  ],
+  "core_runtime_modified": false
+}

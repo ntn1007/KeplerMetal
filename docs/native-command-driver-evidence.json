@@ -1,0 +1,29 @@
+{
+  "driver_SHA256": "e240d54a4cd64b7e54fbc15250de82e88451132e1d9f3a4f9879607c8b0e7645",
+  "provider": "Ghidra 12.1.4 / REA 6.4.0",
+  "constructor": {
+    "address": "0x10aa03",
+    "evidence_id": "ev_727695079a9d993f11438922d5f1d177fc5d29e369e17fca4f15aaf1920a92a8"
+  },
+  "compute_vtable": {
+    "address": "0x1c20e8",
+    "slot_0x10_target": "0x177f50",
+    "evidence_id": "ev_818f42e351e2c48b8553bb58f2a74b2a82b1e2075bf849317bad0216112cc2f0"
+  },
+  "compute_variant_initializer": {
+    "address": "0x177f50",
+    "evidence_id": "ev_72a841922a8ede12b3af8cabf955751756fb6b0d141415783069e615b4f3e80e",
+    "inferred_layout": {
+      "CPU_main_code_copy_pointer": "variant+0x8a8",
+      "main_code_bytes": "variant+0x18",
+      "native_code_section": "0x10005"
+    }
+  },
+  "resource_preparation": {
+    "address": "0x176f1e",
+    "evidence_id": "ev_b2fe039712ce12f7cc0bf194c1209b4d5e4a93073ba024b83d3802d9da72d610"
+  },
+  "interpretation_scope": "static dataflow, not runtime path attestation; no resident GPU code readback; no complete late-linker exclusion",
+  "original_artifact_modified": false,
+  "metadata_annotations_modified": false
+}

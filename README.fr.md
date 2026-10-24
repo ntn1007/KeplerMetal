@@ -15,6 +15,8 @@ Le travail suit deux axes complémentaires :
 
 ## Avancées récentes
 
+Une nouvelle investigation distingue le refus des métadonnées ICB et l’acceptation de pipelines de diagnostic. Les programmes natifs sont comparés avant/après construction ; leur exécution ICB reste non qualifiée. [Preuves et reproduction](docs/NATIVE_COMMAND_COMPILER_BOUNDARY.md).
+
 Une interface source MSL permet désormais d’écrire, copier et réinitialiser les commandes de rendu certifiées, avec compilation NVIDIA native. Douze processus de réception GTX vérifient 1 093 632 composantes exactes. Cette interface nécessite une application adaptée et conserve l’encodage CPU des candidats. [Contrat et reproduction](docs/NATIVE_RENDER_SOURCE_COMMANDS.md).
 
 La GTX choisit maintenant parmi des candidats de rendu certifiés, avec des contrôles séparant pipelines et ressources. La réception compte 54 processus, 1 093 632 nouvelles composantes exactes et 33 images identiques aux références natives. Le CPU encode les candidats ; les prédicats GPU activent leurs dessins indirects. [Contrat, mécanisme et reproduction](docs/GPU_RENDER_STATE_CATALOGUE.md).
