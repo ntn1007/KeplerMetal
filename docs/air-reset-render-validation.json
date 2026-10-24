@@ -1,0 +1,93 @@
+{
+  "status": "PASS_AIR_RESET_RENDER",
+  "signed_terminal_nonoverlapping_processes": 21,
+  "rendered_frames": 168,
+  "checked_float_channels": 2064384,
+  "raster_materializer_guard_bytes": 119808,
+  "reset_guard_bytes": 86016,
+  "maximum_error": 0,
+  "reset_dispatches": 120,
+  "reset_witness_words": 480,
+  "reference_control_image_pairs": 120,
+  "repeat_image_pairs": 112,
+  "repeat_readback_file_pairs": 3328,
+  "changed_float_channels_against_no_reset": 19992,
+  "changed_trials": [
+    {
+      "repeat": 0,
+      "trials": [
+        0,
+        1,
+        3,
+        4,
+        6
+      ]
+    },
+    {
+      "repeat": 1,
+      "trials": [
+        0,
+        1,
+        3,
+        4,
+        6
+      ]
+    },
+    {
+      "repeat": 2,
+      "trials": [
+        0,
+        1,
+        3,
+        4,
+        6
+      ]
+    }
+  ],
+  "scope_and_ICBs_released_before_commit": true,
+  "observer_restored_before_scope": true,
+  "default_runtime_SHA256": "796d6703bdee6b0697492cab7b7c1a5586b21d757813c389c416ce0edc68ad68",
+  "native_Apple_ICB_ABI": false,
+  "performance_benchmark": false,
+  "full_objective_complete": false,
+  "base_commit": "768504805bc88830750ec051753ab672032dae85",
+  "date": "2026-10-24",
+  "CPU_tests": 277,
+  "new_CPU_tests": 11,
+  "system_files_unchanged": 87,
+  "pilot_hosts_excluded": 1,
+  "pilot_frames_excluded": 8,
+  "pilot_reset_dispatches_excluded": 8,
+  "Qwen_used": false,
+  "job_ids": [],
+  "default_regression": {
+    "status": "PASS",
+    "new_default_executable_SHA256": "0f59b56a90c574c91e19e3a9a2e47aec600384f201acecf09277e5efd50dd5da",
+    "matches_previously_GPU_qualified_host": true,
+    "assets_equal": true,
+    "runtime_equal": true,
+    "prior_cases_rechecked": 12,
+    "prior_checked_float_channels": 1093632,
+    "new_GPU_processes": 0
+  },
+  "fresh_runtime": {
+    "status": "PASS",
+    "old_archive_SHA256": "796d6703bdee6b0697492cab7b7c1a5586b21d757813c389c416ce0edc68ad68",
+    "fresh_archive_SHA256": "e036480a5fc1160a9601aa21582a351dcf1d9a091e15e163ca017f6cc09dc76a",
+    "all_seven_objects_equal": true,
+    "all_archive_member_names_and_payloads_equal": true,
+    "archive_header_metadata_differs": true,
+    "old_source_files": 51,
+    "fresh_source_files": 52
+  },
+  "fresh_client": {
+    "status": "PASS",
+    "executable_SHA256": "4c1cd5122ca3ba812dc19abb59dc73f45af17642ebe73d5d7e9afe4c592c90e0",
+    "fresh_seven_object_runtime_links_identical_application": true,
+    "assets_equal": true,
+    "host_sources_equal": true,
+    "oracles_equal": true,
+    "old_runtime_SHA256": "796d6703bdee6b0697492cab7b7c1a5586b21d757813c389c416ce0edc68ad68",
+    "fresh_runtime_SHA256": "e036480a5fc1160a9601aa21582a351dcf1d9a091e15e163ca017f6cc09dc76a"
+  }
+}

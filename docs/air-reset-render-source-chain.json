@@ -1,0 +1,53 @@
+{
+  "base_commit": "768504805bc88830750ec051753ab672032dae85",
+  "entries": [
+    {
+      "path": "bridge/tools/AIRCertifiedResetPipeline.h",
+      "SHA256": "464f33126df173cd498fd71b5f0458c7c8123a13115e8aa555bba55bbb929f21",
+      "frozen_build_copy_SHA256": "464f33126df173cd498fd71b5f0458c7c8123a13115e8aa555bba55bbb929f21"
+    },
+    {
+      "path": "bridge/tools/AIRCertifiedResetPipeline.mm",
+      "SHA256": "cd475b6f1b22ef044884acf45263f9f1cec269da5bbf2f94c4d1758ce83c3948",
+      "frozen_build_copy_SHA256": "cd475b6f1b22ef044884acf45263f9f1cec269da5bbf2f94c4d1758ce83c3948"
+    },
+    {
+      "path": "bridge/tools/AIRRenderResetIntegration.inc",
+      "SHA256": "33c62d1d61daf10f6878e7eed73c54550315f6d4813da9e568114655d76b034c",
+      "frozen_build_copy_SHA256": "33c62d1d61daf10f6878e7eed73c54550315f6d4813da9e568114655d76b034c"
+    },
+    {
+      "path": "bridge/tools/AIRRenderResetEncode.inc",
+      "SHA256": "83eec35858d49b2b548aec1819042e14b2511bb6d7ff67fb2b822d759a1c26e0",
+      "frozen_build_copy_SHA256": "83eec35858d49b2b548aec1819042e14b2511bb6d7ff67fb2b822d759a1c26e0"
+    },
+    {
+      "path": "bridge/tools/render_state_catalogue_client.mm",
+      "SHA256": "22aa1532d482e2593b6ffa3ca9d3577c643347785d16c4bbc6092c05b405db6d",
+      "frozen_build_copy_SHA256": "22aa1532d482e2593b6ffa3ca9d3577c643347785d16c4bbc6092c05b405db6d"
+    },
+    {
+      "path": "bridge/tools/public_render_state_catalogue.py",
+      "SHA256": "fe2882a5e25e17fd79607bfce03e819fe999d209fc0ccf23f0ff29bd9c429d59",
+      "frozen_build_copy_SHA256": "fe2882a5e25e17fd79607bfce03e819fe999d209fc0ccf23f0ff29bd9c429d59"
+    },
+    {
+      "path": "bridge/tools/verify_render_state_catalogue.py",
+      "SHA256": "5115e715e0cc00959ed211485c60dc4706c31ba5b28ccf76b1a99fbc98eb0730",
+      "frozen_build_copy_SHA256": "5115e715e0cc00959ed211485c60dc4706c31ba5b28ccf76b1a99fbc98eb0730"
+    },
+    {
+      "path": "bridge/tools/verify_air_reset_render.py",
+      "SHA256": "2c17a2c70c26d6340ec43bf5e2970f1a988ddadd772629c392b616378ec4fb73",
+      "frozen_build_copy_SHA256": "2c17a2c70c26d6340ec43bf5e2970f1a988ddadd772629c392b616378ec4fb73"
+    },
+    {
+      "path": "bridge/tools/audit_air_reset_render.py",
+      "SHA256": "2ae82c2b105285df8a7db2a00e9fc5e840062dbd21d2a3b907b3908b2e22388a"
+    },
+    {
+      "path": "tests/test_air_reset_render.py",
+      "SHA256": "66fa884451a1b8cb4d7a8ee1f0f967a181c657e1618342fa2af4498e12ff232a"
+    }
+  ]
+}

@@ -15,6 +15,8 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
+The translated typed reset producer now changes a real rendered image through the existing state-record pipeline. A 21-process reception checks 168 images / 2,064,384 float channels exactly, including direct-draw references, a native MSL reset reference and missing/invalid-context controls. The seven-object runtime stays unchanged. [Ordering, ownership and reproduction](docs/AIR_RESET_RENDER.md).
+
 AIR reset lowering now preserves a typed producer's arithmetic, branches, index permutation and ordinary buffer bindings. Three native candidate/reference pairs pass 96 total dispatches, 1,548 exact uint32 outputs and 300 record resets. Structural recognition also rebuilds the first qualified shader byte-identically; GPU use still requires an exact qualified input. [Evidence and limits](docs/AIR_RESET_DATAFLOW.md).
 
 An unchanged SDK-typed render-reset shader now executes on the GTX through an exact-profile AIR translation and NVIDIA's native compiler. Three translated/reference pairs pass 84 total compute dispatches and 138,240 CPU-checked bytes, with missing-dispatch and malformed-context controls. The caller still supplies a project context; Apple ICB ABI and transparent application integration remain open. [Contract and reproduction](docs/AIR_RENDER_RESET.md).

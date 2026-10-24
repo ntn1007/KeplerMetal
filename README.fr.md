@@ -15,6 +15,8 @@ Le travail suit deux axes complémentaires :
 
 ## Avancées récentes
 
+Le producteur typé traduit en AIR agit maintenant sur un rendu réel : 21 processus vérifient 168 images et 2 064 384 canaux exacts, avec références natives et contrôles sans réinitialisation ou avec contexte invalide. Le runtime à sept objets reste inchangé. [Preuves, durées de vie et reproduction](docs/AIR_RESET_RENDER.md).
+
 La traduction AIR préserve maintenant les calculs, branches, indices permutés et buffers ordinaires d'un producteur typé : 96 dispatchs candidat/référence, 1 548 résultats uint32 exacts et 300 réinitialisations. La reconnaissance structurelle reconstruit aussi le premier shader qualifié à l'identique ; l'exécution reste limitée aux entrées qualifiées. [Preuves et limites](docs/AIR_RESET_DATAFLOW.md).
 
 Un shader original utilisant `metal::render_command.reset()` s'exécute maintenant sur la GTX après traduction ciblée de son AIR et compilation NVIDIA native. Trois paires candidat/référence passent 84 dispatchs et 138 240 octets comparés au CPU, avec contrôles sans dispatch et contextes invalides. L'application fournit encore un contexte KeplerMetal explicite ; l'ABI ICB Apple et l'intégration transparente restent à faire. [Contrat et reproduction](docs/AIR_RENDER_RESET.md).

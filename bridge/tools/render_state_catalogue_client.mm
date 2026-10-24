@@ -14,6 +14,12 @@ static void require(bool value,const char *message){if(!value)throw std::runtime
 static NSString *sha(NSData *data){unsigned char h[32];CC_SHA256(data.bytes,(CC_LONG)data.length,h);NSMutableString *s=[NSMutableString new];for(auto b:h)[s appendFormat:@"%02x",b];return s;}
 static void emit(id value){NSData *data=[NSJSONSerialization dataWithJSONObject:value options:NSJSONWritingPrettyPrinted error:nil];require(data!=nil,"JSON encoding");fwrite(data.bytes,1,data.length,stdout);puts("");}
 static NSData *load(NSString *assets,NSString *name){NSData *data=[NSData dataWithContentsOfFile:[assets stringByAppendingPathComponent:name]];require(data!=nil,"asset missing");return data;}
+#ifndef KP_AIR_RENDER_RESET
+#define KP_AIR_RENDER_RESET 0
+#endif
+#if KP_AIR_RENDER_RESET
+#include "AIRRenderResetIntegration.inc"
+#endif
 struct Vertex{float position[4],color[4];};
 static NSData *vertices(unsigned first,bool indexed,unsigned logical,unsigned state){
     static const float colors[2][3][4]={{{.25,.125,.75,1},{.125,.75,.25,1},{.75,.5,.125,1}},{{.5,.375,.25,1},{.375,.25,.5,1},{.125,.5,.625,1}}};
@@ -117,6 +123,9 @@ static StateCapture *encodeFrame(id<MTLDevice>device,id<MTLCommandQueue>queue,NS
     NSMutableData *range=bytes(136),*counter=bytes(132),*records=bytes(384);memset((char*)range.mutableBytes+64,0,8);memset((char*)counter.mutableBytes+64,0,4);memset((char*)records.mutableBytes+64,0,256);privateBuffer(@"range",range);privateBuffer(@"counter",counter);privateBuffer(@"records",records);
     uint32_t config[4]={trial,trial,4,[mode isEqual:@"forced_0"]?1u:[mode isEqual:@"forced_1"]?2u:0u};id<MTLBuffer>cfg=[device newBufferWithLength:256 options:MTLResourceStorageModeShared];memset(cfg.contents,0,256);memcpy(cfg.contents,config,16);
     if(produce){id<MTLComputeCommandEncoder>e=[cb computeCommandEncoder];[e setComputePipelineState:producer];[e setBuffer:buffers[@"seeds"]offset:64 atIndex:0];[e setBuffer:buffers[@"range"]offset:64 atIndex:1];[e setBuffer:buffers[@"counter"]offset:64 atIndex:2];[e setBuffer:cfg offset:0 atIndex:3];[e setBuffer:buffers[@"identities"]offset:64 atIndex:4];[e setBuffer:buffers[@"records"]offset:64 atIndex:5];[e setBuffer:buffers[@"foreign-identities"]offset:64 atIndex:6];[e dispatchThreadgroups:MTLSizeMake(1,1,1)threadsPerThreadgroup:MTLSizeMake(32,1,1)];[e endEncoding];}
+#if KP_AIR_RENDER_RESET
+#include "AIRRenderResetEncode.inc"
+#endif
     NSMutableArray *refusals=[NSMutableArray new];
     id<MTLIndirectCommandBuffer>backup=nil,backupAlternative=nil;
     if([mode isEqual:@"contracts"]&&trial<2){
@@ -159,6 +168,9 @@ static StateCapture *encodeFrame(id<MTLDevice>device,id<MTLCommandQueue>queue,NS
         uint32_t value=values[(trial*5+3)%16];
         for(unsigned i=0;i<3;i++){
             unsigned slot=i==2?3:i;if(!produce||!accepted(trial,slot))continue;
+#if KP_AIR_RENDER_RESET
+            if(slot==3&&airAppliesReset(mode))continue;
+#endif
             unsigned state=(value>>(i+3))&1,start=(i==0?5:0)+3*((value>>i)&1),function=functionIndex(i,state,resourcesOnly);
             [e setRenderPipelineState:[scope renderPipelineForName:@[@"smooth",@"linear",@"flat"][function]]];[e setVertexBuffer:vbo[state][i]offset:64 atIndex:0];[e setVertexBuffer:instances offset:128 atIndex:1];[e setFragmentBuffer:fragmentTables[state][i]offset:256 atIndex:0];
             if(!i)[e drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:start vertexCount:3 instanceCount:1 baseInstance:0];else[e drawIndexedPrimitives:MTLPrimitiveTypeTriangle indexCount:3 indexType:i==1?MTLIndexTypeUInt16:MTLIndexTypeUInt32 indexBuffer:indices[i-1]indexBufferOffset:64+start*(i==1?2:4)instanceCount:1 baseVertex:i==1?2:-2 baseInstance:i==1?1:2];
@@ -176,13 +188,24 @@ static StateCapture *encodeFrame(id<MTLDevice>device,id<MTLCommandQueue>queue,NS
     for(unsigned bank=0;bank<2;bank++){[b copyFromTexture:textures[bank]sourceSlice:0 sourceLevel:0 sourceOrigin:MTLOriginMake(0,0,0)sourceSize:MTLSizeMake(64,48,1)toBuffer:textureRead[bank]destinationOffset:0 destinationBytesPerRow:1024 destinationBytesPerImage:49152];capture.readbacks[[NSString stringWithFormat:@"texture-%u",bank]]=textureRead[bank];}[b endEncoding];
     capture.weakOwners=@[weak(scope),weak(commands[0]),weak(commands[1]),weak(samplers[0][1]),weak(samplers[1][1])];
     [scope restore];require(object_getClass(device)==original&&object_getClass(e)==nativeClass,"class restoration");capture.events=scope.events;
-    capture.row=[@{@"trial":@(trial),@"native_reference":@(native),@"producer_dispatches":@(produce?1u:0u),@"api_refusals":refusals,@"consumer_encoded":@(consume),@"identifiers":ids,@"foreign_identifiers":foreignIDs,@"scissor":@[@(scissor.x),@(scissor.y),@(scissor.width),@(scissor.height)],@"classes_restored_before_commit":@YES}mutableCopy];return capture;
+    capture.row=[@{@"trial":@(trial),@"native_reference":@(native),@"producer_dispatches":@(produce?1u:0u),@"api_refusals":refusals,@"consumer_encoded":@(consume),@"identifiers":ids,@"foreign_identifiers":foreignIDs,@"scissor":@[@(scissor.x),@(scissor.y),@(scissor.width),@(scissor.height)],@"classes_restored_before_commit":@YES}mutableCopy];
+#if KP_AIR_RENDER_RESET
+    capture.row[@"AIR_reset"]=resetRow;
+#endif
+    return capture;
 }
 
 int main(int argc,char **argv){@autoreleasepool{@try{try{
     require(argc==4,"arguments");NSString *assets=@(argv[1]),*directory=@(argv[2]),*mode=@(argv[3]);
+#if KP_AIR_RENDER_RESET
+    require([@[@"air_gpu",@"air_native",@"air_reference",@"air_no_reset",@"air_no_reset_native",@"air_bad_context",@"air_bad_context_native"]containsObject:mode],"AIR mode");
+#else
     require([@[@"gpu",@"native",@"pipeline_only",@"pipeline_only_native",@"resources_only",@"resources_only_native",@"forced_0",@"forced_1",@"no_producer",@"no_consumer",@"release",@"contracts"]containsObject:mode],"mode");
+#endif
     id<MTLDevice>device=nil;for(id<MTLDevice>d in MTLCopyAllDevices())if(KPKepler880MIdentity(d)){require(device==nil,"multiple devices");device=d;}require(device!=nil,"GTX identity");id<MTLCommandQueue>queue=[device newCommandQueue];NSError *error=nil;
+#if KP_AIR_RENDER_RESET
+    airInitializeReset(device,assets,directory,mode);
+#endif
     id<MTLLibrary>producerLibrary=[device newLibraryWithURL:[NSURL fileURLWithPath:[assets stringByAppendingPathComponent:@"producer.metallib"]]error:&error],markerLibrary=[device newLibraryWithURL:[NSURL fileURLWithPath:[assets stringByAppendingPathComponent:@"test.metallib"]]error:&error];
     id<MTLComputePipelineState>producer=[device newComputePipelineStateWithFunction:[producerLibrary newFunctionWithName:@"generate_render_state_records"]error:&error];
     MTLRenderPipelineDescriptor *pd=[MTLRenderPipelineDescriptor new];pd.vertexFunction=[markerLibrary newFunctionWithName:@"vs_range_marker"];pd.fragmentFunction=[markerLibrary newFunctionWithName:@"fs_range_marker"];pd.colorAttachments[0].pixelFormat=MTLPixelFormatRGBA32Float;id<MTLRenderPipelineState>marker=[device newRenderPipelineStateWithDescriptor:pd error:&error];require(producer&&marker,"native pipeline creation");
@@ -195,5 +218,9 @@ int main(int argc,char **argv){@autoreleasepool{@try{try{
         for(NSString *name in capture.readbacks){id<MTLBuffer>buffer=capture.readbacks[name];NSString *file=[directory stringByAppendingPathComponent:[NSString stringWithFormat:@"trial-%u.%@.bin",trial,name]];require([[NSData dataWithBytes:buffer.contents length:buffer.length]writeToFile:file atomically:YES],"readback save");}
         [runs addObject:capture.row];[events addObjectsFromArray:capture.events];
     }
-    emit(@{@"status":@"COMPLETED",@"mode":mode,@"device":device.name,@"registry_id":@(device.registryID),@"device_identity":KPKepler880MIdentity(device),@"scope_events":events,@"runs":runs,@"GPU_choice_CPU_read":@NO,@"CPU_resolved_state_supplied":@([mode hasSuffix:@"native"]),@"native_Apple_ICB_ABI":@NO,@"performance_benchmark":@NO});return 0;
+    emit(@{
+#if KP_AIR_RENDER_RESET
+        @"reset_pipeline":airResetReceipt,
+#endif
+        @"status":@"COMPLETED",@"mode":mode,@"device":device.name,@"registry_id":@(device.registryID),@"device_identity":KPKepler880MIdentity(device),@"scope_events":events,@"runs":runs,@"GPU_choice_CPU_read":@NO,@"CPU_resolved_state_supplied":@([mode hasSuffix:@"native"]),@"native_Apple_ICB_ABI":@NO,@"performance_benchmark":@NO});return 0;
 }catch(const std::exception &e){emit(@{@"failure":@(e.what())});return 10;}}@catch(NSException *e){emit(@{@"failure":e.reason?:@"Objective-C exception"});return 11;}}}

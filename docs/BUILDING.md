@@ -1,5 +1,7 @@
 # Build from source
 
+[AIR_RESET_RENDER.md](AIR_RESET_RENDER.md) adds `--air-reset-build` plus `--air-reset-inspections` to the render catalogue builder. A separate MRC factory with C linkage verifies the previously certified program for the ARC host. The source-built runtime and materializer remain unchanged; seven opt-in modes qualify the final image and negative controls.
+
 [AIR_RESET_DATAFLOW.md](AIR_RESET_DATAFLOW.md) adds structural command-root metadata recognition and the separate qualified typed producer, preserving its arithmetic, branches and ordinary buffer metadata. Its source-only builder, certificate gate and auditor reuse the preceding native capture/section parser without changing the core runtime.
 
 [AIR_RENDER_RESET.md](AIR_RENDER_RESET.md) adds a source-only exact-profile AIR translator, construction/offline-certification gate, signed GPU reset/reference probes and portable auditor. It requires Xcode/Metal and local envytools, with no NAK or core runtime link. An unknown input profile refuses rather than silently changing pins.
