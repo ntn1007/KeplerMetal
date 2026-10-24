@@ -1,0 +1,42 @@
+{
+  "base_commit": "c171a62d9e51482eb2cae8aa97a0ec12e7519769",
+  "entries": [
+    {
+      "path": "bridge/src/air_render_reset_reference.metal",
+      "SHA256": "4f39083dfe773a9f4d5235377359f78ee5f412e26aed69229a1e664d03f8cefe",
+      "frozen_build_copy_SHA256": "4f39083dfe773a9f4d5235377359f78ee5f412e26aed69229a1e664d03f8cefe"
+    },
+    {
+      "path": "bridge/tools/air_render_reset_probe.mm",
+      "SHA256": "87d3b849bf6105d8e14497e1088096ae813800bf874f5685d2cf687d3a463173",
+      "frozen_build_copy_SHA256": "87d3b849bf6105d8e14497e1088096ae813800bf874f5685d2cf687d3a463173"
+    },
+    {
+      "path": "bridge/tools/audit_air_render_reset.py",
+      "SHA256": "356ac3704c54064cd0ee26ffc91d64a70691477c95f729eda25276a3e25bbb20"
+    },
+    {
+      "path": "bridge/tools/lower_air_render_reset.py",
+      "SHA256": "3ad0132236517ba5259aa012c9ac2129359407c170f610eda43835ffced00df6",
+      "frozen_build_copy_SHA256": "3ad0132236517ba5259aa012c9ac2129359407c170f610eda43835ffced00df6"
+    },
+    {
+      "path": "bridge/tools/public_air_render_reset.py",
+      "SHA256": "e4e2c52cf3aa779f7717daf085792eb4ea842d5210826d7eff5773b599bded7a",
+      "frozen_build_copy_SHA256": "e4e2c52cf3aa779f7717daf085792eb4ea842d5210826d7eff5773b599bded7a"
+    },
+    {
+      "path": "bridge/tools/verify_air_render_reset.py",
+      "SHA256": "498b38be49f1a648aab26014fce0da7d302c5673b461aa078af3d2cf223c9889",
+      "frozen_build_copy_SHA256": "498b38be49f1a648aab26014fce0da7d302c5673b461aa078af3d2cf223c9889"
+    },
+    {
+      "path": "tests/test_air_render_reset.py",
+      "SHA256": "23fda953ed025487edefdc09e21e4230a8c8bb813ad675f5c60e2cd4eb0c0bfc"
+    },
+    {
+      "path": "tests/fixtures/air_render_reset_ir.json",
+      "SHA256": "0f10532cc8deff808d65669bb4b05098457b16911ded76aab2477610507355ec"
+    }
+  ]
+}

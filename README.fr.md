@@ -15,6 +15,8 @@ Le travail suit deux axes complémentaires :
 
 ## Avancées récentes
 
+Un shader original utilisant `metal::render_command.reset()` s'exécute maintenant sur la GTX après traduction ciblée de son AIR et compilation NVIDIA native. Trois paires candidat/référence passent 84 dispatchs et 138 240 octets comparés au CPU, avec contrôles sans dispatch et contextes invalides. L'application fournit encore un contexte KeplerMetal explicite ; l'ABI ICB Apple et l'intégration transparente restent à faire. [Contrat et reproduction](docs/AIR_RENDER_RESET.md).
+
 Le code des tampons privés natifs est désormais relu par blit avant/après encodage non soumis : 56 readbacks concordants sur 60 hosts de diagnostic. L’appel relatif observé reste présent ; aucun shader suspect n’est exécuté. [Preuves et limites](docs/NATIVE_COMMAND_BINDING_READBACK.md).
 
 Une nouvelle investigation distingue le refus des métadonnées ICB et l’acceptation de pipelines de diagnostic. Les programmes natifs sont comparés avant/après construction ; leur exécution ICB reste non qualifiée. [Preuves et reproduction](docs/NATIVE_COMMAND_COMPILER_BOUNDARY.md).

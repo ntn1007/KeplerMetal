@@ -1,5 +1,7 @@
 # Status, 2026-10-24
 
+An exact-profile AIR translation now executes one unchanged SDK-typed render-reset shader through NVIDIA's native compiler. Ten final signed hosts cover 84 compute dispatches, 138,240 CPU-matching bytes, 15,360 guard bytes and 45 translated/reference file pairs. Invalid contexts and missing dispatch preserve the expected records. This uses an explicit project context and does not implement Apple's ICB resource ABI. System and core runtime remain unchanged; no speedup or full Metal version is claimed. [Evidence and reproduction](AIR_RENDER_RESET.md).
+
 Native code-buffer binding/readback observation now checks 56 matching private-buffer code copies, 46 unsubmitted QMDs and 28 repeat file pairs across 60 final hosts. All 48 raw-operation readbacks retain a PC-relative call to local program entry. CPU code and buffer identity stay unchanged; committed work is blit-only. Native ICB semantics and commit-time resolution remain unqualified. [Exact scope and evidence](NATIVE_COMMAND_BINDING_READBACK.md).
 
 Native-command construction probes now separate typed ICB metadata refusal from raw diagnostic PSO acceptance. Six raw operations share a 64-byte native block with a local call target zero; witness cases retain that call, with vertex binding differing from the other five. Fourteen CPU staging copies remain identical after the original constructor. This is diagnostic evidence, not native ICB execution or a proven late-linker defect. [Scope and exact evidence](NATIVE_COMMAND_COMPILER_BOUNDARY.md).

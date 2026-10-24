@@ -15,6 +15,8 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
+An unchanged SDK-typed render-reset shader now executes on the GTX through an exact-profile AIR translation and NVIDIA's native compiler. Three translated/reference pairs pass 84 total compute dispatches and 138,240 CPU-checked bytes, with missing-dispatch and malformed-context controls. The caller still supplies a project context; Apple ICB ABI and transparent application integration remain open. [Contract and reproduction](docs/AIR_RENDER_RESET.md).
+
 Private native code buffers now have guarded Metal-blit readback before/after uncommitted encoding. A 60-host diagnostic cohort checks 56 matching readbacks and confirms the raw command entry call remains in the observed bytes; no suspect compute CB is submitted. [Evidence and limits](docs/NATIVE_COMMAND_BINDING_READBACK.md).
 
 A new construction-only compiler investigation separates the native ICB metadata refusal from raw diagnostic PSO acceptance and captures the resulting native programs before/after construction. Native ICB execution remains unqualified. [Evidence and reproduction](docs/NATIVE_COMMAND_COMPILER_BOUNDARY.md).
