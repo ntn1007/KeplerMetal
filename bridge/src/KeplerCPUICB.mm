@@ -49,6 +49,7 @@
 - (id)prepareVertexDrawPipeline:(id<MTLRenderPipelineState>)pipeline bindings:(NSDictionary*)bindings vertexStart:(NSUInteger)start vertexCount:(NSUInteger)count instances:(NSUInteger)instances baseInstance:(NSUInteger)base error:(NSError**)error;
 - (id)prepareInheritedDrawKind:(NSUInteger)kind indexBuffer:(id<MTLBuffer>)indices offset:(NSUInteger)offset instances:(NSUInteger)instances error:(NSError**)error;
 - (BOOL)encodeInheritedRecords:(NSArray*)records encoder:(id<MTLRenderCommandEncoder>)encoder target:(id<MTLTexture>)target evidence:(NSDictionary**)evidence error:(NSError**)error;
+- (BOOL)encodeGPUIndirectRecords:(NSArray*)records arguments:(id<MTLBuffer>)arguments encoder:(id<MTLRenderCommandEncoder>)encoder target:(id<MTLTexture>)target evidence:(NSDictionary**)evidence error:(NSError**)error;
 - (id)prepareIndexedFragmentPipeline:(id<MTLRenderPipelineState>)pipeline vertexBindings:(NSDictionary*)vertexBindings fragmentBindings:(NSDictionary*)fragmentBindings indexCount:(NSUInteger)count indexBuffer:(id<MTLBuffer>)indices indexOffset:(NSUInteger)offset kind:(NSUInteger)kind instances:(NSUInteger)instances baseVertex:(NSInteger)vertexBase baseInstance:(NSUInteger)base error:(NSError**)error;
 @end
 // The scope owns the device, so an associated strong scope would form a cycle.
@@ -141,6 +142,8 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 @property(nonatomic) NSUInteger releasedEncoderCount;
 @property(nonatomic) NSUInteger maxKernelBindings;
 @property(nonatomic,strong) id<KPCPURenderTransport> renderEngine;
+@property(nonatomic,strong) id<MTLLibrary> indirectRenderRangeLibrary;
+@property(nonatomic,strong) id<MTLComputePipelineState> indirectRenderRangePipeline;
 @property(nonatomic,strong) id<MTLLibrary> GPUSelectionLibrary;
 @property(nonatomic,strong) id<MTLComputePipelineState> GPUChoiceProducer;
 @property(nonatomic,strong) id<MTLComputePipelineState> GPUCommandSelector;
@@ -192,8 +195,10 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 - (void)executeRange:(NSRange)range encoder:(id<MTLComputeCommandEncoder>)encoder;
 @end
 
+@class KPIndirectRenderPlan;
 @interface KPRenderICB : KPComputeICB
 @property(nonatomic) MTLIndirectCommandType allowedTypes;
+@property(nonatomic,strong) KPIndirectRenderPlan *indirectRenderPlan;
 @property(nonatomic) NSUInteger maxVertexBuffers,maxFragmentBuffers;
 - (void)executeRenderRange:(NSRange)range encoder:(id<MTLRenderCommandEncoder>)encoder target:(id<MTLTexture>)target;
 @end
@@ -208,6 +213,17 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 @property(nonatomic) BOOL hasDraw;
 @property(nonatomic,strong) id record;
 - (void)copyStateFrom:(KPRenderICBCommand*)source;
+@end
+
+@interface KPIndirectRenderPlan : NSObject
+@property(nonatomic,weak) id<MTLCommandBuffer> commandBuffer;
+@property(nonatomic,strong) id<MTLBuffer> range,arguments,witness,templates,config;
+@property(nonatomic,strong) NSArray *records;
+@property(nonatomic,strong) NSArray *owners;
+@property(nonatomic) NSUInteger rangeOffset;
+@property(atomic) BOOL consumed,completed,failed;
+@end
+@implementation KPIndirectRenderPlan
 @end
 
 @implementation KPComputeICBCommand
@@ -472,6 +488,7 @@ void copyResidentICB(id self,SEL selector,id source,NSRange range,id destination
  NSArray*frozenOwners=[retained copy];[cb addCompletedHandler:^(id<MTLCommandBuffer>completed){(void)frozenOwners.count;}];
  [scope.eventRows addObject:@{@"operation":@"GPU_QMD_copy",@"source_location":@(range.location),@"destination_index":@(index),@"length":@(range.length),@"bytes":@(range.length*256),@"source_QMD_address":addresses[0][@"source"],@"destination_QMD_address":addresses[0][@"destination"],@"descriptor_pairs":addresses,@"predecessor_order":ordering,@"retained_owners":@(retained.count),@"encoded_GPU_blits":@(range.length),@"whole_range_preflight":@YES,@"CPU_shadow_updated_for_setters":@YES,@"CPU_shadow_is_execution_source":@NO,@"full_ICB_contract":@NO}];
 }
+#include "KeplerIndirectRenderExecution.inc"
 void executeRenderICB(id self,SEL selector,id buffer,NSRange range){KPScopeLink*link=objc_getAssociatedObject(self,&contextKey);KPCPUICBScope*scope=link.scope;if(!scope||scope.restored||!scope.renderEngine||![buffer isKindOfClass:[KPRenderICB class]]||((KPRenderICB*)buffer).scope!=scope||!link.renderTarget)reject(@"Render ICB/encoder context mismatch");[(KPRenderICB*)buffer executeRenderRange:range encoder:self target:link.renderTarget];}
 void setCallerRenderPipeline(id self,SEL selector,id pipeline){KPScopeLink*link=objc_getAssociatedObject(self,&contextKey);Class original=class_getSuperclass(object_getClass(self));Method method=class_getInstanceMethod(original,selector);((void(*)(id,SEL,id))method_getImplementation(method))(self,selector,pipeline);if(link&&!link.encodingRenderICB)link.callerRenderPipeline=pipeline;}
 void setCallerVertexBuffer(id self,SEL selector,id buffer,NSUInteger offset,NSUInteger index){
@@ -582,7 +599,7 @@ BOOL installRenderOverride(Class dynamic,Class original,SEL selector,IMP impleme
     if(stencil&&(stencil!=depth||stencil.pixelFormat!=MTLPixelFormatDepth32Float_Stencil8||pass.stencilAttachment.level||pass.stencilAttachment.slice||pass.stencilAttachment.depthPlane||pass.stencilAttachment.loadAction!=MTLLoadActionClear||pass.stencilAttachment.storeAction!=MTLStoreActionStore||pass.stencilAttachment.clearStencil>255)){fail(error,@"Stencil attachment must share the qualified combined depth texture");return nil;}
     for(NSUInteger i=1;i<8;i++)if(pass.colorAttachments[i].texture){fail(error,@"Multiple render targets are not qualified here");return nil;}
     id<MTLRenderCommandEncoder>e=[cb renderCommandEncoderWithDescriptor:pass];Class original=object_getClass(e),native=objc_getClass("NVMTLRenderCommandEncoder_KEPLER_A");if(!e||original!=native||class_getInstanceSize(original)!=128){if(e)[e endEncoding];fail(error,@"Native render encoder layout changed");return nil;}
-    Class dynamic=nil;{std::lock_guard<std::mutex>lock(installMutex);dynamic=scopedClass(renderEncoderClasses,original,@"KPICBRenderEncoder_",@selector(executeCommandsInBuffer:withRange:),(IMP)executeRenderICB,error);if(dynamic&&(!installRenderOverride(dynamic,original,@selector(setRenderPipelineState:),(IMP)setCallerRenderPipeline)||!installRenderOverride(dynamic,original,@selector(setVertexBuffer:offset:atIndex:),(IMP)setCallerVertexBuffer)||!installRenderOverride(dynamic,original,@selector(setVertexBuffers:offsets:withRange:),(IMP)setCallerVertexBuffers)||!installRenderOverride(dynamic,original,@selector(setVertexBufferOffset:atIndex:),(IMP)setCallerVertexOffset)||!installRenderOverride(dynamic,original,@selector(setVertexBytes:length:atIndex:),(IMP)setCallerVertexBytes)||!installRenderOverride(dynamic,original,@selector(setFragmentBuffer:offset:atIndex:),(IMP)setCallerFragmentBuffer)||!installRenderOverride(dynamic,original,@selector(setFragmentBuffers:offsets:withRange:),(IMP)setCallerFragmentBuffers)||!installRenderOverride(dynamic,original,@selector(setFragmentBufferOffset:atIndex:),(IMP)setCallerFragmentOffset)||!installRenderOverride(dynamic,original,@selector(setFragmentBytes:length:atIndex:),(IMP)setCallerFragmentBytes)))dynamic=nil;}
+    Class dynamic=nil;{std::lock_guard<std::mutex>lock(installMutex);dynamic=scopedClass(renderEncoderClasses,original,@"KPICBRenderEncoder_",@selector(executeCommandsInBuffer:withRange:),(IMP)executeRenderICB,error);if(dynamic&&(!installRenderOverride(dynamic,original,@selector(setRenderPipelineState:),(IMP)setCallerRenderPipeline)||!installRenderOverride(dynamic,original,@selector(executeCommandsInBuffer:indirectBuffer:indirectBufferOffset:),(IMP)executeIndirectRenderICB)||!installRenderOverride(dynamic,original,@selector(setVertexBuffer:offset:atIndex:),(IMP)setCallerVertexBuffer)||!installRenderOverride(dynamic,original,@selector(setVertexBuffers:offsets:withRange:),(IMP)setCallerVertexBuffers)||!installRenderOverride(dynamic,original,@selector(setVertexBufferOffset:atIndex:),(IMP)setCallerVertexOffset)||!installRenderOverride(dynamic,original,@selector(setVertexBytes:length:atIndex:),(IMP)setCallerVertexBytes)||!installRenderOverride(dynamic,original,@selector(setFragmentBuffer:offset:atIndex:),(IMP)setCallerFragmentBuffer)||!installRenderOverride(dynamic,original,@selector(setFragmentBuffers:offsets:withRange:),(IMP)setCallerFragmentBuffers)||!installRenderOverride(dynamic,original,@selector(setFragmentBufferOffset:atIndex:),(IMP)setCallerFragmentOffset)||!installRenderOverride(dynamic,original,@selector(setFragmentBytes:length:atIndex:),(IMP)setCallerFragmentBytes)))dynamic=nil;}
     if(!dynamic){[e endEncoding];fail(error,@"Scoped render methods unavailable");return nil;}
     NSMutableIndexSet*expired=[NSMutableIndexSet new];for(NSUInteger i=0;i<_adapted.count;i++)if(!((KPAdaptedEncoder*)_adapted[i]).encoder)[expired addIndex:i];_releasedEncoderCount+=expired.count;[_adapted removeObjectsAtIndexes:expired];
     linkScope(e,self);KPScopeLink*link=objc_getAssociatedObject(e,&contextKey);link.renderTarget=target;link.renderPass=pass;link.callerVertexBindings=[NSMutableDictionary new];link.callerFragmentBindings=[NSMutableDictionary new];object_setClass(e,dynamic);KPAdaptedEncoder*r=[KPAdaptedEncoder new];r.encoder=e;r.originalClass=original;[_adapted addObject:r];
@@ -798,6 +815,7 @@ BOOL installRenderOverride(Class dynamic,Class original,SEL selector,IMP impleme
  id<MTLBuffer>host=[_device newBufferWithLength:65536 options:MTLResourceStorageModeManaged];id<MTLCommandBuffer>read=[_queue commandBuffer];id<MTLBlitCommandEncoder>b=[read blitCommandEncoder];[b copyFromBuffer:nativeCB sourceOffset:0 toBuffer:host destinationOffset:0 size:65536];[b synchronizeResource:host];[b endEncoding];if(!complete(read))reject(@"Native state readback failed");NSData*snapshot=[NSData dataWithBytes:host.contents length:65536];NSError*error=nil;NSDictionary*registered=([profile[@"native_registration_v1"]boolValue]||[profile[@"library_SHA256"]isEqual:@"913c4c1a32db704bc0ee5e54c6d9084f8601418c924fbd35ef72bcc08cb64ecd"])?profile:nil;KPRecordedNativeCompute*r=[KPRecordedNativeCompute recordedCommands:commands queue:_queue pipeline:command.pipeline output:out counter:counter parameters:parameters nativeConstants:nativeCB nativeDescriptor:nativeQMD constantSnapshot:snapshot groups:command.groups.width local:command.local.width profile:registered error:&error];if(!r)reject(error.localizedDescription);
  id<MTLCommandBuffer>upload=[_queue commandBuffer];b=[upload blitCommandEncoder];[b copyFromBuffer:nativeCB sourceOffset:0 toBuffer:r.constants destinationOffset:0 size:65536];[b endEncoding];if(!complete(upload))reject(@"Dedicated constant copy failed");[_eventRows addObject:@{@"operation":@"materialize_CPU_command",@"user_kernel_invocations":@0,@"requires_GPU_NOP_and_blit_preparation":@YES,@"commands_SHA256":hash(commands),@"snapshot_SHA256":hash(snapshot),@"command_bytes":@(commands.length),@"dynamic_threadgroup_length":@(dynamicLength),@"relocation":r.relocationEvidence}];return r;
 }
+#include "KeplerIndirectRenderScope.inc"
 - (void)restore{@synchronized(_factoryLock){if(_restored)return;_restored=YES;NSUInteger liveFunctions=0;for(KPAdaptedFunction*r in _adaptedFunctions){id f=r.function;if(f){liveFunctions++;object_setClass(f,r.originalClass);objc_setAssociatedObject(f,&IRFunctionKey,nil,OBJC_ASSOCIATION_ASSIGN);}}[_adaptedFunctions removeAllObjects];[_functionLibraries removeAllObjects];restoreIRLibraries(self);if(liveFunctions)[_eventRows addObject:@{@"operation":@"restore_IRv2_functions",@"live_functions_restored":@(liveFunctions),@"cached_function_classes":@(functionClasses.size())}];NSUInteger live=0,expired=_releasedEncoderCount;for(KPAdaptedEncoder*r in _adapted){id e=r.encoder;if(!e){expired++;continue;}live++;object_setClass(e,r.originalClass);objc_setAssociatedObject(e,&contextKey,nil,OBJC_ASSOCIATION_ASSIGN);}[_adapted removeAllObjects];restoreAutomaticComputeFactories(self);object_setClass(_device,_originalDeviceClass);objc_setAssociatedObject(_device,&contextKey,nil,OBJC_ASSOCIATION_ASSIGN);_restored=YES;[_eventRows addObject:@{@"operation":@"scope_restore",@"device_class_restored":@(object_getClass(_device)==_originalDeviceClass),@"live_encoder_classes_restored":@(live),@"already_released_encoders":@(expired),@"cached_device_classes":@(deviceClasses.size()),@"cached_encoder_classes":@(encoderClasses.size()),@"system_modified":@NO}];}}
 - (void)dealloc{[self restore];}
 @end

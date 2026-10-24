@@ -28,19 +28,19 @@
       "path": "bridge/src/KeplerCPUICB.h",
       "source_path": "bridge/src/KeplerCPUICB.h",
       "source_SHA256": "263dede0101967e1bfa32fe3b081b73c476d9e09e8a9b5446ae04cf4f425ee0a",
-      "published_SHA256": "4a4cc125330bbc877806365ff3e841a9dc464e3a40c173f5526c17daa32ed7f0",
-      "bytes": 23496,
-      "modified_for_publication": false,
-      "previous_published_SHA256": "3e2a451be0060a6d9dc304ecfca083d8a74c9106431f2b44689882878efffdc5"
+      "published_SHA256": "fd96862591d61bc9e24b2b124928a72e0b8e95e5214827aa81f8caa9db1668fe",
+      "bytes": 24483,
+      "modified_for_publication": true,
+      "previous_published_SHA256": "4a4cc125330bbc877806365ff3e841a9dc464e3a40c173f5526c17daa32ed7f0"
     },
     {
       "path": "bridge/src/KeplerCPUICB.mm",
       "source_path": "bridge/src/KeplerCPUICB.mm",
       "source_SHA256": "3d59c2c609611ddc387e616b8945e903f6378dbd4a3b66a02cb22087ada84b60",
-      "published_SHA256": "792d7bb560f3c2eaa2ecf876c0436ea323bc2c59cb0f414630d99e0a4fd145e8",
-      "bytes": 132638,
+      "published_SHA256": "9488f4d55fd92234621a8750bb47494540e8ab4e8e50c132c40a0bae806b0c7f",
+      "bytes": 133765,
       "modified_for_publication": true,
-      "previous_published_SHA256": "2ade3defcdaf1e9823dfe73598d1cfe580059af2ac4c91477a2322f937458f8f"
+      "previous_published_SHA256": "792d7bb560f3c2eaa2ecf876c0436ea323bc2c59cb0f414630d99e0a4fd145e8"
     },
     {
       "path": "bridge/src/KeplerCommandIR.h",
@@ -176,10 +176,10 @@
       "path": "bridge/src/KeplerNativeRenderDraws.mm",
       "source_path": "bridge/src/KeplerNativeRenderDraws.mm",
       "source_SHA256": "370abcc54cd28f4b9b6731b9a8d7b9debf21067a79d8aba9ac16b4782e0d32a5",
-      "published_SHA256": "ab893268a9ca9383b430b203cc8896b095c4e891d76d7c3728730fdaa2ed06cb",
-      "bytes": 69341,
+      "published_SHA256": "00912bd644278615244d05c13629bfa2551fe1d7ad817365b7766cc05504f68a",
+      "bytes": 74958,
       "modified_for_publication": true,
-      "previous_published_SHA256": "370abcc54cd28f4b9b6731b9a8d7b9debf21067a79d8aba9ac16b4782e0d32a5"
+      "previous_published_SHA256": "ab893268a9ca9383b430b203cc8896b095c4e891d76d7c3728730fdaa2ed06cb"
     },
     {
       "path": "bridge/src/KeplerProgramImport.h",
@@ -7478,7 +7478,7 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "011433588cd8bd81b80bc4f82f64d48639bc355341878d0a732c7ffabc6e6f7c",
-  "previous_public_commit": "24d4cf8f722ccd4037d7c0137991ef35c439ffa2",
-  "update": "Qualify native-source GPU-generated texture argument selection with a three-buffer root, ordinary library factories and a complete public-source auxiliary shader rebuild; no runtime change."
+  "previous_source_snapshot_SHA256": "75644490d479091fbfe057f3807ca1183e606ac07e6071d73eb23d6b7dad65ce",
+  "previous_public_commit": "08603b232b8379106099ebd8fe01bec4ac35c5d9",
+  "update": "Add explicit native GPU render execution-range preparation and scoped public-selector execution, preserving owned record/resource lifetimes and the existing CPU-range path; fresh complete-archive GPU qualification."
 }

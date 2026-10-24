@@ -229,6 +229,20 @@
                                           commandBuffer:(id<MTLCommandBuffer>)commandBuffer
                                                   error:(NSError **)error;
 - (void)restore;
+// Explicit bounded render-range prepass. Register the exact native kernel,
+// then prepare BEFORE opening the render pass, after the GPU range producer.
+// The public executeCommandsInBuffer:indirectBuffer:indirectBufferOffset:
+// consumes this preparation once, on the SAME retained command buffer.
+// Do not mutate the range buffer or ICB state between preparation/consumption.
+// Reprepare this ICB only after successful completion; Error poisons it.
+- (BOOL)enableGPUIndirectRenderRangesWithLibraryData:(NSData *)data
+                                    expectedSHA256:(NSString *)expected
+                                             error:(NSError **)error;
+- (BOOL)prepareIndirectRenderCommands:(id<MTLIndirectCommandBuffer>)buffer
+                       indirectBuffer:(id<MTLBuffer>)range
+                 indirectBufferOffset:(NSUInteger)offset
+                        commandBuffer:(id<MTLCommandBuffer>)commandBuffer
+                                error:(NSError **)error;
 // Returns a real native MTLFunction from an immutable library snapshot. Only
 // its two root-encoder getters are adapted to our IRv2 ABI after validating
 // native reflection. The installed native compiler is not replaced.

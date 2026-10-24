@@ -248,6 +248,61 @@ BOOL validate(NSData*d,NSUInteger kind,id<MTLBuffer>indices,NSUInteger offset,NS
     for(NSNumber*i in [bindings.allKeys sortedArrayUsingSelector:@selector(compare:)]){NSDictionary*b=bindings[i];id<MTLBuffer>buffer=b[@"buffer"];[bs addObject:@{@"index":i,@"offset":b[@"offset"],@"length":@(buffer.length),@"GPU_address":@(buffer.gpuAddress),@"storage_mode":@(buffer.storageMode)}];}
     r->_evidence=@{@"name":p[@"name"],@"library_SHA256":p[@"library_SHA256"],@"manifest_SHA256":p[@"manifest_SHA256"],@"index_count":@(count),@"kind":@(kind),@"index_GPU_address":@(indices.gpuAddress),@"index_offset":@(offset),@"index_buffer_length":@(indices.length),@"index_buffer_storage_mode":@(indices.storageMode),@"base_vertex":@(vertexBase),@"instances":@(instances),@"base_instance":@(base),@"indexed_vertex_domain":p[@"indexed_vertex_domain"],@"bindings":bs,@"bytes":@(raw.length),@"SHA256":sha(raw),@"inherits_encoder_state":@YES,@"native_shader_code_patched":@NO,@"recording_command_buffer_committed":@NO,@"CPU_read_of_index_contents_during_materialization":@NO,@"fragment_buffers":@(fragmentBindings.count)};return r;
 }
+// Internal scope transport. Arguments must be the owned Private output of
+// the certified range prepass; callers must never modify its contents.
+- (BOOL)encodeGPUIndirectRecords:(NSArray*)records arguments:(id<MTLBuffer>)arguments
+                        encoder:(id<MTLRenderCommandEncoder>)encoder target:(id<MTLTexture>)target
+                       evidence:(NSDictionary**)evidence error:(NSError**)error {
+    Ivar v=class_getInstanceVariable(object_getClass(encoder),"_commandBuffer");
+    if(!v||ivar_getOffset(v)!=32)return fail(error,@"Indirect render encoder owner differs");
+    id<MTLCommandBuffer>cb=object_getIvar(encoder,v);
+    if(cb.commandQueue!=_queue||cb.status!=MTLCommandBufferStatusNotEnqueued||!cb.retainedReferences||
+       !records.count||records.count>16||arguments.device!=_queue.device||arguments.storageMode!=MTLStorageModePrivate||
+       arguments.length!=128+records.count*32||![self acceptsRenderTarget:target])return fail(error,@"Indirect render queue/argument/target profile differs");
+    // Whole sequence preflight before touching caller bindings.
+    for(id value in records){
+        if(value==NSNull.null)continue;
+        if(object_getClass(value)!=KPRecordedNativeRenderDraw.class)return fail(error,@"Foreign indirect draw record");
+        KPRecordedNativeRenderDraw*r=value;
+        if(r->_owner!=self||!r->_inheritsEncoderState)return fail(error,@"Indirect draw record owner differs");
+        if(r->_vertexDraw){
+            BOOL valid=r->_kind?
+                [self validateIndexedVertexBindings:r->_vertexBindings pipeline:r->_vertexPipeline indexCount:r->_vertexCount indexBuffer:r->_indices indexOffset:r->_offset kind:r->_kind instances:r->_instances baseVertex:r->_baseVertex baseInstance:r->_baseInstance error:error]&&indexedStageMacro(r.commands,r->_indices,r->_offset,r->_kind,r->_vertexCount,r->_instances,r->_baseVertex,r->_baseInstance):
+                [self validateVertexBindings:r->_vertexBindings pipeline:r->_vertexPipeline vertexStart:r->_vertexStart vertexCount:r->_vertexCount instances:r->_instances baseInstance:r->_baseInstance error:error]&&directMacro(r.commands,r->_vertexBindings.count?0x3aa0:0x3830,r->_vertexStart,r->_vertexCount,r->_instances,r->_baseInstance);
+            if(!valid||![self validateFragmentBindings:r->_fragmentBindings?:@{} pipeline:r->_vertexPipeline error:error])return fail(error,@"Indirect render vertex/fragment contract differs");
+        }else if(!validate(r.commands,r->_kind,r->_indices,r->_offset,r->_instances,MTLScissorRect{0,0,64,48},NO))return fail(error,@"Indirect legacy draw macro differs");
+        for(NSNumber*i in r->_fragmentBindings){
+            NSDictionary*b=r->_fragmentBindings[i];id<MTLBuffer>buffer=b[@"buffer"];
+            if(buffer.storageMode!=MTLStorageModePrivate)continue;
+            NSDictionary*c=_fragmentCertificates[argumentKey(buffer,[b[@"offset"]unsignedIntegerValue])];
+            KPPrivateArgumentTicket*t=c[@"Private_ticket"];id<MTLCommandBuffer>producer=t.producer;
+            if(t.failed||(producer!=cb&&!t.completedSuccessfully&&producer.status!=MTLCommandBufferStatusCompleted))return fail(error,@"Indirect fragment table producer is pending on another buffer");
+        }
+    }
+    NSMutableArray*leases=[NSMutableArray new],*rows=[NSMutableArray new];
+    [encoder useResource:arguments usage:MTLResourceUsageRead stages:MTLRenderStageVertex];
+    for(NSUInteger slot=0;slot<records.count;slot++){
+        if(records[slot]==NSNull.null)continue;
+        KPRecordedNativeRenderDraw*r=records[slot];
+        [encoder setRenderPipelineState:r->_vertexDraw?r->_vertexPipeline:_pipeline];
+        for(NSNumber*i in r->_vertexBindings){NSDictionary*b=r->_vertexBindings[i];[encoder setVertexBuffer:b[@"buffer"]offset:[b[@"offset"]unsignedIntegerValue]atIndex:i.unsignedIntegerValue];[encoder useResource:b[@"buffer"]usage:MTLResourceUsageRead stages:MTLRenderStageVertex];}
+        for(NSNumber*i in r->_fragmentBindings){
+            NSDictionary*b=r->_fragmentBindings[i];id<MTLBuffer>buffer=b[@"buffer"];NSUInteger offset=[b[@"offset"]unsignedIntegerValue];
+            NSDictionary*c=_fragmentCertificates[argumentKey(buffer,offset)];
+            [encoder setFragmentBuffer:buffer offset:offset atIndex:i.unsignedIntegerValue];[encoder useResource:buffer usage:MTLResourceUsageRead stages:MTLRenderStageFragment];
+            [leases addObject:c];for(id resource in c[@"leases"])if([resource conformsToProtocol:@protocol(MTLResource)])[encoder useResource:resource usage:MTLResourceUsageRead stages:MTLRenderStageFragment];
+        }
+        NSUInteger offset=64+slot*32;
+        if(r->_kind){[encoder useResource:r->_indices usage:MTLResourceUsageRead stages:MTLRenderStageVertex];[encoder drawIndexedPrimitives:MTLPrimitiveTypeTriangle indexType:r->_kind==1?MTLIndexTypeUInt16:MTLIndexTypeUInt32 indexBuffer:r->_indices indexBufferOffset:r->_offset indirectBuffer:arguments indirectBufferOffset:offset];}
+        else [encoder drawPrimitives:MTLPrimitiveTypeTriangle indirectBuffer:arguments indirectBufferOffset:offset];
+        [rows addObject:@{@"slot":@(slot),@"kind":@(r->_kind),@"argument_offset":@(offset),@"native_indirect_draw":@YES}];
+    }
+    NSArray*keep=@[self,target,[records copy],arguments,[leases copy]];
+    [cb addCompletedHandler:^(id<MTLCommandBuffer>done){(void)keep.count;}];
+    if(evidence)*evidence=@{@"operation":@"native_GPU_range_indirect_draws",@"draw_calls":rows,@"range_CPU_read":@NO,@"draw_arguments_CPU_read":@NO,@"raw_record_copies":@0,@"resource_leases_until_completion":@YES,@"system_modified":@NO};
+    return YES;
+}
+
 - (BOOL)encodeVertexSequence:(NSArray<KPRecordedNativeRenderDraw*>*)records encoder:(id<MTLRenderCommandEncoder>)encoder target:(id<MTLTexture>)target evidence:(NSDictionary**)evidence error:(NSError**)error {
     Ivar cv=class_getInstanceVariable(object_getClass(encoder),"_commandBuffer");if(!cv||ivar_getOffset(cv)!=32)return fail(error,@"Vertex encoder owner changed");id<MTLCommandBuffer>cb=object_getIvar(encoder,cv);
     if(cb.commandQueue!=_queue||cb.status!=MTLCommandBufferStatusNotEnqueued||!records.count||records.count>16||target.device!=_queue.device)return fail(error,@"Vertex sequence queue/status mismatch");

@@ -15,6 +15,8 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
+GPU-controlled render execution ranges now work through the scoped public indirect-range selector, with an explicit prepass. A new complete runtime passes 983,040 raster-channel checks, 48 native-reference image pairs and compute/FP64/CAS/render regression. This still uses CPU-encoded render commands and adapted applications. [Contract, evidence and reproduction](docs/GPU_RENDER_EXECUTION_RANGES.md).
+
 GPU-generated compute commands now select between two native texture/sampler/nested-buffer argument banks. The 18-process native-source cohort checks 16,224 exact texture values, records, GPU binding tables and missing-stage controls; ten direct/CPU-ICB processes cover regression. The runtime remains unchanged, and the four auxiliary shaders rebuild from public source. [Contract and reproduction](docs/GPU_ICB_TEXTURE_ARGUMENTS.md).
 
 The existing CPU-encoded compute ICB path now has native texture/sampler argument-buffer qualification: 31 terminal hosts, 72 consumer dispatches and 32,448 exact computed values, with direct/ICB comparisons, mip-view/addressing controls and full guards. The runtime stays unchanged; callers retain and declare indirect resources. [Evidence, limits and reproduction](docs/ICB_TEXTURE_ARGUMENTS.md).
