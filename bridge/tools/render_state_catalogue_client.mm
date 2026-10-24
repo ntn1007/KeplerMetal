@@ -177,13 +177,23 @@ static StateCapture *encodeFrame(id<MTLDevice>device,id<MTLCommandQueue>queue,NS
     if(consume){if(native){
         uint32_t value=values[(trial*5+3)%16];
         for(unsigned i=0;i<3;i++){
-            unsigned slot=i==2?3:i;if(!produce||!accepted(trial,slot))continue;
+            unsigned slot=i==2?3:i;if(!produce)continue;
+#if KP_TYPED_RENDER_DRAW
+            if(!i&&airDispatchesReset(mode)){if(!airDrawReferenceAccepted(trial,mode))continue;}
+            else if(!accepted(trial,slot))continue;
+#else
+            if(!accepted(trial,slot))continue;
+#endif
 #if KP_AIR_RENDER_RESET
             if(slot==3&&airAppliesReset(mode))continue;
 #endif
             unsigned state=(value>>(i+3))&1,start=(i==0?5:0)+3*((value>>i)&1),function=functionIndex(i,state,resourcesOnly);
+            uint32_t drawCount=3,drawInstances=1,drawBase=0;
+#if KP_TYPED_RENDER_DRAW
+            if(!i&&airDispatchesReset(mode)){uint32_t seed=airDrawSeed(trial);start=5u+3u*((seed>>3)&1u);drawCount=3u*((seed>>4)&3u);drawInstances=(seed>>6)&1u;drawBase=(seed>>8)&3u;}
+#endif
             [e setRenderPipelineState:[scope renderPipelineForName:@[@"smooth",@"linear",@"flat"][function]]];[e setVertexBuffer:vbo[state][i]offset:64 atIndex:0];[e setVertexBuffer:instances offset:128 atIndex:1];[e setFragmentBuffer:fragmentTables[state][i]offset:256 atIndex:0];
-            if(!i)[e drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:start vertexCount:3 instanceCount:1 baseInstance:0];else[e drawIndexedPrimitives:MTLPrimitiveTypeTriangle indexCount:3 indexType:i==1?MTLIndexTypeUInt16:MTLIndexTypeUInt32 indexBuffer:indices[i-1]indexBufferOffset:64+start*(i==1?2:4)instanceCount:1 baseVertex:i==1?2:-2 baseInstance:i==1?1:2];
+            if(!i)[e drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:start vertexCount:drawCount instanceCount:drawInstances baseInstance:drawBase];else[e drawIndexedPrimitives:MTLPrimitiveTypeTriangle indexCount:3 indexType:i==1?MTLIndexTypeUInt16:MTLIndexTypeUInt32 indexBuffer:indices[i-1]indexBufferOffset:64+start*(i==1?2:4)instanceCount:1 baseVertex:i==1?2:-2 baseInstance:i==1?1:2];
             for(id resource in leases)if([resource conformsToProtocol:@protocol(MTLResource)])[e useResource:resource usage:MTLResourceUsageRead stages:MTLRenderStageFragment];
         }
         [e setRenderPipelineState:marker];[e setVertexBuffer:markerVertices offset:64 atIndex:0];if(trial%2){[e setVertexBytes:mp length:16 atIndex:1];[e setFragmentBytes:mp length:16 atIndex:0];}else{[e setVertexBuffer:markerBuffer offset:128 atIndex:1];[e setFragmentBuffer:markerBuffer offset:128 atIndex:0];}
@@ -213,7 +223,9 @@ static StateCapture *encodeFrame(id<MTLDevice>device,id<MTLCommandQueue>queue,NS
 
 int main(int argc,char **argv){@autoreleasepool{@try{try{
     require(argc==4,"arguments");NSString *assets=@(argv[1]),*directory=@(argv[2]),*mode=@(argv[3]);
-#if KP_RENDER_ARGUMENT_ENCODERS
+#if KP_TYPED_RENDER_DRAW
+    require([@[@"draw_gpu",@"draw_native",@"draw_reference",@"draw_no_dispatch",@"draw_no_dispatch_native",@"draw_after_reset",@"draw_after_reset_native",@"draw_then_reset",@"draw_then_reset_native"]containsObject:mode],"typed draw mode");
+#elif KP_RENDER_ARGUMENT_ENCODERS
     require([@[@"arguments_gpu",@"arguments_native",@"arguments_device",@"arguments_reflection",@"arguments_arrays",@"arguments_reuse",@"arguments_no_reset",@"arguments_no_reset_native",@"arguments_contracts"]containsObject:mode],"render argument mode");
 #elif KP_AIR_RENDER_RESET
     require([@[@"air_gpu",@"air_native",@"air_reference",@"air_no_reset",@"air_no_reset_native",@"air_bad_context",@"air_bad_context_native"]containsObject:mode],"AIR mode");

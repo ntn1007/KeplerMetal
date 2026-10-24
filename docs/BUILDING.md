@@ -1,5 +1,7 @@
 # Build from source
 
+[TYPED_RENDER_DRAW.md](TYPED_RENDER_DRAW.md) adds a source-only typed draw/reset producer, its independent native MSL reference and inspection/certification gate. `--typed-render-draw` extends the render-argument builder; the combined auditor recomputes producer and rendered-image controls.
+
 [RENDER_RECORD_ARGUMENTS.md](RENDER_RECORD_ARGUMENTS.md) adds `--render-argument-encoders` to the AIR render builder, owned context APIs, ordinary native PSO checks and separate 27-host reception / 16-host regression auditors. The fresh seven-object runtime changes its ICB object only.
 
 [AIR_RESET_RENDER.md](AIR_RESET_RENDER.md) adds `--air-reset-build` plus `--air-reset-inspections` to the render catalogue builder. A separate MRC factory with C linkage verifies the previously certified program for the ARC host. The source-built runtime and materializer remain unchanged; seven opt-in modes qualify the final image and negative controls.

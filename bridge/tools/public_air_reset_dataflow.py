@@ -53,12 +53,13 @@ def build(a):
         executable_SHA256=sha(out/'application'),core_runtime_linked=False))
 
 
-def run(a):
+def run(a,oracle_module='verify_air_reset_dataflow'):
     b,out=a.build.resolve(),a.out.resolve();m=read(b/'inputs.json')
     assert not out.exists()and out.parent.is_dir()
     for name,digest in m['frozen'].items():assert sha(b/name)==digest,name
     assert sha(b/'application')==m['executable_SHA256'];driver=check_driver_profile()
     if a.mode!='inspect':
+        assert a.certificate and read(a.certificate)['profile']==m['profile']
         assert a.certificate and read(a.certificate)['driver_SHA256']==driver
         assert read(a.certificate)['library_SHA256']==sha(b/'assets'/(a.variant+'.metallib'))
     out.mkdir();(out/'outputs').mkdir()
@@ -71,7 +72,7 @@ def run(a):
     args=[str(out/'assets'/(a.variant+'.metallib')),a.mode,str(out/'outputs'),str(out/'certificate.json')]
     receipt=run_host(out/'application',out/'execution',args,a.reservation_root.resolve())
     write(out/'results.json',read(out/'execution/execution.stdout'))
-    code='import sys,json;sys.path.insert(0,sys.argv[1]);from verify_air_reset_dataflow import verify;print(json.dumps(verify(sys.argv[2])))'
+    code='import sys,json;sys.path.insert(0,sys.argv[1]);from '+oracle_module+' import verify;print(json.dumps(verify(sys.argv[2])))'
     argv=[sys.executable,'-I','-c',code,str(out/'oracles'),str(out)]
     p=subprocess.run(argv,capture_output=True,text=True)
     (out/'verification.stdout').write_text(p.stdout);(out/'verification.stderr').write_text(p.stderr)
@@ -80,8 +81,10 @@ def run(a):
     proof=json.loads(p.stdout);write(out/'independent-verification.json',dict(proof,PID=receipt['pid']));print(proof)
 
 
-def certify(a):
-    from verify_air_reset_dataflow import verify, native_code
+def certify(a,oracle_module='verify_air_reset_dataflow',profile=PROFILE):
+    from importlib import import_module
+    verify=import_module(oracle_module).verify
+    from verify_air_render_reset import native_code
     out=a.run.resolve();proof=verify(out);assert proof['mode']=='inspect'
     d=read(out/'results.json');code,metadata=native_code(out)
     binary=a.envydis.resolve();(out/'native-code.bin').write_bytes(code)
@@ -90,7 +93,7 @@ def certify(a):
     (out/'native-code.sass.txt').write_text(p.stdout);(out/'envydis.stderr').write_text(p.stderr)
     assert p.returncode==0 and p.stdout and not re.search(r'\bcall\b|\?\?\?',p.stdout,re.I),'Native code needs review; never execute unresolved operations'
     assert not any((int.from_bytes(code[i:i+8],'little')&0xf800000000004007)==0x5000000000000007 for i in range(8,len(code),8)if i%64),'Unresolved CALL refused'
-    write(out/'certificate.json',dict(profile=PROFILE,library_SHA256=d['library_SHA256'],code_SHA256=d['code_SHA256'],
+    write(out/'certificate.json',dict(profile=profile,library_SHA256=d['library_SHA256'],code_SHA256=d['code_SHA256'],
         driver_SHA256=read(out/'inputs.json')['driver_SHA256'],no_native_call=True,code_bytes=len(code),
         inspection_inputs_SHA256=sha(out/'inputs.json'),inspection_results_SHA256=sha(out/'results.json'),
         envydis_SHA256=sha(binary),envydis_argv=argv,disassembly_SHA256=sha(out/'native-code.sass.txt'),metadata_words=metadata))

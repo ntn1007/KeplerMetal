@@ -1,0 +1,213 @@
+{
+  "status": "PASS_TYPED_RENDER_DRAW",
+  "signed_terminal_nonoverlapping_reception_hosts": 34,
+  "producer_hosts": 7,
+  "producer_dispatches": 114,
+  "producer_checked_bytes": 255360,
+  "producer_witness_words": 1836,
+  "producer_modified_records": 666,
+  "producer_draw_records": 492,
+  "producer_reset_records": 174,
+  "producer_nonzero_state_identities_preserved": 396,
+  "producer_candidate_reference_file_pairs": 171,
+  "producer_repeat_file_pairs": 228,
+  "render_hosts": 27,
+  "rendered_frames": 216,
+  "checked_float_channels": 2654208,
+  "maximum_error": 0,
+  "render_producer_dispatches": 168,
+  "render_witness_words": 672,
+  "ordinary_native_programs_checked": 216,
+  "raster_materializer_guard_bytes": 152832,
+  "root_guard_bytes": 110592,
+  "reference_control_image_pairs": 144,
+  "repeat_image_pairs": 144,
+  "repeat_readback_file_pairs": 4272,
+  "changed_float_channels_per_trial": {
+    "draw_no_dispatch": [
+      [
+        3456,
+        0,
+        1630,
+        1088,
+        1792,
+        2311,
+        0,
+        0
+      ],
+      [
+        3456,
+        0,
+        1630,
+        1088,
+        1792,
+        2311,
+        0,
+        0
+      ],
+      [
+        3456,
+        0,
+        1630,
+        1088,
+        1792,
+        2311,
+        0,
+        0
+      ]
+    ],
+    "draw_then_reset": [
+      [
+        1536,
+        2080,
+        4320,
+        1088,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1536,
+        2080,
+        4320,
+        1088,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1536,
+        2080,
+        4320,
+        1088,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "draw_after_reset": [
+      [
+        1536,
+        2080,
+        4320,
+        1088,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1536,
+        2080,
+        4320,
+        1088,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1536,
+        2080,
+        4320,
+        1088,
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "static_library_SHA256": "47292e9181f3ea30891f1993db2f5cf5398511a6d106d903c7b8458f1efeb56e",
+  "native_Apple_ICB_ABI": false,
+  "performance_benchmark": false,
+  "full_objective_complete": false,
+  "date": "2026-10-24",
+  "base_commit": "b5b7b55dfc03e42271a24d6ddec371fb36482f42",
+  "CPU_tests": 307,
+  "new_CPU_tests": 20,
+  "system_files_unchanged": 87,
+  "actual_terminal_signed_hosts": 47,
+  "Qwen_used": false,
+  "job_ids": [],
+  "public_source_auditor_matches": true,
+  "public_rebuild": {
+    "status": "PASS",
+    "all_seven_runtime_objects_unchanged": true,
+    "all_archive_member_payloads_equal": true,
+    "qualified_runtime_SHA256": "47292e9181f3ea30891f1993db2f5cf5398511a6d106d903c7b8458f1efeb56e",
+    "public_runtime_SHA256": "8fd0ba6c2fd77dadb54b82c2e2602e0062dc1c970b806e94df261a4fb9c95ad6",
+    "sources": 54,
+    "builds": {
+      "producer": {
+        "executable_SHA256": "35ab02035d582096a69014cca09a9885ac7834cffd8d68fb3ef279e869258a38",
+        "identical_GPU_qualified_executable": true,
+        "asset_names": [
+          "reference.metallib",
+          "lowered.metallib",
+          "optimized.ll.txt",
+          "lowered.ll.txt",
+          "original.metallib"
+        ]
+      },
+      "render": {
+        "executable_SHA256": "d51fcc9e99e8c6351fbafa0637f7d8bf45f3158eb3c632a2b1ca84a7da45c1f0",
+        "identical_GPU_qualified_executable": true,
+        "asset_names": [
+          "combined.json",
+          "reset-reference.certificate.json",
+          "reset-reference.metallib",
+          "test.metallib",
+          "producer.metallib",
+          "combined_render_resources.metallib",
+          "reset-lowered.metallib",
+          "state.metallib",
+          "render_state_carrier.metallib",
+          "reset-lowered.certificate.json"
+        ]
+      }
+    },
+    "optimized_IR_ModuleID_path_only": true
+  },
+  "archive_members": {
+    "status": "PASS",
+    "all_member_names_and_payloads_equal": true,
+    "members": [
+      "__.SYMDEF",
+      "KeplerCPUICB.o",
+      "KeplerNativeCommands.o",
+      "KeplerNativeRenderDraws.o",
+      "KeplerNativeCAS.o",
+      "KeplerFP64.o",
+      "KeplerProgramImport.o",
+      "KeplerCommandIRProducerFactory.o"
+    ],
+    "archive_header_metadata_only_difference": true
+  },
+  "regression": {
+    "status": "PASS",
+    "new_signed_hosts": 2,
+    "checked_float_channels": 196608,
+    "API_refusals": 22,
+    "old_reset_source_rebuild": {
+      "status": "PASS",
+      "reset_producer_executable_identical": true,
+      "reset_producer_assets_identical": true,
+      "optimized_IR_ModuleID_path_only": true
+    }
+  },
+  "reference_failure_preserved": true,
+  "evidence_SHA256": {
+    "FINAL_AUDIT.json": "78859c0172c27a72b4ca8ea696e7109f7804288386a2d0bc9b73626a6d60928c",
+    "PUBLIC_RECEPTION_AUDIT.json": "78859c0172c27a72b4ca8ea696e7109f7804288386a2d0bc9b73626a6d60928c",
+    "REGRESSION_AUDIT.json": "1d29326507aa0e928c67bd97a7e161636e9216d2868aa2a5faf161c90c62f95d",
+    "SYSTEM_AUDIT.json": "6a1c458a9eabc6af0fe923bd8b14c42e3f6026d1913fc500f31bfd48940ba4f1",
+    "ACTUAL_PROCESS_INVENTORY.json": "ac7f6c74e19471fa87340d5233affc8d0a18cee95d3657363cf896e21a549e0c",
+    "REFERENCE_FIX_ANALYSIS.json": "e50c936c5a31ef513231a56d1d361f65d4672e221efd61ebfdf0a5765d2dcda1",
+    "PUBLIC_REBUILD_AUDIT.json": "92b54a97ff2f71ab8604cfcaffc85111d759a3ef99d5cb628a43111bcedbe487",
+    "PUBLIC_ARCHIVE_MEMBER_AUDIT.json": "f802a525db311cb8adf335b40a64c47091c6e8b9d234600f1b661854b76dfa2c"
+  }
+}

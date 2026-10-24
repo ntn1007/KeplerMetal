@@ -26,11 +26,15 @@ if([mode isEqual:@"arguments_arrays"]){
     id<MTLIndirectCommandBuffer>values[]={commands[0]};[recordArgumentEncoder setIndirectCommandBuffers:values withRange:NSMakeRange(0,1)];
 }else{[recordArgumentEncoder setArgumentBuffer:resetRootGPU offset:64];[recordArgumentEncoder setIndirectCommandBuffer:commands[0]atIndex:0];}
 NSMutableData *resetIndices=bytes(144),*resetOutput=bytes(144);uint32_t resetIndexValues[4]={3,11,7,15};memcpy((char*)resetIndices.mutableBytes+64,resetIndexValues,16);
+uint32_t resetSeed=3,resetOrder=0,resetSlot=3;
+#if KP_TYPED_RENDER_DRAW
+resetSeed=airDrawSeed(trial);resetOrder=airDrawOrder(mode);resetSlot=0;resetIndexValues[0]=0;memcpy((char*)resetIndices.mutableBytes+64,resetIndexValues,16);
+#endif
 id<MTLBuffer>resetIndicesGPU=privateBuffer(@"reset-indices",resetIndices),resetOutputGPU=privateBuffer(@"reset-output",resetOutput);
 NSMutableArray *recordRefusals=[NSMutableArray new];
 #include "RenderRecordArgumentsContracts.inc"
 if(resetDispatched){
-    uint32_t resetConfig[4]={4,3,0,0};id<MTLComputeCommandEncoder>resetEncoder=[cb computeCommandEncoder];
+    uint32_t resetConfig[4]={4,resetSeed,0,resetOrder};id<MTLComputeCommandEncoder>resetEncoder=[cb computeCommandEncoder];
     [resetEncoder setComputePipelineState:recordProducerPipeline];
     if([mode isEqual:@"arguments_contracts"]&&trial==0){
         id<MTLBuffer>unexported=[device newBufferWithLength:136 options:MTLResourceStorageModeShared];memset(unexported.contents,0xa5,136);
@@ -49,7 +53,7 @@ if(resetDispatched){
 }
 // Addresses below are observations for the independent oracle, never inputs
 // to root/header construction or GPU state-choice decisions in this client.
-NSDictionary *resetRow=@{@"dispatched":@(resetDispatched),@"capacity":@4,@"count":@4,@"seed":@3,@"mask":@0,@"target_slot":@3,
+NSDictionary *resetRow=@{@"dispatched":@(resetDispatched),@"capacity":@4,@"count":@4,@"seed":@(resetSeed),@"mask":@0,@"target_slot":@(resetSlot),@"order":@(resetOrder),
     @"context_GPU_address":@(recordArgumentContext.contextBuffer.gpuAddress+recordArgumentContext.contextOffset),
     @"records_GPU_address":@(buffers[@"records"].gpuAddress+64),@"root_GPU_address":@(resetRootGPU.gpuAddress+64),
     @"context_storage_mode":@(recordArgumentContext.contextBuffer.storageMode),@"records_storage_mode":@(buffers[@"records"].storageMode),

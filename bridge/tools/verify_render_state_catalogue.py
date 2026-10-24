@@ -53,7 +53,7 @@ def reason(trial,slot,state,mode,reset_slot=None):
     return 0
 
 
-def scene_buffers(trial,mode,ids,foreign,reset_slot=None):
+def scene_buffers(trial,mode,ids,foreign,reset_slot=None,record_transform=None):
     old=expected_buffers(trial);pipeline_only=mode.startswith('pipeline_only')
     result={}
     for state in range(1 if pipeline_only else 2):
@@ -69,7 +69,9 @@ def scene_buffers(trial,mode,ids,foreign,reset_slot=None):
     produce=trial!=7 and mode!='no_producer'
     raw=bytearray(b'\xa5'*136);struct.pack_into('<2I',raw,64,0,4 if produce else 0);result['range']=raw
     raw=bytearray(b'\xa5'*132);struct.pack_into('<I',raw,64,values(trial)[(trial*5+3)%16]^0x4b505357 if produce else 0);result['counter']=raw
-    result['records']=b'\xa5'*64+b''.join(source_record(trial,slot,mode,ids,foreign,reset_slot)for slot in range(4))+b'\xa5'*64
+    records=[source_record(trial,slot,mode,ids,foreign,reset_slot)for slot in range(4)]
+    if record_transform is not None:records=[record_transform(trial,slot,raw)for slot,raw in enumerate(records)]
+    result['records']=b'\xa5'*64+b''.join(records)+b'\xa5'*64
     return result
 
 
@@ -89,7 +91,7 @@ def color(trial,logical,x,y,mode):
     return tuple(sampled[c]*base[c]*SCALES[logical][c]+bias[c]for c in range(4))
 
 
-def verify_rows(d,out,reset_slot=None,extra_buffers=None):
+def verify_rows(d,out,reset_slot=None,extra_buffers=None,record_transform=None,reason_transform=None):
     out=Path(out);verify_device_identity(d);mode=d['mode'];assert mode in MODES
     native=mode.endswith('native');trials=1 if mode=='release'else 8;consumer=mode!='no_consumer'
     assert d['status']=='COMPLETED'and d['GPU_choice_CPU_read']is False and d['CPU_resolved_state_supplied']is native
@@ -105,7 +107,11 @@ def verify_rows(d,out,reset_slot=None,extra_buffers=None):
         assert len(ids)==len(foreign)==2 and len(set(tokens))==4
         assert all(type(i)is int and i>>32==0x4b505352 and i&0xffffffff and i not in seen for i in tokens)
         seen.update(tokens);creates.extend([foreign,ids])
-        expected=scene_buffers(trial,mode,ids,foreign,reset_slot)
+        expected=scene_buffers(trial,mode,ids,foreign,reset_slot,record_transform)
+        record_words=[struct.unpack_from('<8IQ6I',expected['records'],64+slot*64)for slot in range(4)]
+        def expected_reason(slot,state):
+            why=reason(trial,slot,state,mode,reset_slot)
+            return reason_transform(trial,slot,state,why,record_words,ids,mode)if reason_transform else why
         if extra_buffers is not None:
             assert trial in extra_buffers and not(set(expected)&set(extra_buffers[trial]))
             expected.update(extra_buffers[trial])
@@ -114,9 +120,9 @@ def verify_rows(d,out,reset_slot=None,extra_buffers=None):
             maxima=([6,1,5,0,0],[6,1,0,2,1],[0]*5,[6,1,0,0xfffffffe,2]);kinds=(0,1,0,2)
             for slot in range(4):
                 for state in range(2):
-                    flat=slot*2+state;why=reason(trial,slot,state,mode,reset_slot);active=why==0 and trial!=7 and mode!='no_producer'
+                    flat=slot*2+state;why=expected_reason(slot,state);active=why==0 and trial!=7 and mode!='no_producer'
                     templates.extend(struct.pack('<8IQ6I',*maxima[slot],kinds[slot],int(slot!=2),0,ids[state],slot,0,0,0,0,0))
-                    arguments=list(struct.unpack('<8IQ6I',source_record(trial,slot,mode,ids,foreign,reset_slot))[2:7])if active else[0]*5
+                    arguments=list(record_words[slot][2:7])if active else[0]*5
                     struct.pack_into('<5I',args,64+flat*32,*arguments)
                     struct.pack_into('<4I',witness,64+flat*16,1,int(active),(slot<<16)|state,0x4b530000|why)
                     selected+=int(active);rejected+=int(why in [1,2,3,5])
@@ -135,11 +141,14 @@ def verify_rows(d,out,reset_slot=None,extra_buffers=None):
                 if scissor[0]<=x<scissor[0]+scissor[2]and scissor[1]<=y<scissor[1]+scissor[3]:
                     if consumer:
                         for logical,slot in enumerate((0,1,3)):
-                            if reason(trial,slot,choice(trial,logical,mode),mode,reset_slot):continue
+                            if expected_reason(slot,choice(trial,logical,mode)):continue
+                            n,instances,first=record_words[slot][2:5]
+                            if n<3 or not instances:continue
                             x0,y0,x1,y1=RECTS[logical]
                             if x0<=x<x1 and y0<=y<y1:
                                 side=(2*x+1-2*x0)*(y1-y0)>(2*y+1-2*y0)*(x1-x0)
-                                if side==bool((v>>logical)&1):wanted=color(trial,logical,x,y,mode)
+                                triangle=(first-(5 if logical==0 else 0))//3
+                                if n>=6 or side==bool(triangle):wanted=color(trial,logical,x,y,mode)
                     if x<8:wanted=(.875,.625,.625,1)
                 for c in range(4):
                     value=actual[(y*64+x)*4+c];error=abs(value-wanted[c]);assert math.isfinite(value)and error<=2e-6,(trial,x,y,c,value,wanted[c]);max_error=max(max_error,error);checked+=1

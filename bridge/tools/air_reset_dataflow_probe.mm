@@ -16,7 +16,11 @@ static NSArray *cases(){return @[
  @[@"null_context",@16,@16,@11,@0,@32],@[@"large_capacity",@16,@17,@11,@0,@32],
  @[@"bad_size",@16,@16,@11,@0,@32],@[@"null_records",@16,@16,@11,@0,@32],
  @[@"unaligned_records",@16,@16,@11,@0,@32],@[@"bad_version",@16,@16,@11,@0,@32],
- @[@"reserved",@16,@16,@11,@0,@32],@[@"zero_capacity",@16,@0,@11,@0,@32]];}
+ @[@"reserved",@16,@16,@11,@0,@32],@[@"zero_capacity",@16,@0,@11,@0,@32]
+#if KP_AIR_RENDER_DRAW
+ ,@[@"draw_only",@16,@16,@3,@0,@32],@[@"ordered_reset",@16,@16,@3,@0,@32],@[@"ordered_draw",@16,@16,@3,@0,@32]
+#endif
+ ];}
 int main(int argc,char**argv){@autoreleasepool{@try{
  need(argc==5,"library mode output certificate");NSString*mode=@(argv[2]),*out=@(argv[3]);
  need([@[@"inspect",@"execute",@"no_dispatch"]containsObject:mode],"Unknown mode");
@@ -53,7 +57,11 @@ int main(int argc,char**argv){@autoreleasepool{@try{
  for(unsigned i=0;i<3;i++)[blit copyFromBuffer:upload[i] sourceOffset:0 toBuffer:gpu[i] destinationOffset:0 size:initial[i].length];
  [blit copyFromBuffer:ctxUpload sourceOffset:0 toBuffer:ctx destinationOffset:0 size:32];[blit endEncoding];
  bool execute=![mode isEqual:@"no_dispatch"];
- if(execute){uint32_t config[4]={count,seed,mask,0};id<MTLComputeCommandEncoder>enc=[cb computeCommandEncoder];[enc setComputePipelineState:pso];
+ if(execute){uint32_t config[4]={count,seed,mask,0};
+#if KP_AIR_RENDER_DRAW
+ config[3]=[name isEqual:@"ordered_reset"]?1u:[name isEqual:@"ordered_draw"]?2u:0u;
+#endif
+ id<MTLComputeCommandEncoder>enc=[cb computeCommandEncoder];[enc setComputePipelineState:pso];
  [enc setBuffer:root offset:0 atIndex:0];[enc setBuffer:gpu[1] offset:64 atIndex:1];[enc setBuffer:gpu[2] offset:64 atIndex:2];[enc setBytes:config length:16 atIndex:3];
  [enc useResource:ctx usage:MTLResourceUsageRead];[enc useResource:gpu[0] usage:MTLResourceUsageRead|MTLResourceUsageWrite];
  [enc dispatchThreadgroups:MTLSizeMake((count+width-1)/width?:1,1,1) threadsPerThreadgroup:MTLSizeMake(width,1,1)];[enc endEncoding];dispatches++;}

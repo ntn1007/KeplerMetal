@@ -16,6 +16,8 @@ The native-resource lowering maps the producer's root pointer and launch dimensi
 
 The render-record root uses a separate single-ICB argument schema and owned Private context, rather than compute IRv2 or Apple resource IDs. Public encoder setters populate a Shared root; explicit preparation checks its immutable snapshot and declares indirect resources. Command-buffer completion retains the roots/context after scoped function restoration and owner release. Ordinary native PSO creation and compiled scalar reflection are preserved. [Qualified contract](RENDER_RECORD_ARGUMENTS.md).
 
+The opt-in typed draw translator reuses the reset root-metadata decoder and owned render context. It preserves original AIR entry dataflow while lowering literal triangle draw/reset intrinsics to checked record writes; native code is inspected and pinned before execution. Record materialization enforces the existing certified state/geometry envelope. [Contract and raster reception](TYPED_RENDER_DRAW.md).
+
 ## Integration levels
 
 1. Laboratory application explicitly calls experiment functions.

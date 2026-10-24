@@ -1,0 +1,208 @@
+{
+  "base_commit": "b5b7b55dfc03e42271a24d6ddec371fb36482f42",
+  "entries": [
+    {
+      "path": "bridge/src/air_render_draw.metal",
+      "SHA256": "9906f23e49372a77eb44f78b54fb97a067b53459492af8075a567589146f593a",
+      "frozen_build_copies": [
+        {
+          "build": "build-03",
+          "folder": "src",
+          "SHA256": "9906f23e49372a77eb44f78b54fb97a067b53459492af8075a567589146f593a"
+        }
+      ]
+    },
+    {
+      "path": "bridge/src/air_render_draw_reference.metal",
+      "SHA256": "10777ff3cdcca13aaadb4ed59070076ccb3d25458d7a788e591993443315e654",
+      "frozen_build_copies": [
+        {
+          "build": "build-03",
+          "folder": "src",
+          "SHA256": "10777ff3cdcca13aaadb4ed59070076ccb3d25458d7a788e591993443315e654"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/AIRRenderDrawIntegration.inc",
+      "SHA256": "956aef16c7216318f81569c07f3ed78bb6df8f9ad9847264895ab30e629a86d0",
+      "frozen_build_copies": [
+        {
+          "build": "render-build-02",
+          "folder": "src",
+          "SHA256": "956aef16c7216318f81569c07f3ed78bb6df8f9ad9847264895ab30e629a86d0"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/AIRRenderResetIntegration.inc",
+      "SHA256": "8e5c095465216fbc0bc9b57b0fa4611a349dd1cf666e53057d5877afc1034268",
+      "frozen_build_copies": [
+        {
+          "build": "render-build-02",
+          "folder": "src",
+          "SHA256": "8e5c095465216fbc0bc9b57b0fa4611a349dd1cf666e53057d5877afc1034268"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/RenderRecordArgumentsEncode.inc",
+      "SHA256": "bad8ce8cd13326d5ea9d352208c34ffe60ba378237e07ce804a93f7877eba07f",
+      "frozen_build_copies": [
+        {
+          "build": "render-build-02",
+          "folder": "src",
+          "SHA256": "bad8ce8cd13326d5ea9d352208c34ffe60ba378237e07ce804a93f7877eba07f"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/RenderRecordArgumentsSetup.inc",
+      "SHA256": "ad6d137d4f9202b451407ef08868f81b11d2da8925a649a95a7d441810bcbfcc",
+      "frozen_build_copies": [
+        {
+          "build": "render-build-02",
+          "folder": "src",
+          "SHA256": "ad6d137d4f9202b451407ef08868f81b11d2da8925a649a95a7d441810bcbfcc"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/air_render_draw_lowering.py",
+      "SHA256": "988d0d3f5e9f1e7279f04b32f90c0124da87fef9c62656d31692a0bac57b2d83",
+      "frozen_build_copies": [
+        {
+          "build": "build-03",
+          "folder": "src",
+          "SHA256": "988d0d3f5e9f1e7279f04b32f90c0124da87fef9c62656d31692a0bac57b2d83"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/air_reset_dataflow_probe.mm",
+      "SHA256": "333eae7d05f60efca3a202c1460f5f1728f3015bfcbdffb3668cd2bd52adb511",
+      "frozen_build_copies": [
+        {
+          "build": "build-03",
+          "folder": "src",
+          "SHA256": "333eae7d05f60efca3a202c1460f5f1728f3015bfcbdffb3668cd2bd52adb511"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/air_reset_lowering.py",
+      "SHA256": "1a9df5f5aa106b56bc1001a0d487239e85f6d7254dbb89fdf084dd83fcee13f4",
+      "frozen_build_copies": [
+        {
+          "build": "build-03",
+          "folder": "src",
+          "SHA256": "1a9df5f5aa106b56bc1001a0d487239e85f6d7254dbb89fdf084dd83fcee13f4"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/audit_typed_render_draw.py",
+      "SHA256": "747bf2da81062ed3e729b3f160e1964ed4d6215f8a0b7bf57cd79ae3e6ea0e0c"
+    },
+    {
+      "path": "bridge/tools/public_air_render_draw.py",
+      "SHA256": "ab40234e26a67b47277a704ef15ef8fcae96e2b03b6339bd44550fb526cd67ce",
+      "frozen_build_copies": [
+        {
+          "build": "build-03",
+          "folder": "src",
+          "SHA256": "ab40234e26a67b47277a704ef15ef8fcae96e2b03b6339bd44550fb526cd67ce"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/public_air_reset_dataflow.py",
+      "SHA256": "0574333415c4bf57dfb3311a7bee0667b6ec3e6093aed6c454340699121caac6",
+      "frozen_build_copies": [
+        {
+          "build": "build-03",
+          "folder": "src",
+          "SHA256": "0574333415c4bf57dfb3311a7bee0667b6ec3e6093aed6c454340699121caac6"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/public_render_state_catalogue.py",
+      "SHA256": "656b0fc0ab7b75e94b74ce016b33e9b78f081125b32018711ea63dec05a15e08",
+      "frozen_build_copies": [
+        {
+          "build": "render-build-02",
+          "folder": "src",
+          "SHA256": "656b0fc0ab7b75e94b74ce016b33e9b78f081125b32018711ea63dec05a15e08"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/render_state_catalogue_client.mm",
+      "SHA256": "76aab15606f05b4f4ee302153cd5483c8d586c36812ffc73f1235c1841da17c9",
+      "frozen_build_copies": [
+        {
+          "build": "render-build-02",
+          "folder": "src",
+          "SHA256": "76aab15606f05b4f4ee302153cd5483c8d586c36812ffc73f1235c1841da17c9"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/verify_air_render_draw.py",
+      "SHA256": "f665429167dd364db9e05706f46d7c7e542b6ce63f2ae5dc1198ca0535dd96e1",
+      "frozen_build_copies": [
+        {
+          "build": "build-03",
+          "folder": "oracles",
+          "SHA256": "f665429167dd364db9e05706f46d7c7e542b6ce63f2ae5dc1198ca0535dd96e1"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/verify_air_reset_dataflow.py",
+      "SHA256": "c6e5fcf2d9be6fd8227d5a7c5ab939ab28a26d2dcc1bb15334df4981516cd5e8",
+      "frozen_build_copies": [
+        {
+          "build": "build-03",
+          "folder": "oracles",
+          "SHA256": "c6e5fcf2d9be6fd8227d5a7c5ab939ab28a26d2dcc1bb15334df4981516cd5e8"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/verify_render_state_catalogue.py",
+      "SHA256": "d598202ffad84cb502b75d673a3250fd1d10dc7545570c2b8105b659bd52e4ab",
+      "frozen_build_copies": [
+        {
+          "build": "render-build-02",
+          "folder": "oracles",
+          "SHA256": "d598202ffad84cb502b75d673a3250fd1d10dc7545570c2b8105b659bd52e4ab"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/verify_typed_render_draw.py",
+      "SHA256": "632a2d597e77310d77fe1bae2206313c3afc48eb940442f117478853cef6b8f7",
+      "frozen_build_copies": [
+        {
+          "build": "render-build-02",
+          "folder": "oracles",
+          "SHA256": "632a2d597e77310d77fe1bae2206313c3afc48eb940442f117478853cef6b8f7"
+        }
+      ]
+    },
+    {
+      "path": "tests/fixtures/air_render_draw_ir.json",
+      "SHA256": "b49025c3d5922afed73e429e72473839e1070ee6401ac967fd7210002f9fc59e"
+    },
+    {
+      "path": "tests/test_air_render_draw.py",
+      "SHA256": "f1ad8aee2a6c71c25d20c172b8399c48e521805f9866b9c459620f85c765e3b0"
+    },
+    {
+      "path": "tests/test_typed_render_draw.py",
+      "SHA256": "39fc388990c223ce3f1929b8ac9af91230192775ef9da7415d966a6ba96c2627"
+    }
+  ]
+}

@@ -37,7 +37,7 @@ def expected(case,execute):
     return list(map(bytes,result)),reset_slots
 
 
-def verify(path):
+def verify(path,*,cases=CASES,recipe=expected):
     path=Path(path);m=read(path/'inputs.json');d=read(path/'results.json');r=read(path/'execution/manifest.json')
     verify_device_identity(d);assert d==read(path/'execution/execution.stdout')
     assert r['exit_code']==0 and not r['SIGKILL_requested']and not r['authoritative_ps_status']
@@ -56,17 +56,17 @@ def verify(path):
     cert=read(path/'certificate.json');assert sha(path/'certificate.json')==m['certificate_SHA256']
     assert cert['code_SHA256']==d['code_SHA256']and cert['library_SHA256']==d['library_SHA256']and cert['driver_SHA256']==m['driver_SHA256']and cert['no_native_call']is True
     assert cert['metadata_words']==metadata and cert['code_bytes']==len(code)
-    assert len(d['trials'])==len(CASES)and d['command_buffers']==16
+    assert len(d['trials'])==len(cases)and d['command_buffers']==len(cases)
     execute=m['mode']=='execute';files={};reset=words=0
-    for t,case in zip(d['trials'],CASES):
+    for t,case in zip(d['trials'],cases):
         assert tuple(t[k]for k in ['name','count','capacity','seed','mask','width'])==case
         assert t['dispatched']is execute and t['status']==4 and t['private_buffers']==4
-        wanted,slots=expected(case,execute);reset+=len(slots);words+=case[1]if execute else 0
+        wanted,slots=recipe(case,execute);reset+=len(slots);words+=case[1]if execute else 0
         assert set(t['files'])=={case[0]+'-'+str(i)+'.bin'for i in range(3)}
         for i,data in enumerate(wanted):
             name=case[0]+'-'+str(i)+'.bin';actual=(path/'outputs'/name).read_bytes()
             assert hashlib.sha256(actual).hexdigest()==t['files'][name]and actual==data,name
             files[name]=t['files'][name]
-    assert d['compute_dispatches']==16*execute
-    return dict(status='PASS',mode=m['mode'],variant=m['variant'],compute_dispatches=16*execute,
-        checked_bytes=16*1920,guard_bytes=16*384,witness_words=words,reset_records=reset,files_SHA256=files)
+    assert d['compute_dispatches']==len(cases)*execute
+    return dict(status='PASS',mode=m['mode'],variant=m['variant'],compute_dispatches=len(cases)*execute,
+        checked_bytes=len(cases)*1920,guard_bytes=len(cases)*384,witness_words=words,reset_records=reset,files_SHA256=files)

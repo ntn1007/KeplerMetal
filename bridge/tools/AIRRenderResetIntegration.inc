@@ -4,11 +4,16 @@
 static id<MTLComputePipelineState>airResetPipeline;
 static NSDictionary *airResetReceipt;
 static NSString *airResetOutputDirectory;
+#if KP_TYPED_RENDER_DRAW
+#include "AIRRenderDrawIntegration.inc"
+#else
 static bool airAppliesReset(NSString *mode){return [mode hasPrefix:@"arguments_"]?![mode hasPrefix:@"arguments_no_reset"]:[@[@"air_gpu",@"air_native",@"air_reference"]containsObject:mode];}
 static bool airDispatchesReset(NSString *mode){return ![mode hasPrefix:@"air_no_reset"]&&![mode hasPrefix:@"arguments_no_reset"];}
+static NSString *airProducerVariant(NSString *mode){return[mode isEqual:@"air_reference"]?@"reference":@"lowered";}
+#endif
 static void airInitializeReset(id<MTLDevice>device,NSString *assets,NSString *directory,NSString *mode){
     airResetOutputDirectory=directory;
-    NSString *variant=[mode isEqual:@"air_reference"]?@"reference":@"lowered";
+    NSString *variant=airProducerVariant(mode);
     NSError *error=nil;NSDictionary *receipt=nil;
     airResetPipeline=KPNewCertifiedResetPipeline(device,
         [assets stringByAppendingPathComponent:[NSString stringWithFormat:@"reset-%@.metallib",variant]],

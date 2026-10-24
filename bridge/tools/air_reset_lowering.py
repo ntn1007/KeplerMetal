@@ -17,6 +17,18 @@ def entry_body(ir):
 
 def lower(ir):
     text=normalized(ir);before=entry_body(text)
+    decl='declare void @air.reset_render_command(%struct._command_buffer_t addrspace(1)* nocapture, i32) local_unnamed_addr #1'
+    if text.count(decl)!=1 or len(re.findall(r'@air\.reset_render_command\(',before))!=1:raise ValueError('One reset operation required')
+    names=re.findall(r'@air\.[\w.]*command[\w.]*',text)
+    if names!=['@air.reset_render_command','@air.reset_render_command']:raise ValueError('Other command operations refused')
+    if '@kp_reset_render_command'in text:raise ValueError('Helper collision')
+    text=text.replace(decl,helper()).replace('@air.reset_render_command(', '@kp_reset_render_command(')
+    text=rewrite_root(text)
+    if entry_body(text)!=before.replace('@air.reset_render_command(', '@kp_reset_render_command('):raise ValueError('Entry dataflow changed')
+    return "; ModuleID = 'keplermetal-structural-reset'\n"+text
+
+
+def rewrite_root(text):
     pairs=re.findall(r'^!(\d+) = (.*)$',text,re.M);nodes=dict(pairs)
     if len(nodes)!=len(pairs):raise ValueError('Duplicate metadata node')
     roots=[(k,v)for k,v in nodes.items()if '!"air.indirect_buffer"'in v]
@@ -32,15 +44,8 @@ def lower(ir):
     for n in [child,leaf]:
         if len(re.findall(r'!'+n+r'(?!\d)',text))!=2:raise ValueError('Shared command metadata refused')
     if '%struct.Arguments = type { %"struct.metal::command_buffer" }'not in text:raise ValueError('Root LLVM layout differs')
-    decl='declare void @air.reset_render_command(%struct._command_buffer_t addrspace(1)* nocapture, i32) local_unnamed_addr #1'
-    if text.count(decl)!=1 or len(re.findall(r'@air\.reset_render_command\(',before))!=1:raise ValueError('One reset operation required')
-    names=re.findall(r'@air\.[\w.]*command[\w.]*',text)
-    if names!=['@air.reset_render_command','@air.reset_render_command']:raise ValueError('Other command operations refused')
-    if '@kp_reset_render_command'in text:raise ValueError('Helper collision')
-    text=text.replace(decl,helper()).replace('@air.reset_render_command(', '@kp_reset_render_command(')
     descriptor='!{i32 0, !"air.buffer", !"air.buffer_size", i32 8, !"air.location_index", i32 0, i32 1, !"air.read", !"air.address_space", i32 1, !"air.arg_type_size", i32 8, !"air.arg_type_align_size", i32 8, !"air.arg_type_name", !"ulong", !"air.arg_name", !"project_root"}'
     text=re.sub(r'^!'+root+r' = .*$', '!'+root+' = '+descriptor,text,flags=re.M)
     for n in [child,leaf]:text=re.sub(r'^!'+n+r' = .*\n','',text,flags=re.M)
     if 'air.indirect_buffer'in text or 'air.command_buffer'in text:raise ValueError('Residual command metadata')
-    if entry_body(text)!=before.replace('@air.reset_render_command(', '@kp_reset_render_command('):raise ValueError('Entry dataflow changed')
-    return "; ModuleID = 'keplermetal-structural-reset'\n"+text
+    return text
