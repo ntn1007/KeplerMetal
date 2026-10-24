@@ -155,3 +155,5 @@ buffers, followed by explicit retained read-only indirect-resource/sampler
 ownership in their resource catalogue. These are distinct from this CPU-encoded
 ICB qualification. Preserve native texture/sampler encoding, exact command
 invariants and existing resource functionality throughout that work.
+
+A subsequent [GPU-generated texture-command qualification](GPU_ICB_TEXTURE_ARGUMENTS.md) now covers the bounded two-bank compute path. The figures above remain the original CPU-encoded ICB reception.

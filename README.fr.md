@@ -15,6 +15,8 @@ Le travail suit deux axes complémentaires :
 
 ## Avancées récentes
 
+Les commandes de calcul générées par le GPU sélectionnent maintenant entre deux banques natives texture/sampler/buffer imbriqué. Les 18 processus du nouveau mode vérifient 16 224 résultats exacts, les records et les tables GPU ; dix processus natifs/ICB CPU couvrent la non-régression. Le runtime reste inchangé et les quatre shaders auxiliaires se reconstruisent depuis les sources publiques. [Contrat et reproduction](docs/GPU_ICB_TEXTURE_ARGUMENTS.md).
+
 Le chemin ICB de calcul encodé par le CPU est désormais qualifié avec des argument buffers natifs contenant texture, sampler et buffer imbriqué : 31 processus terminés, 72 dispatchs et 32 448 résultats calculés exacts. Le runtime reste inchangé ; l’application conserve et déclare les ressources indirectes. [Preuves, limites et reproduction](docs/ICB_TEXTURE_ARGUMENTS.md).
 
 Une seule inscription de bibliothèque relie désormais les producteurs compilés par NVIDIA aux factories Metal ordinaires et aux encodeurs automatiques, avec racines pointeur ou réutilisables. Les pipelines et leur réflexion restent natifs ; ce chemin évite l’inscription manuelle de chaque fonction et l’import d’un producteur NAK. [Contrat, contrôles et reproduction](docs/NATIVE_SOURCE_LIBRARY_FACTORIES.md).

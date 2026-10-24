@@ -15,6 +15,8 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
+GPU-generated compute commands now select between two native texture/sampler/nested-buffer argument banks. The 18-process native-source cohort checks 16,224 exact texture values, records, GPU binding tables and missing-stage controls; ten direct/CPU-ICB processes cover regression. The runtime remains unchanged, and the four auxiliary shaders rebuild from public source. [Contract and reproduction](docs/GPU_ICB_TEXTURE_ARGUMENTS.md).
+
 The existing CPU-encoded compute ICB path now has native texture/sampler argument-buffer qualification: 31 terminal hosts, 72 consumer dispatches and 32,448 exact computed values, with direct/ICB comparisons, mip-view/addressing controls and full guards. The runtime stays unchanged; callers retain and declare indirect resources. [Evidence, limits and reproduction](docs/ICB_TEXTURE_ARGUMENTS.md).
 
 One native source-library registration now enables ordinary library/function/pipeline factories and automatic compute encoders for both pointer and reusable roots. Native PSO compilation/reflection stay native; no per-function registration or NAK producer import is needed on this route. The scoped application integration and its controls are documented [here](docs/NATIVE_SOURCE_LIBRARY_FACTORIES.md).

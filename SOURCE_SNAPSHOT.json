@@ -7478,7 +7478,7 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "7c256300742b7be5f0c5841aa3f5d0b65875743cd371673d406eb6b4d136130d",
-  "previous_public_commit": "fb739c7dbd1067a2b4bc73faa2818f76f2313bf8",
-  "update": "Qualify existing CPU compute ICB transport with complete native texture/sampler/nested-buffer argument encoding, numeric controls and guards; no runtime change."
+  "previous_source_snapshot_SHA256": "011433588cd8bd81b80bc4f82f64d48639bc355341878d0a732c7ffabc6e6f7c",
+  "previous_public_commit": "24d4cf8f722ccd4037d7c0137991ef35c439ffa2",
+  "update": "Qualify native-source GPU-generated texture argument selection with a three-buffer root, ordinary library factories and a complete public-source auxiliary shader rebuild; no runtime change."
 }
