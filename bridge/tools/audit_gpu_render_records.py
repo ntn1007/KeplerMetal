@@ -15,7 +15,7 @@ from verify_icb_texture import verify as verify_cpu_compute, MODES as CPU_MODES
 from audit_indirect_render_ranges import MODES as RANGE_MODES
 
 
-def audit(root, regression, library, range_reference, texture_reference):
+def audit(root, regression, library, range_reference, texture_reference, expected_runtime_sources=48):
     root, regression, library, range_reference, texture_reference = map(
         Path, (root, regression, library, range_reference, texture_reference))
     rows, intervals, archives, pairs, render_builds, drivers = [], [], set(), [], set(), set()
@@ -95,7 +95,7 @@ def audit(root, regression, library, range_reference, texture_reference):
     current=read(library/'manifest.json')
     assert archives=={current['static_library_SHA256']} and sha(library/'libKeplerMetal.a') in archives
     for name,digest in current['source_SHA256'].items(): assert sha(library/'src'/name)==digest
-    assert len(current['source_SHA256'])==48 and len(current['object_SHA256'])==7
+    assert len(current['source_SHA256'])==expected_runtime_sources and len(current['object_SHA256'])==7
     assert len(drivers)==1
     intervals.sort();assert all(a[1]<=b[0] for a,b in zip(intervals,intervals[1:]))
     new=[r for r in rows[:len(MODES)] if r['mode'] not in RANGE_MODES]
@@ -107,7 +107,7 @@ def audit(root, regression, library, range_reference, texture_reference):
         exact_reference_image_pairs=image_pairs,identical_raw_file_pairs=len(pairs),
         render_range_producer_dispatches=producer_dispatches,all_render_materializer_dispatches=materializer_dispatches,
         GPU_record_materializer_dispatches=record_dispatches,rejected_occupied_records=rejected_records,empty_record_slots=empty_slots,
-        static_library_SHA256=next(iter(archives)),driver_SHA256=next(iter(drivers)),runtime_source_count=48,
+        static_library_SHA256=next(iter(archives)),driver_SHA256=next(iter(drivers)),runtime_source_count=expected_runtime_sources,
         application_integration_level=2,native_Apple_ICB_ABI=False,GPU_selected_pipeline_or_resources=False,
         performance_benchmark=False,full_objective_complete=False,cases=rows,pairs=pairs)
 

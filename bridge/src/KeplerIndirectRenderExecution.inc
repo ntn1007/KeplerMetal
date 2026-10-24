@@ -19,6 +19,8 @@ id prepareIndirectRenderRecord(KPRenderICBCommand*c,KPCPUICBScope*scope,NSError*
     return c.record;
 }
 
+#include "KeplerRenderStateCatalogueRecords.inc"
+
 void executeIndirectRenderICB(id self,SEL selector,id buffer,id range,NSUInteger offset){
     KPScopeLink*link=objc_getAssociatedObject(self,&contextKey);KPCPUICBScope*scope=link.scope;
     if(!scope||scope.restored||!scope.renderEngine||![buffer isKindOfClass:KPRenderICB.class]||((KPRenderICB*)buffer).scope!=scope||!link.renderTarget)reject(@"Indirect render ICB/encoder scope differs");
@@ -27,20 +29,30 @@ void executeIndirectRenderICB(id self,SEL selector,id buffer,id range,NSUInteger
     if(!cv||ivar_getOffset(cv)!=32)reject(@"Indirect render command buffer owner differs");
     id<MTLCommandBuffer>cb=object_getIvar(self,cv);
     if(!plan||plan.commandBuffer!=cb||plan.range!=range||plan.rangeOffset!=offset||cb.commandQueue!=scope.queue||cb.status!=MTLCommandBufferStatusNotEnqueued||!cb.retainedReferences)reject(@"Indirect render execution requires its prepared range on the same recording buffer");
+    NSMutableArray *encodedCommands=[NSMutableArray new];
     @synchronized(plan){
         if(plan.consumed||plan.completed||plan.failed)reject(@"Indirect render preparation already consumed/terminal");
-        if(plan.records.count!=icb.commands.count)reject(@"Indirect render snapshot size differs");
-        for(NSUInteger i=0;i<plan.records.count;i++){
-            KPRenderICBCommand*c=icb.commands[i];id saved=plan.records[i];
-            if(saved==NSNull.null){if(c.hasDraw)reject(@"Indirect render empty slot changed");continue;}
-            if(!c.hasDraw||c.record!=saved)reject(@"Indirect render command changed after preparation");
-            NSDictionary*p=[scope.renderEngine profileForPipeline:c.pipeline];
-            if(!p||([p[@"target_width"]unsignedIntegerValue]?:64)!=link.renderTarget.width||([p[@"target_height"]unsignedIntegerValue]?:48)!=link.renderTarget.height||([p[@"color_format"]unsignedIntegerValue]?:MTLPixelFormatRGBA32Float)!=link.renderTarget.pixelFormat||[p[@"depth_format"]unsignedIntegerValue]!=link.renderPass.depthAttachment.texture.pixelFormat||[p[@"stencil_format"]unsignedIntegerValue]!=link.renderPass.stencilAttachment.texture.pixelFormat)reject(@"Indirect render pass differs from registered pipeline");
+        NSArray *sources=@[icb];
+        if(plan.stateCatalogue){
+            NSError *error=nil;sources=liveRenderCatalogueSources(plan.stateCatalogue,scope,&error);
+            if(!sources||sources.firstObject!=icb)reject(error.localizedDescription?:@"Render catalogue execution source differs");
+        }else if(plan.records.count!=icb.commands.count)reject(@"Indirect render snapshot size differs");
+        for(NSUInteger state=0;state<sources.count;state++){
+            KPRenderICB *source=sources[state];
+            NSArray *snapshot=plan.stateCatalogue?plan.stateCatalogue.sources[state].snapshots:plan.records;
+            for(NSUInteger i=0;i<source.commands.count;i++){
+                KPRenderICBCommand *c=source.commands[i];id saved=snapshot[i];
+                if(saved==NSNull.null){if(c.hasDraw)reject(@"Indirect render empty slot changed");continue;}
+                if(!c.hasDraw||c.record!=saved)reject(@"Indirect render command changed after preparation");
+                NSDictionary *p=[scope.renderEngine profileForPipeline:c.pipeline];
+                if(!p||([p[@"target_width"]unsignedIntegerValue]?:64)!=link.renderTarget.width||([p[@"target_height"]unsignedIntegerValue]?:48)!=link.renderTarget.height||([p[@"color_format"]unsignedIntegerValue]?:MTLPixelFormatRGBA32Float)!=link.renderTarget.pixelFormat||[p[@"depth_format"]unsignedIntegerValue]!=link.renderPass.depthAttachment.texture.pixelFormat||[p[@"stencil_format"]unsignedIntegerValue]!=link.renderPass.stencilAttachment.texture.pixelFormat)reject(@"Indirect render pass differs from registered pipeline");
+                [encodedCommands addObject:c];
+            }
         }
         plan.consumed=YES;
     }
     NSMutableIndexSet*vertex=[NSMutableIndexSet new],*fragment=[NSMutableIndexSet new];
-    for(KPRenderICBCommand*c in icb.commands)if(c.hasDraw){for(NSNumber*i in c.vertexBindings)[vertex addIndex:i.unsignedIntegerValue];for(NSNumber*i in c.fragmentBindings)[fragment addIndex:i.unsignedIntegerValue];}
+    for(KPRenderICBCommand*c in encodedCommands){for(NSNumber*i in c.vertexBindings)[vertex addIndex:i.unsignedIntegerValue];for(NSNumber*i in c.fragmentBindings)[fragment addIndex:i.unsignedIntegerValue];}
     NSError*error=nil;NSDictionary*proof=nil;BOOL ok=NO;link.encodingRenderICB=YES;
     @try{ok=[scope.renderEngine encodeGPUIndirectRecords:plan.records arguments:plan.arguments encoder:self target:link.renderTarget evidence:&proof error:&error];}
     @finally{
@@ -50,5 +62,5 @@ void executeIndirectRenderICB(id self,SEL selector,id buffer,id range,NSUInteger
         link.encodingRenderICB=NO;
     }
     if(!ok)reject([error.localizedDescription?:@"Indirect render encoding failed" stringByAppendingString:@"; discard command buffer"]);
-    [scope.eventRows addObject:@{@"operation":@"execute_GPU_indirect_render_range",@"slot_capacity":@(icb.size),@"GPU_generated_draw_records":@(plan.commandRecords!=nil),@"record_CPU_read":@NO,@"range_offset":@(offset),@"range_CPU_read":@NO,@"caller_pipeline_restored":@(link.callerRenderPipeline!=nil),@"caller_vertex_slots_restored":@(vertex.count),@"caller_fragment_slots_restored":@(fragment.count),@"evidence":proof?:@{}}];
+    [scope.eventRows addObject:@{@"operation":@"execute_GPU_indirect_render_range",@"slot_capacity":@(icb.size),@"native_slot_capacity":@(plan.records.count),@"GPU_state_selection":@(plan.stateCatalogue!=nil),@"state_count":@(plan.stateCatalogue?plan.stateCatalogue.sources.count:1),@"selection_CPU_read":@NO,@"state_selection_method":plan.stateCatalogue?@"native_indirect_draw_predicates":@"fixed_slot_state",@"GPU_generated_draw_records":@(plan.commandRecords!=nil),@"record_CPU_read":@NO,@"range_offset":@(offset),@"range_CPU_read":@NO,@"caller_pipeline_restored":@(link.callerRenderPipeline!=nil),@"caller_vertex_slots_restored":@(vertex.count),@"caller_fragment_slots_restored":@(fragment.count),@"evidence":proof?:@{}}];
 }

@@ -1,5 +1,9 @@
 # GPU-generated render draw arguments
 
+The later [render-state catalogue](GPU_RENDER_STATE_CATALOGUE.md) adds GPU
+selection among certified pipeline/resource candidates through indirect-draw
+predicates. The results below remain the preceding fixed-state cohort.
+
 The scoped render adapter now accepts scalar draw records generated on the
 GTX 880M. This extends the preceding [GPU execution-range route](GPU_RENDER_EXECUTION_RANGES.md):
 the GPU supplies draw counts and geometry start positions, rather than only

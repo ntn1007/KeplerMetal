@@ -28,19 +28,19 @@
       "path": "bridge/src/KeplerCPUICB.h",
       "source_path": "bridge/src/KeplerCPUICB.h",
       "source_SHA256": "263dede0101967e1bfa32fe3b081b73c476d9e09e8a9b5446ae04cf4f425ee0a",
-      "published_SHA256": "a25518192070b59e3f8c4fb56876a4ad32a8199748c5996db86b7605e5f9cf68",
-      "bytes": 25538,
+      "published_SHA256": "2b4958d62c081e38a8497f1753b72ece970fe1aa2ec080b2d35c7c57a6890031",
+      "bytes": 27176,
       "modified_for_publication": true,
-      "previous_published_SHA256": "fd96862591d61bc9e24b2b124928a72e0b8e95e5214827aa81f8caa9db1668fe"
+      "previous_published_SHA256": "a25518192070b59e3f8c4fb56876a4ad32a8199748c5996db86b7605e5f9cf68"
     },
     {
       "path": "bridge/src/KeplerCPUICB.mm",
       "source_path": "bridge/src/KeplerCPUICB.mm",
       "source_SHA256": "3d59c2c609611ddc387e616b8945e903f6378dbd4a3b66a02cb22087ada84b60",
-      "published_SHA256": "1f28c8631ac7306d3be6bddc9cb2f668ba331a3c28f0b1ddfbeff7a7fe40b60b",
-      "bytes": 133979,
+      "published_SHA256": "8aca0942225c458ef1217a124c4ee5b955449fb866e0b1671a159e3cf303e27d",
+      "bytes": 134982,
       "modified_for_publication": true,
-      "previous_published_SHA256": "9488f4d55fd92234621a8750bb47494540e8ab4e8e50c132c40a0bae806b0c7f"
+      "previous_published_SHA256": "1f28c8631ac7306d3be6bddc9cb2f668ba331a3c28f0b1ddfbeff7a7fe40b60b"
     },
     {
       "path": "bridge/src/KeplerCommandIR.h",
@@ -7478,7 +7478,7 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "43e33c2279758e3dc969c568d4f977420f57b94f49f7c6885385d18748dc7093",
-  "previous_public_commit": "a12c15e44331f72eb3d8b0a791b5ae650f343623",
-  "update": "Add GPU-generated bounded render draw records and drained-pool nonempty release-before-commit reception; preserve CPU-range/compute/native adapter paths."
+  "previous_source_snapshot_SHA256": "6416e3c646cfc4df3607c7d4ca51e9cea10afc27c3194f6939a981fc65215593",
+  "previous_public_commit": "7dae41da64127ac8f9d0673883061df1e62d11c1",
+  "update": "Add immutable render-state catalogues and GPU identity validation selecting certified native indirect draws, with isolated frozen-oracle verification and existing command routes preserved."
 }

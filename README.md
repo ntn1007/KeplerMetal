@@ -15,6 +15,8 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
+The GPU now chooses among certified render pipeline/resource candidates, with separate pipeline-only and resource-only controls. A 54-process reception checks 1,093,632 new exact float channels and 33 native-reference image pairs. The CPU encodes candidate states and GPU indirect-draw predicates select their visible effect; no speedup is claimed. [Contract, mechanism and reproduction](docs/GPU_RENDER_STATE_CATALOGUE.md).
+
 GPU-generated render draw arguments now pass the scoped public indirect-range route, including GPU validation of malformed scalar records. A 42-process reception covers 638,976 new exact raster channels and nonempty rendering after scope/ICB destruction; pipeline and resource bindings remain CPU-certified. [Contract, evidence and reproduction](docs/GPU_RENDER_COMMAND_RECORDS.md).
 
 GPU-controlled render execution ranges now work through the scoped public indirect-range selector, with an explicit prepass. A new complete runtime passes 983,040 raster-channel checks, 48 native-reference image pairs and compute/FP64/CAS/render regression. This still uses CPU-encoded render commands and adapted applications. [Contract, evidence and reproduction](docs/GPU_RENDER_EXECUTION_RANGES.md).

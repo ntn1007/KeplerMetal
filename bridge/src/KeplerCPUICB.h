@@ -8,7 +8,15 @@
 // Compute replay currently retains the native WAIT_FOR_IDLE after EVERY record.
 // setBarrier/clearBarrier state is preserved through copy/reset and recorded in
 // events, but clearing it does not enable concurrency in this serial transport.
-@class KPGPUCommandSelection;
+@class KPGPUCommandSelection,KPRenderStateCatalogue;
+// Immutable catalogue of certified state snapshots. Identities are process-local
+// project tokens. Keep the source ICBs alive and unchanged through consumption.
+@interface KPRenderStateCatalogue : NSObject
+@property(nonatomic,readonly) NSUInteger logicalCommandCount;
+@property(nonatomic,readonly,copy) NSArray<NSNumber*> *stateIdentifiers;
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+@end
 @interface KPCPUICBScope : NSObject
 + (instancetype)installOnDevice:(id<MTLDevice>)device
                          queue:(id<MTLCommandQueue>)queue
@@ -251,6 +259,22 @@
 - (BOOL)enableGPURenderCommandRecordsWithLibraryData:(NSData *)data
                                     expectedSHA256:(NSString *)expected
                                              error:(NSError **)error;
+- (BOOL)enableGPURenderStateCatalogueWithLibraryData:(NSData *)data
+                                    expectedSHA256:(NSString *)expected
+                                             error:(NSError **)error;
+// The first source is the execution ICB; additional sources provide alternative
+// states. Logical-slot order is preserved. logical slots * states must be <=16.
+- (KPRenderStateCatalogue *)newRenderStateCatalogueWithCommands:(id<MTLIndirectCommandBuffer>)commands
+                                                  alternatives:(NSArray<id<MTLIndirectCommandBuffer>> *)alternatives
+                                                         error:(NSError **)error;
+- (BOOL)prepareIndirectRenderCommands:(id<MTLIndirectCommandBuffer>)buffer
+                       stateCatalogue:(KPRenderStateCatalogue *)catalogue
+                       commandRecords:(id<MTLBuffer>)records
+                 commandRecordsOffset:(NSUInteger)recordOffset
+                       indirectBuffer:(id<MTLBuffer>)range
+                 indirectBufferOffset:(NSUInteger)offset
+                        commandBuffer:(id<MTLCommandBuffer>)commandBuffer
+                                error:(NSError **)error;
 - (BOOL)prepareIndirectRenderCommands:(id<MTLIndirectCommandBuffer>)buffer
                        commandRecords:(id<MTLBuffer>)records
                  commandRecordsOffset:(NSUInteger)recordOffset

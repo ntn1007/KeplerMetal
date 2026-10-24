@@ -1,4 +1,5 @@
 #import "KeplerRenderCommandRecords.h"
+#import "KeplerRenderStateRecords.h"
 #import "KeplerGPUIdentity.h"
 #import "KeplerDriverProfile.h"
 #import "KeplerCPUICB.h"
@@ -147,6 +148,8 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 @property(nonatomic,strong) id<MTLComputePipelineState> indirectRenderRangePipeline;
 @property(nonatomic,strong) id<MTLLibrary> indirectRenderCommandLibrary;
 @property(nonatomic,strong) id<MTLComputePipelineState> indirectRenderCommandPipeline;
+@property(nonatomic,strong) id<MTLLibrary> indirectRenderStateLibrary;
+@property(nonatomic,strong) id<MTLComputePipelineState> indirectRenderStatePipeline;
 @property(nonatomic,strong) id<MTLLibrary> GPUSelectionLibrary;
 @property(nonatomic,strong) id<MTLComputePipelineState> GPUChoiceProducer;
 @property(nonatomic,strong) id<MTLComputePipelineState> GPUCommandSelector;
@@ -218,11 +221,31 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 - (void)copyStateFrom:(KPRenderICBCommand*)source;
 @end
 
+@interface KPRenderCatalogueSource : NSObject
+@property(nonatomic,weak) KPRenderICB *buffer;
+@property(nonatomic,copy) NSArray *snapshots;
+@end
+@implementation KPRenderCatalogueSource
+@end
+@interface KPRenderStateCatalogue ()
+@property(nonatomic,weak) KPCPUICBScope *scope;
+@property(nonatomic,readwrite) NSUInteger logicalCommandCount;
+@property(nonatomic,readwrite,copy) NSArray<NSNumber*> *stateIdentifiers;
+@property(nonatomic,copy) NSArray<KPRenderCatalogueSource*> *sources;
+@property(nonatomic,copy) NSArray *records;
+@property(nonatomic,copy) NSData *templates;
+- (instancetype)initOwned;
+@end
+@implementation KPRenderStateCatalogue
+- (instancetype)initOwned{return [super init];}
+@end
+
 @interface KPIndirectRenderPlan : NSObject
 @property(nonatomic,weak) id<MTLCommandBuffer> commandBuffer;
 @property(nonatomic,strong) id<MTLBuffer> range,arguments,witness,templates,config,commandRecords;
 @property(nonatomic,strong) NSArray *records;
 @property(nonatomic,strong) NSArray *owners;
+@property(nonatomic,strong) KPRenderStateCatalogue *stateCatalogue;
 @property(nonatomic) NSUInteger rangeOffset;
 @property(atomic) BOOL consumed,completed,failed;
 @end
@@ -819,6 +842,7 @@ BOOL installRenderOverride(Class dynamic,Class original,SEL selector,IMP impleme
  id<MTLCommandBuffer>upload=[_queue commandBuffer];b=[upload blitCommandEncoder];[b copyFromBuffer:nativeCB sourceOffset:0 toBuffer:r.constants destinationOffset:0 size:65536];[b endEncoding];if(!complete(upload))reject(@"Dedicated constant copy failed");[_eventRows addObject:@{@"operation":@"materialize_CPU_command",@"user_kernel_invocations":@0,@"requires_GPU_NOP_and_blit_preparation":@YES,@"commands_SHA256":hash(commands),@"snapshot_SHA256":hash(snapshot),@"command_bytes":@(commands.length),@"dynamic_threadgroup_length":@(dynamicLength),@"relocation":r.relocationEvidence}];return r;
 }
 #include "KeplerIndirectRenderScope.inc"
+#include "KeplerRenderStateCatalogueScope.inc"
 - (void)restore{@synchronized(_factoryLock){if(_restored)return;_restored=YES;NSUInteger liveFunctions=0;for(KPAdaptedFunction*r in _adaptedFunctions){id f=r.function;if(f){liveFunctions++;object_setClass(f,r.originalClass);objc_setAssociatedObject(f,&IRFunctionKey,nil,OBJC_ASSOCIATION_ASSIGN);}}[_adaptedFunctions removeAllObjects];[_functionLibraries removeAllObjects];restoreIRLibraries(self);if(liveFunctions)[_eventRows addObject:@{@"operation":@"restore_IRv2_functions",@"live_functions_restored":@(liveFunctions),@"cached_function_classes":@(functionClasses.size())}];NSUInteger live=0,expired=_releasedEncoderCount;for(KPAdaptedEncoder*r in _adapted){id e=r.encoder;if(!e){expired++;continue;}live++;object_setClass(e,r.originalClass);objc_setAssociatedObject(e,&contextKey,nil,OBJC_ASSOCIATION_ASSIGN);}[_adapted removeAllObjects];restoreAutomaticComputeFactories(self);object_setClass(_device,_originalDeviceClass);objc_setAssociatedObject(_device,&contextKey,nil,OBJC_ASSOCIATION_ASSIGN);_restored=YES;[_eventRows addObject:@{@"operation":@"scope_restore",@"device_class_restored":@(object_getClass(_device)==_originalDeviceClass),@"live_encoder_classes_restored":@(live),@"already_released_encoders":@(expired),@"cached_device_classes":@(deviceClasses.size()),@"cached_encoder_classes":@(encoderClasses.size()),@"system_modified":@NO}];}}
 - (void)dealloc{[self restore];}
 @end

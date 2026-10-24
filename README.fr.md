@@ -15,6 +15,8 @@ Le travail suit deux axes complémentaires :
 
 ## Avancées récentes
 
+La GTX choisit maintenant parmi des candidats de rendu certifiés, avec des contrôles séparant pipelines et ressources. La réception compte 54 processus, 1 093 632 nouvelles composantes exactes et 33 images identiques aux références natives. Le CPU encode les candidats ; les prédicats GPU activent leurs dessins indirects. [Contrat, mécanisme et reproduction](docs/GPU_RENDER_STATE_CATALOGUE.md).
+
 La GTX génère maintenant les arguments de dessin, contrôlés sur GPU avant leur consommation native. La réception compte 42 processus et 638 976 nouvelles composantes exactes, avec des dessins non vides après destruction du scope et de l’ICB. Pipelines et ressources restent certifiés par le CPU. [Contrat, preuves et reproduction](docs/GPU_RENDER_COMMAND_RECORDS.md).
 
 Les plages d’exécution du rendu peuvent maintenant être produites sur la GTX puis consommées par le sélecteur Metal public, avec une préparation explicite. Le nouveau runtime passe 983 040 vérifications de composantes, 48 comparaisons d’images aux références natives et les régressions calcul/FP64/CAS/rendu. Les commandes de rendu restent encodées par le CPU et l’application doit utiliser notre scope. [Contrat, preuves et reproduction](docs/GPU_RENDER_EXECUTION_RANGES.md).
