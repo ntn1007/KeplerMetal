@@ -1,0 +1,53 @@
+{
+  "status": "PASS_AIR_RESET_DATAFLOW",
+  "signed_terminal_nonoverlapping_processes": 10,
+  "compute_dispatches": 96,
+  "committed_command_buffers": 128,
+  "checked_readback_bytes": 245760,
+  "guard_bytes": 49152,
+  "witness_words": 1548,
+  "reset_records": 300,
+  "CPU_oracle_mismatches": 0,
+  "reference_file_pairs": 144,
+  "repeat_file_pairs": 192,
+  "reference_no_dispatch_pairs": 48,
+  "contexts_private": true,
+  "records_private": true,
+  "GPU_qualified_shader_profiles": 1,
+  "structural_translation_CPU_profiles": 2,
+  "native_Apple_ICB_ABI": false,
+  "system_driver_modified": false,
+  "performance_benchmark": false,
+  "full_objective_complete": false,
+  "base_commit": "7ed6c8b4d7e5b504d33a4d8dd362dcee3a8457c2",
+  "CPU_tests": 266,
+  "new_CPU_tests": 17,
+  "system_files_unchanged": 87,
+  "date": "2026-10-24",
+  "pilot_hosts_excluded": 1,
+  "pilot_dispatches_excluded": 16,
+  "Qwen_used": false,
+  "job_ids": [],
+  "simple_regression": {
+    "new_library_SHA256": "814ee95b88e7b7577ada32538d7c4e1d9a5de324781d9f7a7d824c4ae4bd2a97",
+    "previous_GPU_qualified_library_SHA256": "814ee95b88e7b7577ada32538d7c4e1d9a5de324781d9f7a7d824c4ae4bd2a97",
+    "byte_identical": true,
+    "GPU_execution": false
+  },
+  "lowered": {
+    "library_SHA256": "aa4309e366e5b53d41d5bef5e85024a28f549798f709f4318e0978bd459d3a01",
+    "code_SHA256": "812fda6d08d40f5cc0974bdd46ab0bdf51f04fe3c8f8ddee0e308c8be93d9b06",
+    "code_bytes": 1280,
+    "driver_SHA256": "e240d54a4cd64b7e54fbc15250de82e88451132e1d9f3a4f9879607c8b0e7645",
+    "envydis_SHA256": "1c8730a9a4861f374c58407bff31d7ccb47a57eb23f9f82c6b3ea3deb079be0f",
+    "no_native_call": true
+  },
+  "reference": {
+    "library_SHA256": "faa3f7e03785c3c4271532347c86213ba0e62901c08a8971c53b55e8e2f1306c",
+    "code_SHA256": "935b352ca456db2022ab6b464eb6e5c383d78c610e873180a8e3acc9ea421433",
+    "code_bytes": 1344,
+    "driver_SHA256": "e240d54a4cd64b7e54fbc15250de82e88451132e1d9f3a4f9879607c8b0e7645",
+    "envydis_SHA256": "1c8730a9a4861f374c58407bff31d7ccb47a57eb23f9f82c6b3ea3deb079be0f",
+    "no_native_call": true
+  }
+}

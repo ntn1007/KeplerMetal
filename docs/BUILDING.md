@@ -1,5 +1,7 @@
 # Build from source
 
+[AIR_RESET_DATAFLOW.md](AIR_RESET_DATAFLOW.md) adds structural command-root metadata recognition and the separate qualified typed producer, preserving its arithmetic, branches and ordinary buffer metadata. Its source-only builder, certificate gate and auditor reuse the preceding native capture/section parser without changing the core runtime.
+
 [AIR_RENDER_RESET.md](AIR_RENDER_RESET.md) adds a source-only exact-profile AIR translator, construction/offline-certification gate, signed GPU reset/reference probes and portable auditor. It requires Xcode/Metal and local envytools, with no NAK or core runtime link. An unknown input profile refuses rather than silently changing pins.
 
 [GPU_ICB_TEXTURE_ARGUMENTS.md](GPU_ICB_TEXTURE_ARGUMENTS.md) gives a complete public-source auxiliary-shader rebuild, a three-buffer native producer, GPU-side texture argument selection and the 28-host raw-evidence auditor. [ICB_TEXTURE_ARGUMENTS.md](ICB_TEXTURE_ARGUMENTS.md) supplies the preceding native/CPU-ICB reference cohort.

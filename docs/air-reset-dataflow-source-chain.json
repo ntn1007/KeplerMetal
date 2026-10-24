@@ -1,0 +1,47 @@
+{
+  "base_commit": "7ed6c8b4d7e5b504d33a4d8dd362dcee3a8457c2",
+  "entries": [
+    {
+      "path": "bridge/src/air_reset_dataflow.metal",
+      "SHA256": "be2ffdd085acbc683a7b1c470d806346f9bd28841b67c9ad3509cee521a7b3bb",
+      "frozen_build_copy_SHA256": "be2ffdd085acbc683a7b1c470d806346f9bd28841b67c9ad3509cee521a7b3bb"
+    },
+    {
+      "path": "bridge/src/air_reset_dataflow_reference.metal",
+      "SHA256": "666a7f01920e50983e09107315e847de6624a2bb1fd071a2b67298c2200756aa",
+      "frozen_build_copy_SHA256": "666a7f01920e50983e09107315e847de6624a2bb1fd071a2b67298c2200756aa"
+    },
+    {
+      "path": "bridge/tools/air_reset_dataflow_probe.mm",
+      "SHA256": "522d18b41504eba8430cda6be3cb7c6c560070733f93d5c31561cb5cfc54f37c",
+      "frozen_build_copy_SHA256": "522d18b41504eba8430cda6be3cb7c6c560070733f93d5c31561cb5cfc54f37c"
+    },
+    {
+      "path": "bridge/tools/air_reset_lowering.py",
+      "SHA256": "97c114bc78aa427d1344cf6d4206184deec04e29cfd00ac0400905a5c6f15605",
+      "frozen_build_copy_SHA256": "97c114bc78aa427d1344cf6d4206184deec04e29cfd00ac0400905a5c6f15605"
+    },
+    {
+      "path": "bridge/tools/audit_air_reset_dataflow.py",
+      "SHA256": "683b3c47f435f04317a2c284873b01017e78a0ba817460c5bd26b9511e7753c6"
+    },
+    {
+      "path": "bridge/tools/public_air_reset_dataflow.py",
+      "SHA256": "e53aa9ae9b970865e4a80d25a44ac10f41e79e7e41af5d870a3832f49535d326",
+      "frozen_build_copy_SHA256": "e53aa9ae9b970865e4a80d25a44ac10f41e79e7e41af5d870a3832f49535d326"
+    },
+    {
+      "path": "bridge/tools/verify_air_reset_dataflow.py",
+      "SHA256": "29c7acc29cb3ebe79dad544d2368e76546e71d7e444f8816d57616f2377d6b7c",
+      "frozen_build_copy_SHA256": "29c7acc29cb3ebe79dad544d2368e76546e71d7e444f8816d57616f2377d6b7c"
+    },
+    {
+      "path": "tests/test_air_reset_dataflow.py",
+      "SHA256": "709266bd1f6eaa3cfbb51e49d75e9c7626d5e4cfa00f666627f1d516029ceeee"
+    },
+    {
+      "path": "tests/fixtures/air_reset_dataflow_ir.json",
+      "SHA256": "9bdd3ffc3bc6c692360b00d24ee2f5cbe5009ec0c93c95642b0d5dd9801de978"
+    }
+  ]
+}
