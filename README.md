@@ -19,6 +19,8 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
+The scoped runtime now owns typed render-pipeline tokens, retained resources and a two-word argument encoder. GPU rendering and same-runtime regressions pass; ordinary applications still require adaptation. [Contract, evidence and limits](docs/PIPELINE_RUNTIME_INTEGRATION.md).
+
 A typed render-pipeline selector now changes a real GTX image in an explicitly adapted laboratory client. CPU, native-image and negative controls qualify this bounded case; automatic application integration remains open. [Evidence and reproduction](docs/TYPED_PIPELINE_RENDER.md).
 
 A GTX/M1 comparison identifies the boundary for typed render-pipeline arguments. The new transition planner is CPU-only and not yet integrated. [Evidence and limits](docs/RENDER_PIPELINE_BOUNDARY.md).

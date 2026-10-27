@@ -28,19 +28,19 @@
       "path": "bridge/src/KeplerCPUICB.h",
       "source_path": "bridge/src/KeplerCPUICB.h",
       "source_SHA256": "263dede0101967e1bfa32fe3b081b73c476d9e09e8a9b5446ae04cf4f425ee0a",
-      "published_SHA256": "79c544c5e9981f6287d23ca958267eff215fa915e6c6ae5fc63240077915c62b",
-      "bytes": 32351,
+      "published_SHA256": "b1bbd2ed2b6ffaab58f18497f1290bf62dfa0bd4070a808188c26d75b48a4de3",
+      "bytes": 33719,
       "modified_for_publication": true,
-      "previous_published_SHA256": "18e994385d3d559852b39ea08723ce79fb146b8db8f3cfb316bfced01bcb97de"
+      "previous_published_SHA256": "79c544c5e9981f6287d23ca958267eff215fa915e6c6ae5fc63240077915c62b"
     },
     {
       "path": "bridge/src/KeplerCPUICB.mm",
       "source_path": "bridge/src/KeplerCPUICB.mm",
       "source_SHA256": "3d59c2c609611ddc387e616b8945e903f6378dbd4a3b66a02cb22087ada84b60",
-      "published_SHA256": "5ebe2d6b16932f69902dde89cfaf057a4d6f3a99cb4ebda41bb2c791752963fc",
-      "bytes": 135919,
+      "published_SHA256": "1fa542157ccca522fe141b7789f68ae56c430f06a31b0c8001703f8e17caf3ad",
+      "bytes": 136260,
       "modified_for_publication": true,
-      "previous_published_SHA256": "899f27e8e4d7b02567880f4fbb9785696d31b64e945c489b7a5e14e1361a6d4c"
+      "previous_published_SHA256": "5ebe2d6b16932f69902dde89cfaf057a4d6f3a99cb4ebda41bb2c791752963fc"
     },
     {
       "path": "bridge/src/KeplerCommandIR.h",
@@ -64,10 +64,10 @@
       "path": "bridge/src/KeplerCommandIRFunction.inc",
       "source_path": "bridge/src/KeplerCommandIRFunction.inc",
       "source_SHA256": "0f8b29ecfe9a4fd6326d391dc023a595d511fdae3cd0876cb769c9ddf6983b3f",
-      "published_SHA256": "0dfbbd00924d21efe59f77a1cc4d9d39e52a00bbb5472eb90750d9159c894bd5",
-      "bytes": 10614,
+      "published_SHA256": "7f9f557caadd57ac5992c3c92318d0b1e5952ed396e706ec613c9b115ae435a0",
+      "bytes": 11760,
       "modified_for_publication": true,
-      "previous_published_SHA256": "946396af3d38941ecf7f76840d4378f22bf67f18004903e1f8f0ca8d8e55c2b5"
+      "previous_published_SHA256": "0dfbbd00924d21efe59f77a1cc4d9d39e52a00bbb5472eb90750d9159c894bd5"
     },
     {
       "path": "bridge/src/KeplerCommandIRFunctionScope.inc",
@@ -7478,15 +7478,17 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "8976ed648c5fb42097c82355358a8165ee6327536e602a6fbac5843d433c94f1",
-  "previous_public_commit": "fe35a1a4529b83d34abb2de8059fbb736a38503d",
+  "previous_source_snapshot_SHA256": "143ffb9ee5bf58a163a7d9ba0176733555ade591ba8e9d76acdedb0b875a15c3",
+  "previous_public_commit": "817f812eaa8300e555835c2e0d3402a8a8aad116",
   "update": {
     "date": "2026-10-27",
-    "reason": "Combined indexed and vertex context with unchanged legacy prefixes",
+    "reason": "Runtime-owned render pipeline transition root",
     "files": [
-      "bridge/src/KeplerCPUICB.h"
+      "bridge/src/KeplerCPUICB.h",
+      "bridge/src/KeplerCPUICB.mm",
+      "bridge/src/KeplerCommandIRFunction.inc"
     ]
   },
   "update_date": "2026-10-27",
-  "update_reason": "Combined indexed and vertex transitions"
+  "update_reason": "Runtime-owned typed pipeline transitions"
 }

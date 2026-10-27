@@ -17,6 +17,7 @@
 @property(nonatomic,readonly) NSUInteger contextOffset,commandRecordsOffset,capacity;
 @property(nonatomic,readonly) NSUInteger indexBindingCount,indexBindingTableOffset;
 @property(nonatomic,readonly) NSUInteger vertexTransitionCount,vertexTransitionTableOffset;
+@property(nonatomic,readonly) NSUInteger pipelineTransitionCount,pipelineTransitionTableOffset;
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 @end
@@ -302,12 +303,25 @@
                                            functionName:(NSString *)name
                                         rootBufferIndex:(NSUInteger)index
                                                   error:(NSError **)error;
+// Explicit two-word project root; reflection remains the native lowered struct.
+- (id<MTLFunction>)newPipelineRenderCommandFunctionWithLibraryData:(NSData *)data
+                                                  expectedSHA256:(NSString *)expected
+                                                    functionName:(NSString *)name
+                                                 rootBufferIndex:(NSUInteger)index
+                                                           error:(NSError **)error;
 - (KPRenderCommandArgumentContext *)newRenderCommandArgumentContextWithCommands:(id<MTLIndirectCommandBuffer>)commands
                                                                stateCatalogue:(KPRenderStateCatalogue *)catalogue
                                                                commandRecords:(id<MTLBuffer>)records
                                                          commandRecordsOffset:(NSUInteger)offset
                                                                 commandBuffer:(id<MTLCommandBuffer>)commandBuffer
                                                                         error:(NSError **)error;
+// Pipeline transitions are derived from retained catalogue objects, not Apple IDs.
+- (KPRenderCommandArgumentContext *)newPipelineRenderCommandArgumentContextWithCommands:(id<MTLIndirectCommandBuffer>)commands
+                                                                       stateCatalogue:(KPRenderStateCatalogue *)catalogue
+                                                                       commandRecords:(id<MTLBuffer>)records
+                                                                 commandRecordsOffset:(NSUInteger)offset
+                                                                        commandBuffer:(id<MTLCommandBuffer>)commandBuffer
+                                                                                error:(NSError **)error;
 // Adds an immutable table of the catalogue's exact index-buffer spans. The
 // original root header remains compatible with reset/nonindexed producers.
 - (KPRenderCommandArgumentContext *)newIndexedRenderCommandArgumentContextWithCommands:(id<MTLIndirectCommandBuffer>)commands
