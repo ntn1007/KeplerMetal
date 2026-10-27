@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+The pinned 10.12.6 video-provider selector table differs from the current kernel dispatch evidence. This is static only and does not prove a live selector refusal. [Evidence](VIDEO_PROVIDER_DISPATCH.md).
+
 A scoped re-audit recovers the historical legacy-video provider evidence and separately records current protected-file drift. No hardware video is demonstrated. [Evidence](VIDEO_LEGACY_BACKEND.md).
 
 A pinned public-Metal test executable now receives the qualified native CAS repair through an explicit process-local bootstrap, without linking the project API. GPU and negative controls pass; arbitrary third-party and system-wide integration remain open. [Evidence](STANDALONE_CAS.md).

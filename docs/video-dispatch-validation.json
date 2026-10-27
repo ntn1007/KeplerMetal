@@ -1,0 +1,174 @@
+{
+  "current_GeForce_SHA256": "44f131a958d48afd6ab675a851330c37506557c9d499484170c886c3731bdbb3",
+  "current_IOAccelerator_SHA256": "37e563d6cf3626101f30b1727a4f60dec02152dff9c74c0269c30c213a7320c8",
+  "current_base_static_index_max": 7,
+  "current_vtable_lookup": "IOAccelContext2::getTargetAndMethodForIndex (external relocation)",
+  "hardware_execution_proved": false,
+  "historical_GeForce_SHA256": "25a0bccd7caa884d6aa964743b35f879ec326c46d255dc6212c47e7a20f6f38e",
+  "historical_entries": [
+    {
+      "count0": 0,
+      "count1": 1,
+      "flags": 0,
+      "function_address": "0x5ea02",
+      "function_name": "get_decoder_config",
+      "selector": "0x100"
+    },
+    {
+      "count0": 0,
+      "count1": 4294967295,
+      "flags": 4,
+      "function_address": "0x5ea20",
+      "function_name": "set_source_size",
+      "selector": "0x101"
+    },
+    {
+      "count0": 0,
+      "count1": 1,
+      "flags": 0,
+      "function_address": "0x5ea7c",
+      "function_name": "get_3d_config",
+      "selector": "0x102"
+    },
+    {
+      "count0": 0,
+      "count1": 1,
+      "flags": 0,
+      "function_address": "0x5ea9a",
+      "function_name": "get_fb_config",
+      "selector": "0x103"
+    },
+    {
+      "count0": 0,
+      "count1": 1,
+      "flags": 0,
+      "function_address": "0x5eaf4",
+      "function_name": "check_acc_cap",
+      "selector": "0x104"
+    },
+    {
+      "count0": 1,
+      "count1": 2,
+      "flags": 0,
+      "function_address": "0x5eb02",
+      "function_name": "acquire_channel",
+      "selector": "0x105"
+    },
+    {
+      "count0": 1,
+      "count1": 0,
+      "flags": 4,
+      "function_address": "0x5eccc",
+      "function_name": "map_texture",
+      "selector": "0x106"
+    },
+    {
+      "count0": 256,
+      "count1": 280,
+      "flags": 3,
+      "function_address": "0x5ed92",
+      "function_name": "cipher_initiate",
+      "selector": "0x107"
+    },
+    {
+      "count0": 0,
+      "count1": 280,
+      "flags": 2,
+      "function_address": "0x5ee0c",
+      "function_name": "cipher_query",
+      "selector": "0x108"
+    },
+    {
+      "count0": 1,
+      "count1": 4294967295,
+      "flags": 4,
+      "function_address": "0x5ee84",
+      "function_name": "store_session_key",
+      "selector": "0x109"
+    },
+    {
+      "count0": 1,
+      "count1": 4294967295,
+      "flags": 2,
+      "function_address": "0x5ef3e",
+      "function_name": "retrieve_session_key",
+      "selector": "0x10a"
+    },
+    {
+      "count0": 2,
+      "count1": 1,
+      "flags": 0,
+      "function_address": "0x5efe0",
+      "function_name": "instance_ctrl",
+      "selector": "0x10b"
+    },
+    {
+      "count0": 1,
+      "count1": 24,
+      "flags": 2,
+      "function_address": "0x5f27c",
+      "function_name": "get_texture_params",
+      "selector": "0x10c"
+    }
+  ],
+  "historical_provider_selector_0x105": "one scalar input and two scalar outputs; function called acquire_channel in Sierra symbols",
+  "historical_table_SHA256": "3bdc9e41de2acbfd05d3f11670bedc5098fa0979d009c1bdb6ce12603998c2d0",
+  "historical_vtable_lookup": "0x5f59e",
+  "limits": [
+    "Static disk image evidence only; no live kernel bytes or live vtable checked.",
+    "Current base lookup above 7 and old override difference do not by themselves prove every live externalMethod dispatch takes this path.",
+    "The XNU header is a published modern comparison, not proof of the exact Sierra ABI.",
+    "Opening a video context does not establish command submission or decoding.",
+    "No private video selector or hardware command was called."
+  ],
+  "native_execution": false,
+  "negative_controls_rejected": [
+    "changed-byte",
+    "missing-symbol"
+  ],
+  "other_REA_evidence_ids": [
+    "ev_7f80c1715678eadc5623771a46264fb6df056b673b826ad76f918deb4f9c10c6",
+    "ev_258f9649b3c94eb50cad255ef142c5b6daf118212ef9594b076a75b9c5281161",
+    "ev_67f87e647158b1eb3d87d7fe4962feaf77bef8195ec28040243d4498db746aa9",
+    "ev_63405699d0e72da770321c7d16abc6a5e7a87782cc37dc926f67eee412d21103"
+  ],
+  "pinned_REA_records": 11,
+  "provider_REA": [
+    {
+      "evidence_id": "ev_eac8b697c2c3a342df4f87c549ecb3e52a50300f17da601789feeca3e5a6d5f0",
+      "function": "0x2e526",
+      "selector": "0x105"
+    },
+    {
+      "evidence_id": "ev_6d84b9be7f17a2f4580b2cc700bd63cebd5a05f111c1981718a6831d5d6091b4",
+      "function": "0x2e604",
+      "selector": "0x100"
+    },
+    {
+      "evidence_id": "ev_f89f4c370c0b2d7d2fd313921dd7971351a2a0791e8e15005c16b79013d8499d",
+      "function": "0x2e66e",
+      "selector": "0x102"
+    },
+    {
+      "evidence_id": "ev_31188775ac188409c1679d8ee29fc960496e64ae3ccd70a9ea4bcea092716d28",
+      "function": "0x2e6d8",
+      "selector": "0x103"
+    },
+    {
+      "evidence_id": "ev_5b2de66da9f70d103fd1d9d4b3629fc0b0102a6e055cc87320aa87d6596b64ca",
+      "function": "0x2e774",
+      "selector": "0x104"
+    },
+    {
+      "evidence_id": "ev_cd563f967ec925ccd609702258c9f50f1ac403ba6f50eb1a1a09099e2581916a",
+      "function": "0x2e808",
+      "selector": "0x106"
+    },
+    {
+      "evidence_id": "ev_c347a283f140e122d6c01e2cb08f518f00725ccdfd65e146a91c66e31a23cdda",
+      "function": "0x2eb42",
+      "selector": "0x10b"
+    }
+  ],
+  "status": "STATIC_DISPATCH_COMPARISON_PASS"
+}

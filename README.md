@@ -21,6 +21,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+An offline comparison exposes a video-provider/kernel dispatch difference that must be resolved before a historical provider can be integrated. [Evidence and limits](docs/VIDEO_PROVIDER_DISPATCH.md).
+
 A scoped historical re-audit identifies an installed NVIDIA video-provider Create stub on a deliberately selected legacy path; hardware decoding remains unavailable. [Evidence and limits](docs/VIDEO_LEGACY_BACKEND.md).
 
 A second pinned client qualifies the same CAS repair through the public default compute-descriptor factory. [Evidence and limitations](docs/DESCRIPTOR_CAS.md).
