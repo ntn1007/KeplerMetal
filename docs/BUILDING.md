@@ -1,5 +1,7 @@
 # Build from source
 
+[PARTIAL_ICB_DUAL_PIPELINE.md](PARTIAL_ICB_DUAL_PIPELINE.md) describes the pinned dual-shader build, construction-only inspection, serial GPU controls, regressions and independent CPU audit.
+
 [COMBINED_INDEX_VERTEX.md](COMBINED_INDEX_VERTEX.md) documents source building, native inspection and a signed two-slot render probe.
 
 [VERTEX_BINDING_EXPERIMENT.md](VERTEX_BINDING_EXPERIMENT.md) documents the owned vertex-transition context, construction-only compiler inspection and signed render reception.

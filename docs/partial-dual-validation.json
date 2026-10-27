@@ -1,0 +1,15 @@
+{
+  "barrier_regression_invocations": 5632,
+  "cohort_host_intervals_overlap": false,
+  "dual_invocations": 12114,
+  "dual_logical_dispatches": 72,
+  "dual_order_controls": 16,
+  "dual_preflight_refusals": 24,
+  "host_processes": 18,
+  "old_chain_invocations": 4329,
+  "runtime_archive_SHA256": "1b5626d430f1eab01d5fdebcf1541346bbc60255fd1011471bd80d1a75b0cfef",
+  "runtime_source_SHA256": "9e966dad4e2bc09ea8337ef9c8fd2c54c0893cbe19db6b731981ad13b522dbcf",
+  "scope": "Adapted process only; no native Apple ICB or system-wide integration",
+  "status": "PASS",
+  "uniform_regression_invocations": 37264
+}

@@ -2,13 +2,13 @@
 
 The opt-in project ICB adapter accepts a serial range containing multiple
 CPU-encoded partial-grid commands, and can mix them with uniform commands of
-the **same certified pipeline**. Empty slots are skipped. The existing NVIDIA
+the same certified pipeline. A later separately qualified extension permits the two exact pipelines in one registered library; see [the dual-pipeline qualification](PARTIAL_ICB_DUAL_PIPELINE.md). Empty slots are skipped. The existing NVIDIA
 resident transport emits the resulting records in slot order, with the checked
 native wait after each physical launch. This is an adapted-process extension,
 not the native Apple ICB ABI or transparent support for unmodified apps.
 
 The entire range is checked before any slot is materialized: each occupied
-slot must be CPU-owned, use the same exact registered pipeline, and satisfy
+slot must be CPU-owned, use a certified pipeline in the same exact registration, and satisfy
 its resource and geometry constraints. At most 16 resident launches in total
 are accepted, counting each decomposed partial region and each uniform slot.
 The present certified shaders and [resource-window rules](PARTIAL_ICB_VARIABLE_RESOURCES.md)

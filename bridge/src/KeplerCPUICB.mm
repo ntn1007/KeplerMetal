@@ -272,7 +272,8 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 static BOOL certifiedPartialProfile(NSDictionary*p,id<MTLComputePipelineState>pipeline){
  if(!pipeline||![p[@"native_registration_v1"]boolValue]||p[@"pipeline_owner"]!=pipeline)return NO;
  NSString*name=p[@"function"],*library=p[@"library_SHA256"],*manifest=p[@"manifest_SHA256"];
- return ([name isEqual:@"partial_builtin_barrier"]&&[library isEqual:@"1e89eaf47bdcb482e4fc760869b6005e47c1e836ec43e14820ba601c28fdd3f5"]&&[manifest isEqual:@"31287315ccb87740c86c7180651007a766535bfcadf3de34edbe10e6bad233be"])||
+ return ([@[@"partial_builtin_barrier",@"partial_buffer_stencil"] containsObject:name?:@""]&&[library isEqual:@"0985a3057cd487352d801abcd180bf05a681b8dc7357ee5400db044098c32c4c"]&&[manifest isEqual:@"c7dcdc81adba7f7ba6cf8175ecc179a086a9bd150b44d71ca1a39ad18846ef9a"])||
+        ([name isEqual:@"partial_builtin_barrier"]&&[library isEqual:@"1e89eaf47bdcb482e4fc760869b6005e47c1e836ec43e14820ba601c28fdd3f5"]&&[manifest isEqual:@"31287315ccb87740c86c7180651007a766535bfcadf3de34edbe10e6bad233be"])||
         ([name isEqual:@"partial_buffer_stencil"]&&[library isEqual:@"1d7f936b2f110c99f889518c5ab654447fbdcd0b2215a4a8a14748684a907658"]&&[manifest isEqual:@"4edd2edd2bb70975dcfdac23d98f355f61a30edcd5bdd61fdd695e5a9144b428"]);
 }
 
@@ -366,14 +367,14 @@ static void executePartialRange(NSArray<KPComputeICBCommand*>*commands,NSRange r
  if(encoder.dispatchType!=MTLDispatchTypeSerial)reject(@"Partial range requires a serial encoder");
  Ivar iv=class_getInstanceVariable(object_getClass(encoder),"_commandBuffer");if(!iv||ivar_getOffset(iv)!=32)reject(@"Partial grid encoder ABI differs");id<MTLCommandBuffer>cb=object_getIvar(encoder,iv);
  if(!cb||cb.commandQueue!=scope.queue||cb.status!=MTLCommandBufferStatusNotEnqueued||!cb.retainedReferences)reject(@"Partial grid requires a retained uncommitted buffer on the scope queue");
- NSUInteger count=0;id<MTLComputePipelineState>pipeline=nil;
+ NSUInteger count=0;NSDictionary*domain=nil;
  for(NSUInteger i=range.location;i<NSMaxRange(range);i++){KPComputeICBCommand*c=commands[i];if(!c.hasDispatch){if(c.GPUGenerated||c.reusableContext||c.residentOwners.count)reject(@"Partial range has unsupported empty state");continue;}
-  NSDictionary*p=[scope profileForPipeline:c.pipeline];if(!scope.experimentalPartialGridEnabled||scope.restored||c.GPUGenerated||c.reusableContext||c.residentOwners.count||!certifiedPartialProfile(p,c.pipeline)||(pipeline&&pipeline!=c.pipeline))reject(@"Partial range requires one certified pipeline and CPU-owned commands");pipeline=c.pipeline;
+  NSDictionary*p=[scope profileForPipeline:c.pipeline];if(!scope.experimentalPartialGridEnabled||scope.restored||c.GPUGenerated||c.reusableContext||c.residentOwners.count||!certifiedPartialProfile(p,c.pipeline)||(domain&&!sameResidentRegistration(domain,p)))reject(@"Partial range requires one certified registration and CPU-owned commands");domain=p;
   if(c.partialGrid3D){if(c.partialGrid.width>1023||c.partialGrid.height>1023||c.partialGrid.depth>1023||c.local.width>1023||c.local.height>1023||c.local.depth>1023)reject(@"Partial grid dimension state changed");std::vector<KPPartialPlan::Region>regions;if(!KPPartialPlan::plan({(uint32_t)c.partialGrid.width,(uint32_t)c.partialGrid.height,(uint32_t)c.partialGrid.depth},{(uint32_t)c.local.width,(uint32_t)c.local.height,(uint32_t)c.local.depth},regions))reject(@"Partial grid plan is no longer valid");validatePartialEnvelope(c,scope,volume(c.partialGrid,1024));count+=regions.size();}
   else {NSString*reason=residentBindingError(c,scope);if(reason)reject(reason);NSUInteger g=volume(c.groups,128),l=volume(c.local,128);if(!g||!l||g>128/l)reject(@"Uniform slot exceeds certified partial-range limits");validatePartialEnvelope(c,scope,g*l);count++;}
   if(count>16)reject(@"Partial range exceeds 16 resident launches");
  }
- if(!count||!pipeline)reject(@"Partial range contains no executable commands");
+ if(!count||!domain)reject(@"Partial range contains no executable commands");
  NSMutableArray<KPRecordedNativeCompute*>*records=[NSMutableArray new];NSMutableArray*slots=[NSMutableArray new];
  for(NSUInteger i=range.location;i<NSMaxRange(range);i++){KPComputeICBCommand*c=commands[i];if(!c.hasDispatch)continue;NSUInteger first=records.count;
   if(c.partialGrid3D)[records addObjectsFromArray:prepareFixedPartialGrid(c,scope,encoder)];

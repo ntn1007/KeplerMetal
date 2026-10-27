@@ -1,0 +1,108 @@
+{
+  "schema": 2,
+  "library_SHA256": "0985a3057cd487352d801abcd180bf05a681b8dc7357ee5400db044098c32c4c",
+  "functions": [
+    {
+      "name": "partial_builtin_barrier",
+      "buffers": [
+        {
+          "name": "coordinates",
+          "index": 0,
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 36,
+          "access": 1,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 16
+        },
+        {
+          "name": "geometry",
+          "index": 1,
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 36,
+          "access": 1,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 16
+        },
+        {
+          "name": "counter",
+          "index": 2,
+          "data_size": 4,
+          "alignment": 4,
+          "data_type": 1,
+          "access": 1,
+          "minimum_bytes": 4,
+          "per_invocation_bytes": 0
+        },
+        {
+          "name": "p",
+          "index": 3,
+          "data_size": 16,
+          "alignment": 256,
+          "data_type": 1,
+          "access": 0,
+          "minimum_bytes": 512,
+          "per_invocation_bytes": 0
+        }
+      ],
+      "constant_buffer_index": 3,
+      "static_threadgroup_bytes": 512,
+      "max_local": 128,
+      "max_invocations": 128,
+      "qmd_register_count": 22,
+      "allow_multidimensional": true
+    },
+    {
+      "name": "partial_buffer_stencil",
+      "buffers": [
+        {
+          "name": "source",
+          "index": 0,
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 36,
+          "access": 0,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 16
+        },
+        {
+          "name": "output",
+          "index": 1,
+          "data_size": 16,
+          "alignment": 16,
+          "data_type": 36,
+          "access": 1,
+          "minimum_bytes": 16,
+          "per_invocation_bytes": 16
+        },
+        {
+          "name": "counter",
+          "index": 2,
+          "data_size": 4,
+          "alignment": 4,
+          "data_type": 1,
+          "access": 1,
+          "minimum_bytes": 4,
+          "per_invocation_bytes": 0
+        },
+        {
+          "name": "p",
+          "index": 3,
+          "data_size": 16,
+          "alignment": 256,
+          "data_type": 1,
+          "access": 0,
+          "minimum_bytes": 512,
+          "per_invocation_bytes": 0
+        }
+      ],
+      "constant_buffer_index": 3,
+      "static_threadgroup_bytes": 0,
+      "max_local": 128,
+      "max_invocations": 128,
+      "qmd_register_count": 11,
+      "allow_multidimensional": true
+    }
+  ]
+}
