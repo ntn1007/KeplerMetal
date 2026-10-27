@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+Two isolated video-context witnesses correlate the owning process's registry entry with two mapped address ranges; both ranges cease to be covered after context close in these observations. This does not establish kernel-object destruction, fix the earlier explicit-unmap failure, or prove hardware video decoding. [Evidence and limits](VIDEO_OWNER_MAP.md).
+
 The experimental partial-grid adapter accepts variable, bounded buffer sizes and aligned offsets for its two pinned shaders. A 21-process GTX cohort includes 21,652 invocations using the new layouts, fixed-envelope and uniform regressions, and negative controls; native constant-bank rounding can still reject some windows. [Contract and evidence](PARTIAL_ICB_VARIABLE_RESOURCES.md).
 
 The offline native CAS recognizer now refuses candidates when the register changed by the repair is also referenced by another later instruction or by the output address. This is a conservative safety restriction, not a general proof of shader semantics. [Scope and validation](CAS_RECOGNIZER_SAFETY.md).

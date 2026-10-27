@@ -7534,6 +7534,62 @@
       "published_SHA256": "febe0122ce5d1cfa0facd4bde8137b30d607f09004fa7f1441c4d99936aafba9",
       "bytes": 4730,
       "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/audit_video_context_owner_map.py",
+      "source_path": "bridge/tools/audit_video_context_owner_map.py",
+      "source_SHA256": "e22fa20b3cba61249b19cf28c0b5b4f603ac44179681a2d1ecd2ccbf00f3c298",
+      "published_SHA256": "e22fa20b3cba61249b19cf28c0b5b4f603ac44179681a2d1ecd2ccbf00f3c298",
+      "bytes": 5359,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/run_vm_region_control.py",
+      "source_path": "bridge/tools/run_vm_region_control.py",
+      "source_SHA256": "b2a920ae3ad8383d659d5bbe99a82bc3ba097780cd348856fd6e8a44dece1aa2",
+      "published_SHA256": "b2a920ae3ad8383d659d5bbe99a82bc3ba097780cd348856fd6e8a44dece1aa2",
+      "bytes": 1834,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/verify_video_context_owner_map.py",
+      "source_path": "bridge/tools/verify_video_context_owner_map.py",
+      "source_SHA256": "87c040297eacc81b2069d939d12870bfbb15cdbd0c78112ab4a7aad9e17640db",
+      "published_SHA256": "87c040297eacc81b2069d939d12870bfbb15cdbd0c78112ab4a7aad9e17640db",
+      "bytes": 6193,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_context_owner_map.py",
+      "source_path": "bridge/tools/video_context_owner_map.py",
+      "source_SHA256": "02c05bb18097e8dd360312dc8f17bad434070c2285c04c1ffdc57f21bfcb089e",
+      "published_SHA256": "02c05bb18097e8dd360312dc8f17bad434070c2285c04c1ffdc57f21bfcb089e",
+      "bytes": 6630,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/video_context_owner_map_probe.mm",
+      "source_path": "bridge/tools/video_context_owner_map_probe.mm",
+      "source_SHA256": "479063efe8055e044d237694e757e19ce90e3be5548c99c7d3428c602f502a2a",
+      "published_SHA256": "479063efe8055e044d237694e757e19ce90e3be5548c99c7d3428c602f502a2a",
+      "bytes": 13997,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/vm_region_control.c",
+      "source_path": "bridge/tools/vm_region_control.c",
+      "source_SHA256": "7d06536eb9a99b4ce327c1515657c667ba4e06ab7c0e8071729f4d76938397e2",
+      "published_SHA256": "7d06536eb9a99b4ce327c1515657c667ba4e06ab7c0e8071729f4d76938397e2",
+      "bytes": 2504,
+      "modified_for_publication": false
+    },
+    {
+      "path": "tests/test_video_owner_map_audit.py",
+      "source_path": "tests/test_video_owner_map_audit.py",
+      "source_SHA256": "bb3fe57678b7f20bcd1141dddf323ed339f31eefddc39fa5b221ffd9a2a9f8a4",
+      "published_SHA256": "bb3fe57678b7f20bcd1141dddf323ed339f31eefddc39fa5b221ffd9a2a9f8a4",
+      "bytes": 2195,
+      "modified_for_publication": false
     }
   ],
   "excluded_source_tools": [
@@ -7575,25 +7631,21 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "54567b31372f9a9de47d580e3d5851fe6c3ba0ac9e1262ff1fa98a30e9d586b5",
-  "previous_public_commit": "0b6a1091acec4a5f8e53cde3debcd427581ef8ea",
+  "previous_source_snapshot_SHA256": "6b6bacfeef96f0dda32f8d9872a9d2b56becc0ba7d31ebcfc8c75c5dc7ad55fc",
+  "previous_public_commit": "800fcddf1ce13f92507195b0d6e66d793aad30c0",
   "update": {
     "date": "2026-10-27",
-    "reason": "Bounded partial-grid variable resource windows",
+    "reason": "Video context owner and virtual mapping correlation",
     "files": [
-      "bridge/src/KeplerCPUICB.mm",
-      "bridge/src/KeplerPartialGridPlan.h",
-      "tests/partial_grid_plan_contract.cpp",
-      "tests/test_partial_variable_oracle.py",
-      "bridge/tools/partial_variable_resources.py",
-      "bridge/tools/partial_variable_resources_probe.mm",
-      "bridge/tools/verify_partial_variable_resources.py",
-      "bridge/tools/partial_variable_barrier.py",
-      "bridge/tools/partial_variable_barrier_probe.mm",
-      "bridge/tools/verify_partial_variable_barrier.py",
-      "bridge/tools/audit_partial_variable_resources.py"
+      "bridge/tools/audit_video_context_owner_map.py",
+      "bridge/tools/run_vm_region_control.py",
+      "bridge/tools/verify_video_context_owner_map.py",
+      "bridge/tools/video_context_owner_map.py",
+      "bridge/tools/video_context_owner_map_probe.mm",
+      "bridge/tools/vm_region_control.c",
+      "tests/test_video_owner_map_audit.py"
     ]
   },
   "update_date": "2026-10-27",
-  "update_reason": "Variable partial-grid resource envelopes with separate GTX qualification and preserved native constant-bank guard."
+  "update_reason": "Bounded process-local video context and mapped-address observation; no decoder or kernel object destruction claim."
 }

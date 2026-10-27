@@ -1,0 +1,17 @@
+{
+  "cohort_processes": 5,
+  "cohort_processes_overlap": false,
+  "coverage_after_context_close": false,
+  "executable_SHA256": "f1b5b18fb52a761885cd09c7e6f08db3000ea6d2c0fc97a752247a15b0323459",
+  "explicit_unmap_calls": 0,
+  "explicit_video_selector_calls": 0,
+  "hardware_video_execution_proved": false,
+  "kernel_mapping_destruction_proved": false,
+  "mapped_regions_per_observation": 2,
+  "owner_map_observations": 2,
+  "port_registry_identity_proved": false,
+  "region_bytes": 4096,
+  "scope": "process-local VM coverage and registry correlation only; driver-internal work not traced",
+  "status": "PASS",
+  "vm_anonymous_controls": 4
+}
