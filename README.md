@@ -21,6 +21,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+A bounded synthetic video-provider probe reaches a locally refused `0x103` request after fabricated device configuration. [Evidence and limits](docs/VIDEO_SYNTHETIC_SELECTOR.md).
+
 A guarded synthetic video-provider probe reaches a device-configuration dependency after a fabricated fence response; no hardware video is claimed. [Evidence and preserved failure](docs/VIDEO_SYNTHETIC_CONFIG.md).
 
 An offline comparison exposes a video-provider/kernel dispatch difference that must be resolved before a historical provider can be integrated. [Evidence and limits](docs/VIDEO_PROVIDER_DISPATCH.md).

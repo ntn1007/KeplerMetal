@@ -1,0 +1,70 @@
+{
+  "cohort": [
+    {
+      "case": "video-sierra-config-probe-config-probe-20261027-01",
+      "pid": 88402,
+      "result_SHA256": "bc969e07a7fb8baf8d623a682fb4b203075876a32476dff77099bed06dd14996",
+      "status": "SYNTHETIC_CONFIG_PROBE"
+    },
+    {
+      "case": "video-sierra-config-probe-config-probe-20261027-02",
+      "pid": 88464,
+      "result_SHA256": "44b3ec2be1673591b352ef10d6142954ab5a33342179cccc50b2fb7b195a3003",
+      "status": "SYNTHETIC_CONFIG_PROBE"
+    },
+    {
+      "case": "video-sierra-config-probe-inspect-20261027-01",
+      "pid": 88352,
+      "result_SHA256": "334a99bd0b175030325f3ac75639c374d97c9e36e607cb85e1c1ecab2b135b06",
+      "status": "INSPECT_PASS"
+    },
+    {
+      "case": "video-sierra-config-probe-wrong-20261027-01",
+      "pid": 88375,
+      "result_SHA256": "257130c678380a43918561ba3b70ff71ede18f85633161ae26c80f6f90d45158",
+      "status": "WRONG_IMAGE_REFUSED"
+    },
+    {
+      "case": "video-sierra-config-probe-null-create-20261027-01",
+      "pid": 88439,
+      "result_SHA256": "8454d1ea8ac1356952ed8f56866d8c1350c2411ddc3a5631987c6c7ef61dc844",
+      "status": "NULL_CREATE_REJECTED"
+    }
+  ],
+  "limitations": [
+    "Device, shared and context objects and connection are synthetic; scalar method returns a fabricated success locally and data buffer is a fabricated token, and fence success is fabricated and no real decoding occurs.",
+    "Fence and device configuration success are fabricated; the selector 0x103 is refused locally and no actual fence, config or GPU command is established.",
+    "The 80-byte provider allocation is deliberately zeroed, so this does not qualify normal behavior.",
+    "Sixteen prior import slots and the device-config slot are checked; other kernel paths and provider initializers are not exhaustively traced.",
+    "_exit skips dlclose; provider lifetime is not qualified.",
+    "Reservation is cooperative and does not exclude WindowServer."
+  ],
+  "static_evidence": [
+    {
+      "REA": "ev_63405699d0e72da770321c7d16abc6a5e7a87782cc37dc926f67eee412d21103",
+      "file": "video-sierra-provider-20261027-01/0x2e27c.private.json",
+      "sha256": "0d030d0040bf4c115aea1a0733f9880bbdef1014f394c6094f94bd26a10c2a8d"
+    },
+    {
+      "REA": "ev_439c60d1928e0485e1341462628e580a4c87793daedb4c0da0d8dc7a1ee181b4",
+      "file": "video-sierra-failed-ioaccel-static-20261027-01/0x2e45a.private.json",
+      "sha256": "81821f51ba8c7b2f8ed78191ff43d43267082ac684c2cf4552e97d48e518eaaa"
+    },
+    {
+      "REA": "ev_96feb07e81f6ba314a449182dbf4d055bfe43a6c62bda92110d1566c54a3897b",
+      "file": "sierra-video-fence-path-20261027-01/0x2def8.private.json",
+      "sha256": "134efdabeb56b30fc8d49c28d003952108e1a4a4e00d80c982eb3536d76b8ba0"
+    },
+    {
+      "REA": "ev_31188775ac188409c1679d8ee29fc960496e64ae3ccd70a9ea4bcea092716d28",
+      "file": "video-sierra-selectors-20261027-01/0x2e6d8.private.json",
+      "sha256": "4cea58c0dda16291709e0aef7febaf77999a36425dc046773b87d8c1861191ff"
+    },
+    {
+      "REA": "ev_63405699d0e72da770321c7d16abc6a5e7a87782cc37dc926f67eee412d21103",
+      "file": "video-sierra-provider-20261027-01/0x2e27c.private.json",
+      "sha256": "0d030d0040bf4c115aea1a0733f9880bbdef1014f394c6094f94bd26a10c2a8d"
+    }
+  ],
+  "status": "PASS"
+}

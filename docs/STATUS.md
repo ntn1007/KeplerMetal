@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+A synthetic video-provider probe reaches a locally refused `0x103` request after fabricated configuration. No real selector or video decoding is proved. [Evidence](VIDEO_SYNTHETIC_SELECTOR.md).
+
 A guarded synthetic legacy-provider probe reaches a device-configuration dependency. One earlier attempt crashed before the added guard; hardware video remains unproved. [Evidence](VIDEO_SYNTHETIC_CONFIG.md).
 
 The pinned 10.12.6 video-provider selector table differs from the current kernel dispatch evidence. This is static only and does not prove a live selector refusal. [Evidence](VIDEO_PROVIDER_DISPATCH.md).
