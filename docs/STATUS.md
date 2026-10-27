@@ -1,5 +1,7 @@
 # Status, 2026-10-24
 
+A construction-only GTX/M1 comparison locates a missing typed render-pipeline encoder and compiler path. An offline transition planner is under development; no new GPU execution is claimed. [Observation, reproduction and limits](RENDER_PIPELINE_BOUNDARY.md).
+
 The dual root combines certified vertex transitions and indexed draw spans for one adapted shader. [Evidence and limits](COMBINED_INDEX_VERTEX.md).
 
 The typed vertex-buffer setter now resolves certified catalogue transitions on GPU using retained resource snapshots. The tested two-state, one-slot render path and negative controls are documented in [the scoped contract](VERTEX_BINDING_EXPERIMENT.md).

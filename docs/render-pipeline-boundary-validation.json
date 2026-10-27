@@ -1,0 +1,42 @@
+{
+  "status": "PASS_CONSTRUCTION_COMPARISON",
+  "dispatches": 0,
+  "gtx_signed_manifest_sha256": "ba2bcf6d717f1bf07a739e3cc28be1129a52347817cd24b9cb607663893786aa",
+  "reference_output_sha256": "4fc2401226ac3123f1e16ed7812cd7d753b71e78007f5b9b1faf62a73523f08a",
+  "shader_sha256": "e242a997da00a81045163aded92a39c7645229b7e5e20c925174ff231baf2333",
+  "gtx_encoder_bytes": 0,
+  "m1_encoder_bytes": 16,
+  "gtx_compute_pipeline_created": false,
+  "m1_compute_pipeline_created": true,
+  "reference_attestation": "SSH output; no signed host receipt or GPU dispatch",
+  "gtx_environment": {
+    "macOS": "26.7.1",
+    "build": "25G241",
+    "SDK": "26.2"
+  },
+  "reference_environment": {
+    "macOS": "27.2",
+    "build": "26B118",
+    "SDK": "27.0",
+    "architecture": "arm64"
+  },
+  "qualification": {
+    "gpu_dispatches": 0,
+    "adapter_integrated": false,
+    "gpu_execution_proved": false,
+    "gpu_performance_measured": false,
+    "system_modified": false
+  },
+  "plain_root_control": {
+    "status": "PASS_PLAIN_ROOT_CONSTRUCTION",
+    "dispatches": 0,
+    "ordinary_root_bytes": 16,
+    "compute_pipeline_created": true,
+    "gpu_execution_proved": false,
+    "signed_manifest_sha256": "ff83f0bf072c2ea3830fedfc608eb756152359fd1218b408b45a4995a511ae04"
+  },
+  "cpu_tests": {
+    "suite_passed": 346,
+    "planner_rerun_after_refinement": "PASS"
+  }
+}

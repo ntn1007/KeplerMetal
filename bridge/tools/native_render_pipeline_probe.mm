@@ -1,0 +1,30 @@
+// SPDX-License-Identifier: MIT
+// Construction-only native API observation. No interception or GPU submission.
+#import <Foundation/Foundation.h>
+#import <Metal/Metal.h>
+#import <objc/runtime.h>
+#import "KeplerGPUIdentity.h"
+#include <cstring>
+#include <cstdio>
+static void emit(id value){NSData*d=[NSJSONSerialization dataWithJSONObject:value options:NSJSONWritingPrettyPrinted error:nil];fwrite(d.bytes,1,d.length,stdout);puts("");}
+int main(int argc,char**argv){@autoreleasepool{@try{
+ if(argc!=3)return 1;id<MTLDevice>d=MTLCreateSystemDefaultDevice();NSDictionary*identity=KPKepler880MIdentity(d);if(!identity)return 2;
+ NSError*error=nil;id<MTLLibrary>graphics=[d newLibraryWithURL:[NSURL fileURLWithPath:@(argv[1])]error:&error];id<MTLLibrary>shader=[d newLibraryWithURL:[NSURL fileURLWithPath:@(argv[2])]error:&error];if(!graphics||!shader)return 3;
+ id<MTLFunction>vs=[graphics newFunctionWithName:@"vs_state"],fs=[graphics newFunctionWithName:@"fs_state"],f=[shader newFunctionWithName:@"probe_boundary"];if(!vs||!fs||!f)return 4;
+ NSMutableArray*pipelines=[NSMutableArray new];id<MTLRenderPipelineState>normal=nil,icbPipeline=nil;
+ for(NSNumber*icb in @[@NO,@YES]){NSMutableDictionary*r=[@{@"support_icb_requested":icb}mutableCopy];
+  @try{MTLRenderPipelineDescriptor*desc=[MTLRenderPipelineDescriptor new];desc.vertexFunction=vs;desc.fragmentFunction=fs;desc.colorAttachments[0].pixelFormat=MTLPixelFormatRGBA32Float;desc.supportIndirectCommandBuffers=icb.boolValue;error=nil;id<MTLRenderPipelineState>p=[d newRenderPipelineStateWithDescriptor:desc error:&error];r[@"created"]=@(p!=nil);r[@"error"]=error.description?:@"";
+   if(p){if(icb.boolValue)icbPipeline=p;else normal=p;r[@"class"]=NSStringFromClass(object_getClass(p));r[@"id_selector_present"]=@([p respondsToSelector:@selector(gpuResourceID)]);@try{MTLResourceID value=p.gpuResourceID;uint64_t word=0;static_assert(sizeof(value)==sizeof(word),"resource ID ABI");memcpy(&word,&value,sizeof word);r[@"id_returned"]=@YES;r[@"id_word"]=@(word);}@catch(NSException*x){r[@"id_returned"]=@NO;r[@"id_exception"]=x.reason?:x.name;}}
+  }@catch(NSException*x){r[@"exception"]=x.reason?:x.name;}[pipelines addObject:r];
+ }
+ if(!normal)return 5;
+ NSMutableDictionary*argument=[NSMutableDictionary new];@try{MTLArgumentDescriptor*desc=[MTLArgumentDescriptor argumentDescriptor];desc.index=0;desc.arrayLength=1;desc.access=MTLArgumentAccessReadOnly;desc.dataType=MTLDataTypeRenderPipeline;id<MTLArgumentEncoder>encoder=[d newArgumentEncoderWithArguments:@[desc]];argument[@"created"]=@(encoder!=nil);if(encoder){argument[@"length"]=@(encoder.encodedLength);argument[@"alignment"]=@(encoder.alignment);if(encoder.encodedLength&&encoder.encodedLength<=1024){id<MTLBuffer>root=[d newBufferWithLength:encoder.encodedLength+128 options:MTLResourceStorageModeShared];memset(root.contents,0xa5,root.length);[encoder setArgumentBuffer:root offset:64];[encoder setRenderPipelineState:normal atIndex:0];uint64_t word=0;memcpy(&word,(char*)root.contents+64,MIN(sizeof word,encoder.encodedLength));argument[@"encoded_word"]=@(word);BOOL guards=YES;for(NSUInteger i=0;i<64;i++)guards&=((unsigned char*)root.contents)[i]==0xa5&&((unsigned char*)root.contents)[64+encoder.encodedLength+i]==0xa5;argument[@"guards_intact"]=@(guards);}}} @catch(NSException*x){argument[@"exception"]=x.reason?:x.name;}
+ NSMutableArray*encodedPipelines=[NSMutableArray new];
+ for(NSNumber*icb in @[@NO,@YES]){NSMutableDictionary*r=[@{@"support_icb_requested":icb}mutableCopy];
+  @try{id<MTLRenderPipelineState>p=icb.boolValue?icbPipeline:normal;MTLArgumentDescriptor*desc=[MTLArgumentDescriptor argumentDescriptor];desc.index=0;desc.arrayLength=1;desc.access=MTLArgumentAccessReadOnly;desc.dataType=MTLDataTypeRenderPipeline;id<MTLArgumentEncoder>encoder=[d newArgumentEncoderWithArguments:@[desc]];r[@"pipeline_created"]=@(p!=nil);r[@"encoder_created"]=@(encoder!=nil);if(encoder){r[@"length"]=@(encoder.encodedLength);r[@"alignment"]=@(encoder.alignment);}if(p&&encoder&&encoder.encodedLength&&encoder.encodedLength<=1024){id<MTLBuffer>root=[d newBufferWithLength:encoder.encodedLength+128 options:MTLResourceStorageModeShared];memset(root.contents,0xa5,root.length);[encoder setArgumentBuffer:root offset:64];[encoder setRenderPipelineState:p atIndex:0];uint64_t word=0;memcpy(&word,(char*)root.contents+64,MIN(sizeof word,encoder.encodedLength));r[@"encoded_word"]=@(word);BOOL guards=YES;for(NSUInteger i=0;i<64;i++)guards&=((unsigned char*)root.contents)[i]==0xa5&&((unsigned char*)root.contents)[64+encoder.encodedLength+i]==0xa5;r[@"guards_intact"]=@(guards);}}
+  @catch(NSException*x){r[@"exception"]=x.reason?:x.name;}[encodedPipelines addObject:r];
+ }
+ NSMutableDictionary*function=[NSMutableDictionary new];@try{MTLArgument*reflection=nil;id<MTLArgumentEncoder>ae=[f newArgumentEncoderWithBufferIndex:0 reflection:&reflection];function[@"encoder_created"]=@(ae!=nil);if(ae){function[@"encoded_length"]=@(ae.encodedLength);function[@"alignment"]=@(ae.alignment);}if(reflection){function[@"reflection_type"]=@(reflection.bufferDataType);function[@"reflection_size"]=@(reflection.bufferDataSize);function[@"reflection_alignment"]=@(reflection.bufferAlignment);}}@catch(NSException*x){function[@"exception"]=x.reason?:x.name;}
+ NSMutableDictionary*compute=[NSMutableDictionary new];@try{error=nil;id<MTLComputePipelineState>p=[d newComputePipelineStateWithFunction:f error:&error];compute[@"created"]=@(p!=nil);compute[@"error"]=error.description?:@"";}@catch(NSException*x){compute[@"created"]=@NO;compute[@"exception"]=x.reason?:x.name;}
+ emit(@{@"device":d.name,@"registry_id":@(d.registryID),@"device_identity":identity,@"render_pipelines":pipelines,@"render_argument_descriptor":argument,@"encoded_pipelines":encodedPipelines,@"typed_function_encoder":function,@"typed_compute_pipeline":compute,@"GPU_command_buffers":@0,@"GPU_dispatches":@0,@"interposition":@NO});return 0;
+ }@catch(NSException*x){fprintf(stderr,"Objective-C error: %s\n",x.reason.UTF8String);return 9;}}}
