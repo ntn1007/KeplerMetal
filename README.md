@@ -21,6 +21,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+Two guarded processes created and released an empty real video-context wrapper attached to Metal’s GTX shared object; video decoding remains unproved. [Evidence](docs/METAL_VIDEO_CONTEXT.md).
+
 A process-local observer verifies the device-to-shared object link created naturally by Metal on the GTX; lifetime and video use remain unqualified. [Evidence](docs/METAL_SHARED_OBJECT.md).
 
 A synthetic legacy-video initialization probe uses observed device words and checks an ordered locally intercepted selector sequence; hardware decoding remains unproved. [Evidence](docs/VIDEO_SYNTHETIC_SEQUENCE.md).

@@ -1,0 +1,60 @@
+{
+  "application_SHA256": "06e556a36c2cc43c654a8ead2ca7610f66e69bc90e3937af77449b32b753b40d",
+  "config_repetitions": 2,
+  "configuration_words": [
+    768,
+    0,
+    0,
+    0,
+    1
+  ],
+  "explicit_GPU_dispatches": 0,
+  "hardware_video_execution_proved": false,
+  "hosts": 4,
+  "limits": [
+    "The empty context and accepted association do not establish usable resources or decoder compatibility.",
+    "The cooperative reservation does not exclude WindowServer or unrelated processes.",
+    "Only empty contexts and immediate release are covered; resource-bearing lifetime and concurrency remain untested.",
+    "Guarded IOKit calls cover pinned framework imports on the probe thread, not all driver or process activity."
+  ],
+  "negative_controls_rejected": [
+    "changed-output",
+    "type-mismatch",
+    "control-called-config",
+    "unterminated-reservation",
+    "shared-device-mismatch",
+    "association-failed",
+    "selector-attempt"
+  ],
+  "nonoverlapping": true,
+  "observer_SHA256": "6d9e207a7203d53618051ec4f7bbe2805546a25611a2c838098e1437d9c5167d",
+  "real_video_context_observations": 2,
+  "rows": [
+    {
+      "manifest_SHA256": "9995c1160ac878528d914285d2dddfab9445d923ad1817ce4f8cc9d602abaaf6",
+      "mode": "observe",
+      "pid": 90890,
+      "result_SHA256": "3abd8e2edbd7d329cc3c975f20ea76b83a6a62ce4d257054636c85d9b39416ea"
+    },
+    {
+      "manifest_SHA256": "97e2c075c24918b3ec3fbf5186c818df4aa5baa4df3c2e1899b2216e2f39faf4",
+      "mode": "context",
+      "pid": 90911,
+      "result_SHA256": "513d4a9fff6c3c315909d118f5cdde9fd8314ce61ea0c5f3f54048271cd031cf"
+    },
+    {
+      "manifest_SHA256": "c1c1f5c22cfe3e40ef1034e1ed334aaa0e2f78c48d8a531ca576b0fb4daf85c5",
+      "mode": "observe",
+      "pid": 90941,
+      "result_SHA256": "aa4854cfe2d4edfdc75c92de3e42760331cce453ad7c72f35ed6eb67e9ed7625"
+    },
+    {
+      "manifest_SHA256": "4a018d4e3c8f2364f39174ac76f4f1fc439a6a2764ea35cec91b7d7a273f5e5c",
+      "mode": "context",
+      "pid": 90962,
+      "result_SHA256": "31aa55749430bd45b4dba18ab583cc07465eac87251112f582b62891f6dcc64e"
+    }
+  ],
+  "shared_device_observations": 4,
+  "status": "PASS"
+}

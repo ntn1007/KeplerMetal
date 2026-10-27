@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+Two guarded processes create, associate and immediately release an empty video-context wrapper from Metal’s real shared object. No video resource or decode is established. [Evidence](METAL_VIDEO_CONTEXT.md).
+
 Four Metal processes show the same real device/shared object relationship; retention and video use remain unqualified. [Evidence](METAL_SHARED_OBJECT.md).
 
 A synthetic legacy-provider initialization probe uses the observed GTX device words and validates an ordered local selector guard. Actual video dispatch remains unqualified. [Evidence](VIDEO_SYNTHETIC_SEQUENCE.md).
