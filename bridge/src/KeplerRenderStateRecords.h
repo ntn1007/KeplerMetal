@@ -9,6 +9,8 @@ typedef uint64_t KPRenderStateIdentity;
 // Catalogue identities are process-local project tokens, never native PSO IDs.
 #define KP_RENDER_STATE_COMMAND_MAGIC 0x4b505353u
 #define KP_RENDER_STATE_COMMAND_BYTES 64u
+#define KP_RENDER_STATE_SOURCE_LIMIT 8u
+#define KP_RENDER_STATE_SEQUENCE_LIMIT 16u
 #define KP_RENDER_STATE_ID_TAG 0x4b50535200000000ul
 struct KPRenderStateCommandRecord {
     unsigned int magic,kind,arguments[5],reserved0;

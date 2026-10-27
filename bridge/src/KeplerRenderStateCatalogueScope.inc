@@ -34,12 +34,12 @@
 }
 - (KPRenderStateCatalogue*)newRenderStateCatalogueWithCommands:(id<MTLIndirectCommandBuffer>)commands alternatives:(NSArray*)alternatives error:(NSError**)error {
     if(_restored||!_renderEngine||![commands isKindOfClass:KPRenderICB.class]||
-       ((KPRenderICB*)commands).scope!=self||![alternatives isKindOfClass:NSArray.class]||alternatives.count>3){
+       ((KPRenderICB*)commands).scope!=self||![alternatives isKindOfClass:NSArray.class]||alternatives.count>=KP_RENDER_STATE_SOURCE_LIMIT){
         fail(error,@"Render catalogue sources/scope differ");return nil;
     }
     NSMutableArray *buffers=[NSMutableArray arrayWithObject:commands];[buffers addObjectsFromArray:alternatives];
     NSUInteger slots=((KPRenderICB*)commands).size,states=buffers.count;
-    if(!slots||slots*states>16){fail(error,@"Render catalogue exceeds native sequence capacity");return nil;}
+    if(!slots||slots*states>KP_RENDER_STATE_SEQUENCE_LIMIT){fail(error,@"Render catalogue exceeds native sequence capacity");return nil;}
     NSMutableArray *sources=[NSMutableArray new];
     for(NSUInteger state=0;state<states;state++){
         id value=buffers[state];

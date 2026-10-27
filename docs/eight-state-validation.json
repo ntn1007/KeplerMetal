@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-27",
+  "base_commit": "888c789db6b7bd9aa7ded9d3232a77447473def8",
+  "macOS": "26.7.1 (25G241)",
+  "xcode": "26.3 (17C529)",
+  "macOS_SDK": "26.2",
+  "GPU": "NVIDIA GeForce GTX 880M, PCI 10de:1198",
+  "audit": {
+    "status": "PASS",
+    "eight_state_hosts": 19,
+    "sixteen_candidate_hosts": 9,
+    "same_runtime_regression_hosts": 4,
+    "serialized_hosts": 32,
+    "eight_state_float_channels": 233472,
+    "sixteen_float_channels": 110592,
+    "texture_float_channels": 344064,
+    "sixteen_candidate_witnesses": 144,
+    "eight_distinct_images": true,
+    "native_image_pairs": 13,
+    "maximum_cpu_error": 0.0,
+    "runtime_sha256": "773de4ccae1c413f42204087c9e1da67f62a5defa2ed307b9fc3a3752185c602",
+    "scope": "adapted client; no transparent Metal, combined quad GPU execution or performance claim"
+  },
+  "audit_sha256": "8a400ef351db32cd4246c74e16fa70f704e5743c0f2ac2246dac859f1cdcb54e",
+  "CPU_tests": 366,
+  "source_export_CPU_tests": 366,
+  "source_export_tree": "50be81bdf57b895a7875148a96d27996a1f41504",
+  "eight_host_sha256": "01abf133b3d6ca5138c6718da7ce4b4c5ba086d1899ea08178d63f171d5bfb6b",
+  "source_eight_host_sha256": "01abf133b3d6ca5138c6718da7ce4b4c5ba086d1899ea08178d63f171d5bfb6b",
+  "sixteen_host_sha256": "aa889c256a9f2584e8d2437a16eb24dcdba641ac80b0069943889c9ee66baa87",
+  "source_sixteen_host_sha256": "aa889c256a9f2584e8d2437a16eb24dcdba641ac80b0069943889c9ee66baa87",
+  "source_export_gpu_hosts": 2,
+  "source_export_images_match": true,
+  "35_final_hosts_including_inspection_and_source_nonoverlapping": true,
+  "quad_construction_only": {
+    "profile": "typed-quad-render-air28-experiment-v1",
+    "lowered_library_sha256": "786c24a8ddb6ce9aedceddcd76085e0cfafa0810f3b608bee58858e4b583fddf",
+    "native_code_sha256": "9ca056a42cbf281758be91417fb177ca9144866189dafba7021c9b7c1c6f0124",
+    "native_code_bytes": 19392,
+    "driver_sha256": "e240d54a4cd64b7e54fbc15250de82e88451132e1d9f3a4f9879607c8b0e7645",
+    "envydis_sha256": "1c8730a9a4861f374c58407bff31d7ccb47a57eb23f9f82c6b3ea3deb079be0f",
+    "unresolved_native_calls": false,
+    "source_export_lowered_sha256": "786c24a8ddb6ce9aedceddcd76085e0cfafa0810f3b608bee58858e4b583fddf",
+    "GPU_dispatches": 0
+  },
+  "limits": [
+    "Opt-in adapted process only; no native Apple ICB ABI.",
+    "Eight-state test dispatches one fragment selector; 16-candidate test CPU-seeds identities.",
+    "Quad shader inspected only; no combined GPU dispatch.",
+    "No transparent Metal support or performance claim."
+  ]
+}

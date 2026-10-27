@@ -5,9 +5,9 @@ static std::atomic<bool> renderStateIdentityExhausted{false};
 
 NSArray *liveRenderCatalogueSources(KPRenderStateCatalogue *catalogue,KPCPUICBScope *scope,NSError **error){
     if(object_getClass(catalogue)!=KPRenderStateCatalogue.class||catalogue.scope!=scope||scope.restored||
-       !catalogue.logicalCommandCount||!catalogue.sources.count||catalogue.sources.count>4||
+       !catalogue.logicalCommandCount||!catalogue.sources.count||catalogue.sources.count>KP_RENDER_STATE_SOURCE_LIMIT||
        catalogue.sources.count!=catalogue.stateIdentifiers.count||
-       catalogue.logicalCommandCount*catalogue.sources.count>16||
+       catalogue.logicalCommandCount*catalogue.sources.count>KP_RENDER_STATE_SEQUENCE_LIMIT||
        catalogue.records.count!=catalogue.logicalCommandCount*catalogue.sources.count||
        catalogue.templates.length!=catalogue.records.count*sizeof(KPRenderStateTemplate)){
         fail(error,@"Render catalogue scope/capacity differs");return nil;

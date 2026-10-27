@@ -19,6 +19,8 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
+The adapted render catalogue now supports eight certified states and sixteen flattened candidates. GPU witnesses and native images qualify the expanded path; the four-operation combined shader is construction-only. [Evidence and limits](docs/EIGHT_STATE_CATALOGUE.md).
+
 A scoped typed fragment-buffer selector now switches genuine Metal texture argument resources in an adapted GTX client. [Contract and evidence](docs/FRAGMENT_BINDING_EXPERIMENT.md).
 
 A scoped adapted client now combines pipeline selection, vertex-buffer changes and 16/32-bit indexed draws in one producer. [Contract, tests and limitations](docs/TRIPLE_RENDER.md).
