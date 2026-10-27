@@ -1,0 +1,85 @@
+{
+  "archive_SHA256": "be5cb1ed54db899107bda0fdd57177692564ab6334a8dae257752de17eca1421",
+  "audit_source_SHA256": "ee606a4667cd75ac88dbcac235bfe0db45e0275d6dcd769e07f69acecde169e1",
+  "bootstrap_SHA256": "0f4645aeed5ec4a96d0f3d7abfa16bd329c50d552f998436c660b3b90a81f283",
+  "build_inputs_SHA256": "f82fb7bdd616a9c6dcf4c2a010bdc8bd157b396dd8e406aff1dcbcd43ad67175",
+  "client_SHA256": "78f3536673897f01913e6133306160d822439990bc7d80646b7c2e19beeda2ed",
+  "client_imports_project_symbols": false,
+  "corrected_and_control_CAS_operations": 71100,
+  "host_processes": 10,
+  "installed_driver_modified": false,
+  "mutation_audit_source_SHA256": "eea9b2669dabfa06573225180c12a74f9ed513089e80821c3902c4360df1cd08",
+  "mutation_checks": {
+    "duplicate-dispatch": "EXPECTED_REFUSAL",
+    "factory": "EXPECTED_REFUSAL",
+    "import-proof": "EXPECTED_REFUSAL",
+    "pixel": "EXPECTED_REFUSAL",
+    "reservation": "EXPECTED_REFUSAL",
+    "trace": "EXPECTED_REFUSAL",
+    "unchanged": "PASS"
+  },
+  "native_defect_words": 56808,
+  "native_dispatches": 60,
+  "negative_controls": [
+    "wrong-client",
+    "wrong-cert",
+    "wrong-library",
+    "optin-reflection"
+  ],
+  "nonoverlapping": true,
+  "optin_dispatches": 60,
+  "rows": [
+    {
+      "manifest_SHA256": "70784c9ca7f1c772a82a0d530ef5139688ab14075826f86c46cfe576b94610f7",
+      "mode": "native-option",
+      "verification_SHA256": "80ed2b09804a1792c615ce1daf25c8ca4416b67e58eda8b43e9bed317f33f327"
+    },
+    {
+      "manifest_SHA256": "a4f0934525392d6e8b582ed220c110cb484f1b7821f0c3ece6dbd5e05f63129a",
+      "mode": "optin-option",
+      "verification_SHA256": "0b69f6dea23c6bf10ec9d6e83386837558fc1e4edcc8e208a0057caf6c804d78"
+    },
+    {
+      "manifest_SHA256": "7ecbee685fd4663b41b4f5e51ea504cc281addc0d42d4fc8a79438448c06bc23",
+      "mode": "optin-reflection",
+      "verification_SHA256": "02641955318157370b46686001f714ff23a3af36913f82980be64801dca0e702"
+    },
+    {
+      "manifest_SHA256": "111b6a93370fb98be7c3fc64d2e2b8795cbe77d99c28dbf6924245e2ed83bbe4",
+      "mode": "native",
+      "verification_SHA256": "3c8afc4104b44c7d6e8fadede68d88cd3bb2eddfa16320ccef486b0da095c509"
+    },
+    {
+      "manifest_SHA256": "7e175211679c84a26fc19318eff41b42777a1990d8f47435a74b9c8f74281f24",
+      "mode": "optin",
+      "verification_SHA256": "a0f6e2d48ba95844e788adb233e4f22479441b3b3422bae3f64fa9e1d2028e66"
+    },
+    {
+      "manifest_SHA256": "8e7fa5763578eb7e49859205e5ac588c0283dc2edc1fa7d620d5ce0cc568b128",
+      "mode": "native-option",
+      "verification_SHA256": "80ed2b09804a1792c615ce1daf25c8ca4416b67e58eda8b43e9bed317f33f327"
+    },
+    {
+      "manifest_SHA256": "2868da1412a7ab56de3c4e21d086da0d381d3caabf32da6ffec77ff0ade1b36b",
+      "mode": "optin-option",
+      "verification_SHA256": "0b69f6dea23c6bf10ec9d6e83386837558fc1e4edcc8e208a0057caf6c804d78"
+    },
+    {
+      "manifest_SHA256": "eda349e4967d2864041414d0cd4106a6704acf78e5f70d5aed0266013c579433",
+      "mode": "wrong-library",
+      "verification_SHA256": "ea70b88adc72929ad48156ae6962b950c35013a229bcc6bff760de4c4e3863f9"
+    },
+    {
+      "manifest_SHA256": "01bb9ef0dfe2eaab58ad60dc90f0442dd1f2306247f69bc937a105686c21cfc6",
+      "mode": "wrong-client",
+      "verification_SHA256": "def1451a031fb7f7c4c4b893e121dc8725e0aaff0fad7f42a99833596be2588e"
+    },
+    {
+      "manifest_SHA256": "21a9a071027e4ba8811b4feff3f6f6cee31f91168fe546ee69706b075b30e6bc",
+      "mode": "wrong-cert",
+      "verification_SHA256": "c3a5f8ea7752ab00dc0fdf44f6203295f2b8808a0f8136b7f206a455e23a8ead"
+    }
+  ],
+  "scope": "One pinned purpose-built public-Metal client, options none and null reflection only; not arbitrary applications or system-wide integration",
+  "status": "PASS"
+}

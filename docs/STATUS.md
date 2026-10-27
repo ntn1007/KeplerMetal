@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+The scoped standalone CAS bootstrap now repairs its certified shaders through the public pipeline factory with zero options and null reflection. Two GTX comparisons and reflection/native regression controls pass; other options and transparent apps remain unqualified. [Evidence](STANDALONE_CAS_OPTIONS.md).
+
 An experimental C++ reply gate rejects a locally simulated short success before the native video wrapper constructs a resource, in two guarded processes. No real short response, video allocation or installed-driver fix is established. [Evidence](VIDEO_REPLY_GATE.md).
 
 A static video reply audit identifies a no-write NVIDIA private-tail function and a user-mode length-check gap on a hypothetical short successful reply. A CPU-only conservative bounds helper is tested; no real short reply, driver fix or video decode is established. [Evidence](VIDEO_REPLY_CONTRACT.md).
