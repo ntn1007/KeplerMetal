@@ -32,9 +32,9 @@ The same archive and client also passed one native and one repaired regression
 using the original simple factory. One opted-in options-factory run requested a
 reflection pointer: it stayed on the native path, produced the expected native
 CAS errors and emitted no repair event. This confirms the tested fallback, not
-correctness of the native CAS result. Three separate controls refused a changed
-client, certificate or library without dispatching a user shader; the foreign
-library control uses the simple factory. Nonzero options were not tested.
+correctness of the native CAS result. Changed-client and changed-certificate controls were refused before user
+dispatch. A foreign library stayed native without user dispatch; that control
+uses the simple factory. Nonzero options were not tested.
 
 The ten processes were terminal and nonoverlapping under the cooperative lab
 reservation. The [audit](standalone-cas-options-validation.json) rechecks

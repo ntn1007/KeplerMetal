@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+The scoped standalone CAS bootstrap now also supports the certified argument-and-buffer-type reflection option pair. Two GTX repairs and native comparisons pass, with selected argument reflection fields matching across four hosts; complete reflection and transparent integration remain unqualified. [Evidence](STANDALONE_CAS_REFLECTION.md).
+
 The scoped standalone CAS bootstrap now repairs its certified shaders through the public pipeline factory with zero options and null reflection. Two GTX comparisons and reflection/native regression controls pass; other options and transparent apps remain unqualified. [Evidence](STANDALONE_CAS_OPTIONS.md).
 
 An experimental C++ reply gate rejects a locally simulated short success before the native video wrapper constructs a resource, in two guarded processes. No real short response, video allocation or installed-driver fix is established. [Evidence](VIDEO_REPLY_GATE.md).
