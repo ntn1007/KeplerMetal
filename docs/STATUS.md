@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+The standalone opt-in bootstrap now serializes concurrent default-device initialization and reuses the same device for later calls. A pinned experimental client checks eight concurrent calls, one subsequent call, GPU output and refusal controls. Arbitrary applications and concurrent queue setup remain open. [Evidence](STANDALONE_ICB_MULTICALL.md).
+
 The opted-in partial-grid adapter can chain two different certified compute pipelines from the same pinned registration, including partial and uniform slots. GTX producer/consumer controls test order, reuse and the 16-launch boundary. Broader shaders, native Apple ICB and transparent integration remain open. [Contract and evidence](PARTIAL_ICB_DUAL_PIPELINE.md).
 
 Two isolated video-context witnesses correlate the owning process's registry entry with two mapped address ranges; both ranges cease to be covered after context close in these observations. This does not establish kernel-object destruction, fix the earlier explicit-unmap failure, or prove hardware video decoding. [Evidence and limits](VIDEO_OWNER_MAP.md).

@@ -1,0 +1,19 @@
+{
+  "bootstrap_source_SHA256": "73885cae79e3d18aaa21ec97f16cc32653c7061ab82b892e33ee3804aeaa008d",
+  "concurrent_calls_per_multicall_host": 8,
+  "hosts": 8,
+  "matching_RGBA32F_channels": 61440,
+  "negative_controls": [
+    "native-ICB-missing",
+    "unapproved-library",
+    "unapproved-client"
+  ],
+  "nonoverlapping": true,
+  "original_client_regression_hosts": 1,
+  "runtime_archive_SHA256": "1b5626d430f1eab01d5fdebcf1541346bbc60255fd1011471bd80d1a75b0cfef",
+  "scope": "one pinned client per build and one qualified library; no transparent system integration",
+  "status": "PASS",
+  "subsequent_call_on_approved_client": 1,
+  "successful_multicall_render_hosts": 4,
+  "wrong_client_calls_before_refusal": 8
+}

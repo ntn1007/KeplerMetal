@@ -39,11 +39,15 @@ about `dlsym` is needed for the supported test path.
 
 Limits: one command queue, one library, one pipeline, one draw, and a CPU-encoded
 ICB. The bootstrap has not been qualified for arbitrary pipeline descriptors,
-multiple queues, multi-threaded initialization, GPU-generated ICBs, independent
+multiple queues, concurrent queue initialization, GPU-generated ICBs, independent
 third-party clients or hardened applications. It substitutes a scoped pipeline;
 it does not repair the NVIDIA compiler, install a driver, add Metal 3/4 support,
 or demonstrate a speedup. The GPU reservation coordinates project hosts, not
 WindowServer or unrelated GPU clients.
+
+Repeated and concurrent default-device discovery is separately qualified in
+[the multi-call experiment](STANDALONE_ICB_MULTICALL.md); concurrent queue
+creation is still outside the tested scope.
 
 ## Reproduction on the qualified profile
 

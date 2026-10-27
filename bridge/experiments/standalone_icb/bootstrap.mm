@@ -11,6 +11,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <mutex>
 #ifndef KM_APPROVED_APP_SHA256
 #error Expected the hash of the signed experimental client
 #endif
@@ -45,13 +46,21 @@ static id<MTLRenderPipelineState> scopedNewPipeline(id self,SEL cmd,MTLRenderPip
 static bool add(Class c,Class parent,SEL selector,IMP imp){Method m=class_getInstanceMethod(parent,selector);return m&&class_addMethod(c,selector,imp,method_getTypeEncoding(m));}
 static id<MTLDevice> replacement(void) NS_RETURNS_RETAINED;
 static id<MTLDevice> replacement(void){fprintf(stderr,"KM_BOOT enter\n");@autoreleasepool{
- static BOOL active=NO;if(active){fprintf(stderr,"KM_BOOT recursive device discovery refused\n");return nil;}active=YES;
+ // Recursion is per-thread; simultaneous independent callers wait for the
+ // initial scope, then receive that same device. Failure stays fail-closed.
+ static std::mutex initializationMutex;static bool failed=false;static thread_local bool entered=false;
+ if(entered){fprintf(stderr,"KM_BOOT recursive device discovery refused\n");return nil;}
+ struct EntryGuard { bool &flag; explicit EntryGuard(bool &value):flag(value){flag=true;} ~EntryGuard(){flag=false;} } guard(entered);
+ std::lock_guard<std::mutex> lock(initializationMutex);
+ if(scopedDevice){fprintf(stderr,"KM_BOOT device reused\n");return scopedDevice;}
+ if(failed)return nil;
+ failed=true;
  uint32_t length=0;_NSGetExecutablePath(nullptr,&length);if(length==0||length>8192)return nil;char*name=(char*)calloc(length,1);if(!name)return nil;int got=_NSGetExecutablePath(name,&length);NSData*binary=got==0?[NSData dataWithContentsOfFile:@(name)]:nil;free(name);const char*path=getenv("KM_CARRIER_PATH");NSData*data=path?[NSData dataWithContentsOfFile:@(path)]:nil;
  if(![hash(binary)isEqual:appHash]||![hash(data)isEqual:carrierHash]){fprintf(stderr,"KM_BOOT identity refused\n");return nil;}
  NSArray<id<MTLDevice>>*devices=MTLCopyAllDevices();if(devices.count!=1||!KPKepler880MIdentity(devices[0])){fprintf(stderr,"KM_BOOT device count or identity refused\n");return nil;}id<MTLDevice>d=devices[0];fprintf(stderr,"KM_BOOT got single qualified device\n");
- NSError*error=nil;id<MTLCommandQueue>q=[d newCommandQueue];KPCPUICBScope*s=[KPCPUICBScope installRenderingOnDevice:d queue:q libraryData:data expectedSHA256:carrierHash error:&error];if(!s){fprintf(stderr,"KM_BOOT scope refused %s\n",error.description.UTF8String?:"");return d;}
+ NSError*error=nil;id<MTLCommandQueue>q=[d newCommandQueue];KPCPUICBScope*s=[KPCPUICBScope installRenderingOnDevice:d queue:q libraryData:data expectedSHA256:carrierHash error:&error];if(!s){fprintf(stderr,"KM_BOOT scope refused %s\n",error.description.UTF8String?:"");return nil;}
  Class dyn=object_getClass(d),base=class_getSuperclass(dyn);bool ok=add(dyn,base,@selector(newCommandQueue),(IMP)scopedNewQueue)&&add(dyn,base,@selector(newLibraryWithFile:error:),(IMP)scopedLibrary)&&add(dyn,base,@selector(newRenderPipelineStateWithDescriptor:error:),(IMP)scopedNewPipeline);
- if(!ok||![s enableAutomaticRenderEncoderFactoriesWithError:&error]){[s restore];fprintf(stderr,"KM_BOOT setup refused %s\n",error.description.UTF8String?:"");return d;}
+ if(!ok||![s enableAutomaticRenderEncoderFactoriesWithError:&error]){[s restore];fprintf(stderr,"KM_BOOT setup refused %s\n",error.description.UTF8String?:"");return nil;}
  scope=s;scopedDevice=d;scopedQueue=q;atexit(emitEvents);fprintf(stderr,"KM_BOOT enabled\n");return d;
 }}
 __attribute__((used)) static struct {const void*replacement;const void*replacee;} interpose[] __attribute__((section("__DATA,__interpose")))={{(const void*)replacement,(const void*)MTLCreateSystemDefaultDevice}};

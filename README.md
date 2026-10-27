@@ -21,6 +21,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+The opt-in standalone experiment now handles repeated and concurrent default-device requests while preserving its exact client and library pins. [Evidence and limits](docs/STANDALONE_ICB_MULTICALL.md).
+
 The bounded partial-grid adapter can sequence two distinct certified compute pipelines in one registered library. A GTX producer/consumer test checks the output and ordering; this is process-local support, not native Metal ICB or a system driver replacement. [Contract and reproduction](docs/PARTIAL_ICB_DUAL_PIPELINE.md).
 
 The bounded partial-grid project ICB now also executes a pinned read/write neighbor transform, with GPU results checked against a CPU oracle. [Evidence and limits](docs/PARTIAL_ICB_BUFFER_STENCIL.md).
