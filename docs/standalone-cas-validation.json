@@ -1,0 +1,20 @@
+{
+  "archive_SHA256": "be5cb1ed54db899107bda0fdd57177692564ab6334a8dae257752de17eca1421",
+  "bootstrap_SHA256": "b3b5336148d47821f0b06ba39b0a02719eff386c1f2efd33003f8fac3eaefbe2",
+  "client_SHA256": "f3639f4d7bab819d257b11bb139725029cb6fcd3974585261ad18140303d2a1a",
+  "client_imports_project_symbols": false,
+  "corrected_and_control_CAS_operations": 213300,
+  "host_processes": 7,
+  "installed_driver_modified": false,
+  "native_defect_words": 170424,
+  "native_dispatches": 180,
+  "negative_controls": [
+    "wrong-client",
+    "wrong-cert",
+    "wrong-library"
+  ],
+  "nonoverlapping": true,
+  "optin_dispatches": 180,
+  "scope": "One pinned purpose-built public-Metal client, explicit per-process loading; not arbitrary applications or system-wide integration",
+  "status": "PASS"
+}

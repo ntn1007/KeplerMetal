@@ -21,6 +21,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+An explicitly launched public-Metal test client now receives the qualified native CAS repair from a process-local bootstrap without linking KeplerMetal. [Evidence and limitations](docs/STANDALONE_CAS.md).
+
 The current-profile native CAS SDK now builds with regenerated decoder-checked certificates and a PCI-identified GTX client; two repaired runs and native defect controls have independent CPU oracles. [Evidence and limits](docs/CAS_SDK_REGENERATED.md).
 
 The native CAS diagnosis now requires complete instruction coverage and an exact pinned-decoder replay, preventing two demonstrated false acceptances from corrupted listings. [Evidence and remaining limits](docs/CAS_DISASSEMBLY_COVERAGE.md).
