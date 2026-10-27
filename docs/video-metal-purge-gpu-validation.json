@@ -1,0 +1,102 @@
+{
+  "GPU_execution_proved": true,
+  "audit": "PASS",
+  "build_inputs_SHA256": "29614cc9cace38add2a9f0dcfac79f8eaf91f3d399c2ddcb284fc8d69ef3a7a1",
+  "guard_bytes_compared": 896,
+  "metallib_SHA256": "d27701dd23eb1fdb618962f0356642e09d26e8931cf8ebe757292cf4b03a2032",
+  "native_GPU_trials": 3,
+  "negative_cpu_words_compared": 2097152,
+  "negative_no_dispatch_trials": 1,
+  "observations": [
+    {
+      "cpu_words_compared": 2097152,
+      "guard_bytes_compared": 128,
+      "manifest_SHA256": "f2536c03f6ef0e4a9b7bcf2f56dbc9e422175034ff529bd537e92cee943342a1",
+      "mode": "negative",
+      "negative_gpu_read_mismatches": 1048576,
+      "negative_gpu_write_mismatches": 1048576,
+      "outcome": "NEGATIVE_CONTROL_PASS",
+      "output_SHA256": "6ba9925b54f7f8fb4e30f2f030c25c576a6b6b58ebb79f6f576bbcdd3e4304e6",
+      "result_SHA256": "ce27f3a341c0f7ed1f0f378957d218283c4df4a4c835f55bfadae33da79101c4",
+      "target_SHA256": "e55eac808d9441ff6953270b9c36a433bc36a7727e53dd3a71ad1c3770b07773"
+    },
+    {
+      "cpu_words_compared": 2097152,
+      "guard_bytes_compared": 128,
+      "manifest_SHA256": "8eeebff24a5e77a4c5eb6fbb4255c52302b9fe015a320be9e64f94f3e2e4090f",
+      "mode": "native",
+      "negative_gpu_read_mismatches": 0,
+      "negative_gpu_write_mismatches": 0,
+      "outcome": "GPU_READ_WRITE_PASS",
+      "output_SHA256": "54428bb7aab7456c944760c9294e36a44b4402ee5819a1260fabafe584804ad7",
+      "result_SHA256": "9437ebe670d585b86fa7495b2e541f7d93b8e94b11df1d7595078b834adc0434",
+      "target_SHA256": "bd1a736e07e724c50a43816f15b9c2a1f810ae44a751ea0b95a84b47bc295d73"
+    },
+    {
+      "cpu_words_compared": 2097152,
+      "guard_bytes_compared": 128,
+      "manifest_SHA256": "037e93a0cdbd655b4131b1e462e196316041c8097fa11e4b9d9ab6d8d968eecf",
+      "mode": "purge",
+      "negative_gpu_read_mismatches": 0,
+      "negative_gpu_write_mismatches": 0,
+      "outcome": "GPU_READ_WRITE_PASS",
+      "output_SHA256": "54428bb7aab7456c944760c9294e36a44b4402ee5819a1260fabafe584804ad7",
+      "result_SHA256": "0f443b977886261e2da8d917d0873f8bb314ee9de2f1d5c31e0495dbe1185c18",
+      "target_SHA256": "bd1a736e07e724c50a43816f15b9c2a1f810ae44a751ea0b95a84b47bc295d73"
+    },
+    {
+      "cpu_words_compared": 2097152,
+      "guard_bytes_compared": 128,
+      "manifest_SHA256": "1a76929bb164d6ec7e77a010cff791a33aa808a3e5878f09ec565800d4f201e0",
+      "mode": "native",
+      "negative_gpu_read_mismatches": 0,
+      "negative_gpu_write_mismatches": 0,
+      "outcome": "GPU_READ_WRITE_PASS",
+      "output_SHA256": "54428bb7aab7456c944760c9294e36a44b4402ee5819a1260fabafe584804ad7",
+      "result_SHA256": "fbec0b1df9da8495bd255eedb987cec379e993ce0f0a34fe41cdade4f83ba32a",
+      "target_SHA256": "bd1a736e07e724c50a43816f15b9c2a1f810ae44a751ea0b95a84b47bc295d73"
+    },
+    {
+      "cpu_words_compared": 2097152,
+      "guard_bytes_compared": 128,
+      "manifest_SHA256": "ebe4d85637e090a9497a27d8b00a1046e83106212b8262133576115e4c84745f",
+      "mode": "purge",
+      "negative_gpu_read_mismatches": 0,
+      "negative_gpu_write_mismatches": 0,
+      "outcome": "GPU_READ_WRITE_PASS",
+      "output_SHA256": "54428bb7aab7456c944760c9294e36a44b4402ee5819a1260fabafe584804ad7",
+      "result_SHA256": "5f7f291e0031767939c832f7b420cb1dc414f668017a6fd00dfb7e238dbf320c",
+      "target_SHA256": "bd1a736e07e724c50a43816f15b9c2a1f810ae44a751ea0b95a84b47bc295d73"
+    },
+    {
+      "cpu_words_compared": 2097152,
+      "guard_bytes_compared": 128,
+      "manifest_SHA256": "9b27e33605451b9b6b0accc949efde02c75955fd4c90af4143ff5e64fe6aa301",
+      "mode": "native",
+      "negative_gpu_read_mismatches": 0,
+      "negative_gpu_write_mismatches": 0,
+      "outcome": "GPU_READ_WRITE_PASS",
+      "output_SHA256": "54428bb7aab7456c944760c9294e36a44b4402ee5819a1260fabafe584804ad7",
+      "result_SHA256": "13104dcd5436d5b36b707e9aa6beb7af45bd1759a28c8b071269f1506825fbe5",
+      "target_SHA256": "bd1a736e07e724c50a43816f15b9c2a1f810ae44a751ea0b95a84b47bc295d73"
+    },
+    {
+      "cpu_words_compared": 2097152,
+      "guard_bytes_compared": 128,
+      "manifest_SHA256": "ca2b5c82fa82a95b127bdb9d279818952ba4724407fd2317b37267eda2136016",
+      "mode": "purge",
+      "negative_gpu_read_mismatches": 0,
+      "negative_gpu_write_mismatches": 0,
+      "outcome": "GPU_READ_WRITE_PASS",
+      "output_SHA256": "54428bb7aab7456c944760c9294e36a44b4402ee5819a1260fabafe584804ad7",
+      "result_SHA256": "e2542805bc5219af4e13b9b709d7e4e0c514cedd360457c591f3461e2b251580",
+      "target_SHA256": "bd1a736e07e724c50a43816f15b9c2a1f810ae44a751ea0b95a84b47bc295d73"
+    }
+  ],
+  "physical_memory_reclaimed_proved": false,
+  "positive_cpu_words_compared": 12582912,
+  "post_purge_GPU_trials": 3,
+  "resource_id_correlation_proved": false,
+  "separate_processes": 7,
+  "video_execution_proved": false
+}

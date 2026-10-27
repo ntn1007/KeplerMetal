@@ -21,7 +21,7 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
-The existing Metal driver accepts a bounded 4 MiB buffer purge/restore sequence and passes CPU checks after restoration in three trials. The result does not establish memory reclamation or GPU access after purge. [Contract and evidence](docs/VIDEO_METAL_PURGE.md).
+The existing Metal driver passes three GPU read/write trials on a 4 MiB buffer after purge and restoration, with three native controls and a no-dispatch control. This does not establish memory reclamation or a speedup. [GPU contract and evidence](docs/VIDEO_METAL_PURGE_GPU.md) · [CPU-only observations](docs/VIDEO_METAL_PURGE.md).
 
 An opt-in scope can automatically adapt qualified ordinary render-encoder factories on its own queue. A separately compiled public-Metal client renders correctly; unsupported passes guard project ICBs. [Evidence and limits](docs/AUTOMATIC_RENDER_FACTORIES.md).
 
