@@ -9,7 +9,7 @@ def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 
 def verify(path):
     p=Path(path).resolve();i=read(p/'inputs.json');r=read(p/'results.json');m=read(p/'execution/manifest.json');lease=m['GPU_reservation'];mode=i['mode']
-    assert mode in ('inventory','wrong-target','control','buffer')
+    assert mode in ('inventory','wrong-target','control','buffer','baseline','warmed','large')
     assert r==read(p/'execution/execution.stdout') and m['exit_code']==0 and not m['SIGKILL_requested'] and not m['authoritative_ps_status']
     assert lease['state']=='terminal' and lease['exit_code']==0 and lease['child_PID']==m['pid'] and not lease['known_signed_processes_live']
     assert r['pid']==m['pid'] and r['uid']==r['euid']==i['user_UID']!=0
@@ -41,9 +41,16 @@ def verify(path):
             assert r['control_open_status']==r['control_close_status']==0 and r['control_connection'] and len(opens)==1
             assert any(e['kind']=='close' and e['port']==opens[0]['port'] and e['status']==0 for e in events)
             outcome='HOOK_CONTROLS_PASS'
-        else:
+        elif mode=='buffer':
             assert r['status']=='BUFFER_RELEASED' and r['metal_candidates']==1 and r['metal_registry_ID'] and r['metal_pci_registry_ID']==r['pci_registry_ID']
             assert r['buffer_created'] and r['cpu_bytes_correct'];outcome='BUFFER_CPU_PASS'
+        else:
+            assert r['status']=='WARM_COMPARISON_RECORDED' and r['metal_candidates']==1 and r['metal_registry_ID'] and r['metal_pci_registry_ID']==r['pci_registry_ID']
+            assert r['warm_created'] and isinstance(r['warm_weak_cleared'],bool) and isinstance(r['target_weak_cleared'],bool)
+            assert r['target_created']==(mode in ('warmed','large')) and r['cpu_bytes_correct']
+            assert r['target_length']==(0 if mode=='baseline' else 4096 if mode=='warmed' else 4*1024*1024)
+            if mode=='baseline':assert r['target_weak_cleared']
+            outcome='WARM_COMPARISON_PASS'
     opens=[e for e in events if e['kind']=='open' and e['service_registry_ID']==devices[0]['registry_ID'] and e['status']==0 and e['type_or_selector']==6]
     shared_ports={e['port'] for e in opens if e['port']}
     calls=[e for e in events if e['kind']=='method' and e['port'] in shared_ports and e['type_or_selector']==1]

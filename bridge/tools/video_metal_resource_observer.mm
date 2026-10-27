@@ -71,10 +71,10 @@ bool gpuAncestor(io_registry_entry_t entry,uint64_t *id){if(!entry||IOObjectReta
 }
 
 int main(int argc,char **argv){@autoreleasepool {
-    if(argc!=3||(strcmp(argv[1],"inventory")&&strcmp(argv[1],"control")&&strcmp(argv[1],"buffer")))return 2;
+    if(argc!=3||(strcmp(argv[1],"inventory")&&strcmp(argv[1],"control")&&strcmp(argv[1],"buffer")&&strcmp(argv[1],"baseline")&&strcmp(argv[1],"warmed")&&strcmp(argv[1],"large")))return 2;
     if(!argv[2][0]||strspn(argv[2],"0123456789")!=strlen(argv[2]))return 2;
     errno=0;char *end=nullptr;uint64_t target=strtoull(argv[2],&end,10);if(errno||!end||*end)return 2;
-    bool inv=!strcmp(argv[1],"inventory"),control=!strcmp(argv[1],"control"),buffer=!strcmp(argv[1],"buffer");
+    bool inv=!strcmp(argv[1],"inventory"),control=!strcmp(argv[1],"control"),buffer=!strcmp(argv[1],"buffer"),baseline=!strcmp(argv[1],"baseline"),warmed=!strcmp(argv[1],"warmed"),large=!strcmp(argv[1],"large");
     if(!inv&&!target)return 2;io_iterator_t it=IO_OBJECT_NULL;io_service_t selected=IO_OBJECT_NULL;
     kern_return_t matching=IOServiceGetMatchingServices(kIOMainPortDefault,IOServiceMatching("nvAccelerator"),&it);unsigned found=0,total=0;uint64_t pci=0;bool truncated=false;NSMutableArray *services=[NSMutableArray array];
     if(!matching){io_service_t svc;while((svc=IOIteratorNext(it))){if(++total>16){truncated=true;IOObjectRelease(svc);break;}io_name_t cls={};uint64_t rid=0,prid=0;kern_return_t cs=IOObjectGetClass(svc,cls),rs=IORegistryEntryGetRegistryEntryID(svc,&rid);bool gpu=gpuAncestor(svc,&prid);bool yes=!cs&&!rs&&!strcmp(cls,"nvAccelerator")&&gpu&&rid==target;[services addObject:@{@"class":@(cls),@"registry_ID":@(rid),@"pci_registry_ID":@(prid),@"class_status":@(cs),@"registry_status":@(rs),@"gpu_ancestor":@(gpu),@"candidate":@(yes)}];if(yes){found++;if(!selected){IOObjectRetain(svc);selected=svc;pci=prid;}}IOObjectRelease(svc);}IOObjectRelease(it);}
@@ -90,11 +90,30 @@ int main(int argc,char **argv){@autoreleasepool {
             r[@"control_open_status"]=@(o);r[@"control_connection"]=@(c!=IO_OBJECT_NULL);
             if(c)r[@"control_close_status"]=@(IOServiceClose(c));
             r[@"status"]=@"CONTROL_RECORDED";
-        } else if(buffer){
+        } else if(buffer||baseline||warmed||large){
             NSArray<id<MTLDevice>> *devices=MTLCopyAllDevices();id<MTLDevice> d=nil;unsigned hits=0;
             for(id<MTLDevice> x in devices){uint64_t mpci=0;io_service_t ms=IOServiceGetMatchingService(kIOMainPortDefault,IORegistryEntryIDMatching(x.registryID));bool same=ms&&gpuAncestor(ms,&mpci)&&mpci==pci;if(ms)IOObjectRelease(ms);if(same){d=x;hits++;r[@"metal_registry_ID"]=@(x.registryID);r[@"metal_pci_registry_ID"]=@(mpci);r[@"metal_name"]=x.name?:@"";}}
             r[@"metal_candidates"]=@(hits);
-            if(hits==1){
+            if(hits==1 && (baseline||warmed||large)){
+                __weak id<MTLBuffer> warmWeak=nil;
+                @autoreleasepool {
+                    KPPhase(2); __attribute__((objc_precise_lifetime)) id<MTLBuffer> warm=[d newBufferWithLength:4096 options:MTLResourceStorageModeShared];
+                    warmWeak=warm; r[@"warm_created"]=@(warm!=nil); KPPhase(3); warm=nil;
+                }
+                r[@"warm_weak_cleared"]=@(warmWeak==nil);
+                __weak id<MTLBuffer> targetWeak=nil;
+                @autoreleasepool {
+                    KPPhase(4); __attribute__((objc_precise_lifetime)) id<MTLBuffer> targetBuffer=nil;
+                    size_t size=large?4*1024*1024:4096;
+                    if(warmed||large) targetBuffer=[d newBufferWithLength:size options:MTLResourceStorageModeShared];
+                    r[@"target_length"]=@(targetBuffer?targetBuffer.length:0);
+                    targetWeak=targetBuffer; r[@"target_created"]=@(targetBuffer!=nil); KPPhase(5);
+                    bool correct=baseline || (targetBuffer&&targetBuffer.length==size&&targetBuffer.contents);
+                    if(!baseline&&correct){uint8_t *v=(uint8_t*)targetBuffer.contents;for(size_t i=0;i<size;i++)v[i]=(uint8_t)((i*13+7)&255);for(size_t i=0;i<size;i++)if(v[i]!=(uint8_t)((i*13+7)&255)){correct=false;break;}}
+                    r[@"cpu_bytes_correct"]=@(correct); KPPhase(6); targetBuffer=nil;
+                }
+                KPPhase(7);r[@"target_weak_cleared"]=@(targetWeak==nil);r[@"status"]=@"WARM_COMPARISON_RECORDED";
+            }else if(hits==1){
                 @autoreleasepool {
                     KPPhase(2);id<MTLBuffer> b=[d newBufferWithLength:4096 options:MTLResourceStorageModeShared];
                     r[@"buffer_created"]=@(b!=nil);bool correct=b&&b.length==4096&&b.contents;
@@ -103,6 +122,7 @@ int main(int argc,char **argv){@autoreleasepool {
                 }
                 KPPhase(4);r[@"status"]=@"BUFFER_RELEASED";
             }else r[@"status"]=@"METAL_DEVICE_NOT_QUALIFIED";
+            if(baseline||warmed||large)KPPhase(8);
             d=nil;devices=nil;
         }
         KPFinish();

@@ -17,7 +17,7 @@ The work follows two complementary tracks:
 
 [Français](README.fr.md) · [Build from source](docs/BUILDING.md) · [Dependencies](docs/DEPENDENCIES.md) · [Status](docs/STATUS.md) · [Architecture](docs/ARCHITECTURE.md)
 
-A process-local, calibrated observer now traces ordinary Metal resource creation through IOAccelerator on the GTX 880M. The observed allocations are not yet correlated to a specific public buffer, and deletion and GPU execution remain unproven. [Evidence and reproduction](docs/VIDEO_METAL_RESOURCE_OBSERVER.md).
+A calibrated, process-local observer compares ordinary Metal buffer allocations on the GTX 880M: a warmed 4 MiB target coincides with one additional IOAccelerator resource creation, while a 4 KiB target does not in the observed traces. Resource identity, deletion and GPU execution remain unproven. [Evidence and reproduction](docs/VIDEO_METAL_RESOURCE_OBSERVER.md).
 
 ## Recent progress
 

@@ -33,3 +33,34 @@ python3 bridge/tools/audit_video_metal_resource_observer.py "$LAB/results/resour
 ```
 
 `wrong-target` is a separate negative control: it must return `CONTROL_PASS` without opening a device. Its result is not part of the three-process audit. The audit rechecks recorded inputs, signatures, the exact target and completion order and rejects missing controls or missing observed creates. It doesn't replace the live tests or prove full trace coverage. GPU reservation coordinates participating lab runners; it does not provide exclusive system-wide access to the display GPU.
+
+## Warmed allocation comparison
+
+A subsequent seven-process cohort used one interception control and two repetitions of three variants. Each variant initializes the same qualified Metal device and creates and releases a 4 KiB warmup buffer. It then either creates no target (`baseline`), creates another 4 KiB buffer (`warmed`), or creates a 4 MiB buffer (`large`). Each nonempty target is CPU-written and checked in full; weak references are checked after explicit release and an autorelease-pool drain. All target references and warmup references cleared in the observed cases. That establishes the lifetime of the Objective-C objects, not the lifetime of the backing driver resources.
+
+| Target after warmup | Successful `IOAccelResourceCreate` completions during target creation | Observed selector-1 calls | Repetitions |
+| --- | ---: | ---: | ---: |
+| None | 0 | 0 | 2 |
+| 4 KiB | 0 | 0 | 2 |
+| 4 MiB | 1 | 0 | 2 |
+
+The warmup phase itself observed 11 successful creations per process. The 4 MiB observation is correlated with the target call's interval; recorded phases are assigned on return, so delayed or asynchronous calls cannot be excluded. The small-buffer result is consistent with internal reuse, but neither reuse nor allocation identity is established. The 4 MiB call's response bytes and resource ID were deliberately not recorded. No selector-1 event was observed before collection stopped; this does not prove a resource was not freed or is still allocated. The source invokes no private selector, submits no GPU work and cannot establish a GPU performance result.
+
+[Sanitized cohort audit](video-metal-warm-comparison-validation.json) records the frozen build, event counts and hashes of each retained result and execution manifest. The audit validates the target, distinct processes, serialized completion, observer calibration, signatures, a common frozen build and observed warmup creates. It does not assume that a negative observation means absence.
+
+To reproduce on the pinned profile, first build and run `inventory` as above, choose fresh names, and require the `control` to pass before proceeding. For example, with `LAB` and `RID` set as above:
+
+```sh
+for item in control:01 baseline:01 warmed:01 large:01 baseline:02 warmed:02 large:02; do
+  mode=${item%:*}
+  number=${item#*:}
+  python3 bridge/tools/video_metal_resource_observer.py run \
+    --build "$LAB/results/resource-build-new" \
+    --out "$LAB/results/compare-${mode}-${number}" \
+    --reservation-root "$LAB" --mode "$mode" --registry-id "$RID" || break
+done
+python3 bridge/tools/audit_video_metal_warm_comparison.py \
+  "$LAB/results/compare-control-01" \
+  "$LAB/results/compare-baseline-01" "$LAB/results/compare-warmed-01" "$LAB/results/compare-large-01" \
+  "$LAB/results/compare-baseline-02" "$LAB/results/compare-warmed-02" "$LAB/results/compare-large-02"
+```

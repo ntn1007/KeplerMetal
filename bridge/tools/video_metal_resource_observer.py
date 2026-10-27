@@ -70,7 +70,7 @@ def build(a):
 def run(a):
     build,out=a.build.resolve(),a.out.resolve();data=read(build/'inputs.json')
     if out.exists() or not out.parent.is_dir():raise ValueError('Fresh output path required')
-    if a.mode in ('control','buffer') and not (0<a.registry_id<2**64):raise ValueError('Fresh registry ID required')
+    if a.mode in ('control','buffer','baseline','warmed','large') and not (0<a.registry_id<2**64):raise ValueError('Fresh registry ID required')
     for name,digest in data['frozen'].items():
         if sha(build/name)!=digest:raise ValueError('Frozen input changed: '+name)
     if sha(build/'application')!=data['executable_SHA256']:raise ValueError('Executable changed')
@@ -99,4 +99,4 @@ if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);sub=p.add_subparsers(required=True);b=sub.add_parser('build');b.add_argument('--out',type=Path,required=True);b.set_defaults(func=build)
     r=sub.add_parser('run')
     for n in ('build','out','reservation-root'):r.add_argument('--'+n,type=Path,required=True)
-    r.add_argument('--mode',choices=['inventory','wrong-target','control','buffer'],required=True);r.add_argument('--registry-id',type=int,default=0);r.set_defaults(func=run);a=p.parse_args();a.func(a)
+    r.add_argument('--mode',choices=['inventory','wrong-target','control','buffer','baseline','warmed','large'],required=True);r.add_argument('--registry-id',type=int,default=0);r.set_defaults(func=run);a=p.parse_args();a.func(a)
