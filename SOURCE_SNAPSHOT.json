@@ -1373,9 +1373,10 @@
       "path": "bridge/tools/cpu_icb_grid3d_probe.mm",
       "source_path": "bridge/tools/cpu_icb_grid3d_probe.mm",
       "source_SHA256": "8a3801e73714b775a7f223ae1f5cb779fcf68cfae63a2e878e52c4fbe13e91d7",
-      "published_SHA256": "8a3801e73714b775a7f223ae1f5cb779fcf68cfae63a2e878e52c4fbe13e91d7",
-      "bytes": 10044,
-      "modified_for_publication": false
+      "published_SHA256": "77756e60f7fbbea48aedcb5aab4db0bcc67a73238666b6ce1e31bc5f26a083f8",
+      "bytes": 11193,
+      "modified_for_publication": true,
+      "previous_published_SHA256": "8a3801e73714b775a7f223ae1f5cb779fcf68cfae63a2e878e52c4fbe13e91d7"
     },
     {
       "path": "bridge/tools/cpu_icb_indexed_probe.mm",
@@ -7482,8 +7483,8 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "0534d9170d2893296a10784f82b7c0ee95ada2ae0e93e0ee3a823e210e35f519",
-  "previous_public_commit": "7791989a3584cd54a6e6d6ffec8f2059bf0dd9a4",
+  "previous_source_snapshot_SHA256": "2a0100005442fec6c9e4e2233be766dbe302a4f88657f39977868d0f85d2ea04",
+  "previous_public_commit": "e147fbdbbbec8eb6b48019d4b5b0f1f88124b992",
   "update": {
     "date": "2026-10-27",
     "reason": "Combined indexed, vertex and pipeline render context",
@@ -7492,5 +7493,5 @@
     ]
   },
   "update_date": "2026-10-27",
-  "update_reason": "Add aligned thread-grid dispatch to the scoped CPU ICB and keep partial-grid refusal controls."
+  "update_reason": "Qualify aligned 2D and 3D ICB thread grids against native group dispatch."
 }

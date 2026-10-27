@@ -1,0 +1,111 @@
+{
+  "GPU_execution_proved": true,
+  "audit": "PASS",
+  "build_inputs_SHA256": "fc03bf9248c64be4a7e060ac9ba2beaf8cdcb8faeb0bc50364c8c67cb78bcb26",
+  "library_SHA256": "5c35418c2465d1fa87396419c165ac33b5005937e8623fc40329fef30be99de0",
+  "manifest_SHA256": "fa081fc43d24d54873d069006f9581f6b73b631f505ed9b854cb3429107ec4f3",
+  "native_command_stream_files_verified": 44,
+  "negative_api_cases": 64,
+  "nonempty_native_streams_decoded_not_compared": 38,
+  "observations": [
+    {
+      "GPU_invocations_counted": 0,
+      "GPU_user_submissions": 0,
+      "correct_uint32_words": 0,
+      "dimension_rejection_controls": 8,
+      "form": "groups",
+      "manifest_SHA256": "bd2e9afcc8dd2f75e480a9a1594f03d9fc898ba295d1dd0ff1ebfb4f82234b48",
+      "mode": "prepare",
+      "raw_files_verified": 37,
+      "result_SHA256": "b36bd8bc468f76ce96679b6651276fe1577fc90b1927604bfb815191eebea3cb"
+    },
+    {
+      "GPU_invocations_counted": 0,
+      "GPU_user_submissions": 0,
+      "correct_uint32_words": 0,
+      "dimension_rejection_controls": 8,
+      "form": "threads",
+      "manifest_SHA256": "f175a6edbbd97c51b4da6c4e9938600bc382861f02964ca23745de13b93549a2",
+      "mode": "prepare",
+      "raw_files_verified": 37,
+      "result_SHA256": "d0affb49e0776bd89aea1f82318ad76db3a3d09c6d1a316e5ed10ac0242b8fdc"
+    },
+    {
+      "GPU_invocations_counted": 18632,
+      "GPU_user_submissions": 7,
+      "correct_uint32_words": 149056,
+      "dimension_rejection_controls": 8,
+      "form": "groups",
+      "manifest_SHA256": "f022d1bb77e191d8cbfa8b218c4a4264274ad5f442f5f2647971e5c22728ac01",
+      "mode": "execute",
+      "raw_files_verified": 187,
+      "result_SHA256": "26da3000785d26f9b83972fbc522f1a73f2922d33b41ecebaaaba10017d4d5d7"
+    },
+    {
+      "GPU_invocations_counted": 18632,
+      "GPU_user_submissions": 7,
+      "correct_uint32_words": 149056,
+      "dimension_rejection_controls": 8,
+      "form": "threads",
+      "manifest_SHA256": "99359466f75bb5eb2af3d013abf16e75dbf62eebebcca9758dfec0ba67e0bc40",
+      "mode": "execute",
+      "raw_files_verified": 187,
+      "result_SHA256": "3dedb699aefae9b1153c0672d040bb2be5312e0f10647d6dd115e92fce8b46d6"
+    },
+    {
+      "GPU_invocations_counted": 18632,
+      "GPU_user_submissions": 7,
+      "correct_uint32_words": 149056,
+      "dimension_rejection_controls": 8,
+      "form": "groups",
+      "manifest_SHA256": "57836ed568aba58616d7ba1efbb6f9285d4fe5c289d55f45ae6dbcf33d811fa5",
+      "mode": "execute",
+      "raw_files_verified": 187,
+      "result_SHA256": "ee98a5700c7dcf115dea003dfe433f631294f0990a8356d499acefc18eb3c8b1"
+    },
+    {
+      "GPU_invocations_counted": 18632,
+      "GPU_user_submissions": 7,
+      "correct_uint32_words": 149056,
+      "dimension_rejection_controls": 8,
+      "form": "threads",
+      "manifest_SHA256": "56cbe67165bb169108401f1833a21bf7926cb45466a889b6a63fc528033a1022",
+      "mode": "execute",
+      "raw_files_verified": 187,
+      "result_SHA256": "8dc466f10f585e1d38cec1bc2fd0d97aae9edd1f11c234ddd68c7c392a08bd06"
+    },
+    {
+      "GPU_invocations_counted": 18632,
+      "GPU_user_submissions": 7,
+      "correct_uint32_words": 149056,
+      "dimension_rejection_controls": 8,
+      "form": "groups",
+      "manifest_SHA256": "8a751d3d2cb54d0b844f0dd00f3572ab79eb08c58edc1fec5e3d81efd2c17bc8",
+      "mode": "execute",
+      "raw_files_verified": 187,
+      "result_SHA256": "fb477bccbed371b00a8126807352b76855fe1c8eb4578e13079d61f0fa571d8f"
+    },
+    {
+      "GPU_invocations_counted": 18632,
+      "GPU_user_submissions": 7,
+      "correct_uint32_words": 149056,
+      "dimension_rejection_controls": 8,
+      "form": "threads",
+      "manifest_SHA256": "d6756e040c10b6b5cb08e8e580fec3cc06985cec5ae36f7c72682a5959513b99",
+      "mode": "execute",
+      "raw_files_verified": 187,
+      "result_SHA256": "8402fa06744de85404852eebd7d62b55e373c047ad0c8985f66d0ce86228844d"
+    }
+  ],
+  "paired_data_files_identical": 540,
+  "partial_threadgroups_supported": false,
+  "positive_uint32_words": 894336,
+  "preparation_hosts": 2,
+  "runtime_archive_SHA256": "42e3c6c396c86c97e7a29c1866b6cca1e716d8e775da77d17c5a71ce5d3fc87a",
+  "separate_processes": 8,
+  "system_modified": false,
+  "transparent_application_integration": false,
+  "user_GPU_execute_hosts": 6,
+  "user_GPU_invocations": 111792,
+  "user_command_buffers": 42
+}

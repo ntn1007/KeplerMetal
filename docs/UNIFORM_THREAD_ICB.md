@@ -22,9 +22,36 @@ A new seven-object archive was built from the current public source; its SHA-256
 
 Three pairs of fresh processes then encoded the same registered `consume_grid` commands by threadgroups or by uniform threads. Across the six hosts, 42 user command buffers completed, 26,376 GPU invocations were counted, and 105,504 uint32 values matched an independent CPU oracle. Each pair had 64 byte-identical output/counter captures, including pre-execution files: 192 paired files total. The captures cover ranges, reset, CPU snapshot-copy, command reuse, local sizes 32/33/128, and one-dimensional group counts 1/3/5. There were 43,008 explicitly counted guard bytes and 72 negative API case observations including preparation hosts. These are repeated bounded tests, not 72 distinct features.
 
-A CPU-only test invokes the actual compiled adapter method via a test subclass that records its forwarded group counts. It checks one 3D divisible conversion, a maximum-integer divided case, and nine zero/partial refusals without GPU work. This checks conversion only; **3D GPU execution through the new selector was not run**. The GPU cohort used one pinned native function/pipeline, serial execution and one process-local scope. It does not qualify all registered shaders, native Apple ICB identity, GPU-generated ICB, concurrent execution, every Metal selector, partial groups or transparent integration. No performance comparison is claimed.
+A CPU-only test invokes the actual compiled adapter method via a test subclass that records its forwarded group counts. It checks one 3D divisible conversion, a maximum-integer divided case, and nine zero/partial refusals without GPU work. This CPU test checks conversion only. A separate GPU cohort described below now covers bounded 2D/3D execution. The initial 1D GPU cohort used one pinned native function/pipeline, serial execution and one process-local scope. It does not qualify all registered shaders, native Apple ICB identity, GPU-generated ICB, concurrent execution, every Metal selector, partial groups or transparent integration. No performance comparison is claimed.
 
 The audit reruns the raw-output CPU oracle, verifies signed hosts and frozen sources, checks identical build/profile identity and serialized process completion, and compares each pair's raw hashes. It stores source and binary fingerprints only; original system binaries and raw native GPU captures remain local. The previous refusal tests in the repository now use `33` threads with a group of `32`, so they still exercise a truly partial group instead of an aligned grid.
+
+## Bounded 2D and 3D GPU qualification
+
+A second, independent eight-process cohort used the **same unchanged seven-object archive** and the separately pinned `grid_coordinates` Metal library and registration manifest. Two preparation processes covered the group and thread selectors; six execution processes formed three group/thread pairs. The test includes 2D and 3D grids, a 1,024-thread local group, a local depth of 64, range selection, reshape, reset and CPU snapshot-copy. The GPU writes global, local and group coordinates, group dimensions and local dimensions; an independent CPU oracle checks every value and invocation counter.
+
+Across 42 completed user command buffers, **111,792 GPU invocations** and **894,336 uint32 values** matched the CPU oracle. Each pair produced 180 identical data/counter files, or **540 matched files** total. Eight dimension-refusal cases per process, including a partial dimension on each axis, gave 64 expected observations across the cohort. Preparation may submit native NOP/blit work, but its main user buffer stays uncommitted.
+
+The verifier checks 44 captured command-stream files, decodes the 38 nonempty streams, checks relocated descriptor addresses against each process's own records, and verifies QMD and built-in XYZ geometry. It does **not** require command-stream hashes to match across processes: their GPU addresses can differ. The [separate audit](uniform-icb-3d-validation.json) checks those individual streams and compares only corresponding data files. This qualifies the pinned `grid_coordinates` profile and tested serial geometry, not arbitrary 3D kernels or partial threadgroups.
+
+To reproduce this cohort with the existing `LAB` and `RID` definitions, use the public-source archive and the previously qualified local `cpu_icb_grid3d.metallib`; its builder insists on the exact hash `5c35418c2465d1fa87396419c165ac33b5005937e8623fc40329fef30be99de0`. The associated public `bridge/src/cpu_icb_grid3d.json` is also hash-pinned. All paths must be fresh:
+
+```sh
+GRIDLIB='/path/to/qualified/cpu_icb_grid3d.metallib'
+python3 bridge/tools/uniform_icb_3d.py build --out "$LAB/results/uniform-3d-build-new" \
+  --archive build/uniform-new --metallib "$GRIDLIB"
+for item in groups:prepare:01 threads:prepare:01 groups:execute:01 threads:execute:01 groups:execute:02 threads:execute:02 groups:execute:03 threads:execute:03; do
+  form=${item%%:*}; rest=${item#*:}; mode=${rest%%:*}; number=${rest##*:}
+  python3 bridge/tools/uniform_icb_3d.py run --build "$LAB/results/uniform-3d-build-new" \
+    --out "$LAB/results/uniform-3d-${form}-${mode}-${number}" --reservation-root "$LAB" \
+    --form "$form" --mode "$mode" --registry-id "$RID" || break
+done
+python3 bridge/tools/audit_uniform_icb_3d.py \
+  "$LAB/results/uniform-3d-groups-prepare-01" "$LAB/results/uniform-3d-threads-prepare-01" \
+  "$LAB/results/uniform-3d-groups-execute-01" "$LAB/results/uniform-3d-threads-execute-01" \
+  "$LAB/results/uniform-3d-groups-execute-02" "$LAB/results/uniform-3d-threads-execute-02" \
+  "$LAB/results/uniform-3d-groups-execute-03" "$LAB/results/uniform-3d-threads-execute-03"
+```
 
 ## Reproduction on the qualified machine
 
