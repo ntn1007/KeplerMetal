@@ -1,0 +1,30 @@
+{
+  "audit": "PASS",
+  "both_orders_match": true,
+  "combined_grid_executions": 6,
+  "driver_file_SHA256": "e240d54a4cd64b7e54fbc15250de82e88451132e1d9f3a4f9879607c8b0e7645",
+  "execution_manifest_SHA256": [
+    "76448922d905d5175587e668c7a141d45d2dba38aff290160bcc24f15a7f2f55",
+    "34aae78830c6f90a7ca7114cd08f93b7d3ab025ee60ece690455cfd99813a994",
+    "b94b41e21c6a3c7ff8bbc74568f8fd7b65c9a0ed960bf756f09e74d47c9572d3",
+    "1162283ecc2abd687d5e52034a2b4aa08ad7c8171472863e091b98f59bcb3433"
+  ],
+  "execution_processes": 3,
+  "frozen_host_SHA256": "3c158e085503b89f9c81142d2a08553f126aa39e1236681606e759f7c3709792",
+  "logical_grid_threads": 191,
+  "native_library_SHA256": "1e89eaf47bdcb482e4fc760869b6005e47c1e836ec43e14820ba601c28fdd3f5",
+  "partial_ICB_implemented": false,
+  "preparation_processes": 1,
+  "processes": 4,
+  "runtime_archive_SHA256": "42e3c6c396c86c97e7a29c1866b6cca1e716d8e775da77d17c5a71ce5d3fc87a",
+  "same_frozen_build": true,
+  "same_outputs_across_processes": true,
+  "single_region_controls": 6,
+  "source_SHA256": "63c7391fd033ea4792e42e10fe7ce750721b00f69662c88402e540a8383efed4",
+  "suppressed_controls": 3,
+  "system_modified": false,
+  "threads": 1719,
+  "transparent_integration": false,
+  "uint32_values_checked": 13752,
+  "user_dispatches": 18
+}

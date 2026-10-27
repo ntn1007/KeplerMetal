@@ -1,6 +1,6 @@
 # Status, 2026-10-27
 
-Partial threadgroups remain refused on Kepler. A bounded NVIDIA shader now reports actual/nominal sizes, grid and a barrier witness for GTX groups of 56, 63 and 96 threads; full partial dispatch remains open. [Evidence and reproduction](PARTIAL_THREADGROUP_RESEARCH.md).
+Partial threadgroups remain refused on Kepler. A bounded adapted client now assembles a 191-thread logical grid from two GTX resident launches, including a 63-thread edge; general partial ICB dispatch remains open. [Evidence and reproduction](PARTIAL_THREADGROUP_RESEARCH.md).
 
 Scoped CPU compute ICB thread-grid dispatch accepts evenly divisible grids with bounded 1D, 2D and 3D GPU qualification; partial groups remain refused. [Evidence](UNIFORM_THREAD_ICB.md).
 

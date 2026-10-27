@@ -150,7 +150,7 @@ The [wide diagnostic shader](../bridge/src/partial_wide_barrier.metal) expands t
 
 Three serialized, signed processes each execute zero-origin and edge-metadata cases for physical groups of **63**, **56** and **96** threads. Actual and nominal dimensions differ along X, Y and Z respectively in the edge cases; the output buffers are bounded and guards checked. The construction-only pipeline inspection reports 512 bytes of static threadgroup memory and 22 registers. Across the execution processes, **18 launches, 1,290 invocations and 10,320 uint32 outputs** match the independent CPU oracle, with three untouched suppressed-launch controls. The same shader reports global/local/group coordinates, logical group counts, actual and nominal group sizes, and grid size. Complete resident constant buffers and descriptors match their expected before/after snapshots. Each process produces identical output hashes.
 
-This is evidence that the tested shader and barrier produce the expected results on groups larger than one warp. It is not a proof that removing the barrier would fail, that all synchronization patterns are correct, or that arbitrary shader/group sizes work. Origin, grid, nominal size and group-count data still change together. Every launch remains one physical group; combining adjacent regions into one Metal dispatch, native ICB identity and transparent application integration remain unimplemented. No performance gain is claimed.
+This is evidence that the tested shader and barrier produce the expected results on groups larger than one warp. It is not a proof that removing the barrier would fail, that all synchronization patterns are correct, or that arbitrary shader/group sizes work. Origin, grid, nominal size and group-count data still change together. Those individual edge trials use one physical group each. The later assembly experiment joins adjacent regions through two resident launches; native ICB identity, transparent integration and a general Metal dispatch remain unimplemented. No performance gain is claimed.
 
 Reproduce with `LAB`, `ARCHIVE` and `RID` as in the previous section. Use fresh directories; the build pins the original source/toolchain result and the GPU runner uses the shared reservation:
 
@@ -163,4 +163,23 @@ for run in 1 2 3; do
   python3 bridge/tools/partial_wide_run.py run --build "$LAB/results/wide-run-build-new" --out "$LAB/results/wide-execute-new-$run" --reservation-root "$LAB" --mode execute --registry-id "$RID" || break
 done
 python3 bridge/tools/audit_partial_wide.py "$LAB/results/wide-pipeline-new" "$LAB/results/wide-prepare-new" "$LAB/results/wide-execute-new-1" "$LAB/results/wide-execute-new-2" "$LAB/results/wide-execute-new-3"
+```
+
+## Follow-up: assembling one bounded logical grid on the GTX
+
+A process-local laboratory client now assembles a **191-thread, one-dimensional logical grid**, with a requested group size of 64. It uses two independently prepared records of the already qualified wide-barrier shader: the first launches two full physical groups of 64, and the second launches one physical group of 63 at logical origin 128. Both records reference the same bounded output and counter buffers. The client sets the logical grid, nominal size, group count and origin in each record's private constant data, then submits their existing resident launch sequence in **one user command buffer**. This is two native launches, not a native Metal nonuniform `dispatchThreads` implementation.
+
+Three fresh execution processes each run a suppressed-launch control, each region alone, then the two-region sequence in both orders. Across them, **six complete 191-thread grids**, six single-region controls and three suppressed-launch controls passed. Including the controls, **18 native launches, 1,719 invocations and 13,752 coordinate, builtin and barrier-witness values** match the independent CPU oracle. Both sequence orders and all three processes produced matching full-output hashes. Every output byte and guard, the counter, both QMD geometries, full resident constant snapshots and the reported command-stream hashes were checked. The [audit](partial-assembly-validation.json) records host, runtime, shader-library, driver-file and process-manifest hashes.
+
+The tested shader sees the expected logical thread and group coordinates, three logical groups, a nominal size of 64, and an actual size of 63 in the edge group. Its per-group barrier witness also matches. This is an important bounded end-to-end experiment for the decomposition, but it still relies on an explicitly adapted client, a single fixed shader and grid, exact-profile resident commands, and serialized launches. It does not establish semantics for arbitrary shaders, cross-group progress or scheduling, arbitrary 2D/3D edges, resource lifetime scenarios, native Apple ICB identity, or transparent ordinary-application integration. In particular, a shader relying on unspecified cross-group concurrency may behave differently when split. The public scoped ICB continues to reject partial `concurrentDispatchThreads`; no system component or driver is changed.
+
+To reproduce, retain the pinned wide shader library and the qualified public archive and use the same `LAB`, `ARCHIVE`, `RID` variables and common host reservation described above. Use new output directories:
+
+```sh
+python3 bridge/tools/partial_assembly.py build --out "$LAB/results/assembly-build-new" --archive "$ARCHIVE" --metallib "$LAB/results/wide-pipeline-build-new/assets/shader.metallib"
+python3 bridge/tools/partial_assembly.py run --build "$LAB/results/assembly-build-new" --out "$LAB/results/assembly-prepare-new" --reservation-root "$LAB" --mode prepare --registry-id "$RID"
+for run in 1 2 3; do
+  python3 bridge/tools/partial_assembly.py run --build "$LAB/results/assembly-build-new" --out "$LAB/results/assembly-execute-new-$run" --reservation-root "$LAB" --mode execute --registry-id "$RID" || break
+done
+python3 bridge/tools/audit_partial_assembly.py "$LAB/results/assembly-prepare-new" "$LAB/results/assembly-execute-new-1" "$LAB/results/assembly-execute-new-2" "$LAB/results/assembly-execute-new-3"
 ```

@@ -21,7 +21,7 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
-Partial threadgroup research now includes bounded origin, builtin and multi-warp local-barrier witnesses on the GTX alongside an Apple Silicon reference and a CPU-only geometry model. Partial GPU dispatch on Kepler remains unimplemented. [Evidence and limits](docs/PARTIAL_THREADGROUP_RESEARCH.md).
+A bounded adapted client now assembles a 191-thread partial grid on the GTX from two resident launches; general partial ICB dispatch remains unimplemented. Partial GPU dispatch on Kepler remains unimplemented. [Evidence and limits](docs/PARTIAL_THREADGROUP_RESEARCH.md).
 
 The scoped CPU compute ICB accepts evenly divisible thread-grid dispatches, with bounded 1D, 2D and 3D GPU qualification. Partial groups remain refused. [Contract and GPU evidence](docs/UNIFORM_THREAD_ICB.md).
 
