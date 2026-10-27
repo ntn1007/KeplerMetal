@@ -1,0 +1,38 @@
+{
+  "audit": "PASS",
+  "current_driver_SHA256": "e240d54a4cd64b7e54fbc15250de82e88451132e1d9f3a4f9879607c8b0e7645",
+  "m1_GPU_threads": 836,
+  "m1_negative_untouched_bytes": 98816,
+  "m1_raw_uint32_checked": 26752,
+  "m1_reference_cohorts": 2,
+  "m1_reference_manifest_SHA256": [
+    "735de14fea3f979f5d455bfab95ab3d44343a0f12e714f5dbfc2a5ec0e481487",
+    "159465521357cea524c4cb8b67f5ad84093c6f3fed225ef1df439a4b080a2904"
+  ],
+  "m1_reference_processes": 6,
+  "native_GPU_execution_proved": false,
+  "native_capture_manifest_SHA256": {
+    "depth0": "a113aa256c3ce10dc71ccba62389a87fb04721c2dbfe5eb869b27759aa2ddb57",
+    "grid_coordinates": "e77c0eb3517e7bb8940912e32fc938ac7258fca2748cc9039f39eafddb93579f"
+  },
+  "native_capture_processes": 2,
+  "native_code_SHA256": {
+    "depth0": "7090afba552f714205ff6a673d717976f5b8d58eb77f9f75b6739a2d16206f97",
+    "grid_coordinates": "82e56a5882b36b3d4ff3db4111257a605da8ca0e646660ceda506508a9ee2f56"
+  },
+  "native_listing_SHA256": {
+    "depth0": "c5458b66a0c6b6420252a0e7cbaa21c4a1b7a62ca434f6d2ab1a28551614bca7",
+    "grid_coordinates": "dc800f5629bb7ea2d118af8300bf3ed657be88813eb1d1b843c6b0ad2fec9f5a"
+  },
+  "native_origin_execution_proved": false,
+  "native_pipeline_construction_only": true,
+  "partial_groups_implemented_and_qualified": false,
+  "planner_region_counts": {
+    "partial1d": 2,
+    "partial3d": 8
+  },
+  "planner_safe_to_dispatch": false,
+  "planner_threads_cross_checked": 836,
+  "system_modified": false,
+  "transparent_integration": false
+}

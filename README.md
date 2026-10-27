@@ -21,6 +21,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+Partial threadgroup research now combines an Apple Silicon reference, native NVIDIA compiler observations and a CPU-only geometry model. Partial GPU dispatch on Kepler remains unimplemented. [Evidence and limits](docs/PARTIAL_THREADGROUP_RESEARCH.md).
+
 The scoped CPU compute ICB accepts evenly divisible thread-grid dispatches, with bounded 1D, 2D and 3D GPU qualification. Partial groups remain refused. [Contract and GPU evidence](docs/UNIFORM_THREAD_ICB.md).
 
 The existing Metal driver passes three GPU read/write trials on a 4 MiB buffer after purge and restoration, with three native controls and a no-dispatch control. This does not establish memory reclamation or a speedup. [GPU contract and evidence](docs/VIDEO_METAL_PURGE_GPU.md) · [CPU-only observations](docs/VIDEO_METAL_PURGE.md).
