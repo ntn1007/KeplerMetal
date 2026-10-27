@@ -9,6 +9,10 @@ struct Size { uint32_t x,y,z; };
 struct Region { Size origin,groups,actual; };
 struct AxisPart { uint32_t origin,count,actual; };
 inline bool validRange(uint64_t address,uint64_t size) { return address && size && address<=UINT64_MAX-size; }
+// Validate an aligned binding window using subtraction, avoiding offset+size overflow.
+inline bool validWindow(uint64_t length,uint64_t offset,uint64_t required,uint64_t alignment) {
+ return alignment && required && offset<=length && offset%alignment==0 && required<=length-offset;
+}
 inline bool disjoint(uint64_t a,uint64_t as,uint64_t b,uint64_t bs) {
  return validRange(a,as)&&validRange(b,bs)&&(a+as<=b||b+bs<=a);
 }

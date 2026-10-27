@@ -2,6 +2,8 @@
 
 A later qualification added a second exact read/write buffer shader; see [the stencil extension](PARTIAL_ICB_BUFFER_STENCIL.md). This document describes the original barrier-shader cohort and contract.
 
+The resource-size and offset restriction was subsequently relaxed for both exact shaders; see [the variable-resource contract](PARTIAL_ICB_VARIABLE_RESOURCES.md). The original cohort below used the fixed resource envelope stated in its test description.
+
 The explicitly enabled, process-local CPU ICB adapter now decomposes **bounded nonuniform 1D, 2D and 3D grids** for the exact registered `partial_builtin_barrier` shader and manifest. This expands the earlier [fixed-grid experiment](PARTIAL_ICB_FIXED_PROFILE.md). It is an experimental adapted-application path: it is not arbitrary-shader support, the native Apple ICB ABI, a system driver update, a Metal version upgrade, or transparent integration into unmodified applications.
 
 After installing the scope with the [certified wide-shader library and manifest](../bridge/src/partial_wide_barrier.json), the caller must explicitly call `enableExperimentalPartialGridWithError:`. Then the project command's `concurrentDispatchThreads:threadsPerThreadgroup:` accepts nonzero **partial** dimensions if all these conditions hold:
@@ -9,7 +11,7 @@ After installing the scope with the [certified wide-shader library and manifest]
 - Each grid and nominal local dimension is at most 1,023; grid volume is at most 1,024 and nominal group volume is at most 128.
 - The deterministic CPU planner can represent the grid in at most 16 regions, each containing at most 128 physical invocations. A grid can satisfy the volume limits yet still be refused if its decomposition exceeds 16 regions; for example, the CPU contract test rejects `(3,21,15)` with local `(2,5,7)`.
 - The exact certified pipeline, manifest, reflected ABI and device profile are retained. The execution range contains exactly one command, on a serial compute encoder belonging to an uncommitted retained command buffer on the scope queue.
-- Bindings 0 and 1 are distinct 16,512-byte Private buffers at offset 64; binding 2 is a distinct 132-byte Private buffer at offset 64; binding 3 is a distinct 1,536-byte Shared buffer at offset 256. They belong to the same device. The adapter rejects zero, overflowing or overlapping GPU address ranges, including overlaps between distinct buffer objects.
+- In the original cohort, bindings 0 and 1 were distinct 16,512-byte Private buffers at offset 64; binding 2 was a distinct 132-byte Private buffer at offset 64; binding 3 was a distinct 1,536-byte Shared buffer at offset 256. Current resource requirements are in the variable-resource contract. The adapter rejects zero, overflowing or overlapping GPU address ranges, including overlaps between distinct buffer objects.
 
 Fully divisible grids continue through the original uniform path and its own manifest limits; this opt-in does not relax those limits. CPU snapshot copy, GPU-selected command export, mixed ranges, concurrent encoders and unqualified resources remain refused. Callers must externally synchronize command mutation and preserve resource contents through completion. If encoding raises an exception or reports an error, discard that uncommitted command buffer rather than submitting it. The shader source defines the output, counter and parameter layout.
 

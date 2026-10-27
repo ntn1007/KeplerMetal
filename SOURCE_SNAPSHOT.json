@@ -37,10 +37,10 @@
       "path": "bridge/src/KeplerCPUICB.mm",
       "source_path": "bridge/src/KeplerCPUICB.mm",
       "source_SHA256": "3d59c2c609611ddc387e616b8945e903f6378dbd4a3b66a02cb22087ada84b60",
-      "published_SHA256": "69fefa971d54f7690e15b51950375e688fed02200f0fd7380e4393f2bb5be5eb",
-      "bytes": 147562,
+      "published_SHA256": "70b953e1ff045c6db573ee57c6366d5f986c68137cf901d89a6ec1d6e1ac3bd0",
+      "bytes": 147722,
       "modified_for_publication": true,
-      "previous_published_SHA256": "5098775e8072395b27f92748601111f54b13bccd277bf342b26b08d051245b86"
+      "previous_published_SHA256": "69fefa971d54f7690e15b51950375e688fed02200f0fd7380e4393f2bb5be5eb"
     },
     {
       "path": "bridge/src/KeplerCommandIR.h",
@@ -7454,6 +7454,86 @@
       "published_SHA256": "ee6d4693d639b2225a54ac31a785bb08bad65c83cb16feacd4ad95b900fd3487",
       "bytes": 2290,
       "modified_for_publication": false
+    },
+    {
+      "path": "bridge/src/KeplerPartialGridPlan.h",
+      "source_path": "bridge/src/KeplerPartialGridPlan.h",
+      "source_SHA256": "f46e10ce958221a968aaf39481a71f773345830c6c68ac071a7b14bdc52299f7",
+      "published_SHA256": "f46e10ce958221a968aaf39481a71f773345830c6c68ac071a7b14bdc52299f7",
+      "bytes": 2001,
+      "modified_for_publication": false
+    },
+    {
+      "path": "tests/partial_grid_plan_contract.cpp",
+      "source_path": "tests/partial_grid_plan_contract.cpp",
+      "source_SHA256": "78865b3bec937f657fc850cdffedf3e8cbfc93a10eb6540113527cc600d9881f",
+      "published_SHA256": "78865b3bec937f657fc850cdffedf3e8cbfc93a10eb6540113527cc600d9881f",
+      "bytes": 2759,
+      "modified_for_publication": false
+    },
+    {
+      "path": "tests/test_partial_variable_oracle.py",
+      "source_path": "tests/test_partial_variable_oracle.py",
+      "source_SHA256": "f29540c626f02d422c7de446e6dc55e9fe5e1bf25a870c92c7a86e99c5176f40",
+      "published_SHA256": "f29540c626f02d422c7de446e6dc55e9fe5e1bf25a870c92c7a86e99c5176f40",
+      "bytes": 2706,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/partial_variable_resources.py",
+      "source_path": "bridge/tools/partial_variable_resources.py",
+      "source_SHA256": "f7c37ac34f481fd00adabd798b7993ddeab903d7dd81be23fa2bac560d0356ef",
+      "published_SHA256": "f7c37ac34f481fd00adabd798b7993ddeab903d7dd81be23fa2bac560d0356ef",
+      "bytes": 6087,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/partial_variable_resources_probe.mm",
+      "source_path": "bridge/tools/partial_variable_resources_probe.mm",
+      "source_SHA256": "5af4a315bbf7136656caa8450b91d9d17baef9ae2dea6e9428109052a80890ad",
+      "published_SHA256": "5af4a315bbf7136656caa8450b91d9d17baef9ae2dea6e9428109052a80890ad",
+      "bytes": 12662,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/verify_partial_variable_resources.py",
+      "source_path": "bridge/tools/verify_partial_variable_resources.py",
+      "source_SHA256": "38c849449b0bb00acc5d370476f448187b7fed4917bc5317f3fb67bca22a00c7",
+      "published_SHA256": "38c849449b0bb00acc5d370476f448187b7fed4917bc5317f3fb67bca22a00c7",
+      "bytes": 6674,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/partial_variable_barrier.py",
+      "source_path": "bridge/tools/partial_variable_barrier.py",
+      "source_SHA256": "df9d4b49cbea1c2276bad822b4e7070c683a68c3d92d16a010ff6bc89305cc4e",
+      "published_SHA256": "df9d4b49cbea1c2276bad822b4e7070c683a68c3d92d16a010ff6bc89305cc4e",
+      "bytes": 6055,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/partial_variable_barrier_probe.mm",
+      "source_path": "bridge/tools/partial_variable_barrier_probe.mm",
+      "source_SHA256": "28e65f966eb26a60a9ecdacdd0eb40d200335f2d59278240c0d605101a3e7571",
+      "published_SHA256": "28e65f966eb26a60a9ecdacdd0eb40d200335f2d59278240c0d605101a3e7571",
+      "bytes": 12475,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/verify_partial_variable_barrier.py",
+      "source_path": "bridge/tools/verify_partial_variable_barrier.py",
+      "source_SHA256": "46443b52e19fadedf7783fee7af10c59f665c8a93c72219b54498b4bc9b55c09",
+      "published_SHA256": "46443b52e19fadedf7783fee7af10c59f665c8a93c72219b54498b4bc9b55c09",
+      "bytes": 6988,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/audit_partial_variable_resources.py",
+      "source_path": "bridge/tools/audit_partial_variable_resources.py",
+      "source_SHA256": "febe0122ce5d1cfa0facd4bde8137b30d607f09004fa7f1441c4d99936aafba9",
+      "published_SHA256": "febe0122ce5d1cfa0facd4bde8137b30d607f09004fa7f1441c4d99936aafba9",
+      "bytes": 4730,
+      "modified_for_publication": false
     }
   ],
   "excluded_source_tools": [
@@ -7495,16 +7575,25 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "dea1d632df41278af65f1b9278467405323fbbac270ab6c65797f3dbb334ad9f",
-  "previous_public_commit": "4bc8c7d3a6abd2e8ba8a75dee69119ca3ee2b911",
+  "previous_source_snapshot_SHA256": "54567b31372f9a9de47d580e3d5851fe6c3ba0ac9e1262ff1fa98a30e9d586b5",
+  "previous_public_commit": "0b6a1091acec4a5f8e53cde3debcd427581ef8ea",
   "update": {
     "date": "2026-10-27",
-    "reason": "Conservative CAS recognizer and offline safety controls",
+    "reason": "Bounded partial-grid variable resource windows",
     "files": [
-      "bridge/tools/recognize_native_cas.py",
-      "tests/test_native_cas_recognizer.py"
+      "bridge/src/KeplerCPUICB.mm",
+      "bridge/src/KeplerPartialGridPlan.h",
+      "tests/partial_grid_plan_contract.cpp",
+      "tests/test_partial_variable_oracle.py",
+      "bridge/tools/partial_variable_resources.py",
+      "bridge/tools/partial_variable_resources_probe.mm",
+      "bridge/tools/verify_partial_variable_resources.py",
+      "bridge/tools/partial_variable_barrier.py",
+      "bridge/tools/partial_variable_barrier_probe.mm",
+      "bridge/tools/verify_partial_variable_barrier.py",
+      "bridge/tools/audit_partial_variable_resources.py"
     ]
   },
   "update_date": "2026-10-27",
-  "update_reason": "Conservative CAS recognizer and offline safety controls; historical GPU evidence is not repinned."
+  "update_reason": "Variable partial-grid resource envelopes with separate GTX qualification and preserved native constant-bank guard."
 }

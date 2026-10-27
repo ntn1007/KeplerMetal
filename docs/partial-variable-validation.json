@@ -1,0 +1,16 @@
+{
+  "barrier_threads": 7940,
+  "cohort_host_intervals_overlap": false,
+  "fixed_barrier_threads": 5632,
+  "host_processes": 21,
+  "negative_control_observations": 217,
+  "runtime_archive_SHA256": "6d04b2477ba49d9dce0fdc6d2b21b798bfade6d72785eb159c2f9c9502c18038",
+  "scope": "Bounded opt-in project ICB, not native Apple ICB or system-wide support",
+  "source_SHA256": {
+    "KeplerCPUICB.mm": "70b953e1ff045c6db573ee57c6366d5f986c68137cf901d89a6ec1d6e1ac3bd0",
+    "KeplerPartialGridPlan.h": "f46e10ce958221a968aaf39481a71f773345830c6c68ac071a7b14bdc52299f7"
+  },
+  "status": "PASS",
+  "stencil_threads": 13712,
+  "uniform_threads": 37264
+}

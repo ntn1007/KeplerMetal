@@ -26,6 +26,14 @@ int main(){
  assert(KPPartialPlan::disjoint(100,10,110,5));assert(KPPartialPlan::disjoint(110,5,100,10));
  assert(!KPPartialPlan::disjoint(100,11,110,5));assert(!KPPartialPlan::disjoint(100,20,105,2));
  assert(!KPPartialPlan::disjoint(0,1,10,1));assert(!KPPartialPlan::disjoint(UINT64_MAX-2,4,10,1));
+ for(uint64_t length=0;length<128;length++)for(uint64_t offset=0;offset<144;offset++)
+  for(uint64_t required=0;required<20;required++)for(uint64_t alignment: {1u,4u,16u}){
+   bool expected=required!=0 && offset%alignment==0 && offset+required<=length;
+   assert(KPPartialPlan::validWindow(length,offset,required,alignment)==expected);
+  }
+ assert(KPPartialPlan::validWindow(UINT64_MAX,UINT64_MAX-3,3,1));
+ assert(!KPPartialPlan::validWindow(UINT64_MAX,UINT64_MAX-3,4,1));
+ assert(!KPPartialPlan::validWindow(128,0,16,0));
  assert(!KPPartialPlan::plan({0,1,1},{1,1,1},regions));assert(!KPPartialPlan::plan({1024,1,1},{2,1,1},regions));
  assert(!KPPartialPlan::plan({1023,2,1},{2,1,1},regions));assert(!KPPartialPlan::plan({3,1,1},{129,1,1},regions));
  assert(KPPartialPlan::plan({1023,1,1},{4,1,1},regions));assert(regions.size()==9);
