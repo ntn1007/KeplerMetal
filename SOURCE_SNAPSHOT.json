@@ -2818,9 +2818,13 @@
       "path": "bridge/tools/plan_native_metallib_repair.py",
       "source_path": "bridge/tools/plan_native_metallib_repair.py",
       "source_SHA256": "0f4a160bbbc4345678caec2d7047342d1b483a1e7c1b277dba7badcab4173bea",
-      "published_SHA256": "0f4a160bbbc4345678caec2d7047342d1b483a1e7c1b277dba7badcab4173bea",
-      "bytes": 4755,
-      "modified_for_publication": false
+      "published_SHA256": "2c597895c60c180b2aa058927ca8cde5fd29c6e7216af9fea159803e936edc56",
+      "bytes": 5397,
+      "modified_for_publication": true,
+      "publication_change": {
+        "previous_published_SHA256": "0f4a160bbbc4345678caec2d7047342d1b483a1e7c1b277dba7badcab4173bea",
+        "reason": "Require pinned decoder reproduction and preserve checked native snapshots; original source hash retained."
+      }
     },
     {
       "path": "bridge/tools/prepare_atomic64_compiler.py",
@@ -2906,9 +2910,13 @@
       "path": "bridge/tools/prepare_native_cas_sdk.py",
       "source_path": "bridge/tools/prepare_native_cas_sdk.py",
       "source_SHA256": "f4e514a99e1a00b1f66a277603e92ebd232539aaa26072912e0adbc69d523862",
-      "published_SHA256": "f4e514a99e1a00b1f66a277603e92ebd232539aaa26072912e0adbc69d523862",
-      "bytes": 7037,
-      "modified_for_publication": false
+      "published_SHA256": "ae0a43facf525542b0fc00575b41c03fba046eb8e58e3b7250a8abff2838b896",
+      "bytes": 7523,
+      "modified_for_publication": true,
+      "publication_change": {
+        "previous_published_SHA256": "f4e514a99e1a00b1f66a277603e92ebd232539aaa26072912e0adbc69d523862",
+        "reason": "Require pinned decoder reproduction and preserve checked native snapshots; original source hash retained."
+      }
     },
     {
       "path": "bridge/tools/prepare_native_cas_variants.py",
@@ -2962,12 +2970,12 @@
       "path": "bridge/tools/recognize_native_cas.py",
       "source_path": "bridge/tools/recognize_native_cas.py",
       "source_SHA256": "d9783fa0258f65f50d3df9547f36701684324abcc9f99a494ba70fca41a063cb",
-      "published_SHA256": "9aa30b458263eeeddb782cd2a3b10ac362b6faf3ced9cbca805e55b515bebbee",
-      "bytes": 9845,
+      "published_SHA256": "2dcd61e6a0205089d0ef6cc94b93d2c7de584984e48e0c43f14eeeb20686713a",
+      "bytes": 11740,
       "modified_for_publication": true,
       "publication_change": {
-        "previous_published_SHA256": "d9783fa0258f65f50d3df9547f36701684324abcc9f99a494ba70fca41a063cb",
-        "reason": "Conservative rejection of additional register consumers after native CAS repair; original source hash is retained."
+        "previous_published_SHA256": "9aa30b458263eeeddb782cd2a3b10ac362b6faf3ced9cbca805e55b515bebbee",
+        "reason": "Require pinned decoder reproduction and preserve checked native snapshots; original source hash retained."
       }
     },
     {
@@ -3278,9 +3286,13 @@
       "path": "bridge/tools/reproduce_metallib_native_repair.py",
       "source_path": "bridge/tools/reproduce_metallib_native_repair.py",
       "source_SHA256": "d587c1759b35b64a219fc3d155b59b5d61822d5c82fb686c45ff1b31e2bdd810",
-      "published_SHA256": "d587c1759b35b64a219fc3d155b59b5d61822d5c82fb686c45ff1b31e2bdd810",
-      "bytes": 12601,
-      "modified_for_publication": false
+      "published_SHA256": "a1bcca961d0c527c083c67b36db49c5c5335460d2a2a59b372ab46177a0f5892",
+      "bytes": 13113,
+      "modified_for_publication": true,
+      "publication_change": {
+        "previous_published_SHA256": "d587c1759b35b64a219fc3d155b59b5d61822d5c82fb686c45ff1b31e2bdd810",
+        "reason": "Require pinned decoder reproduction and preserve checked native snapshots; original source hash retained."
+      }
     },
     {
       "path": "bridge/tools/reproduce_mixed_native_replay.py",
@@ -3510,9 +3522,13 @@
       "path": "bridge/tools/reproduce_semantic_cas_repair.py",
       "source_path": "bridge/tools/reproduce_semantic_cas_repair.py",
       "source_SHA256": "35dabee1b203ec9d277dfb5e4d051cf2cd6ece26d71f3d9b67a50684fcc5d2c3",
-      "published_SHA256": "35dabee1b203ec9d277dfb5e4d051cf2cd6ece26d71f3d9b67a50684fcc5d2c3",
-      "bytes": 9690,
-      "modified_for_publication": false
+      "published_SHA256": "b59222f8cd0ef9414d352075cb49986c999d0b5a889e672b897baacdf8d8b4d4",
+      "bytes": 9828,
+      "modified_for_publication": true,
+      "publication_change": {
+        "previous_published_SHA256": "35dabee1b203ec9d277dfb5e4d051cf2cd6ece26d71f3d9b67a50684fcc5d2c3",
+        "reason": "Require pinned decoder reproduction and preserve checked native snapshots; original source hash retained."
+      }
     },
     {
       "path": "bridge/tools/reproduce_shared_benchmark.py",
@@ -7451,9 +7467,13 @@
       "path": "tests/test_native_cas_recognizer.py",
       "source_path": "tests/test_native_cas_recognizer.py",
       "source_SHA256": "ee6d4693d639b2225a54ac31a785bb08bad65c83cb16feacd4ad95b900fd3487",
-      "published_SHA256": "ee6d4693d639b2225a54ac31a785bb08bad65c83cb16feacd4ad95b900fd3487",
-      "bytes": 2290,
-      "modified_for_publication": false
+      "published_SHA256": "c3039be88a19ea99a424fdf2afe5406e511ace6ba8f76dee1de9d5eb4e40cf46",
+      "bytes": 6097,
+      "modified_for_publication": true,
+      "publication_change": {
+        "previous_published_SHA256": "ee6d4693d639b2225a54ac31a785bb08bad65c83cb16feacd4ad95b900fd3487",
+        "reason": "Exercise fail-closed disassembly coverage, decoder verification and input snapshots."
+      }
     },
     {
       "path": "bridge/src/KeplerPartialGridPlan.h",

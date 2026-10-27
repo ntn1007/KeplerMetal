@@ -5,7 +5,7 @@ This planner never dispatches and does not turn a candidate into deployment.
 from pathlib import Path
 import argparse,datetime,hashlib,json,shutil,struct,subprocess
 from metallib_air import extract,MetallibError
-from recognize_native_cas import air_contract,sass_contract
+from recognize_native_cas import air_contract,sass_contract,verify_decoder
 ROOT=Path(__file__).resolve().parents[1];p=argparse.ArgumentParser();p.add_argument('--library',type=Path,required=True);p.add_argument('--function',required=True);p.add_argument('--out',type=Path,required=True);a=p.parse_args();out=a.out.resolve();out.relative_to(ROOT/'results');assert not out.exists();out.mkdir();commands=[]
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def save(x):
@@ -38,7 +38,13 @@ while True:
  if not nxt:break
  offset+=nxt
 assert code and metadata;(out/'native.sass').write_bytes(code);(out/'native.metadata').write_bytes(metadata)
-ex,_=signed(ROOT/'build/envydis-only/envydis/envydis','decode-native',['-m','gf100','-V','gk104','-i','-n',str(out/'native.sass')]);shutil.copyfile(ex/'execution.stdout',out/'native.asm');SASS=sass_contract(code,(out/'native.asm').read_text(),AIR['expected_output_component']);state['SASS']=SASS
-state['artifact_SHA256']={p.name:sha(p) for p in [library,out/'embedded.air',out/'typed-air.json',out/'native.sass',out/'native.metadata',out/'native.asm']}
+decoder=ROOT/'build/envydis-only/envydis/envydis';ex,_=signed(decoder,'decode-native',['-m','gf100','-V','gk104','-i','-n',str(out/'native.sass')]);shutil.copyfile(ex/'execution.stdout',out/'native.asm');listing=(out/'native.asm').read_text()
+if not verify_decoder(code,listing,decoder):save({**state,'candidate':False,'stage':'decoder','reason':'Offline decoder missing, unpinned or listing differs'});raise SystemExit(0)
+state['decoder_reproduced_listing']=True
+SASS=sass_contract(code,listing,AIR['expected_output_component']);state['SASS']=SASS
+if (out/'native.sass').read_bytes()!=code or (out/'native.metadata').read_bytes()!=metadata or sha(library)!=state['input_library_SHA256']:
+ save({**state,'candidate':False,'stage':'snapshot','reason':'Native snapshot or library changed during diagnosis'});raise SystemExit(0)
+state['artifact_SHA256']={p.name:sha(p) for p in [library,out/'embedded.air',out/'typed-air.json',out/'native.asm']}
+state['artifact_SHA256'].update({'native.sass':hashlib.sha256(code).hexdigest(),'native.metadata':hashlib.sha256(metadata).hexdigest()})
 save({**state,'candidate':SASS['qualified'],'stage':'AIR_and_SASS','native_metadata_preservation_required':True,
       'reason':'Candidate only; matching semantics/structure does not substitute for GPU qualification.' if SASS['qualified'] else SASS['reason']})

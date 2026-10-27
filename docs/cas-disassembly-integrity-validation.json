@@ -1,0 +1,47 @@
+{
+  "AIR_fixture_qualified": true,
+  "GPU_execution": false,
+  "altered_listing_SHA256": "d6bce9d1da6614362c600abfdf7c5ec1a513365634b2bf3a66482129bbdfdea8",
+  "archived_cases": {
+    "live_noise": {
+      "listing_SHA256": "4f5b340559479b30594ef3208a803354c8b854b66263f79509b6ee5ab2eeef01",
+      "native_SHA256": "c05047171ca9812e714a75d1679c9a535d04536ebecc915f91aef0cb19141146",
+      "qualified": true
+    },
+    "original_compare_control": {
+      "listing_SHA256": "3ffd83b184765bf22fb3e1db1f9491bac12a9b191a3b01cfdeba07f889d4958b",
+      "native_SHA256": "ea09f179ff169422f6f3ac8c3b1f85f020c52f5853106e68becbb0f408ef85e3",
+      "qualified": false
+    },
+    "permuted": {
+      "listing_SHA256": "4e9eb9498fa959f7d8e5cda7c329200ebea6ca59d3cd92020b19e8417d004c41",
+      "native_SHA256": "9d6fc4f422a49b25c20f74a3e95accca8cbbd8ac6a6f5f7f53230a14d3dec7e0",
+      "qualified": true
+    },
+    "slot1": {
+      "listing_SHA256": "f0c6766b2e18d22cdceeaae507601adbf28a4b09c9189b519b2552637d19650b",
+      "native_SHA256": "d39eb2371cbd96770576236ce8b48ba5b03d8dcd818db2b6826737bedaa89701",
+      "qualified": true
+    }
+  },
+  "complete_listing_SHA256": "4d92956f6d299e3e41fb5ff2a82dc9724d020c75ac28ee2d6d7ec3f03e8ac392",
+  "consumer_code_SHA256": "0cf847323737a5dc7e15bdea7fb6e829708f2bdf3a07fd4174110c71757bb161",
+  "current_altered_qualified": false,
+  "current_complete_qualified": false,
+  "current_full_policy_refused_both_corruptions": true,
+  "current_recognizer_SHA256": "2dcd61e6a0205089d0ef6cc94b93d2c7de584984e48e0c43f14eeeb20686713a",
+  "current_refusal": "Decoder offsets are missing, duplicated or out of order",
+  "duplicated_offset": "0x2e0",
+  "missing_decoder_refused": true,
+  "omitted_offset": "0x2d8",
+  "opcode_tampered_listing_SHA256": "8b7e80b6bb7e1fd99d807fff4627f137ffe6568567310fed3e6b3e14a665857f",
+  "pinned_decoder_SHA256": "1c8730a9a4861f374c58407bff31d7ccb47a57eb23f9f82c6b3ea3deb079be0f",
+  "pinned_decoder_rejects_forged_opcode": true,
+  "previous_altered_qualified": true,
+  "previous_complete_qualified": false,
+  "previous_full_policy_accepted_both_corruptions": true,
+  "previous_recognizer_SHA256": "9aa30b458263eeeddb782cd2a3b10ac362b6faf3ced9cbca805e55b515bebbee",
+  "scope": "Artificial one-instruction program and altered listing; no evidence of a defective disassembler or a GPU execution",
+  "status": "PASS",
+  "structural_parser_accepts_forged_opcode": true
+}

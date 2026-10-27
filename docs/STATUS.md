@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+The offline native CAS diagnosis now rejects incomplete/reordered disassembly and requires an exact listing reproduced by the pinned decoder. Two artificial false-acceptance cases are refused; archived cases retain their offline outcomes. This does not invalidate old policies or establish general compiler repair. [Evidence](CAS_DISASSEMBLY_COVERAGE.md).
+
 The standalone opt-in bootstrap now serializes concurrent default-device initialization and reuses the same device for later calls. A pinned experimental client checks eight concurrent calls, one subsequent call, GPU output and refusal controls. Arbitrary applications and concurrent queue setup remain open. [Evidence](STANDALONE_ICB_MULTICALL.md).
 
 The opted-in partial-grid adapter can chain two different certified compute pipelines from the same pinned registration, including partial and uniform slots. GTX producer/consumer controls test order, reuse and the 16-launch boundary. Broader shaders, native Apple ICB and transparent integration remain open. [Contract and evidence](PARTIAL_ICB_DUAL_PIPELINE.md).

@@ -53,11 +53,13 @@ for layout,function in names:
  diagnosis=out/('diagnosis-'+function)
  run(['python3',str(ROOT/'tools/plan_native_metallib_repair.py'),'--library',str(library),'--function',function,'--out',str(diagnosis)],'plan-'+function)
  state=json.loads((diagnosis/'diagnosis.json').read_text());candidate=state['candidate'];assert candidate==(layout!='original_compare_control')
+ if sha(library)!=state['input_library_SHA256'] or (candidate and not state.get('decoder_reproduced_listing')):raise SystemExit('Library or decoder evidence changed after diagnosis')
  cert={'schema':1,'candidate':candidate,'function':function,'intent':'post_CAS_expected' if candidate else 'original_comparand',
-       'SASS_only_repair_forbidden':True,'AIR':state['AIR'],'SASS':state.get('SASS',{}),'embedded_AIR':state['embedded_AIR'],
+       'SASS_only_repair_forbidden':True,'AIR':state['AIR'],'SASS':state.get('SASS',{}),'embedded_AIR':state['embedded_AIR'],'decoder_reproduced_listing':bool(state.get('decoder_reproduced_listing')),
        'library_SHA256':sha(library),'GPU_qualification_pending':True,'scope':'Developer-approved per-function diagnosis; runtime identities/constructor checked, GPU correctness qualified separately'}
  if candidate:
   original=(diagnosis/'native.sass').read_bytes();metadata=(diagnosis/'native.metadata').read_bytes();s=state['SASS'];redirect=s['redirect_offset'];length=len(original)
+  if hashlib.sha256(original).hexdigest()!=state['artifact_SHA256']['native.sass'] or hashlib.sha256(metadata).hexdigest()!=state['artifact_SHA256']['native.metadata']:raise SystemExit('Native snapshot changed after diagnosis')
   assembly=diagnosis/'repair.easm';assembly.write_text(f'''.section #code 0;
 .skip {redirect:#x};
 long bra #repair_stub;

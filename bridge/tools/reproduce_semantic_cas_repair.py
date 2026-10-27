@@ -40,7 +40,8 @@ for fixture in json.loads((fixtures/'fixtures.json').read_text()):
  name=fixture['name'];d=out/name;d.mkdir();src=Path(fixture['directory'])
  for file in fixture['hashes']:
   assert sha(src/file)==fixture['hashes'][file];shutil.copyfile(src/file,d/file)
- policy=recognize(d);original=(d/'native.sass').read_bytes()
+ policy=recognize(d,decoder);original=(d/'native.sass').read_bytes()
+ if hashlib.sha256(original).hexdigest()!=policy['hashes']['native.sass']:raise SystemExit('Native code changed after diagnosis')
  assert policy['qualified']==(name!='original_compare_control')
  if policy['qualified']:
   match=policy['SASS'];off=match['redirect_offset'];old=match['old_register'];expected=match['expected_register'];length=len(original)

@@ -5,7 +5,7 @@ Input to diagnosis is library+entry name, never a separate shader source/AIR.
 from pathlib import Path
 import argparse,datetime,hashlib,json,shutil,struct,subprocess
 from metallib_air import extract,indexed_modules,MetallibError
-from recognize_native_cas import air_contract,sass_contract
+from recognize_native_cas import air_contract,sass_contract,verify_decoder
 ROOT=Path(__file__).resolve().parents[1]
 p=argparse.ArgumentParser();p.add_argument('--out',type=Path,required=True);a=p.parse_args();out=a.out.resolve();out.relative_to(ROOT/'results');assert not out.exists();out.mkdir();commands=[];results=[];entries=[]
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -48,6 +48,7 @@ try:extract(data,'absent_entry');raise AssertionError('Missing function accepted
 except MetallibError as e:rejections.append({'case':'absent-entry','rejected':True,'reason':str(e),'GPU_dispatch':False})
 (out/'container-negative-checks.json').write_text(json.dumps(rejections,indent=2)+'\n')
 for old,name in names.items():
+ if library.read_bytes()!=data:raise SystemExit('Fixture library changed before capture')
  d=out/name;d.mkdir();module=extract(data,name);(d/'embedded.air').write_bytes(module['wrapped_AIR'])
  ex,_=signed(dump,name+'-AIR',[str(d/'embedded.air'),name]);typed=json.loads((ex/'execution.stdout').read_text());(d/'typed-air.json').write_text(json.dumps(typed,indent=2)+'\n')
  air=air_contract(typed,name);capture=out/(name+'-compiler-output')
@@ -60,11 +61,13 @@ for old,name in names.items():
   if not nxt:break
   offset+=nxt
  assert code and len(metadata)==232;(d/'native.sass').write_bytes(code);(d/'native.metadata').write_bytes(metadata)
- ex,_=signed(ROOT/'build/envydis-only/envydis/envydis',name+'-decode',['-m','gf100','-V','gk104','-i','-n',str(d/'native.sass')]);shutil.copyfile(ex/'execution.stdout',d/'native.asm')
- sass=sass_contract(code,(d/'native.asm').read_text(),air.get('expected_output_component',0));qualified=air['qualified'] and sass['qualified'];assert qualified==(old!='original_compare_control')
- policy={'policy_version':2,'qualified':qualified,'function':name,'AIR':air,'SASS':sass,'SASS_only_repair_forbidden':True,
+ decoder=ROOT/'build/envydis-only/envydis/envydis';ex,_=signed(decoder,name+'-decode',['-m','gf100','-V','gk104','-i','-n',str(d/'native.sass')]);shutil.copyfile(ex/'execution.stdout',d/'native.asm');listing=(d/'native.asm').read_text()
+ if not verify_decoder(code,listing,decoder):raise SystemExit('Offline decoder missing, unpinned or listing differs')
+ if library.read_bytes()!=data or (d/'native.sass').read_bytes()!=code or (d/'native.metadata').read_bytes()!=metadata:raise SystemExit('Library or native snapshot changed during diagnosis')
+ sass=sass_contract(code,listing,air.get('expected_output_component',0));qualified=air['qualified'] and sass['qualified'];assert qualified==(old!='original_compare_control')
+ policy={'policy_version':2,'qualified':qualified,'function':name,'AIR':air,'SASS':sass,'decoder_reproduced_listing':True,'SASS_only_repair_forbidden':True,
   'embedded_AIR':{k:v for k,v in module.items() if k!='wrapped_AIR'},
-  'hashes':{'library.metallib':sha(library),'typed-air.json':sha(d/'typed-air.json'),'native.sass':sha(d/'native.sass')},
+  'hashes':{'library.metallib':hashlib.sha256(data).hexdigest(),'typed-air.json':sha(d/'typed-air.json'),'native.sass':hashlib.sha256(code).hexdigest()},
   'layout':'permuted' if old=='permuted' else 'noise' if old=='live_noise' else 'standard',
   'intent':'original_comparand' if old=='original_compare_control' else 'post_CAS_expected','replacement_hashes':{}}
  if qualified:

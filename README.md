@@ -21,6 +21,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+The native CAS diagnosis now requires complete instruction coverage and an exact pinned-decoder replay, preventing two demonstrated false acceptances from corrupted listings. [Evidence and remaining limits](docs/CAS_DISASSEMBLY_COVERAGE.md).
+
 The opt-in standalone experiment now handles repeated and concurrent default-device requests while preserving its exact client and library pins. [Evidence and limits](docs/STANDALONE_ICB_MULTICALL.md).
 
 The bounded partial-grid adapter can sequence two distinct certified compute pipelines in one registered library. A GTX producer/consumer test checks the output and ordering; this is process-local support, not native Metal ICB or a system driver replacement. [Contract and reproduction](docs/PARTIAL_ICB_DUAL_PIPELINE.md).

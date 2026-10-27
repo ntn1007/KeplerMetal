@@ -1,8 +1,28 @@
 #!/usr/bin/env python3
 """Conservative AIR+SM30 diagnosis, not a SASS-only or global compiler repair."""
 from pathlib import Path
-import argparse,hashlib,json,re,struct
+import argparse,hashlib,json,os,re,struct,subprocess,tempfile
+ENVYDIS_SHA256='1c8730a9a4861f374c58407bff31d7ccb47a57eb23f9f82c6b3ea3deb079be0f'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def verify_decoder(code,text,decoder):
+ """Regenerate the complete listing from the exact offline decoder, or refuse.
+
+ This authenticates neither decoder correctness nor AIR semantics. The binary
+ is snapshotted and verified before execution, with loader-injection variables
+ removed. No GPU operation is performed.
+ """
+ if decoder is None or not isinstance(code,bytes) or not code or len(code)>1048576:return False
+ try:
+  executable=Path(decoder).read_bytes()
+  if hashlib.sha256(executable).hexdigest()!=ENVYDIS_SHA256:return False
+  with tempfile.TemporaryDirectory(prefix='kepler-cas-decoder-') as directory:
+   tool=Path(directory)/'envydis'; source=Path(directory)/'program.sass'
+   tool.write_bytes(executable);tool.chmod(0o500);source.write_bytes(code)
+   if sha(tool)!=ENVYDIS_SHA256:return False
+   env={k:v for k,v in os.environ.items() if not k.startswith(('DYLD_','LD_'))};env['LC_ALL']='C'
+   run=subprocess.run([str(tool),'-m','gf100','-V','gk104','-i','-n',str(source)],capture_output=True,timeout=20,env=env)
+   return run.returncode==0 and run.stdout==text.encode('utf-8') and sha(tool)==ENVYDIS_SHA256 and source.read_bytes()==code
+ except (OSError,UnicodeError,subprocess.SubprocessError):return False
 def register_references(op):
  """Every explicit GPR operand, including the full span of d/q operands."""
  refs=set()
@@ -65,11 +85,13 @@ def air_contract(module,function='test'):
 def sass_contract(code,text,component):
  if not isinstance(component,int) or isinstance(component,bool) or not 0<=component<=3:return {'qualified':False,'reason':'Unsupported output component'}
  if not code or len(code)%64:return {'qualified':False,'reason':'Unsupported schedule-block alignment'}
- instructions=[]
+ instructions=[];next_offset=0
  for line in text.splitlines():
   m=re.match(r'^([0-9a-f]{8}): ([0-9a-f]{8}) ([0-9a-f]{8})\s+(.*)$',line)
   if not m:continue
   offset=int(m[1],16);raw=struct.pack('<II',int(m[2],16),int(m[3],16))
+  if offset!=next_offset:return {'qualified':False,'reason':'Decoder offsets are missing, duplicated or out of order'}
+  next_offset+=8
   if code[offset:offset+8]!=raw:return {'qualified':False,'reason':'Decoder bytes differ from original program'}
   op=re.sub(r'^B\s+','',m[4]).strip()
   if offset%64==0:
@@ -78,7 +100,7 @@ def sass_contract(code,text,component):
   if '[unknown instruction]' in op or ('[unknown:' in op and not ('ld lock ' in op or 'st unlock ' in op) or '[unknown:' in op and '[unknown: 00000000 01000000]' not in op):
    return {'qualified':False,'reason':'Unsupported undecoded instruction/bits'}
   instructions.append((offset,op.split(' [unknown:')[0]))
- if len(instructions)!=len(code)//8-len(code)//64:return {'qualified':False,'reason':'Decoder did not cover every original word'}
+ if next_offset!=len(code) or len(instructions)!=len(code)//8-len(code)//64:return {'qualified':False,'reason':'Decoder did not cover every original word'}
  max_reg=max((int(x) for _,op in instructions for x in re.findall(r'\$r(\d+)',op)),default=0)
  if max_reg>=24:return {'qualified':False,'reason':'Register profile exceeds qualified floor24'}
  candidates=[]
@@ -132,12 +154,14 @@ def sass_contract(code,text,component):
     'max_explicit_register':max_reg,'unknown_lock_modifier_preserved':'0x01000000'})
  if len(candidates)!=1:return {'qualified':False,'reason':'No unique safe structural CAS/output pattern'}
  return candidates[0]
-def recognize(directory):
- d=Path(directory);air=air_contract(json.loads((d/'typed-air.json').read_text()))
- code=(d/'native.sass').read_bytes();sass=sass_contract(code,(d/'native.asm').read_text(),air.get('expected_output_component',0))
- return {'policy_version':1,'qualified':air['qualified'] and sass['qualified'],'AIR':air,'SASS':sass,
-         'hashes':{p.name:sha(p) for p in [d/'test.metal',d/'test.air',d/'test.metallib',d/'typed-air.json',d/'native.sass',d/'native.asm']},
+def recognize(directory,decoder=None):
+ d=Path(directory);names=['test.metal','test.air','test.metallib','typed-air.json','native.sass','native.asm']
+ snapshot={name:(d/name).read_bytes() for name in names};air=air_contract(json.loads(snapshot['typed-air.json']))
+ code=snapshot['native.sass'];listing=snapshot['native.asm'].decode('utf-8');verified=verify_decoder(code,listing,decoder)
+ sass=sass_contract(code,listing,air.get('expected_output_component',0)) if verified else {'qualified':False,'reason':'Offline decoder missing, unpinned or listing differs'}
+ return {'policy_version':1,'qualified':air['qualified'] and verified and sass['qualified'],'AIR':air,'SASS':sass,'decoder_reproduced_listing':verified,
+         'hashes':{name:hashlib.sha256(value).hexdigest() for name,value in snapshot.items()},
          'SASS_only_repair_forbidden':True,'scope':'Offline candidate diagnosis plus exact input fingerprints; per-shader GPU qualification required before use.'}
 if __name__=='__main__':
- p=argparse.ArgumentParser();p.add_argument('--input',type=Path,required=True);a=p.parse_args();r=recognize(a.input)
+ p=argparse.ArgumentParser();p.add_argument('--input',type=Path,required=True);p.add_argument('--decoder',type=Path,required=True);a=p.parse_args();r=recognize(a.input,a.decoder)
  (a.input/'recognition.json').write_text(json.dumps(r,indent=2)+'\n');print(json.dumps(r,indent=2))
