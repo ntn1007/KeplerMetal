@@ -21,6 +21,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+A process-local observer verifies the device-to-shared object link created naturally by Metal on the GTX; lifetime and video use remain unqualified. [Evidence](docs/METAL_SHARED_OBJECT.md).
+
 A synthetic legacy-video initialization probe uses observed device words and checks an ordered locally intercepted selector sequence; hardware decoding remains unproved. [Evidence](docs/VIDEO_SYNTHETIC_SEQUENCE.md).
 
 A process-local Metal observer now validates five configuration words from a real GTX device object; their meanings and video compatibility remain unknown. [Evidence](docs/METAL_DEVICE_OBJECT.md).
