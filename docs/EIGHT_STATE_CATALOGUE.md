@@ -33,9 +33,8 @@ combined scenario on the GPU.
 A new pinned typed AIR experiment contains the three setters and both indexed
 draw widths. Its source compiles and the exact lowered program has been
 constructed by the native NVIDIA backend and inspected for unresolved calls.
-No quad-context runtime or quad GPU dispatch is claimed. Integration, actual
-GPU execution, resource-lifetime qualification and native-image comparisons
-remain required before claiming the combined feature.
+At this milestone there was no quad-context runtime or quad GPU dispatch.
+Later integration and GPU qualification are described in [QUAD_RENDER.md](QUAD_RENDER.md).
 
 The initial sixteen-candidate host did not compile because Objective-C did not
 recognize `valueForKey:` on the typed Metal protocol; it was rebuilt with an

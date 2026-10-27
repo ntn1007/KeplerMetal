@@ -59,11 +59,14 @@
 - (KPRenderCommandArgumentContext*)newIndexedVertexPipelineRenderCommandArgumentContextWithCommands:(id<MTLIndirectCommandBuffer>)commands stateCatalogue:(KPRenderStateCatalogue*)catalogue commandRecords:(id<MTLBuffer>)records commandRecordsOffset:(NSUInteger)offset commandBuffer:(id<MTLCommandBuffer>)cb error:(NSError**)error{
  return[self newRenderCommandArgumentContextWithCommands:commands stateCatalogue:catalogue commandRecords:records commandRecordsOffset:offset commandBuffer:cb indexedBindings:YES vertexBindings:YES pipelineBindings:YES fragmentBindings:NO error:error];
 }
+- (KPRenderCommandArgumentContext*)newIndexedVertexPipelineFragmentRenderCommandArgumentContextWithCommands:(id<MTLIndirectCommandBuffer>)commands stateCatalogue:(KPRenderStateCatalogue*)catalogue commandRecords:(id<MTLBuffer>)records commandRecordsOffset:(NSUInteger)offset commandBuffer:(id<MTLCommandBuffer>)cb error:(NSError**)error{
+ return[self newRenderCommandArgumentContextWithCommands:commands stateCatalogue:catalogue commandRecords:records commandRecordsOffset:offset commandBuffer:cb indexedBindings:YES vertexBindings:YES pipelineBindings:YES fragmentBindings:YES error:error];
+}
 - (KPRenderCommandArgumentContext*)newRenderCommandArgumentContextWithCommands:(id<MTLIndirectCommandBuffer>)commands stateCatalogue:(KPRenderStateCatalogue*)catalogue commandRecords:(id<MTLBuffer>)records commandRecordsOffset:(NSUInteger)offset commandBuffer:(id<MTLCommandBuffer>)cb indexedBindings:(BOOL)indexed vertexBindings:(BOOL)vertex pipelineBindings:(BOOL)pipeline fragmentBindings:(BOOL)fragment error:(NSError**)error{
  @synchronized(_factoryLock){
   if(error)*error=nil;
   NSArray*sources=liveRenderCatalogueSources(catalogue,self,error);
-  if((fragment&&(indexed||vertex||pipeline))||(pipeline&&(indexed!=vertex))||!_renderRecordArgumentsEnabled||!sources||sources.firstObject!=commands||cb.commandQueue!=_queue||cb.status!=MTLCommandBufferStatusNotEnqueued||!cb.retainedReferences||records.device!=_device||records.storageMode!=MTLStorageModePrivate||offset%16||offset>records.length||catalogue.logicalCommandCount>16||catalogue.logicalCommandCount*64>records.length-offset||!records.gpuAddress||records.gpuAddress>>40||records.length>((uint64_t(1)<<40)-records.gpuAddress)){
+  if((fragment&&(indexed||vertex||pipeline)&&!(indexed&&vertex&&pipeline))||(pipeline&&(indexed!=vertex))||!_renderRecordArgumentsEnabled||!sources||sources.firstObject!=commands||cb.commandQueue!=_queue||cb.status!=MTLCommandBufferStatusNotEnqueued||!cb.retainedReferences||records.device!=_device||records.storageMode!=MTLStorageModePrivate||offset%16||offset>records.length||catalogue.logicalCommandCount>16||catalogue.logicalCommandCount*64>records.length-offset||!records.gpuAddress||records.gpuAddress>>40||records.length>((uint64_t(1)<<40)-records.gpuAddress)){
    fail(error,@"Render argument records, catalogue, queue or bounds differ");return nil;
   }
   KPRenderICB*target=(KPRenderICB*)commands;KPRenderCommandArgumentContext*old=target.renderArgumentContext;

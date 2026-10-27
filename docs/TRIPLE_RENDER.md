@@ -104,6 +104,6 @@ frozen oracles, checks serialized receipts, compares native/repeat images and
 requires all four selector combinations to differ.
 
 The runtime still requires an adapted application and explicitly registered
-profiles. Pipeline+vertex+index is only one combination; texture, fragment,
-indirect generation, resource mutation and broader application integration
-remain separate work.
+profiles. Pipeline+vertex+index is only one combination. A later fragment-resource
+combination is documented in [QUAD_RENDER.md](QUAD_RENDER.md); broader
+resource mutation and application integration remain separate work.

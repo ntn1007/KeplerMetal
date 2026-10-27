@@ -10,9 +10,11 @@ fragment pointer; it matches it to a retained resource and a permitted
 state-transition row. The target application must register the producer and
 render profiles, retain resources and declare indirect dependencies.
 
-This is an opt-in, process-local fragment-only context. It does not yet combine
-with the indexed/vertex/pipeline context in [TRIPLE_RENDER.md](TRIPLE_RENDER.md),
-implement the native Apple ICB ABI, change the installed driver, support
+This is an opt-in, process-local fragment-only context. It was initially
+separate from the indexed/vertex/pipeline context in
+[TRIPLE_RENDER.md](TRIPLE_RENDER.md); the later combined path is documented in
+[QUAD_RENDER.md](QUAD_RENDER.md). This experiment does not implement the native Apple ICB ABI, change the
+installed driver, support
 unmodified applications, establish Metal 3/4 conformance or demonstrate a
 performance gain. State tables are bounded and validated against their exact
 owned context and retained objects; they are not a sandbox for arbitrary GPU

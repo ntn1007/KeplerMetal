@@ -1,8 +1,10 @@
-# Status, 2026-10-24
+# Status, 2026-10-27
 
-Eight render states and sixteen flattened candidates now pass bounded GTX execution and controls. A combined indexed/vertex/pipeline/fragment shader is compiled and inspected but not dispatched. [Evidence and limits](EIGHT_STATE_CATALOGUE.md).
+The scoped quad context combines indexed draw spans with vertex, pipeline and fragment transitions. [Evidence and limits](QUAD_RENDER.md).
 
-A separate typed fragment context selects certified fragment argument buffers from the GPU and renders a native Metal texture in an adapted client. Combination with the triple context remains open. [Evidence and limits](FRAGMENT_BINDING_EXPERIMENT.md).
+Eight render states and sixteen flattened candidates pass bounded GTX execution and controls. [Evidence and limits](EIGHT_STATE_CATALOGUE.md).
+
+A separate typed fragment context selects certified fragment argument buffers from the GPU and renders a native Metal texture in an adapted client. A later combined context is documented in [QUAD_RENDER.md](QUAD_RENDER.md). [Evidence and limits](FRAGMENT_BINDING_EXPERIMENT.md).
 
 The scoped triple render context combines pipeline and vertex transitions with indexed draw spans. The adapted client checks native-image and CPU references, setter order and guarded refusal cases; transparent application support remains open. [Evidence and reproduction](TRIPLE_RENDER.md).
 

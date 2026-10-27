@@ -28,10 +28,10 @@
       "path": "bridge/src/KeplerCPUICB.h",
       "source_path": "bridge/src/KeplerCPUICB.h",
       "source_SHA256": "263dede0101967e1bfa32fe3b081b73c476d9e09e8a9b5446ae04cf4f425ee0a",
-      "published_SHA256": "1f76677b9d2e49febf3662e7a0f69207479ac9ccfa1aada685c881c64a797415",
-      "bytes": 35441,
+      "published_SHA256": "f44c786a4b65ad32fa96ab4e77025ffadf0934135eccdb1af8ff2362926d2fc9",
+      "bytes": 36350,
       "modified_for_publication": true,
-      "previous_published_SHA256": "ef4e87c5f7077b4e24d74399406a3582c193b96701d84d895e27d7565091b088"
+      "previous_published_SHA256": "1f76677b9d2e49febf3662e7a0f69207479ac9ccfa1aada685c881c64a797415"
     },
     {
       "path": "bridge/src/KeplerCPUICB.mm",
@@ -7478,8 +7478,8 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "b081659939890c1ba61a668f14710eee6c218c78f13ccc938e849c95725847ad",
-  "previous_public_commit": "75d93ea86ef6ebeea6dc0e93d7b6a71810a17c3c",
+  "previous_source_snapshot_SHA256": "6b1fe41c2aa712e4cff486875bc31808e8fc3f049022ac05c7289e4c04beb349",
+  "previous_public_commit": "e4dea99752388d5aa4e4cc3be4a9e810ff05525e",
   "update": {
     "date": "2026-10-27",
     "reason": "Combined indexed, vertex and pipeline render context",
@@ -7488,5 +7488,5 @@
     ]
   },
   "update_date": "2026-10-27",
-  "update_reason": "Add a scoped certified fragment-buffer transition and preserve previous contexts."
+  "update_reason": "Add an explicit scoped four-table render context."
 }
