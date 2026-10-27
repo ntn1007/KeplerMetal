@@ -1,0 +1,28 @@
+{
+  "audit": "PASS",
+  "coordinate_geometry_output_hashes_repeat": true,
+  "driver_file_SHA256": "e240d54a4cd64b7e54fbc15250de82e88451132e1d9f3a4f9879607c8b0e7645",
+  "execution_manifest_SHA256": [
+    "065aae9c7d8bf3656164cb121616771de243fcb7d192adb5b1bf8cfe25edc617",
+    "f4a1c81cac6da8d60b54d19561fe5c288c3d226a48d650e0b83113bf22dd9ca0",
+    "0ce28ff7291c0eb24970feea66fbda066cf97fb11de578624c02827c5307a003",
+    "b19da50ae29524be55d9c7fe69fe4f16a4547b88770d85dc703a94d964d9199d"
+  ],
+  "execution_processes": 3,
+  "frozen_host_SHA256": "72c7f7d46b86825b23e7ef02b0c1e03b21aacd9adcf9cda78b5c0575c7af788a",
+  "native_library_SHA256": "5c35418c2465d1fa87396419c165ac33b5005937e8623fc40329fef30be99de0",
+  "partial_threadgroups_implemented": false,
+  "preparation_processes": 1,
+  "processes": 4,
+  "qmd_and_builtin_geometry_checked": true,
+  "reported_resident_stream_hashes_checked": true,
+  "runtime_archive_SHA256": "42e3c6c396c86c97e7a29c1866b6cca1e716d8e775da77d17c5a71ce5d3fc87a",
+  "same_frozen_build": true,
+  "source_SHA256": "c39f2a6e9d968a917ac14e25904034912b06293dd2fb67d82b04e279d85c3597",
+  "suppressed_controls": 3,
+  "system_modified": false,
+  "threads": 90,
+  "transparent_integration": false,
+  "uint32_values_checked": 720,
+  "user_dispatches": 18
+}

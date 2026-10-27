@@ -69,7 +69,7 @@ The audit pins the captured native code hashes and expects the same source and r
 
 ## Next qualification boundary
 
-The bounded origin experiment below qualifies one native shader and selected group-ID shifts. Separately qualify logical group counts, actual versus nominal dimensions and local-memory barriers for the proposed decomposition. The approach must preserve resource ownership and progress and reject unsupported shaders/geometry; semantic equivalence across segmented submissions remains open. Only after those proofs should the scoped ICB's current refusal be reconsidered. Native Apple ICB ABI and transparent integration into ordinary applications remain separate work.
+The bounded origin experiment below qualifies one native shader and selected group-ID shifts. The later edge-builtins experiment exercises selected logical group counts and actual dimensions. Separately isolate the nominal field, qualify the corresponding MSL builtins, and test local-memory barriers for the proposed decomposition. The approach must preserve resource ownership and progress and reject unsupported shaders/geometry; semantic equivalence across segmented submissions remains open. Only after those proofs should the scoped ICB's current refusal be reconsidered. Native Apple ICB ABI and transparent integration into ordinary applications remain separate work.
 
 ## Follow-up: bounded nonzero origins on the GTX 880M
 
@@ -95,3 +95,28 @@ python3 bridge/tools/audit_partial_origin.py "$LAB/results/origin-prepare-new" "
 ```
 
 The builder checks source/archive, SDK, library, manifest and machine profile. The runner freezes inputs, checks the same profile, uses a separately signed host and the common reservation, and invokes the independent raw-data verifier. The auditor checks four terminal serialized processes and signatures. Unknown drivers or assets are refused, not automatically repinned.
+
+## Follow-up: edge-group builtins on the GTX
+
+A further isolated experiment uses the same certified shader and resident launch mechanism. Each actual launch is a **single, ordinary physical threadgroup**, with size smaller in one dimension than a separately supplied nominal size. The probe changes the origin, nominal size, logical group count and candidate logical-grid fields **together** in the record's private constant buffer; these changes do not establish the individual causal role of each field. No native command or shader bytes are patched. Its complete 64 KiB constant buffer and 4 KiB descriptor are read back and checked before and after launch.
+
+| Case | Actual physical group | Supplied nominal size | Origin | Supplied logical group counts | Observed group ID |
+| --- | --- | --- | --- | --- | --- |
+| X edge | `(3,1,1)` | `(4,1,1)` | `(8,0,0)` | `(3,1,1)` | `(2,0,0)` |
+| Y edge | `(4,1,1)` | `(4,2,1)` | `(0,4,0)` | `(2,3,1)` | `(0,2,0)` |
+| Z edge | `(4,2,1)` | `(4,2,2)` | `(0,0,4)` | `(2,2,3)` | `(0,0,2)` |
+
+One preparation and three fresh serialized execution processes qualified **18 launches, 90 shader invocations and 720 checked coordinate/geometry values**, with three suppressed-launch controls. Each process includes an unmodified physical-geometry control for each edge case. Independent CPU verification checks counters, all output bytes and guards, group and local coordinates, actual local size and reported group counts. The three processes produce matching output hashes. The [audit](partial-nominal-validation.json) additionally checks native QMD dimensions, builtin baseline fields, the reported resident select/launch/wait stream hashes, signatures, source/build fingerprints and terminal reservations.
+
+The shader computes its own output index using `groups * actualLocal`; this is **not** a validated linear index for the full logical Metal grid. Although the candidate logical-grid field is changed, this shader does not report `threads_per_grid`. It does not report `dispatch_threads_per_threadgroup` either. Thus the test shows that selected edge metadata produces the expected outputs for this shader, **not** that all Metal builtins or arbitrary shaders work. No group barrier is exercised, no complete multi-region dispatch is implemented, and the partial-ICB refusal remains in place. Further isolate field causality with controls and use a shader explicitly reporting nominal/grid sizes and barriers before integration.
+
+Reproduce with the same pinned archive, library, current registry ID and common reservation root as the origin experiment; output directories must be new:
+
+```sh
+python3 bridge/tools/partial_nominal.py build --out "$LAB/results/nominal-build-new" --archive "$ARCHIVE" --metallib "$GRIDLIB"
+python3 bridge/tools/partial_nominal.py run --build "$LAB/results/nominal-build-new" --out "$LAB/results/nominal-prepare-new" --reservation-root "$LAB" --mode prepare --registry-id "$RID"
+for run in 1 2 3; do
+  python3 bridge/tools/partial_nominal.py run --build "$LAB/results/nominal-build-new" --out "$LAB/results/nominal-execute-new-$run" --reservation-root "$LAB" --mode execute --registry-id "$RID" || break
+done
+python3 bridge/tools/audit_partial_nominal.py "$LAB/results/nominal-prepare-new" "$LAB/results/nominal-execute-new-1" "$LAB/results/nominal-execute-new-2" "$LAB/results/nominal-execute-new-3"
+```
