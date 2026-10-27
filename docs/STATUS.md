@@ -1,6 +1,6 @@
 # Status, 2026-10-27
 
-Partial threadgroups remain refused on Kepler. A bounded adapted client now assembles a 191-thread logical grid from two GTX resident launches, including a 63-thread edge; general partial ICB dispatch remains open. [Evidence and reproduction](PARTIAL_THREADGROUP_RESEARCH.md).
+Partial threadgroups remain refused on Kepler. A bounded adapted client now assembles 1D and 3D partial logical grids on the GTX using resident launches; the 3D builtins match an M1 reference, while general partial ICB dispatch remains open. [Evidence and reproduction](PARTIAL_THREADGROUP_RESEARCH.md).
 
 Scoped CPU compute ICB thread-grid dispatch accepts evenly divisible grids with bounded 1D, 2D and 3D GPU qualification; partial groups remain refused. [Evidence](UNIFORM_THREAD_ICB.md).
 

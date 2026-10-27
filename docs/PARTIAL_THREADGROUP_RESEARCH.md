@@ -183,3 +183,24 @@ for run in 1 2 3; do
 done
 python3 bridge/tools/audit_partial_assembly.py "$LAB/results/assembly-prepare-new" "$LAB/results/assembly-execute-new-1" "$LAB/results/assembly-execute-new-2" "$LAB/results/assembly-execute-new-3"
 ```
+
+## Follow-up: eight-region 3D grid and M1 reference comparison
+
+A separate fixed adapted client assembles a logical **11 × 7 × 5 grid** with nominal group size **4 × 4 × 3**. Its eight independently prepared resident records cover the full interior, three faces, three edges and the corner. The first four records each launch two physical groups; the last four launch one, for twelve physical groups in all. Each record retains its own validated QMD and constant buffer while sharing the bounded output and atomic counter. The eight native launches are submitted in one user command buffer. This remains a fixed project-owned transport experiment, not the native Metal `dispatchThreads` implementation.
+
+Three fresh signed processes each run an untouched suppressed-launch control, all eight regions individually, then the full sequence in forward and reverse order. The three processes cover **six complete 385-thread grids**, 24 single-region controls, three suppressed controls, **72 native launches, 3,465 invocations and 27,720 checked uint32 outputs**. The CPU oracle verifies every coordinate, actual and nominal group size, logical grid and group count, local-memory witness, counter, output byte and guard. Full 64 KiB constants and 4 KiB QMD snapshots are rechecked for every record after every trial. The verifier checks the resident launch-stream hashes and record geometry; the [audit](partial-assembly-3d-validation.json) verifies signatures, serial completion, frozen inputs and matching outputs across both orders and all processes.
+
+The audit also rechecks the two previously captured, native Apple M1 Max reference cohorts for the same logical grid. For each GTX output and each M1 capture it compares all three components of seven metadata fields: global/local/group position, group count, actual size, nominal size and grid size. All **48,510 component comparisons** match. This is a comparison of independently obtained results, not a new M1 run, and the M1 result is not evidence of Kepler GPU execution. The two shaders use different barrier witnesses; those witnesses are checked against their respective CPU oracles, not directly compared.
+
+The outcome qualifies this specific shader and geometry through a process-local adapted client. It does not prove arbitrary Metal shaders, all possible 2D/3D sizes, cross-group forward progress or ordering, performance, native Apple ICB identity or transparent ordinary-application behavior. Region launches are serialized; replacing one dispatch with several launches could change scheduling. The scoped ICB still rejects partial `concurrentDispatchThreads`, pending a guarded integration and separate lifecycle/semantic qualification. No system driver is changed.
+
+Reproduce using the same pinned wide shader library, public archive, common lab reservation and M1 reference directory described above. Supply the current GTX registry ID and fresh output paths:
+
+```sh
+python3 bridge/tools/partial_assembly_3d.py build --out "$LAB/results/assembly-3d-build-new" --archive "$ARCHIVE" --metallib "$LAB/results/wide-pipeline-build-new/assets/shader.metallib"
+python3 bridge/tools/partial_assembly_3d.py run --build "$LAB/results/assembly-3d-build-new" --out "$LAB/results/assembly-3d-prepare-new" --reservation-root "$LAB" --mode prepare --registry-id "$RID"
+for run in 1 2 3; do
+  python3 bridge/tools/partial_assembly_3d.py run --build "$LAB/results/assembly-3d-build-new" --out "$LAB/results/assembly-3d-execute-new-$run" --reservation-root "$LAB" --mode execute --registry-id "$RID" || break
+done
+python3 bridge/tools/audit_partial_assembly_3d.py "$LAB/results/assembly-3d-prepare-new" "$LAB/results/assembly-3d-execute-new-1" "$LAB/results/assembly-3d-execute-new-2" "$LAB/results/assembly-3d-execute-new-3" "$M1_ROOT"
+```

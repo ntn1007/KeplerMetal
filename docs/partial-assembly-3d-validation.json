@@ -1,0 +1,42 @@
+{
+  "audit": "PASS",
+  "both_orders_match": true,
+  "combined_grid_executions": 6,
+  "driver_file_SHA256": "e240d54a4cd64b7e54fbc15250de82e88451132e1d9f3a4f9879607c8b0e7645",
+  "execution_manifest_SHA256": [
+    "f9ccd5cd26f2148692e2c2dcff9fcfc862a5856c1fadb62c9e65813f36eafd80",
+    "ae858c8d4d2bcd9bad665c3b9d38c1106a6e156e140f235f124499f9bfe53508",
+    "0083964f7f9d02d645e7eadb65e0932b9306a0ef254e8759282d42f556838fab",
+    "63a9583dd7f415d5986e85bd91efa1bc56100a9af21c05c59705d800ccab5ca6"
+  ],
+  "execution_processes": 3,
+  "frozen_host_SHA256": "a2b28144a3eb1644e52580c122f63143a3a37d2feec4b4e910440fe95a08a0b1",
+  "logical_grid_shape": [
+    11,
+    7,
+    5
+  ],
+  "logical_grid_threads": 385,
+  "m1_barrier_witness_not_directly_compared": true,
+  "m1_metadata_components_checked": 48510,
+  "m1_reference_is_not_Kepler_execution": true,
+  "m1_reference_manifest_SHA256": [
+    "735de14fea3f979f5d455bfab95ab3d44343a0f12e714f5dbfc2a5ec0e481487",
+    "159465521357cea524c4cb8b67f5ad84093c6f3fed225ef1df439a4b080a2904"
+  ],
+  "native_library_SHA256": "1e89eaf47bdcb482e4fc760869b6005e47c1e836ec43e14820ba601c28fdd3f5",
+  "partial_ICB_implemented": false,
+  "preparation_processes": 1,
+  "processes": 4,
+  "runtime_archive_SHA256": "42e3c6c396c86c97e7a29c1866b6cca1e716d8e775da77d17c5a71ce5d3fc87a",
+  "same_frozen_build": true,
+  "same_outputs_across_processes": true,
+  "single_region_controls": 24,
+  "source_SHA256": "2fb1c35f3dcb36452af95f00cd81a81e8b241a82686e0fb30c0883a8e443481d",
+  "suppressed_controls": 3,
+  "system_modified": false,
+  "threads": 3465,
+  "transparent_integration": false,
+  "uint32_values_checked": 27720,
+  "user_dispatches": 72
+}
