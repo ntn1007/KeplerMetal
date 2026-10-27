@@ -69,7 +69,7 @@ The audit pins the captured native code hashes and expects the same source and r
 
 ## Next qualification boundary
 
-The bounded origin experiment below qualifies one native shader and selected group-ID shifts. The later edge-builtins experiment exercises selected logical group counts and actual dimensions. The later builtin/barrier witness directly reports the nominal and grid builtins for selected cases. Isolate field causality and qualify cross-warp barriers and complete decompositions separately. The approach must preserve resource ownership and progress and reject unsupported shaders/geometry; semantic equivalence across segmented submissions remains open. Only after those proofs should the scoped ICB's current refusal be reconsidered. Native Apple ICB ABI and transparent integration into ordinary applications remain separate work.
+The bounded origin experiment below qualifies one native shader and selected group-ID shifts. The later edge-builtins experiment exercises selected logical group counts and actual dimensions. The later builtin/barrier witness directly reports the nominal and grid builtins for selected cases. The later wide-group witness covers selected groups spanning multiple warps. Isolate field causality and qualify complete decompositions separately. The approach must preserve resource ownership and progress and reject unsupported shaders/geometry; semantic equivalence across segmented submissions remains open. Only after those proofs should the scoped ICB's current refusal be reconsidered. Native Apple ICB ABI and transparent integration into ordinary applications remain separate work.
 
 ## Follow-up: bounded nonzero origins on the GTX 880M
 
@@ -142,4 +142,25 @@ for run in 1 2 3; do
   python3 bridge/tools/partial_builtin_run.py run --build "$LAB/results/builtin-run-build-new" --out "$LAB/results/builtin-execute-new-$run" --reservation-root "$LAB" --mode execute --registry-id "$RID" || break
 done
 python3 bridge/tools/audit_partial_builtin.py "$LAB/results/builtin-pipeline-new" "$LAB/results/builtin-prepare-new" "$LAB/results/builtin-execute-new-1" "$LAB/results/builtin-execute-new-2" "$LAB/results/builtin-execute-new-3"
+```
+
+## Follow-up: multi-warp threadgroup witness
+
+The [wide diagnostic shader](../bridge/src/partial_wide_barrier.metal) expands the local array to 128 words. After a threadgroup barrier, every thread reads the value written by the thread whose linear local index is `(index + 32) % groupSize`. Its exact source, AIR, library, signed host and driver-profile hashes are recorded in the [audit](partial-wide-validation.json). On the usual NVIDIA 32-thread warp mapping, many of these exchanges cross a warp boundary; the observed pipeline reports a 32-thread execution width. The test does not independently trace warp scheduling.
+
+Three serialized, signed processes each execute zero-origin and edge-metadata cases for physical groups of **63**, **56** and **96** threads. Actual and nominal dimensions differ along X, Y and Z respectively in the edge cases; the output buffers are bounded and guards checked. The construction-only pipeline inspection reports 512 bytes of static threadgroup memory and 22 registers. Across the execution processes, **18 launches, 1,290 invocations and 10,320 uint32 outputs** match the independent CPU oracle, with three untouched suppressed-launch controls. The same shader reports global/local/group coordinates, logical group counts, actual and nominal group sizes, and grid size. Complete resident constant buffers and descriptors match their expected before/after snapshots. Each process produces identical output hashes.
+
+This is evidence that the tested shader and barrier produce the expected results on groups larger than one warp. It is not a proof that removing the barrier would fail, that all synchronization patterns are correct, or that arbitrary shader/group sizes work. Origin, grid, nominal size and group-count data still change together. Every launch remains one physical group; combining adjacent regions into one Metal dispatch, native ICB identity and transparent application integration remain unimplemented. No performance gain is claimed.
+
+Reproduce with `LAB`, `ARCHIVE` and `RID` as in the previous section. Use fresh directories; the build pins the original source/toolchain result and the GPU runner uses the shared reservation:
+
+```sh
+python3 bridge/tools/partial_wide_pipeline.py build --out "$LAB/results/wide-pipeline-build-new"
+python3 bridge/tools/partial_wide_pipeline.py run --build "$LAB/results/wide-pipeline-build-new" --out "$LAB/results/wide-pipeline-new" --reservation-root "$LAB" --registry-id "$RID"
+python3 bridge/tools/partial_wide_run.py build --out "$LAB/results/wide-run-build-new" --archive "$ARCHIVE" --metallib "$LAB/results/wide-pipeline-build-new/assets/shader.metallib"
+python3 bridge/tools/partial_wide_run.py run --build "$LAB/results/wide-run-build-new" --out "$LAB/results/wide-prepare-new" --reservation-root "$LAB" --mode prepare --registry-id "$RID"
+for run in 1 2 3; do
+  python3 bridge/tools/partial_wide_run.py run --build "$LAB/results/wide-run-build-new" --out "$LAB/results/wide-execute-new-$run" --reservation-root "$LAB" --mode execute --registry-id "$RID" || break
+done
+python3 bridge/tools/audit_partial_wide.py "$LAB/results/wide-pipeline-new" "$LAB/results/wide-prepare-new" "$LAB/results/wide-execute-new-1" "$LAB/results/wide-execute-new-2" "$LAB/results/wide-execute-new-3"
 ```
