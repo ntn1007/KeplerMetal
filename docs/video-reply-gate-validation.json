@@ -1,0 +1,72 @@
+{
+  "application_SHA256": "17b81a03d5eaab6c90a3c01e2bb91dc165fb5aad31eff37dc93c4089693f8b8f",
+  "audit_mutations_rejected": [
+    "resource_shared_after",
+    "null_context_rejected",
+    "resource_while_context_matches",
+    "context_slots_empty",
+    "probe_add_status",
+    "short_reply_rejected",
+    "request_guard_matches",
+    "request_output_capacity",
+    "probe_denied_selectors",
+    "buffer_CPU_after_context_correct",
+    "reservation_not_terminal"
+  ],
+  "audit_source_SHA256": "1445dec88a57d076f40dad028d72902965786015a3e607593b5d8e220d96a074",
+  "buffer_bytes_checked_before_and_after_per_host": 4194304,
+  "build_inputs_SHA256": "73dfa8728a1bb1b132a0bcdda23c433385451410e2e4658b859db29aa99692c1",
+  "controls": 2,
+  "explicit_GPU_dispatches": 0,
+  "guarded_request_class": 0,
+  "guarded_request_size": 131072,
+  "hardware_video_execution_proved": false,
+  "historical_result_SHA256": [
+    "1725f3dbcb06839143a64d1e6ff8bc14158392bf38b1dc926bff7ffbebeea3cb",
+    "5af31252b263a536a5bab44f130d524d487f8042045724efd265971c2a83f332"
+  ],
+  "historical_results_verified": true,
+  "hosts": 4,
+  "limits": [
+    "The 48-byte successful reply was simulated locally; no live video selector or real successful reply was observed.",
+    "Pointer association does not establish complete resource lifetime or cleanup.",
+    "No GPU computation or hardware video decoding is demonstrated.",
+    "Reservation and guarded imports do not cover unrelated processes or all driver activity."
+  ],
+  "nonoverlapping": true,
+  "observed_output_capacity": 49,
+  "observer_SHA256": "7459fd2b046d8089bbdb206ba8e8f2d4f8e7570546282835c14ab4a8f0d95a4c",
+  "policy_test_binary_SHA256": "d299523700d0003c599f624c241103cbbb68675e5a17781c4b3436b8da044240",
+  "policy_test_exit_code": 0,
+  "policy_test_source_SHA256": "51d211a55f94b762f98939603737ba4b07e49bcec462169c22a201da9cb48a4d",
+  "request_hosts": 2,
+  "rows": [
+    {
+      "manifest_SHA256": "4d82bab657b6d8b6fbd3f7bfe219f806ee86222dfc753b4cf0f2e998e63d57c4",
+      "mode": "observe",
+      "pid": 93358,
+      "result_SHA256": "3149b0bcc3a25d78637401cf078fa10d89df9a8e2fff79ae12e89c9a70dd2ccd"
+    },
+    {
+      "manifest_SHA256": "44e25ef2f2f22f081fc449a91050bff67b023ed1dabf678feeca9135b9bd9fbf",
+      "mode": "coexist",
+      "pid": 93382,
+      "result_SHA256": "abd03ceb7a7badd029db17fb448b7d2b09240f9f8e8660a68d15973b8e735d27"
+    },
+    {
+      "manifest_SHA256": "3f894e001244c3cf453f081119d5fd14c0ddc81df0dcabdc7c4461c3eaf07c0f",
+      "mode": "observe",
+      "pid": 93407,
+      "result_SHA256": "f114d9146ea57547a16c87dd5a915fb70c04d3f29805fe2d5db2b04facf3eb1b"
+    },
+    {
+      "manifest_SHA256": "5ed58c0a930cbd5f64e4c23d882274c0a05697660bd67079fb1c51ec03789348",
+      "mode": "coexist",
+      "pid": 93428,
+      "result_SHA256": "e56eb32add82b2fdffae53a229fbc096826c85dc7c707513f398eef77cc25a73"
+    }
+  ],
+  "simulated_reported_length": 48,
+  "status": "PASS",
+  "synthetic_success_rejected": 2
+}

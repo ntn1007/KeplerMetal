@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+An experimental C++ reply gate rejects a locally simulated short success before the native video wrapper constructs a resource, in two guarded processes. No real short response, video allocation or installed-driver fix is established. [Evidence](VIDEO_REPLY_GATE.md).
+
 A static video reply audit identifies a no-write NVIDIA private-tail function and a user-mode length-check gap on a hypothetical short successful reply. A CPU-only conservative bounds helper is tested; no real short reply, driver fix or video decode is established. [Evidence](VIDEO_REPLY_CONTRACT.md).
 
 On a real video wrapper, a historically observed class-0/128 KiB request reaches a guard and is refused before IOKit; the native user-mode output capacity is 49 bytes on this profile. Kernel acceptance and video allocation remain unproved. [Evidence](VIDEO_BUFFER_REQUEST_GUARD.md).
