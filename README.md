@@ -17,6 +17,8 @@ The work follows two complementary tracks:
 
 [Français](README.fr.md) · [Build from source](docs/BUILDING.md) · [Dependencies](docs/DEPENDENCIES.md) · [Status](docs/STATUS.md) · [Architecture](docs/ARCHITECTURE.md)
 
+A process-local, calibrated observer now traces ordinary Metal resource creation through IOAccelerator on the GTX 880M. The observed allocations are not yet correlated to a specific public buffer, and deletion and GPU execution remain unproven. [Evidence and reproduction](docs/VIDEO_METAL_RESOURCE_OBSERVER.md).
+
 ## Recent progress
 
 An opt-in scope can automatically adapt qualified ordinary render-encoder factories on its own queue. A separately compiled public-Metal client renders correctly; unsupported passes guard project ICBs. [Evidence and limits](docs/AUTOMATIC_RENDER_FACTORIES.md).

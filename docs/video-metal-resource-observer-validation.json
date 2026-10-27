@@ -1,0 +1,38 @@
+{
+  "GPU_execution_proved": false,
+  "audit": "PASS",
+  "build_inputs_SHA256": "eafaa83c670b0bcf34c899b7c09b8ebbc62420b31db6f76e5549fe861e450dae",
+  "control_events": 4,
+  "event_coverage_complete": false,
+  "observer_SHA256": "90c19cc0fe355d89ed550f339334a3078fbaf2d6d336e91fa4b9c9b9d1d017a2",
+  "phase_measures": "completion, not entry",
+  "resource_deletion_absence_proved": false,
+  "resource_to_public_buffer_correlation_proved": false,
+  "scalar_and_payload_values_recorded": false,
+  "separate_processes": 3,
+  "shared_create_observations": [
+    {
+      "events": 28,
+      "manifest_SHA256": "786847f4981b5c1e2263105b017bb347b859d129b24f251cee883a4630f32011",
+      "resource_create_calls_observed": 11,
+      "resource_create_completion_phases": [
+        2
+      ],
+      "result_SHA256": "225f22c2f36132cad2e1c95f27586061746e7a95703e336f5dc3f4935204a8c5",
+      "selector_1_calls_observed": 0,
+      "shared_opens": 1
+    },
+    {
+      "events": 28,
+      "manifest_SHA256": "bf75720cc780d23db7357c449cd80dc490100ea290779453d040c85d6f048a88",
+      "resource_create_calls_observed": 11,
+      "resource_create_completion_phases": [
+        2
+      ],
+      "result_SHA256": "f50a6510a4347dcb130b2f69a73496d4dd225526bbe7a4ec73dfe696ee3551bf",
+      "selector_1_calls_observed": 0,
+      "shared_opens": 1
+    }
+  ],
+  "video_execution_proved": false
+}
