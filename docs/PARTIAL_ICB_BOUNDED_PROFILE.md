@@ -1,5 +1,7 @@
 # Experimental bounded partial-grid dispatch in the project ICB
 
+A later qualification added a second exact read/write buffer shader; see [the stencil extension](PARTIAL_ICB_BUFFER_STENCIL.md). This document describes the original barrier-shader cohort and contract.
+
 The explicitly enabled, process-local CPU ICB adapter now decomposes **bounded nonuniform 1D, 2D and 3D grids** for the exact registered `partial_builtin_barrier` shader and manifest. This expands the earlier [fixed-grid experiment](PARTIAL_ICB_FIXED_PROFILE.md). It is an experimental adapted-application path: it is not arbitrary-shader support, the native Apple ICB ABI, a system driver update, a Metal version upgrade, or transparent integration into unmodified applications.
 
 After installing the scope with the [certified wide-shader library and manifest](../bridge/src/partial_wide_barrier.json), the caller must explicitly call `enableExperimentalPartialGridWithError:`. Then the project command's `concurrentDispatchThreads:threadsPerThreadgroup:` accepts nonzero **partial** dimensions if all these conditions hold:

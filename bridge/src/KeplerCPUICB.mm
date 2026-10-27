@@ -267,6 +267,15 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 @implementation KPIndirectRenderPlan
 @end
 
+// Only exact, explicitly registered shader and manifest pairs may use the
+// experimental nonuniform-grid transport. Never accept a caller-provided name alone.
+static BOOL certifiedPartialProfile(NSDictionary*p,id<MTLComputePipelineState>pipeline){
+ if(!pipeline||![p[@"native_registration_v1"]boolValue]||p[@"pipeline_owner"]!=pipeline)return NO;
+ NSString*name=p[@"function"],*library=p[@"library_SHA256"],*manifest=p[@"manifest_SHA256"];
+ return ([name isEqual:@"partial_builtin_barrier"]&&[library isEqual:@"1e89eaf47bdcb482e4fc760869b6005e47c1e836ec43e14820ba601c28fdd3f5"]&&[manifest isEqual:@"31287315ccb87740c86c7180651007a766535bfcadf3de34edbe10e6bad233be"])||
+        ([name isEqual:@"partial_buffer_stencil"]&&[library isEqual:@"1d7f936b2f110c99f889518c5ab654447fbdcd0b2215a4a8a14748684a907658"]&&[manifest isEqual:@"4edd2edd2bb70975dcfdac23d98f355f61a30edcd5bdd61fdd695e5a9144b428"]);
+}
+
 @implementation KPComputeICBCommand
 - (instancetype)init{if((self=[super init])){_bindings=[NSMutableDictionary new];_threadgroupLengths=[NSMutableDictionary new];}return self;}
 - (void)checkReusableMutation{if(_reusableContext){NSError*error=nil;if(![_reusableContext idle:&error])reject(error.localizedDescription);if(_reusableGeneration==_reusableContext.generation&&![_reusableContext retire:&error])reject(error.localizedDescription);}}
@@ -278,7 +287,7 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 - (void)concurrentDispatchThreads:(MTLSize)grid threadsPerThreadgroup:(MTLSize)local{
  if(grid.width&&grid.height&&grid.depth&&local.width&&local.height&&local.depth&&(grid.width%local.width||grid.height%local.height||grid.depth%local.depth)){
   [self checkReusableMutation];NSDictionary*p=[_owner.scope profileForPipeline:_pipeline];
-  if(_GPUGenerated||!_owner.scope.experimentalPartialGridEnabled||_owner.scope.restored||![p[@"native_registration_v1"]boolValue]||p[@"pipeline_owner"]!=_pipeline||![p[@"function"]isEqual:@"partial_builtin_barrier"]||![p[@"library_SHA256"]isEqual:@"1e89eaf47bdcb482e4fc760869b6005e47c1e836ec43e14820ba601c28fdd3f5"]||![p[@"manifest_SHA256"]isEqual:@"31287315ccb87740c86c7180651007a766535bfcadf3de34edbe10e6bad233be"])reject(@"Partial grid requires the explicitly enabled certified pipeline");
+  if(_GPUGenerated||!_owner.scope.experimentalPartialGridEnabled||_owner.scope.restored||!certifiedPartialProfile(p,_pipeline))reject(@"Partial grid requires the explicitly enabled certified pipeline");
   if(grid.width>1023||grid.height>1023||grid.depth>1023||local.width>1023||local.height>1023||local.depth>1023)reject(@"Partial grid exceeds packed dimension bounds");
   std::vector<KPPartialPlan::Region>regions;if(!KPPartialPlan::plan({(uint32_t)grid.width,(uint32_t)grid.height,(uint32_t)grid.depth},{(uint32_t)local.width,(uint32_t)local.height,(uint32_t)local.depth},regions))reject(@"Partial grid exceeds invocation, local or region bounds");
   _groups=MTLSizeMake((grid.width+local.width-1)/local.width,(grid.height+local.height-1)/local.height,(grid.depth+local.depth-1)/local.depth);_local=local;_partialGrid=grid;_hasDispatch=YES;_partialGrid3D=YES;[self invalidate];return;
@@ -322,7 +331,7 @@ static NSString*residentBindingError(KPComputeICBCommand*c,KPCPUICBScope*scope){
 // Profile registration alone is not GPU qualification.
 static void executeFixedPartialGrid(KPComputeICBCommand*c,KPCPUICBScope*scope,id<MTLComputeCommandEncoder>encoder){
  NSDictionary*p=[scope profileForPipeline:c.pipeline];
- if(!scope.experimentalPartialGridEnabled||scope.restored||!c.partialGrid3D||!c.hasDispatch||c.GPUGenerated||c.reusableContext||c.residentOwners.count||![p[@"native_registration_v1"]boolValue]||p[@"pipeline_owner"]!=c.pipeline||![p[@"function"]isEqual:@"partial_builtin_barrier"]||![p[@"library_SHA256"]isEqual:@"1e89eaf47bdcb482e4fc760869b6005e47c1e836ec43e14820ba601c28fdd3f5"]||![p[@"manifest_SHA256"]isEqual:@"31287315ccb87740c86c7180651007a766535bfcadf3de34edbe10e6bad233be"])reject(@"Partial grid profile or state changed");
+ if(!scope.experimentalPartialGridEnabled||scope.restored||!c.partialGrid3D||!c.hasDispatch||c.GPUGenerated||c.reusableContext||c.residentOwners.count||!certifiedPartialProfile(p,c.pipeline))reject(@"Partial grid profile or state changed");
  Ivar iv=class_getInstanceVariable(object_getClass(encoder),"_commandBuffer");if(!iv||ivar_getOffset(iv)!=32)reject(@"Partial grid encoder ABI differs");id<MTLCommandBuffer>cb=object_getIvar(encoder,iv);
  if(!cb||cb.commandQueue!=scope.queue||cb.status!=MTLCommandBufferStatusNotEnqueued||!cb.retainedReferences)reject(@"Partial grid requires a retained uncommitted buffer on the scope queue");
  if(c.bindings.count!=4||c.threadgroupLengths.count)reject(@"Partial grid bindings differ");
@@ -764,8 +773,8 @@ BOOL installRenderOverride(Class dynamic,Class original,SEL selector,IMP impleme
 - (NSDictionary*)profileForPipeline:(id<MTLComputePipelineState>)pipeline {return pipeline?_profiles[[NSValue valueWithPointer:(__bridge const void*)pipeline]]:nil;}
 - (id<MTLComputePipelineState>)pipelineForFunction:(NSString*)name{return _restored?nil:_namedPipelines[name];}
 - (BOOL)enableExperimentalPartialGridWithError:(NSError**)error {
- if(error)*error=nil;NSDictionary*p=[self profileForPipeline:_namedPipelines[@"partial_builtin_barrier"]];
- if(_restored||![p[@"native_registration_v1"]boolValue]||p[@"pipeline_owner"]!=_namedPipelines[@"partial_builtin_barrier"]||![p[@"library_SHA256"]isEqual:@"1e89eaf47bdcb482e4fc760869b6005e47c1e836ec43e14820ba601c28fdd3f5"]||![p[@"manifest_SHA256"]isEqual:@"31287315ccb87740c86c7180651007a766535bfcadf3de34edbe10e6bad233be"])return fail(error,@"Experimental partial grid requires the exact registered shader and manifest");
+ if(error)*error=nil;BOOL certified=NO;for(NSString*name in @[@"partial_builtin_barrier",@"partial_buffer_stencil"]){id<MTLComputePipelineState>pipeline=_namedPipelines[name];if(certifiedPartialProfile([self profileForPipeline:pipeline],pipeline)){certified=YES;break;}}
+ if(_restored||!certified)return fail(error,@"Experimental partial grid requires the exact registered shader and manifest");
  _experimentalPartialGridEnabled=YES;[_eventRows addObject:@{@"operation":@"enable_experimental_partial_grid",@"max_grid_invocations":@1024,@"max_local_invocations":@128,@"max_regions":@16,@"native_ICB":@NO,@"system_modified":@NO}];return YES;
 }
 

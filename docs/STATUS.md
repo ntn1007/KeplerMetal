@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+A second, exact buffer-transform shader executes through the bounded partial-grid adapter, with CPU-oracle and regression checks. [Evidence and limitations](PARTIAL_ICB_BUFFER_STENCIL.md).
+
 An explicit opt-in project ICB path executes bounded partial 1D/2D/3D grids for the exact certified shader and resource profile. Arbitrary shaders and general Metal ICB support remain open. [Contract and qualification](PARTIAL_ICB_BOUNDED_PROFILE.md).
 
 Scoped CPU compute ICB thread-grid dispatch accepts evenly divisible grids with bounded 1D, 2D and 3D GPU qualification; other profiles remain refused. [Evidence](UNIFORM_THREAD_ICB.md).

@@ -37,10 +37,10 @@
       "path": "bridge/src/KeplerCPUICB.mm",
       "source_path": "bridge/src/KeplerCPUICB.mm",
       "source_SHA256": "3d59c2c609611ddc387e616b8945e903f6378dbd4a3b66a02cb22087ada84b60",
-      "published_SHA256": "5098775e8072395b27f92748601111f54b13bccd277bf342b26b08d051245b86",
-      "bytes": 147375,
+      "published_SHA256": "69fefa971d54f7690e15b51950375e688fed02200f0fd7380e4393f2bb5be5eb",
+      "bytes": 147562,
       "modified_for_publication": true,
-      "previous_published_SHA256": "c8c7982ed90688577665f9762e73638c9ceceaf4153e4611200ab4b7750d7128"
+      "previous_published_SHA256": "5098775e8072395b27f92748601111f54b13bccd277bf342b26b08d051245b86"
     },
     {
       "path": "bridge/src/KeplerCommandIR.h",

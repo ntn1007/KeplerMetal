@@ -21,6 +21,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+The bounded partial-grid project ICB now also executes a pinned read/write neighbor transform, with GPU results checked against a CPU oracle. [Evidence and limits](docs/PARTIAL_ICB_BUFFER_STENCIL.md).
+
 An explicitly enabled project ICB path now executes bounded partial 1D/2D/3D grids on the GTX for a pinned shader and resource profile; arbitrary-shader support remains open. [Contract and evidence](docs/PARTIAL_ICB_BOUNDED_PROFILE.md).
 
 The scoped CPU compute ICB accepts evenly divisible thread-grid dispatches, with bounded 1D, 2D and 3D GPU qualification. Partial grids outside the explicitly bounded profile remain refused. [Contract and GPU evidence](docs/UNIFORM_THREAD_ICB.md).

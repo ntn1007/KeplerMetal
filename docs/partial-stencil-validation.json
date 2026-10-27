@@ -1,0 +1,164 @@
+{
+  "audit": "PASS",
+  "core_source_SHA256": "69fefa971d54f7690e15b51950375e688fed02200f0fd7380e4393f2bb5be5eb",
+  "execution_manifest_SHA256": [
+    "c189a9ed10d4b1a36e173ef9ad1ec09036da64ce03f371956a3f105cbfbb014c",
+    "8501021aedf84acb6a0515b44d07a8d5024456a6faf70d23ff054ea38ff676b1",
+    "0732747c9cdae3e32f32fd00ea3b3b72ae61353397c444cfcea7fbeb3762b4cd",
+    "4870cbff6eff48cf1adf5f0f75fc7234e5cf63ee3ea13bdf3eb2a3dac4a6baf0",
+    "45b3ab95e0747df01a668a22eca8a5c2ac1322092fe26b05dc26d5cd2e4cc2a8",
+    "d210ce675c37df542ee980b82159e3c25b583b6a84c5245cb7ad8ec1ec90ec1a",
+    "769e19e830f0b5ebabaf692e3e8fa4cc056e600e55fecab7e9456b7fa1c90000",
+    "74fce74fcba68b4a9880bd21e296b46d99ddee9dee6c2f4391003e79dfa551fa",
+    "d4003ca5af9826a6230b37b768f3dbeecebd8017954a1f07b5c8e596a2e31983",
+    "096fddf2501c01901c59344ae4ede48938d608c9770b98f1207e7d9cfd3d4a4a",
+    "42d751d6ce5399746086d4e43ef2d1b3e468831b50db531d9e8138516d7ece12",
+    "d5d47982cb820e62d0d70bce71f29a51e150f2b2aac0f8a730a20857716b954f",
+    "c41e1ba4fe79cdd7534822a544391163f14fd998b52a3dc18989b881f5d9e973",
+    "654b771d563974497c65826343b7eede9f08862d1eb04cc4d7b1b641557546ef",
+    "3593601da333135ea1f9735d3c859d5ffb3d863cf0db19a26691d598445e175d",
+    "9df4a051dcd0b1773508b3f2cd4e6dfb4036d0766aade78992c6d87438629ce4",
+    "f7a25c251bd9fd7bff4225cf1a56648df41292219618c2824a759c503f07a869"
+  ],
+  "grid_cases": [
+    {
+      "grid": [
+        11,
+        7,
+        5
+      ],
+      "local": [
+        4,
+        4,
+        3
+      ],
+      "regions": 8,
+      "threads": 1540
+    },
+    {
+      "grid": [
+        191,
+        1,
+        1
+      ],
+      "local": [
+        64,
+        1,
+        1
+      ],
+      "regions": 2,
+      "threads": 764
+    },
+    {
+      "grid": [
+        13,
+        5,
+        2
+      ],
+      "local": [
+        4,
+        3,
+        2
+      ],
+      "regions": 4,
+      "threads": 520
+    },
+    {
+      "grid": [
+        3,
+        2,
+        1
+      ],
+      "local": [
+        4,
+        4,
+        3
+      ],
+      "regions": 1,
+      "threads": 24
+    },
+    {
+      "grid": [
+        10,
+        9,
+        3
+      ],
+      "local": [
+        4,
+        4,
+        2
+      ],
+      "regions": 8,
+      "threads": 1080
+    },
+    {
+      "grid": [
+        13,
+        4,
+        4
+      ],
+      "local": [
+        4,
+        4,
+        4
+      ],
+      "regions": 3,
+      "threads": 832
+    },
+    {
+      "grid": [
+        1023,
+        1,
+        1
+      ],
+      "local": [
+        4,
+        1,
+        1
+      ],
+      "regions": 9,
+      "threads": 4092
+    },
+    {
+      "grid": [
+        1,
+        1,
+        1
+      ],
+      "local": [
+        128,
+        1,
+        1
+      ],
+      "regions": 1,
+      "threads": 4
+    }
+  ],
+  "host_source_SHA256": "190295a9e87e63f3852de611ac18d2fb39cba3db71ed6c5a5b0eef87a9611427",
+  "manifest_SHA256": "4edd2edd2bb70975dcfdac23d98f355f61a30edcd5bdd61fdd695e5a9144b428",
+  "native_apple_ICB": false,
+  "negative_refusal_observations": 104,
+  "previous_shader_invocations": 5632,
+  "previous_shader_regression_hosts": 2,
+  "repeated_cases": [
+    0,
+    0,
+    6,
+    6
+  ],
+  "runtime_archive_SHA256": "8c030dcc2399a6aeb1e128762a72c375d7db4dbfc213a8fee32b3af93793b7d6",
+  "scope": "Exact experimental shader and manifest; immutable input and disjoint output; serial process-local project ICB",
+  "shader_library_SHA256": "1d7f936b2f110c99f889518c5ab654447fbdcd0b2215a4a8a14748684a907658",
+  "shader_source_SHA256": "08a52b04513b2bc6036ebd1a1a6ff6dde125b918c4d254769e027076716a3fa0",
+  "stencil_execution_hosts": 12,
+  "stencil_invocations": 20120,
+  "stencil_output_uint32_values": 80480,
+  "stencil_prepare_hosts": 1,
+  "stencil_user_command_buffers": 48,
+  "system_modified": false,
+  "transparent_integration": false,
+  "uniform_invocations": 37264,
+  "uniform_paired_data_files": 180,
+  "uniform_regression_hosts": 2,
+  "uniform_uint32_values": 298112
+}
