@@ -1,0 +1,139 @@
+{
+  "date": "2026-10-27",
+  "base_commit": "74b29d0d91221e1355915b8a35403a75c780b7df",
+  "audit_SHA256": "f21b60dfbdaae84a4b550e328fca637caad047e7538b4dfbd722ac9615460d6d",
+  "build_inputs_SHA256": "99d33955bc5578d331986f0fe46c9d785bda03035fa460f3c6b76c5052d446dc",
+  "original_executable_SHA256": "b0d1dd09cf9a370de776036176d171f4269a3d3743f4b816bccb46a4b795021f",
+  "profile": {
+    "system_files_SHA256": {
+      "/System/Library/Extensions/NVDAResman.kext/Contents/MacOS/NVDAResman": "36396eaecd68ddbb0482f019f38ce55d01b10379ca829da7f19b3bd8f3e26808",
+      "/System/Library/Extensions/NVDAGK100Hal.kext/Contents/MacOS/NVDAGK100Hal": "74575453948c834dba5f18e936a58f611f01c598955ecc0f1ff79a501971c99e",
+      "/System/Library/Extensions/GeForce.kext/Contents/MacOS/GeForce": "44f131a958d48afd6ab675a851330c37506557c9d499484170c886c3731bdbb3",
+      "/System/Library/Extensions/IOAcceleratorFamily2.kext/Contents/MacOS/IOAcceleratorFamily2": "37e563d6cf3626101f30b1727a4f60dec02152dff9c74c0269c30c213a7320c8"
+    },
+    "kernel_UUID": "1291D44A-C0CD-3AC7-A9E4-CA2749B33959",
+    "loaded_kext_UUID": {
+      "com.apple.nvidia.driver.NVDAResman": "879FE28C-BC88-3553-B3C7-1CCFAE357D45",
+      "com.apple.nvidia.driver.NVDAGK100Hal": "CCDFB15A-E29E-38CE-A6C0-732F5648BC28",
+      "com.apple.GeForce": "B907167E-E164-36D8-9E8F-695A72E738F7",
+      "com.apple.iokit.IOAcceleratorFamily2": "6C4A16B1-66DC-3A8B-9F0B-D3E027B16EB1"
+    },
+    "loaded_code_bytes_compared": false
+  },
+  "cohort": {
+    "status": "PASS",
+    "hosts": [
+      {
+        "mode": "inventory",
+        "pid": 32777,
+        "start": "2026-10-27T03:47:38.114287+00:00",
+        "end": "2026-10-27T03:47:39.171970+00:00",
+        "signed_SHA256": "02bbf6a7c1193431249fd400f4fbbbfad06cb41b520283a4478965d8c0282ca0",
+        "build_inputs_SHA256": "99d33955bc5578d331986f0fe46c9d785bda03035fa460f3c6b76c5052d446dc",
+        "registry_id": 4294968416,
+        "host_manifest_SHA256": "9d4e30dbbe0e5b947666c3723f4ced92f5af19e6936ecb0ce53c5b7bbc3e3ed9",
+        "results_SHA256": "37f4f09569f6a1101271e2225a201397b651c656696a286c5fb17ca7bcafcc1b",
+        "verification_SHA256": "00b8348d6e8725b92a1161616feb0bb79949d5b6aab02b30cdd2e18ac85f5ed1",
+        "proof": {
+          "status": "PASS",
+          "mode": "inventory",
+          "gpu_registry_id": 4294968416,
+          "open_attempts": 0,
+          "external_methods": 0,
+          "hardware_video_execution_proved": false,
+          "driver_internal_effects_traced": false,
+          "system_modified": false
+        }
+      },
+      {
+        "mode": "wrong-target",
+        "pid": 32798,
+        "start": "2026-10-27T03:47:49.275548+00:00",
+        "end": "2026-10-27T03:47:50.639294+00:00",
+        "signed_SHA256": "02bbf6a7c1193431249fd400f4fbbbfad06cb41b520283a4478965d8c0282ca0",
+        "build_inputs_SHA256": "99d33955bc5578d331986f0fe46c9d785bda03035fa460f3c6b76c5052d446dc",
+        "registry_id": 4294968416,
+        "host_manifest_SHA256": "052349d296f026aa039fbe68e65c33e71665178e2f434d139b14c00fe07f69f6",
+        "results_SHA256": "a3b007eaf0a39e22743a5636ce0149e267d70fcab24646ee1e1bf77b4be950d7",
+        "verification_SHA256": "d54a9fae6a61e4640215b1a66d4c68ee1dbcce317b95b07da0a3de0a3ced1304",
+        "proof": {
+          "status": "PASS",
+          "mode": "wrong-target",
+          "gpu_registry_id": 4294968416,
+          "open_attempts": 0,
+          "external_methods": 0,
+          "hardware_video_execution_proved": false,
+          "driver_internal_effects_traced": false,
+          "system_modified": false
+        }
+      },
+      {
+        "mode": "video",
+        "pid": 32820,
+        "start": "2026-10-27T03:48:01.174110+00:00",
+        "end": "2026-10-27T03:48:02.249289+00:00",
+        "signed_SHA256": "02bbf6a7c1193431249fd400f4fbbbfad06cb41b520283a4478965d8c0282ca0",
+        "build_inputs_SHA256": "99d33955bc5578d331986f0fe46c9d785bda03035fa460f3c6b76c5052d446dc",
+        "registry_id": 4294968416,
+        "host_manifest_SHA256": "c5bec94319d71b5baca89f6164a10126c56612aed7b7c3dd2bdba8515c42d57a",
+        "results_SHA256": "ebf31404a2a042264e752e767a8bd0c5c7de31cc09dc17ddf6459d7c9f62bc92",
+        "verification_SHA256": "493533c0c4a7c2be2111193bd06bbf7725123126779831ca9674e63ab9488aba",
+        "proof": {
+          "status": "PASS",
+          "mode": "video",
+          "gpu_registry_id": 4294968416,
+          "open_attempts": 1,
+          "external_methods": 0,
+          "hardware_video_execution_proved": false,
+          "driver_internal_effects_traced": false,
+          "system_modified": false
+        }
+      },
+      {
+        "mode": "video",
+        "pid": 32842,
+        "start": "2026-10-27T03:48:12.467438+00:00",
+        "end": "2026-10-27T03:48:13.681812+00:00",
+        "signed_SHA256": "02bbf6a7c1193431249fd400f4fbbbfad06cb41b520283a4478965d8c0282ca0",
+        "build_inputs_SHA256": "99d33955bc5578d331986f0fe46c9d785bda03035fa460f3c6b76c5052d446dc",
+        "registry_id": 4294968416,
+        "host_manifest_SHA256": "169af97f823dbd8c6dff01e0bf6772b4a3c547449f1ccd435777973ac409ee61",
+        "results_SHA256": "cb055b3700474138fcdba076232e31277ddf609a2edbf17af98a39ed329b19fe",
+        "verification_SHA256": "493533c0c4a7c2be2111193bd06bbf7725123126779831ca9674e63ab9488aba",
+        "proof": {
+          "status": "PASS",
+          "mode": "video",
+          "gpu_registry_id": 4294968416,
+          "open_attempts": 1,
+          "external_methods": 0,
+          "hardware_video_execution_proved": false,
+          "driver_internal_effects_traced": false,
+          "system_modified": false
+        }
+      }
+    ],
+    "same_signed_executable": true,
+    "serialized": true,
+    "successful_video_context_opens": 2,
+    "successful_video_context_closes": 2,
+    "external_IOConnect_calls": 0,
+    "GPU_commands_submitted": 0,
+    "hardware_video_execution_proved": false,
+    "driver_internal_effects_traced": false,
+    "current_video_profile_qualified_for_RM": false,
+    "limits": [
+      "Only type-3 open/close on the pinned profile.",
+      "A context opening is not a video decode, command ABI qualification or privilege grant."
+    ]
+  },
+  "offline_mutations_rejected": [
+    "target",
+    "close status",
+    "process ID",
+    "reservation state",
+    "frozen source"
+  ],
+  "synthetic_tests_passed": 5,
+  "exploratory_first_build_hosts": 4,
+  "current_video_profile_qualified_for_RM": false
+}
