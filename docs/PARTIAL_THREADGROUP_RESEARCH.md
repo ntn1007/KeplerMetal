@@ -69,7 +69,7 @@ The audit pins the captured native code hashes and expects the same source and r
 
 ## Next qualification boundary
 
-The bounded origin experiment below qualifies one native shader and selected group-ID shifts. The later edge-builtins experiment exercises selected logical group counts and actual dimensions. Separately isolate the nominal field, qualify the corresponding MSL builtins, and test local-memory barriers for the proposed decomposition. The approach must preserve resource ownership and progress and reject unsupported shaders/geometry; semantic equivalence across segmented submissions remains open. Only after those proofs should the scoped ICB's current refusal be reconsidered. Native Apple ICB ABI and transparent integration into ordinary applications remain separate work.
+The bounded origin experiment below qualifies one native shader and selected group-ID shifts. The later edge-builtins experiment exercises selected logical group counts and actual dimensions. The later builtin/barrier witness directly reports the nominal and grid builtins for selected cases. Isolate field causality and qualify cross-warp barriers and complete decompositions separately. The approach must preserve resource ownership and progress and reject unsupported shaders/geometry; semantic equivalence across segmented submissions remains open. Only after those proofs should the scoped ICB's current refusal be reconsidered. Native Apple ICB ABI and transparent integration into ordinary applications remain separate work.
 
 ## Follow-up: bounded nonzero origins on the GTX 880M
 
@@ -119,4 +119,27 @@ for run in 1 2 3; do
   python3 bridge/tools/partial_nominal.py run --build "$LAB/results/nominal-build-new" --out "$LAB/results/nominal-execute-new-$run" --reservation-root "$LAB" --mode execute --registry-id "$RID" || break
 done
 python3 bridge/tools/audit_partial_nominal.py "$LAB/results/nominal-prepare-new" "$LAB/results/nominal-execute-new-1" "$LAB/results/nominal-execute-new-2" "$LAB/results/nominal-execute-new-3"
+```
+
+## Follow-up: directly reported builtins and a local barrier
+
+A new [bounded MSL shader](../bridge/src/partial_builtin_barrier.metal) reports global, local and group coordinates, logical group counts, `threads_per_threadgroup`, `dispatch_threads_per_threadgroup` and `threads_per_grid`. Each thread writes a value to threadgroup memory, executes `threadgroup_barrier(mem_flags::mem_threadgroup)`, then reports the value written by its next thread. The 32-element local array and each dispatched group are explicitly bounded; the shader checks its output index against a 1,024-element buffer.
+
+A separate construction-only inspection reflects four expected buffers and shows 256 bytes of static threadgroup memory and 22 registers in the observed NVIDIA QMD. It does not commit GPU work. Its signed process, locally built AIR/library and source are tied to the later cohort by hashes in the [audit](partial-builtin-validation.json). An earlier construction pilot exited normally, but its launcher could not write a manifest because a helper was not in the expected directory; it is excluded from the audit.
+
+Three fresh execution processes each run physical groups of 3, 4 and 8 threads. Each size has a normal zero-origin control and an edge case with a distinct nominal size, logical grid and group count, as in the preceding table. Across them, **18 launches, 90 invocations and 720 reported uint32 fields** match an independent CPU oracle; three suppressed-launch controls remain untouched. The oracle compares every output byte, guard and counter, including each thread's neighbor witness. It also verifies full constant and descriptor snapshots before and after execution. Output hashes repeat across processes. The audit verifies native QMD geometry, the reported resident command-stream hashes, signed hosts, serialized reservations and source/library provenance.
+
+These are **single-group, within-one-warp examples**: successful output with the barrier present does not demonstrate that the barrier was necessary, nor establish cross-warp synchronization or the progress of a split dispatch. Several metadata fields still change together. This does not implement partial Metal dispatch, establish arbitrary shader correctness or modify the installed driver. A complete integration must separately cover cross-warp and larger groups, field-isolating controls, multiple adjacent regions, resource lifetimes and regressions before relaxing the current rejection. No performance claim is made.
+
+Reproduce with the same `LAB`, `ARCHIVE` and `RID` variables as above. The shader build requires Metal 2.3; a different toolchain may produce a library with a different hash and will be refused rather than silently repinned. All directories must be fresh. The source snapshot and exact driver profile are checked by the builders.
+
+```sh
+python3 bridge/tools/partial_builtin_pipeline.py build --out "$LAB/results/builtin-pipeline-build-new"
+python3 bridge/tools/partial_builtin_pipeline.py run --build "$LAB/results/builtin-pipeline-build-new" --out "$LAB/results/builtin-pipeline-new" --reservation-root "$LAB" --registry-id "$RID"
+python3 bridge/tools/partial_builtin_run.py build --out "$LAB/results/builtin-run-build-new" --archive "$ARCHIVE" --metallib "$LAB/results/builtin-pipeline-build-new/assets/shader.metallib"
+python3 bridge/tools/partial_builtin_run.py run --build "$LAB/results/builtin-run-build-new" --out "$LAB/results/builtin-prepare-new" --reservation-root "$LAB" --mode prepare --registry-id "$RID"
+for run in 1 2 3; do
+  python3 bridge/tools/partial_builtin_run.py run --build "$LAB/results/builtin-run-build-new" --out "$LAB/results/builtin-execute-new-$run" --reservation-root "$LAB" --mode execute --registry-id "$RID" || break
+done
+python3 bridge/tools/audit_partial_builtin.py "$LAB/results/builtin-pipeline-new" "$LAB/results/builtin-prepare-new" "$LAB/results/builtin-execute-new-1" "$LAB/results/builtin-execute-new-2" "$LAB/results/builtin-execute-new-3"
 ```
