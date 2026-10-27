@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+A static video reply audit identifies a no-write NVIDIA private-tail function and a user-mode length-check gap on a hypothetical short successful reply. A CPU-only conservative bounds helper is tested; no real short reply, driver fix or video decode is established. [Evidence](VIDEO_REPLY_CONTRACT.md).
+
 On a real video wrapper, a historically observed class-0/128 KiB request reaches a guard and is refused before IOKit; the native user-mode output capacity is 49 bytes on this profile. Kernel acceptance and video allocation remain unproved. [Evidence](VIDEO_BUFFER_REQUEST_GUARD.md).
 
 An empty video context and a real Metal buffer coexist on the same shared object in two guarded processes; the buffer passes CPU checks before and after context release. This does not bind it to video or demonstrate GPU execution. [Evidence](VIDEO_CONTEXT_RESOURCE_COEXIST.md).

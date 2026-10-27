@@ -1,0 +1,40 @@
+{
+  "GPU_commands": 0,
+  "GeForce_SHA256": "44f131a958d48afd6ab675a851330c37506557c9d499484170c886c3731bdbb3",
+  "cache_image_UUID": "198a776afe0335ee8e537b9f14caabaa",
+  "conditional_user_copy_bytes": "device private length, irrespective of a shorter successful reported output",
+  "conservative_synthetic_lengths": {
+    "accepted": [
+      49
+    ],
+    "capacity": 49,
+    "private_bytes": 1,
+    "rejected": [
+      0,
+      47,
+      48,
+      50
+    ]
+  },
+  "hardware_video_execution_proved": false,
+  "kernel_getDataBuffer_evidence_id": "ev_73185ac90e6c691e4d2eca5f95e61e33d6f341b329cd17b6934db77cab79f6b9",
+  "kernel_get_data_evidence_id": "ev_9ef4aee42a6f2eee153d0e5ff80c39bb8a4771f391d11562decd68341dbbbd03",
+  "limits": [
+    "On-disk vtable does not establish runtime relocation or selected virtual target.",
+    "No live selector 3 or successful output has been observed.",
+    "The six-byte function observation does not establish returned tail initialization elsewhere.",
+    "A short successful reply is a hypothetical case; no vulnerability or exploit is demonstrated."
+  ],
+  "mutated_REA_record_rejected": true,
+  "native_calls": 0,
+  "observed_user_reply_check": "rejects output length greater than capacity; no lower-bound check visible in pinned branch",
+  "static_tail_pointer_rule": "capacity 48 -> null; capacity greater than 48 -> output + 48 with capacity - 48",
+  "status": "STATIC_PASS",
+  "tail_REA_SHA256": "548d3ae35fc55004e621b7906c24bdc64b20398be7de7803aa53f6b996ee9b40",
+  "tail_REA_evidence_id": "ev_e5a940d04aea0c79af48881f137812f2fcd7dbb6e0bed3d7fb59e1d53b74ad96",
+  "tail_body_SHA256": "5a96d1fb661d55552184ea24023ae8190bd1523ae1f855a8d671b07143e8b1df",
+  "tail_target": "0x683b0",
+  "tail_vtable_slot": "0xa78",
+  "video_reply_bounds.py_SHA256": "8b9e3224020c54a6fadc674ae870c11cc889c720ce3ad458482a04ebfdf86143",
+  "video_reply_contract.py_SHA256": "f000a1b6fa1c717568e84d28b9383c90cb45bc84d753f201f805ccce5fe312e7"
+}
