@@ -1,0 +1,81 @@
+{
+  "date": "2026-10-27",
+  "base_commit": "671d3aadbc623c55f66d4b868c15d5649171c727",
+  "donor": {
+    "repository": "dortania/PatcherSupportPkg",
+    "revision": "3250ca07ca49e3f8c743066381b5688028681de8",
+    "repository_path": "Universal-Binaries/12.0 Beta 6-23.4/System/Library/Extensions/GeForce.kext/Contents/MacOS/GeForce",
+    "git_blob_SHA1": "35f2746a265dc78c3b40f43369b38affe1aa6c42",
+    "SHA256": "dc666a02220d8d196a426e0e23d5a2d4c44719b70cee0ac9464d0b20845ed846",
+    "bytes": 1057696
+  },
+  "layout_comparison": {
+    "classification": "SAME_PRE_SIGNATURE_EXCEPT_VALIDATED_SIZE_FIELDS",
+    "left_SHA256": "dc666a02220d8d196a426e0e23d5a2d4c44719b70cee0ac9464d0b20845ed846",
+    "right_SHA256": "44f131a958d48afd6ab675a851330c37506557c9d499484170c886c3731bdbb3",
+    "signature_offset": 1026192,
+    "left_signature_bytes": 31504,
+    "right_signature_bytes": 31584,
+    "raw_pre_signature_different_bytes": 2,
+    "validated_size_fields": [
+      {
+        "name": "LINKEDIT.filesize",
+        "file_offset": 1096,
+        "bytes": 8,
+        "different": true
+      },
+      {
+        "name": "LC_CODE_SIGNATURE.datasize",
+        "file_offset": 1276,
+        "bytes": 4,
+        "different": true
+      }
+    ],
+    "normalized_pre_signature_SHA256_left": "5c21e03f40e7609e3ab688be17363700d04516a7046e8744236673cf2e5520f3",
+    "normalized_pre_signature_SHA256_right": "5c21e03f40e7609e3ab688be17363700d04516a7046e8744236673cf2e5520f3",
+    "normalized_pre_signature_equal": true,
+    "tail_outside_signature": false,
+    "signature_authenticity_checked": false,
+    "runtime_compatibility_proved": false,
+    "GPU_execution": false,
+    "limits": [
+      "Compared these two local files only; no historic third file inferred.",
+      "Normalized only the two validated size fields, not arbitrary byte differences.",
+      "Loaded kernel memory and cryptographic signatures were not authenticated."
+    ]
+  },
+  "independent_check": {
+    "status": "PASS",
+    "method": "independent raw byte and size-field cross-check",
+    "bytes_compared_before_signature": 1026192,
+    "differing_byte_offsets": [
+      "0x448",
+      "0x4fc"
+    ],
+    "differences_confined_to_validated_size_fields": true,
+    "historical_file_recovered": false,
+    "signature_authenticity_proved": false,
+    "runtime_compatibility_proved": false
+  },
+  "strict_old_profile_control": {
+    "launcher_exit_code": 1,
+    "expected_rejection": true,
+    "result_directory_created": false,
+    "reason_last_line": "ValueError: Installed driver differs from the inspected profile",
+    "native_host_started": false,
+    "system_modified": false
+  },
+  "local_result_hashes": {
+    "layout_comparison": "1776e9147338872bc0a02e9b3b627e9a4e818f34134cd0938f13ad8ccdc8fcfc",
+    "independent_check": "7ef228f52d4484ec1324a725b2334fbb93d903e00adf0ddce29f945caffb0087",
+    "old_profile_refusal": "2e428493e8b7a9eb3ae78d76f253b1bd19305900e8117e4042ff4a8dfd282d26"
+  },
+  "retained_comparison_to_archived_evidence": {
+    "table_entries_match": 28,
+    "function_ranges_match": 11,
+    "bytes_in_function_ranges": 1217
+  },
+  "historical_binary_recovered": false,
+  "new_video_hardware_execution": false,
+  "system_modified": false
+}

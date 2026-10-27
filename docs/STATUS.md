@@ -102,6 +102,8 @@ are unchanged. No new Metal function, M1 run or benchmark.
 
 New dependency milestone: 19 terminal nonoverlapping processes, 24 software images / 2,764,800 exact NV12 bytes, 38 public query controls and 110 CPU scope checks. Twenty-two real queries target nvAccelerator registry ID 4294968458. Three scoped `IOGVACodec` presence substitutions change GVA selection (178 entry observations versus 87 in native/wrong-key controls), but all 13 hardware creates still fail at -12906 with zero images. This establishes a selection barrier; a complete decoder fix and hardware execution remain unproved. [Evidence and reproduction](VIDEO_DEPENDENCIES.md).
 
+A later donor comparison covers the entire 1,026,192-byte pre-signature region of the current GeForce file against a pinned upstream donor; only two validated signature-layout size bytes differ. The missing historical file is not inferred from that comparison, and video/RM qualification remains open. [Details](VIDEO_DONOR_COMPARISON.md).
+
 Video-profile recheck: five of 83 historical file hashes changed. All 28 archived GeForce video-table words and their relocation metadata, plus 11 archived function ranges (1,217 bytes), match the current file. This partial static comparison does not qualify the current video path or the prepared privileged RM test. [Profile drift and reproduction](VIDEO_PROFILE_DRIFT.md).
 
 The full goal remains **incomplete**. This is a development source snapshot with private ABI dependencies, not a production display-driver release. No percentage of total completion is assigned: the remaining hardware/API scope is not bounded enough to make that number meaningful.
