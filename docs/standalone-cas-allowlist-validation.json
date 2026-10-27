@@ -1,0 +1,104 @@
+{
+  "archive_SHA256": "be5cb1ed54db899107bda0fdd57177692564ab6334a8dae257752de17eca1421",
+  "audit_source_SHA256": "a89fa12ec53ddb8c42d0b69ba1eeb2009347083aee27f688b363cff6a6c16480",
+  "bootstrap_SHA256": "a82d1fa649755c872dcb03124a5d50fe9cd6911addb85e68f8e30744638a4741",
+  "build_inputs_SHA256": "3458e374a05469d43eb1845eb8b8fd1971affae426643baec73fc546e85ce6cb",
+  "client_A_SHA256": "cfb1cf7c80ea7d7a14c3dcde97651cb439cb4668d2abeb53118f53962c988aad",
+  "client_B_SHA256": "dcde1729688ec9acd060b99ea768d99bda3a0211d81a5509d8d231b38a701e8b",
+  "client_imports_project_symbols": false,
+  "corrected_and_control_CAS_operations": 142200,
+  "host_processes": 12,
+  "installed_driver_modified": false,
+  "mutated_reflection_rejected": true,
+  "mutation_audit_source_SHA256": "74050895441e69005cfc2cac23bbf1ef2c7a027fcdf50ecdfe2977046cff4ae3",
+  "mutation_checks": {
+    "client": "EXPECTED_REFUSAL",
+    "duplicate-dispatch": "EXPECTED_REFUSAL",
+    "factory": "EXPECTED_REFUSAL",
+    "import-proof": "EXPECTED_REFUSAL",
+    "pixel": "EXPECTED_REFUSAL",
+    "policy": "EXPECTED_REFUSAL",
+    "reservation": "EXPECTED_REFUSAL",
+    "trace": "EXPECTED_REFUSAL",
+    "unchanged": "PASS"
+  },
+  "native_defect_words": 56808,
+  "native_dispatches": 60,
+  "negative_controls": [
+    "denied-b",
+    "wrong-policy",
+    "wrong-library",
+    "wrong-descriptor",
+    "wrong-client",
+    "wrong-cert"
+  ],
+  "nonoverlapping": true,
+  "optin_dispatches": 120,
+  "policy_AB_SHA256": "53d7a887745e3301f63e7f66f6661c4b3d293cf403a5a4253976f99f5287bd3a",
+  "policy_A_SHA256": "b65974e8465057f5ad3fb7e7a73efe1b47f44292d4a2bdbf9bb3a66cb1d989e9",
+  "rows": [
+    {
+      "manifest_SHA256": "95644dd19b0b2a5de0a50557dfeb43b702557fc5c361b3cd6c3f1f84a5014d6b",
+      "mode": "native-a",
+      "verification_SHA256": "dd14b1a4f4ed91c6aeec3a528179ee7ea49b73729224ebb5c5a6b9fbb8b180c4"
+    },
+    {
+      "manifest_SHA256": "04b8ab012402554884df0143939e87ec3b51ad08e322ba3892c7fdfb6c8ddbab",
+      "mode": "native-b",
+      "verification_SHA256": "a22e823c468c8437c128b5acdc058780e012914986e95376c54e46829d6e6ac6"
+    },
+    {
+      "manifest_SHA256": "41283ee4d9bb39bffde681ca317286043f1675297edbe8722a7cc4a2000b6f08",
+      "mode": "optin-a",
+      "verification_SHA256": "f78e318a8402dd4a34aa60c336be9aabfe0a36a69e8081d8406f4c5d0585d793"
+    },
+    {
+      "manifest_SHA256": "fba67ca23325ab99fe14a093cd40be387d06e9e8566c2a307ad25962cb367a1e",
+      "mode": "optin-a",
+      "verification_SHA256": "f78e318a8402dd4a34aa60c336be9aabfe0a36a69e8081d8406f4c5d0585d793"
+    },
+    {
+      "manifest_SHA256": "d15cd64340363a0d3aa9bb184c8ca017bb920156922d0034809569ada9dee41d",
+      "mode": "optin-b",
+      "verification_SHA256": "303c13195b2b75bce92d99547986d9191db888347506463f8aeecf2ba42e330f"
+    },
+    {
+      "manifest_SHA256": "59ed96d45e754b27d90d7f2785b699b1db8131db59f370dd870ad55f2ece6142",
+      "mode": "optin-b",
+      "verification_SHA256": "303c13195b2b75bce92d99547986d9191db888347506463f8aeecf2ba42e330f"
+    },
+    {
+      "manifest_SHA256": "ce85d235ebc28621c8d78ef0c2f27c5a01acd60df70aff9ec25819d46417a37a",
+      "mode": "denied-b",
+      "verification_SHA256": "2f53f5bef58e45d2400ffb7a5ddd02c0e321c6b7d927edde706f5948d5ef25a0"
+    },
+    {
+      "manifest_SHA256": "3dc5e443bca05514b40597b56f0d4dc0092cd833756a4469eb937db198fb5c89",
+      "mode": "wrong-policy",
+      "verification_SHA256": "f1abe16a715f84a56a6bb42c2732f219f044af835d30ce7aa52d70c9db7133b7"
+    },
+    {
+      "manifest_SHA256": "ca7e70f3bcfbc3da2ff51f3c1eee15458dc29b738ec816d2a6be311358bf3ebc",
+      "mode": "wrong-library",
+      "verification_SHA256": "ea70b88adc72929ad48156ae6962b950c35013a229bcc6bff760de4c4e3863f9"
+    },
+    {
+      "manifest_SHA256": "1e9750ce7bece243cba59e737d1961102770bead0505e0fbaf64e4224231b069",
+      "mode": "wrong-descriptor",
+      "verification_SHA256": "9b4147c602ec1a33f31f74732353ca930157187f6ea6c7ea68399358a6254a81"
+    },
+    {
+      "manifest_SHA256": "f96f1b2d08ceec97f59e7e533d716042d5b75b534d49ce417c18362f19e59785",
+      "mode": "wrong-client",
+      "verification_SHA256": "def1451a031fb7f7c4c4b893e121dc8725e0aaff0fad7f42a99833596be2588e"
+    },
+    {
+      "manifest_SHA256": "5b84d12340b3e8704b9b71ebd3b75da1c6f1308e2d61ff1bc2383b9668116234",
+      "mode": "wrong-cert",
+      "verification_SHA256": "c3a5f8ea7752ab00dc0fdf44f6203295f2b8808a0f8136b7f206a455e23a8ead"
+    }
+  ],
+  "scope": "Two builds of one purpose-built client; explicit local policy and fixed certified library, not general or transparent application support",
+  "selected_reflection_equal": true,
+  "status": "PASS"
+}
