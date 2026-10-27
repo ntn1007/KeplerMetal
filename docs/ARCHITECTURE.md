@@ -1,5 +1,7 @@
 # Architecture
 
+The opt-in vertex root derives a bounded transition table from complete certified catalogue states, retains their buffer resources and resolves the typed setter on GPU. Its context remains distinct from indexed roots and native Apple resource identities. [Contract](VERTEX_BINDING_EXPERIMENT.md).
+
 ## Branch A: native NVIDIA behavior
 
 `KeplerProgramImport` preserves the retained-return C API as a facade over the same MRC constructor transport used by `KeplerNativeCAS`. Generic compute, graphics, FP64 and certified CAS imports share its mutex/context, strict driver/PCI checks and constructor restoration; nested imports and cached no-callback pipelines are refused. [Reception and build contract](SHARED_GENERIC_IMPORT.md). `KeplerNativeCAS` recognizes a bounded native shader defect and applies a certified process-local repair. `KeplerNativeCommands` and `KeplerNativeRenderDraws` handle narrowly qualified native command/profile data.

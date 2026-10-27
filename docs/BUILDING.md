@@ -1,5 +1,7 @@
 # Build from source
 
+[VERTEX_BINDING_EXPERIMENT.md](VERTEX_BINDING_EXPERIMENT.md) documents the owned vertex-transition context, construction-only compiler inspection and signed render reception.
+
 [INDEXED_RENDER.md](INDEXED_RENDER.md) adds the indexed producer build, construction-only inspector/certifier and `--typed-indexed-render` reception. The complete runtime gains an optional owned index-binding extension while preserving the basic root prefix.
 
 [TYPED_RENDER_DRAW.md](TYPED_RENDER_DRAW.md) adds a source-only typed draw/reset producer, its independent native MSL reference and inspection/certification gate. `--typed-render-draw` extends the render-argument builder; the combined auditor recomputes producer and rendered-image controls.

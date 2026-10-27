@@ -1,5 +1,7 @@
 # KeplerMetal
 
+The scoped typed vertex-buffer setter now selects between certified render states in an adapted application. [Evidence and limits](docs/VERTEX_BINDING_EXPERIMENT.md).
+
 **Ultimate goal: develop a modernized NVIDIA driver for macOS that makes full use of Kepler's hardware capabilities and supports as many Metal features as the hardware can actually implement.** The reference GPU is a GeForce GTX 880M, GK104 / SM30, with 8 GiB VRAM in an Intel iMac.
 
 The long-term target is native macOS integration, allowing ordinary Metal applications to use these capabilities without application-specific adaptations. Progress is measured through correct GPU execution, stability and workload-specific benchmarks.

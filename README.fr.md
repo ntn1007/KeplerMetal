@@ -1,5 +1,7 @@
 # KeplerMetal
 
+Le chemin expérimental accepte désormais un changement typé de buffer de sommets entre états certifiés, dans une application adaptée. [Résultats et limites](docs/VERTEX_BINDING_EXPERIMENT.md).
+
 **Objectif ultime : créer un pilote NVIDIA modernisé pour macOS qui exploite au maximum les capacités matérielles des GPU Kepler et prenne en charge le plus grand nombre de fonctionnalités Metal réellement réalisables sur ce matériel.** La carte de référence est une GeForce GTX 880M, GK104 / SM30, de 8 Gio de VRAM dans un iMac Intel.
 
 À terme, nous visons une intégration native à macOS permettant aux applications Metal habituelles de bénéficier de ces capacités sans adaptation spécifique. Les progrès sont évalués par la justesse des calculs GPU, la stabilité et des benchmarks sur des charges précises.

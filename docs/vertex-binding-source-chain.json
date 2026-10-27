@@ -1,0 +1,56 @@
+{
+  "status": "PASS",
+  "base_public_commit": "744b7cbd62215ce21e5384c80657d2d6b4d1b0bd",
+  "runtime_SHA256": "a989d7087e52d3f6fd9e1d5e1aab1053514383ab0e97b2739f56d470a268cb7d",
+  "host_SHA256": "475b3029e9a39d3bef0a7be88ac94de0e916ac1409e4ec2cf2015846ba9f7192",
+  "files": {
+    "bridge/src/KeplerCPUICB.h": {
+      "sha256": "18e994385d3d559852b39ea08723ce79fb146b8db8f3cfb316bfced01bcb97de",
+      "frozen_in": "runtime/src"
+    },
+    "bridge/src/KeplerCPUICB.mm": {
+      "sha256": "5ebe2d6b16932f69902dde89cfaf057a4d6f3a99cb4ebda41bb2c791752963fc",
+      "frozen_in": "runtime/src"
+    },
+    "bridge/src/KeplerRenderCommandArguments.inc": {
+      "sha256": "f321f34d4829c5b0c1f71e293b840c811e85449e9607a79477fc168e38085df6",
+      "frozen_in": "runtime/src"
+    },
+    "bridge/src/KeplerRenderCommandArgumentsScope.inc": {
+      "sha256": "38effc875cb53650c4255f57150dbe31b2d3aac894e0c13f46b7e0d310e97593",
+      "frozen_in": "runtime/src"
+    },
+    "bridge/src/KeplerVertexTransitionPlan.h": {
+      "sha256": "8a30fd4d7fd8808d6acf9c45da15f0acd5fcb307fe7a019cdd9ea514d283e468",
+      "frozen_in": "runtime/src"
+    },
+    "bridge/src/KeplerVertexTransitionPlan.inc": {
+      "sha256": "5ba020199861787c203d16a67a453027c1ea0df33368db97067b9655b77c8811",
+      "frozen_in": "runtime/src"
+    },
+    "bridge/src/KeplerVertexTransitionRecords.h": {
+      "sha256": "642523bb84d7aec16dff8c90ee577943b942c5c4c1fc8110d16ecd93acc7bb0a",
+      "frozen_in": "runtime/src"
+    },
+    "bridge/src/air_vertex_binding.metal": {
+      "sha256": "51355f30e0280abd5fa7cb227e54d1f2ff650952b108f9d55610e6771e90ae5f",
+      "frozen_in": "producer/src"
+    },
+    "bridge/tools/air_vertex_binding_lowering.py": {
+      "sha256": "7c8f360037e75ad3b8deea90c535f656d529fbf20c9540a5a09af2f07c92e4ac",
+      "frozen_in": "producer/src"
+    },
+    "bridge/tools/vertex_binding_render_probe.mm": {
+      "sha256": "85b6e3c75a90759c26ce3f37b2d6c80cacc2d90d399630c8dec05c58c980632c",
+      "frozen_in": "render-client/src"
+    },
+    "bridge/tools/verify_vertex_binding_render.py": {
+      "sha256": "792f1ca44b638e0bdc32c3750182093f7e947a47f558547f1938c4a0ff8874e0",
+      "frozen_in": "render-client/oracles"
+    },
+    "bridge/tools/air_vertex_transition.py": {
+      "sha256": "2d395f38329015f1372161fc7a0caab6403b16b1c157404a48f1ba184cae2dde",
+      "frozen_in": "render-client/oracles"
+    }
+  }
+}

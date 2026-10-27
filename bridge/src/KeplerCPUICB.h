@@ -16,6 +16,7 @@
 @property(nonatomic,readonly,strong) id<MTLBuffer> contextBuffer,commandRecords;
 @property(nonatomic,readonly) NSUInteger contextOffset,commandRecordsOffset,capacity;
 @property(nonatomic,readonly) NSUInteger indexBindingCount,indexBindingTableOffset;
+@property(nonatomic,readonly) NSUInteger vertexTransitionCount,vertexTransitionTableOffset;
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 @end
@@ -315,6 +316,14 @@
                                                                 commandRecordsOffset:(NSUInteger)offset
                                                                        commandBuffer:(id<MTLCommandBuffer>)commandBuffer
                                                                                error:(NSError **)error;
+// Experimental scoped state transitions derived from the live catalogue.
+// This is not Apple ICB identity and is not yet hardware-qualified.
+- (KPRenderCommandArgumentContext *)newVertexRenderCommandArgumentContextWithCommands:(id<MTLIndirectCommandBuffer>)commands
+                                                                     stateCatalogue:(KPRenderStateCatalogue *)catalogue
+                                                                     commandRecords:(id<MTLBuffer>)records
+                                                               commandRecordsOffset:(NSUInteger)offset
+                                                                      commandBuffer:(id<MTLCommandBuffer>)commandBuffer
+                                                                              error:(NSError **)error;
 // Seal one exported Shared root, declare its indirect resources and retain
 // them until this same uncommitted command buffer completes. Roots must not
 // be modified until completion. Restoring the scope after encoding is allowed.

@@ -1,0 +1,82 @@
+{
+  "status": "PASS_VERTEX_BINDING_RENDER",
+  "date": "2026-10-27",
+  "base_public_commit": "744b7cbd62215ce21e5384c80657d2d6b4d1b0bd",
+  "preliminary_local_commit": "1eee5d7e50b20b3eda943c0d550c91a5d72cd13b",
+  "GPU": "NVIDIA GeForce GTX 880M (PCI 10de:1198)",
+  "driver_SHA256": "e240d54a4cd64b7e54fbc15250de82e88451132e1d9f3a4f9879607c8b0e7645",
+  "scope": "explicit adapted client, one logical slot, two complete certified states, ordinary device vertex pointer",
+  "cohort": {
+    "status": "PASS_VERTEX_BINDING_RENDER",
+    "signed_terminal_nonoverlapping_hosts": 26,
+    "frames": 26,
+    "checked_float_channels": 319488,
+    "maximum_error": 0.0,
+    "setter_dispatches": 18,
+    "transition_rows_checked": 156,
+    "native_image_pairs": 12,
+    "repeat_image_pairs": 13,
+    "API_refusals": 4,
+    "changed_channels_by_control": {
+      "0:no_dispatch": 6144,
+      "0:disabled": 6144,
+      "0:foreign": 12288,
+      "0:reverse_no_dispatch": 6144,
+      "1:no_dispatch": 6144,
+      "1:disabled": 6144,
+      "1:foreign": 12288,
+      "1:reverse_no_dispatch": 6144
+    },
+    "static_library_SHA256": "a989d7087e52d3f6fd9e1d5e1aab1053514383ab0e97b2739f56d470a268cb7d",
+    "native_Apple_ICB_ABI": false,
+    "performance_benchmark": false,
+    "full_objective_complete": false
+  },
+  "regression": {
+    "status": "PASS",
+    "signed_terminal_nonoverlapping_hosts": 13,
+    "render_hosts": 4,
+    "compute_hosts": 9,
+    "checked_float_channels": 393216,
+    "exact_uint32_results": 2291712,
+    "consumer_invocations": 572928,
+    "static_library_SHA256": "a989d7087e52d3f6fd9e1d5e1aab1053514383ab0e97b2739f56d470a268cb7d"
+  },
+  "source_rebuild": {
+    "status": "PASS",
+    "source_tree": "ffac5776ebf12db0a4d91d8977efdef58f6ba4b1",
+    "runtime_sources": 58,
+    "runtime_objects": 7,
+    "archive_members_identical": 8,
+    "whole_archive_identical": false,
+    "producer_application_SHA256": "db0f7a97126465f6661e441151865a41ee8413e3aa884f049e3553a65cac048f",
+    "render_application_SHA256": "475b3029e9a39d3bef0a7be88ac94de0e916ac1409e4ec2cf2015846ba9f7192",
+    "capture_object_SHA256": "a1f27a1b95711e65af7927d20a75919ee5b257dd52152afb14903bb914241d20",
+    "render_assets_all_identical": true,
+    "producer_metallibs_and_lowered_ir_identical": true,
+    "optimized_ir_equal_except_module_path": true,
+    "public_CPU_tests": 337
+  },
+  "CPU_unit_tests": 337,
+  "system_files_unchanged": 87,
+  "all_signed_terminal_nonoverlapping_hosts": 62,
+  "public_reaudits_match_originals": true,
+  "worker_jobs": [],
+  "private_evidence_SHA256": {
+    "VERTEX_FINAL_AUDIT.json": "264171dd3fc8cf2277952dce25139039f5f0c7c3ea23bb5ed6c80528a6045f77",
+    "REGRESSION_FINAL_AUDIT.json": "c66de94338178a2c912e8ce2bc7e818b64f5be0da3ccc54c7f746679d55465bf",
+    "PUBLIC_VERTEX_AUDIT.json": "264171dd3fc8cf2277952dce25139039f5f0c7c3ea23bb5ed6c80528a6045f77",
+    "PUBLIC_REGRESSION_AUDIT.json": "c66de94338178a2c912e8ce2bc7e818b64f5be0da3ccc54c7f746679d55465bf",
+    "PUBLIC_REBUILD_AUDIT.json": "b6c1d5a79162ff154591a8159d8a37cc360aa0d51013f7a90afe004dfc7fdaee",
+    "SYSTEM_FINAL.json": "b4f41fa24ec01c30aede42cfb0a0b483452705eadf4d95e086de62b83e847af4",
+    "GPU_PROCESS_INVENTORY.json": "14f6b84d329a1ab3e6ba4b986d8523a9084ebe0ccf8cdecb62768bae6c547f11",
+    "SOURCE_CHAIN.json": "9a61046d9719d1cec884964efaf72332c420fe4e99cc0f186b799a1cdf19d65f"
+  },
+  "limitations": [
+    "A single logical slot and two complete states were GPU-qualified; larger catalogues, GPU-selected initial states and early owner release remain unqualified.",
+    "The test does not contain fragment or index bindings; their alias-refusal branch is implemented but not independently GPU-qualified.",
+    "No null/unbinding, dynamic stride, constant-address pointer, empty/reset state setter, mixed indexed context or arbitrary shader translation.",
+    "No native Apple ICB ABI, transparent macOS integration, Metal 3/4 conformance, additional video support or performance benchmark."
+  ],
+  "full_objective_complete": false
+}

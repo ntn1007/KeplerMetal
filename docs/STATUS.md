@@ -1,5 +1,7 @@
 # Status, 2026-10-24
 
+The typed vertex-buffer setter now resolves certified catalogue transitions on GPU using retained resource snapshots. The tested two-state, one-slot render path and negative controls are documented in [the scoped contract](VERTEX_BINDING_EXPERIMENT.md).
+
 The typed render path now handles indexed device-pointer triangles in both element widths through an owned inline binding table. It preserves the v1 root prefix, retains index resources and checks exact pointer/format/span mapping before the existing sealed materializer. CPU/native image references and missing/foreign/wrong-kind/table/order controls qualify the path. [Exact evidence and limitations](INDEXED_RENDER.md).
 
 Typed triangle draws and resets now preserve original AIR dataflow and feed the owned render-record/raster path. Independent producer, direct-draw and missing/order controls qualify dynamic geometry, preserved state identity, complete six-vertex rectangles and sealed-envelope refusals. This extends the earlier reset-only path without changing the core runtime. [Exact qualification, source and limits](TYPED_RENDER_DRAW.md).

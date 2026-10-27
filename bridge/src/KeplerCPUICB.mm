@@ -1,6 +1,8 @@
 #import "KeplerRenderCommandRecords.h"
 #import "KeplerRenderStateRecords.h"
 #import "KeplerIndexedRenderRecords.h"
+#import "KeplerVertexTransitionRecords.h"
+#include "KeplerVertexTransitionPlan.h"
 #import "KeplerGPUIdentity.h"
 #import "KeplerDriverProfile.h"
 #import "KeplerCPUICB.h"
@@ -166,7 +168,7 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 @property(nonatomic,strong) id<MTLComputePipelineState> GPUCommandIRv2Selector;
 - (NSDictionary*)profileForPipeline:(id<MTLComputePipelineState>)pipeline;
 - (BOOL)validateRenderCommandArgumentContext:(KPRenderCommandArgumentContext*)context error:(NSError**)error;
-- (KPRenderCommandArgumentContext*)newRenderCommandArgumentContextWithCommands:(id<MTLIndirectCommandBuffer>)commands stateCatalogue:(KPRenderStateCatalogue*)catalogue commandRecords:(id<MTLBuffer>)records commandRecordsOffset:(NSUInteger)offset commandBuffer:(id<MTLCommandBuffer>)cb indexedBindings:(BOOL)indexed error:(NSError**)error;
+- (KPRenderCommandArgumentContext*)newRenderCommandArgumentContextWithCommands:(id<MTLIndirectCommandBuffer>)commands stateCatalogue:(KPRenderStateCatalogue*)catalogue commandRecords:(id<MTLBuffer>)records commandRecordsOffset:(NSUInteger)offset commandBuffer:(id<MTLCommandBuffer>)cb indexedBindings:(BOOL)indexed vertexBindings:(BOOL)vertex error:(NSError**)error;
 - (KPRecordedNativeCompute*)materialize:(KPComputeICBCommand*)command;
 - (KPGPUCommandSelection*)newGPUCommandBindingPlanFromBuffer:(id<MTLIndirectCommandBuffer>)source sourceRange:(NSRange)range destination:(id<MTLIndirectCommandBuffer>)destination destinationRange:(NSRange)targetRange resources:(NSArray<NSDictionary*>*)resources input:(id<MTLBuffer>)input inputOffset:(NSUInteger)offset nonce:(uint32_t)nonce IR:(BOOL)IR error:(NSError**)error;
 - (KPGPUCommandSelection*)newGPUCommandIRv2FromBuffer:(id<MTLIndirectCommandBuffer>)source sourceRange:(NSRange)range destination:(id<MTLIndirectCommandBuffer>)destination destinationRange:(NSRange)targetRange resources:(NSArray<NSDictionary*>*)resources records:(id<MTLBuffer>)records recordOffset:(NSUInteger)offset stablePipelineIdentities:(BOOL)stable error:(NSError**)error;
@@ -522,6 +524,7 @@ void copyResidentICB(id self,SEL selector,id source,NSRange range,id destination
  [scope.eventRows addObject:@{@"operation":@"GPU_QMD_copy",@"source_location":@(range.location),@"destination_index":@(index),@"length":@(range.length),@"bytes":@(range.length*256),@"source_QMD_address":addresses[0][@"source"],@"destination_QMD_address":addresses[0][@"destination"],@"descriptor_pairs":addresses,@"predecessor_order":ordering,@"retained_owners":@(retained.count),@"encoded_GPU_blits":@(range.length),@"whole_range_preflight":@YES,@"CPU_shadow_updated_for_setters":@YES,@"CPU_shadow_is_execution_source":@NO,@"full_ICB_contract":@NO}];
 }
 #include "KeplerIndirectRenderExecution.inc"
+#include "KeplerVertexTransitionPlan.inc"
 void executeRenderICB(id self,SEL selector,id buffer,NSRange range){KPScopeLink*link=objc_getAssociatedObject(self,&contextKey);KPCPUICBScope*scope=link.scope;if(!scope||scope.restored||!scope.renderEngine||![buffer isKindOfClass:[KPRenderICB class]]||((KPRenderICB*)buffer).scope!=scope||!link.renderTarget)reject(@"Render ICB/encoder context mismatch");[(KPRenderICB*)buffer executeRenderRange:range encoder:self target:link.renderTarget];}
 void setCallerRenderPipeline(id self,SEL selector,id pipeline){KPScopeLink*link=objc_getAssociatedObject(self,&contextKey);Class original=class_getSuperclass(object_getClass(self));Method method=class_getInstanceMethod(original,selector);((void(*)(id,SEL,id))method_getImplementation(method))(self,selector,pipeline);if(link&&!link.encodingRenderICB)link.callerRenderPipeline=pipeline;}
 void setCallerVertexBuffer(id self,SEL selector,id buffer,NSUInteger offset,NSUInteger index){

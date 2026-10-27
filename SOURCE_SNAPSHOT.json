@@ -28,19 +28,19 @@
       "path": "bridge/src/KeplerCPUICB.h",
       "source_path": "bridge/src/KeplerCPUICB.h",
       "source_SHA256": "263dede0101967e1bfa32fe3b081b73c476d9e09e8a9b5446ae04cf4f425ee0a",
-      "published_SHA256": "004cfb7ffa1747cde2ed3a7925d7e3527106efb3c8ec0c601b3b22756d93e994",
-      "bytes": 29646,
+      "published_SHA256": "18e994385d3d559852b39ea08723ce79fb146b8db8f3cfb316bfced01bcb97de",
+      "bytes": 31479,
       "modified_for_publication": true,
-      "previous_published_SHA256": "9256d0ea08974bb5d34387959672f63421db4f04821c56e98ac0ffe39c94e14d"
+      "previous_published_SHA256": "004cfb7ffa1747cde2ed3a7925d7e3527106efb3c8ec0c601b3b22756d93e994"
     },
     {
       "path": "bridge/src/KeplerCPUICB.mm",
       "source_path": "bridge/src/KeplerCPUICB.mm",
       "source_SHA256": "3d59c2c609611ddc387e616b8945e903f6378dbd4a3b66a02cb22087ada84b60",
-      "published_SHA256": "899f27e8e4d7b02567880f4fbb9785696d31b64e945c489b7a5e14e1361a6d4c",
-      "bytes": 135389,
+      "published_SHA256": "5ebe2d6b16932f69902dde89cfaf057a4d6f3a99cb4ebda41bb2c791752963fc",
+      "bytes": 135919,
       "modified_for_publication": true,
-      "previous_published_SHA256": "6b18d56fe0b3975df3bc168376e571bcf7b39310cafc37d59eb9bda500dd7bcc"
+      "previous_published_SHA256": "899f27e8e4d7b02567880f4fbb9785696d31b64e945c489b7a5e14e1361a6d4c"
     },
     {
       "path": "bridge/src/KeplerCommandIR.h",
@@ -7478,18 +7478,16 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "b83ddccfdfd22b4e144c5c77106fe75b47230b74dd435bff333f1f2455f1b897",
-  "previous_public_commit": "910352de122b14a619a599273a5aeebae3a2266c",
+  "previous_source_snapshot_SHA256": "4a645767b7b1d9b23e9c55300205ba2d521b703b208ffc5da3aaf0bf144736db",
+  "previous_public_commit": "744b7cbd62215ce21e5384c80657d2d6b4d1b0bd",
   "update": {
-    "date": "2026-10-24",
-    "reason": "Owned render-record contexts and public argument encoders; compute IRv2 ABI kept separate",
+    "date": "2026-10-27",
+    "reason": "Scoped vertex-buffer transitions from certified render-state snapshots",
     "files": [
       "bridge/src/KeplerCPUICB.h",
-      "bridge/src/KeplerCPUICB.mm",
-      "bridge/src/KeplerCommandIRArgumentEncoder.inc",
-      "bridge/src/KeplerCommandIRFunction.inc"
+      "bridge/src/KeplerCPUICB.mm"
     ]
   },
-  "update_date": "2026-10-24",
-  "update_reason": "Owned indexed render binding extension; unchanged v1 root prefix"
+  "update_date": "2026-10-27",
+  "update_reason": "Retained, alias-checked vertex-transition context; original root unchanged"
 }
