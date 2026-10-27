@@ -37,10 +37,10 @@
       "path": "bridge/src/KeplerCPUICB.mm",
       "source_path": "bridge/src/KeplerCPUICB.mm",
       "source_SHA256": "3d59c2c609611ddc387e616b8945e903f6378dbd4a3b66a02cb22087ada84b60",
-      "published_SHA256": "f40bdabc473be52b2242c622265429bbcdfacdb5d0c747fb55387c703b87620b",
-      "bytes": 138365,
+      "published_SHA256": "1b7a457dd2e4ee551e456ddced901ec8a15f90b0d9ca46bccd4a3e61454d0e62",
+      "bytes": 138716,
       "modified_for_publication": true,
-      "previous_published_SHA256": "6b3d14fd725e523c645c9943cc8731a54847c77bf35f84b6744cdaaee265daa6"
+      "previous_published_SHA256": "f40bdabc473be52b2242c622265429bbcdfacdb5d0c747fb55387c703b87620b"
     },
     {
       "path": "bridge/src/KeplerCommandIR.h",
@@ -1413,9 +1413,10 @@
       "path": "bridge/tools/cpu_icb_manifest_probe.mm",
       "source_path": "bridge/tools/cpu_icb_manifest_probe.mm",
       "source_SHA256": "48dd7d827f482249e95aab98af9ab258d2764d7473523864b9523084807a6058",
-      "published_SHA256": "48dd7d827f482249e95aab98af9ab258d2764d7473523864b9523084807a6058",
+      "published_SHA256": "26964fb7af6ede4fa5e8b48a58cc4a2e48083f74d35e8ad8461bca25b01d06d1",
       "bytes": 16445,
-      "modified_for_publication": false
+      "modified_for_publication": true,
+      "previous_published_SHA256": "48dd7d827f482249e95aab98af9ab258d2764d7473523864b9523084807a6058"
     },
     {
       "path": "bridge/tools/cpu_icb_mixed_probe.mm",
@@ -1445,9 +1446,10 @@
       "path": "bridge/tools/cpu_icb_probe.mm",
       "source_path": "bridge/tools/cpu_icb_probe.mm",
       "source_SHA256": "cf0e13b79cdcb57c4e913aee6a5ed2d4403b2aefb1707560dfaed3c4df63a9c2",
-      "published_SHA256": "cf0e13b79cdcb57c4e913aee6a5ed2d4403b2aefb1707560dfaed3c4df63a9c2",
-      "bytes": 9824,
-      "modified_for_publication": false
+      "published_SHA256": "70c39ea3153e0490791427d9c84eaeb4275ddbb11f90d69a278e50fad942b33a",
+      "bytes": 11293,
+      "modified_for_publication": true,
+      "previous_published_SHA256": "cf0e13b79cdcb57c4e913aee6a5ed2d4403b2aefb1707560dfaed3c4df63a9c2"
     },
     {
       "path": "bridge/tools/cpu_icb_profiles_lifetime_probe.mm",
@@ -1461,9 +1463,10 @@
       "path": "bridge/tools/cpu_icb_profiles_probe.mm",
       "source_path": "bridge/tools/cpu_icb_profiles_probe.mm",
       "source_SHA256": "f2491a1d04ce0d8c0d9b5f0962e711918a8fa126674b96d6040ab551f87f5c3d",
-      "published_SHA256": "f2491a1d04ce0d8c0d9b5f0962e711918a8fa126674b96d6040ab551f87f5c3d",
+      "published_SHA256": "679c46e223ffcaa516f7aa88fcf4db3e34c71c1083ce25cf6a8a44ce8b6406ba",
       "bytes": 12348,
-      "modified_for_publication": false
+      "modified_for_publication": true,
+      "previous_published_SHA256": "f2491a1d04ce0d8c0d9b5f0962e711918a8fa126674b96d6040ab551f87f5c3d"
     },
     {
       "path": "bridge/tools/cpu_icb_render_lifetime_probe.mm",
@@ -7479,8 +7482,8 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "0f31ca2ade4b20d955b6d3564cb1dbe0b1ff136deb64a4867c83ded00056ae83",
-  "previous_public_commit": "ba3a448808db8bc12a7cad2344219bd49eb1a675",
+  "previous_source_snapshot_SHA256": "0534d9170d2893296a10784f82b7c0ee95ada2ae0e93e0ee3a823e210e35f519",
+  "previous_public_commit": "7791989a3584cd54a6e6d6ffec8f2059bf0dd9a4",
   "update": {
     "date": "2026-10-27",
     "reason": "Combined indexed, vertex and pipeline render context",
@@ -7489,5 +7492,5 @@
     ]
   },
   "update_date": "2026-10-27",
-  "update_reason": "Add queue-local render factories with guarded native fallback."
+  "update_reason": "Add aligned thread-grid dispatch to the scoped CPU ICB and keep partial-grid refusal controls."
 }

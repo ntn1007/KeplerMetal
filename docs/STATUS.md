@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+Scoped CPU compute ICB thread-grid dispatch now accepts evenly divisible grids and reuses the qualified threadgroup path; partial groups remain refused. [Evidence](UNIFORM_THREAD_ICB.md).
+
 Qualified render-encoder creation can now be adapted automatically on one opted-in queue, with guarded fallback for unsupported passes. Bootstrap and pipeline registration remain explicit. [Evidence and limits](AUTOMATIC_RENDER_FACTORIES.md).
 
 The scoped quad context combines indexed draw spans with vertex, pipeline and fragment transitions. [Evidence and limits](QUAD_RENDER.md).

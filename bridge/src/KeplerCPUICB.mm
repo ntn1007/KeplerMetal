@@ -273,7 +273,13 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 - (void)setKernelBuffer:(id<MTLBuffer>)buffer offset:(NSUInteger)offset atIndex:(NSUInteger)index {[self checkReusableMutation];if(_GPUGenerated)reject(@"GPU-selected command requires reset before CPU re-encoding");NSDictionary*p=[_owner.scope profileForPipeline:_pipeline],*spec=p[@"binding_specs"][@(index)];BOOL extended=[p[@"binding_layout_v2"]boolValue];if(!_owner||(!extended&&index>=3)||(extended&&!spec)||buffer.device!=_owner.scope.device||offset>buffer.length||(extended&&offset%[spec[@"alignment"]unsignedIntegerValue]))reject(@"Unqualified kernel buffer/index/offset alignment");_bindings[@(index)]=@{@"buffer":buffer,@"offset":@(offset)};[self invalidate];}
 - (void)setKernelBuffer:(id<MTLBuffer>)buffer offset:(NSUInteger)offset attributeStride:(NSUInteger)stride atIndex:(NSUInteger)index{reject(@"Dynamic attribute stride is not implemented");}
 - (void)concurrentDispatchThreadgroups:(MTLSize)groups threadsPerThreadgroup:(MTLSize)local {[self checkReusableMutation];if(_GPUGenerated)reject(@"GPU-selected command requires reset before CPU re-encoding");NSDictionary*p=[_owner.scope profileForPipeline:_pipeline];BOOL multidimensional=[p[@"multidimensional_grid"]boolValue];NSUInteger limit=[p[@"max_local"]unsignedIntegerValue];if(!limit)limit=[p[@"static_threadgroup_bytes"]unsignedIntegerValue]?128:1024;NSUInteger maxInvocations=[p[@"max_invocations"]unsignedIntegerValue]?:640;NSUInteger localCount=volume(local,limit),groupCount=volume(groups,maxInvocations);if(!localCount||!groupCount||local.width>1024||local.height>1024||local.depth>64||groups.width>0x7fffffff||groups.height>65535||groups.depth>65535||groupCount>maxInvocations/localCount||(!multidimensional&&(groups.height!=1||groups.depth!=1||local.height!=1||local.depth!=1)))reject(@"Grid exceeds registered dimension/thread bounds");_groups=groups;_local=local;_hasDispatch=YES;[self invalidate];}
-- (void)concurrentDispatchThreads:(MTLSize)grid threadsPerThreadgroup:(MTLSize)local{reject(@"Nonuniform thread grids are not implemented");}
+- (void)concurrentDispatchThreads:(MTLSize)grid threadsPerThreadgroup:(MTLSize)local{
+ if(!grid.width||!grid.height||!grid.depth||!local.width||!local.height||!local.depth||
+    grid.width%local.width||grid.height%local.height||grid.depth%local.depth)
+  reject(@"Partial or zero thread grids are not implemented");
+ MTLSize groups=MTLSizeMake(grid.width/local.width,grid.height/local.height,grid.depth/local.depth);
+ [self concurrentDispatchThreadgroups:groups threadsPerThreadgroup:local];
+}
 - (void)setBarrier{[self checkReusableMutation];_barrier=YES;}
 - (void)clearBarrier{[self checkReusableMutation];_barrier=NO;}
 - (void)setImageblockWidth:(NSUInteger)width height:(NSUInteger)height{reject(@"Imageblock state is not implemented");}

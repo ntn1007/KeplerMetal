@@ -1,0 +1,109 @@
+{
+  "GPU_execution_proved": true,
+  "audit": "PASS",
+  "build_inputs_SHA256": "dfcccdab72149c369da3c584c38d958e0934dc1732f594d4b87f65a0622b4bb2",
+  "guard_bytes_checked": 43008,
+  "metallib_SHA256": "b15f9b198ba326811f0a61f64fc32ac7cc185d04db63fa8e04f86075e8450a8d",
+  "negative_api_cases": 72,
+  "observations": [
+    {
+      "correct_uint32_words": 0,
+      "form": "groups",
+      "guard_bytes_checked": 0,
+      "manifest_SHA256": "b38c2332f8bf72f441e97f11f5f530cf2fd68dec4a001a0fa6ce46f0e95f8615",
+      "mode": "prepare",
+      "negative_api_cases": 9,
+      "raw_file_count": 8,
+      "result_SHA256": "2a8eda63b960e2e91aff1a4e1bf898d8483896334850875ddef4202cc134eedd",
+      "user_GPU_invocations": 0
+    },
+    {
+      "correct_uint32_words": 0,
+      "form": "threads",
+      "guard_bytes_checked": 0,
+      "manifest_SHA256": "3d84f8f5196f952eef57be1ad5735b94102c9216fd3e2becfcef715fb38cd8bd",
+      "mode": "prepare",
+      "negative_api_cases": 9,
+      "raw_file_count": 8,
+      "result_SHA256": "393588e17ad44f63e129430374c890838e6af0a4f9bdbf10b1873ed1e1ac0511",
+      "user_GPU_invocations": 0
+    },
+    {
+      "correct_uint32_words": 17584,
+      "form": "groups",
+      "guard_bytes_checked": 7168,
+      "manifest_SHA256": "5542d756c00d1a3b4ad56267bbd7005e1c9d33d257763e3aa35a5dbeeae786b4",
+      "mode": "execute",
+      "negative_api_cases": 9,
+      "raw_file_count": 64,
+      "result_SHA256": "a92ba740b696dfc85ef780ba5c40d97a237fea3d759711e12ed82a0b5e0fcf14",
+      "user_GPU_invocations": 4396
+    },
+    {
+      "correct_uint32_words": 17584,
+      "form": "threads",
+      "guard_bytes_checked": 7168,
+      "manifest_SHA256": "796738ca194516fc93092d0704f8c56a078a1e2594a1ca56113a33a189129784",
+      "mode": "execute",
+      "negative_api_cases": 9,
+      "raw_file_count": 64,
+      "result_SHA256": "41a147d1a26cf2e1e58cf5db77f617c47ccb3191e54ac5c9519b6ff2f31bbd64",
+      "user_GPU_invocations": 4396
+    },
+    {
+      "correct_uint32_words": 17584,
+      "form": "groups",
+      "guard_bytes_checked": 7168,
+      "manifest_SHA256": "d020247ea402eaeb052cf82ac58c9b0f83889ce3b87492396fa532816d84100f",
+      "mode": "execute",
+      "negative_api_cases": 9,
+      "raw_file_count": 64,
+      "result_SHA256": "e0e5eaa8b427e79f444a31f89ede4646405346441a4b90ad1cfa33caecf4fd6a",
+      "user_GPU_invocations": 4396
+    },
+    {
+      "correct_uint32_words": 17584,
+      "form": "threads",
+      "guard_bytes_checked": 7168,
+      "manifest_SHA256": "9182a477a64b125e57a441cb8022b8bdbfcc8e6b520858b7b3c81aabfa992810",
+      "mode": "execute",
+      "negative_api_cases": 9,
+      "raw_file_count": 64,
+      "result_SHA256": "bbb7b76355e53242f458c6c64ebb2dc0dfe4e852ac8babc6a60bc16cec529b39",
+      "user_GPU_invocations": 4396
+    },
+    {
+      "correct_uint32_words": 17584,
+      "form": "groups",
+      "guard_bytes_checked": 7168,
+      "manifest_SHA256": "67f0c49beabb7f27d45f1122f0f912562abd969431254881a104da3cc91a2647",
+      "mode": "execute",
+      "negative_api_cases": 9,
+      "raw_file_count": 64,
+      "result_SHA256": "b64603ab9bd4e34b9c85dc138f8b33cae652a73471142cc99b97869b24d02274",
+      "user_GPU_invocations": 4396
+    },
+    {
+      "correct_uint32_words": 17584,
+      "form": "threads",
+      "guard_bytes_checked": 7168,
+      "manifest_SHA256": "5d8f1aaff5621c88c7dab3062ce6836e9d17b25a3db2a5c251d6d891fabb053b",
+      "mode": "execute",
+      "negative_api_cases": 9,
+      "raw_file_count": 64,
+      "result_SHA256": "702535d3da1f915e7e847e9905f02e22a4ef1c6ad01466c4dfc8151b98027a37",
+      "user_GPU_invocations": 4396
+    }
+  ],
+  "paired_raw_files_identical": 192,
+  "partial_threadgroups_supported": false,
+  "positive_uint32_words": 105504,
+  "preparation_hosts": 2,
+  "runtime_archive_SHA256": "42e3c6c396c86c97e7a29c1866b6cca1e716d8e775da77d17c5a71ce5d3fc87a",
+  "separate_processes": 8,
+  "system_modified": false,
+  "transparent_application_integration": false,
+  "user_GPU_execute_hosts": 6,
+  "user_GPU_invocations": 26376,
+  "user_command_buffers": 42
+}

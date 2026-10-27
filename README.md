@@ -21,6 +21,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+The scoped CPU compute ICB now accepts evenly divisible thread-grid dispatches, using its qualified group-dispatch path. Partial groups remain refused. [Contract and GPU evidence](docs/UNIFORM_THREAD_ICB.md).
+
 The existing Metal driver passes three GPU read/write trials on a 4 MiB buffer after purge and restoration, with three native controls and a no-dispatch control. This does not establish memory reclamation or a speedup. [GPU contract and evidence](docs/VIDEO_METAL_PURGE_GPU.md) · [CPU-only observations](docs/VIDEO_METAL_PURGE.md).
 
 An opt-in scope can automatically adapt qualified ordinary render-encoder factories on its own queue. A separately compiled public-Metal client renders correctly; unsupported passes guard project ICBs. [Evidence and limits](docs/AUTOMATIC_RENDER_FACTORIES.md).
