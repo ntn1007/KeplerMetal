@@ -23,8 +23,9 @@ relocation for that slot names the inherited `IOAccelContext2::start`.
 The comparison of fields and the call are verified against recorded
 instructions; their object interpretation comes from the Ghidra analysis and
 associated symbols. A previous static factory analysis associates type 6 with
-creation of a shared client, but **neither a successful type-6 open nor a
-successful association has been observed** on this profile.
+creation of a shared client. A subsequent [same-process Metal test](VIDEO_SHARED_METAL.md)
+observed successful type-6 open/close; a successful association has not been
+observed.
 
 The inherited `IOAccelContext2::contextStop` at `0x7eea` calls
 `freeAllDataBuffers`, decrements the shared context reference and clears the
