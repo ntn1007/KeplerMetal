@@ -14,7 +14,7 @@ The source SHA-256 is `2a503c7a0d22431b4c5d251171b21dc7027519b8c2320d776c23ae382
 
 Two fresh isolated processes constructed the existing `depth0` and `grid_coordinates` compute pipelines using the currently pinned NVIDIA driver, with a process-local observer around `NVMTLFunctionVariant` construction. The observer restores the method and **does not dispatch either shader**. The driver file on disk had SHA-256 `e240d54a4cd64b7e54fbc15250de82e88451132e1d9f3a4f9879607c8b0e7645`; this does not independently establish the bytes of loaded driver memory. Each container was extracted and independently re-disassembled with the locally built `envydis`; both listings had zero unknown annotations.
 
-For the *specific* 256-byte `depth0` program, the checked disassembly starts with `tidx`, `ctaidx`, and the equivalent of `ctaidx * c1[0x6f0] + tidx + c1[0x710]`. The 1,152-byte `grid_coordinates` program refers to all three CTA coordinates, `c1[0x710..0x718]` and additional values `c1[0x730..0x738]`. This is static evidence of compiler inputs for these exact shaders, not a complete interpretation of their ABI. Program and disassembly hashes and execution-manifest hashes appear in the audit. Neither nonzero origins, group-ID adjustment, group-size builtins, nor partial groups were executed on the GTX. The observer's pilot produced no complete manifest after a launcher import error; its child exited normally and the reservation was terminal. It is excluded from these two final observations.
+For the *specific* 256-byte `depth0` program, the checked disassembly starts with `tidx`, `ctaidx`, and the equivalent of `ctaidx * c1[0x6f0] + tidx + c1[0x710]`. The 1,152-byte `grid_coordinates` program refers to all three CTA coordinates, `c1[0x710..0x718]` and additional values `c1[0x730..0x738]`. This is static evidence of compiler inputs for these exact shaders, not a complete interpretation of their ABI. Program and disassembly hashes and execution-manifest hashes appear in the audit. At the time of this capture, nonzero origins, group-ID adjustment and partial groups had not been executed on the GTX. A later bounded origin experiment is documented below; partial groups remain unimplemented. The observer's pilot produced no complete manifest after a launcher import error; its child exited normally and the reservation was terminal. It is excluded from these two final observations.
 
 ## CPU-only geometry model
 
@@ -69,4 +69,29 @@ The audit pins the captured native code hashes and expects the same source and r
 
 ## Next qualification boundary
 
-First determine, with a narrowly guarded process-local experiment and existing certified submission machinery, whether the pinned native shaders can read nonzero coordinate origins and still produce the correct output on the GTX. Separately qualify group IDs, logical group counts, actual versus nominal dimensions and local-memory barriers. The approach must preserve resource ownership and progress and reject unsupported shaders/geometry; semantic equivalence across segmented submissions remains open. Only after those proofs should the scoped ICB's current refusal be reconsidered. Native Apple ICB ABI and transparent integration into ordinary applications remain separate work.
+The bounded origin experiment below qualifies one native shader and selected group-ID shifts. Separately qualify logical group counts, actual versus nominal dimensions and local-memory barriers for the proposed decomposition. The approach must preserve resource ownership and progress and reject unsupported shaders/geometry; semantic equivalence across segmented submissions remains open. Only after those proofs should the scoped ICB's current refusal be reconsidered. Native Apple ICB ABI and transparent integration into ordinary applications remain separate work.
+
+## Follow-up: bounded nonzero origins on the GTX 880M
+
+A separate process-local probe uses the existing scope-owned `grid_coordinates` shader, its pinned library and the already qualified resident descriptor/launch transport. It does **not** alter the native instruction stream or construct a new GPU packet. After the normal resident preparation, a Metal blit changes only the three origin values at offsets `0x710`, `0x714`, `0x718` in that record's dedicated 64 KiB constant buffer. Before launching, the full buffer is checked against the untouched baseline plus exactly those 12 bytes, and the whole resident descriptor is checked against the baseline. Both are read back and compared again after every launch. The output buffers and all output indexes are bounded by the shader's 1,024-element limit.
+
+One preparation process and three independent execution processes completed serially under the common host reservation. Each execution has a suppressed-launch control, four zero-origin launches (including two repetitions of the 1D baseline), and three nonzero cases: X origin `(8,0,0)` with group size `(4,1,1)`, Y origin `(0,4,0)` with group size `(4,2,1)`, and Z origin `(0,0,4)` with group size `(4,2,2)`. Across all three hosts, **21 user launches / 1,032 invocations / 8,256 uint32 coordinate and geometry values** matched the independent CPU oracle. The oracle checks the invocation counters and every byte of the output buffers, including unwritten regions and guards; three suppressed-launch controls remain untouched. Matching coordinate and geometry output hashes repeat across the three processes. The [cohort audit](partial-origin-validation.json) records exact source, archive, library, host, driver-file and manifest hashes. The raw buffers, constant snapshots, descriptors and signed hosts remain in the local lab.
+
+For these aligned origins and this exact shader, the observed global coordinates and group IDs include the tested offsets; local positions, physical group counts and local dimensions retain their expected values. The experiment does **not** establish arbitrary-origin correctness, nonuniform groups, logical grid or group counts for a larger decomposed dispatch, other shaders, global application integration, or performance. It also does not prove that the installed driver was repaired. The existing refusal of partial groups is unchanged.
+
+To reproduce, start from the public archive and hash-pinned library used by the aligned-grid qualification, and use a fresh result directory for every host. Replace `RID` with the currently observed GTX registry ID; the common reservation root must be the same one used by all GTX probes.
+
+```sh
+LAB='/path/to/nvidia-880m-lab/bridge'
+ARCHIVE='/path/to/qualified-public-source-archive'
+GRIDLIB='/path/to/cpu_icb_grid3d.metallib'
+RID=REPLACE_WITH_CURRENT_REGISTRY_ID
+python3 bridge/tools/partial_origin.py build --out "$LAB/results/origin-build-new" --archive "$ARCHIVE" --metallib "$GRIDLIB"
+python3 bridge/tools/partial_origin.py run --build "$LAB/results/origin-build-new" --out "$LAB/results/origin-prepare-new" --reservation-root "$LAB" --mode prepare --registry-id "$RID"
+for run in 1 2 3; do
+  python3 bridge/tools/partial_origin.py run --build "$LAB/results/origin-build-new" --out "$LAB/results/origin-execute-new-$run" --reservation-root "$LAB" --mode execute --registry-id "$RID" || break
+done
+python3 bridge/tools/audit_partial_origin.py "$LAB/results/origin-prepare-new" "$LAB/results/origin-execute-new-1" "$LAB/results/origin-execute-new-2" "$LAB/results/origin-execute-new-3"
+```
+
+The builder checks source/archive, SDK, library, manifest and machine profile. The runner freezes inputs, checks the same profile, uses a separately signed host and the common reservation, and invokes the independent raw-data verifier. The auditor checks four terminal serialized processes and signatures. Unknown drivers or assets are refused, not automatically repinned.

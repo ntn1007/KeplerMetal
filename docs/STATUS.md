@@ -1,6 +1,6 @@
 # Status, 2026-10-27
 
-Partial threadgroups remain refused on Kepler. Two M1 reference cohorts and native compiler captures now characterize builtins and a CPU-only geometry model; GPU origin semantics remain unproved. [Evidence and reproduction](PARTIAL_THREADGROUP_RESEARCH.md).
+Partial threadgroups remain refused on Kepler. A pinned NVIDIA shader now passes bounded nonzero-origin experiments on the GTX across 21 launches and 1,032 invocations; logical group counts and actual versus nominal sizes remain open. [Evidence and reproduction](PARTIAL_THREADGROUP_RESEARCH.md).
 
 Scoped CPU compute ICB thread-grid dispatch accepts evenly divisible grids with bounded 1D, 2D and 3D GPU qualification; partial groups remain refused. [Evidence](UNIFORM_THREAD_ICB.md).
 
