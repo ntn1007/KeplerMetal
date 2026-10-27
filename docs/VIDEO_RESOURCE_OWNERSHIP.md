@@ -1,8 +1,8 @@
 # Video context association and resource lifetime: static evidence
 
 The existing type-3 video-context open/close test succeeded on the qualified
-profile. This document investigates the next dependency without opening any
-new connection. It does **not** demonstrate video decoding, allocation,
+profile. This static analysis investigates the dependency without opening any new
+connection. It does **not itself** demonstrate video decoding, allocation,
 association or cleanup after association on the running system.
 
 The pinned NVIDIA `nvVideoContext` vtable has file relocations to the inherited
@@ -24,8 +24,8 @@ The comparison of fields and the call are verified against recorded
 instructions; their object interpretation comes from the Ghidra analysis and
 associated symbols. A previous static factory analysis associates type 6 with
 creation of a shared client. A subsequent [same-process Metal test](VIDEO_SHARED_METAL.md)
-observed successful type-6 open/close; a successful association has not been
-observed.
+observed successful type-6 open/close. A later [bounded association test](VIDEO_CONTEXT_ASSOCIATION.md)
+returned success twice; its internal lifecycle was not traced.
 
 The inherited `IOAccelContext2::contextStop` at `0x7eea` calls
 `freeAllDataBuffers`, decrements the shared context reference and clears the

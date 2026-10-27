@@ -37,9 +37,9 @@ process. Loaded UUIDs identify builds, not the bytes in kernel memory. The
 common lab lock serializes participating lab hosts, not WindowServer or all
 other GPU processes. [Recorded audit and raw-capture hashes](video-shared-metal-validation.json).
 
-The next step is to qualify the complete start, failure and teardown semantics
-of associating a type-3 context with this shared connection. A context open and
-a shared-client open separately do not yet qualify that association. Preserve
+A later [association witness](VIDEO_CONTEXT_ASSOCIATION.md) returned success,
+with context-first close in two cases. Start failure and broader teardown
+semantics remain unqualified. Preserve
 an ordinary Metal object while investigating its lifetime; do not send video
 selectors or arbitrary command packets until their ABI and resource ownership
 are established.
