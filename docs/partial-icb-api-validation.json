@@ -1,0 +1,38 @@
+{
+  "audit": "PASS",
+  "core_source_SHA256": "c8c7982ed90688577665f9762e73638c9ceceaf4153e4611200ab4b7750d7128",
+  "driver_file_SHA256": "e240d54a4cd64b7e54fbc15250de82e88451132e1d9f3a4f9879607c8b0e7645",
+  "host_source_SHA256": "5c7ea1e72d8c19e110201a24249162c01e008c055ca485ffa0e747cc3d4c7bb8",
+  "m1_metadata_component_matches": 194040,
+  "m1_reference_manifest_SHA256": [
+    "735de14fea3f979f5d455bfab95ab3d44343a0f12e714f5dbfc2a5ec0e481487",
+    "159465521357cea524c4cb8b67f5ad84093c6f3fed225ef1df439a4b080a2904"
+  ],
+  "manual_prototype_manifest_SHA256": "ae858c8d4d2bcd9bad665c3b9d38c1106a6e156e140f235f124499f9bfe53508",
+  "native_apple_ICB": false,
+  "negative_refusal_observations": 28,
+  "partial_execution_hosts": 3,
+  "partial_hosts": 4,
+  "partial_invocations": 4620,
+  "partial_manifest_SHA256": [
+    "70480477750eac5f5cc07884100910df2ae5a122bcd5cab699812dbafa8318ff",
+    "85eedce4b3c6b675317aae32a8f01bb4d3da2ab0860bc025b4bdd68aeefdc197",
+    "283e2b6b95a2c7c6f6bee92af3906f6c5f0a2130c542822ff3e79cc358828de3",
+    "ed494bc154d6cfb45b18158ce8e1614aed5e6c4e1a09908cf84fa1e07a1a3e5b"
+  ],
+  "partial_uint32_values": 36960,
+  "partial_user_command_buffers": 12,
+  "prototype_raw_file_matches": 24,
+  "runtime_archive_SHA256": "cd2490431261bed5e3ee8d96fe1a0231d310f29a039e7334d328b0326412f5cb",
+  "scope": "Explicit opt-in, exact shader/grid/resources; serial process-local project ICB",
+  "system_modified": false,
+  "transparent_integration": false,
+  "uniform_invocations": 37264,
+  "uniform_manifest_SHA256": [
+    "9048d4da6391a7f9b0ff204867c17742e477d01a811c5161887da649e020df70",
+    "0f553b158b1fca9aa6aa55d9c16fc957b0ad8f0623823a1d343e205149384a58"
+  ],
+  "uniform_paired_data_files": 180,
+  "uniform_regression_hosts": 2,
+  "uniform_uint32_values": 298112
+}

@@ -1,8 +1,8 @@
 # Status, 2026-10-27
 
-Partial threadgroups remain refused on Kepler. A bounded adapted client now assembles 1D and 3D partial logical grids on the GTX using resident launches; the 3D builtins match an M1 reference, while general partial ICB dispatch remains open. [Evidence and reproduction](PARTIAL_THREADGROUP_RESEARCH.md).
+An explicit opt-in project ICB path executes one fixed 3D partial grid for the exact certified shader and resource profile. General partial ICB dispatch remains open. [Contract and qualification](PARTIAL_ICB_FIXED_PROFILE.md).
 
-Scoped CPU compute ICB thread-grid dispatch accepts evenly divisible grids with bounded 1D, 2D and 3D GPU qualification; partial groups remain refused. [Evidence](UNIFORM_THREAD_ICB.md).
+Scoped CPU compute ICB thread-grid dispatch accepts evenly divisible grids with bounded 1D, 2D and 3D GPU qualification; other partial grids remain refused. [Evidence](UNIFORM_THREAD_ICB.md).
 
 Qualified render-encoder creation can now be adapted automatically on one opted-in queue, with guarded fallback for unsupported passes. Bootstrap and pipeline registration remain explicit. [Evidence and limits](AUTOMATIC_RENDER_FACTORIES.md).
 

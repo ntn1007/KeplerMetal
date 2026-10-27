@@ -28,19 +28,19 @@
       "path": "bridge/src/KeplerCPUICB.h",
       "source_path": "bridge/src/KeplerCPUICB.h",
       "source_SHA256": "263dede0101967e1bfa32fe3b081b73c476d9e09e8a9b5446ae04cf4f425ee0a",
-      "published_SHA256": "754ead3908122f83f6d8269f75b2b241621b563b9a2bae7d1cdda7703bd05ae6",
-      "bytes": 36581,
+      "published_SHA256": "6425e00d83e18660e96da822b6dc04500f366a6f67a33b577a51fa7a6f14dbe7",
+      "bytes": 36960,
       "modified_for_publication": true,
-      "previous_published_SHA256": "f44c786a4b65ad32fa96ab4e77025ffadf0934135eccdb1af8ff2362926d2fc9"
+      "previous_published_SHA256": "754ead3908122f83f6d8269f75b2b241621b563b9a2bae7d1cdda7703bd05ae6"
     },
     {
       "path": "bridge/src/KeplerCPUICB.mm",
       "source_path": "bridge/src/KeplerCPUICB.mm",
       "source_SHA256": "3d59c2c609611ddc387e616b8945e903f6378dbd4a3b66a02cb22087ada84b60",
-      "published_SHA256": "1b7a457dd2e4ee551e456ddced901ec8a15f90b0d9ca46bccd4a3e61454d0e62",
-      "bytes": 138716,
+      "published_SHA256": "c8c7982ed90688577665f9762e73638c9ceceaf4153e4611200ab4b7750d7128",
+      "bytes": 145173,
       "modified_for_publication": true,
-      "previous_published_SHA256": "f40bdabc473be52b2242c622265429bbcdfacdb5d0c747fb55387c703b87620b"
+      "previous_published_SHA256": "1b7a457dd2e4ee551e456ddced901ec8a15f90b0d9ca46bccd4a3e61454d0e62"
     },
     {
       "path": "bridge/src/KeplerCommandIR.h",
@@ -7493,5 +7493,5 @@
     ]
   },
   "update_date": "2026-10-27",
-  "update_reason": "Qualify aligned 2D and 3D ICB thread grids against native group dispatch."
+  "update_reason": "Explicit fixed-profile partial 3D ICB experiment with bounded lifecycle and refusals."
 }

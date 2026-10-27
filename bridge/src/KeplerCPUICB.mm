@@ -147,7 +147,7 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 @property(nonatomic) BOOL renderRecordArgumentsEnabled,automaticComputeEnabled,automaticRenderEnabled;
 @property(nonatomic,strong) NSHashTable *renderArgumentContexts;
 @property(nonatomic,strong) NSMutableDictionary *stablePipelineIdentities;
-@property(nonatomic) BOOL restored;
+@property(nonatomic) BOOL restored,experimentalPartialGridEnabled;
 @property(nonatomic) NSUInteger releasedEncoderCount;
 @property(nonatomic) NSUInteger maxKernelBindings;
 @property(nonatomic,strong) id<KPCPURenderTransport> renderEngine;
@@ -192,7 +192,8 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 @property(nonatomic) MTLSize groups;
 @property(nonatomic) MTLSize local;
 @property(nonatomic) BOOL hasDispatch;
-@property(nonatomic) BOOL barrier;
+@property(nonatomic) BOOL barrier,partialGrid3D;
+@property(nonatomic,strong) NSArray<KPRecordedNativeCompute*> *partialGridRecords;
 @property(nonatomic,strong) KPRecordedNativeCompute *record;
 @property(nonatomic,strong) NSArray<KPRecordedNativeCompute*> *residentOwners;
 @property(nonatomic,strong) id<MTLCommandBuffer> residentCopyBuffer;
@@ -268,12 +269,17 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 @implementation KPComputeICBCommand
 - (instancetype)init{if((self=[super init])){_bindings=[NSMutableDictionary new];_threadgroupLengths=[NSMutableDictionary new];}return self;}
 - (void)checkReusableMutation{if(_reusableContext){NSError*error=nil;if(![_reusableContext idle:&error])reject(error.localizedDescription);if(_reusableGeneration==_reusableContext.generation&&![_reusableContext retire:&error])reject(error.localizedDescription);}}
-- (void)invalidate{_record=nil;_residentOwners=nil;_residentCopyBuffer=nil;_GPUResourceOwners=nil;_GPUGenerated=NO;}
+- (void)invalidate{_record=nil;_partialGridRecords=nil;_residentOwners=nil;_residentCopyBuffer=nil;_GPUResourceOwners=nil;_GPUGenerated=NO;}
 - (void)setComputePipelineState:(id<MTLComputePipelineState>)pipeline {[self checkReusableMutation];if(_GPUGenerated)reject(@"GPU-selected command requires reset before CPU re-encoding");if(!_owner||![_owner.scope profileForPipeline:pipeline])reject(@"Pipeline is not owned by this registered scope");_pipeline=pipeline;[self invalidate];}
 - (void)setKernelBuffer:(id<MTLBuffer>)buffer offset:(NSUInteger)offset atIndex:(NSUInteger)index {[self checkReusableMutation];if(_GPUGenerated)reject(@"GPU-selected command requires reset before CPU re-encoding");NSDictionary*p=[_owner.scope profileForPipeline:_pipeline],*spec=p[@"binding_specs"][@(index)];BOOL extended=[p[@"binding_layout_v2"]boolValue];if(!_owner||(!extended&&index>=3)||(extended&&!spec)||buffer.device!=_owner.scope.device||offset>buffer.length||(extended&&offset%[spec[@"alignment"]unsignedIntegerValue]))reject(@"Unqualified kernel buffer/index/offset alignment");_bindings[@(index)]=@{@"buffer":buffer,@"offset":@(offset)};[self invalidate];}
 - (void)setKernelBuffer:(id<MTLBuffer>)buffer offset:(NSUInteger)offset attributeStride:(NSUInteger)stride atIndex:(NSUInteger)index{reject(@"Dynamic attribute stride is not implemented");}
-- (void)concurrentDispatchThreadgroups:(MTLSize)groups threadsPerThreadgroup:(MTLSize)local {[self checkReusableMutation];if(_GPUGenerated)reject(@"GPU-selected command requires reset before CPU re-encoding");NSDictionary*p=[_owner.scope profileForPipeline:_pipeline];BOOL multidimensional=[p[@"multidimensional_grid"]boolValue];NSUInteger limit=[p[@"max_local"]unsignedIntegerValue];if(!limit)limit=[p[@"static_threadgroup_bytes"]unsignedIntegerValue]?128:1024;NSUInteger maxInvocations=[p[@"max_invocations"]unsignedIntegerValue]?:640;NSUInteger localCount=volume(local,limit),groupCount=volume(groups,maxInvocations);if(!localCount||!groupCount||local.width>1024||local.height>1024||local.depth>64||groups.width>0x7fffffff||groups.height>65535||groups.depth>65535||groupCount>maxInvocations/localCount||(!multidimensional&&(groups.height!=1||groups.depth!=1||local.height!=1||local.depth!=1)))reject(@"Grid exceeds registered dimension/thread bounds");_groups=groups;_local=local;_hasDispatch=YES;[self invalidate];}
+- (void)concurrentDispatchThreadgroups:(MTLSize)groups threadsPerThreadgroup:(MTLSize)local {[self checkReusableMutation];if(_GPUGenerated)reject(@"GPU-selected command requires reset before CPU re-encoding");NSDictionary*p=[_owner.scope profileForPipeline:_pipeline];BOOL multidimensional=[p[@"multidimensional_grid"]boolValue];NSUInteger limit=[p[@"max_local"]unsignedIntegerValue];if(!limit)limit=[p[@"static_threadgroup_bytes"]unsignedIntegerValue]?128:1024;NSUInteger maxInvocations=[p[@"max_invocations"]unsignedIntegerValue]?:640;NSUInteger localCount=volume(local,limit),groupCount=volume(groups,maxInvocations);if(!localCount||!groupCount||local.width>1024||local.height>1024||local.depth>64||groups.width>0x7fffffff||groups.height>65535||groups.depth>65535||groupCount>maxInvocations/localCount||(!multidimensional&&(groups.height!=1||groups.depth!=1||local.height!=1||local.depth!=1)))reject(@"Grid exceeds registered dimension/thread bounds");_groups=groups;_local=local;_hasDispatch=YES;_partialGrid3D=NO;[self invalidate];}
 - (void)concurrentDispatchThreads:(MTLSize)grid threadsPerThreadgroup:(MTLSize)local{
+ if(grid.width==11&&grid.height==7&&grid.depth==5&&local.width==4&&local.height==4&&local.depth==3){
+  [self checkReusableMutation];NSDictionary*p=[_owner.scope profileForPipeline:_pipeline];
+  if(_GPUGenerated||!_owner.scope.experimentalPartialGridEnabled||_owner.scope.restored||![p[@"native_registration_v1"]boolValue]||p[@"pipeline_owner"]!=_pipeline||![p[@"function"]isEqual:@"partial_builtin_barrier"]||![p[@"library_SHA256"]isEqual:@"1e89eaf47bdcb482e4fc760869b6005e47c1e836ec43e14820ba601c28fdd3f5"]||![p[@"manifest_SHA256"]isEqual:@"31287315ccb87740c86c7180651007a766535bfcadf3de34edbe10e6bad233be"])reject(@"Fixed partial grid requires the explicitly enabled certified pipeline");
+  _groups=MTLSizeMake(3,2,2);_local=local;_hasDispatch=YES;_partialGrid3D=YES;[self invalidate];return;
+ }
  if(!grid.width||!grid.height||!grid.depth||!local.width||!local.height||!local.depth||
     grid.width%local.width||grid.height%local.height||grid.depth%local.depth)
   reject(@"Partial or zero thread grids are not implemented");
@@ -285,8 +291,8 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 - (void)setImageblockWidth:(NSUInteger)width height:(NSUInteger)height{reject(@"Imageblock state is not implemented");}
 - (void)setThreadgroupMemoryLength:(NSUInteger)length atIndex:(NSUInteger)index{[self checkReusableMutation];if(_GPUGenerated)reject(@"GPU-selected command requires reset before CPU re-encoding");NSDictionary*p=[_owner.scope profileForPipeline:_pipeline],*memory=p[@"dynamic_threadgroup"];if(![p[@"native_registration_v1"]boolValue]||!memory||index!=[memory[@"index"]unsignedIntegerValue]||length%16||length<[memory[@"min_bytes"]unsignedIntegerValue]||length>[memory[@"max_bytes"]unsignedIntegerValue]||length+[p[@"static_threadgroup_bytes"]unsignedIntegerValue]>49152)reject(@"Threadgroup memory index/length outside registered native ABI");_threadgroupLengths[@(index)]=@(length);[self invalidate];}
 - (void)setStageInRegion:(MTLRegion)region{reject(@"Stage-in regions are not implemented");}
-- (void)reset{[self checkReusableMutation];_reusableContext=nil;_reusableGeneration=0;_pipeline=nil;[_bindings removeAllObjects];[_threadgroupLengths removeAllObjects];_hasDispatch=NO;_barrier=NO;_groups=MTLSizeMake(0,0,0);_local=MTLSizeMake(0,0,0);[self invalidate];}
-- (void)copyStateFrom:(KPComputeICBCommand*)s{[self checkReusableMutation];if(s.reusableContext)reject(@"Copying reusable command state is not qualified");_pipeline=s.pipeline;_bindings=[s.bindings mutableCopy];_threadgroupLengths=[s.threadgroupLengths mutableCopy];_groups=s.groups;_local=s.local;_hasDispatch=s.hasDispatch;_barrier=s.barrier;_record=s.record;_residentOwners=s.residentOwners;_residentCopyBuffer=s.residentCopyBuffer;_GPUResourceOwners=s.GPUResourceOwners;_GPUGenerated=s.GPUGenerated;}
+- (void)reset{[self checkReusableMutation];_reusableContext=nil;_reusableGeneration=0;_pipeline=nil;[_bindings removeAllObjects];[_threadgroupLengths removeAllObjects];_hasDispatch=NO;_barrier=NO;_partialGrid3D=NO;_groups=MTLSizeMake(0,0,0);_local=MTLSizeMake(0,0,0);[self invalidate];}
+- (void)copyStateFrom:(KPComputeICBCommand*)s{[self checkReusableMutation];if(s.reusableContext||s.partialGrid3D)reject(@"Copying reusable or experimental partial command state is not qualified");_partialGrid3D=NO;_partialGridRecords=nil;_pipeline=s.pipeline;_bindings=[s.bindings mutableCopy];_threadgroupLengths=[s.threadgroupLengths mutableCopy];_groups=s.groups;_local=s.local;_hasDispatch=s.hasDispatch;_barrier=s.barrier;_record=s.record;_residentOwners=s.residentOwners;_residentCopyBuffer=s.residentCopyBuffer;_GPUResourceOwners=s.GPUResourceOwners;_GPUGenerated=s.GPUGenerated;}
 @end
 
 // Validate the current public command state, not just a cached native record.
@@ -307,6 +313,30 @@ static NSString*residentBindingError(KPComputeICBCommand*c,KPCPUICBScope*scope){
   memcpy(&words,(const char*)parameters.contents+base+wordOffset,4);if(uint64_t(words)*4!=length)return @"Resident dynamic shared parameter differs from its allocation";
  }else if(c.threadgroupLengths.count)return @"Resident static profile has unexpected dynamic shared bindings";
  return nil;
+}
+
+// Exact-profile experimental path, restricted to the fully verified 3D
+// shader and resource envelope. Never enable from a manifest alone.
+static void executeFixedPartialGrid(KPComputeICBCommand*c,KPCPUICBScope*scope,id<MTLComputeCommandEncoder>encoder){
+ NSDictionary*p=[scope profileForPipeline:c.pipeline];
+ if(!scope.experimentalPartialGridEnabled||scope.restored||!c.partialGrid3D||!c.hasDispatch||c.GPUGenerated||c.reusableContext||c.residentOwners.count||![p[@"native_registration_v1"]boolValue]||p[@"pipeline_owner"]!=c.pipeline||![p[@"function"]isEqual:@"partial_builtin_barrier"]||![p[@"library_SHA256"]isEqual:@"1e89eaf47bdcb482e4fc760869b6005e47c1e836ec43e14820ba601c28fdd3f5"]||![p[@"manifest_SHA256"]isEqual:@"31287315ccb87740c86c7180651007a766535bfcadf3de34edbe10e6bad233be"])reject(@"Partial grid profile or state changed");
+ Ivar iv=class_getInstanceVariable(object_getClass(encoder),"_commandBuffer");if(!iv||ivar_getOffset(iv)!=32)reject(@"Partial grid encoder ABI differs");id<MTLCommandBuffer>cb=object_getIvar(encoder,iv);
+ if(!cb||cb.commandQueue!=scope.queue||cb.status!=MTLCommandBufferStatusNotEnqueued||!cb.retainedReferences)reject(@"Partial grid requires a retained uncommitted buffer on the scope queue");
+ if(c.bindings.count!=4||c.threadgroupLengths.count)reject(@"Partial grid bindings differ");
+ NSMutableArray*buffers=[NSMutableArray new];for(unsigned j=0;j<4;j++){NSDictionary*b=c.bindings[@(j)];id<MTLBuffer>v=b[@"buffer"];NSUInteger expectedOffset=j==3?256:64,expectedLength=j==2?132:j==3?1536:16512;MTLStorageMode storage=j==3?MTLStorageModeShared:MTLStorageModePrivate;
+  if(!v||v.device!=scope.device||v.length!=expectedLength||v.storageMode!=storage||[b[@"offset"]unsignedIntegerValue]!=expectedOffset||[buffers containsObject:v])reject(@"Partial grid requires the exact, nonaliasing qualified resource envelope");[buffers addObject:v];}
+ if(!c.partialGridRecords){NSMutableArray<KPRecordedNativeCompute*>*records=[NSMutableArray new];
+  for(unsigned i=0;i<8;i++){KPComputeICBCommand*part=[KPComputeICBCommand new];part.owner=c.owner;part.pipeline=c.pipeline;part.bindings=[c.bindings mutableCopy];part.groups=MTLSizeMake((i&4)?1:2,1,1);part.local=MTLSizeMake((i&4)?3:4,(i&2)?3:4,(i&1)?2:3);part.hasDispatch=YES;
+   NSString*reason=residentBindingError(part,scope);if(reason)reject(reason);KPRecordedNativeCompute*r=[scope materialize:part];if(!r)reject(@"Partial grid materialization failed");[records addObject:r];}
+  id<MTLCommandBuffer>init=[scope.queue commandBuffer];if(!init||!init.retainedReferences)reject(@"Partial grid initializer missing");NSError*error=nil;
+  for(KPRecordedNativeCompute*r in records)if(![r initializeResidentDescriptorInCommandBuffer:init evidence:nil error:&error])reject(error.localizedDescription?:@"Partial QMD initialization failed");
+  id<MTLBlitCommandEncoder>b=[init blitCommandEncoder];if(!b)reject(@"Partial grid constant initialization unavailable");
+  for(unsigned i=0;i<8;i++){uint32_t values[16]={(i&4)?8u:0u,(i&2)?4u:0u,(i&1)?3u:0u,0,11,7,5,0,4,4,3,0,3,2,2,0};id<MTLBuffer>stage=[scope.device newBufferWithBytes:values length:sizeof(values) options:MTLResourceStorageModeShared];if(!stage)reject(@"Partial grid constant staging failed");for(unsigned j=0;j<4;j++)[b copyFromBuffer:stage sourceOffset:j*16 toBuffer:records[i].constants destinationOffset:0x710+j*16 size:12];}
+  [b endEncoding];if(!complete(init))reject(@"Partial grid initializer did not complete");c.partialGridRecords=[records copy];
+ }
+ if(c.partialGridRecords.count!=8)reject(@"Partial grid record count changed");NSError*error=nil;NSDictionary*proof=nil;
+ if(![c.partialGridRecords[0] encodeResidentSequence:c.partialGridRecords owners:c.partialGridRecords encoder:encoder suppressElementIndexes:[NSIndexSet indexSet] evidence:&proof error:&error])reject(error.localizedDescription?:@"Partial grid execution failed");
+ [scope.eventRows addObject:@{@"operation":@"execute_fixed_partial_grid",@"grid":@[@11,@7,@5],@"nominal_local":@[@4,@4,@3],@"regions":@8,@"logical_invocations":@385,@"evidence":proof,@"native_ICB":@NO,@"system_modified":@NO}];
 }
 
 @interface KPGPUCommandSelection ()
@@ -417,7 +447,7 @@ static NSString*residentBindingError(KPComputeICBCommand*c,KPCPUICBScope*scope){
 - (id<MTLIndirectComputeCommand>)indirectComputeCommandAtIndex:(NSUInteger)i{bounds(NSMakeRange(i,1),self.size);return _commands[i];}
 - (id<MTLIndirectRenderCommand>)indirectRenderCommandAtIndex:(NSUInteger)i{reject(@"Render ICBs are not implemented");return nil;}
 - (void)executeRange:(NSRange)range encoder:(id<MTLComputeCommandEncoder>)encoder {
- bounds(range,self.size);if(_scope.restored)reject(@"Scope was restored");for(NSUInteger i=range.location;i<NSMaxRange(range);i++){KPComputeICBCommand*c=_commands[i];if(c.reusableContext&&(!c.GPUGenerated||c.reusableContext.retired||c.reusableContext.generation!=c.reusableGeneration))reject(@"Reusable consumer generation is not materialized/active");}if(encoder.dispatchType!=MTLDispatchTypeSerial)reject(@"Concurrent encoders are not qualified");NSMutableArray*records=[NSMutableArray new];NSMutableArray*indices=[NSMutableArray new];
+ bounds(range,self.size);if(_scope.restored)reject(@"Scope was restored");NSUInteger partials=0;KPComputeICBCommand*partial=nil;for(NSUInteger i=range.location;i<NSMaxRange(range);i++){KPComputeICBCommand*c=_commands[i];if(c.partialGrid3D){partials++;partial=c;}}if(partials){if(partials!=1||range.length!=1||encoder.dispatchType!=MTLDispatchTypeSerial)reject(@"Partial grid accepts one command in a serial range");executeFixedPartialGrid(partial,_scope,encoder);return;}for(NSUInteger i=range.location;i<NSMaxRange(range);i++){KPComputeICBCommand*c=_commands[i];if(c.reusableContext&&(!c.GPUGenerated||c.reusableContext.retired||c.reusableContext.generation!=c.reusableGeneration))reject(@"Reusable consumer generation is not materialized/active");}if(encoder.dispatchType!=MTLDispatchTypeSerial)reject(@"Concurrent encoders are not qualified");NSMutableArray*records=[NSMutableArray new];NSMutableArray*indices=[NSMutableArray new];
  BOOL resident=NO;for(NSUInteger i=range.location;i<NSMaxRange(range);i++)if(((KPComputeICBCommand*)_commands[i]).residentOwners.count)resident=YES;
  if(resident){
   Ivar v=class_getInstanceVariable(object_getClass(encoder),"_commandBuffer");if(!v||ivar_getOffset(v)!=32)reject(@"Resident consumer command-buffer ABI differs");id<MTLCommandBuffer>cb=object_getIvar(encoder,v);
@@ -727,6 +757,12 @@ BOOL installRenderOverride(Class dynamic,Class original,SEL selector,IMP impleme
 }
 - (NSDictionary*)profileForPipeline:(id<MTLComputePipelineState>)pipeline {return pipeline?_profiles[[NSValue valueWithPointer:(__bridge const void*)pipeline]]:nil;}
 - (id<MTLComputePipelineState>)pipelineForFunction:(NSString*)name{return _restored?nil:_namedPipelines[name];}
+- (BOOL)enableExperimentalPartialGridWithError:(NSError**)error {
+ if(error)*error=nil;NSDictionary*p=[self profileForPipeline:_namedPipelines[@"partial_builtin_barrier"]];
+ if(_restored||![p[@"native_registration_v1"]boolValue]||p[@"pipeline_owner"]!=_namedPipelines[@"partial_builtin_barrier"]||![p[@"library_SHA256"]isEqual:@"1e89eaf47bdcb482e4fc760869b6005e47c1e836ec43e14820ba601c28fdd3f5"]||![p[@"manifest_SHA256"]isEqual:@"31287315ccb87740c86c7180651007a766535bfcadf3de34edbe10e6bad233be"])return fail(error,@"Experimental partial grid requires the exact registered shader and manifest");
+ _experimentalPartialGridEnabled=YES;[_eventRows addObject:@{@"operation":@"enable_experimental_partial_grid",@"grid":@[@11,@7,@5],@"local":@[@4,@4,@3],@"native_ICB":@NO,@"system_modified":@NO}];return YES;
+}
+
 - (NSArray*)events{return [_eventRows copy];}
 - (BOOL)adaptComputeEncoder:(id<MTLComputeCommandEncoder>)e error:(NSError**)error {@synchronized(_factoryLock){
  if(error)*error=nil;
@@ -890,7 +926,7 @@ BOOL installRenderOverride(Class dynamic,Class original,SEL selector,IMP impleme
 
 BOOL KPCopyCPUICBCommands(id<MTLIndirectCommandBuffer>source,NSRange range,id<MTLIndirectCommandBuffer>destination,NSUInteger index,NSError**error){
  if(![source isKindOfClass:[KPComputeICB class]]||![destination isKindOfClass:[KPComputeICB class]]||[source isKindOfClass:[KPRenderICB class]]!=[destination isKindOfClass:[KPRenderICB class]]||((KPComputeICB*)source).scope!=((KPComputeICB*)destination).scope||range.location>source.size||range.length>source.size-range.location||index>destination.size||range.length>destination.size-index)return fail(error,@"CPU ICB copy type/context/range mismatch");
- BOOL render=[source isKindOfClass:[KPRenderICB class]];KPComputeICB*s=(KPComputeICB*)source,*d=(KPComputeICB*)destination;if(!render)for(NSUInteger k=0;k<range.length;k++)if(((KPComputeICBCommand*)s.commands[range.location+k]).reusableContext||((KPComputeICBCommand*)d.commands[index+k]).reusableContext)return fail(error,@"CPU copying reusable command state is not qualified");if(!render)for(NSUInteger i=range.location;i<NSMaxRange(range);i++)if(((KPComputeICBCommand*)s.commands[i]).GPUGenerated)return fail(error,@"GPU-selected command cannot be copied as a CPU snapshot");
+ BOOL render=[source isKindOfClass:[KPRenderICB class]];KPComputeICB*s=(KPComputeICB*)source,*d=(KPComputeICB*)destination;if(!render)for(NSUInteger k=0;k<range.length;k++)if(((KPComputeICBCommand*)s.commands[range.location+k]).reusableContext||((KPComputeICBCommand*)d.commands[index+k]).reusableContext)return fail(error,@"CPU copying reusable command state is not qualified");if(!render)for(NSUInteger i=range.location;i<NSMaxRange(range);i++)if(((KPComputeICBCommand*)s.commands[i]).GPUGenerated||((KPComputeICBCommand*)s.commands[i]).partialGrid3D)return fail(error,@"GPU-selected or experimental partial command cannot be copied as a CPU snapshot");
  if(render&&((((KPRenderICB*)s).allowedTypes&~((KPRenderICB*)d).allowedTypes)||((KPRenderICB*)s).maxVertexBuffers>((KPRenderICB*)d).maxVertexBuffers||((KPRenderICB*)s).maxFragmentBuffers>((KPRenderICB*)d).maxFragmentBuffers))return fail(error,@"Destination render descriptor cannot hold source types");
  NSMutableArray*snapshots=[NSMutableArray new];for(NSUInteger i=0;i<range.length;i++){id c=render?[KPRenderICBCommand new]:[KPComputeICBCommand new];[c copyStateFrom:s.commands[range.location+i]];[snapshots addObject:c];}for(NSUInteger i=0;i<range.length;i++)[d.commands[index+i]copyStateFrom:snapshots[i]];
  [s.scope.eventRows addObject:@{@"operation":@"CPU_snapshot_copy",@"source_location":@(range.location),@"length":@(range.length),@"destination_index":@(index),@"GPU_timeline_copy":@NO}];return YES;
