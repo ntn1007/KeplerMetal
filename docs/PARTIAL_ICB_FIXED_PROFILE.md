@@ -1,4 +1,6 @@
-# Experimental fixed-profile partial dispatch in the project ICB
+# Historical fixed-profile partial dispatch qualification
+
+The current adapter supports additional bounded geometries as described in [the newer contract](PARTIAL_ICB_BOUNDED_PROFILE.md). The remaining text records the earlier exact-grid qualification and its then-current limits.
 
 The process-local CPU ICB adapter has an **explicitly enabled, exact-profile** path for `concurrentDispatchThreads:threadsPerThreadgroup:`. It accepts one grid, **11 × 7 × 5 threads with nominal groups 4 × 4 × 3**, for the exact registered `partial_builtin_barrier` shader and manifest. This is an experimental adapted-application feature, not support for arbitrary partial grids or shaders, Apple's native ICB ABI, an installed driver, or transparent use by ordinary applications. Capabilities advertised by `MTLDevice` are unchanged. The ordinary aligned-grid path remains available without this opt-in; unsupported partial grids continue to be refused.
 
@@ -31,7 +33,7 @@ The same new archive also passed two fresh GTX regression hosts for ordinary uni
 
 ## Reproduce
 
-The builder requires macOS/Xcode and the exact source/profile pins. Set a common `LAB` reservation root, the currently observed GTX `RID`, a fresh source-only archive `ARCHIVE`, the pinned wide shader `WIDE`, an existing manual prototype capture `PROTO`, and the two-cohort M1 reference directory `M1_ROOT`. Use fresh paths and execute serially:
+These historical commands require the source checkout at commit `42818ddd7fc341f917433522cca8fd6495ebd556`; later versions broaden the adapter and change its events. The builder requires macOS/Xcode and the exact source/profile pins. Set a common `LAB` reservation root, the currently observed GTX `RID`, a fresh source-only archive `ARCHIVE`, the pinned wide shader `WIDE`, an existing manual prototype capture `PROTO`, and the two-cohort M1 reference directory `M1_ROOT`. Use fresh paths and execute serially:
 
 ```sh
 python3 tools/build_from_source.py --out build/partial-icb-new

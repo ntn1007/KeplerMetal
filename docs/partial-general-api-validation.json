@@ -1,0 +1,169 @@
+{
+  "audit": "PASS",
+  "cases": [
+    {
+      "grid": [
+        11,
+        7,
+        5
+      ],
+      "local": [
+        4,
+        4,
+        3
+      ],
+      "regions": 8,
+      "threads": 1540
+    },
+    {
+      "grid": [
+        191,
+        1,
+        1
+      ],
+      "local": [
+        64,
+        1,
+        1
+      ],
+      "regions": 2,
+      "threads": 764
+    },
+    {
+      "grid": [
+        13,
+        5,
+        2
+      ],
+      "local": [
+        4,
+        3,
+        2
+      ],
+      "regions": 4,
+      "threads": 520
+    },
+    {
+      "grid": [
+        3,
+        2,
+        1
+      ],
+      "local": [
+        4,
+        4,
+        3
+      ],
+      "regions": 1,
+      "threads": 24
+    },
+    {
+      "grid": [
+        10,
+        9,
+        3
+      ],
+      "local": [
+        4,
+        4,
+        2
+      ],
+      "regions": 8,
+      "threads": 1080
+    },
+    {
+      "grid": [
+        13,
+        4,
+        4
+      ],
+      "local": [
+        4,
+        4,
+        4
+      ],
+      "regions": 3,
+      "threads": 832
+    },
+    {
+      "grid": [
+        1023,
+        1,
+        1
+      ],
+      "local": [
+        4,
+        1,
+        1
+      ],
+      "regions": 9,
+      "threads": 4092
+    },
+    {
+      "grid": [
+        1,
+        1,
+        1
+      ],
+      "local": [
+        128,
+        1,
+        1
+      ],
+      "regions": 1,
+      "threads": 4
+    }
+  ],
+  "core_source_SHA256": "5098775e8072395b27f92748601111f54b13bccd277bf342b26b08d051245b86",
+  "driver_file_SHA256": "e240d54a4cd64b7e54fbc15250de82e88451132e1d9f3a4f9879607c8b0e7645",
+  "earlier_gpu_raw_file_matches": 32,
+  "fixed_3d_manifest_SHA256": "85eedce4b3c6b675317aae32a8f01bb4d3da2ab0860bc025b4bdd68aeefdc197",
+  "host_source_SHA256": "08441997b67ad5108764ce93bae6bfa523fac6e607f9753cb4b8a00ad20e5898",
+  "m1_metadata_component_matches": 194040,
+  "m1_reference_manifest_SHA256": [
+    "735de14fea3f979f5d455bfab95ab3d44343a0f12e714f5dbfc2a5ec0e481487",
+    "159465521357cea524c4cb8b67f5ad84093c6f3fed225ef1df439a4b080a2904"
+  ],
+  "manual_1d_manifest_SHA256": "34aae78830c6f90a7ca7114cd08f93b7d3ab025ee60ece690455cfd99813a994",
+  "native_apple_ICB": false,
+  "negative_refusal_observations": 104,
+  "partial_execution_hosts": 12,
+  "partial_hosts": 13,
+  "partial_invocations": 20120,
+  "partial_manifest_SHA256": [
+    "fb0fd59c0c00ff9c8936947f37ce8f86b73ee62d9b939b7c56b7ca34933232e7",
+    "adfa970165ef0628d55abea2a6011ab290b6e72b805936a5e0f08906ae532c30",
+    "319431b44588d14b20b0e026d4a499469ebd8efa3309b14f0bf5d942c068721a",
+    "88f47fdc15a89f42bd7d1b0771d6fc64cec26cfaf64d530f4767ef07c902a1b7",
+    "2245524daadaa0853855ae98aa92b37dfdbfb05c938d8285cd17624ab8de6d21",
+    "b37bd357cfd9a6454a994399c7e3f7c96750dec3d4c63fc5f9e6975a9aaff1c9",
+    "1c48c6a179f4605ce0dfc73488a16ca7acb6ea4a4a8eec0214e901a8dee5cf18",
+    "8d6ff5e684e26b8f9f06dc1e4fd5f6c7fe333390ed743c5c34664a635aabd84c",
+    "d50a5ec0637c7452a26cc7b16e45c3c9d67d5d5fbf47528e42fdb7b4b1389c27",
+    "bf2d730e8488467911d331a72c56c242098600b0953032d03c02391532a89c12",
+    "d8af16507cb5f253b753901877632678446c5334b27616102626ba091e2704b4",
+    "095da470263ba1f204bd9ed77c29807bcbc9eaa5752edafd9bb37043d5b849c5",
+    "a1f0db78d5aebea6ef1e0715183070b05c83988937321ab08b30399a4bbefaf0"
+  ],
+  "partial_uint32_values": 160960,
+  "partial_user_command_buffers": 48,
+  "planner_SHA256": "d63ac9ac921e897f97290960322aff665f131b11a18ecee50be15822a659a717",
+  "repeat_cases": [
+    0,
+    0,
+    6,
+    6
+  ],
+  "runtime_archive_SHA256": "bc06c5d731df4fdac7553a8daa717290fe7fab154a7a2ec4aa0e8640401fb14b",
+  "scope": "Explicit opt-in; exact shader/resources; bounded 3D geometry; serial process-local project ICB",
+  "system_modified": false,
+  "transparent_integration": false,
+  "uniform_invocations": 37264,
+  "uniform_manifest_SHA256": [
+    "051c63813c333050aa7236b42c191f953ca1988723e04e401f6743c59531ff5c",
+    "bdc1a46bad62865c91e228cf657d46c5fa6dafe57ee10bab1cd9c2d7be683627"
+  ],
+  "uniform_paired_data_files": 180,
+  "uniform_regression_hosts": 2,
+  "uniform_uint32_values": 298112
+}

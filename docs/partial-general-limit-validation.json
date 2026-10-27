@@ -1,0 +1,34 @@
+{
+  "audit": "PASS",
+  "core_source_SHA256": "5098775e8072395b27f92748601111f54b13bccd277bf342b26b08d051245b86",
+  "execution_hosts": 1,
+  "execution_manifest_SHA256": [
+    "90d0e0de757592af1e1e3d06698d9f1539e6d82ebe758835f01cb06ef0ccc7fd",
+    "8ea1397951f46c6e07ceeb870922a2b746ac85f88ac24c7d932473a1763395a3"
+  ],
+  "grid": [
+    14,
+    23,
+    3
+  ],
+  "host_source_SHA256": "06d66a7bc30acc1eca8feabf604ae87cc9c0d4edff9607e2c17fa9c370355ca6",
+  "invocations": 3864,
+  "local": [
+    12,
+    3,
+    2
+  ],
+  "native_apple_ICB": false,
+  "negative_refusal_observations": 18,
+  "over_16_regions_refused": true,
+  "planner_SHA256": "d63ac9ac921e897f97290960322aff665f131b11a18ecee50be15822a659a717",
+  "preparation_hosts": 1,
+  "previous_extra_manifest_SHA256": "0507b63c175de7d306926f81c3713d27d5efe72a7b0491fd26c1c3cea7722dc0",
+  "regions": 16,
+  "runtime_archive_SHA256": "bc06c5d731df4fdac7553a8daa717290fe7fab154a7a2ec4aa0e8640401fb14b",
+  "scope": "Explicit opt-in exact shader/resources; 16 regions and over-limit refusal",
+  "system_modified": false,
+  "transparent_integration": false,
+  "uint32_values": 30912,
+  "user_command_buffers": 4
+}

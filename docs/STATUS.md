@@ -1,8 +1,8 @@
 # Status, 2026-10-27
 
-An explicit opt-in project ICB path executes one fixed 3D partial grid for the exact certified shader and resource profile. General partial ICB dispatch remains open. [Contract and qualification](PARTIAL_ICB_FIXED_PROFILE.md).
+An explicit opt-in project ICB path executes bounded partial 1D/2D/3D grids for the exact certified shader and resource profile. Arbitrary shaders and general Metal ICB support remain open. [Contract and qualification](PARTIAL_ICB_BOUNDED_PROFILE.md).
 
-Scoped CPU compute ICB thread-grid dispatch accepts evenly divisible grids with bounded 1D, 2D and 3D GPU qualification; other partial grids remain refused. [Evidence](UNIFORM_THREAD_ICB.md).
+Scoped CPU compute ICB thread-grid dispatch accepts evenly divisible grids with bounded 1D, 2D and 3D GPU qualification; other profiles remain refused. [Evidence](UNIFORM_THREAD_ICB.md).
 
 Qualified render-encoder creation can now be adapted automatically on one opted-in queue, with guarded fallback for unsupported passes. Bootstrap and pipeline registration remain explicit. [Evidence and limits](AUTOMATIC_RENDER_FACTORIES.md).
 

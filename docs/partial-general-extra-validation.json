@@ -1,0 +1,81 @@
+{
+  "audit": "PASS",
+  "cases": [
+    {
+      "grid": [
+        1,
+        1023,
+        1
+      ],
+      "local": [
+        1,
+        4,
+        1
+      ],
+      "regions": 9,
+      "threads": 4092
+    },
+    {
+      "grid": [
+        1,
+        1,
+        1023
+      ],
+      "local": [
+        1,
+        1,
+        4
+      ],
+      "regions": 9,
+      "threads": 4092
+    },
+    {
+      "grid": [
+        21,
+        21,
+        1
+      ],
+      "local": [
+        4,
+        4,
+        1
+      ],
+      "regions": 8,
+      "threads": 1764
+    },
+    {
+      "grid": [
+        9,
+        9,
+        9
+      ],
+      "local": [
+        4,
+        4,
+        2
+      ],
+      "regions": 11,
+      "threads": 2916
+    }
+  ],
+  "core_source_SHA256": "5098775e8072395b27f92748601111f54b13bccd277bf342b26b08d051245b86",
+  "execution_manifest_SHA256": [
+    "585460af7a0b7348a97d8473d5124867b7313f92d2c30eb50db0292504c260e1",
+    "2e43c9819ec92c5b75ddd5580d1e5ce76aa975941313dd498abd376234629f37",
+    "3b0863720b72b49de44dafe66d88f5993b5afdd71e00ab922792eff3529d929b",
+    "0507b63c175de7d306926f81c3713d27d5efe72a7b0491fd26c1c3cea7722dc0"
+  ],
+  "extra_execution_hosts": 4,
+  "host_source_SHA256": "aaa8820701c5d8d95f4409863d84abfabea14202ca6eec444b5550206f09865d",
+  "invocations": 12864,
+  "native_apple_ICB": false,
+  "negative_refusal_observations": 32,
+  "planner_SHA256": "d63ac9ac921e897f97290960322aff665f131b11a18ecee50be15822a659a717",
+  "previous_uniform_manifest_SHA256": "bdc1a46bad62865c91e228cf657d46c5fa6dafe57ee10bab1cd9c2d7be683627",
+  "runtime_archive_SHA256": "bc06c5d731df4fdac7553a8daa717290fe7fab154a7a2ec4aa0e8640401fb14b",
+  "scope": "Explicit opt-in exact shader/resources; additional bounded Y/Z/2D/3D shapes",
+  "system_modified": false,
+  "transparent_integration": false,
+  "uint32_values": 102912,
+  "user_command_buffers": 16
+}

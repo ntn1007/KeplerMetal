@@ -1,6 +1,6 @@
 # Partial threadgroups: reference and native compiler boundary
 
-The scoped CPU ICB accepts aligned grids and, through a separately enabled [fixed-profile experiment](PARTIAL_ICB_FIXED_PROFILE.md), one qualified partial 3D grid. Other partial groups remain refused. The investigations below document the evidence and limits; they do not establish general partial dispatch, change any driver, or establish a performance gain. The [previous GPU qualification](UNIFORM_THREAD_ICB.md) applies to aligned grids only.
+The scoped CPU ICB accepts aligned grids and, through a separately enabled [bounded-profile experiment](PARTIAL_ICB_BOUNDED_PROFILE.md), partial grids for the certified shader and resource envelope. Other partial groups remain refused. The investigations below document the evidence and limits; they do not establish general partial dispatch, change any driver, or establish a performance gain. The [previous GPU qualification](UNIFORM_THREAD_ICB.md) applies to aligned grids only.
 
 ## Independent Apple Metal reference
 

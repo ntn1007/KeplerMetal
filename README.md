@@ -21,9 +21,9 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
-An explicitly enabled project ICB path now executes one fixed 3D partial grid on the GTX for a pinned shader and resource profile; general partial ICB dispatch remains open. [Contract and evidence](docs/PARTIAL_ICB_FIXED_PROFILE.md).
+An explicitly enabled project ICB path now executes bounded partial 1D/2D/3D grids on the GTX for a pinned shader and resource profile; arbitrary-shader support remains open. [Contract and evidence](docs/PARTIAL_ICB_BOUNDED_PROFILE.md).
 
-The scoped CPU compute ICB accepts evenly divisible thread-grid dispatches, with bounded 1D, 2D and 3D GPU qualification. Other partial grids remain refused. [Contract and GPU evidence](docs/UNIFORM_THREAD_ICB.md).
+The scoped CPU compute ICB accepts evenly divisible thread-grid dispatches, with bounded 1D, 2D and 3D GPU qualification. Partial grids outside the explicitly bounded profile remain refused. [Contract and GPU evidence](docs/UNIFORM_THREAD_ICB.md).
 
 The existing Metal driver passes three GPU read/write trials on a 4 MiB buffer after purge and restoration, with three native controls and a no-dispatch control. This does not establish memory reclamation or a speedup. [GPU contract and evidence](docs/VIDEO_METAL_PURGE_GPU.md) · [CPU-only observations](docs/VIDEO_METAL_PURGE.md).
 

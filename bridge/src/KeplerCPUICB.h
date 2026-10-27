@@ -65,8 +65,9 @@
                          error:(NSError **)error;
 - (BOOL)adaptComputeEncoder:(id<MTLComputeCommandEncoder>)encoder error:(NSError **)error;
 // Explicit experimental fixed-profile partial-grid adapter. Only the exact
-// registered partial_builtin_barrier shader, grid 11x7x5 and local 4x4x3 are
-// accepted. Unsupported shaders, layouts, mixed ranges and copies are refused.
+// registered partial_builtin_barrier shader, grid volume <=1024, local volume
+// <=128 and at most 16 bounded regions are accepted. Unsupported shaders,
+// layouts, mixed ranges and copies are refused.
 // This is an adapted-process experiment, not a native Metal capability claim.
 - (BOOL)enableExperimentalPartialGridWithError:(NSError **)error;
 // Bounded GPU-timeline copy extension for native profiles owned by this scope.
