@@ -1,0 +1,106 @@
+{
+  "GPU_execution_proved": false,
+  "audit": "PASS",
+  "build_inputs_SHA256": "701df6f7b6aba674cd1e931f1e5bcfbd251976c1445395bb665f420f666e24ea",
+  "control_events": 4,
+  "event_coverage_complete": false,
+  "observations": [
+    {
+      "all_intercepted_events_during_purge": 0,
+      "events": 29,
+      "manifest_SHA256": "4de13937d3058041e6bd29ecdfddfb7aaa030d572cc2a2ff7e7c6e0c4621151e",
+      "mode": "large",
+      "resource_creations_during_target": 1,
+      "result_SHA256": "ce595acdfb7845e9668810c9c00f9c9361acb4d1f95cc8ed2b9d07822c22af45",
+      "shared_selector1_observed": 0,
+      "target_length": 4194304,
+      "target_weak_cleared": true
+    },
+    {
+      "all_intercepted_events_during_purge": 0,
+      "events": 29,
+      "manifest_SHA256": "ed6b2ada4366650595eb398849689a18400877e6dac342da05337cb500cc1643",
+      "mode": "purge",
+      "resource_creations_during_target": 1,
+      "restored_cpu_bytes_correct": true,
+      "result_SHA256": "b9c335f758514a76495bd4e2a60963740a36b276b41d6b9b52288dc54ea1f87f",
+      "shared_selector1_observed": 0,
+      "state_sequence": [
+        2,
+        2,
+        4,
+        4,
+        2
+      ],
+      "target_length": 4194304,
+      "target_weak_cleared": true
+    },
+    {
+      "all_intercepted_events_during_purge": 0,
+      "events": 29,
+      "manifest_SHA256": "1241bb5b952e6316e8000cb629d2fa73e309f0939b3aef4ac72025c469a7abbb",
+      "mode": "large",
+      "resource_creations_during_target": 1,
+      "result_SHA256": "50464963260623bd103315c18448c02547f6238c7be1f80750cc484833cd8091",
+      "shared_selector1_observed": 0,
+      "target_length": 4194304,
+      "target_weak_cleared": true
+    },
+    {
+      "all_intercepted_events_during_purge": 0,
+      "events": 29,
+      "manifest_SHA256": "4454eeb926d2d0a4bdc933bc1d91c42fc8d6b1dc341c96976e450909761ec1a8",
+      "mode": "purge",
+      "resource_creations_during_target": 1,
+      "restored_cpu_bytes_correct": true,
+      "result_SHA256": "15e7cc3b20bb692d472c3201289abd6106e0b6688638b27987d6277a730ae15f",
+      "shared_selector1_observed": 0,
+      "state_sequence": [
+        2,
+        2,
+        4,
+        4,
+        2
+      ],
+      "target_length": 4194304,
+      "target_weak_cleared": true
+    },
+    {
+      "all_intercepted_events_during_purge": 0,
+      "events": 29,
+      "manifest_SHA256": "ebc470d60d1d7e6eec1c2ef2f1db588562dddfdb9f6fdd56ad5c0323870aa484",
+      "mode": "large",
+      "resource_creations_during_target": 1,
+      "result_SHA256": "d89960fa81ddf60fd86cbdd9afd2a57d2fd3eb817804eefef4271211b43d11b5",
+      "shared_selector1_observed": 0,
+      "target_length": 4194304,
+      "target_weak_cleared": true
+    },
+    {
+      "all_intercepted_events_during_purge": 0,
+      "events": 29,
+      "manifest_SHA256": "9f73c539c152dac8d70ad067b0489b32d3ce1973a2e4545af4b01a8487f13988",
+      "mode": "purge",
+      "resource_creations_during_target": 1,
+      "restored_cpu_bytes_correct": true,
+      "result_SHA256": "1cdb88a8370a6a112d1178ab65a0bef74fc075e448ba32c430ca4911b7a598aa",
+      "shared_selector1_observed": 0,
+      "state_sequence": [
+        2,
+        2,
+        4,
+        4,
+        2
+      ],
+      "target_length": 4194304,
+      "target_weak_cleared": true
+    }
+  ],
+  "observer_SHA256": "49cf5b752922bd5c997fa1d4a6471bc4ebe08f232ec30d3ad7618c856b9d129d",
+  "phase_measures": "completion, not entry",
+  "physical_memory_reclaimed_proved": false,
+  "resource_deletion_absence_proved": false,
+  "resource_id_correlation_proved": false,
+  "separate_processes": 7,
+  "video_execution_proved": false
+}

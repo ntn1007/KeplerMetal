@@ -9,7 +9,7 @@ def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 
 def verify(path):
     p=Path(path).resolve();i=read(p/'inputs.json');r=read(p/'results.json');m=read(p/'execution/manifest.json');lease=m['GPU_reservation'];mode=i['mode']
-    assert mode in ('inventory','wrong-target','control','buffer','baseline','warmed','large')
+    assert mode in ('inventory','wrong-target','control','buffer','baseline','warmed','large','purge')
     assert r==read(p/'execution/execution.stdout') and m['exit_code']==0 and not m['SIGKILL_requested'] and not m['authoritative_ps_status']
     assert lease['state']=='terminal' and lease['exit_code']==0 and lease['child_PID']==m['pid'] and not lease['known_signed_processes_live']
     assert r['pid']==m['pid'] and r['uid']==r['euid']==i['user_UID']!=0
@@ -47,9 +47,16 @@ def verify(path):
         else:
             assert r['status']=='WARM_COMPARISON_RECORDED' and r['metal_candidates']==1 and r['metal_registry_ID'] and r['metal_pci_registry_ID']==r['pci_registry_ID']
             assert r['warm_created'] and isinstance(r['warm_weak_cleared'],bool) and isinstance(r['target_weak_cleared'],bool)
-            assert r['target_created']==(mode in ('warmed','large')) and r['cpu_bytes_correct']
+            assert r['target_created']==(mode in ('warmed','large','purge')) and r['cpu_bytes_correct']
             assert r['target_length']==(0 if mode=='baseline' else 4096 if mode=='warmed' else 4*1024*1024)
             if mode=='baseline':assert r['target_weak_cleared']
+            if mode=='purge':
+                assert isinstance(r['purge_exception'],bool) and isinstance(r['cpu_after_purge_checked'],bool) and isinstance(r['cpu_after_purge_correct'],bool)
+                if not r['purge_exception']:
+                    assert all(isinstance(r[x],int) and r[x] in (2,3,4) for x in ('state_initial','previous_empty','state_empty','previous_restore','state_restored'))
+                    assert r['cpu_after_purge_checked']==(r['state_restored']==2)
+                if r['cpu_after_purge_checked']:assert r['cpu_after_purge_correct']
+                else:assert not r['cpu_after_purge_correct']
             outcome='WARM_COMPARISON_PASS'
     opens=[e for e in events if e['kind']=='open' and e['service_registry_ID']==devices[0]['registry_ID'] and e['status']==0 and e['type_or_selector']==6]
     shared_ports={e['port'] for e in opens if e['port']}
