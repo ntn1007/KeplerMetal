@@ -1,0 +1,115 @@
+{
+  "audit_source_SHA256": "bd37e9e8b5d0027f0900aee47e767a42bdabee71df3275257d6d98d99487e940",
+  "bootstrap_SHA256": "a82d1fa649755c872dcb03124a5d50fe9cd6911addb85e68f8e30744638a4741",
+  "corrected_and_control_CAS_operations": 142200,
+  "hosts": 6,
+  "launcher_SHA256": "0cd0852a11628e96835499925d50e828a2a5b5ff000a3ee8f9f8d1a6437e7be5",
+  "mutated_output_rejected": true,
+  "native_defect_words": 56808,
+  "native_dispatches": 60,
+  "offline_unit_tests_passed": 8,
+  "optin_dispatches": 120,
+  "preflight_cli_controls": {
+    "controls": [
+      {
+        "exit_code": 0,
+        "name": "valid",
+        "pass": true,
+        "receipt_created": false
+      },
+      {
+        "exit_code": 2,
+        "name": "unlisted",
+        "pass": true,
+        "receipt_created": false
+      },
+      {
+        "exit_code": 2,
+        "name": "wrong_policy",
+        "pass": true,
+        "receipt_created": false
+      },
+      {
+        "exit_code": 2,
+        "name": "wrong_bootstrap",
+        "pass": true,
+        "receipt_created": false
+      }
+    ],
+    "launcher_sha256": "0cd0852a11628e96835499925d50e828a2a5b5ff000a3ee8f9f8d1a6437e7be5"
+  },
+  "rows": [
+    {
+      "client": "A",
+      "correct_CAS_operations": 7110,
+      "dispatches": 30,
+      "events_SHA256": null,
+      "expected_native_defect_words": 28404,
+      "guard_bytes": 3840,
+      "manifest_SHA256": "75daa500d71d24cbc8944adee1e2caa2600302ede98ab8cd5d97483db9836e40",
+      "mode": "native",
+      "stdout_SHA256": "c62eac0a8bf53a112cc52643a791d8f9dfdd7754bc977b7eb69dea4b4c399566"
+    },
+    {
+      "client": "A",
+      "correct_CAS_operations": 35550,
+      "dispatches": 30,
+      "events_SHA256": "02e2f77125761e9b488d39783440698ab062a5145a9a4b6599fcc1a6f8c933a8",
+      "expected_native_defect_words": 0,
+      "guard_bytes": 3840,
+      "manifest_SHA256": "61806e4a89d86c91e68d1b0dae2de09042acf60ede8bb267ebe0b818906fd622",
+      "mode": "optin",
+      "stdout_SHA256": "c62eac0a8bf53a112cc52643a791d8f9dfdd7754bc977b7eb69dea4b4c399566"
+    },
+    {
+      "client": "B",
+      "correct_CAS_operations": 7110,
+      "dispatches": 30,
+      "events_SHA256": null,
+      "expected_native_defect_words": 28404,
+      "guard_bytes": 3840,
+      "manifest_SHA256": "cfbdfd59528776d87878b7abd1bab552d83f2082cdd49bff2d2f58bdf57855b6",
+      "mode": "native",
+      "stdout_SHA256": "237e3e11bce4d7d801fca324a4b9e305a34a55fb80f92574b840fba6996f916f"
+    },
+    {
+      "client": "B",
+      "correct_CAS_operations": 35550,
+      "dispatches": 30,
+      "events_SHA256": "07c5312ae93c978fc237fed7867bb62f24d007c32687feb2b9f4e529cf6d7d6b",
+      "expected_native_defect_words": 0,
+      "guard_bytes": 3840,
+      "manifest_SHA256": "111484f6f962b826590d5d9a5d3c79f7dda1c44418d2d97f5d29114b91fe1b5e",
+      "mode": "optin",
+      "stdout_SHA256": "237e3e11bce4d7d801fca324a4b9e305a34a55fb80f92574b840fba6996f916f"
+    },
+    {
+      "client": "A",
+      "correct_CAS_operations": 35550,
+      "dispatches": 30,
+      "events_SHA256": "02e2f77125761e9b488d39783440698ab062a5145a9a4b6599fcc1a6f8c933a8",
+      "expected_native_defect_words": 0,
+      "guard_bytes": 3840,
+      "manifest_SHA256": "b13c0a19bae1f7507d8edd23038fb76c8bfacd34ded595ef51ed5085290a5586",
+      "mode": "optin",
+      "stdout_SHA256": "c62eac0a8bf53a112cc52643a791d8f9dfdd7754bc977b7eb69dea4b4c399566"
+    },
+    {
+      "client": "B",
+      "correct_CAS_operations": 35550,
+      "dispatches": 30,
+      "events_SHA256": "07c5312ae93c978fc237fed7867bb62f24d007c32687feb2b9f4e529cf6d7d6b",
+      "expected_native_defect_words": 0,
+      "guard_bytes": 3840,
+      "manifest_SHA256": "54d8362b596faa48b7cda9c4a918438518665252f92367b2f2d951e6edcb1b76",
+      "mode": "optin",
+      "stdout_SHA256": "237e3e11bce4d7d801fca324a4b9e305a34a55fb80f92574b840fba6996f916f"
+    }
+  ],
+  "scope": "Two builds of one test client and one certified library; no general application or system-wide qualification",
+  "selected_reflection_equal": true,
+  "status": "PASS",
+  "system_modified": false,
+  "unit_test_source_SHA256": "30c4eebb5dae6f0072aeb68c978c5122b72efaf4e801a3dfa83f462bacde3c9f",
+  "unresolved_receipt_rejected": true
+}

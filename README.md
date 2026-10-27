@@ -41,7 +41,7 @@ A scoped historical re-audit identifies an installed NVIDIA video-provider Creat
 
 A second pinned client qualifies the same CAS repair through the public default compute-descriptor factory. [Evidence and limitations](docs/DESCRIPTOR_CAS.md).
 
-An explicitly launched public-Metal test client now receives the qualified native CAS repair from a process-local bootstrap without linking KeplerMetal. [Evidence and limitations](docs/STANDALONE_CAS.md).
+An explicitly launched public-Metal test client now receives the qualified native CAS repair from a process-local bootstrap without linking KeplerMetal. [Evidence and limitations](docs/STANDALONE_CAS.md). A [scoped launcher](docs/CAS_LAUNCHER.md) now checks the client policy and artifacts and reserves the GPU for an explicitly selected process; other applications remain unqualified.
 
 The current-profile native CAS SDK now builds with regenerated decoder-checked certificates and a PCI-identified GTX client; two repaired runs and native defect controls have independent CPU oracles. [Evidence and limits](docs/CAS_SDK_REGENERATED.md).
 

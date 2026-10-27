@@ -13,9 +13,10 @@ This is an **opt-in process-local experiment**, not transparent support for
 ordinary applications. The tested clients are two differently signed builds
 of the **same purpose-built source**, not two independent third-party apps.
 Both use the same certified library and mixed factory sequence. The experiment
-runner currently accepts its fixed test clients; a general launcher and other
-applications have not been qualified. A client hash in a policy does not make
-its shaders safe or certify its behavior.
+runner accepts its fixed test clients. A newer [scoped launcher](CAS_LAUNCHER.md)
+accepts an explicitly selected allowlisted client; other applications have not
+been qualified. A client hash in a policy does not make its shaders safe or
+certify its behavior.
 
 The policy hash is supplied by the launching process. It checks the policy
 snapshot against that supplied value; it is **not a digital signature or an
