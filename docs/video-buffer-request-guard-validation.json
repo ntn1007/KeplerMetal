@@ -1,0 +1,67 @@
+{
+  "application_SHA256": "ffe5a52508e89570aa2330b5296b115458d4edff17964c163de1f8773c7bbf0e",
+  "audit_mutations_rejected": [
+    "resource_shared_after",
+    "null_context_rejected",
+    "resource_while_context_matches",
+    "context_slots_empty",
+    "probe_add_status",
+    "request_guard_matches",
+    "request_output_capacity",
+    "probe_denied_selectors",
+    "buffer_CPU_after_context_correct",
+    "reservation_not_terminal"
+  ],
+  "audit_source_SHA256": "1d93e003449e0d06e08a1717a225d5e8f4607004449eb135c3a0eeabff91e74a",
+  "buffer_bytes_checked_before_and_after_per_host": 4194304,
+  "build_inputs_SHA256": "0bc2ea9920868b6c348338d1cea0d4bc09eb166023e6202ef42c1ed164231213",
+  "controls": 2,
+  "explicit_GPU_dispatches": 0,
+  "guarded_request_class": 0,
+  "guarded_request_size": 131072,
+  "hardware_video_execution_proved": false,
+  "historical_result_SHA256": [
+    "1725f3dbcb06839143a64d1e6ff8bc14158392bf38b1dc926bff7ffbebeea3cb",
+    "5af31252b263a536a5bab44f130d524d487f8042045724efd265971c2a83f332"
+  ],
+  "historical_results_verified": true,
+  "hosts": 4,
+  "limits": [
+    "The request was refused locally; no live video selector or successful video-buffer allocation is demonstrated.",
+    "Pointer association does not establish complete resource lifetime or cleanup.",
+    "No GPU computation or hardware video decoding is demonstrated.",
+    "Reservation and guarded imports do not cover unrelated processes or all driver activity."
+  ],
+  "manifest_audit_dependency_SHA256": "217b4b452e119b8cc8d6f5d9fe63ec4fa43e6f3f40a6e8048dbb4f5d9a4b94de",
+  "nonoverlapping": true,
+  "observed_output_capacity": 49,
+  "observer_SHA256": "6337ca13850bc0816c428f6fbc45def72ed1bcf6f66f97dc94fa879e84be66a9",
+  "request_hosts": 2,
+  "rows": [
+    {
+      "manifest_SHA256": "6dc0361e3659821465c176ad930daada2c4be68221fc530cdde39ae4f4e7a82b",
+      "mode": "observe",
+      "pid": 92543,
+      "result_SHA256": "bbc13f883c99880147e1315d816bc989cd33875f3c3fe9ccc03da8611c3d0a89"
+    },
+    {
+      "manifest_SHA256": "77a14e3a5a648bbeff1975ccd53e4b996bf4bada6039bb0175ad5e3fdbb6cbc8",
+      "mode": "coexist",
+      "pid": 92568,
+      "result_SHA256": "db80a7e768d37f15c165b04ff1e2110f9852a3368bcb2efe412aff36cc115258"
+    },
+    {
+      "manifest_SHA256": "51c00688c74e7ee5e35d7938b8fb5643b58f36cf183d844718eddb1af1bd2fe0",
+      "mode": "observe",
+      "pid": 92598,
+      "result_SHA256": "2e737c43271c16df459fb3c53a16bcce03e844c9b7cd790e6732a9bf6d63f472"
+    },
+    {
+      "manifest_SHA256": "5d28f1c5f0187503584f2d5c8fe2b46c797495c2df32d4a71cc363d13cb9c5d0",
+      "mode": "coexist",
+      "pid": 92620,
+      "result_SHA256": "b61de02e1534be11602ca9071580d605dcdfe6d239bb7475b3cff4c4b98c0216"
+    }
+  ],
+  "status": "PASS"
+}
