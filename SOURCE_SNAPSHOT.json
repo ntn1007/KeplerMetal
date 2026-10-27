@@ -2962,9 +2962,13 @@
       "path": "bridge/tools/recognize_native_cas.py",
       "source_path": "bridge/tools/recognize_native_cas.py",
       "source_SHA256": "d9783fa0258f65f50d3df9547f36701684324abcc9f99a494ba70fca41a063cb",
-      "published_SHA256": "d9783fa0258f65f50d3df9547f36701684324abcc9f99a494ba70fca41a063cb",
-      "bytes": 9230,
-      "modified_for_publication": false
+      "published_SHA256": "9aa30b458263eeeddb782cd2a3b10ac362b6faf3ced9cbca805e55b515bebbee",
+      "bytes": 9845,
+      "modified_for_publication": true,
+      "publication_change": {
+        "previous_published_SHA256": "d9783fa0258f65f50d3df9547f36701684324abcc9f99a494ba70fca41a063cb",
+        "reason": "Conservative rejection of additional register consumers after native CAS repair; original source hash is retained."
+      }
     },
     {
       "path": "bridge/tools/relink_command_ir_client.py",
@@ -7442,6 +7446,14 @@
       "bytes": 5083,
       "modified_for_publication": true,
       "previous_published_SHA256": "4909c66390df9fd718bfddac08e8fa886bbb4cc3b4f7065d5e917337124142df"
+    },
+    {
+      "path": "tests/test_native_cas_recognizer.py",
+      "source_path": "tests/test_native_cas_recognizer.py",
+      "source_SHA256": "ee6d4693d639b2225a54ac31a785bb08bad65c83cb16feacd4ad95b900fd3487",
+      "published_SHA256": "ee6d4693d639b2225a54ac31a785bb08bad65c83cb16feacd4ad95b900fd3487",
+      "bytes": 2290,
+      "modified_for_publication": false
     }
   ],
   "excluded_source_tools": [
@@ -7483,15 +7495,16 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "2a0100005442fec6c9e4e2233be766dbe302a4f88657f39977868d0f85d2ea04",
-  "previous_public_commit": "e147fbdbbbec8eb6b48019d4b5b0f1f88124b992",
+  "previous_source_snapshot_SHA256": "dea1d632df41278af65f1b9278467405323fbbac270ab6c65797f3dbb334ad9f",
+  "previous_public_commit": "4bc8c7d3a6abd2e8ba8a75dee69119ca3ee2b911",
   "update": {
     "date": "2026-10-27",
-    "reason": "Combined indexed, vertex and pipeline render context",
+    "reason": "Conservative CAS recognizer and offline safety controls",
     "files": [
-      "bridge/src/KeplerCPUICB.h"
+      "bridge/tools/recognize_native_cas.py",
+      "tests/test_native_cas_recognizer.py"
     ]
   },
   "update_date": "2026-10-27",
-  "update_reason": "Bounded multi-shape partial grid planning and GPU address overlap checks."
+  "update_reason": "Conservative CAS recognizer and offline safety controls; historical GPU evidence is not repinned."
 }

@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+The offline native CAS recognizer now refuses candidates when the register changed by the repair is also referenced by another later instruction or by the output address. This is a conservative safety restriction, not a general proof of shader semantics. [Scope and validation](CAS_RECOGNIZER_SAFETY.md).
+
 A second, exact buffer-transform shader executes through the bounded partial-grid adapter, with CPU-oracle and regression checks. [Evidence and limitations](PARTIAL_ICB_BUFFER_STENCIL.md).
 
 An explicit opt-in project ICB path executes bounded partial 1D/2D/3D grids for the exact certified shader and resource profile. Arbitrary shaders and general Metal ICB support remain open. [Contract and qualification](PARTIAL_ICB_BOUNDED_PROFILE.md).

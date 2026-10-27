@@ -3,6 +3,12 @@
 from pathlib import Path
 import argparse,hashlib,json,re,struct
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def register_references(op):
+ """Every explicit GPR operand, including the full span of d/q operands."""
+ refs=set()
+ for base,suffix in re.findall(r'\$r(\d+)([dq]?)\b',op):
+  start=int(base);refs.update(range(start,start+{'':1,'d':2,'q':4}[suffix]))
+ return refs
 def register_writes(op):
  """Conservative destinations for the decoded SM30 subset used here.
  None means an unqualified instruction, never presumed to preserve registers.
@@ -38,7 +44,7 @@ def air_contract(module,function='test'):
  item=insert[0];idx=values[item['operands'][2]]
  # LLVM encodes scalar integer zero as AV_CNULL as well as AV_CINT.
  if idx['kind']==4 and types[idx['type']]['kind']==2 and idx['integer']==0:idx=dict(idx,kind=2)
- if idx['kind']!=2 or idx['integer']>3:return {'qualified':False,'reason':'Unsupported output component'}
+ if idx['kind']!=2 or not 0<=idx['integer']<=3:return {'qualified':False,'reason':'Unsupported output component'}
  vector=types[item['type']]
  if vector['kind']!=4 or vector['count']!=4 or types[vector['element']]['bits']!=32:return {'qualified':False,'reason':'Only uint4 output is qualified'}
  byval={x['value']:x for x in ins};stores=[x for x in ins if x['op']==15 and x['index']>call['index']]
@@ -57,6 +63,7 @@ def air_contract(module,function='test'):
          'expected_pointer_value':pointer,'expected_load_instruction':load['index'],'output_store_instruction':reachable[0]['index'],
          'scope':'Single local i32 weak CAS, direct post-call expected load to uint4 device output; broader CFG/alias/ABI cases rejected.'}
 def sass_contract(code,text,component):
+ if not isinstance(component,int) or isinstance(component,bool) or not 0<=component<=3:return {'qualified':False,'reason':'Unsupported output component'}
  if not code or len(code)%64:return {'qualified':False,'reason':'Unsupported schedule-block alignment'}
  instructions=[]
  for line in text.splitlines():
@@ -104,18 +111,19 @@ def sass_contract(code,text,component):
   if patchop!='membar cta' or struct.unpack_from('<Q',code,patch)[0]!=0xe000000000001c05:continue
   stores=[]
   for k in range(j+2,len(instructions)):
-   so,sop=instructions[k];sm=re.fullmatch(r'st b128 wb g\[\$r\d+d\] \$r(\d+)q',sop)
-   if sm:stores.append((k,int(sm[1])))
+   so,sop=instructions[k];sm=re.fullmatch(r'st b128 wb g\[\$r(\d+)d\] \$r(\d+)q',sop)
+   if sm:stores.append((k,int(sm[1]),int(sm[2])))
   if len(stores)!=1:continue
-  k,base=stores[0]
-  if cmp!=base+component:continue
-  # Comparand must survive untouched to the vector store. Other instructions
-  # may use it; they must not redefine it or enter the patch through an edge.
-  overwrite=False
-  for _,op2 in instructions[j+2:k]:
-   writes=register_writes(op2)
-   if writes is None or cmp in writes:overwrite=True
-  if overwrite:continue
+  k,address_base,base=stores[0]
+  if cmp!=base+component or address_base<=cmp<address_base+2:continue
+  # The repair changes cmp. Reject any other explicit use or definition after
+  # the redirect, even after the store; it could change an unrelated result or
+  # a memory address. This is deliberately stricter than a liveness analysis.
+  other_use=False
+  for n,(_,op2) in enumerate(instructions[j+2:],start=j+2):
+   if n!=k and (register_writes(op2) is None or cmp in register_references(op2)):
+    other_use=True;break
+  if other_use:continue
   targets=[int(x,16) for _,op2 in instructions for x in re.findall(r'(?:bra|joinat) (0x[0-9a-f]+)',op2)]
   if patch in targets or patch+8 in targets:continue
   candidates.append({'qualified':True,'old_register':old,'expected_register':cmp,'shared_address':addr,

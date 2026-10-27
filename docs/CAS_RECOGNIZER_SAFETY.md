@@ -1,0 +1,64 @@
+# Native CAS recognizer: conservative register-use check
+
+The process-local CAS repair changes one SASS register after the original
+comparison. The former offline diagnosis checked that the register was not
+overwritten before the selected vector store, but could accept another read of
+that register. Such a read can also change when the repair is applied; in
+particular it might affect an address rather than just the intended output.
+
+An offline adversarial example was created from an archived program: a single
+instruction was replaced by `mov b32 $r5 $r0`, with the corresponding real
+SM30 disassembly regenerated. The previous recognizer accepted the resulting
+input; the strengthened recognizer refuses it. This synthetic modified program
+was never dispatched. It demonstrates a diagnosis gap, not that an Apple/NVIDIA
+compiler emitted that particular program or that the archived qualified
+shaders malfunctioned.
+
+The changed recognizer also checks d/q register spans, the selected store's
+address pair, later instructions after the store, and the output component
+range. These rules deliberately refuse some potentially correct shaders. They
+do not establish complete control-flow, dataflow or alias correctness; input
+fingerprinting and per-shader GPU qualification remain necessary. This does
+not modify the installed compiler or transparently fix ordinary applications.
+The policy schema is unchanged: existing saved policies are not automatically
+invalidated or re-evaluated. Regenerate the diagnosis from the actual AIR and
+SASS inputs with this version before considering a new repair.
+
+Six portable safety tests use synthetic listings and never dispatch GPU code:
+
+```sh
+python3 -m unittest discover -s tests -p test_native_cas_recognizer.py -v
+```
+
+Offline checking of four previously captured AIR/SASS inputs retained the same
+outcomes: three recognized candidates and one semantic negative control.
+Those historical GPU results and their original source hashes remain separate
+from the changed recognizer. Any new GPU result requires its own recorded
+source, driver profile, controls and numerical checks.
+
+## Fresh regression on the reference GTX
+
+On 27 October, the updated recognizer was used with the current, separately
+qualified driver profile `e240d54a4cd64b7e54fbc15250de82e88451132e1d9f3a4f9879607c8b0e7645`.
+The current public native CAS transport was rebuilt in an isolated lab folder;
+a small compatibility shim forwards the historical probe's arguments to the
+same pinned-input transport. The driver hash gate and PCI device check stayed
+enabled. The first attempt with the older transport was refused at pipeline
+creation because that binary admitted only the earlier driver hash; this failed
+attempt was retained. No vendor binary is distributed here.
+
+The completed regression used three previously captured shaders, 33 or 128
+threads per group, and two comparison variants. It records 40 GPU test cases
+(three readbacks each), plus four rejected inputs before dispatch. Of the GPU
+cases, 12 repaired cases produced 8,694 CPU-verified CAS operations; 24
+original/trampoline cases remained the expected numerical failures, and four
+original-comparand controls passed without repair. The independent verifier
+checked 115,920 uint32 words, 15,360 guard bytes and all terminal processes;
+no guard mismatches occurred. It used the observed current registry ID and
+asserted the current exact driver and rebuilt transport hashes. This confirms
+these bounded cases, not arbitrary shaders or resident instruction readback.
+
+The tested GeForce Metal driver, AIR plugin and OCLP property-list fingerprints
+matched before and after this cohort. The synthetic extra-consumer program was
+rejected offline and was not included in the GPU dispatches. No performance
+benchmark or transparent application integration was performed.
