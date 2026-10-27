@@ -64,10 +64,10 @@
         expectedManifestSHA256:(NSString *)manifestSHA256
                          error:(NSError **)error;
 - (BOOL)adaptComputeEncoder:(id<MTLComputeCommandEncoder>)encoder error:(NSError **)error;
-// Explicit experimental fixed-profile partial-grid adapter. Only the exact
-// registered partial_builtin_barrier shader, grid volume <=1024, local volume
-// <=128 and at most 16 bounded regions are accepted. Unsupported shaders,
-// layouts, mixed ranges and copies are refused.
+// Explicit experimental partial-grid adapter: only two exact registered shaders,
+// grid volume <=1024, local volume <=128 and <=16 resident launches per serial
+// range. Eligible uniform and partial slots may be mixed; unsupported shaders,
+// layouts, GPU-selected commands and copies are refused.
 // This is an adapted-process experiment, not a native Metal capability claim.
 - (BOOL)enableExperimentalPartialGridWithError:(NSError **)error;
 // Bounded GPU-timeline copy extension for native profiles owned by this scope.

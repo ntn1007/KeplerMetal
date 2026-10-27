@@ -1,0 +1,21 @@
+{
+  "all_seven_archive_members_identical": true,
+  "barrier_regression_invocations": 5632,
+  "chain_checked_output_words": 48456,
+  "chain_invocations": 12114,
+  "chain_logical_dispatches": 72,
+  "chain_preflight_refusal_observations": 24,
+  "cohort_host_intervals_overlap": false,
+  "fresh_archive_SHA256": "c11995d77c8119f7af5a53d2a9bf2910964dcb5efd6636e23bbeeb1656983d9a",
+  "host_processes": 16,
+  "order_control_observations": 16,
+  "post_test_source_change": "KeplerCPUICB.h comments only",
+  "runtime_archive_SHA256": "48b7e7818cc1101dde561cd37941541a25538b262317af800690f8de4abf5965",
+  "scope": "Bounded adapted-process project ICB, not native Apple ICB or system-wide support",
+  "source_SHA256": {
+    "KeplerCPUICB.mm": "183be0be67c910ebdbff61841347f6146f72e0b1512bf241d54f0d258a308828",
+    "KeplerPartialGridPlan.h": "f46e10ce958221a968aaf39481a71f773345830c6c68ac071a7b14bdc52299f7"
+  },
+  "status": "PASS",
+  "uniform_regression_invocations": 37264
+}

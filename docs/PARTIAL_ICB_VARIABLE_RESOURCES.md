@@ -6,6 +6,9 @@ required one exact length and offset for each binding. These are still
 process-local adapted-application commands, not native Apple ICB support or a
 system-driver change.
 
+A later extension adds [bounded serial ranges](PARTIAL_ICB_CHAINED_RANGE.md)
+that mix these partial commands with uniform commands of the same certified pipeline.
+
 For a grid of `N` logical invocations, bindings 0 and 1 must each provide
 `16*N` bytes from their 16-byte-aligned offsets; binding 2 needs four bytes at a
 four-byte-aligned offset; and binding 3 needs at least 512 bytes at a

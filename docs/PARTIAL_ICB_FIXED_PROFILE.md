@@ -2,6 +2,8 @@
 
 The current adapter supports additional bounded geometries as described in [the newer contract](PARTIAL_ICB_BOUNDED_PROFILE.md). The remaining text records the earlier exact-grid qualification and its then-current limits.
 
+Later changes also support [variable resource windows](PARTIAL_ICB_VARIABLE_RESOURCES.md) and [bounded serial ranges](PARTIAL_ICB_CHAINED_RANGE.md); the historical refusals below remain part of the earlier evidence.
+
 The process-local CPU ICB adapter has an **explicitly enabled, exact-profile** path for `concurrentDispatchThreads:threadsPerThreadgroup:`. It accepts one grid, **11 × 7 × 5 threads with nominal groups 4 × 4 × 3**, for the exact registered `partial_builtin_barrier` shader and manifest. This is an experimental adapted-application feature, not support for arbitrary partial grids or shaders, Apple's native ICB ABI, an installed driver, or transparent use by ordinary applications. Capabilities advertised by `MTLDevice` are unchanged. The ordinary aligned-grid path remains available without this opt-in; unsupported partial grids continue to be refused.
 
 The caller registers the verified [wide shader manifest](../bridge/src/partial_wide_barrier.json) through the existing scope installation, then opts in before encoding the command:

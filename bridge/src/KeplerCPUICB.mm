@@ -327,18 +327,21 @@ static NSString*residentBindingError(KPComputeICBCommand*c,KPCPUICBScope*scope){
  return nil;
 }
 
-// Exact-shader experimental path with bounded region planning and resources.
-// Profile registration alone is not GPU qualification.
-static void executeFixedPartialGrid(KPComputeICBCommand*c,KPCPUICBScope*scope,id<MTLComputeCommandEncoder>encoder){
+// Validate the full logical grid, not just an individual native region.
+static void validatePartialEnvelope(KPComputeICBCommand*c,KPCPUICBScope*scope,NSUInteger total){
+ if(c.bindings.count!=4||c.threadgroupLengths.count)reject(@"Partial grid bindings differ");
+ if(!total||total>1024)reject(@"Partial grid exceeds invocation bounds");
+ NSMutableArray*buffers=[NSMutableArray new];uint64_t starts[4]={},lengths[4]={};for(unsigned j=0;j<4;j++){NSDictionary*b=c.bindings[@(j)];id<MTLBuffer>v=b[@"buffer"];NSUInteger offset=[b[@"offset"]unsignedIntegerValue],required=j<2?total*16:j==2?4:512,alignment=j<2?16:j==2?4:256;MTLStorageMode storage=j==3?MTLStorageModeShared:MTLStorageModePrivate;
+  if(!v||v.device!=scope.device||v.storageMode!=storage||!KPPartialPlan::validWindow(v.length,offset,required,alignment)||(j==3&&v.length-offset>65536)||[buffers containsObject:v])reject(@"Partial grid requires the exact, nonaliasing qualified resource envelope");
+  uint64_t start=v.gpuAddress;if(!KPPartialPlan::validRange(start,v.length))reject(@"Partial grid requires the exact, nonaliasing qualified resource envelope");starts[j]=start;lengths[j]=v.length;for(unsigned k=0;k<j;k++)if(!KPPartialPlan::disjoint(starts[j],lengths[j],starts[k],lengths[k]))reject(@"Partial grid requires the exact, nonaliasing qualified resource envelope");[buffers addObject:v];}
+}
+// Exact-shader experimental path. Profile registration alone is not GPU qualification.
+static NSArray<KPRecordedNativeCompute*>* prepareFixedPartialGrid(KPComputeICBCommand*c,KPCPUICBScope*scope,id<MTLComputeCommandEncoder>encoder){
  NSDictionary*p=[scope profileForPipeline:c.pipeline];
  if(!scope.experimentalPartialGridEnabled||scope.restored||!c.partialGrid3D||!c.hasDispatch||c.GPUGenerated||c.reusableContext||c.residentOwners.count||!certifiedPartialProfile(p,c.pipeline))reject(@"Partial grid profile or state changed");
  Ivar iv=class_getInstanceVariable(object_getClass(encoder),"_commandBuffer");if(!iv||ivar_getOffset(iv)!=32)reject(@"Partial grid encoder ABI differs");id<MTLCommandBuffer>cb=object_getIvar(encoder,iv);
  if(!cb||cb.commandQueue!=scope.queue||cb.status!=MTLCommandBufferStatusNotEnqueued||!cb.retainedReferences)reject(@"Partial grid requires a retained uncommitted buffer on the scope queue");
- if(c.bindings.count!=4||c.threadgroupLengths.count)reject(@"Partial grid bindings differ");
- NSUInteger total=volume(c.partialGrid,1024);if(!total)reject(@"Partial grid exceeds invocation bounds");
- NSMutableArray*buffers=[NSMutableArray new];uint64_t starts[4]={},lengths[4]={};for(unsigned j=0;j<4;j++){NSDictionary*b=c.bindings[@(j)];id<MTLBuffer>v=b[@"buffer"];NSUInteger offset=[b[@"offset"]unsignedIntegerValue],required=j<2?total*16:j==2?4:512,alignment=j<2?16:j==2?4:256;MTLStorageMode storage=j==3?MTLStorageModeShared:MTLStorageModePrivate;
-  if(!v||v.device!=scope.device||v.storageMode!=storage||!KPPartialPlan::validWindow(v.length,offset,required,alignment)||(j==3&&v.length-offset>65536)||[buffers containsObject:v])reject(@"Partial grid requires the exact, nonaliasing qualified resource envelope");
-  uint64_t start=v.gpuAddress;if(!KPPartialPlan::validRange(start,v.length))reject(@"Partial grid requires the exact, nonaliasing qualified resource envelope");starts[j]=start;lengths[j]=v.length;for(unsigned k=0;k<j;k++)if(!KPPartialPlan::disjoint(starts[j],lengths[j],starts[k],lengths[k]))reject(@"Partial grid requires the exact, nonaliasing qualified resource envelope");[buffers addObject:v];}
+ validatePartialEnvelope(c,scope,volume(c.partialGrid,1024));
  if(c.partialGrid.width>1023||c.partialGrid.height>1023||c.partialGrid.depth>1023||c.local.width>1023||c.local.height>1023||c.local.depth>1023)reject(@"Partial grid dimension state changed");
  std::vector<KPPartialPlan::Region>regions;if(!KPPartialPlan::plan({(uint32_t)c.partialGrid.width,(uint32_t)c.partialGrid.height,(uint32_t)c.partialGrid.depth},{(uint32_t)c.local.width,(uint32_t)c.local.height,(uint32_t)c.local.depth},regions))reject(@"Partial grid plan is no longer valid");
  if(!c.partialGridRecords){NSMutableArray<KPRecordedNativeCompute*>*records=[NSMutableArray new];
@@ -350,9 +353,36 @@ static void executeFixedPartialGrid(KPComputeICBCommand*c,KPCPUICBScope*scope,id
   for(unsigned i=0;i<regions.size();i++){const auto&r=regions[i];uint32_t values[16]={r.origin.x,r.origin.y,r.origin.z,0,(uint32_t)c.partialGrid.width,(uint32_t)c.partialGrid.height,(uint32_t)c.partialGrid.depth,0,(uint32_t)c.local.width,(uint32_t)c.local.height,(uint32_t)c.local.depth,0,(uint32_t)c.groups.width,(uint32_t)c.groups.height,(uint32_t)c.groups.depth,0};id<MTLBuffer>stage=[scope.device newBufferWithBytes:values length:sizeof(values) options:MTLResourceStorageModeShared];if(!stage)reject(@"Partial grid constant staging failed");for(unsigned j=0;j<4;j++)[b copyFromBuffer:stage sourceOffset:j*16 toBuffer:records[i].constants destinationOffset:0x710+j*16 size:12];}
   [b endEncoding];if(!complete(init))reject(@"Partial grid initializer did not complete");c.partialGridRecords=[records copy];
  }
- if(c.partialGridRecords.count!=regions.size())reject(@"Partial grid record count changed");NSError*error=nil;NSDictionary*proof=nil;
+ if(c.partialGridRecords.count!=regions.size())reject(@"Partial grid record count changed");return c.partialGridRecords;
+}
+static void executeFixedPartialGrid(KPComputeICBCommand*c,KPCPUICBScope*scope,id<MTLComputeCommandEncoder>encoder){
+ NSArray<KPRecordedNativeCompute*>*records=prepareFixedPartialGrid(c,scope,encoder);NSError*error=nil;NSDictionary*proof=nil;
  if(![c.partialGridRecords[0] encodeResidentSequence:c.partialGridRecords owners:c.partialGridRecords encoder:encoder suppressElementIndexes:[NSIndexSet indexSet] evidence:&proof error:&error])reject(error.localizedDescription?:@"Partial grid execution failed");
- [scope.eventRows addObject:@{@"operation":@"execute_bounded_partial_grid",@"grid":@[@(c.partialGrid.width),@(c.partialGrid.height),@(c.partialGrid.depth)],@"nominal_local":@[@(c.local.width),@(c.local.height),@(c.local.depth)],@"regions":@(regions.size()),@"logical_invocations":@(volume(c.partialGrid,1024)),@"evidence":proof,@"native_ICB":@NO,@"system_modified":@NO}];
+ [scope.eventRows addObject:@{@"operation":@"execute_bounded_partial_grid",@"grid":@[@(c.partialGrid.width),@(c.partialGrid.height),@(c.partialGrid.depth)],@"nominal_local":@[@(c.local.width),@(c.local.height),@(c.local.depth)],@"regions":@(records.count),@"logical_invocations":@(volume(c.partialGrid,1024)),@"evidence":proof,@"native_ICB":@NO,@"system_modified":@NO}];
+}
+// A single validated serial sequence preserves completion between logical slots.
+// Full preflight happens before preparing or emitting any of the requested slots.
+static void executePartialRange(NSArray<KPComputeICBCommand*>*commands,NSRange range,KPCPUICBScope*scope,id<MTLComputeCommandEncoder>encoder){
+ if(encoder.dispatchType!=MTLDispatchTypeSerial)reject(@"Partial range requires a serial encoder");
+ Ivar iv=class_getInstanceVariable(object_getClass(encoder),"_commandBuffer");if(!iv||ivar_getOffset(iv)!=32)reject(@"Partial grid encoder ABI differs");id<MTLCommandBuffer>cb=object_getIvar(encoder,iv);
+ if(!cb||cb.commandQueue!=scope.queue||cb.status!=MTLCommandBufferStatusNotEnqueued||!cb.retainedReferences)reject(@"Partial grid requires a retained uncommitted buffer on the scope queue");
+ NSUInteger count=0;id<MTLComputePipelineState>pipeline=nil;
+ for(NSUInteger i=range.location;i<NSMaxRange(range);i++){KPComputeICBCommand*c=commands[i];if(!c.hasDispatch){if(c.GPUGenerated||c.reusableContext||c.residentOwners.count)reject(@"Partial range has unsupported empty state");continue;}
+  NSDictionary*p=[scope profileForPipeline:c.pipeline];if(!scope.experimentalPartialGridEnabled||scope.restored||c.GPUGenerated||c.reusableContext||c.residentOwners.count||!certifiedPartialProfile(p,c.pipeline)||(pipeline&&pipeline!=c.pipeline))reject(@"Partial range requires one certified pipeline and CPU-owned commands");pipeline=c.pipeline;
+  if(c.partialGrid3D){if(c.partialGrid.width>1023||c.partialGrid.height>1023||c.partialGrid.depth>1023||c.local.width>1023||c.local.height>1023||c.local.depth>1023)reject(@"Partial grid dimension state changed");std::vector<KPPartialPlan::Region>regions;if(!KPPartialPlan::plan({(uint32_t)c.partialGrid.width,(uint32_t)c.partialGrid.height,(uint32_t)c.partialGrid.depth},{(uint32_t)c.local.width,(uint32_t)c.local.height,(uint32_t)c.local.depth},regions))reject(@"Partial grid plan is no longer valid");validatePartialEnvelope(c,scope,volume(c.partialGrid,1024));count+=regions.size();}
+  else {NSString*reason=residentBindingError(c,scope);if(reason)reject(reason);NSUInteger g=volume(c.groups,128),l=volume(c.local,128);if(!g||!l||g>128/l)reject(@"Uniform slot exceeds certified partial-range limits");validatePartialEnvelope(c,scope,g*l);count++;}
+  if(count>16)reject(@"Partial range exceeds 16 resident launches");
+ }
+ if(!count||!pipeline)reject(@"Partial range contains no executable commands");
+ NSMutableArray<KPRecordedNativeCompute*>*records=[NSMutableArray new];NSMutableArray*slots=[NSMutableArray new];
+ for(NSUInteger i=range.location;i<NSMaxRange(range);i++){KPComputeICBCommand*c=commands[i];if(!c.hasDispatch)continue;NSUInteger first=records.count;
+  if(c.partialGrid3D)[records addObjectsFromArray:prepareFixedPartialGrid(c,scope,encoder)];
+  else {if(!c.record)c.record=[scope materialize:c];if(!c.record)reject(@"Uniform range materialization failed");if(!c.record.residentDescriptorReady){id<MTLCommandBuffer>init=[scope.queue commandBuffer];NSError*error=nil;if(!init||!init.retainedReferences||![c.record initializeResidentDescriptorInCommandBuffer:init evidence:nil error:&error]||!complete(init))reject(error.localizedDescription?:@"Uniform range initialization failed");}[records addObject:c.record];}
+  [slots addObject:@{@"index":@(i),@"first_launch":@(first),@"launches":@(records.count-first),@"partial":@(c.partialGrid3D)}];
+ }
+ if(records.count!=count)reject(@"Partial range launch count changed");NSError*error=nil;NSDictionary*proof=nil;
+ if(![records[0] encodeResidentSequence:records owners:records encoder:encoder suppressElementIndexes:[NSIndexSet indexSet] evidence:&proof error:&error])reject(error.localizedDescription?:@"Partial range execution failed");
+ [scope.eventRows addObject:@{@"operation":@"execute_bounded_partial_range",@"location":@(range.location),@"length":@(range.length),@"slots":slots,@"evidence":proof,@"serial_wait_after_each_launch":@YES,@"native_ICB":@NO,@"system_modified":@NO}];
 }
 
 @interface KPGPUCommandSelection ()
@@ -463,7 +493,7 @@ static void executeFixedPartialGrid(KPComputeICBCommand*c,KPCPUICBScope*scope,id
 - (id<MTLIndirectComputeCommand>)indirectComputeCommandAtIndex:(NSUInteger)i{bounds(NSMakeRange(i,1),self.size);return _commands[i];}
 - (id<MTLIndirectRenderCommand>)indirectRenderCommandAtIndex:(NSUInteger)i{reject(@"Render ICBs are not implemented");return nil;}
 - (void)executeRange:(NSRange)range encoder:(id<MTLComputeCommandEncoder>)encoder {
- bounds(range,self.size);if(_scope.restored)reject(@"Scope was restored");NSUInteger partials=0;KPComputeICBCommand*partial=nil;for(NSUInteger i=range.location;i<NSMaxRange(range);i++){KPComputeICBCommand*c=_commands[i];if(c.partialGrid3D){partials++;partial=c;}}if(partials){if(partials!=1||range.length!=1||encoder.dispatchType!=MTLDispatchTypeSerial)reject(@"Partial grid accepts one command in a serial range");executeFixedPartialGrid(partial,_scope,encoder);return;}for(NSUInteger i=range.location;i<NSMaxRange(range);i++){KPComputeICBCommand*c=_commands[i];if(c.reusableContext&&(!c.GPUGenerated||c.reusableContext.retired||c.reusableContext.generation!=c.reusableGeneration))reject(@"Reusable consumer generation is not materialized/active");}if(encoder.dispatchType!=MTLDispatchTypeSerial)reject(@"Concurrent encoders are not qualified");NSMutableArray*records=[NSMutableArray new];NSMutableArray*indices=[NSMutableArray new];
+ bounds(range,self.size);if(_scope.restored)reject(@"Scope was restored");NSUInteger partials=0;KPComputeICBCommand*partial=nil;for(NSUInteger i=range.location;i<NSMaxRange(range);i++){KPComputeICBCommand*c=_commands[i];if(c.partialGrid3D){partials++;partial=c;}}if(partials){if(encoder.dispatchType!=MTLDispatchTypeSerial)reject(@"Partial range requires a serial encoder");if(partials==1&&range.length==1)executeFixedPartialGrid(partial,_scope,encoder);else executePartialRange(_commands,range,_scope,encoder);return;}for(NSUInteger i=range.location;i<NSMaxRange(range);i++){KPComputeICBCommand*c=_commands[i];if(c.reusableContext&&(!c.GPUGenerated||c.reusableContext.retired||c.reusableContext.generation!=c.reusableGeneration))reject(@"Reusable consumer generation is not materialized/active");}if(encoder.dispatchType!=MTLDispatchTypeSerial)reject(@"Concurrent encoders are not qualified");NSMutableArray*records=[NSMutableArray new];NSMutableArray*indices=[NSMutableArray new];
  BOOL resident=NO;for(NSUInteger i=range.location;i<NSMaxRange(range);i++)if(((KPComputeICBCommand*)_commands[i]).residentOwners.count)resident=YES;
  if(resident){
   Ivar v=class_getInstanceVariable(object_getClass(encoder),"_commandBuffer");if(!v||ivar_getOffset(v)!=32)reject(@"Resident consumer command-buffer ABI differs");id<MTLCommandBuffer>cb=object_getIvar(encoder,v);

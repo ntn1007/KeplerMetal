@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+The opted-in partial-grid adapter now chains bounded serial partial and uniform ICB slots of the same pinned pipeline, including empty slots. Producer/consumer GTX controls verify order, reuse and the 16-launch boundary; broader shaders and transparent integration remain open. [Contract and evidence](PARTIAL_ICB_CHAINED_RANGE.md).
+
 Two isolated video-context witnesses correlate the owning process's registry entry with two mapped address ranges; both ranges cease to be covered after context close in these observations. This does not establish kernel-object destruction, fix the earlier explicit-unmap failure, or prove hardware video decoding. [Evidence and limits](VIDEO_OWNER_MAP.md).
 
 The experimental partial-grid adapter accepts variable, bounded buffer sizes and aligned offsets for its two pinned shaders. A 21-process GTX cohort includes 21,652 invocations using the new layouts, fixed-envelope and uniform regressions, and negative controls; native constant-bank rounding can still reject some windows. [Contract and evidence](PARTIAL_ICB_VARIABLE_RESOURCES.md).

@@ -28,19 +28,19 @@
       "path": "bridge/src/KeplerCPUICB.h",
       "source_path": "bridge/src/KeplerCPUICB.h",
       "source_SHA256": "263dede0101967e1bfa32fe3b081b73c476d9e09e8a9b5446ae04cf4f425ee0a",
-      "published_SHA256": "3380d4932230816ea334277a11fd6603ce8d07cc81f725e45ac2e2027678920c",
-      "bytes": 37005,
+      "published_SHA256": "a5c0857f5287231817179d0b6a2939ab54b2d9306a73ed6260b1dabf9fce369a",
+      "bytes": 37026,
       "modified_for_publication": true,
-      "previous_published_SHA256": "6425e00d83e18660e96da822b6dc04500f366a6f67a33b577a51fa7a6f14dbe7"
+      "previous_published_SHA256": "3380d4932230816ea334277a11fd6603ce8d07cc81f725e45ac2e2027678920c"
     },
     {
       "path": "bridge/src/KeplerCPUICB.mm",
       "source_path": "bridge/src/KeplerCPUICB.mm",
       "source_SHA256": "3d59c2c609611ddc387e616b8945e903f6378dbd4a3b66a02cb22087ada84b60",
-      "published_SHA256": "70b953e1ff045c6db573ee57c6366d5f986c68137cf901d89a6ec1d6e1ac3bd0",
-      "bytes": 147722,
+      "published_SHA256": "183be0be67c910ebdbff61841347f6146f72e0b1512bf241d54f0d258a308828",
+      "bytes": 152180,
       "modified_for_publication": true,
-      "previous_published_SHA256": "69fefa971d54f7690e15b51950375e688fed02200f0fd7380e4393f2bb5be5eb"
+      "previous_published_SHA256": "70b953e1ff045c6db573ee57c6366d5f986c68137cf901d89a6ec1d6e1ac3bd0"
     },
     {
       "path": "bridge/src/KeplerCommandIR.h",
@@ -7590,6 +7590,70 @@
       "published_SHA256": "bb3fe57678b7f20bcd1141dddf323ed339f31eefddc39fa5b221ffd9a2a9f8a4",
       "bytes": 2195,
       "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/audit_partial_range_chain.py",
+      "source_path": "bridge/tools/audit_partial_range_chain.py",
+      "source_SHA256": "9f36f6c92a09129924bea7f6b94c94338620b1b833dd439a2c12885fef1dfd21",
+      "published_SHA256": "9f36f6c92a09129924bea7f6b94c94338620b1b833dd439a2c12885fef1dfd21",
+      "bytes": 7112,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/partial_chain_barrier.py",
+      "source_path": "bridge/tools/partial_chain_barrier.py",
+      "source_SHA256": "c9783004b35b9e873bf5ee1d566d5512677dcb2dcfe9421784cff15903317089",
+      "published_SHA256": "c9783004b35b9e873bf5ee1d566d5512677dcb2dcfe9421784cff15903317089",
+      "bytes": 6037,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/partial_chain_barrier_probe.mm",
+      "source_path": "bridge/tools/partial_chain_barrier_probe.mm",
+      "source_SHA256": "4c4f6602a1462a565f68e9bbd198178170d373921d21993483e4389b5ecd68dd",
+      "published_SHA256": "4c4f6602a1462a565f68e9bbd198178170d373921d21993483e4389b5ecd68dd",
+      "bytes": 10754,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/partial_range_chain.py",
+      "source_path": "bridge/tools/partial_range_chain.py",
+      "source_SHA256": "fccf32c22ecebe4cfc7f84bc1bdc2f93b8fb996ae0d26d86302158f63d9f9cef",
+      "published_SHA256": "fccf32c22ecebe4cfc7f84bc1bdc2f93b8fb996ae0d26d86302158f63d9f9cef",
+      "bytes": 6045,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/partial_range_chain_probe.mm",
+      "source_path": "bridge/tools/partial_range_chain_probe.mm",
+      "source_SHA256": "2053c5131250d17e5fd8d732485fb54a99d5c0985f6f2fbd777f85ae00052273",
+      "published_SHA256": "2053c5131250d17e5fd8d732485fb54a99d5c0985f6f2fbd777f85ae00052273",
+      "bytes": 10074,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/verify_partial_chain_barrier.py",
+      "source_path": "bridge/tools/verify_partial_chain_barrier.py",
+      "source_SHA256": "c80505e8990594558e452b5f06dab1ace6527d6197510802eb03634a8367ea2b",
+      "published_SHA256": "c80505e8990594558e452b5f06dab1ace6527d6197510802eb03634a8367ea2b",
+      "bytes": 6451,
+      "modified_for_publication": false
+    },
+    {
+      "path": "bridge/tools/verify_partial_range_chain.py",
+      "source_path": "bridge/tools/verify_partial_range_chain.py",
+      "source_SHA256": "8da88895b0fc661c661d07a74d90df8a3095d3c6fb6d05bfb3dc5c0f6e75dd03",
+      "published_SHA256": "8da88895b0fc661c661d07a74d90df8a3095d3c6fb6d05bfb3dc5c0f6e75dd03",
+      "bytes": 6500,
+      "modified_for_publication": false
+    },
+    {
+      "path": "tests/test_partial_range_chain_oracle.py",
+      "source_path": "tests/test_partial_range_chain_oracle.py",
+      "source_SHA256": "aeb59ec4acbcf2eba2176f9b74f776155794f185cf938afec65564b4b7959f17",
+      "published_SHA256": "aeb59ec4acbcf2eba2176f9b74f776155794f185cf938afec65564b4b7959f17",
+      "bytes": 1601,
+      "modified_for_publication": false
     }
   ],
   "excluded_source_tools": [
@@ -7631,21 +7695,24 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "6b6bacfeef96f0dda32f8d9872a9d2b56becc0ba7d31ebcfc8c75c5dc7ad55fc",
-  "previous_public_commit": "800fcddf1ce13f92507195b0d6e66d793aad30c0",
+  "previous_source_snapshot_SHA256": "52aa2af0f1f01fe43752a47105b23c6a6e473731dd4fecbeecac7b341c1ae570",
+  "previous_public_commit": "e62b6eafe86c665da77ac1ad64728f2018a76a0d",
   "update": {
     "date": "2026-10-27",
-    "reason": "Video context owner and virtual mapping correlation",
+    "reason": "Bounded serial mixed partial-grid ICB ranges",
     "files": [
-      "bridge/tools/audit_video_context_owner_map.py",
-      "bridge/tools/run_vm_region_control.py",
-      "bridge/tools/verify_video_context_owner_map.py",
-      "bridge/tools/video_context_owner_map.py",
-      "bridge/tools/video_context_owner_map_probe.mm",
-      "bridge/tools/vm_region_control.c",
-      "tests/test_video_owner_map_audit.py"
+      "bridge/src/KeplerCPUICB.h",
+      "bridge/src/KeplerCPUICB.mm",
+      "bridge/tools/audit_partial_range_chain.py",
+      "bridge/tools/partial_chain_barrier.py",
+      "bridge/tools/partial_chain_barrier_probe.mm",
+      "bridge/tools/partial_range_chain.py",
+      "bridge/tools/partial_range_chain_probe.mm",
+      "bridge/tools/verify_partial_chain_barrier.py",
+      "bridge/tools/verify_partial_range_chain.py",
+      "tests/test_partial_range_chain_oracle.py"
     ]
   },
   "update_date": "2026-10-27",
-  "update_reason": "Bounded process-local video context and mapped-address observation; no decoder or kernel object destruction claim."
+  "update_reason": "Serial partial/uniform range chaining, qualified by dependent producer/consumer outputs; native and system integration remain unclaimed."
 }
