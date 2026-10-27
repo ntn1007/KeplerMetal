@@ -174,3 +174,5 @@ Contributions are welcome: independent reproductions, smaller valid test cases, 
 The local-memory path also accepts the same MSL/AIR programs, with native-versus-AIR/NAK byte comparisons and explicit resource-layout rejection controls. [Frontend contract and reproduction](docs/AIR_LOCAL_MEMORY.md).
 
 Deep-control work has a mixed result: external-CRS imports up to2KiB pass their bounded tests, while a native96-level case fails after an observed entry write. The failure is retained and the full goal remains incomplete. [Control-flow investigation](docs/CONTROL_FLOW.md).
+
+For a narrowly scoped, opt-in standalone public-Metal client experiment and its controls, see [the standalone ICB experiment](docs/STANDALONE_ICB_EXPERIMENT.md).

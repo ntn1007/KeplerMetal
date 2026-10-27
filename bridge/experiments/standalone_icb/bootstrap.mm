@@ -1,0 +1,57 @@
+// Narrow experimental bootstrap for one pinned executable and one shader snapshot.
+// Not a general Metal compatibility layer; no native shared class is modified.
+#import <Foundation/Foundation.h>
+#import <Metal/Metal.h>
+#import <objc/runtime.h>
+#import <mach-o/dyld.h>
+#import <CommonCrypto/CommonDigest.h>
+#import <dlfcn.h>
+#import "KeplerCPUICB.h"
+#import "KeplerGPUIdentity.h"
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#ifndef KM_APPROVED_APP_SHA256
+#error Expected the hash of the signed experimental client
+#endif
+static NSString* const appHash=@KM_APPROVED_APP_SHA256;
+static NSString* const carrierHash=@"965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7";
+static KPCPUICBScope *scope;static id<MTLDevice> scopedDevice;static id<MTLCommandQueue> scopedQueue;static BOOL usedQueue;
+static NSString* hash(NSData*d){if(!d||d.length>64*1024*1024)return nil;unsigned char digest[CC_SHA256_DIGEST_LENGTH];CC_SHA256(d.bytes,(CC_LONG)d.length,digest);NSMutableString*s=[NSMutableString string];for(unsigned i=0;i<sizeof(digest);i++)[s appendFormat:@"%02x",digest[i]];return s;}
+static void emitEvents(void){@autoreleasepool{const char*p=getenv("KM_EVENT_PATH");if(!p||!scope)return;NSError*e=nil;NSData*d=[NSJSONSerialization dataWithJSONObject:scope.events options:NSJSONWritingPrettyPrinted error:&e];if(d)[d writeToFile:@(p) options:NSDataWritingAtomic error:&e];}}
+static id<MTLCommandQueue> scopedNewQueue(id self,SEL cmd) NS_RETURNS_RETAINED;
+static id<MTLCommandQueue> scopedNewQueue(id self,SEL cmd){if(self!=scopedDevice){Method m=class_getInstanceMethod(class_getSuperclass(object_getClass(self)),cmd);typedef id<MTLCommandQueue>(*Fn)(id,SEL) __attribute__((ns_returns_retained));return ((Fn)method_getImplementation(m))(self,cmd);}if(usedQueue)[NSException raise:@"KeplerStandaloneUnsupported" format:@"Only one queue is qualified"];usedQueue=YES;fprintf(stderr,"KM_BOOT queue matched\n");return scopedQueue;}
+static char functionTag;
+static id<MTLFunction> approvedFunction(id self,SEL cmd,NSString*name) NS_RETURNS_RETAINED;
+static id<MTLFunction> approvedFunction(id self,SEL cmd,NSString*name){
+ Method m=class_getInstanceMethod(class_getSuperclass(object_getClass(self)),cmd);typedef id<MTLFunction>(*Fn)(id,SEL,NSString*) __attribute__((ns_returns_retained));id<MTLFunction>f=((Fn)method_getImplementation(m))(self,cmd,name);
+ if(f&&([name isEqual:@"vs_state"]||[name isEqual:@"fs_state"]))objc_setAssociatedObject(f,&functionTag,@YES,OBJC_ASSOCIATION_RETAIN_NONATOMIC);return f;
+}
+static id<MTLLibrary> scopedLibrary(id self,SEL cmd,NSString*path,NSError**error) NS_RETURNS_RETAINED;
+static id<MTLLibrary> scopedLibrary(id self,SEL cmd,NSString*path,NSError**error){
+ Class base=class_getSuperclass(object_getClass(self));Method fileMethod=class_getInstanceMethod(base,cmd);typedef id<MTLLibrary>(*FileFn)(id,SEL,NSString*,NSError**) __attribute__((ns_returns_retained));
+ NSData*snapshot=[NSData dataWithContentsOfFile:path];if(self!=scopedDevice||![hash(snapshot)isEqual:carrierHash]){fprintf(stderr,"KM_BOOT library unapproved\n");return ((FileFn)method_getImplementation(fileMethod))(self,cmd,path,error);}
+ dispatch_data_t bytes=dispatch_data_create(snapshot.bytes,snapshot.length,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),^{(void)snapshot.length;});SEL dataSelector=@selector(newLibraryWithData:error:);Method dataMethod=class_getInstanceMethod(base,dataSelector);typedef id<MTLLibrary>(*DataFn)(id,SEL,dispatch_data_t,NSError**) __attribute__((ns_returns_retained));
+ id<MTLLibrary>lib=((DataFn)method_getImplementation(dataMethod))(self,dataSelector,bytes,error);if(!lib)return nil;
+ Class original=object_getClass(lib);Method functionMethod=class_getInstanceMethod(original,@selector(newFunctionWithName:));NSString*name=[@"KMApprovedLibrary_" stringByAppendingString:[[NSUUID UUID].UUIDString stringByReplacingOccurrencesOfString:@"-" withString:@"_"]];Class dynamic=objc_allocateClassPair(original,name.UTF8String,0);
+ if(!dynamic||!functionMethod||!class_addMethod(dynamic,@selector(newFunctionWithName:),(IMP)approvedFunction,method_getTypeEncoding(functionMethod))){if(dynamic)objc_disposeClassPair(dynamic);fprintf(stderr,"KM_BOOT library adaptation refused\n");return nil;}objc_registerClassPair(dynamic);if(class_getInstanceSize(dynamic)!=class_getInstanceSize(original))return nil;object_setClass(lib,dynamic);fprintf(stderr,"KM_BOOT library snapshot approved\n");return lib;
+}
+static id<MTLRenderPipelineState> scopedNewPipeline(id self,SEL cmd,MTLRenderPipelineDescriptor*p,NSError**error) NS_RETURNS_RETAINED;
+static id<MTLRenderPipelineState> scopedNewPipeline(id self,SEL cmd,MTLRenderPipelineDescriptor*p,NSError**error){
+ BOOL match=self==scopedDevice&&[objc_getAssociatedObject(p.vertexFunction,&functionTag) boolValue]&&[objc_getAssociatedObject(p.fragmentFunction,&functionTag) boolValue]&&[p.vertexFunction.name isEqual:@"vs_state"]&&[p.fragmentFunction.name isEqual:@"fs_state"]&&p.colorAttachments[0].pixelFormat==MTLPixelFormatRGBA32Float&&!p.colorAttachments[0].blendingEnabled&&p.sampleCount==1&&p.depthAttachmentPixelFormat==MTLPixelFormatInvalid&&p.stencilAttachmentPixelFormat==MTLPixelFormatInvalid;
+ if(match){fprintf(stderr,"KM_BOOT pipeline matched\n");return scope.renderPipeline;}
+ Method m=class_getInstanceMethod(class_getSuperclass(object_getClass(self)),cmd);typedef id<MTLRenderPipelineState>(*Fn)(id,SEL,MTLRenderPipelineDescriptor*,NSError**) __attribute__((ns_returns_retained));return ((Fn)method_getImplementation(m))(self,cmd,p,error);
+}
+static bool add(Class c,Class parent,SEL selector,IMP imp){Method m=class_getInstanceMethod(parent,selector);return m&&class_addMethod(c,selector,imp,method_getTypeEncoding(m));}
+static id<MTLDevice> replacement(void) NS_RETURNS_RETAINED;
+static id<MTLDevice> replacement(void){fprintf(stderr,"KM_BOOT enter\n");@autoreleasepool{
+ static BOOL active=NO;if(active){fprintf(stderr,"KM_BOOT recursive device discovery refused\n");return nil;}active=YES;
+ uint32_t length=0;_NSGetExecutablePath(nullptr,&length);if(length==0||length>8192)return nil;char*name=(char*)calloc(length,1);if(!name)return nil;int got=_NSGetExecutablePath(name,&length);NSData*binary=got==0?[NSData dataWithContentsOfFile:@(name)]:nil;free(name);const char*path=getenv("KM_CARRIER_PATH");NSData*data=path?[NSData dataWithContentsOfFile:@(path)]:nil;
+ if(![hash(binary)isEqual:appHash]||![hash(data)isEqual:carrierHash]){fprintf(stderr,"KM_BOOT identity refused\n");return nil;}
+ NSArray<id<MTLDevice>>*devices=MTLCopyAllDevices();if(devices.count!=1||!KPKepler880MIdentity(devices[0])){fprintf(stderr,"KM_BOOT device count or identity refused\n");return nil;}id<MTLDevice>d=devices[0];fprintf(stderr,"KM_BOOT got single qualified device\n");
+ NSError*error=nil;id<MTLCommandQueue>q=[d newCommandQueue];KPCPUICBScope*s=[KPCPUICBScope installRenderingOnDevice:d queue:q libraryData:data expectedSHA256:carrierHash error:&error];if(!s){fprintf(stderr,"KM_BOOT scope refused %s\n",error.description.UTF8String?:"");return d;}
+ Class dyn=object_getClass(d),base=class_getSuperclass(dyn);bool ok=add(dyn,base,@selector(newCommandQueue),(IMP)scopedNewQueue)&&add(dyn,base,@selector(newLibraryWithFile:error:),(IMP)scopedLibrary)&&add(dyn,base,@selector(newRenderPipelineStateWithDescriptor:error:),(IMP)scopedNewPipeline);
+ if(!ok||![s enableAutomaticRenderEncoderFactoriesWithError:&error]){[s restore];fprintf(stderr,"KM_BOOT setup refused %s\n",error.description.UTF8String?:"");return d;}
+ scope=s;scopedDevice=d;scopedQueue=q;atexit(emitEvents);fprintf(stderr,"KM_BOOT enabled\n");return d;
+}}
+__attribute__((used)) static struct {const void*replacement;const void*replacee;} interpose[] __attribute__((section("__DATA,__interpose")))={{(const void*)replacement,(const void*)MTLCreateSystemDefaultDevice}};

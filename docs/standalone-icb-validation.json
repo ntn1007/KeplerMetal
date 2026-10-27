@@ -1,0 +1,136 @@
+{
+  "date": "2026-10-27",
+  "base_commit": "0b566d1f4c637e9f633dc9cb95cf99f725ebd724",
+  "gpu": "NVIDIA GeForce GTX 880M",
+  "macOS": [
+    "ProductName:\t\tmacOS",
+    "ProductVersion:\t\t26.7.1",
+    "BuildVersion:\t\t25G241"
+  ],
+  "driver_SHA256": "e240d54a4cd64b7e54fbc15250de82e88451132e1d9f3a4f9879607c8b0e7645",
+  "static_library_SHA256": "b77d50ec037c50b64638b1498b019e101b4fb05009817a704d83b87520ff37b0",
+  "build_inputs_SHA256": "55853e435a657c2bb428369fa8ea3f76f7a6b056922e98d54f13db17e54d2c30",
+  "approved_signed_client_SHA256": "d4de9d258efad19099c594b41d554ffe44cbb93305d7d614c111ad70d4ef797b",
+  "bootstrap_SHA256": "20da81cd02d9636e0ae2509d9a21a20ed7760e521180176374f4c56c9f76f494",
+  "carrier_SHA256": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7",
+  "wrong_carrier_SHA256": "dbfd08f425b55310bf3513274dbdeee10577d1346eeba9b5c135752969229cdf",
+  "image_SHA256": "ad54a279b3c738206061e86dc4598c2675204b2fb3b9d4461821b1f5524da7fc",
+  "cases": {
+    "direct": {
+      "oracle": {
+        "general_application_compatibility": false,
+        "gpu_pixels_checked": 12288,
+        "mode": "direct",
+        "process_exit": 0,
+        "scope": "one signed experimental client and one library",
+        "status": "PASS",
+        "system_modified": false
+      },
+      "child_exit": 0,
+      "host_pid": 30504,
+      "reservation_state": "terminal",
+      "signed_client_SHA256": "d4de9d258efad19099c594b41d554ffe44cbb93305d7d614c111ad70d4ef797b",
+      "injected_library_SHA256": null,
+      "host_manifest_SHA256": "206f3539b944d390334dedc4020c7d8517c53ca6b40505ebe4ce103bf2a081dd",
+      "stdout_SHA256": "41e446bab0ad7be3f97ed03256272c5a338b16de1726f801b39df639ab12c4c0",
+      "stderr_SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "events_SHA256": null
+    },
+    "auto": {
+      "oracle": {
+        "general_application_compatibility": false,
+        "gpu_pixels_checked": 12288,
+        "mode": "auto",
+        "process_exit": 0,
+        "scope": "one signed experimental client and one library",
+        "status": "PASS",
+        "system_modified": false
+      },
+      "child_exit": 0,
+      "host_pid": 30537,
+      "reservation_state": "terminal",
+      "signed_client_SHA256": "d4de9d258efad19099c594b41d554ffe44cbb93305d7d614c111ad70d4ef797b",
+      "injected_library_SHA256": "20da81cd02d9636e0ae2509d9a21a20ed7760e521180176374f4c56c9f76f494",
+      "host_manifest_SHA256": "749b99e667eb39718fa513460cf0278bf48aed6ba67624b591021cb01b195962",
+      "stdout_SHA256": "5c1188ce23700490a2004837c1c40bbd405d6e4e515921e58592472aabf5d611",
+      "stderr_SHA256": "6756f93995b0360221d8f83e2220e15f75b23bd594f6321e3340eae5c40a342d",
+      "events_SHA256": "a36995d7826745810445c345dba20555d3bcb3d342de621872f57aaa8d919bcf"
+    },
+    "auto-native": {
+      "oracle": {
+        "general_application_compatibility": false,
+        "gpu_pixels_checked": 0,
+        "mode": "auto-native",
+        "process_exit": 7,
+        "scope": "one signed experimental client and one library",
+        "status": "PASS",
+        "system_modified": false
+      },
+      "child_exit": 7,
+      "host_pid": 30556,
+      "reservation_state": "terminal",
+      "signed_client_SHA256": "d4de9d258efad19099c594b41d554ffe44cbb93305d7d614c111ad70d4ef797b",
+      "injected_library_SHA256": null,
+      "host_manifest_SHA256": "9b81cae3f39141fd8e62d2043d0b2e7f2d2c7243160bd158839972500ae49a4e",
+      "stdout_SHA256": "3816700db9f33fa41ce96123c31407a7473dfce6456d06d69c718f68e2c865b1",
+      "stderr_SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "events_SHA256": null
+    },
+    "wrong-library": {
+      "oracle": {
+        "general_application_compatibility": false,
+        "gpu_pixels_checked": 0,
+        "mode": "wrong-library",
+        "process_exit": 7,
+        "scope": "one signed experimental client and one library",
+        "status": "PASS",
+        "system_modified": false
+      },
+      "child_exit": 7,
+      "host_pid": 30579,
+      "reservation_state": "terminal",
+      "signed_client_SHA256": "d4de9d258efad19099c594b41d554ffe44cbb93305d7d614c111ad70d4ef797b",
+      "injected_library_SHA256": "20da81cd02d9636e0ae2509d9a21a20ed7760e521180176374f4c56c9f76f494",
+      "host_manifest_SHA256": "3390a928ddba250f26604081190c282bdac15923b651bc8893909bddec9cd794",
+      "stdout_SHA256": "7d17d1908534521f1c582ae0a48c79d9fb4c69e92dc3653995b491397b0aec2c",
+      "stderr_SHA256": "63d0a1081575dc590469a2000fdb163c85915b566f00df5867bd6325da6ca936",
+      "events_SHA256": "5746b8d02c0599cdc396646f4cb6ade7f18698a6e7835c6596bbb22553823bbc"
+    },
+    "wrong-client": {
+      "oracle": {
+        "general_application_compatibility": false,
+        "gpu_pixels_checked": 0,
+        "mode": "wrong-client",
+        "process_exit": 3,
+        "scope": "one signed experimental client and one library",
+        "status": "PASS",
+        "system_modified": false
+      },
+      "child_exit": 3,
+      "host_pid": 30602,
+      "reservation_state": "terminal",
+      "signed_client_SHA256": "76e0ce7391f29b5790af8ac2d28956167750d4b93d28da7f50fdec54f4d9254e",
+      "injected_library_SHA256": "20da81cd02d9636e0ae2509d9a21a20ed7760e521180176374f4c56c9f76f494",
+      "host_manifest_SHA256": "a1bf147507ee77182192de1e00ad4bedc8cfca591a071d77a20ab55d30c14edc",
+      "stdout_SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_SHA256": "90b8ae5f6ca4e0a4886bfeb885a557a638d8003b24dd8e9f7fb94a75778f89be",
+      "events_SHA256": null
+    }
+  },
+  "regression": {
+    "unit_tests_passed": 366,
+    "offline_mutations_rejected": [
+      "pixel",
+      "event",
+      "bootstrap binary",
+      "GPU reservation state"
+    ],
+    "exploratory_icb_repetitions": 3
+  },
+  "limits": [
+    "Purpose-built public Metal client, not arbitrary preexisting applications",
+    "One queue, known library and pipeline, one CPU encoded draw",
+    "No general Metal 3/4 support or performance claim",
+    "Exploratory SIGSEGV before qualified runs; saved separately"
+  ]
+}
