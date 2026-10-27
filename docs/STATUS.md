@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+One scoped CAS bootstrap now handles four certified pipeline-factory styles in the same process, including reflection and a default descriptor. Two GTX comparisons and four no-dispatch controls pass; arbitrary clients and broader factory semantics remain unqualified. [Evidence](STANDALONE_CAS_UNIFIED.md).
+
 The scoped standalone CAS bootstrap now also supports the certified argument-and-buffer-type reflection option pair. Two GTX repairs and native comparisons pass, with selected argument reflection fields matching across four hosts; complete reflection and transparent integration remain unqualified. [Evidence](STANDALONE_CAS_REFLECTION.md).
 
 The scoped standalone CAS bootstrap now repairs its certified shaders through the public pipeline factory with zero options and null reflection. Two GTX comparisons and reflection/native regression controls pass; other options and transparent apps remain unqualified. [Evidence](STANDALONE_CAS_OPTIONS.md).

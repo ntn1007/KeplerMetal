@@ -1,0 +1,79 @@
+{
+  "archive_SHA256": "be5cb1ed54db899107bda0fdd57177692564ab6334a8dae257752de17eca1421",
+  "audit_source_SHA256": "b530efbfea355f59ea3718695b11f35b07ef0fe196365d96bbfd840471dd94d3",
+  "bootstrap_SHA256": "09070762cf6bfabd4b9503c4e16ccf31427ed7c3568d6963a5ecacee90a8ab57",
+  "build_inputs_SHA256": "3291b77a841e90121255cd199bf32fa3e25086fcea098c0fdc075cdf71d4acbd",
+  "client_SHA256": "c43ddc1330965aa3adaca7842c7472c35b06c1111ee60bf7fad3e494e4756503",
+  "client_imports_project_symbols": false,
+  "corrected_and_control_CAS_operations": 71100,
+  "host_processes": 8,
+  "installed_driver_modified": false,
+  "mutated_reflection_rejected": true,
+  "mutation_audit_source_SHA256": "f825e6a799672e467ae59aa3a7f2f51f36cd6d7863f58536c01dc8bfdf614c34",
+  "mutation_checks": {
+    "duplicate-dispatch": "EXPECTED_REFUSAL",
+    "factory": "EXPECTED_REFUSAL",
+    "import-proof": "EXPECTED_REFUSAL",
+    "pixel": "EXPECTED_REFUSAL",
+    "reservation": "EXPECTED_REFUSAL",
+    "trace": "EXPECTED_REFUSAL",
+    "unchanged": "PASS"
+  },
+  "native_defect_words": 56808,
+  "native_dispatches": 60,
+  "negative_controls": [
+    "wrong-client",
+    "wrong-cert",
+    "wrong-library",
+    "wrong-descriptor"
+  ],
+  "nonoverlapping": true,
+  "optin_dispatches": 60,
+  "reflection_argument_count_per_function": 3,
+  "reflection_full_host_count": 4,
+  "reflection_function_count": 1,
+  "rows": [
+    {
+      "manifest_SHA256": "6858de26f40ea4d18e6c76de409f150c768c2b6611430a1f98d51862ca999a63",
+      "mode": "native",
+      "verification_SHA256": "3c8afc4104b44c7d6e8fadede68d88cd3bb2eddfa16320ccef486b0da095c509"
+    },
+    {
+      "manifest_SHA256": "9b6766923deb6d728c7ea05e5f602b925989f8383acce8baad45ac46fafc6cd6",
+      "mode": "optin",
+      "verification_SHA256": "a0f6e2d48ba95844e788adb233e4f22479441b3b3422bae3f64fa9e1d2028e66"
+    },
+    {
+      "manifest_SHA256": "1c83d5a0845293278a5e946cf186e2e166ab29bd8615f0995bdf18104772c192",
+      "mode": "native",
+      "verification_SHA256": "3c8afc4104b44c7d6e8fadede68d88cd3bb2eddfa16320ccef486b0da095c509"
+    },
+    {
+      "manifest_SHA256": "fe3c78f8c975c977c56546cb84c5b606ea01ed3734f46622838f84dac6a6268f",
+      "mode": "optin",
+      "verification_SHA256": "a0f6e2d48ba95844e788adb233e4f22479441b3b3422bae3f64fa9e1d2028e66"
+    },
+    {
+      "manifest_SHA256": "548eeb4d02d4d22902012b79567c9ecc36e4d45f3b155944f4d40db12e172795",
+      "mode": "wrong-library",
+      "verification_SHA256": "ea70b88adc72929ad48156ae6962b950c35013a229bcc6bff760de4c4e3863f9"
+    },
+    {
+      "manifest_SHA256": "b008d794f676ab3ef5a4a020b34e66e6eae8ad80a52cc737cbd141f4d971fb4c",
+      "mode": "wrong-descriptor",
+      "verification_SHA256": "9b4147c602ec1a33f31f74732353ca930157187f6ea6c7ea68399358a6254a81"
+    },
+    {
+      "manifest_SHA256": "fe133b54c913ffb0a0844bfa4a68b878653ee9f3114db8c05b43c94783182b0a",
+      "mode": "wrong-client",
+      "verification_SHA256": "def1451a031fb7f7c4c4b893e121dc8725e0aaff0fad7f42a99833596be2588e"
+    },
+    {
+      "manifest_SHA256": "36eafa1dfbd768edba350241150d81a27bc858f883aa91ea5e183df42d7b9346",
+      "mode": "wrong-cert",
+      "verification_SHA256": "c3a5f8ea7752ab00dc0fdf44f6203295f2b8808a0f8136b7f206a455e23a8ead"
+    }
+  ],
+  "scope": "One pinned purpose-built public-Metal client, four factory styles in one process for exact certified shaders; not arbitrary applications or system-wide integration",
+  "status": "PASS"
+}
