@@ -20,7 +20,9 @@ inactive identity. With no producer dispatch the initial state is retained.
 The helper checks a bounded inline table, slot, identity, token, version and
 reserved fields. These checks do not sandbox arbitrary GPU pointers; this
 experiment uses only allocations constructed and retained by its test host.
-The new C++ transition planner is not connected to this host or the runtime.
+In this laboratory client, the C++ transition planner was not connected to the
+host. A subsequent [runtime integration](PIPELINE_RUNTIME_INTEGRATION.md)
+uses the planner to derive its owned pipeline transitions.
 The host's manually constructed table does not implement general pipeline
 ownership, arbitrary state creation, lifetime enforcement or application-facing
 argument encoding. It must not be used as a production integration.

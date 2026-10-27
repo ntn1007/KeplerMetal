@@ -1,6 +1,6 @@
 # KeplerMetal
 
-A combined adapted-client path now brings typed vertex setters and indexed draws together. [Contract and evidence](docs/COMBINED_INDEX_VERTEX.md).
+A combined adapted-client path now brings typed pipeline and vertex setters together with indexed draws. [Contract and evidence](docs/TRIPLE_RENDER.md).
 
 The scoped typed vertex-buffer setter now selects between certified render states in an adapted application. [Evidence and limits](docs/VERTEX_BINDING_EXPERIMENT.md).
 
@@ -19,11 +19,13 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
+A scoped adapted client now combines pipeline selection, vertex-buffer changes and 16/32-bit indexed draws in one producer. [Contract, tests and limitations](docs/TRIPLE_RENDER.md).
+
 The scoped runtime now owns typed render-pipeline tokens, retained resources and a two-word argument encoder. GPU rendering and same-runtime regressions pass; ordinary applications still require adaptation. [Contract, evidence and limits](docs/PIPELINE_RUNTIME_INTEGRATION.md).
 
 A typed render-pipeline selector now changes a real GTX image in an explicitly adapted laboratory client. CPU, native-image and negative controls qualify this bounded case; automatic application integration remains open. [Evidence and reproduction](docs/TYPED_PIPELINE_RENDER.md).
 
-A GTX/M1 comparison identifies the boundary for typed render-pipeline arguments. The new transition planner is CPU-only and not yet integrated. [Evidence and limits](docs/RENDER_PIPELINE_BOUNDARY.md).
+A GTX/M1 comparison identified the original boundary for typed render-pipeline arguments. [Evidence and limits](docs/RENDER_PIPELINE_BOUNDARY.md).
 
 Typed indexed triangles now resolve 16/32-bit index pointers through an owned binding table, then reach native indirect rendering. The source keeps signed base vertices and command order; foreign buffers, wrong formats, absent tables and overlap are checked. [Contract, reception and source-only reproduction](docs/INDEXED_RENDER.md).
 

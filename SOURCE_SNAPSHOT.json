@@ -28,10 +28,10 @@
       "path": "bridge/src/KeplerCPUICB.h",
       "source_path": "bridge/src/KeplerCPUICB.h",
       "source_SHA256": "263dede0101967e1bfa32fe3b081b73c476d9e09e8a9b5446ae04cf4f425ee0a",
-      "published_SHA256": "b1bbd2ed2b6ffaab58f18497f1290bf62dfa0bd4070a808188c26d75b48a4de3",
-      "bytes": 33719,
+      "published_SHA256": "ef4e87c5f7077b4e24d74399406a3582c193b96701d84d895e27d7565091b088",
+      "bytes": 34576,
       "modified_for_publication": true,
-      "previous_published_SHA256": "79c544c5e9981f6287d23ca958267eff215fa915e6c6ae5fc63240077915c62b"
+      "previous_published_SHA256": "b1bbd2ed2b6ffaab58f18497f1290bf62dfa0bd4070a808188c26d75b48a4de3"
     },
     {
       "path": "bridge/src/KeplerCPUICB.mm",
@@ -7478,17 +7478,15 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "143ffb9ee5bf58a163a7d9ba0176733555ade591ba8e9d76acdedb0b875a15c3",
-  "previous_public_commit": "817f812eaa8300e555835c2e0d3402a8a8aad116",
+  "previous_source_snapshot_SHA256": "05c60331302b88b111ec0afb689d073fd78fe1f3fdefbd6f657277a3c4656b5e",
+  "previous_public_commit": "3c3113b6ed708c2b533d86d7d3ba54d42ab714d3",
   "update": {
     "date": "2026-10-27",
-    "reason": "Runtime-owned render pipeline transition root",
+    "reason": "Combined indexed, vertex and pipeline render context",
     "files": [
-      "bridge/src/KeplerCPUICB.h",
-      "bridge/src/KeplerCPUICB.mm",
-      "bridge/src/KeplerCommandIRFunction.inc"
+      "bridge/src/KeplerCPUICB.h"
     ]
   },
   "update_date": "2026-10-27",
-  "update_reason": "Runtime-owned typed pipeline transitions"
+  "update_reason": "Triple render context"
 }

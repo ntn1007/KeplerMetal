@@ -74,8 +74,8 @@ The caller must check every creation, error and `ready` before dispatch; use
 only the qualified translated program and certified native code. Then use the
 existing render-state materializer and indirect-render preparation in the same
 command buffer. The caller may restore the scope after encoding, as in the
-qualified client. The standalone pipeline table does not yet combine with the
-existing indexed or vertex-transition extensions.
+qualified client. The standalone context remains available; the separate
+[combined context](TRIPLE_RENDER.md) also includes indexed and vertex transitions.
 
 ## Reproduction
 

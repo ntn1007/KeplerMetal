@@ -3,8 +3,9 @@
 This is a construction-only comparison of the same Metal shaders on the GTX
 880M and an Apple M1 Max. It does not submit a command buffer or prove shader
 execution, correct rendering, an adapter, Metal conformance or a performance
-improvement. The existing scoped implementation does not yet implement typed
-`render_command.set_render_pipeline_state`.
+improvement. The scoped implementation did not yet implement typed
+`render_command.set_render_pipeline_state` at the time of this observation;
+the later scoped result is described in [the runtime integration](PIPELINE_RUNTIME_INTEGRATION.md).
 
 The shader contains a 16-byte argument struct holding a `command_buffer` at
 index 0 and a `render_pipeline_state` at index 1, followed by a triangle draw.
@@ -40,8 +41,9 @@ does not establish that rewriting the typed program is correct or executable.
 
 ## Offline prototype
 
-`KeplerPipelineTransitionPlan.h` is an isolated CPU planning experiment; it
-is not connected to the runtime or shader translator. The caller supplies
+At the time of this observation, `KeplerPipelineTransitionPlan.h` was an isolated
+CPU planning experiment. A later [runtime integration](PIPELINE_RUNTIME_INTEGRATION.md)
+connects it to the scoped adapter. In the offline planner, the caller supplies
 process-local opaque tokens, not Apple resource IDs. A transition may only
 change the pipeline when slot, draw fields, index binding and all vertex and
 fragment bindings match. Duplicate tokens, ambiguous transitions, malformed

@@ -39,6 +39,18 @@ int main() {
  rejected(states,{{101,0},{102,2}});
  rejected(states,{{101,1},{102,KPVertexTransition::AddressLimit}});
  rejected(states,{{101,1}});
+ // A cross-product catalogue must reach the same state in either setter order.
+ State c=a;c.identity=13;c.vertices[0]={0,301,0x20000,0,128};
+ State d=c;d.identity=14;d.pipeline=102;
+ std::vector<State> cross={a,b,c,d};std::vector<KPVertexTransition::Row> vertexRows;
+ assert(makeRows(cross,tokens,rows));assert(KPVertexTransition::makeRows(cross,vertexRows));
+ auto choosePipeline=[&](uint64_t source,uint64_t token){for(const auto&r:rows)if(r.source==source&&r.token==token&&r.slot==2)return r.destination;return uint64_t(0);};
+ auto chooseVertex=[&](uint64_t source,uint64_t address){for(const auto&r:vertexRows)if(r.source==source&&r.pointer==address&&r.slot==2&&r.binding==0)return r.destination;return uint64_t(0);};
+ assert(choosePipeline(chooseVertex(11,0x20000),0x1002)==14);
+ assert(chooseVertex(choosePipeline(11,0x1002),0x20000)==14);
+ assert(chooseVertex(11,0x30000)==0&&choosePipeline(11,0x9999)==0);
+ assert(makeRows({a,d},tokens,rows));assert(KPVertexTransition::makeRows({a,d},vertexRows));
+ assert(choosePipeline(11,0x1002)==0&&chooseVertex(11,0x20000)==0);
  State duplicate=b;duplicate.identity=a.identity;rejected({a,duplicate},tokens);
  State ambiguous=b;ambiguous.identity=13;rejected({a,b,ambiguous},tokens);
  State unaligned=b;unaligned.vertices[0].offset=1;rejected({a,unaligned},tokens);

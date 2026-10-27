@@ -1,0 +1,61 @@
+{
+  "status": "PASS",
+  "triple_hosts": 42,
+  "header_control_hosts": 6,
+  "regression_hosts": 8,
+  "compute_regression_hosts": 2,
+  "serialized_hosts": 58,
+  "triple_float_channels": 516096,
+  "triple_dispatches": 38,
+  "index_rows_checked": 336,
+  "vertex_rows_checked": 1008,
+  "pipeline_rows_checked": 672,
+  "regression_float_channels": 98304,
+  "header_control_float_channels": 73728,
+  "compute_exact_uint32_results": 460800,
+  "native_pairs": 23,
+  "repeat_image_pairs": 21,
+  "expected_api_refusals": 16,
+  "selector_combinations_distinct": true,
+  "maximum_cpu_error": 7.947285973752827e-08,
+  "runtime_sha256": "2dd2b5237e9c737eb8253849641a6488a773ce9384c8fd3473f09f5246943eb8",
+  "scope": "scoped adapted client; not transparent Metal support",
+  "audit_sha256": "784d357901bd72e189da2be70939df987f09462aa4f0c88d726abbf15e282d67",
+  "native_program": {
+    "profile": "typed-triple-render-air28-experiment-v1",
+    "driver_SHA256": "e240d54a4cd64b7e54fbc15250de82e88451132e1d9f3a4f9879607c8b0e7645",
+    "library_SHA256": "bf5646088e3e4aac2cb2d0290117ad40ae1724593be0ef808d37605a54240c36",
+    "code_SHA256": "d112e55859d78770eff31a105ec2cb6fdb8dcd2ce41099b0712e53630fd9d6d1",
+    "code_bytes": 17536,
+    "no_native_call": true
+  },
+  "environment": {
+    "macOS": "26.7.1",
+    "build": "25G241",
+    "SDK": "26.2",
+    "GPU": "GTX 880M",
+    "architecture": "GK104/SM30"
+  },
+  "cpu_tests_passed": 356,
+  "public_source": {
+    "export_tree": "ac936c16c360a3ad1fc35a10eef6235a02953688",
+    "cpu_tests_passed": 356,
+    "runtime_build": "PASS",
+    "producer_library_sha256_identical": "bf5646088e3e4aac2cb2d0290117ad40ae1724593be0ef808d37605a54240c36",
+    "render_executable_sha256_identical": "e027e918bcaf39a092f05e0bf2960b39543532f0058c751b72b24ae5216b23f8",
+    "gpu_hosts": 2,
+    "gpu_float_channels": 24576,
+    "native_image_match": true
+  },
+  "preserved_preliminary_results": {
+    "oracle_shadowing_failure": true,
+    "existing_output_refused_before_gpu": true
+  },
+  "limitations": {
+    "transparent_application_support": false,
+    "native_apple_icb_abi": false,
+    "arbitrary_gpu_pointers_sandboxed": false,
+    "all_missing_catalogue_states_gpu_qualified": false,
+    "performance_measured": false
+  }
+}

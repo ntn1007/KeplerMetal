@@ -346,6 +346,13 @@
                                                                       commandRecordsOffset:(NSUInteger)offset
                                                                              commandBuffer:(id<MTLCommandBuffer>)commandBuffer
                                                                                      error:(NSError **)error;
+// Combined index spans, vertex transitions and project-owned pipeline tokens.
+- (KPRenderCommandArgumentContext *)newIndexedVertexPipelineRenderCommandArgumentContextWithCommands:(id<MTLIndirectCommandBuffer>)commands
+                                                                                      stateCatalogue:(KPRenderStateCatalogue *)catalogue
+                                                                                      commandRecords:(id<MTLBuffer>)records
+                                                                                commandRecordsOffset:(NSUInteger)offset
+                                                                                       commandBuffer:(id<MTLCommandBuffer>)commandBuffer
+                                                                                               error:(NSError **)error;
 // Seal one exported Shared root, declare its indirect resources and retain
 // them until this same uncommitted command buffer completes. Roots must not
 // be modified until completion. Restoring the scope after encoding is allowed.
