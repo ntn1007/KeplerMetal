@@ -29,7 +29,9 @@ runtime trace of the internal object or proof of cleanup under all conditions.
 The test does not establish GPU video execution, valid buffer contents,
 complete ownership semantics, or decode correctness. Only the context-first
 close order and successful paths were exercised. The two port names being
-distinct does not by itself prove distinct underlying kernel objects.
+distinct does not by itself prove distinct underlying kernel objects. The native
+CF-wrapper candidates use `IOConnectRelease`; see the later
+[lifetime analysis](VIDEO_BUFFER_LIFETIME.md).
 
 ## Start-path static evidence
 

@@ -16,7 +16,8 @@ In the analyzed image:
   wrapper and calls the `IOConnectAddClient` import.
 - `IOAccelSharedCreate` opens type 6 and requests a 16-byte reply using
   selector 9 on that **shared-client connection**. It also stores a pointer
-  to the device wrapper; ownership is not yet qualified. This selector is not video-context selector 9.
+  to the device wrapper; ownership is not yet qualified. This selector is not
+  video-context selector 9.
 - `IOAccelDeviceCreate` forwards to a device constructor that opens type 5.
   One of that constructor's queries uses selector 2 on the **device
   connection**, with a `0x258`-byte output capacity. Its returned data supplies
@@ -42,6 +43,9 @@ kernel's separate [method-table analysis](VIDEO_METHOD_CONTRACT.md) agrees on
 selector 3 and an 8-byte input, but lengths alone do not establish input values,
 resource lifetime, mapping ownership or synchronization. The earlier accepted
 connection association does not construct all of these user-space wrappers.
+
+A subsequent [lifetime analysis](VIDEO_BUFFER_LIFETIME.md) maps CF finalizer
+candidates and a conditional shared-client call during resource release.
 
 The result is a concrete dependency chain for the next investigation: recover
 the legitimate constructor contracts and resource lifetime using further

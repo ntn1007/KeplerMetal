@@ -1,0 +1,95 @@
+{
+  "status": "PASS",
+  "cache_SHA256": "01d2fb67994fe5f4a6846263144432af24a1a450993f917e54de53351e6708be",
+  "image_UUID": "198a776afe0335ee8e537b9f14caabaa",
+  "records": [
+    {
+      "label": "device_registration",
+      "start_VM": "0x7ff80f88e20d",
+      "region_SHA256": "cff3c4bbab19b2ad4e1cc61eb84d41ac200e8dba9ef1dc61e083aabd57cf16c7",
+      "bytes": 25,
+      "metadata_SHA256": "00490ff53d0863743842e73285ad254e1a123d6a28d9d35edf94d7ed04712caf"
+    },
+    {
+      "label": "device_finalizer",
+      "start_VM": "0x7ff80f890d9a",
+      "region_SHA256": "3ac14db31487f70610f9dadfbbf56dbe50fd822507bee6b94f6ec4fed41b590b",
+      "bytes": 60,
+      "metadata_SHA256": "ccfe1340a9ba6a4f5b67a68dac375771a43bc5953ac0f38bd0d2fcb8a803647d"
+    },
+    {
+      "label": "shared_registration",
+      "start_VM": "0x7ff80f88e52c",
+      "region_SHA256": "dbdb82022553235ebf31f9668d76904cf5e5bfa789d973c717eae6f09d6822cc",
+      "bytes": 25,
+      "metadata_SHA256": "7e78cc975b51763d71c74260aee55bd2696db19da445d118eea31d56983843d0"
+    },
+    {
+      "label": "shared_finalizer",
+      "start_VM": "0x7ff80f89076c",
+      "region_SHA256": "8376616df43e4aafc1cd09131887312cc0605b95be5ef0497c49e5d078502be6",
+      "bytes": 200,
+      "metadata_SHA256": "ff30edb8fa49a1e357ae52fd69a4af3f337a8ec55ab54ad080a24c280c6326c5"
+    },
+    {
+      "label": "context_registration",
+      "start_VM": "0x7ff80f88e6d0",
+      "region_SHA256": "c46af5c0c46a561a02c61dafa89f1567fbd0d31b36667bd9d35f05c53b442ec2",
+      "bytes": 25,
+      "metadata_SHA256": "9a28a90158efa4547a4e196a1b0abaf46b5d7c1790bb742a5629ebebc10a20ab"
+    },
+    {
+      "label": "context_finalizer",
+      "start_VM": "0x7ff80f890906",
+      "region_SHA256": "7eee3cf95ce9e8016084c1ecedbb87f53fe8c565939ac774c6851eaf1ea13e87",
+      "bytes": 111,
+      "metadata_SHA256": "b4fee37636d8b5b294906405d86ae6cb088d54df08e410d07342677642bbd0b7"
+    },
+    {
+      "label": "resource_registration",
+      "start_VM": "0x7ff80f88ed4e",
+      "region_SHA256": "f52842657ee142fffcc51dba302a83200c86811906056ff2a348022db883f333",
+      "bytes": 25,
+      "metadata_SHA256": "9a88e560e6b163c8e3122d87cf04d925320ffb54e0a6557618c23ce942c8aecc"
+    },
+    {
+      "label": "resource_finalizer",
+      "start_VM": "0x7ff80f88f6a5",
+      "region_SHA256": "17f9d42efe9b91891078eebb6dbe32fd90fd00fcf542079507ec5ba3d4cde3f7",
+      "bytes": 216,
+      "metadata_SHA256": "b212c24d16b57fa98bd6136574e6e1dbccea00a93d14c332aed2501e5b2b2016"
+    },
+    {
+      "label": "resource_alloc",
+      "start_VM": "0x7ff80f88ecc9",
+      "region_SHA256": "ac30d8ae45293a22c31db0b54401d88381dbbcf6bf9dd8fa17294315c29d0abf",
+      "bytes": 133,
+      "metadata_SHA256": "f3006e574abc368761ba1fdfafcc922eb3ba41f5c2f5f4ff2db9615323ebea57"
+    },
+    {
+      "label": "resource_getter",
+      "start_VM": "0x7ff80f88ed87",
+      "region_SHA256": "e044de81e27880d3ad728f770517a2badaa9188d4afdb5fc7723ee86e044e0c6",
+      "bytes": 40,
+      "metadata_SHA256": "111b0d144cab737a66070cc6e407d9eb48bf364fbcda3fbb3fadbc8764ebb7a4"
+    },
+    {
+      "label": "video_getter",
+      "start_VM": "0x7ff80f89030b",
+      "region_SHA256": "323f4e620cca32a89c2f07fe7ed27f180103591f778fcc66b178729dc50ed30b",
+      "bytes": 10,
+      "metadata_SHA256": "d3911dc56c75149837dd11c32610d393689b64d0903fec1edfd0e7fc08c2515e"
+    }
+  ],
+  "class_layout_reference": "https://github.com/apple-oss-distributions/CF/blob/dc54c6bb1c1e5e0b9486c1d26dd5bef110b20bf3/CFRuntime.h",
+  "class_finalize_offset": 32,
+  "context_release_before_connection_release": true,
+  "resource_constructor_retains_shared": true,
+  "resource_finalizer_releases_shared": true,
+  "context_getter_direct_retain_observed": false,
+  "resource_finalizer_conditional_shared_selector": 1,
+  "runtime_callback_dispatch_observed": false,
+  "valid_resource_values_qualified": false,
+  "private_function_invocations": 0,
+  "GPU_commands": 0
+}
