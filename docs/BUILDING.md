@@ -139,3 +139,5 @@ The scoped GPU render-range extension has a source-only client builder, pinned n
 [NATIVE_COMMAND_COMPILER_BOUNDARY.md](NATIVE_COMMAND_COMPILER_BOUNDARY.md) provides standalone construction-only typed/raw command probes, optional process-local MRC capture, frozen AIR text and a strict observation auditor. No diagnostic kernel is dispatched.
 
 [NATIVE_COMMAND_BINDING_READBACK.md](NATIVE_COMMAND_BINDING_READBACK.md) adds owned private-code range validation, guarded blit-only readback, uncommitted compute/QMD snapshots and missing-copy controls. The host has no compute-CB submission mode.
+
+The [descriptor CAS experiment](DESCRIPTOR_CAS.md) requires the separately qualified local SDK and lab reservation; it is not a clean-checkout GPU build.

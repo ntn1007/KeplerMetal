@@ -1,0 +1,21 @@
+{
+  "archive_SHA256": "be5cb1ed54db899107bda0fdd57177692564ab6334a8dae257752de17eca1421",
+  "bootstrap_SHA256": "a22e7f615dfc1f734e73aaf56a128ee4f68d5fb87df6454323b8146d3d880662",
+  "client_SHA256": "7b46cf39b3ec5a42ddf106b3e8ec4ffca843c5ebdca6f011864058580284f67f",
+  "client_imports_project_symbols": false,
+  "corrected_and_control_CAS_operations": 213300,
+  "host_processes": 8,
+  "installed_driver_modified": false,
+  "native_defect_words": 170424,
+  "native_dispatches": 180,
+  "negative_controls": [
+    "wrong-client",
+    "wrong-cert",
+    "wrong-library",
+    "wrong-descriptor"
+  ],
+  "nonoverlapping": true,
+  "optin_dispatches": 180,
+  "scope": "One pinned purpose-built public-Metal descriptor client, explicit per-process loading; not arbitrary applications or system-wide integration",
+  "status": "PASS"
+}
