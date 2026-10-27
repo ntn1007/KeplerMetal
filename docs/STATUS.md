@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+Two own-process observations compare the real Metal-created GTX device configuration with object fields; meanings and video decoding remain unqualified. [Evidence](METAL_DEVICE_OBJECT.md).
+
 Read-only current IOAccelerator analysis identifies a device type check and five configuration output words; no valid device values or hardware video are established. [Evidence](IOACCEL_DEVICE_CONFIG.md).
 
 A synthetic video-provider probe reaches a locally refused `0x103` request after fabricated configuration. No real selector or video decoding is proved. [Evidence](VIDEO_SYNTHETIC_SELECTOR.md).

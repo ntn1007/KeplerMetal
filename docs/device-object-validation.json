@@ -1,0 +1,54 @@
+{
+  "actual_GPU_dispatches": 0,
+  "application_SHA256": "5033c677416e8aab03e1bdd630f6d3bbbfb9427122731f5a62a462a4f92c25cf",
+  "config_repetitions": 2,
+  "configuration_words": [
+    768,
+    0,
+    0,
+    0,
+    1
+  ],
+  "hardware_video_execution_proved": false,
+  "hosts": 4,
+  "limits": [
+    "Configuration meanings are unknown; matching an object does not establish decoder compatibility.",
+    "The cooperative reservation does not exclude WindowServer or unrelated processes.",
+    "Only the two observed process-local calls are qualified; wider lifetime and concurrency remain untested."
+  ],
+  "negative_controls_rejected": [
+    "changed-output",
+    "type-mismatch",
+    "control-called-config",
+    "unterminated-reservation"
+  ],
+  "nonoverlapping": true,
+  "observer_SHA256": "7abbc33efbb1794d70e5cf956d3d9bbde1adcce3ef3c1235a8a6702f48639e81",
+  "rows": [
+    {
+      "manifest_SHA256": "6c10722350e300c5eebebeffe0c015341b1cb6e47bc378d00a69a94d03b1e7f2",
+      "mode": "observe",
+      "pid": 89513,
+      "result_SHA256": "fde491770295a62758d5b6ad30ef31885d19a95b8033906fe8101015ca8de108"
+    },
+    {
+      "manifest_SHA256": "f315e0f329897cc2fd35c62ad2e9c2f58b77b37294cf3813d4807add062a8f05",
+      "mode": "config",
+      "pid": 89534,
+      "result_SHA256": "c9e33162dea9d2e4fc8370cdec8719ec45e7c633182965d8fdf0ed4a6e4c8db7"
+    },
+    {
+      "manifest_SHA256": "31c4f71b7084b26328b917c51c674bf1c6032a5a7957b692a0d1e722e61e2fc6",
+      "mode": "observe",
+      "pid": 89555,
+      "result_SHA256": "755c73b4af92ecdd8a1d00e15430406dbad61c836d1aeae2ee2b9bfb29167f1b"
+    },
+    {
+      "manifest_SHA256": "36455558a07dbb5bc688b3f63186878a9ed36ba1540283bee43fcfe953a17849",
+      "mode": "config",
+      "pid": 89577,
+      "result_SHA256": "8193e2b0fc9e89e920916beeb145d97cba4c2f3bc7916e1dfecff7740c56d5ff"
+    }
+  ],
+  "status": "PASS"
+}
