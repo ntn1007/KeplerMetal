@@ -1,0 +1,57 @@
+{
+  "application_SHA256": "1c40575ee81a385624d80326a6523b0fa9a17e8dfcb33e523c747ab8bde8dfa4",
+  "audit_mutations_rejected": [
+    "resource_shared_after",
+    "null_context_rejected",
+    "resource_while_context_matches",
+    "context_slots_empty",
+    "probe_add_status",
+    "probe_denied_selectors",
+    "buffer_CPU_after_context_correct",
+    "reservation_not_terminal"
+  ],
+  "audit_source_SHA256": "d01355cf6006af4de0df93db0d5366bc6454d2c949c4d9086a45374ba8c1e106",
+  "buffer_bytes_checked_before_and_after_per_host": 4194304,
+  "build_inputs_SHA256": "919b20f276cf75150025b8905d07ba69b370bfb95ac6ea45576c436fc6c6c380",
+  "coexistence_hosts": 2,
+  "controls": 2,
+  "explicit_GPU_dispatches": 0,
+  "hardware_video_execution_proved": false,
+  "hosts": 4,
+  "limits": [
+    "The context is empty: the Metal buffer is not bound as a video data buffer.",
+    "Pointer association does not establish complete resource lifetime or cleanup.",
+    "No GPU computation or hardware video decoding is demonstrated.",
+    "Reservation and guarded imports do not cover unrelated processes or all driver activity."
+  ],
+  "manifest_audit_dependency_SHA256": "217b4b452e119b8cc8d6f5d9fe63ec4fa43e6f3f40a6e8048dbb4f5d9a4b94de",
+  "nonoverlapping": true,
+  "observer_SHA256": "5f5d10dd24b69c2ca56c39431bc327bfd7559f6ba105f37d29f36792934e138e",
+  "rows": [
+    {
+      "manifest_SHA256": "697639fd07177515bcd8ef429062437e5b63cf1c2b4c676669b1afdb07c7d7f3",
+      "mode": "observe",
+      "pid": 92110,
+      "result_SHA256": "476188c1929cc7038a02f581f629c5d82b160bad8fd7692d1fe0b0791369f561"
+    },
+    {
+      "manifest_SHA256": "27c7a3438da6dc39dff01bb6ab148262102b1ee532fd2261b61b2ab71a32af8d",
+      "mode": "coexist",
+      "pid": 92131,
+      "result_SHA256": "5880bf5fbecd263d9d3b25715c466795ddb62e795cd3921734dd8b0ee318da7a"
+    },
+    {
+      "manifest_SHA256": "054de376ab2059edd9d029316f665fbb975ddb118d0b4f853344248482f53a3e",
+      "mode": "observe",
+      "pid": 92152,
+      "result_SHA256": "9b23e883bd3df90b5939640f4d6b7eb81fc09b00c4d48e050e6e81e35add7f85"
+    },
+    {
+      "manifest_SHA256": "b558e0f81d9ad9df2eea44137b81a8bf446842a8df1929da215ceab6d701377c",
+      "mode": "coexist",
+      "pid": 92173,
+      "result_SHA256": "b0cab91771fd97dc9a31a4764eb6ba72ce9fca136144e68f6572f7028fb267a6"
+    }
+  ],
+  "status": "PASS"
+}
