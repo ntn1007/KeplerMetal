@@ -1,0 +1,78 @@
+{
+  "date": "2026-10-27",
+  "base_commit": "5f3d540866bd70a42af35a16a89eccc892b20c7e",
+  "raw_report_SHA256": "5b26bcbc5513a4ec27d4c51a84f4f1c4704cdd8a1fb02c97845d800e07aceb04",
+  "status": "DRIFT_DETECTED",
+  "inventory_count": 83,
+  "changed_count": 5,
+  "changes": [
+    {
+      "path": "/System/Library/Extensions/GeForce.kext/Contents/MacOS/GeForce",
+      "prior_SHA256": "c735877fe16b1495a7010c707ea355c4f312465bda4cdb0b8d99ab7f34247557",
+      "current_SHA256": "44f131a958d48afd6ab675a851330c37506557c9d499484170c886c3731bdbb3",
+      "readable": true
+    },
+    {
+      "path": "/System/Library/Extensions/GeForceMTLDriver.bundle/Contents/MacOS/GeForceMTLDriver",
+      "prior_SHA256": "2b89839c425d95934f5e01f16c8683fe53432df410292ec8e554b21c98d6c054",
+      "current_SHA256": "e240d54a4cd64b7e54fbc15250de82e88451132e1d9f3a4f9879607c8b0e7645",
+      "readable": true
+    },
+    {
+      "path": "/System/Library/Frameworks/Metal.framework/Metal",
+      "prior_SHA256": "168d5f1e5639cc6a9b5c47bd69bb49a2cdc2b3a50dcf17f495c674cd7f1a8107",
+      "current_SHA256": "8522009127dd86829f467757a802dd87caae640f9f9e4d76b89eb50994889df4",
+      "readable": true
+    },
+    {
+      "path": "/Applications/OpenCore-Patcher.app/Contents/Info.plist",
+      "prior_SHA256": "558650222a8ab5f23fc446c690463ead7cdfc77ff75df847a24588a99bb717b5",
+      "current_SHA256": "3d3fcf7b4671d5625dae9b2580957f6423695f102ea9784aeab573f855ef7709",
+      "readable": true
+    },
+    {
+      "path": "/Applications/OpenCore-Patcher.app/Contents/MacOS/OpenCore-Patcher",
+      "prior_SHA256": "2b5b6518c3e60f2c69e02ee61cc9d75c7169ac95b5d1b2d34c0ee4f37f0054f2",
+      "current_SHA256": "f626267ab9db383008613d155d3b001d982e9233952a6ea51ff4f8cb75621da6",
+      "readable": true
+    }
+  ],
+  "prior_GeForce_SHA256": "c735877fe16b1495a7010c707ea355c4f312465bda4cdb0b8d99ab7f34247557",
+  "current_GeForce_SHA256": "44f131a958d48afd6ab675a851330c37506557c9d499484170c886c3731bdbb3",
+  "table_comparison": {
+    "slots_checked": 28,
+    "slots_matching": 28,
+    "slots_different": [],
+    "comparison": "original on-disk words and relocation metadata",
+    "relocated_runtime_words_compared": false
+  },
+  "function_ranges": {
+    "functions_checked": 11,
+    "ranges_checked": 11,
+    "bytes_checked": 1217,
+    "ranges_matching": 11,
+    "differences": [],
+    "scope": "Archived Ghidra-selected function ranges in the current on-disk file"
+  },
+  "REA_function": {
+    "address": "0x68352",
+    "prior_evidence_id": "ev_82d51d4688e63ffca3f0b1dab4a9dcd7c0ed107887fda0486b219e82d70d81f7",
+    "current_evidence_id": "ev_3da28650851aa5c17ce5f78541b808d6f250e6404415b769e7f3417ffd0e1fa9",
+    "prior_evidence_SHA256": "707ed2b569d686f4e39322c80075c389e1af866f5a5d02647cf10b6fb819a58b",
+    "current_evidence_SHA256": "c59d7181aa0512df9ad528f4287a4fbc2d83277b4f60bf8dd91f96968f82303e",
+    "body_ranges_match": true,
+    "assembly_match": true,
+    "pseudocode_match": true,
+    "outgoing_references_match": true,
+    "scope": "Decompiler representation of one function, not complete binary bytes or live execution"
+  },
+  "current_live_code_compared": false,
+  "video_profile_qualified": false,
+  "GPU_or_RM_execution": false,
+  "standalone_synthetic_tests_passed": 7,
+  "limitations": [
+    "Archived file snapshots compared to current paths; not a live kernel measurement.",
+    "A matching 28-cell table does not establish identical method bodies, capability or safety.",
+    "Changes are not attributed to a cause; the old profile remains blocked."
+  ]
+}
