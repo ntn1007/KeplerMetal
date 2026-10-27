@@ -21,6 +21,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+A guarded synthetic video-provider probe reaches a device-configuration dependency after a fabricated fence response; no hardware video is claimed. [Evidence and preserved failure](docs/VIDEO_SYNTHETIC_CONFIG.md).
+
 An offline comparison exposes a video-provider/kernel dispatch difference that must be resolved before a historical provider can be integrated. [Evidence and limits](docs/VIDEO_PROVIDER_DISPATCH.md).
 
 A scoped historical re-audit identifies an installed NVIDIA video-provider Create stub on a deliberately selected legacy path; hardware decoding remains unavailable. [Evidence and limits](docs/VIDEO_LEGACY_BACKEND.md).

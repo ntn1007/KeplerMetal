@@ -1,0 +1,34 @@
+{
+  "status": "CRASH_VERIFIED",
+  "report_SHA256": "67a3fbaa587272660bf15c41cd5d13051d0662d1c723d4eeb16bf72b4056aca0",
+  "manifest_SHA256": "e5accc4cf01c2695a2db312f4b0d765faf6fc881c8fe784d44bcea8a4f2c5881",
+  "pid": 87508,
+  "signal": "SIGSEGV",
+  "faulting_frames": [
+    [
+      "libobjc.A.dylib",
+      "objc_msgSend"
+    ],
+    [
+      "IOAccelerator",
+      "IOAccelDeviceGetConfig"
+    ],
+    [
+      "GeForceVADriver-10.12.6-x86_64.private",
+      ""
+    ],
+    [
+      "GeForceVADriver-10.12.6-x86_64.private",
+      ""
+    ],
+    [
+      "GeForceVADriver-10.12.6-x86_64.private",
+      ""
+    ]
+  ],
+  "terminal_reservation": true,
+  "no_gpu_execution_proved": true,
+  "limits": [
+    "Crash occurred before normal counter report; guarded or unguarded driver activity is not fully measured."
+  ]
+}
