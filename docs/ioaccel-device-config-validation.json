@@ -1,0 +1,28 @@
+{
+  "IOAccelerator_UUID": "198a776afe0335ee8e537b9f14caabaa",
+  "actual_device_or_function_called": false,
+  "bounded_instruction_checks": 27,
+  "capture_count": 2,
+  "configuration_entry_SHA256": "1f97e27b78826a4c4801f851173d67e97d00f7b1668fe5882e19895eb74b9ece",
+  "corrupted_entry_control": "EXPECTED_REFUSAL",
+  "gpu_execution_proved": false,
+  "limitations": [
+    "Function bytes and current binding are observed in isolated capture processes; the selected function itself was not invoked.",
+    "The compared expected type identifier and field semantics remain unknown.",
+    "The adjacent entry bytes exceed the verified function boundary; only offsets through the first return were interpreted."
+  ],
+  "null_object_refusal_observed_statically": true,
+  "object_field_offsets": [
+    "0x270",
+    "0x274",
+    "0x278",
+    "0x280",
+    "0x288"
+  ],
+  "output_values_or_semantics_proved": false,
+  "output_width_bits": 32,
+  "output_word_count": 5,
+  "status": "PASS",
+  "type_query_resolved": "CFGetTypeID",
+  "type_test_observed_statically": true
+}

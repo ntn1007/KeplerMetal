@@ -21,6 +21,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+Read-only analysis narrows the current device-configuration boundary to a type check and five 32-bit outputs; the valid object and values remain unqualified. [Evidence](docs/IOACCEL_DEVICE_CONFIG.md).
+
 A bounded synthetic video-provider probe reaches a locally refused `0x103` request after fabricated device configuration. [Evidence and limits](docs/VIDEO_SYNTHETIC_SELECTOR.md).
 
 A guarded synthetic video-provider probe reaches a device-configuration dependency after a fabricated fence response; no hardware video is claimed. [Evidence and preserved failure](docs/VIDEO_SYNTHETIC_CONFIG.md).
