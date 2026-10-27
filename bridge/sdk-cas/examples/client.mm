@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <Metal/Metal.h>
 #import "KeplerNativeCAS.h"
+#import "KeplerGPUIdentity.h"
 #include <CommonCrypto/CommonDigest.h>
 #include <cstring>
 
@@ -21,7 +22,7 @@ int main(int argc,char**argv){@autoreleasepool {
  if(!negative&&!prepare&&!baseline&&![mode isEqual:@"execute"])return 1;
  NSDictionary *manifest=[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:@(argv[2])] options:0 error:nil];
  NSMutableData *library=[NSMutableData dataWithContentsOfFile:[assets stringByAppendingPathComponent:manifest[@"library"]]];
- id<MTLDevice>device=nil;for(id<MTLDevice>d in MTLCopyAllDevices())if(d.registryID==4294968458)device=d;if(!device)return 2;
+ id<MTLDevice>device=nil;NSDictionary*deviceIdentity=nil;for(id<MTLDevice>d in MTLCopyAllDevices()){NSDictionary*identity=KPKepler880MIdentity(d);if(identity){if(device)return 2;device=d;deviceIdentity=identity;}}if(!device)return 2;
  NSMutableArray *certificates=[NSMutableArray new];for(NSDictionary *profile in manifest[@"profiles"])[certificates addObject:[NSMutableData dataWithContentsOfFile:[assets stringByAppendingPathComponent:profile[@"certificate"]]]];
  NSError *error=nil;NSMutableArray *proofs=[NSMutableArray new],*pipelines=[NSMutableArray new],*runs=[NSMutableArray new];
  if(negative) {
@@ -67,5 +68,5 @@ int main(int argc,char**argv){@autoreleasepool {
    }}
   }
  }
- NSDictionary *result=@{@"mode":mode,@"device":device.name,@"registry_id":@(device.registryID),@"proofs":proofs,@"runs":runs,@"caller_inputs_wiped_before_commit":@(!negative),@"system_modified":@NO,@"performance_benchmark":@NO};NSData *data=json(result);fwrite(data.bytes,1,data.length,stdout);puts("");return 0;
+ NSDictionary *result=@{@"mode":mode,@"device":device.name,@"registry_id":@(device.registryID),@"device_identity":deviceIdentity,@"proofs":proofs,@"runs":runs,@"caller_inputs_wiped_before_commit":@(!negative),@"system_modified":@NO,@"performance_benchmark":@NO};NSData *data=json(result);fwrite(data.bytes,1,data.length,stdout);puts("");return 0;
 }}

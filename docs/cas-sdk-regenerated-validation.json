@@ -1,0 +1,49 @@
+{
+  "GPU_archive_SHA256": "c0dfeb94bc6934d36cf42d4ed97925dcb6ce6e15c5a6724a03bba04340acad72",
+  "GPU_hosts": 6,
+  "candidate_certificates": 4,
+  "certificates": [
+    {
+      "candidate": true,
+      "certificate_SHA256": "612a59ecb37bb9fc08cf73dca5eeb52e3a01529f83821cbd5919acfd2b6b9d74",
+      "function": "sdk_cas_expected"
+    },
+    {
+      "candidate": true,
+      "certificate_SHA256": "eef0ac3f3a6f37c55e77cfc3e4d8ac32dd68d7e767a8779d80a90f5c11c02fbb",
+      "function": "sdk_cas_slot"
+    },
+    {
+      "candidate": true,
+      "certificate_SHA256": "4d7667692296d5b625a96b2f528e2d1c0ad3d32d6eb56c10bd22880379e4f9a2",
+      "function": "sdk_cas_noise"
+    },
+    {
+      "candidate": true,
+      "certificate_SHA256": "1332ba6c7ab7ad8aa181e47cfe49d5e3a1b49299d650b695cfe89c385d6e4022",
+      "function": "sdk_cas_swizzle"
+    },
+    {
+      "candidate": false,
+      "certificate_SHA256": "1a61dd5d52db9e9534ff1faebc1544795a5fb753e49e218f6432d93a365d7913",
+      "function": "sdk_keep_comparand"
+    }
+  ],
+  "decoder_SHA256": "1c8730a9a4861f374c58407bff31d7ccb47a57eb23f9f82c6b3ea3deb079be0f",
+  "executable_SHA256": "e30f92877728de9e6171a28dcf74a0c74bb74a022334a3a959e49b52ca00fd05",
+  "final_archive_SHA256": "be5cb1ed54db899107bda0fdd57177692564ab6334a8dae257752de17eca1421",
+  "final_object_SHA256": "b45f93488ae92b0fb321589c877d95fe3c19ed517e86476c490beabfe6b36a7c",
+  "final_object_and_client_identical_to_GPU_tested": true,
+  "installed_driver_modified": false,
+  "native_defect_words_observed": 170424,
+  "negative_constructor_pin_rejections": 2,
+  "negative_pre_constructor_rejections": 6,
+  "nonoverlapping": true,
+  "preparation_signed_processes": 21,
+  "repaired_GPU_command_buffers": 180,
+  "repaired_and_control_CAS_operations": 213300,
+  "repaired_and_control_uint32_words": 853200,
+  "scope": "Exact regenerated certificates and adapted client on GTX; not global compiler repair or performance",
+  "semantic_negative_certificates": 1,
+  "status": "PASS"
+}

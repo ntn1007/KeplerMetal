@@ -1,5 +1,7 @@
 # Build from source
 
+[CAS_SDK_REGENERATED.md](CAS_SDK_REGENERATED.md) describes the current native CAS SDK, pinned decoder, isolated preparation and GTX qualification.
+
 [PARTIAL_ICB_DUAL_PIPELINE.md](PARTIAL_ICB_DUAL_PIPELINE.md) describes the pinned dual-shader build, construction-only inspection, serial GPU controls, regressions and independent CPU audit.
 
 [COMBINED_INDEX_VERTEX.md](COMBINED_INDEX_VERTEX.md) documents source building, native inspection and a signed two-slot render probe.

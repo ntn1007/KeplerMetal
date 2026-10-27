@@ -11,10 +11,11 @@ import json
 import shutil
 import struct
 import subprocess
+from public_large_scratch import check_driver_profile
 
 ROOT=Path(__file__).resolve().parents[1]
 p=argparse.ArgumentParser();p.add_argument('--out',type=Path,required=True)
-a=p.parse_args();out=a.out.resolve();out.relative_to(ROOT/'results');assert not out.exists();out.mkdir()
+a=p.parse_args();out=a.out.resolve();out.relative_to(ROOT/'results');assert not out.exists();driver=check_driver_profile();out.mkdir()
 sdk=out/'KeplerNativeCAS';sdk.mkdir()
 for name in ['include','src','lib','assets','examples']:(sdk/name).mkdir()
 commands=[]
@@ -30,18 +31,27 @@ def signed(exe,label,args):
  run(['python3',str(ROOT/'tools/run_signed_probe.py'),'--exe',str(exe),'--out',str(ex),'--timeout','20','--']+args,label)
  d=json.loads((ex/'manifest.json').read_text());assert d['exit_code']==0 and not d['SIGKILL_requested'] and not d['authoritative_ps_status']
  return ex
-for name in ['KeplerNativeCAS.h','KeplerNativeCAS.mm','KeplerNativeCASAdapter.inc','KeplerProgramImport.h']:
+for name in ['KeplerNativeCAS.h','KeplerNativeCAS.mm','KeplerNativeCASAdapter.inc','KeplerProgramImport.h',
+             'KeplerGPUIdentity.h','KeplerDriverProfile.h','KeplerNativeAllocation.h','KeplerNativeAllocation.inc']:
  shutil.copyfile(ROOT/'src'/name,sdk/'src'/name)
 shutil.copyfile(ROOT/'src/KeplerNativeCAS.h',sdk/'include/KeplerNativeCAS.h')
+shutil.copyfile(ROOT/'src/KeplerGPUIdentity.h',sdk/'include/KeplerGPUIdentity.h')
+for name in ['client.mm','build_example.py']:
+ shutil.copyfile(ROOT/'sdk-cas/examples'/name,sdk/'examples'/name)
 obj=out/'KeplerNativeCAS.o'
 run(['clang++','-arch','x86_64','-O2','-std=c++17','-fno-objc-arc','-fvisibility=hidden','-I',str(sdk/'src'),'-c',str(sdk/'src/KeplerNativeCAS.mm'),'-o',str(obj)],'build-module')
 archive=sdk/'lib/libKeplerNativeCAS.a';run(['ar','rcs',str(archive),str(obj)],'archive-module')
 fixture=sdk/'examples/cas_client.metal'
 common='#include <metal_stdlib>\nusing namespace metal;\nstruct P{uint seed,n,local,groups,variant;};\n'
 parts=[common];names=[]
+fixtures_dir=ROOT/'results/native-cas-variants-captured';fixture_manifest=fixtures_dir/'fixtures.json'
+fixture_rows=json.loads(fixture_manifest.read_text());fixture_pins={row['name']:row['hashes']['test.metal'] for row in fixture_rows}
+if len(fixture_pins)!=len(fixture_rows) or set(fixture_pins)!={'slot1','live_noise','permuted','original_compare_control'}:raise SystemExit('Fixture source inventory differs')
 for layout,function in [('minimal','sdk_cas_expected'),('slot1','sdk_cas_slot'),('live_noise','sdk_cas_noise'),('permuted','sdk_cas_swizzle'),('original_compare_control','sdk_keep_comparand')]:
  old='original_compare_control' if layout=='minimal' else layout
- source=(ROOT/'results/native-cas-variants-captured'/old/'test.metal').read_text()
+ source_bytes=(fixtures_dir/old/'test.metal').read_bytes()
+ if hashlib.sha256(source_bytes).hexdigest()!=fixture_pins[old]:raise SystemExit('Fixture source fingerprint differs: '+old)
+ source=source_bytes.decode('utf-8')
  body=source[source.index('kernel void test('):].replace('kernel void test(','kernel void '+function+'(',1)
  if layout=='minimal':body=body.replace('uint expected=compare;','').replace('a,&expected,','a,&compare,')
  parts.append(body);names.append((layout,function))
@@ -87,10 +97,13 @@ long nop;
  path=sdk/'assets'/(function+'.certificate.json');path.write_text(json.dumps(cert,indent=2)+'\n')
  profiles.append({'function':function,'layout':'standard' if layout in ['minimal','slot1','original_compare_control'] else 'noise' if layout=='live_noise' else 'permuted',
                   'candidate':candidate,'certificate':path.name,'certificate_SHA256':sha(path),'diagnosis':str(diagnosis)})
+if check_driver_profile()!=driver:raise SystemExit('Driver profile changed during SDK preparation')
 manifest={'library':'cas_client.metallib','library_SHA256':sha(library),'profiles':profiles,'GPU_qualification_pending':True,
-          'driver_SHA256':'2b89839c425d95934f5e01f16c8683fe53432df410292ec8e554b21c98d6c054','system_modified':False,'Qwen_job_ids':[]}
+          'driver_SHA256':driver,'system_modified':False,'Qwen_job_ids':[]}
 (sdk/'assets/client-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
-build={'Git_branch':'main','Git_commit':None,'source_SHA256':{str(x.relative_to(sdk)):sha(x) for x in (sdk/'src').iterdir()},
+build={'Git_branch':None,'Git_commit':None,'source_SHA256':{str(x.relative_to(sdk)):sha(x) for x in (sdk/'src').iterdir()},
+       'example_SHA256':{str((sdk/'examples'/n).relative_to(sdk)):sha(sdk/'examples'/n) for n in ('client.mm','build_example.py')},
+       'fixture_manifest_SHA256':sha(fixture_manifest),'fixture_source_SHA256':fixture_pins,
        'static_archive_SHA256':sha(archive),'object_SHA256':sha(obj),'source_transport_provenance':json.loads((ROOT/'results/native-cas-sdk-source-provenance.json').read_text()),
        'commands':commands,'system_modified':False,'GPU_user_dispatch':False}
 (sdk/'BUILD_MANIFEST.json').write_text(json.dumps(build,indent=2)+'\n')

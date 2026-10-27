@@ -53,8 +53,7 @@ not use its result alone to authorize a repair. AIR/source relationships,
 control-flow and alias safety, trusted policy provenance, runtime conditions
 and per-shader GPU correctness remain separate requirements. Existing stored
 policies and SDK certificates are not invalidated by the runtime automatically;
-regenerate them from actual inputs with the new tools before use. The historical
-GPU cohort is not a new GPU qualification of this version. No installed
+regenerate them from actual inputs with the new tools before use. A subsequent [regenerated SDK cohort](CAS_SDK_REGENERATED.md) separately qualifies the tested shaders on the GTX. Earlier historical GPU results remain distinct. No installed
 compiler, driver, Metal framework or OCLP component was modified.
 
 ## Reproduction

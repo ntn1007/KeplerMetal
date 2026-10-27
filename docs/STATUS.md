@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+Four CAS SDK certificates were regenerated with the pinned decoder and tested on the current GTX profile. Two repaired runs and native defect controls pass their respective CPU oracles; the runtime remains an opt-in application adapter. [Evidence](CAS_SDK_REGENERATED.md).
+
 The offline native CAS diagnosis now rejects incomplete/reordered disassembly and requires an exact listing reproduced by the pinned decoder. Two artificial false-acceptance cases are refused; archived cases retain their offline outcomes. This does not invalidate old policies or establish general compiler repair. [Evidence](CAS_DISASSEMBLY_COVERAGE.md).
 
 The standalone opt-in bootstrap now serializes concurrent default-device initialization and reuses the same device for later calls. A pinned experimental client checks eight concurrent calls, one subsequent call, GPU output and refusal controls. Arbitrary applications and concurrent queue setup remain open. [Evidence](STANDALONE_ICB_MULTICALL.md).

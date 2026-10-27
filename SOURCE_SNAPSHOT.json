@@ -1148,9 +1148,13 @@
       "path": "bridge/tools/build_native_cas_sdk_module.py",
       "source_path": "bridge/tools/build_native_cas_sdk_module.py",
       "source_SHA256": "9f9494d785cb021a85faa44b413a566ef62a9a4d1637c6eae05b9952f1fd589c",
-      "published_SHA256": "9f9494d785cb021a85faa44b413a566ef62a9a4d1637c6eae05b9952f1fd589c",
-      "bytes": 2462,
-      "modified_for_publication": false
+      "published_SHA256": "7ab4aeb1618616f8194784c7c62c64ca79250ecbb481a82bdab32ec7b4ea8b19",
+      "bytes": 3545,
+      "modified_for_publication": true,
+      "publication_change": {
+        "previous_published_SHA256": "9f9494d785cb021a85faa44b413a566ef62a9a4d1637c6eae05b9952f1fd589c",
+        "reason": "Regenerate CAS SDK against exact current sources, driver profile and PCI-validated GPU identity."
+      }
     },
     {
       "path": "bridge/tools/build_offline_compiler.py",
@@ -2910,12 +2914,12 @@
       "path": "bridge/tools/prepare_native_cas_sdk.py",
       "source_path": "bridge/tools/prepare_native_cas_sdk.py",
       "source_SHA256": "f4e514a99e1a00b1f66a277603e92ebd232539aaa26072912e0adbc69d523862",
-      "published_SHA256": "ae0a43facf525542b0fc00575b41c03fba046eb8e58e3b7250a8abff2838b896",
-      "bytes": 7523,
+      "published_SHA256": "e71aa5add4912c53d710c8a5bb617d859b4f623c12dbf592eac8dd7ffe5d4216",
+      "bytes": 8731,
       "modified_for_publication": true,
       "publication_change": {
-        "previous_published_SHA256": "f4e514a99e1a00b1f66a277603e92ebd232539aaa26072912e0adbc69d523862",
-        "reason": "Require pinned decoder reproduction and preserve checked native snapshots; original source hash retained."
+        "previous_published_SHA256": "ae0a43facf525542b0fc00575b41c03fba046eb8e58e3b7250a8abff2838b896",
+        "reason": "Regenerate CAS SDK against exact current sources, driver profile and PCI-validated GPU identity."
       }
     },
     {
@@ -5163,17 +5167,25 @@
       "path": "bridge/sdk-cas/examples/build_example.py",
       "source_path": "bridge/sdk-cas/examples/build_example.py",
       "source_SHA256": "582d01b0f89b07ca46577861f1ff3cbf29b36b6a1e61ab30ebcf3374c40d883d",
-      "published_SHA256": "582d01b0f89b07ca46577861f1ff3cbf29b36b6a1e61ab30ebcf3374c40d883d",
-      "bytes": 1335,
-      "modified_for_publication": false
+      "published_SHA256": "9d063bbc04cbe48900bda975c57ad692ac9e77a6d56f541366c30569dfc903a3",
+      "bytes": 1399,
+      "modified_for_publication": true,
+      "publication_change": {
+        "previous_published_SHA256": "582d01b0f89b07ca46577861f1ff3cbf29b36b6a1e61ab30ebcf3374c40d883d",
+        "reason": "Regenerate CAS SDK against exact current sources, driver profile and PCI-validated GPU identity."
+      }
     },
     {
       "path": "bridge/sdk-cas/examples/client.mm",
       "source_path": "bridge/sdk-cas/examples/client.mm",
       "source_SHA256": "eac0c1e42a41592ff802d2c2f0c6f55ac1c14b0ad28ae2e5cdd2b619f72db81b",
-      "published_SHA256": "eac0c1e42a41592ff802d2c2f0c6f55ac1c14b0ad28ae2e5cdd2b619f72db81b",
-      "bytes": 8575,
-      "modified_for_publication": false
+      "published_SHA256": "07282c8ed1e18a82a50cc7f455992e2e2c0d85a5871953416c42dd2de4399e50",
+      "bytes": 8748,
+      "modified_for_publication": true,
+      "publication_change": {
+        "previous_published_SHA256": "eac0c1e42a41592ff802d2c2f0c6f55ac1c14b0ad28ae2e5cdd2b619f72db81b",
+        "reason": "Regenerate CAS SDK against exact current sources, driver profile and PCI-validated GPU identity."
+      }
     },
     {
       "path": "bridge/sdk-combined/README.md",
