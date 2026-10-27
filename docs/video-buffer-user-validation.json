@@ -1,0 +1,108 @@
+{
+  "status": "PASS",
+  "image": "/System/Library/PrivateFrameworks/IOAccelerator.framework/Versions/A/IOAccelerator",
+  "image_UUID": "198a776afe0335ee8e537b9f14caabaa",
+  "functions": [
+    {
+      "symbol": "_IOAccelVideoContextRequestDataBuffer",
+      "start_VM": "0x7ff80f8928bd",
+      "region_SHA256": "de75f21e9d308e0128792a8d867872d53ae3e79ef787dc08ac8b50be161faabf",
+      "bytes": 10,
+      "metadata_SHA256": "ca09301e53fe71e63787492a20074bffe637ed79e865688db161b84242c38603",
+      "disassembly_SHA256": "5220d3bcce16a82d7c6ff5e17cb8167444870d5426ca64e8785d091fcb9b8de3"
+    },
+    {
+      "symbol": "_IOAccelContextRequestDataBuffer",
+      "start_VM": "0x7ff80f890b36",
+      "region_SHA256": "35d66134005b9fcfb387423a3ef975bc6cec4b62aeb7c8b82a46e2cfc284cb29",
+      "bytes": 236,
+      "metadata_SHA256": "0237e15ed23d93647e706beb0046d48d9704780e27d6b1df6a6c9b9965a45d58",
+      "disassembly_SHA256": "c95c1170940ed933588b5d0c5422306ddb441d541899d8cb371897aef8b89001"
+    },
+    {
+      "symbol": "_IOAccelResourceCreateDataBuffer",
+      "start_VM": "0x7ff80f88ec14",
+      "region_SHA256": "4a2716ebd724b52e4c2cab4e345094eab8a0bbb24a5316ee565478d6732f8059",
+      "bytes": 181,
+      "metadata_SHA256": "65c3b3230cd7b79ba015fc0a2ca6ea04b078b297f5216b787f5c688feeec1de8",
+      "disassembly_SHA256": "2b5e82ae8d03ba134d0e6555f26b13206008852c21e476bd121c0bf6ff210251"
+    },
+    {
+      "symbol": "_IOAccelVideoContextCreate",
+      "start_VM": "0x7ff80f8902b0",
+      "region_SHA256": "8e3f084ec62d063d193bcead7fb4271012ff3334c909d1e0eba90465385e6fc6",
+      "bytes": 15,
+      "metadata_SHA256": "dab22ef5cd647d147922febdae5366ec42c246307b367ccf13840189e30d9ceb",
+      "disassembly_SHA256": "3054bef78af53e4084e841ccace53f592fc8e896914bc25fc9fa6102c76c3013"
+    },
+    {
+      "symbol": "_IOAccelContextCreate",
+      "start_VM": "0x7ff80f88e554",
+      "region_SHA256": "46435a813d343f15205827de6fcc73c914701d6571c39b23431eb970b27c0e84",
+      "bytes": 380,
+      "metadata_SHA256": "cb590deaa4935ba05a8eb68c372dc8d9fe961838cd0b5b35d9279b12fa0f1950",
+      "disassembly_SHA256": "00ebfd6fd0f55e5d83b9696c174a1e9e9f2a57b5b0b2f8e9072a93a00b4b3021"
+    },
+    {
+      "symbol": "_IOAccelDeviceCreate",
+      "start_VM": "0x7ff80f89021a",
+      "region_SHA256": "b337296aceb0aed820f6965ba3815ee550e5b91a16990f0fa370fd081f2da648",
+      "bytes": 12,
+      "metadata_SHA256": "f1210d9cae20cd99e3c90da3201fa72f37ec59fbf0215fd7c904c580782d54de",
+      "disassembly_SHA256": "0115ba52c778ff61c886971a16f3393caf8f5fedee98fce503a4432c7d61937f"
+    },
+    {
+      "symbol": "_IOAccelSharedCreate",
+      "start_VM": "0x7ff80f88e431",
+      "region_SHA256": "42cb0f1632b36c0b56a8de0fe60e1f744b8407270f309a23a6f2f30d3a33904d",
+      "bytes": 251,
+      "metadata_SHA256": "a04a3899418e326555eac9a863e2a17937dab9db65bb9bf52f5109d76b943deb",
+      "disassembly_SHA256": "b3c411c1d8674b42bd3a7d869aee38befeca96d16696e8468806299e1c95a64b"
+    },
+    {
+      "symbol": "_IOAccelVideoContextGetDataBufferClassCount",
+      "start_VM": "0x7ff80f890301",
+      "region_SHA256": "f40c391d17accafbfed049d584d836c59d2e810da7f940573f621b247c6f8eca",
+      "bytes": 10,
+      "metadata_SHA256": "262020fe4243e67378451788a296907fe16b6a50e0a1ab5ea8d8f7c636f1cdb2",
+      "disassembly_SHA256": "0b9c990539953015610d349f079fb9e4c2a012adf5eeac8b44a2ef33757fcd7d"
+    },
+    {
+      "symbol": "_IOAccelContextGetDataBufferClassCount",
+      "start_VM": "0x7ff80f88ed71",
+      "region_SHA256": "4b4717fecd4470eb59b449335296cc011e4ad1edebf818b535992266fdd0e23d",
+      "bytes": 12,
+      "metadata_SHA256": "219d9c28fadc37a11d47cfbe083536b24532a4ea927e2c41488e05b710bd3c01",
+      "disassembly_SHA256": "a03118421de7b104ae8a7486c3b6ce76ea194a2c6eaf6a0877113bbe53d27b3c"
+    },
+    {
+      "symbol": "_IOAccelDeviceCreateWithAPIProperty",
+      "start_VM": "0x7ff80f88df60",
+      "region_SHA256": "392ef70adb9a4175266bb9b29611428f4cb00ab1a8a518ce59e950ffa915294a",
+      "bytes": 685,
+      "metadata_SHA256": "667751d3a97b813a08f10a42160421b5bd490f96e9d1e983cffb27cb933ca27e",
+      "disassembly_SHA256": "0159b0671d266ccb34bde2d7f2c37b86c8d01229d0daba505154f5e63c1201bb"
+    }
+  ],
+  "type3_context_create_static": true,
+  "request_selector": 3,
+  "request_input_bytes": 8,
+  "request_first_two_u32_from_registers": [
+    "esi",
+    "edx"
+  ],
+  "user_context_slot_count": 16,
+  "buffer_output_size": "48 + device response-2 u32 at offset 16",
+  "cache_part_SHA256": {
+    "dyld_shared_cache_x86_64": "01d2fb67994fe5f4a6846263144432af24a1a450993f917e54de53351e6708be"
+  },
+  "kernel_class_count_runtime_observed": false,
+  "shared_constructor_open_type": 6,
+  "shared_constructor_selector": 9,
+  "device_constructor_open_type": 5,
+  "device_constructor_selector": 2,
+  "runtime_bindings_observed": false,
+  "private_function_invocations": 0,
+  "GPU_commands": 0,
+  "qualification": "Static x86_64 cache evidence only; private API prototype, resource lifetimes and valid input values remain unqualified."
+}
