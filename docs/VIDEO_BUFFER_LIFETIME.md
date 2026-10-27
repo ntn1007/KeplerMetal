@@ -22,7 +22,8 @@ The callback candidates show the following static paths:
   counter; when it reaches zero, the callback calls `IOConnectCallMethod` with
   selector 1 on a connection reached through the shared wrapper. This is a
   **shared-client selector**, not context selector 1. Its input semantics and
-  effect are not yet qualified.
+  runtime effect is not yet qualified. A later [dispatch analysis](VIDEO_SHARED_DELETE.md)
+  identifies the statically selected kernel path and its limits.
 - The shared and device callback candidates each call `IOConnectRelease` on
   their connection. The shared callback also walks local bookkeeping after
   releasing the connection reference. Static inspection does not prove the

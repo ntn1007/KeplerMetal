@@ -1,0 +1,97 @@
+{
+  "IOAccelerator_SHA256": "37e563d6cf3626101f30b1727a4f60dec02152dff9c74c0269c30c213a7320c8",
+  "GeForce_SHA256": "44f131a958d48afd6ab675a851330c37506557c9d499484170c886c3731bdbb3",
+  "selector": 1,
+  "legacy_method_table": "0x77cb0",
+  "selector_entry": {
+    "address": "0x77ce0",
+    "file_offset": 490720,
+    "descriptor_SHA256": "b96991049e95c24f018bce94db94749f8954d30794d6966aa7e73b7666cf40b6",
+    "member_pointer_kind": "direct",
+    "method_symbol": "__ZN24IOAccelSharedUserClient215delete_resourceEj",
+    "method_address": "0x2c470",
+    "this_adjustment": 0,
+    "flags": 0,
+    "count0": 1,
+    "count1": 0
+  },
+  "nv_shared_vtable_slots": [
+    {
+      "slot": "0x850",
+      "symbol": "__ZN18nvSharedUserClient14externalMethodEjP25IOExternalMethodArgumentsP24IOExternalMethodDispatchP8OSObjectPv",
+      "target_on_disk": "0x53284"
+    },
+    {
+      "slot": "0x940",
+      "symbol": "__ZN18nvSharedUserClient26getTargetAndMethodForIndexEPP9IOServicej",
+      "target_on_disk": "0x533a6"
+    }
+  ],
+  "runtime_dispatch_observed": false,
+  "native_calls": 0,
+  "GPU_commands": 0,
+  "REA_evidence": [
+    {
+      "address": "0x53284",
+      "capture_SHA256": "128401a4c6eae933ede1e773c4d889bae4b07050f35270e206d5d0f182c5e340",
+      "evidence_id": "ev_25c35a13b5665be2b3eb5f3b9cf4c322e1414be1ab5aa9bf318319ba09e7913d",
+      "bytes": 290
+    },
+    {
+      "address": "0xf820",
+      "capture_SHA256": "0e4e8944fb9b80352cfca9e4e47bd8297c356dd970ca2fc2230f7569f7884fcd",
+      "evidence_id": "ev_51bc12723d20106ed2e841a5f865a1a867e8c230070ee4f95ed1feaddce28b74",
+      "bytes": 124
+    },
+    {
+      "address": "0x533a6",
+      "capture_SHA256": "70b1835c712f43217d8de80ca4f6dc5a5b26450db3d17235346cbbe9a20c5f70",
+      "evidence_id": "ev_4c96f2956c8b4a9fc70f0f9f915c0c7abad0be07fdfa6e7e059a176bc5302811",
+      "bytes": 65
+    },
+    {
+      "address": "0x52eca",
+      "capture_SHA256": "268640102f22696f66d592e94b2efccc73a23615b2550f640fae5bf7d12d5f63",
+      "evidence_id": "ev_dee4ecc0bcbddf6b5e11d65c8baafe7fe2814590080127e9fe5dd710cdaad42d",
+      "bytes": 75
+    },
+    {
+      "address": "0x2da22",
+      "capture_SHA256": "b9c9bacc6a73bcc012088155de50c8ca4764c38815b5a8de91dc72910d257fad",
+      "evidence_id": "ev_0e05021a99cecd09ce893a00b085ede9086928ad8767397fa0d152e4a3908264",
+      "bytes": 446
+    },
+    {
+      "address": "0x2dbec",
+      "capture_SHA256": "3351005dc2280f244f0bdd9a5d60019300ac716262ab3404c004c892c2bc363f",
+      "evidence_id": "ev_e998879ee7445609aa17ed6c4f97cf46dd7ba807e15615a66d6a247a34185315",
+      "bytes": 38
+    },
+    {
+      "address": "0x2c470",
+      "capture_SHA256": "a3e8cef9aea79565f2a6121e2cb3105566988c2a161cba96c05d6ad1a6033d89",
+      "evidence_id": "ev_418168271cd4a16376227ae0dc0ae2f05694e4dac289d43aca804a04fce3cb63",
+      "bytes": 278
+    }
+  ],
+  "SDK_layout": {
+    "SDK_version": "26.2",
+    "source_SHA256": "da93b0c9e15e86b3ceebd5e8a1fc9b3be4bc3c39501ec2c54fd84c8f2087d9e7",
+    "header_SHA256": "7533d253e0f7fbf19c4577e2d84e816850557599b6e850c35b325571aea9a8d8",
+    "compile": "PASS",
+    "scalarInput_offset": 32,
+    "scalarInputCount_offset": 40,
+    "compiled_only": true
+  },
+  "native_resource_release": {
+    "cache_SHA256": "01d2fb67994fe5f4a6846263144432af24a1a450993f917e54de53351e6708be",
+    "image_UUID": "198a776afe0335ee8e537b9f14caabaa",
+    "finalizer_SHA256": "17f9d42efe9b91891078eebb6dbe32fd90fd00fcf542079507ec5ba3d4cde3f7",
+    "selector": 1,
+    "scalar_input_count": 1,
+    "value_source": "32-bit field at offset 0x100 in resource-associated client data",
+    "runtime_binding_observed": false,
+    "selector_invoked": false
+  },
+  "status": "PASS"
+}
