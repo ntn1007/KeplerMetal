@@ -1,5 +1,7 @@
 # Architecture
 
+The dual render root appends a bounded vertex transition extension after the unchanged indexed table. [Contract](COMBINED_INDEX_VERTEX.md).
+
 The opt-in vertex root derives a bounded transition table from complete certified catalogue states, retains their buffer resources and resolves the typed setter on GPU. Its context remains distinct from indexed roots and native Apple resource identities. [Contract](VERTEX_BINDING_EXPERIMENT.md).
 
 ## Branch A: native NVIDIA behavior

@@ -1,0 +1,76 @@
+{
+  "status": "PASS",
+  "base_public_commit": "fe35a1a4529b83d34abb2de8059fbb736a38503d",
+  "runtime_SHA256": "6ca2529d61f173c3ed459e1e8df2e29d664c73164748e757ba91c028516c4392",
+  "host_SHA256": "7a1ea7207a70034481ba48023a31346616a04ed9eea4c87b12f98402a6c8f296",
+  "files": {
+    "bridge/src/KeplerCPUICB.h": {
+      "sha256": "79c544c5e9981f6287d23ca958267eff215fa915e6c6ae5fc63240077915c62b",
+      "frozen_in": "runtime/src"
+    },
+    "bridge/src/KeplerCPUICB.mm": {
+      "sha256": "5ebe2d6b16932f69902dde89cfaf057a4d6f3a99cb4ebda41bb2c791752963fc",
+      "frozen_in": "runtime/src"
+    },
+    "bridge/src/KeplerRenderCommandArguments.inc": {
+      "sha256": "f321f34d4829c5b0c1f71e293b840c811e85449e9607a79477fc168e38085df6",
+      "frozen_in": "runtime/src"
+    },
+    "bridge/src/KeplerRenderCommandArgumentsScope.inc": {
+      "sha256": "748739c391b432cfcccd1b3e3dcb7d6f5bbcc8ad808d56af8de5673195a790c1",
+      "frozen_in": "runtime/src"
+    },
+    "bridge/src/KeplerIndexedRenderRecords.h": {
+      "sha256": "257c48a39057c51e6f09493d9a271e57b30377c7c154a2b3272e993a72aa2d39",
+      "frozen_in": "runtime/src"
+    },
+    "bridge/src/KeplerVertexTransitionRecords.h": {
+      "sha256": "642523bb84d7aec16dff8c90ee577943b942c5c4c1fc8110d16ecd93acc7bb0a",
+      "frozen_in": "runtime/src"
+    },
+    "bridge/src/KeplerVertexTransitionPlan.h": {
+      "sha256": "8a30fd4d7fd8808d6acf9c45da15f0acd5fcb307fe7a019cdd9ea514d283e468",
+      "frozen_in": "runtime/src"
+    },
+    "bridge/src/KeplerVertexTransitionPlan.inc": {
+      "sha256": "5ba020199861787c203d16a67a453027c1ea0df33368db97067b9655b77c8811",
+      "frozen_in": "runtime/src"
+    },
+    "bridge/src/air_combined_index_vertex.metal": {
+      "sha256": "6e3eac809595694917154544e092ced681bba56d5f517069a873f69e60769a60",
+      "frozen_in": "producer/src"
+    },
+    "bridge/tools/air_combined_index_vertex_lowering.py": {
+      "sha256": "1434566623624c770f048f93430b008dd28e28ec813dd271db5f53667ede9655",
+      "frozen_in": "producer/src"
+    },
+    "bridge/tools/air_indexed_render_lowering.py": {
+      "sha256": "876efd17962542f4992e43f5f27fd4b909531b00772f2ce27d0176489824eb5d",
+      "frozen_in": "producer/src"
+    },
+    "bridge/tools/air_vertex_binding_lowering.py": {
+      "sha256": "7c8f360037e75ad3b8deea90c535f656d529fbf20c9540a5a09af2f07c92e4ac",
+      "frozen_in": "producer/src"
+    },
+    "bridge/tools/air_reset_lowering.py": {
+      "sha256": "1a9df5f5aa106b56bc1001a0d487239e85f6d7254dbb89fdf084dd83fcee13f4",
+      "frozen_in": "producer/src"
+    },
+    "bridge/tools/lower_air_render_reset.py": {
+      "sha256": "3ad0132236517ba5259aa012c9ac2129359407c170f610eda43835ffced00df6",
+      "frozen_in": "producer/src"
+    },
+    "bridge/tools/combined_index_vertex_probe.mm": {
+      "sha256": "e7a6788c40512187be4aa5b8a7d02901372d345975524704a8cfd2ef327eabdd",
+      "frozen_in": "render-client/src"
+    },
+    "bridge/tools/verify_combined_index_vertex.py": {
+      "sha256": "b7b99ca46d0a91fb76dbd7a2db836b29aabf9610ef959ed8212083ee50a42f1d",
+      "frozen_in": "render-client/oracles"
+    },
+    "bridge/tools/air_vertex_transition.py": {
+      "sha256": "2d395f38329015f1372161fc7a0caab6403b16b1c157404a48f1ba184cae2dde",
+      "frozen_in": "render-client/oracles"
+    }
+  }
+}

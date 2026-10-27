@@ -1,5 +1,7 @@
 # KeplerMetal
 
+A combined adapted-client path now brings typed vertex setters and indexed draws together. [Contract and evidence](docs/COMBINED_INDEX_VERTEX.md).
+
 The scoped typed vertex-buffer setter now selects between certified render states in an adapted application. [Evidence and limits](docs/VERTEX_BINDING_EXPERIMENT.md).
 
 **Ultimate goal: develop a modernized NVIDIA driver for macOS that makes full use of Kepler's hardware capabilities and supports as many Metal features as the hardware can actually implement.** The reference GPU is a GeForce GTX 880M, GK104 / SM30, with 8 GiB VRAM in an Intel iMac.

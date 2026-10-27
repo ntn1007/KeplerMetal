@@ -1,5 +1,7 @@
 # Build from source
 
+[COMBINED_INDEX_VERTEX.md](COMBINED_INDEX_VERTEX.md) documents source building, native inspection and a signed two-slot render probe.
+
 [VERTEX_BINDING_EXPERIMENT.md](VERTEX_BINDING_EXPERIMENT.md) documents the owned vertex-transition context, construction-only compiler inspection and signed render reception.
 
 [INDEXED_RENDER.md](INDEXED_RENDER.md) adds the indexed producer build, construction-only inspector/certifier and `--typed-indexed-render` reception. The complete runtime gains an optional owned index-binding extension while preserving the basic root prefix.

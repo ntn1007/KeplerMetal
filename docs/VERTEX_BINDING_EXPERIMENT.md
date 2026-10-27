@@ -10,8 +10,7 @@ or framework is replaced.
 This is a bounded laboratory implementation, not general Metal ICB support.
 The source shader and AIR profile are pinned; arbitrary shader translation,
 null/unbinding, dynamic stride, constant-address-space pointers and setters on
-an empty/reset state are not implemented. The current vertex and indexed root
-extensions cannot be combined. The tested application uses the project scope,
+an empty/reset state are not implemented. The standalone vertex and indexed roots are distinct; a separate [combined root](COMBINED_INDEX_VERTEX.md) now supports their tested combination. The tested application uses the project scope,
 context and argument encoder explicitly; transparent applications remain open.
 
 ## Owned state-transition context
