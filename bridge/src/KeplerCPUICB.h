@@ -18,6 +18,7 @@
 @property(nonatomic,readonly) NSUInteger indexBindingCount,indexBindingTableOffset;
 @property(nonatomic,readonly) NSUInteger vertexTransitionCount,vertexTransitionTableOffset;
 @property(nonatomic,readonly) NSUInteger pipelineTransitionCount,pipelineTransitionTableOffset;
+@property(nonatomic,readonly) NSUInteger fragmentTransitionCount,fragmentTransitionTableOffset;
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 @end
@@ -338,6 +339,13 @@
                                                                commandRecordsOffset:(NSUInteger)offset
                                                                       commandBuffer:(id<MTLCommandBuffer>)commandBuffer
                                                                               error:(NSError **)error;
+// Fragment argument-buffer transitions derive from certified retained states.
+- (KPRenderCommandArgumentContext *)newFragmentRenderCommandArgumentContextWithCommands:(id<MTLIndirectCommandBuffer>)commands
+                                                                       stateCatalogue:(KPRenderStateCatalogue *)catalogue
+                                                                       commandRecords:(id<MTLBuffer>)records
+                                                                 commandRecordsOffset:(NSUInteger)offset
+                                                                        commandBuffer:(id<MTLCommandBuffer>)commandBuffer
+                                                                                error:(NSError **)error;
 // Combined context retains both indexed spans and vertex-state transitions.
 // This explicit project ABI is distinct from Apple's native ICB identity.
 - (KPRenderCommandArgumentContext *)newIndexedVertexRenderCommandArgumentContextWithCommands:(id<MTLIndirectCommandBuffer>)commands

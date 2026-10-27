@@ -1,5 +1,7 @@
 # Status, 2026-10-24
 
+A separate typed fragment context selects certified fragment argument buffers from the GPU and renders a native Metal texture in an adapted client. Combination with the triple context remains open. [Evidence and limits](FRAGMENT_BINDING_EXPERIMENT.md).
+
 The scoped triple render context combines pipeline and vertex transitions with indexed draw spans. The adapted client checks native-image and CPU references, setter order and guarded refusal cases; transparent application support remains open. [Evidence and reproduction](TRIPLE_RENDER.md).
 
 The typed render-pipeline context and argument encoder are now runtime-owned in the scoped adapter. GPU images, bounded lifetime/refusal checks and same-runtime rendering/compute regressions pass; transparent application integration remains open. [Evidence and reproduction](PIPELINE_RUNTIME_INTEGRATION.md).

@@ -19,6 +19,8 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
+A scoped typed fragment-buffer selector now switches genuine Metal texture argument resources in an adapted GTX client. [Contract and evidence](docs/FRAGMENT_BINDING_EXPERIMENT.md).
+
 A scoped adapted client now combines pipeline selection, vertex-buffer changes and 16/32-bit indexed draws in one producer. [Contract, tests and limitations](docs/TRIPLE_RENDER.md).
 
 The scoped runtime now owns typed render-pipeline tokens, retained resources and a two-word argument encoder. GPU rendering and same-runtime regressions pass; ordinary applications still require adaptation. [Contract, evidence and limits](docs/PIPELINE_RUNTIME_INTEGRATION.md).

@@ -6,7 +6,9 @@
 @property(nonatomic,readwrite) NSUInteger indexBindingCount,indexBindingTableOffset;
 @property(nonatomic,readwrite) NSUInteger vertexTransitionCount,vertexTransitionTableOffset;
 @property(nonatomic,readwrite) NSUInteger pipelineTransitionCount,pipelineTransitionTableOffset;
+@property(nonatomic,readwrite) NSUInteger fragmentTransitionCount,fragmentTransitionTableOffset;
 @property(nonatomic,copy) NSArray<id<MTLBuffer>> *indexOwners,*vertexOwners;
+@property(nonatomic,copy) NSArray<id<MTLBuffer>> *fragmentOwners;
 @property(nonatomic,copy) NSArray<id<MTLRenderPipelineState>> *pipelineOwners;
 @property(nonatomic,copy) NSDictionary<NSNumber*,NSNumber*> *pipelineTokenByObject;
 @property(nonatomic,weak) KPCPUICBScope *scope;
@@ -74,7 +76,7 @@
             if((address<a+length&&a<address+self.encodedLength)||(host<prior+length&&prior<host+self.encodedLength))[self refuse:@"Render argument root overlaps an exported root"];
         }
     }
-    NSMutableArray *protectedResources=[@[c.contextBuffer,c.commandRecords]mutableCopy];[protectedResources addObjectsFromArray:c.indexOwners?:@[]];[protectedResources addObjectsFromArray:c.vertexOwners?:@[]];
+    NSMutableArray *protectedResources=[@[c.contextBuffer,c.commandRecords]mutableCopy];[protectedResources addObjectsFromArray:c.indexOwners?:@[]];[protectedResources addObjectsFromArray:c.vertexOwners?:@[]];[protectedResources addObjectsFromArray:c.fragmentOwners?:@[]];
     for(id<MTLBuffer>b in protectedResources){
         uint64_t a=b.gpuAddress;if(address<a+b.length&&a<address+self.encodedLength)[self refuse:@"Render argument root aliases retained resources"];
         if(b.storageMode!=MTLStorageModePrivate&&b.contents){uintptr_t host=(uintptr_t)_root.contents+_offset,other=(uintptr_t)b.contents;if(host<other+b.length&&other<host+self.encodedLength)[self refuse:@"Render root aliases retained CPU backing"];}

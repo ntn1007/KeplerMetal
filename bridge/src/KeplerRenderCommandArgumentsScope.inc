@@ -39,28 +39,31 @@
  return YES;
 }
 - (KPRenderCommandArgumentContext*)newRenderCommandArgumentContextWithCommands:(id<MTLIndirectCommandBuffer>)commands stateCatalogue:(KPRenderStateCatalogue*)catalogue commandRecords:(id<MTLBuffer>)records commandRecordsOffset:(NSUInteger)offset commandBuffer:(id<MTLCommandBuffer>)cb error:(NSError**)error{
- return[self newRenderCommandArgumentContextWithCommands:commands stateCatalogue:catalogue commandRecords:records commandRecordsOffset:offset commandBuffer:cb indexedBindings:NO vertexBindings:NO pipelineBindings:NO error:error];
+ return[self newRenderCommandArgumentContextWithCommands:commands stateCatalogue:catalogue commandRecords:records commandRecordsOffset:offset commandBuffer:cb indexedBindings:NO vertexBindings:NO pipelineBindings:NO fragmentBindings:NO error:error];
 }
 - (KPRenderCommandArgumentContext*)newPipelineRenderCommandArgumentContextWithCommands:(id<MTLIndirectCommandBuffer>)commands stateCatalogue:(KPRenderStateCatalogue*)catalogue commandRecords:(id<MTLBuffer>)records commandRecordsOffset:(NSUInteger)offset commandBuffer:(id<MTLCommandBuffer>)cb error:(NSError**)error{
- return[self newRenderCommandArgumentContextWithCommands:commands stateCatalogue:catalogue commandRecords:records commandRecordsOffset:offset commandBuffer:cb indexedBindings:NO vertexBindings:NO pipelineBindings:YES error:error];
+ return[self newRenderCommandArgumentContextWithCommands:commands stateCatalogue:catalogue commandRecords:records commandRecordsOffset:offset commandBuffer:cb indexedBindings:NO vertexBindings:NO pipelineBindings:YES fragmentBindings:NO error:error];
 }
 - (KPRenderCommandArgumentContext*)newIndexedRenderCommandArgumentContextWithCommands:(id<MTLIndirectCommandBuffer>)commands stateCatalogue:(KPRenderStateCatalogue*)catalogue commandRecords:(id<MTLBuffer>)records commandRecordsOffset:(NSUInteger)offset commandBuffer:(id<MTLCommandBuffer>)cb error:(NSError**)error{
- return[self newRenderCommandArgumentContextWithCommands:commands stateCatalogue:catalogue commandRecords:records commandRecordsOffset:offset commandBuffer:cb indexedBindings:YES vertexBindings:NO pipelineBindings:NO error:error];
+ return[self newRenderCommandArgumentContextWithCommands:commands stateCatalogue:catalogue commandRecords:records commandRecordsOffset:offset commandBuffer:cb indexedBindings:YES vertexBindings:NO pipelineBindings:NO fragmentBindings:NO error:error];
 }
 - (KPRenderCommandArgumentContext*)newVertexRenderCommandArgumentContextWithCommands:(id<MTLIndirectCommandBuffer>)commands stateCatalogue:(KPRenderStateCatalogue*)catalogue commandRecords:(id<MTLBuffer>)records commandRecordsOffset:(NSUInteger)offset commandBuffer:(id<MTLCommandBuffer>)cb error:(NSError**)error{
- return[self newRenderCommandArgumentContextWithCommands:commands stateCatalogue:catalogue commandRecords:records commandRecordsOffset:offset commandBuffer:cb indexedBindings:NO vertexBindings:YES pipelineBindings:NO error:error];
+ return[self newRenderCommandArgumentContextWithCommands:commands stateCatalogue:catalogue commandRecords:records commandRecordsOffset:offset commandBuffer:cb indexedBindings:NO vertexBindings:YES pipelineBindings:NO fragmentBindings:NO error:error];
+}
+- (KPRenderCommandArgumentContext*)newFragmentRenderCommandArgumentContextWithCommands:(id<MTLIndirectCommandBuffer>)commands stateCatalogue:(KPRenderStateCatalogue*)catalogue commandRecords:(id<MTLBuffer>)records commandRecordsOffset:(NSUInteger)offset commandBuffer:(id<MTLCommandBuffer>)cb error:(NSError**)error{
+ return[self newRenderCommandArgumentContextWithCommands:commands stateCatalogue:catalogue commandRecords:records commandRecordsOffset:offset commandBuffer:cb indexedBindings:NO vertexBindings:NO pipelineBindings:NO fragmentBindings:YES error:error];
 }
 - (KPRenderCommandArgumentContext*)newIndexedVertexRenderCommandArgumentContextWithCommands:(id<MTLIndirectCommandBuffer>)commands stateCatalogue:(KPRenderStateCatalogue*)catalogue commandRecords:(id<MTLBuffer>)records commandRecordsOffset:(NSUInteger)offset commandBuffer:(id<MTLCommandBuffer>)cb error:(NSError**)error{
- return[self newRenderCommandArgumentContextWithCommands:commands stateCatalogue:catalogue commandRecords:records commandRecordsOffset:offset commandBuffer:cb indexedBindings:YES vertexBindings:YES pipelineBindings:NO error:error];
+ return[self newRenderCommandArgumentContextWithCommands:commands stateCatalogue:catalogue commandRecords:records commandRecordsOffset:offset commandBuffer:cb indexedBindings:YES vertexBindings:YES pipelineBindings:NO fragmentBindings:NO error:error];
 }
 - (KPRenderCommandArgumentContext*)newIndexedVertexPipelineRenderCommandArgumentContextWithCommands:(id<MTLIndirectCommandBuffer>)commands stateCatalogue:(KPRenderStateCatalogue*)catalogue commandRecords:(id<MTLBuffer>)records commandRecordsOffset:(NSUInteger)offset commandBuffer:(id<MTLCommandBuffer>)cb error:(NSError**)error{
- return[self newRenderCommandArgumentContextWithCommands:commands stateCatalogue:catalogue commandRecords:records commandRecordsOffset:offset commandBuffer:cb indexedBindings:YES vertexBindings:YES pipelineBindings:YES error:error];
+ return[self newRenderCommandArgumentContextWithCommands:commands stateCatalogue:catalogue commandRecords:records commandRecordsOffset:offset commandBuffer:cb indexedBindings:YES vertexBindings:YES pipelineBindings:YES fragmentBindings:NO error:error];
 }
-- (KPRenderCommandArgumentContext*)newRenderCommandArgumentContextWithCommands:(id<MTLIndirectCommandBuffer>)commands stateCatalogue:(KPRenderStateCatalogue*)catalogue commandRecords:(id<MTLBuffer>)records commandRecordsOffset:(NSUInteger)offset commandBuffer:(id<MTLCommandBuffer>)cb indexedBindings:(BOOL)indexed vertexBindings:(BOOL)vertex pipelineBindings:(BOOL)pipeline error:(NSError**)error{
+- (KPRenderCommandArgumentContext*)newRenderCommandArgumentContextWithCommands:(id<MTLIndirectCommandBuffer>)commands stateCatalogue:(KPRenderStateCatalogue*)catalogue commandRecords:(id<MTLBuffer>)records commandRecordsOffset:(NSUInteger)offset commandBuffer:(id<MTLCommandBuffer>)cb indexedBindings:(BOOL)indexed vertexBindings:(BOOL)vertex pipelineBindings:(BOOL)pipeline fragmentBindings:(BOOL)fragment error:(NSError**)error{
  @synchronized(_factoryLock){
   if(error)*error=nil;
   NSArray*sources=liveRenderCatalogueSources(catalogue,self,error);
-  if((pipeline&&(indexed!=vertex))||!_renderRecordArgumentsEnabled||!sources||sources.firstObject!=commands||cb.commandQueue!=_queue||cb.status!=MTLCommandBufferStatusNotEnqueued||!cb.retainedReferences||records.device!=_device||records.storageMode!=MTLStorageModePrivate||offset%16||offset>records.length||catalogue.logicalCommandCount>16||catalogue.logicalCommandCount*64>records.length-offset||!records.gpuAddress||records.gpuAddress>>40||records.length>((uint64_t(1)<<40)-records.gpuAddress)){
+  if((fragment&&(indexed||vertex||pipeline))||(pipeline&&(indexed!=vertex))||!_renderRecordArgumentsEnabled||!sources||sources.firstObject!=commands||cb.commandQueue!=_queue||cb.status!=MTLCommandBufferStatusNotEnqueued||!cb.retainedReferences||records.device!=_device||records.storageMode!=MTLStorageModePrivate||offset%16||offset>records.length||catalogue.logicalCommandCount>16||catalogue.logicalCommandCount*64>records.length-offset||!records.gpuAddress||records.gpuAddress>>40||records.length>((uint64_t(1)<<40)-records.gpuAddress)){
    fail(error,@"Render argument records, catalogue, queue or bounds differ");return nil;
   }
   KPRenderICB*target=(KPRenderICB*)commands;KPRenderCommandArgumentContext*old=target.renderArgumentContext;
@@ -94,25 +97,34 @@
   NSUInteger pipelineCount=pipelineData.length/sizeof(KPPipelineTransition::Row);
   if(pipeline&&(!pipelineCount||pipelineCount>KPVertexTransition::MaxRows)){fail(error,@"Pipeline transition count outside supported bound");return nil;}
   [vertexOwners addObjectsFromArray:pipelineResources];
+  NSMutableData*fragmentData=[NSMutableData new];NSMutableArray*fragmentOwners=[NSMutableArray new];
+  if(fragment&&!kpCreateFragmentTransitionRows(sources,catalogue,_device,records,offset,fragmentData,fragmentOwners)){
+   fail(error,@"Fragment transitions, retained resources or row bounds differ");return nil;
+  }
+  NSUInteger fragmentCount=fragmentData.length/sizeof(KPFragmentTransition::Row);
+  if(fragment&&(!fragmentCount||fragmentCount>KPVertexTransition::MaxRows)){fail(error,@"Fragment transition count outside supported bound");return nil;}
   KPRenderCommandArgumentContext*c=[[KPRenderCommandArgumentContext alloc]initOwned];c.scope=self;c.target=target;c.catalogue=catalogue;c.commandBuffer=cb;c.ownerThread=NSThread.currentThread;c.capacity=target.size;c.commandRecords=records;c.commandRecordsOffset=offset;c.contextOffset=64;c.roots=[NSMutableArray new];
   c.indexBindingCount=indexCount;c.indexBindingTableOffset=indexed?128:0;c.indexOwners=indexOwners;
   NSUInteger vertexExtensionOffset=indexed?128+indexData.length:96;
   c.vertexTransitionCount=vertexCount;c.vertexTransitionTableOffset=vertex?vertexExtensionOffset+32:0;c.vertexOwners=vertexOwners;
   NSUInteger pipelineExtensionOffset=vertex?vertexExtensionOffset+32+vertexData.length:96;
   c.pipelineTransitionCount=pipelineCount;c.pipelineTransitionTableOffset=pipeline?pipelineExtensionOffset+32:0;c.pipelineOwners=pipelineOwners;c.pipelineTokenByObject=pipelineTokens;
+  NSUInteger fragmentExtensionOffset=pipeline?pipelineExtensionOffset+32+pipelineData.length:vertex?vertexExtensionOffset+32+vertexData.length:indexed?128+indexData.length:96;
+  c.fragmentTransitionCount=fragmentCount;c.fragmentTransitionTableOffset=fragment?fragmentExtensionOffset+32:0;c.fragmentOwners=fragmentOwners;
   struct Header{uint32_t magic,version,capacity,bytes;uint64_t records,reserved;};static_assert(sizeof(Header)==32,"Render root context ABI");
-  NSUInteger size=160+(indexed?32+indexData.length:0)+(vertex?32+vertexData.length:0)+(pipeline?32+pipelineData.length:0);
+  NSUInteger size=160+(indexed?32+indexData.length:0)+(vertex?32+vertexData.length:0)+(pipeline?32+pipelineData.length:0)+(fragment?32+fragmentData.length:0);
   c.contextBuffer=[_device newBufferWithLength:size options:MTLResourceStorageModePrivate];
   if(!c.contextBuffer||!c.contextBuffer.gpuAddress||c.contextBuffer.gpuAddress>>40||size>((uint64_t(1)<<40)-c.contextBuffer.gpuAddress)){fail(error,@"Render context allocation failed");return nil;}
   NSMutableData*data=[NSMutableData dataWithLength:size];memset(data.mutableBytes,0xa5,size);Header header={0x4b505243,1,(uint32_t)c.capacity,64,records.gpuAddress+offset,0};memcpy((char*)data.mutableBytes+64,&header,32);
   if(indexed){KPRenderIndexExtension extension={KP_RENDER_INDEX_EXTENSION_MAGIC,KP_RENDER_INDEX_EXTENSION_VERSION,(uint32_t)indexCount,KP_RENDER_INDEX_BINDING_BYTES,c.contextBuffer.gpuAddress+128,0};memcpy((char*)data.mutableBytes+96,&extension,sizeof(extension));memcpy((char*)data.mutableBytes+128,indexData.bytes,indexData.length);}
   if(vertex){KPRenderVertexExtension extension={KP_RENDER_VERTEX_EXTENSION_MAGIC,KP_RENDER_VERTEX_EXTENSION_VERSION,(uint32_t)vertexCount,KP_RENDER_VERTEX_BINDING_BYTES,c.contextBuffer.gpuAddress+c.vertexTransitionTableOffset,0};memcpy((char*)data.mutableBytes+vertexExtensionOffset,&extension,sizeof(extension));memcpy((char*)data.mutableBytes+c.vertexTransitionTableOffset,vertexData.bytes,vertexData.length);}
   if(pipeline){KPRenderVertexExtension extension={0x4b505050,1,(uint32_t)pipelineCount,(uint32_t)sizeof(KPPipelineTransition::Row),c.contextBuffer.gpuAddress+c.pipelineTransitionTableOffset,0};memcpy((char*)data.mutableBytes+pipelineExtensionOffset,&extension,sizeof(extension));memcpy((char*)data.mutableBytes+c.pipelineTransitionTableOffset,pipelineData.bytes,pipelineData.length);}
+  if(fragment){KPRenderVertexExtension extension={0x4b504658,1,(uint32_t)fragmentCount,(uint32_t)sizeof(KPFragmentTransition::Row),c.contextBuffer.gpuAddress+c.fragmentTransitionTableOffset,0};memcpy((char*)data.mutableBytes+fragmentExtensionOffset,&extension,sizeof(extension));memcpy((char*)data.mutableBytes+c.fragmentTransitionTableOffset,fragmentData.bytes,fragmentData.length);}
   id<MTLBuffer>stage=[_device newBufferWithBytes:data.bytes length:size options:MTLResourceStorageModeShared];if(!stage){fail(error,@"Render context staging allocation failed");return nil;}
   id<MTLBlitCommandEncoder>blit=[cb blitCommandEncoder];if(!blit){fail(error,@"Render context upload failed; discard command buffer");return nil;}[blit copyFromBuffer:stage sourceOffset:0 toBuffer:c.contextBuffer destinationOffset:0 size:size];[blit endEncoding];
   [cb addCompletedHandler:^(id<MTLCommandBuffer>done){c.failed=done.status!=MTLCommandBufferStatusCompleted;c.completed=YES;(void)stage.length;}];
   target.renderArgumentContext=c;if(!_renderArgumentContexts)_renderArgumentContexts=[NSHashTable weakObjectsHashTable];[_renderArgumentContexts addObject:c];
-  [_eventRows addObject:@{@"operation":@"create_render_record_argument_context",@"capacity":@(c.capacity),@"context_bytes":@32,@"record_bytes":@64,@"record_offset":@(offset),@"same_recording_CB":@YES,@"client_GPU_address_required":@NO,@"index_bindings":@(indexCount),@"index_buffers_retained":@(indexed),@"index_table_inline":@(indexed),@"vertex_transitions":@(vertexCount),@"vertex_buffers_retained":@(vertex||pipeline),@"pipeline_transitions":@(pipelineCount),@"pipeline_objects_retained":@(pipeline)}];return c;
+  [_eventRows addObject:@{@"operation":@"create_render_record_argument_context",@"capacity":@(c.capacity),@"context_bytes":@32,@"record_bytes":@64,@"record_offset":@(offset),@"same_recording_CB":@YES,@"client_GPU_address_required":@NO,@"index_bindings":@(indexCount),@"index_buffers_retained":@(indexed),@"index_table_inline":@(indexed),@"vertex_transitions":@(vertexCount),@"vertex_buffers_retained":@(vertex||pipeline),@"pipeline_transitions":@(pipelineCount),@"pipeline_objects_retained":@(pipeline),@"fragment_transitions":@(fragmentCount),@"fragment_buffers_retained":@(fragment)}];return c;
  }
 }
 - (BOOL)prepareRenderCommandArgumentContext:(KPRenderCommandArgumentContext*)c argumentBuffer:(id<MTLBuffer>)root offset:(NSUInteger)offset computeEncoder:(id<MTLComputeCommandEncoder>)encoder commandBuffer:(id<MTLCommandBuffer>)cb error:(NSError**)error{
@@ -123,7 +135,7 @@
   for(NSMutableDictionary*r in c.roots)if(r[@"buffer"]==root&&[r[@"offset"]unsignedIntegerValue]==offset){found=r;break;}
   NSData*expected=found[@"expected"];
   if(!found||![found[@"complete"]boolValue]||(expected.length!=(c.pipelineTransitionCount?16:8))||root.storageMode!=MTLStorageModeShared||!root.contents||offset>root.length||expected.length>root.length-offset||memcmp((char*)root.contents+offset,expected.bytes,expected.length))return fail(error,@"Render root was not exported intact by its argument encoder");
-  [encoder setBuffer:root offset:offset atIndex:0];[encoder useResource:c.contextBuffer usage:MTLResourceUsageRead];[encoder useResource:c.commandRecords usage:MTLResourceUsageRead|MTLResourceUsageWrite];for(id<MTLBuffer>buffer in c.indexOwners)[encoder useResource:buffer usage:MTLResourceUsageRead];for(id<MTLBuffer>buffer in c.vertexOwners)[encoder useResource:buffer usage:MTLResourceUsageRead];c.prepared=YES;
+  [encoder setBuffer:root offset:offset atIndex:0];[encoder useResource:c.contextBuffer usage:MTLResourceUsageRead];[encoder useResource:c.commandRecords usage:MTLResourceUsageRead|MTLResourceUsageWrite];for(id<MTLBuffer>buffer in c.indexOwners)[encoder useResource:buffer usage:MTLResourceUsageRead];for(id<MTLBuffer>buffer in c.vertexOwners)[encoder useResource:buffer usage:MTLResourceUsageRead];for(id<MTLBuffer>buffer in c.fragmentOwners)[encoder useResource:buffer usage:MTLResourceUsageRead];c.prepared=YES;
   [_eventRows addObject:@{@"operation":@"prepare_render_record_arguments",@"root_bytes":@(expected.length),@"root_offset":@(offset),@"indirect_resources_declared":@YES,@"roots_retained_until_completion":@YES,@"native_pipeline_unchanged":@YES}];return YES;
  }
 }

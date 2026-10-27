@@ -28,19 +28,19 @@
       "path": "bridge/src/KeplerCPUICB.h",
       "source_path": "bridge/src/KeplerCPUICB.h",
       "source_SHA256": "263dede0101967e1bfa32fe3b081b73c476d9e09e8a9b5446ae04cf4f425ee0a",
-      "published_SHA256": "ef4e87c5f7077b4e24d74399406a3582c193b96701d84d895e27d7565091b088",
-      "bytes": 34576,
+      "published_SHA256": "1f76677b9d2e49febf3662e7a0f69207479ac9ccfa1aada685c881c64a797415",
+      "bytes": 35441,
       "modified_for_publication": true,
-      "previous_published_SHA256": "b1bbd2ed2b6ffaab58f18497f1290bf62dfa0bd4070a808188c26d75b48a4de3"
+      "previous_published_SHA256": "ef4e87c5f7077b4e24d74399406a3582c193b96701d84d895e27d7565091b088"
     },
     {
       "path": "bridge/src/KeplerCPUICB.mm",
       "source_path": "bridge/src/KeplerCPUICB.mm",
       "source_SHA256": "3d59c2c609611ddc387e616b8945e903f6378dbd4a3b66a02cb22087ada84b60",
-      "published_SHA256": "1fa542157ccca522fe141b7789f68ae56c430f06a31b0c8001703f8e17caf3ad",
-      "bytes": 136260,
+      "published_SHA256": "6b3d14fd725e523c645c9943cc8731a54847c77bf35f84b6744cdaaee265daa6",
+      "bytes": 136378,
       "modified_for_publication": true,
-      "previous_published_SHA256": "5ebe2d6b16932f69902dde89cfaf057a4d6f3a99cb4ebda41bb2c791752963fc"
+      "previous_published_SHA256": "1fa542157ccca522fe141b7789f68ae56c430f06a31b0c8001703f8e17caf3ad"
     },
     {
       "path": "bridge/src/KeplerCommandIR.h",
@@ -7478,8 +7478,8 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "05c60331302b88b111ec0afb689d073fd78fe1f3fdefbd6f657277a3c4656b5e",
-  "previous_public_commit": "3c3113b6ed708c2b533d86d7d3ba54d42ab714d3",
+  "previous_source_snapshot_SHA256": "b081659939890c1ba61a668f14710eee6c218c78f13ccc938e849c95725847ad",
+  "previous_public_commit": "75d93ea86ef6ebeea6dc0e93d7b6a71810a17c3c",
   "update": {
     "date": "2026-10-27",
     "reason": "Combined indexed, vertex and pipeline render context",
@@ -7488,5 +7488,5 @@
     ]
   },
   "update_date": "2026-10-27",
-  "update_reason": "Triple render context"
+  "update_reason": "Add a scoped certified fragment-buffer transition and preserve previous contexts."
 }
