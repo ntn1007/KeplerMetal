@@ -102,6 +102,8 @@ are unchanged. No new Metal function, M1 run or benchmark.
 
 New dependency milestone: 19 terminal nonoverlapping processes, 24 software images / 2,764,800 exact NV12 bytes, 38 public query controls and 110 CPU scope checks. Twenty-two real queries target nvAccelerator registry ID 4294968458. Three scoped `IOGVACodec` presence substitutions change GVA selection (178 entry observations versus 87 in native/wrong-key controls), but all 13 hardware creates still fail at -12906 with zero images. This establishes a selection barrier; a complete decoder fix and hardware execution remain unproved. [Evidence and reproduction](VIDEO_DEPENDENCIES.md).
 
+Static video-method analysis now identifies the eight-entry legacy IOAccelerator method table and its SDK kernel layout; submit/get-buffer entries declare 136/8-byte inputs and variable outputs. No video method was invoked and the resource/command ABI remains unqualified. [Method contract](VIDEO_METHOD_CONTRACT.md).
+
 On the current exact profile, a fresh four-process cohort requalifies user-mode `nvAccelerator` type-3 open/close: inventory, wrong-target rejection and two successful opens/closes. No external method, GPU video command or hardware decode is established. [Evidence and reproduction](VIDEO_CONTEXT_CURRENT.md).
 
 A later donor comparison covers the entire 1,026,192-byte pre-signature region of the current GeForce file against a pinned upstream donor; only two validated signature-layout size bytes differ. The missing historical file is not inferred from that comparison, and video/RM qualification remains open. [Details](VIDEO_DONOR_COMPARISON.md).

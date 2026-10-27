@@ -1,0 +1,311 @@
+{
+  "IOAccelerator_SHA256": "37e563d6cf3626101f30b1727a4f60dec02152dff9c74c0269c30c213a7320c8",
+  "GeForce_SHA256": "44f131a958d48afd6ab675a851330c37506557c9d499484170c886c3731bdbb3",
+  "archived_REA_SHA256": "acb34e18ff3a9fff305f988ee12430c25ea5e8ce668c18ddd1ba245bab19fd4d",
+  "table_address": "0x6e3a0",
+  "stride_bytes": 48,
+  "methods": [
+    {
+      "selector": 0,
+      "address": "0x6e3a0",
+      "file_offset": 451488,
+      "descriptor_SHA256": "cc1cb8c2e5a055a2528556254307c0d515bad1a679ec2aa42c778c1b69f1193c",
+      "member_pointer_kind": "direct",
+      "method_symbol": "__ZN15IOAccelContext26finishEv",
+      "method_address": "0x679c",
+      "this_adjustment": 0,
+      "flags": 0,
+      "count0": 0,
+      "count1": 0
+    },
+    {
+      "selector": 1,
+      "address": "0x6e3d0",
+      "file_offset": 451536,
+      "descriptor_SHA256": "00792bcbd6b0acb15ea806500c3acad70a7956c983a08ff03fa84c60b370c107",
+      "member_pointer_kind": "direct",
+      "method_symbol": "__ZN15IOAccelContext215set_client_infoEP17IOAccelClientInfoy",
+      "method_address": "0x67aa",
+      "this_adjustment": 0,
+      "flags": 4,
+      "count0": 0,
+      "count1": 4294967295
+    },
+    {
+      "selector": 2,
+      "address": "0x6e400",
+      "file_offset": 451584,
+      "descriptor_SHA256": "a05d1e44550af6dab0ef95047046414a81ce5c563d7c42d8235059be3c8e7422",
+      "member_pointer_kind": "direct",
+      "method_symbol": "__ZN15IOAccelContext219submit_data_buffersEP33IOAccelContextSubmitDataBuffersInP34IOAccelContextSubmitDataBuffersOutyPy",
+      "method_address": "0x67d2",
+      "this_adjustment": 0,
+      "flags": 3,
+      "count0": 136,
+      "count1": 4294967295
+    },
+    {
+      "selector": 3,
+      "address": "0x6e430",
+      "file_offset": 451632,
+      "descriptor_SHA256": "2fdde3030d814a0821857ab2b41d82eb2da6d791408827cf7aa19540996c6abc",
+      "member_pointer_kind": "direct",
+      "method_symbol": "__ZN15IOAccelContext215get_data_bufferEP29IOAccelContextGetDataBufferInP30IOAccelContextGetDataBufferOutyPy",
+      "method_address": "0x7144",
+      "this_adjustment": 0,
+      "flags": 3,
+      "count0": 8,
+      "count1": 4294967295
+    },
+    {
+      "selector": 4,
+      "address": "0x6e460",
+      "file_offset": 451680,
+      "descriptor_SHA256": "1b4a8e6d1d9a98af81d90aa1fc5bd2b588a85e57d08311fc446a203e8f99613a",
+      "member_pointer_kind": "direct",
+      "method_symbol": "__ZN15IOAccelContext217reclaim_resourcesEv",
+      "method_address": "0x7290",
+      "this_adjustment": 0,
+      "flags": 0,
+      "count0": 0,
+      "count1": 0
+    },
+    {
+      "selector": 5,
+      "address": "0x6e490",
+      "file_offset": 451728,
+      "descriptor_SHA256": "c83b35cde06d3ab10be72732c92b2217f52d790ae4e00ed4d45614cd9ff34189",
+      "member_pointer_kind": "direct",
+      "method_symbol": "__ZN15IOAccelContext218finish_fence_eventEj",
+      "method_address": "0x7450",
+      "this_adjustment": 0,
+      "flags": 0,
+      "count0": 1,
+      "count1": 0
+    },
+    {
+      "selector": 6,
+      "address": "0x6e4c0",
+      "file_offset": 451776,
+      "descriptor_SHA256": "17b0761f87b081d5cf10757ccc89f12be355c70e2e29df288b65b30710dcbcd1",
+      "member_pointer_kind": "null",
+      "method_symbol": null,
+      "method_address": null,
+      "this_adjustment": 0,
+      "flags": 0,
+      "count0": 0,
+      "count1": 0
+    },
+    {
+      "selector": 7,
+      "address": "0x6e4f0",
+      "file_offset": 451824,
+      "descriptor_SHA256": "59f2c5bd488ad9111d3718b05ae829b0593ebe6c6eece8a58660cbe2086a2a8e",
+      "member_pointer_kind": "direct",
+      "method_symbol": "__ZN15IOAccelContext224set_background_renderingEj",
+      "method_address": "0x7628",
+      "this_adjustment": 0,
+      "flags": 0,
+      "count0": 1,
+      "count1": 0
+    }
+  ],
+  "foreground_override": {
+    "address": "0x6e520",
+    "file_offset": 451872,
+    "descriptor_SHA256": "408974ffc2d3659c1c617f7071162fb0328ac5dc2c9ccd5506d008bed9e58c30",
+    "member_pointer_kind": "direct",
+    "method_symbol": "__ZN15IOAccelContext219submit_data_buffersEP33IOAccelContextSubmitDataBuffersInP34IOAccelContextSubmitDataBuffersOutyPy",
+    "method_address": "0x67d2",
+    "this_adjustment": 0,
+    "flags": 19,
+    "count0": 136,
+    "count1": 4294967295
+  },
+  "nvVideoContext_vtable_links": [
+    {
+      "cell": "0x91848",
+      "slot_from_vptr": "0x850",
+      "external_symbol": "__ZN15IOAccelContext214externalMethodEjP25IOExternalMethodArgumentsP24IOExternalMethodDispatchP8OSObjectPv",
+      "target_on_disk": "0x8656",
+      "runtime_relocation_observed": false
+    },
+    {
+      "cell": "0x91938",
+      "slot_from_vptr": "0x940",
+      "external_symbol": "__ZN15IOAccelContext226getTargetAndMethodForIndexEPP9IOServicej",
+      "target_on_disk": "0x860a",
+      "runtime_relocation_observed": false
+    },
+    {
+      "cell": "0x919e8",
+      "slot_from_vptr": "0x9f0",
+      "external_symbol": "__ZN15IOAccelContext219getDataBufferLimitsEv",
+      "target_on_disk": "0xadec",
+      "runtime_relocation_observed": false
+    },
+    {
+      "cell": "0x91a60",
+      "slot_from_vptr": "0xa68",
+      "external_symbol": "__ZN15IOAccelContext213getDataBufferEP29IOAccelContextGetDataBufferInP30IOAccelContextGetDataBufferOutP22IOAccelResourcePrivatey",
+      "target_on_disk": "0x9f70",
+      "runtime_relocation_observed": false
+    },
+    {
+      "cell": "0x91a68",
+      "slot_from_vptr": "0xa70",
+      "external_symbol": "__ZN15IOAccelContext218allocOneDataBufferEbj",
+      "target_on_disk": "0xa99c",
+      "runtime_relocation_observed": false
+    }
+  ],
+  "archived_REA_functions": [
+    {
+      "address": "0x8656",
+      "evidence_id": "ev_3fa93b6b92aaf5f590c5d5f85eb2af3e982d7e9e99a2d559f53f1029796512fd",
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+        "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+        "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+        "Ghidra Listing reports a terminal call at 0x867d to 0x138a00 <EXTERNAL>::__ZN12IOUserClient14externalMethodEjP25IOExternalMethodArgumentsP24IOExternalMethodDispatchP8OSObjectPv (external=false, thunk=true, hasNoReturn=false); fallthrough is excluded by Ghidra's flow model. The reason for the terminal flow is not established by this observation.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ]
+    },
+    {
+      "address": "0x860a",
+      "evidence_id": "ev_908982903c561a85746b8abba566390302e9af730bdfd9746484c9ab99c4bf01",
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+        "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+        "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ]
+    },
+    {
+      "address": "0xadec",
+      "evidence_id": "ev_99f570af976f00a966363ca531f34c8b84e8c4b27b684be9ba2af75b486f0575",
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+        "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+        "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ]
+    },
+    {
+      "address": "0x7a9c",
+      "evidence_id": "ev_cdf7ab79e67a28410b7f9c96a0efa68db74e71bfcf7f3ca039c465eaea50391f",
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "limitations": [
+        "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+        "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+        "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+        "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+        "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ]
+    }
+  ],
+  "static_candidate_classes": {
+    "count_written_by_limits": 2,
+    "candidate_indices": [
+      0,
+      1
+    ],
+    "initialization_is_conditional": true,
+    "current_runtime_value_observed": false
+  },
+  "native_calls": 0,
+  "GPU_commands": 0,
+  "hardware_video_execution_proved": false,
+  "scope": "Pinned on-disk tables and static REA evidence; no live selector dispatch or resource semantics proved",
+  "get_data_buffer_observation": {
+    "address": "0x7144",
+    "evidence_id": "ev_9ef4aee42a6f2eee153d0e5ff80c39bb8a4771f391d11562decd68341dbbbd03",
+    "REA_SHA256": "a1d16102765eb56d78066019ca4a91cb6ac2a056562f847675940745bfd5a5d7",
+    "function_bytes": 331,
+    "input_bytes_minimum_in_body": 8,
+    "output_capacity_minimum_in_body": 48,
+    "next_virtual_slot_from_vptr": "0xa68",
+    "next_target_runtime_observed": false,
+    "qualification": "Static disassembly only; resource ownership, contents and live behavior unknown"
+  },
+  "getDataBuffer_observation": {
+    "address": "0x9f70",
+    "evidence_id": "ev_73185ac90e6c691e4d2eca5f95e61e33d6f341b329cd17b6934db77cab79f6b9",
+    "REA_SHA256": "7bead58f8621856548e64a66d6db7c9fee4d40357ad4bcce3b5d7eada98c6f5b",
+    "function_bytes": 2532,
+    "first_input_word": "u32 compared against context + 0x6dc",
+    "second_input_word": "u32 used in a conditional size-update calculation",
+    "buffer_allocation_virtual_slot": "0xa70",
+    "allocation_runtime_observed": false,
+    "qualification": "Static disassembly only; valid class values, returned resource and release ownership unknown"
+  },
+  "SDK_layout": {
+    "SDK_version": "26.2",
+    "kernel_layout_compile": "PASS",
+    "nonkernel_compile": "EXPECTED_FAILURE",
+    "source_SHA256": "18af92514600512252d3a53351af412093a8ee3e29258bf4c651f8b89f795bb6",
+    "IOUserClient_header_SHA256": "7533d253e0f7fbf19c4577e2d84e816850557599b6e850c35b325571aea9a8d8",
+    "IOTypes_header_SHA256": "42fb65aa1ba30e15fb746a2ad8e75e92dff78f8d0430469ce08e9ba6387601b1",
+    "compiler_runs": [
+      {
+        "mode": "kernel",
+        "exit_code": 0,
+        "stdout_SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "mode": "user_negative",
+        "exit_code": 1,
+        "stdout_SHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_SHA256": "41fb17076765419006286fcdee0d491217d576771ed46889f0a1b0bda19752b6"
+      }
+    ]
+  },
+  "date": "2026-10-27",
+  "base_commit": "2d9acd02b49c741b3d65118f9413f96d966d5fd7",
+  "local_result_SHA256": "e6492bc1a86ca8b0c4e6d904d89476bb46289b3625004eac5dae97c993c5d2e4",
+  "synthetic_test_methods": 8,
+  "system_modified": false
+}
