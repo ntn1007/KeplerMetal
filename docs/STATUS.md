@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+A scoped re-audit recovers the historical legacy-video provider evidence and separately records current protected-file drift. No hardware video is demonstrated. [Evidence](VIDEO_LEGACY_BACKEND.md).
+
 A pinned public-Metal test executable now receives the qualified native CAS repair through an explicit process-local bootstrap, without linking the project API. GPU and negative controls pass; arbitrary third-party and system-wide integration remain open. [Evidence](STANDALONE_CAS.md).
 
 Four CAS SDK certificates were regenerated with the pinned decoder and tested on the current GTX profile. Two repaired runs and native defect controls pass their respective CPU oracles; the runtime remains an opt-in application adapter. [Evidence](CAS_SDK_REGENERATED.md).

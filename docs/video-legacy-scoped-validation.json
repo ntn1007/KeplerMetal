@@ -1,0 +1,37 @@
+{
+  "status": "PASS_SCOPED",
+  "prior_full_audit_repeated": false,
+  "prior_full_audit_currently": "NOT_RUN_BY_THIS_TOOL",
+  "historical_audit_SHA256": "73498e87f5f9872d3a2a5832c2c2dd447e9868cdbb84a4977b405f3f7e217b6b",
+  "current_protected_files_checked": 83,
+  "current_protected_files_changed": [
+    "/System/Library/Extensions/GeForce.kext/Contents/MacOS/GeForce",
+    "/System/Library/Extensions/GeForceMTLDriver.bundle/Contents/MacOS/GeForceMTLDriver",
+    "/System/Library/Frameworks/Metal.framework/Metal",
+    "/Applications/OpenCore-Patcher.app/Contents/Info.plist",
+    "/Applications/OpenCore-Patcher.app/Contents/MacOS/OpenCore-Patcher"
+  ],
+  "current_protected_files_missing": [],
+  "native_hosts": 20,
+  "terminal_nonoverlapping": true,
+  "software_images": 24,
+  "exact_CPU_pixel_bytes": 8985600,
+  "hardware_refusals": 12,
+  "actual_stub_pointer_cases": 2,
+  "static_provenance": {
+    "status": "PASS",
+    "static_functions": 4,
+    "reference_SHA256": "54dc80c41bab45492d1eb601fb1d242b513107645d068bf24edee155b965681f",
+    "profile_SHA256": "8252dac8914947244341b65f7152d97d4b3531b319cd0535a0da0e5af4414275",
+    "REA_bundle_SHA256": "62b0b5c4d5f3d455e59ed1dd6ed392d710c29c898c1e476cf1b67a43c87f9027",
+    "installed_VA_SHA256": "2d3894048f5d61f6735955211bba28cb1e1a0ff9a7f556ebb6c144018388a865",
+    "Create_code_SHA256": "56ab2f750b92826bbc9b12d9878950be8e7783a12315c2efcdcd169726fe8eb4"
+  },
+  "native_execution_during_reaudit": false,
+  "hardware_video_execution_proved": false,
+  "limitations": [
+    "Historical receipts rechecked using pinned original auditors, not independent hardware execution.",
+    "Current protected-file comparison is distinct from the historical observation and excludes unlisted state.",
+    "The matching backend is observed after return, not by a breakpoint on its private entry."
+  ]
+}
