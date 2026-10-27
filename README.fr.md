@@ -15,6 +15,8 @@ Le travail suit deux axes complémentaires :
 
 ## Avancées récentes
 
+Les dessins indexés typés résolvent maintenant les pointeurs 16/32 bits via une table de bindings détenue par la bibliothèque, puis atteignent le rendu indirect natif. Bases de sommet signées, ordre des commandes et rejets de buffers/types étrangers sont vérifiés. [Contrat, réception et reproduction](docs/INDEXED_RENDER.md).
+
 Les appels typés de dessin de triangles sont maintenant traduits vers le chemin de rendu existant, en conservant paramètres dynamiques et ordre des resets. Producteur et images sont comparés à des références CPU/natives indépendantes ; les pipelines natifs et le runtime sont préservés. [Contrat, contrôles et reproduction](docs/TYPED_RENDER_DRAW.md).
 
 Les encodeurs d’arguments publics raccordent maintenant le producteur typé de rendu à un contexte détenu par la bibliothèque, sans construction d’adresses GPU par l’application. Le nouveau runtime passe 27 processus de réception / 2 654 208 canaux exacts et 16 régressions rendu/compute ; les pipelines restent compilés nativement. [Contrat, durées de vie et reproduction](docs/RENDER_RECORD_ARGUMENTS.md).

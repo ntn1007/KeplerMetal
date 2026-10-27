@@ -4,7 +4,9 @@
 static id<MTLComputePipelineState>airResetPipeline;
 static NSDictionary *airResetReceipt;
 static NSString *airResetOutputDirectory;
-#if KP_TYPED_RENDER_DRAW
+#if KP_TYPED_INDEXED_RENDER
+#include "AIRIndexedRenderIntegration.inc"
+#elif KP_TYPED_RENDER_DRAW
 #include "AIRRenderDrawIntegration.inc"
 #else
 static bool airAppliesReset(NSString *mode){return [mode hasPrefix:@"arguments_"]?![mode hasPrefix:@"arguments_no_reset"]:[@[@"air_gpu",@"air_native",@"air_reference"]containsObject:mode];}

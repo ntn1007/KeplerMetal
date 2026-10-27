@@ -18,6 +18,8 @@ The render-record root uses a separate single-ICB argument schema and owned Priv
 
 The opt-in typed draw translator reuses the reset root-metadata decoder and owned render context. It preserves original AIR entry dataflow while lowering literal triangle draw/reset intrinsics to checked record writes; native code is inspected and pinned before execution. Record materialization enforces the existing certified state/geometry envelope. [Contract and raster reception](TYPED_RENDER_DRAW.md).
 
+Indexed render producers use an optional inline binding-table extension after the unchanged v1 root header. Scope/catalogue-owned rows bind state/slot/index format to sealed GPU address spans; the shader maps pointers to element offsets, then the existing materializer checks complete geometry bounds. The context retains and declares index resources through completion. [ABI and reception](INDEXED_RENDER.md).
+
 ## Integration levels
 
 1. Laboratory application explicitly calls experiment functions.

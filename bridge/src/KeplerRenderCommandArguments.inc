@@ -3,6 +3,8 @@
 @interface KPRenderCommandArgumentContext ()
 @property(nonatomic,readwrite,strong) id<MTLBuffer> contextBuffer,commandRecords;
 @property(nonatomic,readwrite) NSUInteger contextOffset,commandRecordsOffset,capacity;
+@property(nonatomic,readwrite) NSUInteger indexBindingCount,indexBindingTableOffset;
+@property(nonatomic,copy) NSArray<id<MTLBuffer>> *indexOwners;
 @property(nonatomic,weak) KPCPUICBScope *scope;
 @property(nonatomic,weak) KPRenderICB *target;
 @property(nonatomic,strong) KPRenderStateCatalogue *catalogue;
@@ -63,7 +65,8 @@
             if((address<a+8&&a<address+8)||(host<prior+8&&prior<host+8))[self refuse:@"Render argument root overlaps an exported root"];
         }
     }
-    for(id<MTLBuffer>b in @[c.contextBuffer,c.commandRecords]){
+    NSMutableArray *protectedResources=[@[c.contextBuffer,c.commandRecords]mutableCopy];[protectedResources addObjectsFromArray:c.indexOwners?:@[]];
+    for(id<MTLBuffer>b in protectedResources){
         uint64_t a=b.gpuAddress;if(address<a+b.length&&a<address+8)[self refuse:@"Render argument root aliases retained resources"];
     }
     if(!_rootRow){

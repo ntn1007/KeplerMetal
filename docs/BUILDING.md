@@ -1,5 +1,7 @@
 # Build from source
 
+[INDEXED_RENDER.md](INDEXED_RENDER.md) adds the indexed producer build, construction-only inspector/certifier and `--typed-indexed-render` reception. The complete runtime gains an optional owned index-binding extension while preserving the basic root prefix.
+
 [TYPED_RENDER_DRAW.md](TYPED_RENDER_DRAW.md) adds a source-only typed draw/reset producer, its independent native MSL reference and inspection/certification gate. `--typed-render-draw` extends the render-argument builder; the combined auditor recomputes producer and rendered-image controls.
 
 [RENDER_RECORD_ARGUMENTS.md](RENDER_RECORD_ARGUMENTS.md) adds `--render-argument-encoders` to the AIR render builder, owned context APIs, ordinary native PSO checks and separate 27-host reception / 16-host regression auditors. The fresh seven-object runtime changes its ICB object only.

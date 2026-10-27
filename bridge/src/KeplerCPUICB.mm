@@ -1,5 +1,6 @@
 #import "KeplerRenderCommandRecords.h"
 #import "KeplerRenderStateRecords.h"
+#import "KeplerIndexedRenderRecords.h"
 #import "KeplerGPUIdentity.h"
 #import "KeplerDriverProfile.h"
 #import "KeplerCPUICB.h"
@@ -165,6 +166,7 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 @property(nonatomic,strong) id<MTLComputePipelineState> GPUCommandIRv2Selector;
 - (NSDictionary*)profileForPipeline:(id<MTLComputePipelineState>)pipeline;
 - (BOOL)validateRenderCommandArgumentContext:(KPRenderCommandArgumentContext*)context error:(NSError**)error;
+- (KPRenderCommandArgumentContext*)newRenderCommandArgumentContextWithCommands:(id<MTLIndirectCommandBuffer>)commands stateCatalogue:(KPRenderStateCatalogue*)catalogue commandRecords:(id<MTLBuffer>)records commandRecordsOffset:(NSUInteger)offset commandBuffer:(id<MTLCommandBuffer>)cb indexedBindings:(BOOL)indexed error:(NSError**)error;
 - (KPRecordedNativeCompute*)materialize:(KPComputeICBCommand*)command;
 - (KPGPUCommandSelection*)newGPUCommandBindingPlanFromBuffer:(id<MTLIndirectCommandBuffer>)source sourceRange:(NSRange)range destination:(id<MTLIndirectCommandBuffer>)destination destinationRange:(NSRange)targetRange resources:(NSArray<NSDictionary*>*)resources input:(id<MTLBuffer>)input inputOffset:(NSUInteger)offset nonce:(uint32_t)nonce IR:(BOOL)IR error:(NSError**)error;
 - (KPGPUCommandSelection*)newGPUCommandIRv2FromBuffer:(id<MTLIndirectCommandBuffer>)source sourceRange:(NSRange)range destination:(id<MTLIndirectCommandBuffer>)destination destinationRange:(NSRange)targetRange resources:(NSArray<NSDictionary*>*)resources records:(id<MTLBuffer>)records recordOffset:(NSUInteger)offset stablePipelineIdentities:(BOOL)stable error:(NSError**)error;

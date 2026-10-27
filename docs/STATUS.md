@@ -1,5 +1,7 @@
 # Status, 2026-10-24
 
+The typed render path now handles indexed device-pointer triangles in both element widths through an owned inline binding table. It preserves the v1 root prefix, retains index resources and checks exact pointer/format/span mapping before the existing sealed materializer. CPU/native image references and missing/foreign/wrong-kind/table/order controls qualify the path. [Exact evidence and limitations](INDEXED_RENDER.md).
+
 Typed triangle draws and resets now preserve original AIR dataflow and feed the owned render-record/raster path. Independent producer, direct-draw and missing/order controls qualify dynamic geometry, preserved state identity, complete six-vertex rectangles and sealed-envelope refusals. This extends the earlier reset-only path without changing the core runtime. [Exact qualification, source and limits](TYPED_RENDER_DRAW.md).
 
 The public render argument-root path now owns context construction/resource declarations and completion lifetimes. Twenty-seven final hosts pass 216 frames / 2,654,208 exact float channels, 168 reset dispatches and 66 expected API refusals; 216 ordinary native PSO programs match the pinned certificate. Sixteen fresh render/compute IRv2 regression hosts pass on the same new runtime. All 287 CPU tests pass and 87 system files stay unchanged. This remains scoped adapted-application support; native Apple ICB identity and transparent integration remain open. [Evidence and reproduction](RENDER_RECORD_ARGUMENTS.md).

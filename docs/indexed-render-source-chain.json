@@ -1,0 +1,214 @@
+{
+  "base_commit": "910352de122b14a619a599273a5aeebae3a2266c",
+  "entries": [
+    {
+      "path": "bridge/src/KeplerCPUICB.h",
+      "SHA256": "004cfb7ffa1747cde2ed3a7925d7e3527106efb3c8ec0c601b3b22756d93e994",
+      "frozen_build_copies": [
+        {
+          "build": "typed-indexed-render-20261024-01",
+          "folder": "src",
+          "SHA256": "004cfb7ffa1747cde2ed3a7925d7e3527106efb3c8ec0c601b3b22756d93e994"
+        },
+        {
+          "build": "render-build-02",
+          "folder": "src",
+          "SHA256": "004cfb7ffa1747cde2ed3a7925d7e3527106efb3c8ec0c601b3b22756d93e994"
+        }
+      ]
+    },
+    {
+      "path": "bridge/src/KeplerCPUICB.mm",
+      "SHA256": "899f27e8e4d7b02567880f4fbb9785696d31b64e945c489b7a5e14e1361a6d4c",
+      "frozen_build_copies": [
+        {
+          "build": "typed-indexed-render-20261024-01",
+          "folder": "src",
+          "SHA256": "899f27e8e4d7b02567880f4fbb9785696d31b64e945c489b7a5e14e1361a6d4c"
+        }
+      ]
+    },
+    {
+      "path": "bridge/src/KeplerIndexedRenderRecords.h",
+      "SHA256": "257c48a39057c51e6f09493d9a271e57b30377c7c154a2b3272e993a72aa2d39",
+      "frozen_build_copies": [
+        {
+          "build": "typed-indexed-render-20261024-01",
+          "folder": "src",
+          "SHA256": "257c48a39057c51e6f09493d9a271e57b30377c7c154a2b3272e993a72aa2d39"
+        },
+        {
+          "build": "producer-build-02",
+          "folder": "src",
+          "SHA256": "257c48a39057c51e6f09493d9a271e57b30377c7c154a2b3272e993a72aa2d39"
+        }
+      ]
+    },
+    {
+      "path": "bridge/src/KeplerRenderCommandArguments.inc",
+      "SHA256": "e295bc0857ab56fa5863f0a16f3050e58e1ea0bd150e12380d669f9275c1bb9a",
+      "frozen_build_copies": [
+        {
+          "build": "typed-indexed-render-20261024-01",
+          "folder": "src",
+          "SHA256": "e295bc0857ab56fa5863f0a16f3050e58e1ea0bd150e12380d669f9275c1bb9a"
+        }
+      ]
+    },
+    {
+      "path": "bridge/src/KeplerRenderCommandArgumentsScope.inc",
+      "SHA256": "d66f54bada610aebb6beac946caf3cf40caee60082dac8f493c043900b8fecf6",
+      "frozen_build_copies": [
+        {
+          "build": "typed-indexed-render-20261024-01",
+          "folder": "src",
+          "SHA256": "d66f54bada610aebb6beac946caf3cf40caee60082dac8f493c043900b8fecf6"
+        }
+      ]
+    },
+    {
+      "path": "bridge/src/air_indexed_render.metal",
+      "SHA256": "24998853b2f07c1d7f91a023978b1861d0ee228f7700f732b62862591c39e5c8",
+      "frozen_build_copies": [
+        {
+          "build": "producer-build-02",
+          "folder": "src",
+          "SHA256": "24998853b2f07c1d7f91a023978b1861d0ee228f7700f732b62862591c39e5c8"
+        }
+      ]
+    },
+    {
+      "path": "bridge/src/air_indexed_render_reference.metal",
+      "SHA256": "3f3f4e3bcbeeb1bc1c7f383e89c8420ec5b3ddae37b2c5f9349e6a682ab338e3",
+      "frozen_build_copies": [
+        {
+          "build": "producer-build-02",
+          "folder": "src",
+          "SHA256": "3f3f4e3bcbeeb1bc1c7f383e89c8420ec5b3ddae37b2c5f9349e6a682ab338e3"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/AIRIndexedRenderIntegration.inc",
+      "SHA256": "4e86ffaa54186aa053bde2754b75dbca8c53ad6a6a77a081d8a5e74f79c540a6",
+      "frozen_build_copies": [
+        {
+          "build": "render-build-02",
+          "folder": "src",
+          "SHA256": "4e86ffaa54186aa053bde2754b75dbca8c53ad6a6a77a081d8a5e74f79c540a6"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/AIRRenderResetIntegration.inc",
+      "SHA256": "3c10ffc396ba516579750db831c0cbc32fd147a2ee1d7175476636d98d4cbc50",
+      "frozen_build_copies": [
+        {
+          "build": "render-build-02",
+          "folder": "src",
+          "SHA256": "3c10ffc396ba516579750db831c0cbc32fd147a2ee1d7175476636d98d4cbc50"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/RenderRecordArgumentsEncode.inc",
+      "SHA256": "8ab615cbd414ef15e0ddd51f99e52db56611ba23e95c5ab897726a814a962e81",
+      "frozen_build_copies": [
+        {
+          "build": "render-build-02",
+          "folder": "src",
+          "SHA256": "8ab615cbd414ef15e0ddd51f99e52db56611ba23e95c5ab897726a814a962e81"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/air_indexed_render_lowering.py",
+      "SHA256": "876efd17962542f4992e43f5f27fd4b909531b00772f2ce27d0176489824eb5d",
+      "frozen_build_copies": [
+        {
+          "build": "producer-build-02",
+          "folder": "src",
+          "SHA256": "876efd17962542f4992e43f5f27fd4b909531b00772f2ce27d0176489824eb5d"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/air_reset_dataflow_probe.mm",
+      "SHA256": "5bc29d63a9739580c62fac6bf2eb2ef1fbf4ff5472fff9ab90f9ab93f1f22bb7",
+      "frozen_build_copies": [
+        {
+          "build": "producer-build-02",
+          "folder": "src",
+          "SHA256": "5bc29d63a9739580c62fac6bf2eb2ef1fbf4ff5472fff9ab90f9ab93f1f22bb7"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/audit_indexed_render.py",
+      "SHA256": "199664b34fb2d351e572269ff84e438ba75ce7c907917b880d123144bec7caaf"
+    },
+    {
+      "path": "bridge/tools/public_air_indexed_render.py",
+      "SHA256": "01785e61cf56de46af62c083bf4fe63f030c7a9a56b07138e224febb3e6a33bb",
+      "frozen_build_copies": [
+        {
+          "build": "producer-build-02",
+          "folder": "src",
+          "SHA256": "01785e61cf56de46af62c083bf4fe63f030c7a9a56b07138e224febb3e6a33bb"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/public_render_state_catalogue.py",
+      "SHA256": "bb20eb02311c53be04718e7b545a25df4e7c107e21eb96febc6f93660b453051",
+      "frozen_build_copies": [
+        {
+          "build": "render-build-02",
+          "folder": "src",
+          "SHA256": "bb20eb02311c53be04718e7b545a25df4e7c107e21eb96febc6f93660b453051"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/render_state_catalogue_client.mm",
+      "SHA256": "f100febe7ef24ceeded66ab99f25d6bf44249e60709cc111ddfb946193471b9d",
+      "frozen_build_copies": [
+        {
+          "build": "render-build-02",
+          "folder": "src",
+          "SHA256": "f100febe7ef24ceeded66ab99f25d6bf44249e60709cc111ddfb946193471b9d"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/verify_air_indexed_inspection.py",
+      "SHA256": "6d9fde399e55750ceaafbd145c8d5fe19af52c82266efbb84df6955ee351ebb7",
+      "frozen_build_copies": [
+        {
+          "build": "producer-build-02",
+          "folder": "oracles",
+          "SHA256": "6d9fde399e55750ceaafbd145c8d5fe19af52c82266efbb84df6955ee351ebb7"
+        }
+      ]
+    },
+    {
+      "path": "bridge/tools/verify_indexed_render.py",
+      "SHA256": "94b3de064dc9784594d4c688907be522826517d7aebe4e69ad24b1dfdd3d922e",
+      "frozen_build_copies": [
+        {
+          "build": "render-build-02",
+          "folder": "oracles",
+          "SHA256": "94b3de064dc9784594d4c688907be522826517d7aebe4e69ad24b1dfdd3d922e"
+        }
+      ]
+    },
+    {
+      "path": "tests/fixtures/air_indexed_render_ir.json",
+      "SHA256": "1a89ad225d807e74d93fcf1da27fab6c777055b6c8170ebc07e227bff12a0f0d"
+    },
+    {
+      "path": "tests/test_indexed_render.py",
+      "SHA256": "a3329507ee324ded046fb1eba230bb7e443d94de5a9d348f23da620b2232eb24"
+    }
+  ]
+}

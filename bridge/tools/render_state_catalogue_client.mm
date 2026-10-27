@@ -86,6 +86,9 @@ static StateCapture *encodeFrame(id<MTLDevice>device,id<MTLCommandQueue>queue,NS
     NSMutableData *instanceData=bytes(512);memset((char*)instanceData.mutableBytes+128,0,128);id<MTLBuffer>instances=privateBuffer(@"instances",instanceData);
     id<MTLBuffer>indices[2];unsigned order[]={5,6,7,7,6,8};
     for(unsigned kind=0;kind<2;kind++){NSMutableData *data=bytes(256);for(unsigned i=0;i<6;i++)if(kind)((uint32_t*)((char*)data.mutableBytes+64))[i]=order[i];else((uint16_t*)((char*)data.mutableBytes+64))[i]=order[i];indices[kind]=privateBuffer([NSString stringWithFormat:@"indices-%u",kind],data);}
+#if KP_TYPED_INDEXED_RENDER
+    if([mode isEqual:@"indexed_contracts"]){NSMutableData *data=bytes(256);for(unsigned i=0;i<6;i++)((uint16_t*)((char*)data.mutableBytes+64))[i]=order[i];indices[0]=[device newBufferWithBytes:data.bytes length:data.length options:MTLResourceStorageModeShared];require(indices[0]!=nil,"shared certified index allocation");buffers[@"indices-0"]=indices[0];}
+#endif
     NSMutableData *markerData=[vertices(0,false,0,0)mutableCopy];
     // Marker uses only x in [0,8), unlike the candidate's left rectangle.
     for(unsigned i=0;i<6;i++){Vertex *v=(Vertex*)((char*)markerData.mutableBytes+64+i*32);v->position[0]=(v->position[0]+1.f)/4.f-1.f;}
@@ -178,7 +181,10 @@ static StateCapture *encodeFrame(id<MTLDevice>device,id<MTLCommandQueue>queue,NS
         uint32_t value=values[(trial*5+3)%16];
         for(unsigned i=0;i<3;i++){
             unsigned slot=i==2?3:i;if(!produce)continue;
-#if KP_TYPED_RENDER_DRAW
+#if KP_TYPED_INDEXED_RENDER
+            if(i&&airDispatchesReset(mode)){if(!airIndexReferenceAccepted(trial,i,mode))continue;}
+            else if(!accepted(trial,slot))continue;
+#elif KP_TYPED_RENDER_DRAW
             if(!i&&airDispatchesReset(mode)){if(!airDrawReferenceAccepted(trial,mode))continue;}
             else if(!accepted(trial,slot))continue;
 #else
@@ -192,8 +198,11 @@ static StateCapture *encodeFrame(id<MTLDevice>device,id<MTLCommandQueue>queue,NS
 #if KP_TYPED_RENDER_DRAW
             if(!i&&airDispatchesReset(mode)){uint32_t seed=airDrawSeed(trial);start=5u+3u*((seed>>3)&1u);drawCount=3u*((seed>>4)&3u);drawInstances=(seed>>6)&1u;drawBase=(seed>>8)&3u;}
 #endif
+#if KP_TYPED_INDEXED_RENDER
+            if(i&&airDispatchesReset(mode))airIndexDrawArguments(trial,i,mode,start,drawCount,drawInstances);
+#endif
             [e setRenderPipelineState:[scope renderPipelineForName:@[@"smooth",@"linear",@"flat"][function]]];[e setVertexBuffer:vbo[state][i]offset:64 atIndex:0];[e setVertexBuffer:instances offset:128 atIndex:1];[e setFragmentBuffer:fragmentTables[state][i]offset:256 atIndex:0];
-            if(!i)[e drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:start vertexCount:drawCount instanceCount:drawInstances baseInstance:drawBase];else[e drawIndexedPrimitives:MTLPrimitiveTypeTriangle indexCount:3 indexType:i==1?MTLIndexTypeUInt16:MTLIndexTypeUInt32 indexBuffer:indices[i-1]indexBufferOffset:64+start*(i==1?2:4)instanceCount:1 baseVertex:i==1?2:-2 baseInstance:i==1?1:2];
+            if(!i)[e drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:start vertexCount:drawCount instanceCount:drawInstances baseInstance:drawBase];else[e drawIndexedPrimitives:MTLPrimitiveTypeTriangle indexCount:drawCount indexType:i==1?MTLIndexTypeUInt16:MTLIndexTypeUInt32 indexBuffer:indices[i-1]indexBufferOffset:64+start*(i==1?2:4)instanceCount:drawInstances baseVertex:i==1?2:-2 baseInstance:i==1?1:2];
             for(id resource in leases)if([resource conformsToProtocol:@protocol(MTLResource)])[e useResource:resource usage:MTLResourceUsageRead stages:MTLRenderStageFragment];
         }
         [e setRenderPipelineState:marker];[e setVertexBuffer:markerVertices offset:64 atIndex:0];if(trial%2){[e setVertexBytes:mp length:16 atIndex:1];[e setFragmentBytes:mp length:16 atIndex:0];}else{[e setVertexBuffer:markerBuffer offset:128 atIndex:1];[e setFragmentBuffer:markerBuffer offset:128 atIndex:0];}
@@ -223,7 +232,9 @@ static StateCapture *encodeFrame(id<MTLDevice>device,id<MTLCommandQueue>queue,NS
 
 int main(int argc,char **argv){@autoreleasepool{@try{try{
     require(argc==4,"arguments");NSString *assets=@(argv[1]),*directory=@(argv[2]),*mode=@(argv[3]);
-#if KP_TYPED_RENDER_DRAW
+#if KP_TYPED_INDEXED_RENDER
+    require([airIndexedModes()containsObject:mode],"typed indexed mode");
+#elif KP_TYPED_RENDER_DRAW
     require([@[@"draw_gpu",@"draw_native",@"draw_reference",@"draw_no_dispatch",@"draw_no_dispatch_native",@"draw_after_reset",@"draw_after_reset_native",@"draw_then_reset",@"draw_then_reset_native"]containsObject:mode],"typed draw mode");
 #elif KP_RENDER_ARGUMENT_ENCODERS
     require([@[@"arguments_gpu",@"arguments_native",@"arguments_device",@"arguments_reflection",@"arguments_arrays",@"arguments_reuse",@"arguments_no_reset",@"arguments_no_reset_native",@"arguments_contracts"]containsObject:mode],"render argument mode");

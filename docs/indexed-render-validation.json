@@ -1,0 +1,143 @@
+{
+  "status": "PASS_INDEXED_RENDER",
+  "observed_date": "2026-10-24",
+  "base_commit": "910352de122b14a619a599273a5aeebae3a2266c",
+  "scope": "adapted application, typed indexed render commands, uint16 and uint32 device pointers",
+  "gpu": "NVIDIA GeForce GTX 880M (PCI 10de:1198)",
+  "qualification": {
+    "status": "PASS_INDEXED_RENDER",
+    "signed_terminal_nonoverlapping_hosts": 36,
+    "rendered_frames": 288,
+    "checked_float_channels": 3538944,
+    "maximum_error": 0,
+    "indexed_dispatches": 256,
+    "arithmetic_witness_words": 1024,
+    "ordinary_native_programs_checked": 288,
+    "owned_binding_rows_checked": 1024,
+    "API_refusals": 4,
+    "raster_materializer_guard_bytes": 203776,
+    "root_guard_bytes": 147456,
+    "reference_control_image_pairs": 224,
+    "repeat_image_pairs": 144,
+    "repeat_readback_file_pairs": 4304,
+    "preceding_v1_image_pairs": 16,
+    "changed_float_channels_per_trial": {
+      "indexed_no_dispatch": [
+        [
+          2400,
+          1219,
+          3072,
+          3460,
+          1296,
+          1924,
+          0,
+          0
+        ],
+        [
+          2400,
+          1219,
+          3072,
+          3460,
+          1296,
+          1924,
+          0,
+          0
+        ]
+      ],
+      "indexed_foreign": [
+        [
+          3552,
+          2577,
+          6144,
+          0,
+          0,
+          0,
+          3566,
+          0
+        ],
+        [
+          3552,
+          2577,
+          6144,
+          0,
+          0,
+          0,
+          3566,
+          0
+        ]
+      ],
+      "indexed_last": [
+        [
+          7200,
+          1219,
+          3072,
+          3020,
+          4368,
+          3141,
+          7380,
+          0
+        ],
+        [
+          7200,
+          1219,
+          3072,
+          3020,
+          4368,
+          3141,
+          7380,
+          0
+        ]
+      ]
+    },
+    "static_library_SHA256": "bdc226856d3ba8c9b0c805d14ffba829ae79766795bbbfdb52d501bef413d729",
+    "native_Apple_ICB_ABI": false,
+    "performance_benchmark": false,
+    "full_objective_complete": false
+  },
+  "regression": {
+    "status": "PASS",
+    "signed_terminal_nonoverlapping_hosts": 13,
+    "render_hosts": 4,
+    "rendered_frames": 32,
+    "checked_float_channels": 393216,
+    "compute_hosts": 9,
+    "exact_uint32_results": 2291712,
+    "consumer_invocations": 572928
+  },
+  "system_files_unchanged": 87,
+  "all_actual_signed_terminal_nonoverlapping_hosts": 60,
+  "source_rebuild": {
+    "status": "PASS",
+    "exported_source_tree": "54f06a3e926bd0f24955e4022831d82463e9ff3b",
+    "source_files": 55,
+    "object_files": 7,
+    "archive_members_including_symbol_table": 8,
+    "archive_payloads_identical": true,
+    "archive_bytes_identical": false,
+    "producer_application_sha256": "db0f7a97126465f6661e441151865a41ee8413e3aa884f049e3553a65cac048f",
+    "render_application_sha256": "573dda0c07c5ede66b910696fe49e6d41e1cbb6b7ff7e83b3130625751f0fbcd",
+    "render_helper_object_sha256": "a1f27a1b95711e65af7927d20a75919ee5b257dd52152afb14903bb914241d20",
+    "optimized_ir_equal_except_module_path": true,
+    "intermediate_air_byte_identity_not_claimed": true,
+    "CPU_tests": 324,
+    "public_rebuild_tests_result": "PASS",
+    "initial_compiler_timeout_then_retry": "PASS after Metal toolchain became available"
+  },
+  "public_reception_audit_matches_original": true,
+  "CPU_unit_tests": 324,
+  "new_indexed_CPU_tests": 17,
+  "worker_jobs": [],
+  "private_evidence_sha256": {
+    "FINAL_AUDIT.json": "370f9db689da5e19abcc81a361b8dd8f3283d90339de6da59c8d04f45032cbd7",
+    "REGRESSION_AUDIT.json": "effd0502b34ec12c64084025e8cb16c58a0627b6093f571185903300934443c5",
+    "SYSTEM_AUDIT.json": "b5b8d669b11b66b8e7603dae7620d2eab1d9c35b66818824cd5e61abbf0778b7",
+    "ACTUAL_PROCESS_INVENTORY.json": "9bd65753526c1cc0e6cd6b239fa6adf6b9c1dc9740295ecf56220d202d34512f",
+    "PUBLIC_REBUILD_AUDIT.json": "452db69c430a3735af54b3648bc772807fcf5d9b59ad95cca674113e3569d5db",
+    "PUBLIC_RECEPTION_AUDIT.json": "370f9db689da5e19abcc81a361b8dd8f3283d90339de6da59c8d04f45032cbd7"
+  },
+  "limitations": [
+    "Four logical slots and two states with common underlying index buffers were tested; wider combinations are not qualified.",
+    "No claim of native Apple ICB ABI, transparent integration, Metal 3 or 4 conformance, hardware video support or a performance gain.",
+    "Hardware tests are the recorded October 24 cohort, not a new GPU execution during public source rebuild."
+  ]
+}

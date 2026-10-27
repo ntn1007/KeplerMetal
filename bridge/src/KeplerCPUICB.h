@@ -15,6 +15,7 @@
 @interface KPRenderCommandArgumentContext : NSObject
 @property(nonatomic,readonly,strong) id<MTLBuffer> contextBuffer,commandRecords;
 @property(nonatomic,readonly) NSUInteger contextOffset,commandRecordsOffset,capacity;
+@property(nonatomic,readonly) NSUInteger indexBindingCount,indexBindingTableOffset;
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 @end
@@ -306,6 +307,14 @@
                                                          commandRecordsOffset:(NSUInteger)offset
                                                                 commandBuffer:(id<MTLCommandBuffer>)commandBuffer
                                                                         error:(NSError **)error;
+// Adds an immutable table of the catalogue's exact index-buffer spans. The
+// original root header remains compatible with reset/nonindexed producers.
+- (KPRenderCommandArgumentContext *)newIndexedRenderCommandArgumentContextWithCommands:(id<MTLIndirectCommandBuffer>)commands
+                                                                      stateCatalogue:(KPRenderStateCatalogue *)catalogue
+                                                                      commandRecords:(id<MTLBuffer>)records
+                                                                commandRecordsOffset:(NSUInteger)offset
+                                                                       commandBuffer:(id<MTLCommandBuffer>)commandBuffer
+                                                                               error:(NSError **)error;
 // Seal one exported Shared root, declare its indirect resources and retain
 // them until this same uncommitted command buffer completes. Roots must not
 // be modified until completion. Restoring the scope after encoding is allowed.

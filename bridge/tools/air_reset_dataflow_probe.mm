@@ -24,6 +24,9 @@ static NSArray *cases(){return @[
 int main(int argc,char**argv){@autoreleasepool{@try{
  need(argc==5,"library mode output certificate");NSString*mode=@(argv[2]),*out=@(argv[3]);
  need([@[@"inspect",@"execute",@"no_dispatch"]containsObject:mode],"Unknown mode");
+#if KP_AIR_INSPECTION_ONLY
+ need([mode isEqual:@"inspect"],"This host is restricted to construction-only inspection");
+#endif
  id<MTLDevice>device=nil;for(id<MTLDevice>d in MTLCopyAllDevices())if(KPKepler880MIdentity(d)){need(!device,"Ambiguous device");device=d;}need(device,"GPU absent");
  NSError*error=nil;id<MTLLibrary>library=[device newLibraryWithURL:[NSURL fileURLWithPath:@(argv[1])]error:&error];need(library,"Library refused");
  id<MTLFunction>function=[library newFunctionWithName:@"probe_boundary"];need(function,"Function absent");
