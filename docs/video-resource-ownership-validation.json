@@ -1,0 +1,100 @@
+{
+  "status": "PASS",
+  "scope": "static pinned binaries and REA captures only",
+  "IOAccelerator_SHA256": "37e563d6cf3626101f30b1727a4f60dec02152dff9c74c0269c30c213a7320c8",
+  "GeForce_SHA256": "44f131a958d48afd6ab675a851330c37506557c9d499484170c886c3731bdbb3",
+  "vtable_external_relocations": [
+    {
+      "slot": "0x5c0",
+      "external_symbol": "__ZN15IOAccelContext25startEP9IOService"
+    },
+    {
+      "slot": "0x5c8",
+      "external_symbol": "__ZN15IOAccelContext24stopEP9IOService"
+    },
+    {
+      "slot": "0x600",
+      "external_symbol": "__ZN9IOService9terminateEj"
+    },
+    {
+      "slot": "0x678",
+      "external_symbol": "__ZN9IOService6detachEPS_"
+    },
+    {
+      "slot": "0x8f0",
+      "external_symbol": "__ZN15IOAccelContext211clientCloseEv"
+    },
+    {
+      "slot": "0x918",
+      "external_symbol": "__ZN15IOAccelContext213connectClientEP12IOUserClient"
+    }
+  ],
+  "nvVideoContext_contextStop_override": "0x68340",
+  "parent_vtable_target_on_disk": "0x3a062",
+  "base_vtable_target_on_disk": "0x7eea",
+  "function_evidence": [
+    {
+      "address": "0x83b4",
+      "capture_SHA256": "ec73d8735a3fd96bad36145b129979ee5cb68387a3335200c1309c716d548fbd",
+      "evidence_id": "ev_bee5bc6856791f275d991d8a50ebe05e56f2911012c7e6b1aa5b7f1cd3f778f1",
+      "bytes": 591
+    },
+    {
+      "address": "0x2b056",
+      "capture_SHA256": "e01bde5c00abb9cd4ac1cb4fe3a301d8aecaf691415c375c7cc666fed1df9d3f",
+      "evidence_id": "ev_0184de253bb8a43a6e8088d4df57af2309ff685771640f33ab5bb24a54977511",
+      "bytes": 111
+    },
+    {
+      "address": "0x2b0c6",
+      "capture_SHA256": "3bec884762f8b954bac8084e3c8b91073cd87d9af73fadfbcfacdf84971090ae",
+      "evidence_id": "ev_ddc01ec0bd4e8d6222ee6ca89c252bcc7175bbbb25a9b43b1396ea7c32861818",
+      "bytes": 234
+    },
+    {
+      "address": "0x2b7b2",
+      "capture_SHA256": "ca42e2cf179b365e198e3a54c20dd102e7f897b62c7af311282428ec35fe75e7",
+      "evidence_id": "ev_24e6e61d0c50bb5d7df35138bb51a27873eb08c5a62d2fee2cda82411cb49815",
+      "bytes": 84
+    },
+    {
+      "address": "0x7eea",
+      "capture_SHA256": "d5e663b382ae042e5b9b67ff13eb7b7379897d1664a8ec7dee110395fb6622bb",
+      "evidence_id": "ev_1884adaec23bec032e598965592d81a25cca1306b656c129459d8aa1abb1399a",
+      "bytes": 631
+    },
+    {
+      "address": "0x8162",
+      "capture_SHA256": "29b3079b9d69316f3ace9d4425a6a67374235c3e98a0e65fc3c3c540ed18d2a1",
+      "evidence_id": "ev_ee8511cd806b2b37e4c767451d79fcdafd4a2f155343fc044586ac2ae0bcfe16",
+      "bytes": 545
+    },
+    {
+      "address": "0x3a062",
+      "capture_SHA256": "ab4a3cb9495523fc909c5383540dc0e4fc5e03ec5192947fdf2a2de5f07cf8b0",
+      "evidence_id": "ev_5099c7c1b4081816814754d254a6e2d5bcf00e748a1d52d81a8060b1097379c0",
+      "bytes": 72
+    },
+    {
+      "address": "0x7880",
+      "capture_SHA256": "dae6ad161f934a828bae0e17fcc1934fc16506718546d678638722ca9bf5c384",
+      "evidence_id": "ev_95e9b16533ee7ba34ba58b41e72f5a13b4ea5a707964423aae085f5babba6b86",
+      "bytes": 211
+    },
+    {
+      "address": "0x7954",
+      "capture_SHA256": "f3d4cb6326c23e76e3df9b1fcffce30ea0b788dad95de6b32ec46049195c90d0",
+      "evidence_id": "ev_0491c9b5a4da4b3c854f4d073c7e0882688224d044dabb1309e2eb11e22b4541",
+      "bytes": 51
+    },
+    {
+      "address": "0x68340",
+      "capture_SHA256": "cefd15abcac4a8328985ddaaefca57b65080626ad7cca026db22919c15ed2fcf",
+      "evidence_id": "ev_b970248367bcb334bc50119cc8a5cc230a6c2d77a8fc0ddca11a1867f50a1230",
+      "bytes": 18
+    }
+  ],
+  "live_connections": 0,
+  "hardware_video_execution_proved": false,
+  "cleanup_after_connect_observed": false
+}
