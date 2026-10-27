@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "GeForce_SHA256": "44f131a958d48afd6ab675a851330c37506557c9d499484170c886c3731bdbb3",
+  "factory": {
+    "address": "0xd328",
+    "capture_SHA256": "86cd77050160acc767cfeb929049fa756e03ac6011d0db01663b3d7bfe69500b",
+    "evidence_id": "ev_62c777b2ac1ff72567dfa7053a53d60ae457e30c16d5e3a277eb90c80d3e3959",
+    "bytes": 1045
+  },
+  "type6_static_task_device_lookup": true,
+  "lookup_target": "0xd73e",
+  "missing_device_path_error": "0xe00002c9",
+  "actual_runtime_branch_observed": false,
+  "runtime_refusal_cause_proved": false
+}
