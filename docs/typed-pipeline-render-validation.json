@@ -1,0 +1,47 @@
+{
+  "status": "PASS",
+  "render_hosts": 20,
+  "compute_hosts": 16,
+  "render_float_channels": 245760,
+  "render_dispatches": 12,
+  "compute_dispatches": 14,
+  "render_native_pairs": 10,
+  "repeat_image_pairs": 10,
+  "unique_serialized_hosts": 36,
+  "causal_images_distinct": true,
+  "active_vs_no_dispatch_different_channels": 9216,
+  "active_vs_foreign_different_channels": 6144,
+  "maximum_cpu_error": 5.960464477539063e-08,
+  "scope": "explicit laboratory context; not native Apple ICB ABI or transparent application support",
+  "native_program": {
+    "profile": "typed-pipeline-binding-air28-experiment-v1",
+    "library_SHA256": "5a1f7a8b42dcccfce7b85adeca381cbe666fe614a0dd86321333a3a20fa371b5",
+    "driver_SHA256": "e240d54a4cd64b7e54fbc15250de82e88451132e1d9f3a4f9879607c8b0e7645",
+    "code_SHA256": "e614eeea325e460568984e6098975f733454d2794873dd659d02372093a9eeb0",
+    "code_bytes": 2240,
+    "no_native_call": true
+  },
+  "audit_sha256": "a564ad9f6d063cc1bf0041102ac1ede70428a398ae13d83ff20be5b4c0318ebe",
+  "environment": {
+    "macOS": "26.7.1",
+    "build": "25G241",
+    "SDK": "26.2",
+    "GPU": "GeForce GTX 880M",
+    "architecture": "GK104/SM30"
+  },
+  "cpu_tests_passed": 351,
+  "limitations": {
+    "transparent_application_support": false,
+    "native_apple_icb_abi": false,
+    "runtime_owns_context": false,
+    "performance_measured": false
+  },
+  "source_export": {
+    "cpu_tests_passed": 351,
+    "runtime_source_build": "PASS",
+    "producer_library_sha256_identical": "5a1f7a8b42dcccfce7b85adeca381cbe666fe614a0dd86321333a3a20fa371b5",
+    "compute_executable_sha256_identical": "54144fe6f5c99d595205d6e52497dd06ac3024fad383ba6a2b7b7fc578fb2e90",
+    "render_executable_sha256_identical": "8cee085f93cdd7e678eae8f87af80514552bfa14e54cf419cd287df2fb2c0165",
+    "second_gpu_cohort_run": false
+  }
+}

@@ -1,5 +1,7 @@
 # Status, 2026-10-24
 
+An adapted laboratory client translates typed render-pipeline selection and changes a GTX image; 20 rendering and 16 compute hosts pass bounded CPU, native-image and negative controls. The client manually owns the context; runtime integration remains open. [Evidence and limits](TYPED_PIPELINE_RENDER.md).
+
 A construction-only GTX/M1 comparison locates a missing typed render-pipeline encoder and compiler path. An offline transition planner is under development; no new GPU execution is claimed. [Observation, reproduction and limits](RENDER_PIPELINE_BOUNDARY.md).
 
 The dual root combines certified vertex transitions and indexed draw spans for one adapted shader. [Evidence and limits](COMBINED_INDEX_VERTEX.md).

@@ -19,6 +19,8 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
+A typed render-pipeline selector now changes a real GTX image in an explicitly adapted laboratory client. CPU, native-image and negative controls qualify this bounded case; automatic application integration remains open. [Evidence and reproduction](docs/TYPED_PIPELINE_RENDER.md).
+
 A GTX/M1 comparison identifies the boundary for typed render-pipeline arguments. The new transition planner is CPU-only and not yet integrated. [Evidence and limits](docs/RENDER_PIPELINE_BOUNDARY.md).
 
 Typed indexed triangles now resolve 16/32-bit index pointers through an owned binding table, then reach native indirect rendering. The source keeps signed base vertices and command order; foreign buffers, wrong formats, absent tables and overlap are checked. [Contract, reception and source-only reproduction](docs/INDEXED_RENDER.md).
