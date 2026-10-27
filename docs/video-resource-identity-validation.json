@@ -1,0 +1,41 @@
+{
+  "application_SHA256": "878f8d036ae24240a02c496c61016d0a2d724462abf61ec73fe2bfaa8d73e687",
+  "audit_mutations_rejected": [
+    "resource_shared_matches",
+    "resource_nonnull",
+    "negative_null_rejected",
+    "getter_called",
+    "getter_sha256",
+    "resource_slot_offset",
+    "reservation_not_terminal"
+  ],
+  "audit_source_SHA256": "8d98e2bb2ae3f3653749f0917776dc00a76adee68a021b24849d1269937c4660",
+  "build_inputs_SHA256": "d0638dbc232803b3b2b0044b13c826a6ed33ce6b356593190d8d6ed6587c5bba",
+  "device_audit_dependency_SHA256": "217b4b452e119b8cc8d6f5d9fe63ec4fa43e6f3f40a6e8048dbb4f5d9a4b94de",
+  "explicit_GPU_dispatches": 0,
+  "hardware_video_execution_proved": false,
+  "hosts": 2,
+  "limits": [
+    "Pointer association does not qualify the resource as a video data buffer or establish its use by a video context.",
+    "No GPU execution or resource finalization is established.",
+    "A cooperative reservation does not exclude WindowServer or unrelated processes.",
+    "The observation covers this exact executable, getter, runtime and allocation profile."
+  ],
+  "negative_null_rejected": 2,
+  "nonoverlapping": true,
+  "observer_SHA256": "1d8e99a8981c7f207a9ab27cddcc0553e35865c0dfdd27189f8f42c04986ed7e",
+  "rows": [
+    {
+      "manifest_SHA256": "386cb397813be88d4410a0445ed52b2ea6ef3b2a217e21ac612f4d91901b93aa",
+      "pid": 91657,
+      "result_SHA256": "5f7ee250acd5168e8d4f2ba4cdabf13ca56069264f8f6e1a10db7780932bafd5"
+    },
+    {
+      "manifest_SHA256": "cf9ebea64dceb636aaa629ad283340559f256642d08dcee393da4e78aad6f2eb",
+      "pid": 91685,
+      "result_SHA256": "749a8fc8cf8409c60f8025d9907dedc7ab12659d338d611652fdaa5edfbffc77"
+    }
+  ],
+  "shared_link_matches": 2,
+  "status": "PASS"
+}

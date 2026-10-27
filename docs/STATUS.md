@@ -179,6 +179,8 @@ A separate pinned public-Metal client qualifies default compute-descriptor CAS p
 
 The final library also passed 9 targeted three-pointer regression cases. A separate complete rebuild of all seven runtime objects from the public source (`f110430d…`) passed 4 GTX smoke trials with 457,728 exact uint32 values, 114,432 counted consumer invocations and 5,052,992 guard bytes. Its full 64-case suite was NOT RUN; it does not inherit the other artifact's qualification.
 
+A 4 MiB public Metal buffer now has a bounded observed link to the same IOAccelerator shared wrapper created for the GTX in two processes. The resource field is located through pinned runtime metadata and getter code without calling that getter. This does not qualify a video buffer or prove GPU execution. [Evidence and reproduction](VIDEO_RESOURCE_IDENTITY.md).
+
 ## Evidence boundaries
 
 Milestone library hashes:
