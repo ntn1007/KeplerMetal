@@ -212,6 +212,9 @@
                             libraryData:(NSData *)libraryData
                          expectedSHA256:(NSString *)expectedSHA256
                                   error:(NSError **)error;
+// Opt in to queue-local automatic render-encoder adaptation for qualified passes.
+// Unsupported passes remain native. This does not install a global hook.
+- (BOOL)enableAutomaticRenderEncoderFactoriesWithError:(NSError **)error;
 - (id<MTLRenderPipelineState>)renderPipeline;
 // Additional reflected native stage-in pipelines. Supports direct triangles,
 // Float4 attributes, per-vertex/per-instance buffers and reflected fragment

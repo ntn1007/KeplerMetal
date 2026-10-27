@@ -28,19 +28,19 @@
       "path": "bridge/src/KeplerCPUICB.h",
       "source_path": "bridge/src/KeplerCPUICB.h",
       "source_SHA256": "263dede0101967e1bfa32fe3b081b73c476d9e09e8a9b5446ae04cf4f425ee0a",
-      "published_SHA256": "f44c786a4b65ad32fa96ab4e77025ffadf0934135eccdb1af8ff2362926d2fc9",
-      "bytes": 36350,
+      "published_SHA256": "754ead3908122f83f6d8269f75b2b241621b563b9a2bae7d1cdda7703bd05ae6",
+      "bytes": 36581,
       "modified_for_publication": true,
-      "previous_published_SHA256": "1f76677b9d2e49febf3662e7a0f69207479ac9ccfa1aada685c881c64a797415"
+      "previous_published_SHA256": "f44c786a4b65ad32fa96ab4e77025ffadf0934135eccdb1af8ff2362926d2fc9"
     },
     {
       "path": "bridge/src/KeplerCPUICB.mm",
       "source_path": "bridge/src/KeplerCPUICB.mm",
       "source_SHA256": "3d59c2c609611ddc387e616b8945e903f6378dbd4a3b66a02cb22087ada84b60",
-      "published_SHA256": "6b3d14fd725e523c645c9943cc8731a54847c77bf35f84b6744cdaaee265daa6",
-      "bytes": 136378,
+      "published_SHA256": "f40bdabc473be52b2242c622265429bbcdfacdb5d0c747fb55387c703b87620b",
+      "bytes": 138365,
       "modified_for_publication": true,
-      "previous_published_SHA256": "1fa542157ccca522fe141b7789f68ae56c430f06a31b0c8001703f8e17caf3ad"
+      "previous_published_SHA256": "6b3d14fd725e523c645c9943cc8731a54847c77bf35f84b6744cdaaee265daa6"
     },
     {
       "path": "bridge/src/KeplerCommandIR.h",
@@ -6033,9 +6033,10 @@
       "path": "bridge/src/KeplerAutomaticComputeFactories.inc",
       "source_path": "bridge/src/KeplerAutomaticComputeFactories.inc",
       "source_SHA256": "284380c15920b1cd37c40243ddd654a774036dbbdbd0706f16e05fc08764ceb9",
-      "published_SHA256": "284380c15920b1cd37c40243ddd654a774036dbbdbd0706f16e05fc08764ceb9",
-      "bytes": 10331,
-      "modified_for_publication": false
+      "published_SHA256": "ca9799105e054338a4023ea01c57ea2c0b9f0520e2a28defa5a3ed21c023f116",
+      "bytes": 16030,
+      "modified_for_publication": true,
+      "previous_published_SHA256": "284380c15920b1cd37c40243ddd654a774036dbbdbd0706f16e05fc08764ceb9"
     },
     {
       "path": "bridge/tools/native_queue_factory_probe.mm",
@@ -7478,8 +7479,8 @@
     }
   ],
   "FP64_pin_include": "Generated hash/size/register allowlist only; no compiled GPU code included.",
-  "previous_source_snapshot_SHA256": "6b1fe41c2aa712e4cff486875bc31808e8fc3f049022ac05c7289e4c04beb349",
-  "previous_public_commit": "e4dea99752388d5aa4e4cc3be4a9e810ff05525e",
+  "previous_source_snapshot_SHA256": "0f31ca2ade4b20d955b6d3564cb1dbe0b1ff136deb64a4867c83ded00056ae83",
+  "previous_public_commit": "ba3a448808db8bc12a7cad2344219bd49eb1a675",
   "update": {
     "date": "2026-10-27",
     "reason": "Combined indexed, vertex and pipeline render context",
@@ -7488,5 +7489,5 @@
     ]
   },
   "update_date": "2026-10-27",
-  "update_reason": "Add an explicit scoped four-table render context."
+  "update_reason": "Add queue-local render factories with guarded native fallback."
 }

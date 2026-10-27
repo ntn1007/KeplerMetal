@@ -144,7 +144,7 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 @property(nonatomic,strong) NSObject *factoryLock;
 @property(nonatomic,strong) NSMutableArray *adaptedFunctions,*functionLibraries,*adaptedIRLibraries;
 @property(nonatomic,strong) NSMutableDictionary *registeredIRLibraries;
-@property(nonatomic) BOOL renderRecordArgumentsEnabled;
+@property(nonatomic) BOOL renderRecordArgumentsEnabled,automaticComputeEnabled,automaticRenderEnabled;
 @property(nonatomic,strong) NSHashTable *renderArgumentContexts;
 @property(nonatomic,strong) NSMutableDictionary *stablePipelineIdentities;
 @property(nonatomic) BOOL restored;
@@ -169,6 +169,8 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 @property(nonatomic,strong) id<MTLLibrary> GPUCommandIRv2Library;
 @property(nonatomic,strong) id<MTLComputePipelineState> GPUCommandIRv2Selector;
 - (NSDictionary*)profileForPipeline:(id<MTLComputePipelineState>)pipeline;
+- (BOOL)validateRenderPassProfile:(MTLRenderPassDescriptor*)pass commandBuffer:(id<MTLCommandBuffer>)cb error:(NSError**)error;
+- (id<MTLRenderCommandEncoder>)adoptNativeRenderEncoder:(id<MTLRenderCommandEncoder>)encoder descriptor:(MTLRenderPassDescriptor*)pass commandBuffer:(id<MTLCommandBuffer>)cb error:(NSError**)error;
 - (BOOL)validateRenderCommandArgumentContext:(KPRenderCommandArgumentContext*)context error:(NSError**)error;
 - (id<MTLFunction>)newRenderCommandFunctionWithLibraryData:(NSData*)data expectedSHA256:(NSString*)expected functionName:(NSString*)name rootBufferIndex:(NSUInteger)index pipelineRoot:(BOOL)pipeline error:(NSError**)error;
 - (KPRenderCommandArgumentContext*)newRenderCommandArgumentContextWithCommands:(id<MTLIndirectCommandBuffer>)commands stateCatalogue:(KPRenderStateCatalogue*)catalogue commandRecords:(id<MTLBuffer>)records commandRecordsOffset:(NSUInteger)offset commandBuffer:(id<MTLCommandBuffer>)cb indexedBindings:(BOOL)indexed vertexBindings:(BOOL)vertex pipelineBindings:(BOOL)pipeline fragmentBindings:(BOOL)fragment error:(NSError**)error;
@@ -632,16 +634,25 @@ BOOL installRenderOverride(Class dynamic,Class original,SEL selector,IMP impleme
     id<KPCPURenderTransport>engine=[(id<KPCPURenderTransport>)[transport alloc]initWithQueue:_queue libraryData:snapshot error:error];if(!engine)return NO;_renderEngine=engine;
     [_eventRows addObject:@{@"operation":@"register_render_domain",@"library_SHA256":expected,@"compute_domain_preserved":@YES,@"device_class_unchanged":@YES,@"capabilities_spoofed":@NO}];return YES;
 }
-- (id<MTLRenderCommandEncoder>)renderEncoderWithDescriptor:(MTLRenderPassDescriptor*)descriptor commandBuffer:(id<MTLCommandBuffer>)cb error:(NSError**)error {
-    MTLRenderPassDescriptor*pass=[descriptor copy];id<MTLTexture>target=pass.colorAttachments[0].texture;
-    if(_restored||!_renderEngine||cb.commandQueue!=_queue||cb.status!=MTLCommandBufferStatusNotEnqueued||target.device!=_device||![_renderEngine acceptsRenderTarget:target]||target.textureType!=MTLTextureType2D||target.sampleCount!=1||target.mipmapLevelCount!=1||pass.colorAttachments[0].level||pass.colorAttachments[0].slice||pass.colorAttachments[0].depthPlane||pass.colorAttachments[0].loadAction!=MTLLoadActionClear||pass.colorAttachments[0].storeAction!=MTLStoreActionStore||pass.visibilityResultBuffer){fail(error,@"Render pass outside registered native target profiles");return nil;}
+- (BOOL)validateRenderPassProfile:(MTLRenderPassDescriptor*)pass commandBuffer:(id<MTLCommandBuffer>)cb error:(NSError**)error {
+    id<MTLTexture>target=pass.colorAttachments[0].texture;
+    if(_restored||!_renderEngine||cb.commandQueue!=_queue||cb.status!=MTLCommandBufferStatusNotEnqueued||target.device!=_device||![_renderEngine acceptsRenderTarget:target]||target.textureType!=MTLTextureType2D||target.sampleCount!=1||target.mipmapLevelCount!=1||pass.colorAttachments[0].level||pass.colorAttachments[0].slice||pass.colorAttachments[0].depthPlane||pass.colorAttachments[0].loadAction!=MTLLoadActionClear||pass.colorAttachments[0].storeAction!=MTLStoreActionStore||pass.visibilityResultBuffer)return fail(error,@"Render pass outside registered native target profiles");
     id<MTLTexture>depth=pass.depthAttachment.texture,stencil=pass.stencilAttachment.texture;
-    if(depth&&(depth.device!=_device||depth.width!=target.width||depth.height!=target.height||depth.textureType!=MTLTextureType2D||depth.sampleCount!=1||depth.mipmapLevelCount!=1||(depth.pixelFormat!=MTLPixelFormatDepth32Float&&depth.pixelFormat!=MTLPixelFormatDepth32Float_Stencil8)||pass.depthAttachment.level||pass.depthAttachment.slice||pass.depthAttachment.depthPlane||pass.depthAttachment.loadAction!=MTLLoadActionClear||pass.depthAttachment.storeAction!=MTLStoreActionStore||!std::isfinite(pass.depthAttachment.clearDepth)||pass.depthAttachment.clearDepth<0||pass.depthAttachment.clearDepth>1)){fail(error,@"Depth attachment outside qualified profile");return nil;}
-    if(stencil&&(stencil!=depth||stencil.pixelFormat!=MTLPixelFormatDepth32Float_Stencil8||pass.stencilAttachment.level||pass.stencilAttachment.slice||pass.stencilAttachment.depthPlane||pass.stencilAttachment.loadAction!=MTLLoadActionClear||pass.stencilAttachment.storeAction!=MTLStoreActionStore||pass.stencilAttachment.clearStencil>255)){fail(error,@"Stencil attachment must share the qualified combined depth texture");return nil;}
-    for(NSUInteger i=1;i<8;i++)if(pass.colorAttachments[i].texture){fail(error,@"Multiple render targets are not qualified here");return nil;}
-    id<MTLRenderCommandEncoder>e=[cb renderCommandEncoderWithDescriptor:pass];Class original=object_getClass(e),native=objc_getClass("NVMTLRenderCommandEncoder_KEPLER_A");if(!e||original!=native||class_getInstanceSize(original)!=128){if(e)[e endEncoding];fail(error,@"Native render encoder layout changed");return nil;}
+    if(depth&&(depth.device!=_device||depth.width!=target.width||depth.height!=target.height||depth.textureType!=MTLTextureType2D||depth.sampleCount!=1||depth.mipmapLevelCount!=1||(depth.pixelFormat!=MTLPixelFormatDepth32Float&&depth.pixelFormat!=MTLPixelFormatDepth32Float_Stencil8)||pass.depthAttachment.level||pass.depthAttachment.slice||pass.depthAttachment.depthPlane||pass.depthAttachment.loadAction!=MTLLoadActionClear||pass.depthAttachment.storeAction!=MTLStoreActionStore||!std::isfinite(pass.depthAttachment.clearDepth)||pass.depthAttachment.clearDepth<0||pass.depthAttachment.clearDepth>1))return fail(error,@"Depth attachment outside qualified profile");
+    if(stencil&&(stencil!=depth||stencil.pixelFormat!=MTLPixelFormatDepth32Float_Stencil8||pass.stencilAttachment.level||pass.stencilAttachment.slice||pass.stencilAttachment.depthPlane||pass.stencilAttachment.loadAction!=MTLLoadActionClear||pass.stencilAttachment.storeAction!=MTLStoreActionStore||pass.stencilAttachment.clearStencil>255))return fail(error,@"Stencil attachment must share the qualified combined depth texture");
+    for(NSUInteger i=1;i<8;i++)if(pass.colorAttachments[i].texture)return fail(error,@"Multiple render targets are not qualified here");
+    return YES;
+}
+- (id<MTLRenderCommandEncoder>)adoptNativeRenderEncoder:(id<MTLRenderCommandEncoder>)e descriptor:(MTLRenderPassDescriptor*)pass commandBuffer:(id<MTLCommandBuffer>)cb error:(NSError**)error {
+    id<MTLTexture>target=pass.colorAttachments[0].texture;Class native=objc_getClass("NVMTLRenderCommandEncoder_KEPLER_A");Class original=object_getClass(e);KPScopeLink*previous=objc_getAssociatedObject(e,&contextKey);
+    if(previous){
+        if(previous.scope!=self||class_getSuperclass(original)!=native){fail(error,@"Recycled render encoder ownership differs");return nil;}
+        object_setClass(e,native);objc_setAssociatedObject(e,&contextKey,nil,OBJC_ASSOCIATION_ASSIGN);NSMutableIndexSet*same=[NSMutableIndexSet new];for(NSUInteger i=0;i<_adapted.count;i++)if(((KPAdaptedEncoder*)_adapted[i]).encoder==e)[same addIndex:i];[_adapted removeObjectsAtIndexes:same];original=native;
+    }
+    Ivar cbVar=class_getInstanceVariable(original,"_commandBuffer");
+    if(!e||original!=native||class_getInstanceSize(original)!=128||!cbVar||ivar_getOffset(cbVar)!=32||object_getIvar(e,cbVar)!=cb){fail(error,@"Native render encoder layout/owner changed");return nil;}
     Class dynamic=nil;{std::lock_guard<std::mutex>lock(installMutex);dynamic=scopedClass(renderEncoderClasses,original,@"KPICBRenderEncoder_",@selector(executeCommandsInBuffer:withRange:),(IMP)executeRenderICB,error);if(dynamic&&(!installRenderOverride(dynamic,original,@selector(setRenderPipelineState:),(IMP)setCallerRenderPipeline)||!installRenderOverride(dynamic,original,@selector(executeCommandsInBuffer:indirectBuffer:indirectBufferOffset:),(IMP)executeIndirectRenderICB)||!installRenderOverride(dynamic,original,@selector(setVertexBuffer:offset:atIndex:),(IMP)setCallerVertexBuffer)||!installRenderOverride(dynamic,original,@selector(setVertexBuffers:offsets:withRange:),(IMP)setCallerVertexBuffers)||!installRenderOverride(dynamic,original,@selector(setVertexBufferOffset:atIndex:),(IMP)setCallerVertexOffset)||!installRenderOverride(dynamic,original,@selector(setVertexBytes:length:atIndex:),(IMP)setCallerVertexBytes)||!installRenderOverride(dynamic,original,@selector(setFragmentBuffer:offset:atIndex:),(IMP)setCallerFragmentBuffer)||!installRenderOverride(dynamic,original,@selector(setFragmentBuffers:offsets:withRange:),(IMP)setCallerFragmentBuffers)||!installRenderOverride(dynamic,original,@selector(setFragmentBufferOffset:atIndex:),(IMP)setCallerFragmentOffset)||!installRenderOverride(dynamic,original,@selector(setFragmentBytes:length:atIndex:),(IMP)setCallerFragmentBytes)))dynamic=nil;}
-    if(!dynamic){[e endEncoding];fail(error,@"Scoped render methods unavailable");return nil;}
+    if(!dynamic){fail(error,@"Scoped render methods unavailable");return nil;}
     NSMutableIndexSet*expired=[NSMutableIndexSet new];for(NSUInteger i=0;i<_adapted.count;i++)if(!((KPAdaptedEncoder*)_adapted[i]).encoder)[expired addIndex:i];_releasedEncoderCount+=expired.count;[_adapted removeObjectsAtIndexes:expired];
     linkScope(e,self);KPScopeLink*link=objc_getAssociatedObject(e,&contextKey);link.renderTarget=target;link.renderPass=pass;link.callerVertexBindings=[NSMutableDictionary new];link.callerFragmentBindings=[NSMutableDictionary new];object_setClass(e,dynamic);KPAdaptedEncoder*r=[KPAdaptedEncoder new];r.encoder=e;r.originalClass=original;[_adapted addObject:r];
     // The observed descriptor is immutable and also leases its attachments
@@ -649,6 +660,14 @@ BOOL installRenderOverride(Class dynamic,Class original,SEL selector,IMP impleme
     [cb addCompletedHandler:^(id<MTLCommandBuffer>done){(void)pass.colorAttachments[0].texture;}];
     [self.eventRows addObject:@{@"operation":@"adapt_render_encoder",@"native_constructor_observed":@YES,@"cached_render_encoder_classes":@(renderEncoderClasses.size()),@"scissor_state_inherited":@YES}];return e;
 }
+- (id<MTLRenderCommandEncoder>)renderEncoderWithDescriptor:(MTLRenderPassDescriptor*)descriptor commandBuffer:(id<MTLCommandBuffer>)cb error:(NSError**)error {
+    MTLRenderPassDescriptor*pass=[descriptor copy];if(![self validateRenderPassProfile:pass commandBuffer:cb error:error])return nil;
+    id<MTLRenderCommandEncoder>e=[cb renderCommandEncoderWithDescriptor:pass];if(!e){fail(error,@"Native render encoder unavailable");return nil;}
+    KPScopeLink*link=objc_getAssociatedObject(e,&contextKey);if(link.scope==self&&link.renderTarget==pass.colorAttachments[0].texture)return e;
+    id<MTLRenderCommandEncoder>adapted=[self adoptNativeRenderEncoder:e descriptor:pass commandBuffer:cb error:error];if(!adapted)[e endEncoding];return adapted;
+}
+- (BOOL)enableAutomaticRenderEncoderFactoriesWithError:(NSError**)error {return enableAutomaticRenderFactories(self,error);}
+
 + (instancetype)installOnDevice:(id<MTLDevice>)device queue:(id<MTLCommandQueue>)queue libraryURL:(NSURL*)url expectedSHA256:(NSString*)expected manifestURL:(NSURL*)manifestURL expectedManifestSHA256:(NSString*)manifestSHA error:(NSError**)error {
  return [self installOnDevice:device queue:queue libraryData:[NSData dataWithContentsOfURL:url] expectedSHA256:expected manifestData:[NSData dataWithContentsOfURL:manifestURL] expectedManifestSHA256:manifestSHA error:error];
 }

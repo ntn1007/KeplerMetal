@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-27",
+  "base_commit": "ba3a448808db8bc12a7cad2344219bd49eb1a675",
+  "macOS": "26.7.1 (25G241)",
+  "xcode": "26.3 (17C529)",
+  "macOS_SDK": "26.2",
+  "GPU": "NVIDIA GeForce GTX 880M, PCI 10de:1198",
+  "audit": {
+    "status": "PASS",
+    "ordinary_client_hosts": 16,
+    "regression_hosts": 7,
+    "serialized_hosts": 23,
+    "frames": 20,
+    "checked_float_channels": 229376,
+    "ordinary_client_binary_sha256": "c31ab2ae5c83ff9ed8197c01f4226a7c3c5373bc12b69e870705a4d4a161d8b7",
+    "same_runtime_sha256": "b77d50ec037c50b64638b1498b019e101b4fb05009817a704d83b87520ff37b0",
+    "compute_regression_kinds": [
+      "library basic",
+      "library encoder_reuse",
+      "library_contracts pointer"
+    ],
+    "supported_ICB_executions": 12,
+    "guarded_unsupported_passes": 2,
+    "unmodified_existing_app": false,
+    "performance_benchmark": false
+  },
+  "audit_sha256": "7c633303c7997ccd5071cf5ca9cd171d394ec297be3096bd8058439bab9012ab",
+  "oracle_mutations": {
+    "status": "PASS",
+    "positive_copied_runs": 2,
+    "rejected_mutations": [
+      "auto-pixels",
+      "auto-client-hash",
+      "encoder-class",
+      "shared-methods",
+      "unsupported-pixels",
+      "unsupported-client-hash",
+      "guard-reason"
+    ],
+    "GPU_execution": false
+  },
+  "oracle_mutations_sha256": "c10d161ad5f586e21950d2340fd71485dead136b538c4a6802b66872517a7335",
+  "CPU_tests": 366,
+  "source_export_CPU_tests": 366,
+  "source_export_tree": "3ebb85d35b42ded5a7cacdb27af2eb06dcf680e4",
+  "runtime_rebuilt_from_tree": "22afb9d3b23faaee9190e28aee3944e02328be49",
+  "runtime_inputs_match_source_export": true,
+  "host_sha256": "403eecdb4a31c7bf1d1bb6d39ff4d77e44ab487dd56833e752c8771096b0d2c5",
+  "source_export_host_sha256": "403eecdb4a31c7bf1d1bb6d39ff4d77e44ab487dd56833e752c8771096b0d2c5",
+  "ordinary_client_sha256": "c31ab2ae5c83ff9ed8197c01f4226a7c3c5373bc12b69e870705a4d4a161d8b7",
+  "source_export_client_sha256": "c31ab2ae5c83ff9ed8197c01f4226a7c3c5373bc12b69e870705a4d4a161d8b7",
+  "source_export_GPU_hosts": 2,
+  "source_export_images_match": true,
+  "25_final_hosts_nonoverlapping": true,
+  "compute_regression_exact_uint32_results": 915456,
+  "limits": [
+    "Explicit process-local scope bootstrap and scope-owned pipeline are required.",
+    "Separately compiled public-Metal client is not an existing unmodified application.",
+    "Off-profile project ICBs are rejected, not passed to native driver.",
+    "No simultaneous compute/render activation, arbitrary application coverage, transparent Metal or performance claim."
+  ]
+}

@@ -19,6 +19,8 @@ The work follows two complementary tracks:
 
 ## Recent progress
 
+An opt-in scope can automatically adapt qualified ordinary render-encoder factories on its own queue. A separately compiled public-Metal client renders correctly; unsupported passes guard project ICBs. [Evidence and limits](docs/AUTOMATIC_RENDER_FACTORIES.md).
+
 A scoped client now combines GPU selection of pipeline, vertex and fragment resources with indexed rendering. [Contract and evidence](docs/QUAD_RENDER.md).
 
 The adapted render catalogue supports eight certified states and sixteen flattened candidates. GPU witnesses and native images qualify the expanded path. [Evidence and limits](docs/EIGHT_STATE_CATALOGUE.md).

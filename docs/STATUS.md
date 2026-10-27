@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+Qualified render-encoder creation can now be adapted automatically on one opted-in queue, with guarded fallback for unsupported passes. Bootstrap and pipeline registration remain explicit. [Evidence and limits](AUTOMATIC_RENDER_FACTORIES.md).
+
 The scoped quad context combines indexed draw spans with vertex, pipeline and fragment transitions. [Evidence and limits](QUAD_RENDER.md).
 
 Eight render states and sixteen flattened candidates pass bounded GTX execution and controls. [Evidence and limits](EIGHT_STATE_CATALOGUE.md).
