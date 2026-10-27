@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+A synthetic legacy-provider initialization probe uses the observed GTX device words and validates an ordered local selector guard. Actual video dispatch remains unqualified. [Evidence](VIDEO_SYNTHETIC_SEQUENCE.md).
+
 Two own-process observations compare the real Metal-created GTX device configuration with object fields; meanings and video decoding remain unqualified. [Evidence](METAL_DEVICE_OBJECT.md).
 
 Read-only current IOAccelerator analysis identifies a device type check and five configuration output words; no valid device values or hardware video are established. [Evidence](IOACCEL_DEVICE_CONFIG.md).

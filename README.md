@@ -21,6 +21,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+A synthetic legacy-video initialization probe uses observed device words and checks an ordered locally intercepted selector sequence; hardware decoding remains unproved. [Evidence](docs/VIDEO_SYNTHETIC_SEQUENCE.md).
+
 A process-local Metal observer now validates five configuration words from a real GTX device object; their meanings and video compatibility remain unknown. [Evidence](docs/METAL_DEVICE_OBJECT.md).
 
 Read-only analysis narrows the current device-configuration boundary to a type check and five 32-bit outputs; the valid object and values remain unqualified. [Evidence](docs/IOACCEL_DEVICE_CONFIG.md).
