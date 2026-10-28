@@ -1,0 +1,99 @@
+{
+  "GPU_dispatches": 0,
+  "live_registry": {
+    "matches_both_on_disk_class_branches": true,
+    "registry_id": 4294968416,
+    "registry_output_SHA256": "5a5054ad60024eb2f5b5c10030f544c9d0293a6944382ba5c3a608ce29dd68ac",
+    "renderer_id": 17039368,
+    "renderer_sub_id": 3,
+    "runtime_branch_observed": false
+  },
+  "macos": {
+    "REA_bundle_SHA256": "401a07db63b466ad08f5dae49d9d4684fa50905167325508cae61dd1bc83c3dc",
+    "class_candidates": {
+      "0xff4": [
+        "0x95b1",
+        "0x90b1"
+      ],
+      "0xff8": [
+        "0x95b2",
+        "0x90b2"
+      ],
+      "0xffc": [
+        "0x90b3"
+      ]
+    },
+    "conditional_channel_type_to_field": {
+      "10": "0xffc",
+      "11": "0xff4",
+      "8": "0xff8"
+    },
+    "dynamic_class_values_observed": false,
+    "file_SHA256": "44f131a958d48afd6ab675a851330c37506557c9d499484170c886c3731bdbb3",
+    "functions": {
+      "create_video": {
+        "REA_evidence_id": "ev_d414fd7e6fa2d1d70d1524efc175674b096e77b932238ee79eb8e8280fa9bfda",
+        "SHA256": "3fd71b9f2a2f88f1bb98f2785a6bed274560cf56bf6604ae7a7ad78b88d8f2c5",
+        "address": "0x3e90a",
+        "file_offset": "0x3e90a",
+        "length": 251,
+        "symbol": "__ZN5nvHAL17CreateObjectVideoEP15nvGpFifoChannel"
+      },
+      "first_supported": {
+        "REA_evidence_id": "ev_54ad61326b3f4f16c9766cacc273c2aa387b2230c64eb825fa54f7f7158b4ccb",
+        "SHA256": "d30030b6ae5f8107cd522cce0fd6d73b3155c0d602296ea1a264dd8a02c1df0e",
+        "address": "0x3e64c",
+        "file_offset": "0x3e64c",
+        "length": 72,
+        "symbol": "__ZN5nvHAL22GetFirstClassSupportedEPKjj"
+      },
+      "init_classes": {
+        "REA_evidence_id": "ev_5a5d5e4ee848324f75d166a41254d62f074f316bdb4bb820103e0aa3c7a0a27d",
+        "SHA256": "168f17bd024ef6abb80b172e434d3379d8c67b104e465276ecec984752429cbf",
+        "address": "0x2cb9a",
+        "file_offset": "0x2cb9a",
+        "length": 715,
+        "symbol": "__ZN10nvFermiHAL11InitClassesEv"
+      },
+      "properties": {
+        "REA_evidence_id": "ev_45f2e5ff493f8b1d4718c25d4676f71afd3786689af5819abc3860a1a09ebaa4",
+        "SHA256": "12cd1a4e2a2c3ccbb28bde37a9eb6c147fda24001eee12a7f9c15c7836c8c99e",
+        "address": "0x9a90",
+        "file_offset": "0x9a90",
+        "length": 233,
+        "symbol": "__ZN13nvAccelerator18SetAccelPropertiesEv"
+      }
+    },
+    "property_class_ambiguity": [
+      "0x95b1",
+      "0x90b1"
+    ]
+  },
+  "nouveau": {
+    "archive_SHA256": "bce5f7fbebb934373b86c999a064d52fb5065878dc57f287f95346648ec832e9",
+    "archive_tree_matches": true,
+    "classes": [
+      "0x95b1",
+      "0x95b2",
+      "0x90b3"
+    ],
+    "firmware_scope": "userspace file load applies only to chipset < 0xd0; kernel/firmware dependencies remain unproved",
+    "kepler_engine_order": [
+      "BSP",
+      "VP",
+      "PPP"
+    ],
+    "members_SHA256": {
+      "include/drm-uapi/nouveau_drm.h": "8cc1e1dbca4ddc4dd4df0c888ff493f4ef2b10648e7102540c6c755627a720dc",
+      "src/gallium/drivers/nouveau/nouveau_vp3_video.c": "d5cc2a6692f0db2a7218957c98d8ccf4e3792c70b8393d3e5cbc89ac46489a48",
+      "src/gallium/drivers/nouveau/nvc0/nvc0_video.c": "2c1662f23fb1afe0fd76c758e4779eee0e0ede8562938f7479e45dd3bec118a6",
+      "src/nouveau/drm/nvif/class.h": "8486732ad1988054b5f2415970111bc19e4ebc8cf4b059288d462699e39e7a2a"
+    },
+    "recorded_upstream_reference": "96cb43121031992b85767f9c1be8f3f48e22b1d2",
+    "reference_version": "Mesa 26.2.4"
+  },
+  "scope": "Static source and on-disk analysis plus public registry observation. No proof of loaded instruction bytes, active class selection, channel creation, ABI compatibility, firmware state or video decode.",
+  "status": "PASS_STATIC_CLASS_COMPARISON",
+  "system_modified": false,
+  "video_provider_or_private_selector_called": false
+}

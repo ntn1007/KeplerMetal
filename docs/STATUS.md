@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+Nouveau's GK104 decoder classes also appear in the pinned on-disk macOS NVIDIA class-selection and video-object paths. Current registry properties remain ambiguous between two candidates; live selection, channel access and hardware decoding remain unproved. [Evidence](VIDEO_NOUVEAU_CLASS_COMPARISON.md).
+
 An experimental cooperative API abandons an exclusive, unsubmitted reusable producer and validates subsequent real ICB generations. General cancellation and transparent integration remain unimplemented. [Evidence and limitations](REUSABLE_ABANDON_API.md).
 
 A real reusable ICB plan retains its producer independently of the lease: a lease-only abandonment pilot is refused. Two earlier isolated witnesses manually clear both states after instance revocation and validate four GPU generations each; their test-only mutation is superseded by the experimental API above. [Evidence and limitations](REUSABLE_PLAN_REVOKE.md).
