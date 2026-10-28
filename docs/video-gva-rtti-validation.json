@@ -1,0 +1,61 @@
+{
+  "GPU_execution_during_audit": false,
+  "REA_evidence_ids": [
+    "ev_7d4076952810b322845e9284ed3d7db48391119b14346479c2d3f90e734e6f6c",
+    "ev_d9dd51fad1f0e876bdc7d52ed3b69c31dbdd46573c4645bf3e2c3d457727f4bb"
+  ],
+  "analysis_container_sha256": [
+    "939514251c976857f48ab64a101a2300f3cafb6ba7fc9b9f8e0b65311ab26cfc",
+    "0558dbc3e9d4e10dbbbe781f2ca19aba0aeb467c6a58302aadfcb27ce38618e8"
+  ],
+  "auditor_sha256": "6870514897eb9891fefc71e573384232670eeddf06cdb973b8ca91219b201493",
+  "base_constructor_target_offset": 117024,
+  "base_type": "Flow",
+  "candidate_slot_runtime_dispatch_proved": false,
+  "constructor_completed_at_runtime_proved": false,
+  "constructor_vtable_address_point_image_offset": 869196312,
+  "counterfactual_property_and_policy_used": true,
+  "cpu_abi_calibration": {
+    "GPU_execution": false,
+    "derived_name": "Flow_QT0",
+    "single_base_name": "Flow",
+    "status": "PASS",
+    "vendor_execution": false,
+    "vtable_minus_one_slot_is_typeinfo": true
+  },
+  "cpu_calibration_binary_sha256": "eb89243a7c91e264115274d4b2c255b8c4b8c8e0b73eaa627961ad40a1302986",
+  "cpu_calibration_source_sha256": "6a7f184f31df7023bfdf935589f020d1aeb2c24e20cbf7a149a4f16d078c7491",
+  "derived_type": "Flow_QT0",
+  "first_ten_candidate_slot_targets_image_offsets": [
+    233074,
+    233084,
+    233956,
+    234752,
+    235048,
+    235772,
+    235984,
+    236888,
+    237318,
+    237476
+  ],
+  "metadata_interpretation": "C++ Itanium-style single inheritance; independently checked with current compiler and libc++abi",
+  "observed_selector": 2,
+  "region_sha256": [
+    "3318c28c191393b96f825b4c97bc875f444c773bbfcc5c727fb6ba00f462143f",
+    "80adc25382ccad971d4388af6ab616ae65200ab934d6819a7cbd54c9efdba68f"
+  ],
+  "runtime_selector_receipt_sha256": "1ed7bc1ae23e73ed3875eb876e8cdbb5f744a5444ae2877b83386d3b90f509f9",
+  "source_evidence_sha256": {
+    "init_rea": "5f2fe115a1a8ee540cca544ac975dd0c7380ed600e463b94c739b60e7ecaee1b",
+    "thunk_rea": "88f5ac6c037e7dac2883a9d16ba96a4a8db7f3ef16ce1d93f49f6b1f3e241765",
+    "witness_audit": "1ed7bc1ae23e73ed3875eb876e8cdbb5f744a5444ae2877b83386d3b90f509f9"
+  },
+  "static_type_evidence_not_live_object_readback": true,
+  "status": "PASS_STATIC_RTTI_AND_BOUNDED_RUNTIME_SELECTOR",
+  "system_modified": false,
+  "thunk_offset": 233054,
+  "thunk_target_offset": 232918,
+  "vendor_execution_during_audit": false,
+  "video_engine_execution_proved": false,
+  "vtable_extent_proved": false
+}

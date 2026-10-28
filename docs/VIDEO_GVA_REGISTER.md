@@ -7,6 +7,9 @@ process. This narrows the earlier [static candidates 2 and 9](VIDEO_GVA_DISPATCH
 to an actual value in these instrumented executions. The meaning of value 2
 as a codec, provider or hardware class remains unproved.
 
+The associated constructor's static type metadata is examined separately in
+the [RTTI audit](VIDEO_GVA_RTTI.md); its completion at runtime remains unproved.
+
 These are **process-local counterfactual H.264 requests**: they retain the
 earlier scoped `IOGVACodec` presence substitution and current-board policy
 entry. All require hardware decoding. Each still returns **-12913 and zero
