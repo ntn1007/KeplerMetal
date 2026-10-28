@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+A real reusable ICB plan retains its producer independently of the lease: a lease-only abandonment pilot is refused. Two isolated witnesses manually clear both states after instance revocation and validate four GPU generations each; cancellation remains unimplemented. [Evidence and limitations](REUSABLE_PLAN_REVOKE.md).
+
 Two actual reusable-lease instances tracking one native command buffer were tested with explicit test-only revocation and manual pending removal; real ICB cancellation remains unimplemented. [Evidence and limitations](REUSABLE_REVOKE_WITNESS.md).
 
 A process-local witness blocks ordinary commit/enqueue on one uncommitted Metal buffer and verifies subsequent GTX reuse; actual reusable-ICB cancellation remains unimplemented. [Evidence and limitations](UNCOMMITTED_REVOKE.md).

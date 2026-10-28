@@ -1,0 +1,36 @@
+{
+  "build_inputs_SHA256": "09995a149e37ef707381507dbc153219a145ad1ee09802096c07dad3b7cd20ec",
+  "cases": [
+    {
+      "case": "native-control",
+      "pid": 9038,
+      "result_SHA256": "9a287b0265baafa54e2b7235093a87ad324542379ca66a5dd56ad15846f27410"
+    },
+    {
+      "case": "lease-only-pilot",
+      "exit": 32,
+      "result_SHA256": "861486159491cd7e67c0a860250380258cb7c8d1fbed6f9da5f8b8762c987c79"
+    },
+    {
+      "case": "manual-witness",
+      "pid": 9186,
+      "result_SHA256": "5f71b885c911e27a50cf37645d283b49290f10ce0f4145f3d4ea188d4f370efb"
+    },
+    {
+      "case": "manual-witness",
+      "pid": 9242,
+      "result_SHA256": "fcdd9c16d4715097ce7774bd78ca7a20193a23925c9766b59cd8f3e7644bcf16"
+    }
+  ],
+  "control_witness_matching_stage_counter_files": 32,
+  "generations_per_process": 4,
+  "library_SHA256": "0275b13126a63372518b85fcd8e546af0cae0b593ceb37cadc5574b4a765d85a",
+  "native_control_processes": 1,
+  "pilot_refused_exit": 32,
+  "scope": "Manual test-only pending removal and producerBuffer reset after own-process instance revocation; not an exposed cancellation API, automatic factory restoration, concurrent safety or driver modification.",
+  "status": "PASS_BOUNDED_REAL_PLAN_WITNESS",
+  "terminal_nonoverlapping_processes": 4,
+  "witness_exact_uint32_values": 915456,
+  "witness_guard_bytes": 10105984,
+  "witness_processes": 2
+}
