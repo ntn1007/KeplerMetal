@@ -1,0 +1,33 @@
+{
+  "CAS_tests_passed": 59,
+  "GPU_dispatches": 0,
+  "identical_results": true,
+  "reader_independently_verified": false,
+  "rebuilds": 2,
+  "result": {
+    "all_paths_reach_store_proved": false,
+    "authorizes_repair": false,
+    "cfg_sha256": "11222eef383363dc192c788817f695be2aa8a9df477030873d9218f6fe500cc1",
+    "component": 0,
+    "device_store_block": 10,
+    "device_store_instruction": 71,
+    "insertion_chain": [
+      61,
+      62,
+      63,
+      68
+    ],
+    "limits": "Reader-derived SSA/CFG observation; no independent AIR decoding, memory alias proof, SASS flow or GPU qualification.",
+    "phi_block": 9,
+    "phi_dominates_store_block": true,
+    "phi_instruction": 55,
+    "previous_sha256": "45c91be0e401de5272c47c38bf31c8fec5ff05f8d885a731ae60be04fe29b1ad",
+    "status": "OBSERVED"
+  },
+  "source_sha256": {
+    "bridge/experiments/cas_divergence/inspect_air_cfg.py": "104475d8d62f0124220470087444aaf8e685b4d58ccfbc49c1e491173c72399c",
+    "bridge/experiments/cas_divergence/trace_air_output.py": "20b0710aa1e980deca60517c8dc51a1a278f00d7ddf20f671097d68db18f7317",
+    "tests/test_cas_air_output_trace.py": "c9cdcd6d008d7ec8348ee8324cee4ee440dddd77aafd290e6a4d47ab2fa286f6"
+  },
+  "status": "OBSERVED"
+}
