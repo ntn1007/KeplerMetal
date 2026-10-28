@@ -1,0 +1,46 @@
+{
+  "GPU_or_vendor_execution_during_audit": false,
+  "REA_evidence_id": "ev_415b2e7d3c80855d44d12dfda5e5c80d10b1e10779b86551758f41664a4570ef",
+  "REA_subject_SHA256": "5ebac1c972a7b134e8676aa0bc20c2a51fdc8418145daea30e9a526cf2f8b7e5",
+  "actual_case_observed": false,
+  "allocator_runtime_target_proved": false,
+  "allocator_static_symbol": "__ZnwmRKSt9nothrow_t",
+  "counterfactual_property_and_policy_used": true,
+  "hardware_video_execution_proved": false,
+  "image_UUID": "ca5414f369373c059ea2d82b35afd4f0",
+  "live_code_identity_proved_for_every_frame": false,
+  "observed_stack_return_offset": 115492,
+  "possible_cases_if_pinned_entry_flow_applies": [
+    2,
+    9
+  ],
+  "region_SHA256": "cb8e85197a4b37270ced86a070fecb85bb61ea56aa98892996658a304544db0c",
+  "selector_case_targets": {
+    "10": 115811,
+    "11": 115728,
+    "12": 115811,
+    "13": 115811,
+    "14": 115497,
+    "15": 115547,
+    "16": 115597,
+    "2": 115449,
+    "3": 115811,
+    "4": 115811,
+    "5": 115644,
+    "6": 115811,
+    "7": 115811,
+    "8": 115685,
+    "9": 115449
+  },
+  "source_evidence_sha256": {
+    "cohort_audit": "03bf49514bacec7383f5d6230edd1bf77fe78c887fe3bd13b864ae8508fd501f",
+    "metadata": "b5725e6ea80f9f67136dddf43f2a295958ffed560face7bf56bf55a80f4596ca",
+    "object": "5ebac1c972a7b134e8676aa0bc20c2a51fdc8418145daea30e9a526cf2f8b7e5",
+    "rea": "a72946af5c1d95acccf4c723fd6b62eb119b73a53cb040e0ab68bd5d11d649c5",
+    "stack_map": "d5ae8902628d7193c32fb159fcfced0f02070c00bf84fbdfc8e5cb34bd0c219d",
+    "stub_map": "b8aacf6ec7b4c1a0613bd82c6a1aaa53e2854d2194ac8ebc0a9412699a5680c0"
+  },
+  "stack_complete": false,
+  "static_call_target_offset": 233054,
+  "status": "PASS_STATIC_AND_ARCHIVED_STACK"
+}

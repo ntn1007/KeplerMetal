@@ -1,4 +1,6 @@
-# Status, 2026-10-28
+# Status, 2026-10-29
+
+Offline correlation narrows one previously recorded AppleGVA constructor branch to selector candidates 2 or 9 under explicit pinned-code/stack assumptions; the actual register and hardware video remain unobserved. [Evidence](VIDEO_GVA_DISPATCH.md).
 
 The scoped CPU render ICB now treats selected zero-count and zero-instance triangle draws as inert. Two GTX direct/adapted process pairs match raw pixels; three invalid inputs remain refused. M1 direct/ICB references agree on the tested outcomes. [Evidence and limits](EMPTY_RENDER_DRAWS.md).
 
