@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+AppleGVA read this iMac board ID in three process-local hardware requests; all still returned -12913 with zero images. Selection cause remains unknown. [Evidence](VIDEO_GVA_BOARD_OBSERVATION.md).
+
 A static AppleGVA follow-up identifies three board comparisons and a conditional candidate-pointer fallback; the actual runtime selection and hardware decoder remain unresolved. [Evidence](VIDEO_GVA_SELECTION_STATIC.md).
 
 Eight new GTX processes validate two disjoint ICB copies per encoder for the pinned profiles; this is opt-in and not general ICB support. [Evidence](STANDALONE_MULTI_COPY.md).

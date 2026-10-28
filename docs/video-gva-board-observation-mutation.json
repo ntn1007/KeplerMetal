@@ -1,0 +1,1 @@
+{"controls": {"board-event": "EXPECTED_REFUSAL", "lease": "EXPECTED_REFUSAL", "software-byte": "EXPECTED_REFUSAL", "unchanged": "PASS", "wrong-policy": "EXPECTED_REFUSAL"}, "native_execution": false, "status": "PASS"}

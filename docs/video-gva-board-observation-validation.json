@@ -1,0 +1,19 @@
+{
+  "board_value_matches_iMac": true,
+  "current_registry_ID": 4294968416,
+  "driver_SHA256": "44f131a958d48afd6ab675a851330c37506557c9d499484170c886c3731bdbb3",
+  "hardware_images": 0,
+  "hardware_required_failures": 8,
+  "injected_current_board_runs": 3,
+  "observed_GVA_board_reads": 3,
+  "observer_SHA256": "bf7e6d2a354672060717706aaa7251722c9afb3ac6f81b8c8336228ef27cf377",
+  "original_registry_ID": 4294968458,
+  "plain_current_board_runs": 3,
+  "revised_dependency_SHA256": "abc313b50a3a5ca75feb7cb7c28cd0e52b870ab87cccb299a2ea71910f521f52",
+  "scope": "Own process; pinned CFData caller and loaded code; conditional selection cause and hardware decoding remain unknown.",
+  "selection_ancestor_observed": false,
+  "software_CPU_reference_bytes": 691200,
+  "software_images": 6,
+  "status": "PASS",
+  "terminal_nonoverlapping_processes": 11
+}

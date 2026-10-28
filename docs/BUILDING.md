@@ -1,5 +1,7 @@
 # Build from source
 
+[VIDEO_GVA_BOARD_OBSERVATION.md](VIDEO_GVA_BOARD_OBSERVATION.md) documents the pinned board-read observer and controls.
+
 [VIDEO_GVA_SELECTION_STATIC.md](VIDEO_GVA_SELECTION_STATIC.md) documents the read-only candidate-selection audit.
 
 [STANDALONE_MULTI_COPY.md](STANDALONE_MULTI_COPY.md) documents the bounded two-copy experiment and reproduction.
