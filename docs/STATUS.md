@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+Conditional per-thread CAS results were compared on the GTX and an M1 Max reference. Two GTX runs reproduce 14,226 wrong active-thread expected values each while inactive values and other fields match; the M1 reference matches all checked fields. The separately captured NVIDIA output contains an indirect branch and the AIR contract refuses this shape. No new runtime repair is claimed. [Evidence](CAS_DIVERGENCE_REFERENCE.md).
+
 An offline must-alias analysis follows copied CAS lock results across a bounded direct-branch graph. Seven synthetic decoded counterexamples are refused, but reconvergence entry remains assumed; no certificate or new GPU execution is authorized. [Evidence](CAS_LIVE_COPY_FLOW.md).
 
 The application-local CAS SDK accepts the exact GPU-qualified copied-lock profile through its certified pipeline API. Seven GTX clients checked 22,482 operations through 1,024 threads per group and four changed inputs were refused before the constructor; a second cohort and the earlier four candidate profiles passed regression. General recognition and transparent integration remain open. [Evidence](CAS_LIVE_COPY_SDK.md).

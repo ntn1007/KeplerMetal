@@ -1,0 +1,49 @@
+{
+  "status": "PASS",
+  "GPU_dispatches": 0,
+  "cases": [
+    {
+      "case": "unchanged",
+      "nonzero_totals": {}
+    },
+    {
+      "case": "active-value",
+      "nonzero_totals": {
+        "active_expected": 1
+      }
+    },
+    {
+      "case": "inactive-value",
+      "nonzero_totals": {
+        "inactive_expected": 1
+      }
+    },
+    {
+      "case": "witness",
+      "nonzero_totals": {
+        "witness": 1
+      }
+    },
+    {
+      "case": "guard",
+      "nonzero_totals": {
+        "guard_bytes": 1
+      }
+    },
+    {
+      "case": "success",
+      "nonzero_totals": {
+        "final": 1,
+        "success": 1
+      }
+    },
+    {
+      "case": "truncated",
+      "input_refused": true
+    },
+    {
+      "case": "restored",
+      "nonzero_totals": {}
+    }
+  ]
+}
