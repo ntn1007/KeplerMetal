@@ -1,0 +1,55 @@
+{
+  "GPU_dispatches": 0,
+  "binary_sha256": "79333dc780a27e0a21433041701552d6aa2db57d9c9c2c472535ae0b2fbbdd28",
+  "host_count": 4,
+  "hosts": [
+    {
+      "completed_at": "2026-10-28T20:36:15.970183+00:00",
+      "manifest_sha256": "de5b8038051f4ec4fe2345cb13ef0aeb22582bc8ee2542796f83a5bc2d3c78b5",
+      "mode": "wrong-code-hash",
+      "pid": 18566,
+      "signed_sha256": "d5418b5c88213d4a0a0ce8dbbef0d4942f0fd334fe7f8329e4089829f8d69898",
+      "started_at": "2026-10-28T20:36:14.971892+00:00",
+      "status": "PROFILE_REFUSED",
+      "stdout_sha256": "de0280b68aab289992a2587c1955201b5690f71470e1ee0f8b89731d4c660499"
+    },
+    {
+      "completed_at": "2026-10-28T20:36:23.537163+00:00",
+      "manifest_sha256": "d5184296f664cc0ff4f823efbbc09abd6abcc8b393a6f3e7dea86af24b397b27",
+      "mode": "observe",
+      "pid": 18583,
+      "signed_sha256": "d5418b5c88213d4a0a0ce8dbbef0d4942f0fd334fe7f8329e4089829f8d69898",
+      "started_at": "2026-10-28T20:36:22.305740+00:00",
+      "status": "PROFILE_REFUSED",
+      "stdout_sha256": "bd4891b97911ee42313bfb5c40ec4f664c237606e061c3afda3bb18763c857dc"
+    },
+    {
+      "completed_at": "2026-10-28T20:36:29.093174+00:00",
+      "manifest_sha256": "345902690f73dad86a124b4302f24c61fcf80f8a4040a631b906cf37e4d50b59",
+      "mode": "observe",
+      "pid": 18600,
+      "signed_sha256": "d5418b5c88213d4a0a0ce8dbbef0d4942f0fd334fe7f8329e4089829f8d69898",
+      "started_at": "2026-10-28T20:36:28.160885+00:00",
+      "status": "PROFILE_OBSERVED_NO_OPEN",
+      "stdout_sha256": "8a86cceb5a6768a2e9554341eafe291f5aa1c0033838b06c3e7f1441b241e4d8"
+    },
+    {
+      "completed_at": "2026-10-28T20:36:35.607193+00:00",
+      "manifest_sha256": "15d35a85d3003c94cffed3cd2f5545f128783dfb1ae5b51ad0d1d97532c738e6",
+      "mode": "observe",
+      "pid": 18618,
+      "signed_sha256": "d5418b5c88213d4a0a0ce8dbbef0d4942f0fd334fe7f8329e4089829f8d69898",
+      "started_at": "2026-10-28T20:36:34.543053+00:00",
+      "status": "PROFILE_OBSERVED_NO_OPEN",
+      "stdout_sha256": "1e559688c6f9d161f153beabafae7d8bd73c2b435c24e2f92ade35ebf237cb53"
+    }
+  ],
+  "lease_sha256": "ee637d27c5af482b1fbce396f6a49ef234b09a7d8602aeb36edc422f46b61248",
+  "matching_services": 4,
+  "private_RM_calls": 0,
+  "runner_sha256": "9dfb0f8ff0361d8adddf73382520e801cca7c5ab308a25e21e7b4d84c9260cc9",
+  "scope": "Own-process IOKit code and on-disk hashes only. This does not repin or qualify the privileged RM witness or prove loaded kernel code.",
+  "selected_parent": "NVDA,Display-A",
+  "source_sha256": "7fe7d79e565e3d0feebdeea8768afe24629fe6e46744b66c136f1f71b076aff2",
+  "status": "PASS_CURRENT_PROFILE_NO_OPEN"
+}

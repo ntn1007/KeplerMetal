@@ -1,5 +1,7 @@
 # Build from source
 
+[VIDEO_RM_CURRENT_PROFILE.md](VIDEO_RM_CURRENT_PROFILE.md) documents the signed, no-open current-profile observation and captured controls.
+
 [VIDEO_RM_DEVICE_IDENTITY.md](VIDEO_RM_DEVICE_IDENTITY.md) documents the device allocation comparison and read-only PCI observation.
 
 [VIDEO_RM_NESTED_CLASSLIST.md](VIDEO_RM_NESTED_CLASSLIST.md) documents the offline class-list handler and nested-buffer audit.
