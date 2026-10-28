@@ -69,6 +69,17 @@ class CASRecognitionSafety(unittest.TestCase):
         code, text = listing(after_store='mov b32 $r5 $r0')
         self.assertFalse(sass_contract(code, text, 0)['qualified'])
 
+    def test_post_patch_control_flow_cannot_reenter_cas(self):
+        for position in ('extra', 'after_store'):
+            for operation in ('bra 0x8', '$p1 bra 0x10', 'joinat 0x20'):
+                with self.subTest(position=position, operation=operation):
+                    code, text = listing(**{position: operation})
+                    self.assertFalse(sass_contract(code, text, 0)['qualified'])
+
+    def test_forward_branch_does_not_trip_backedge_rule(self):
+        code, text = listing(extra='bra 0x58')
+        self.assertTrue(sass_contract(code, text, 0)['qualified'])
+
     def test_address_alias_is_rejected(self):
         code, text = listing(address=0)
         self.assertFalse(sass_contract(code, text, 0)['qualified'])

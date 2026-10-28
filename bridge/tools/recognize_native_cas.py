@@ -146,8 +146,13 @@ def sass_contract(code,text,component):
    if n!=k and (register_writes(op2) is None or cmp in register_references(op2)):
     other_use=True;break
   if other_use:continue
-  targets=[int(x,16) for _,op2 in instructions for x in re.findall(r'(?:bra|joinat) (0x[0-9a-f]+)',op2)]
+  edges=[(source,int(target,16)) for source,op2 in instructions for target in re.findall(r'(?:bra|joinat) (0x[0-9a-f]+)',op2)]
+  targets=[target for _,target in edges]
   if patch in targets or patch+8 in targets:continue
+  # A post-patch backedge can re-enter the lock/compare region after cmp has
+  # been changed. Refuse even if the path is unreachable or conditionally safe;
+  # this structural check does not establish complete control-flow semantics.
+  if any(source>patch and target<=patch for source,target in edges):continue
   candidates.append({'qualified':True,'old_register':old,'expected_register':cmp,'shared_address':addr,
     'CAS_load_offset':off,'success_compare_offset':instructions[j][0],'redirect_offset':patch,'return_offset':patch+8,
     'output_store_offset':instructions[k][0],'output_vector_base':base,'expected_output_component':component,

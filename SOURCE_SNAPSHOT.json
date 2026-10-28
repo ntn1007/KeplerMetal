@@ -2974,12 +2974,16 @@
       "path": "bridge/tools/recognize_native_cas.py",
       "source_path": "bridge/tools/recognize_native_cas.py",
       "source_SHA256": "d9783fa0258f65f50d3df9547f36701684324abcc9f99a494ba70fca41a063cb",
-      "published_SHA256": "2dcd61e6a0205089d0ef6cc94b93d2c7de584984e48e0c43f14eeeb20686713a",
-      "bytes": 11740,
+      "published_SHA256": "46116c7d4c9143f46cfc4ee62cf589fe3cbd9cfa9a371388377259a342446352",
+      "bytes": 12115,
       "modified_for_publication": true,
       "publication_change": {
         "previous_published_SHA256": "9aa30b458263eeeddb782cd2a3b10ac362b6faf3ced9cbca805e55b515bebbee",
         "reason": "Require pinned decoder reproduction and preserve checked native snapshots; original source hash retained."
+      },
+      "latest_change": {
+        "previous_published_SHA256": "2dcd61e6a0205089d0ef6cc94b93d2c7de584984e48e0c43f14eeeb20686713a",
+        "reason": "Conservative post-redirect backedge refusal and CPU regression tests; historical source provenance preserved."
       }
     },
     {
@@ -7479,12 +7483,16 @@
       "path": "tests/test_native_cas_recognizer.py",
       "source_path": "tests/test_native_cas_recognizer.py",
       "source_SHA256": "ee6d4693d639b2225a54ac31a785bb08bad65c83cb16feacd4ad95b900fd3487",
-      "published_SHA256": "c3039be88a19ea99a424fdf2afe5406e511ace6ba8f76dee1de9d5eb4e40cf46",
-      "bytes": 6097,
+      "published_SHA256": "268e264fbee27b8524c997813afd9b4ac9171283fb05f8e143345d2dfa7e9ed4",
+      "bytes": 6683,
       "modified_for_publication": true,
       "publication_change": {
         "previous_published_SHA256": "ee6d4693d639b2225a54ac31a785bb08bad65c83cb16feacd4ad95b900fd3487",
         "reason": "Exercise fail-closed disassembly coverage, decoder verification and input snapshots."
+      },
+      "latest_change": {
+        "previous_published_SHA256": "c3039be88a19ea99a424fdf2afe5406e511ace6ba8f76dee1de9d5eb4e40cf46",
+        "reason": "Conservative post-redirect backedge refusal and CPU regression tests; historical source provenance preserved."
       }
     },
     {
@@ -7746,5 +7754,14 @@
     ]
   },
   "update_date": "2026-10-27",
-  "update_reason": "Serial partial/uniform range chaining, qualified by dependent producer/consumer outputs; native and system integration remain unclaimed."
+  "update_reason": "Serial partial/uniform range chaining, qualified by dependent producer/consumer outputs; native and system integration remain unclaimed.",
+  "cas_backedge_update": {
+    "date": "2026-10-28",
+    "previous_public_commit": "bb937d8c3289e69d9c9d30b47b58e5246933ec1c",
+    "previous_snapshot_SHA256": "85f70942934ba11415d8dd2276d2f2f923275b7b5cffb97458533682a6fe09ac",
+    "files": [
+      "bridge/tools/recognize_native_cas.py",
+      "tests/test_native_cas_recognizer.py"
+    ]
+  }
 }

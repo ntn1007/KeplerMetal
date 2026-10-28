@@ -21,6 +21,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+The offline CAS recognizer now refuses a demonstrated synthetic post-repair backedge. [Evidence and limitations](docs/CAS_BACKEDGE_SAFETY.md).
+
 A static audit traces the video-buffer resource factory to NVIDIA `nvTextureBuffer` and conditional backing paths. [Evidence and limits](docs/VIDEO_ALLOCATION_CHAIN.md).
 
 The scoped Metal registrar now owns its callback gate through pending completions. [Evidence and limits](docs/NOCOPY_OWNED_REGISTRATION.md).

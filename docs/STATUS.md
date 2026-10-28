@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+The offline CAS diagnosis now rejects post-redirect backedges that can revisit earlier code. Existing policies require regeneration. [Evidence](CAS_BACKEDGE_SAFETY.md).
+
 A static video allocation audit identifies the NVIDIA `nvTextureBuffer` factory and conditional memory paths; no live allocation or decoding is established. [Evidence](VIDEO_ALLOCATION_CHAIN.md).
 
 Pending registered Metal completions now retain their registry gate; untracked work and general application integration remain open. [Evidence](NOCOPY_OWNED_REGISTRATION.md).
