@@ -44,8 +44,9 @@ not a claim that the unsigned executables were byte-identical.
 
 This is a **laboratory correction for one shader**, not a change to the installed
 compiler, a general dataflow recognizer, an SDK-supported certificate or a
-transparent application fix. The current SDK still refuses this different
-displaced-instruction form. No performance benchmark, new Metal family, or
+transparent application fix. The [SDK now supports this one pinned profile](CAS_LIVE_COPY_SDK.md);
+the generic recognizer still refuses this different displaced-instruction form.
+No performance benchmark, new Metal family, or
 GPU hardware capability beyond the tested behavior is claimed. No system
 driver, framework or OCLP configuration was modified. Existing policies remain
 unchanged; do not generalize register numbers or offsets.

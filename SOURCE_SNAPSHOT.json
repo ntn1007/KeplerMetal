@@ -216,10 +216,15 @@
       "path": "bridge/src/KeplerNativeCASAdapter.inc",
       "source_path": "bridge/src/KeplerNativeCASAdapter.inc",
       "source_SHA256": "57b86d64a0006d37418b418180b893a778a0da39035ec765efbd23d5ee0a2dfe",
-      "published_SHA256": "8c55319f9c2f2b46957ac1b0140a3c06d8dccf1c21adf0818a40de7835c72d51",
-      "bytes": 11653,
+      "published_SHA256": "3a1664a09c71c9aad4d598dd17d413f6208e05b365bdd0e7eb1538ef5f463076",
+      "bytes": 12614,
       "modified_for_publication": true,
-      "previous_published_SHA256": "cdd32884ba293cd160eced53dff9ce0031ba3bf69def322c061b53fed3341b81"
+      "previous_published_SHA256": "cdd32884ba293cd160eced53dff9ce0031ba3bf69def322c061b53fed3341b81",
+      "latest_change": {
+        "previous_published_SHA256": "8c55319f9c2f2b46957ac1b0140a3c06d8dccf1c21adf0818a40de7835c72d51",
+        "previous_bytes": 11653,
+        "reason": "Explicit byte-pinned GPU-qualified copied-lock CAS profile; prior barrier-trampoline profile retained."
+      }
     },
     {
       "path": "bridge/src/KeplerNativeCommands.h",
@@ -7966,5 +7971,10 @@
     "previous_source_snapshot_SHA256": "337ff2d44c3698520563e58b9725b8592c24e3fbe7c7984e47e13d680aeb5529",
     "previous_public_commit": "2ebf58c",
     "scope": "Offline recognizer JOIN-write correction and focused tests; no GPU qualification or vendor binaries."
+  },
+  "cas_livecopy_sdk_update": {
+    "previous_source_snapshot_SHA256": "bdb592789daf6d5ed536b48e79fa2d7d8c6edcc735dcba7f3683be59c3ab94b4",
+    "previous_public_commit": "fb59eab",
+    "scope": "Explicit exact-profile CAS SDK integration; not an arbitrary shader recognizer."
   }
 }

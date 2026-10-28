@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "GPU_dispatches": 0,
+  "cases": [
+    {
+      "case": "unchanged",
+      "accepted": true
+    },
+    {
+      "case": "bad-value",
+      "accepted": false
+    },
+    {
+      "case": "bad-guard",
+      "accepted": false
+    },
+    {
+      "case": "constructor-entered",
+      "accepted": false
+    },
+    {
+      "case": "profile-control",
+      "accepted": false
+    },
+    {
+      "case": "restored",
+      "accepted": true
+    }
+  ]
+}

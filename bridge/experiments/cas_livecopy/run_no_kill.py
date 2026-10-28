@@ -1,7 +1,7 @@
 import hashlib,importlib.util,json,os,shutil,subprocess,sys,datetime
 from pathlib import Path
 root=Path.cwd().resolve(); work=Path(os.environ['KM_CAS_WORK']).resolve(); work.relative_to(root/'results'); mode,local,variant,name=sys.argv[1:]; local=int(local); variant=int(variant)
-if mode not in ('native','native_replay','native_trampoline','native_repaired','negative_native_pin') or local not in (33,128) or variant not in (0,1) or '/' in name: raise ValueError('unsupported case')
+if mode not in ('native','native_replay','native_trampoline','native_repaired','negative_native_pin','negative_sdk_trampoline','negative_sdk_certificate') or local not in (33,128,1024) or variant not in (0,1) or '/' in name: raise ValueError('unsupported case')
 sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
 library=work/'test.metallib'
 if sha(library)!='17cd653eb49ab7749f6013145e71292d51ce467f2a094451e6f1fc9192a31632':raise ValueError('library identity')
@@ -15,9 +15,10 @@ if sha(module)!='ee637d27c5af482b1fbce396f6a49ef234b09a7d8602aeb36edc422f46b6124
 spec=importlib.util.spec_from_file_location('lab_gpu_reservation',module);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 lease=m.GPUReservation(root);child=None
 try:
- out.mkdir();output=out/'outputs';output.mkdir();plan={'mode':mode,'space':'threadgroup','local':local,'groups':3,'contended':True,'variant':variant,'require_native_lock_loop':True,'layout':'noise','intent':'post_CAS_expected','library':str(library)}
+ plan_mode={'negative_sdk_trampoline':'native_trampoline','negative_sdk_certificate':'native_repaired'}.get(mode,mode)
+ out.mkdir();output=out/'outputs';output.mkdir();plan={'mode':plan_mode,'space':'threadgroup','local':local,'groups':3,'contended':True,'variant':variant,'require_native_lock_loop':True,'layout':'noise','intent':'post_CAS_expected','library':str(library)}
  if mode!='native':
-  key={'native_replay':'original','native_trampoline':'trampoline','native_repaired':'repaired','negative_native_pin':'repaired'}[mode];plan.update(original_code=str(work/('wrong-original.sass' if mode=='negative_native_pin' else 'original.sass')),code=str(work/(key+'.sass')))
+  key={'native_replay':'original','native_trampoline':'trampoline','native_repaired':'repaired','negative_native_pin':'repaired','negative_sdk_trampoline':'trampoline','negative_sdk_certificate':'repaired'}[mode];plan.update(original_code=str(work/('wrong-original.sass' if mode=='negative_native_pin' else 'original.sass')),code=str(work/(key+'.sass')))
   if mode=='negative_native_pin' and (work/'wrong-original.sass').read_bytes() != bytes([original_byte ^ 1 if i==0 else original_byte for i,original_byte in enumerate((work/'original.sass').read_bytes())]):raise ValueError('wrong pin construction')
  planpath=out/'plan.json';planpath.write_text(json.dumps(plan,indent=2)+'\n'); signed=out/'application';shutil.copyfile(exe,signed);signed.chmod(0o755)
  subprocess.run(['codesign','--force','--sign','-',str(signed)],check=True,capture_output=True,timeout=15);subprocess.run(['codesign','--verify','--strict',str(signed)],check=True,capture_output=True,timeout=15)
@@ -29,9 +30,10 @@ try:
  ps=subprocess.run(['ps','-p',str(child.pid),'-o','pid=,lstart=,command='],capture_output=True,text=True,timeout=10)
  if ps.returncode not in (0,1) or ps.stderr:raise RuntimeError('cannot verify process')
  state=ps.stdout.strip();job.update(exit_code=code,SIGKILL_requested=False,authoritative_ps_status=state,completed_at=datetime.datetime.now(datetime.timezone.utc).isoformat());registry.write_text(json.dumps(jobs,indent=2)+'\n');lease.finish(code,False,state)
- (out/'manifest.json').write_text(json.dumps({**job,'GPU_reservation':dict(lease.data),'library_SHA256':sha(library),'runner_SHA256':sha(__file__)},indent=2)+'\n')
+ cert=os.environ.get('KM_CAS_CERT');cert_hash=sha(cert) if cert else None
+ (out/'manifest.json').write_text(json.dumps({**job,'GPU_reservation':dict(lease.data),'library_SHA256':sha(library),'certificate_template_SHA256':cert_hash,'runner_SHA256':sha(__file__)},indent=2)+'\n')
  print(json.dumps({'status':'TERMINAL' if not state else 'UNRESOLVED','exit_code':code,'stdout':str(out/'execution.stdout')}),flush=True)
- expected_code=4 if mode=='negative_native_pin' else 0 if mode=='native_repaired' else 10
+ expected_code=4 if mode in ('negative_native_pin','negative_sdk_trampoline','negative_sdk_certificate') else 0 if mode=='native_repaired' else 10
  if state or code != expected_code:raise RuntimeError('unexpected execution; inspect process and output')
 except BaseException:
  if child is not None and child.poll() is None:lease.finish(None,False,'child outcome not established')

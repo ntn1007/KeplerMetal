@@ -1,0 +1,114 @@
+{
+  "GPU_checked_words": 89928,
+  "GPU_correct_operations": 22482,
+  "GPU_hosts": 7,
+  "adapter_SHA256": "3a1664a09c71c9aad4d598dd17d413f6208e05b365bdd0e7eb1538ef5f463076",
+  "certificate_template_SHA256": "5c41f7ad0263ad5b38bfb789b8a3ab1e0269ba7959087d2b9bb5bc2fe3d42d66",
+  "client_SHA256": "78dd902eb653bdf0efd695ff7fdd01fdc1e769fee7801b2aea12c885475bfa91",
+  "code_residency_readback": false,
+  "general_shader_support": false,
+  "performance_benchmark": false,
+  "pre_constructor_refusals": [
+    {
+      "before_constructor": true,
+      "certificate_template_SHA256": "5c41f7ad0263ad5b38bfb789b8a3ab1e0269ba7959087d2b9bb5bc2fe3d42d66",
+      "name": "negative-pin-v1-l33-2"
+    },
+    {
+      "before_constructor": true,
+      "certificate_template_SHA256": "5c41f7ad0263ad5b38bfb789b8a3ab1e0269ba7959087d2b9bb5bc2fe3d42d66",
+      "name": "negative-trampoline"
+    },
+    {
+      "before_constructor": true,
+      "certificate_template_SHA256": "6ce6d1a1c8aadd53062d182c384c90015cdea0a5f1b399a76bccaf82f405c1d0",
+      "name": "negative-profile"
+    },
+    {
+      "before_constructor": true,
+      "certificate_template_SHA256": "6d11105a3abb1689cc6695201c8803f61dac06512a0aa165cc8b173ac3e23839",
+      "name": "negative-metadata"
+    }
+  ],
+  "receipts": [
+    {
+      "certificate_template_SHA256": "5c41f7ad0263ad5b38bfb789b8a3ab1e0269ba7959087d2b9bb5bc2fe3d42d66",
+      "name": "repaired-v1-l33-2",
+      "operations": 297,
+      "output_SHA256": [
+        "c3e913554e70cec455cd5c957c976d7944ed7984fa3fb2ba078ff6717801b7d4",
+        "c4bfc2f2690687a2691cb9b1d084097bff988d45a25d87621dabc90a65db57a5",
+        "d927a3ebec5d33c975418235fbccb6bd4a4eb9fd0631ecf38321f5cf1727a829"
+      ],
+      "signed_executable_SHA256": "7d13317108cf7d4f40191bce7987ee631800e106fb290ec5c0d7bbb37041e9b7"
+    },
+    {
+      "certificate_template_SHA256": "5c41f7ad0263ad5b38bfb789b8a3ab1e0269ba7959087d2b9bb5bc2fe3d42d66",
+      "name": "repaired-v0-l33",
+      "operations": 297,
+      "output_SHA256": [
+        "a89abdf29c371bfa2eada20fafa94ee9cfb67bcf36c1f084b6fe0f32c19be124",
+        "c2f738cf3dd8ec4d7371080778fee1adf076f7dc9f75562799b896fe4c05f53a",
+        "39b21a2db6e42bedb6d9a046390f6d51d3ff526bbc91433aeb0550fdaf1e8799"
+      ],
+      "signed_executable_SHA256": "7d13317108cf7d4f40191bce7987ee631800e106fb290ec5c0d7bbb37041e9b7"
+    },
+    {
+      "certificate_template_SHA256": "5c41f7ad0263ad5b38bfb789b8a3ab1e0269ba7959087d2b9bb5bc2fe3d42d66",
+      "name": "repaired-v0-l128",
+      "operations": 1152,
+      "output_SHA256": [
+        "064063d31da4681796a5509ce2ef138c89fd911c686483dc3ccf2af9208c912f",
+        "b6d38850ca71f12475beca23e527eee928610f0842af872ce893c3fb8dddb035",
+        "3be0265fd737d32d0d13fe9df6947bb60618a7b26bff6c8db95e748ee70aab54"
+      ],
+      "signed_executable_SHA256": "7d13317108cf7d4f40191bce7987ee631800e106fb290ec5c0d7bbb37041e9b7"
+    },
+    {
+      "certificate_template_SHA256": "5c41f7ad0263ad5b38bfb789b8a3ab1e0269ba7959087d2b9bb5bc2fe3d42d66",
+      "name": "repaired-v1-l128",
+      "operations": 1152,
+      "output_SHA256": [
+        "5f3b9295c2aac8e325627fca97b314c2ff9c705f4506bb1bd7d0636027878941",
+        "b50faed9548a05e78fd2d7fc7566a8332f95f52a07c60b8d7b63b8eca58284d1",
+        "f023cb0a50ea3f027936d687a38ff144d6bd7772ca4471d80cb452a6a01bf3fa"
+      ],
+      "signed_executable_SHA256": "7d13317108cf7d4f40191bce7987ee631800e106fb290ec5c0d7bbb37041e9b7"
+    },
+    {
+      "certificate_template_SHA256": "5c41f7ad0263ad5b38bfb789b8a3ab1e0269ba7959087d2b9bb5bc2fe3d42d66",
+      "name": "repaired-v1-l128-repeat",
+      "operations": 1152,
+      "output_SHA256": [
+        "5f3b9295c2aac8e325627fca97b314c2ff9c705f4506bb1bd7d0636027878941",
+        "b50faed9548a05e78fd2d7fc7566a8332f95f52a07c60b8d7b63b8eca58284d1",
+        "f023cb0a50ea3f027936d687a38ff144d6bd7772ca4471d80cb452a6a01bf3fa"
+      ],
+      "signed_executable_SHA256": "7d13317108cf7d4f40191bce7987ee631800e106fb290ec5c0d7bbb37041e9b7"
+    },
+    {
+      "certificate_template_SHA256": "5c41f7ad0263ad5b38bfb789b8a3ab1e0269ba7959087d2b9bb5bc2fe3d42d66",
+      "name": "repaired-v0-l1024",
+      "operations": 9216,
+      "output_SHA256": [
+        "a85429bfd267f6403d05d3016771c9cfb565306f43f2b1039481f92e0681fba9",
+        "22faa33b1c9144f9c3c0d4d20fd38293f7dec89a54882a7345f821dc7aec6b7b",
+        "f5fe727f31f2abaa833cf276ee41985177baf14c6212366e12841bf568421174"
+      ],
+      "signed_executable_SHA256": "7d13317108cf7d4f40191bce7987ee631800e106fb290ec5c0d7bbb37041e9b7"
+    },
+    {
+      "certificate_template_SHA256": "5c41f7ad0263ad5b38bfb789b8a3ab1e0269ba7959087d2b9bb5bc2fe3d42d66",
+      "name": "repaired-v1-l1024",
+      "operations": 9216,
+      "output_SHA256": [
+        "40983d34908394571bec93503b61c6aaf16a3814fcd553fde55b8b4e35bc8894",
+        "5a4b09144e20b87d0e3cf81ee6753fe670416a3955c4e4f280c352b20f2a7b09",
+        "0ed4bcfdb6646b4505979535f2fe729770251330fa3399e88cd3c62a48d5be2e"
+      ],
+      "signed_executable_SHA256": "7d13317108cf7d4f40191bce7987ee631800e106fb290ec5c0d7bbb37041e9b7"
+    }
+  ],
+  "status": "PASS",
+  "terminal_nonoverlapping_processes": 11
+}

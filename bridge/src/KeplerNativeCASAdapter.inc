@@ -112,11 +112,24 @@ extern "C" id<MTLComputePipelineState> KPCreateCertifiedNativeCASPipeline(
   NSUInteger oldRegister=[sass[@"old_register"]unsignedIntegerValue],expectedRegister=[sass[@"expected_register"]unsignedIntegerValue];
   structure=structure&&oldRegister<24&&expectedRegister<24&&oldRegister!=expectedRegister;
   const unsigned char *a=(const unsigned char*)original.bytes,*b=(const unsigned char*)replacement.bytes;
+  id repairProfile=cert[@"repair_profile"];
+  bool copiedLockProfile=[repairProfile isKindOfClass:NSString.class]&&
+      [repairProfile isEqual:@"gk104-livecopy-pinned-v1"];
+  structure=structure&&(!repairProfile||copiedLockProfile);
   if(structure){
    structure=u32((const unsigned char*)metadata.bytes,0)==size/8-1&&
-      u64(a,redirect)==0xe000000000001c05ULL&&
       memcmp(a+redirect,b+size+8,8)==0&&
       u64(b,size+16)==(0x2800000000001de4ULL|(uint64_t(oldRegister)<<26)|(uint64_t(expectedRegister)<<14));
+   if(copiedLockProfile){
+    // Separately GPU-qualified exact program. This does not authorize another
+    // register flow or a generic displaced constant-bank instruction.
+    structure=structure&&[function isEqual:@"test"]&&component==0&&size==0x5c0&&
+      redirect==0x530&&oldRegister==5&&expectedRegister==0&&
+      kpCASHash(library,@"17cd653eb49ab7749f6013145e71292d51ce467f2a094451e6f1fc9192a31632")&&
+      kpCASHash(original,@"f16bf16da56d5dc060429f6886d2e1d80eafa0a960f48b7d776a3234fb6bcb41")&&
+      kpCASHash(replacement,@"a193a1c62851ff483bcb3ab7fda86e9646108e36f1552f80a879616e7017e58f")&&
+      kpCASHash(metadata,@"b688a341c68920bb8e8c383f5a2a87d37ac5a1c93a962a531ff8f4a289ecbf12");
+   }else structure=structure&&u64(a,redirect)==0xe000000000001c05ULL;
    for(NSUInteger i=0;i<size&&structure;i+=8)
     if(i!=redirect&&memcmp(a+i,b+i,8))structure=false;
   }
