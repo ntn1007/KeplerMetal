@@ -1,0 +1,63 @@
+{
+  "absence_does_not_prove_constructor_failure": true,
+  "all_deallocation_calls_observed": false,
+  "base_inputs_sha256": "d07d612a8c5ac9a116e26a57a7716b5db2703e911469b3dffab4798d6222d47e",
+  "calibration_sha256": "220c593db40e6577380a75d9d7713c4808298baf7b0410e20789a55cde5de170",
+  "constructor_completion_proved": false,
+  "counterfactual_property_and_policy_used": true,
+  "current_hardware_create_status": -12913,
+  "current_without_witness_controls": 1,
+  "current_witness_runs": 2,
+  "hardware_images": 0,
+  "hardware_video_execution_proved": false,
+  "hosts": 5,
+  "live_post_constructor_region_sha256": "38281d047ee261127550cff96495d8aa7a911fe889fb6f7a6ac2992f3bbb274c",
+  "live_selector_region_sha256": "cb8e85197a4b37270ced86a070fecb85bb61ea56aa98892996658a304544db0c",
+  "observed_conditional_deallocation_calls": 0,
+  "observer_sha256": "d748d7fd837bda1a74b28c512b9f71cf1f02f7caaf60093a2980cb30184b04a0",
+  "receipts": [
+    {
+      "conditional_witness_calls": 0,
+      "create_status": 0,
+      "images": 6,
+      "mode": "cpu",
+      "witness": "on"
+    },
+    {
+      "conditional_witness_calls": 0,
+      "create_status": -12906,
+      "images": 0,
+      "mode": "wrong",
+      "witness": "on"
+    },
+    {
+      "conditional_witness_calls": 0,
+      "create_status": -12913,
+      "images": 0,
+      "mode": "current",
+      "witness": "on"
+    },
+    {
+      "conditional_witness_calls": null,
+      "create_status": -12913,
+      "images": 0,
+      "mode": "current",
+      "witness": "off"
+    },
+    {
+      "conditional_witness_calls": 0,
+      "create_status": -12913,
+      "images": 0,
+      "mode": "current",
+      "witness": "on"
+    }
+  ],
+  "software_controls": 1,
+  "software_images": 6,
+  "software_reference_bytes": 691200,
+  "status": "PASS_BOUNDED_CONDITIONAL_WITNESS",
+  "system_modified": false,
+  "tail_sha256": "605653e171783c64acc52a0cbb8a80cd1c762b7ea363cc8ffc8e2bc2ecbb9d82",
+  "wrong_board_controls": 1,
+  "wrong_board_hardware_create_status": -12906
+}
