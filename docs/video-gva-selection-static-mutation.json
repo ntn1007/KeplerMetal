@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "controls": {
+    "changed-capture": "EXPECTED_REFUSAL",
+    "changed-map": "EXPECTED_REFUSAL"
+  },
+  "vendor_code_executed": false
+}

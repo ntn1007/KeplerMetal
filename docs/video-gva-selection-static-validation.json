@@ -1,0 +1,39 @@
+{
+  "append_target_offset": 151776,
+  "board_query_call_offset": 152080,
+  "board_query_key": "board-id",
+  "board_query_options": 1,
+  "board_query_plane": "IOService",
+  "board_query_static_target": "IORegistryEntrySearchCFProperty",
+  "board_reader_region_SHA256": "d5a78812a5224dc620e0b9fddd2c2c4422a2399e18f994d67a10885f0b88a15b",
+  "candidate_absent_branch_offset": 147429,
+  "candidate_comparisons": [
+    {
+      "compare_call_offset": 146933,
+      "equal_branch_offset": 147107,
+      "string": "Mac-F60DEB81FF30ACF6"
+    },
+    {
+      "compare_call_offset": 146956,
+      "equal_branch_offset": 147203,
+      "string": "Mac-7BA5B2D9E42DDD94"
+    },
+    {
+      "compare_call_offset": 146979,
+      "equal_branch_offset": 147237,
+      "string": "Mac-27AD2F918AE68F61"
+    }
+  ],
+  "candidate_present_append_call_offset": 147011,
+  "conditional_fallback_candidate_test_offset": 146992,
+  "hardware_decode_proved": false,
+  "image_UUID": "ca5414f369373c059ea2d82b35afd4f0",
+  "inner_region_SHA256": "4c07b6daa5d9e4449c3f77192951ffa230915193befe87cbbf443e25226fa564",
+  "input_board": "Mac-F2268DAE",
+  "input_board_matches_special_case": false,
+  "runtime_board_value_observed": false,
+  "selection_branch_observed": false,
+  "status": "STATIC_ONLY",
+  "system_modified": false,
+  "vendor_program_executed": false
+}

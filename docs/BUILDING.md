@@ -1,5 +1,7 @@
 # Build from source
 
+[VIDEO_GVA_SELECTION_STATIC.md](VIDEO_GVA_SELECTION_STATIC.md) documents the read-only candidate-selection audit.
+
 [STANDALONE_MULTI_COPY.md](STANDALONE_MULTI_COPY.md) documents the bounded two-copy experiment and reproduction.
 
 [STANDALONE_COPY_POLICY.md](STANDALONE_COPY_POLICY.md) documents the scoped client policy and GPU-copy qualification.
