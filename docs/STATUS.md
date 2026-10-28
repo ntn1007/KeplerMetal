@@ -1,6 +1,6 @@
 # Status, 2026-10-27
 
-A purpose-built public Metal client now qualifies the bounded runtime-indexed CAS shader with the opt-in process-local bootstrap; arbitrary applications and dynamic shapes remain unqualified. [Evidence](STANDALONE_DYNAMIC_CAS.md). The earlier SDK tests remain documented [here](CAS_DYNAMIC_SLOT.md).
+A purpose-built public Metal client now qualifies the bounded runtime-indexed CAS shader when the certified library is loaded through URL or data; arbitrary applications and dynamic shapes remain unqualified. [Evidence](STANDALONE_DATA_CAS.md). The prior process-local and SDK tests remain documented [here](STANDALONE_DYNAMIC_CAS.md) and [here](CAS_DYNAMIC_SLOT.md).
 
 The single-overlay CAS SDK was regenerated using the backedge check and validated on the GTX; scope remains four adapted-client shader shapes. [Evidence](CAS_BACKEDGE_SDK.md).
 

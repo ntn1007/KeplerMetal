@@ -1,6 +1,6 @@
 # Build from source
 
-[STANDALONE_DYNAMIC_CAS.md](STANDALONE_DYNAMIC_CAS.md) documents the process-local public-Metal client qualification. [CAS_DYNAMIC_SLOT.md](CAS_DYNAMIC_SLOT.md) covers the prior SDK qualification and [CAS_SLOT3.md](CAS_SLOT3.md) the fixed-slot test.
+[STANDALONE_DATA_CAS.md](STANDALONE_DATA_CAS.md) documents the URL/data library-loading qualification. [STANDALONE_DYNAMIC_CAS.md](STANDALONE_DYNAMIC_CAS.md) documents the preceding process-local public-Metal client qualification. [CAS_DYNAMIC_SLOT.md](CAS_DYNAMIC_SLOT.md) covers the prior SDK qualification and [CAS_SLOT3.md](CAS_SLOT3.md) the fixed-slot test.
 
 [CAS_BACKEDGE_SDK.md](CAS_BACKEDGE_SDK.md) documents the newly completed single-overlay CAS GPU qualification.
 
