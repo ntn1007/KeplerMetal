@@ -1,0 +1,40 @@
+{
+  "GPU_dispatches": 0,
+  "authorizes_repair": false,
+  "evidence": {
+    "AIR_sha256": "57f48fd3bc747c45b1a0d2b82fddea4c4bab97f18042e4d70afe5086fbaedc0b",
+    "CAS_block": 8,
+    "CAS_instruction": 49,
+    "GPU_dispatches": 0,
+    "authorizes_repair": false,
+    "blocks": 12,
+    "edges": 19,
+    "expected_load_instruction": 51,
+    "fallback_block": 7,
+    "initial_store_instruction": 48,
+    "inserted_component": 0,
+    "inspector_sha256": "104475d8d62f0124220470087444aaf8e685b4d58ccfbc49c1e491173c72399c",
+    "limits": "Reader-derived structural observation only; no alias, dominance, full output, native SASS or GPU qualification.",
+    "phi_block": 9,
+    "phi_instruction": 55,
+    "previous_typed_sha256": "45c91be0e401de5272c47c38bf31c8fec5ff05f8d885a731ae60be04fe29b1ad",
+    "reader_binary_sha256": "0c6236be06204aab20452caab0597f4d5019decb00e10e8b727e0b875890a0f7",
+    "reader_object_sha256": [
+      "e98b276a537ea8bdf247dde2ef04ada35ec8e588fc15bc45a2d2b1d3731ece5e",
+      "473b8e25bb10ec9786616bbb74d7892d98c4d1b90e09838d93022a2fdce0b75e"
+    ],
+    "reader_source_sha256": "c08a0e2647efe852dae3b08235ac5bfdceb08ec0a91cb1e64d3a97cb845b2203",
+    "reproducer_sha256": "5feb958e2a5d7caf239006adc209ad2ab866d862b147890e0c913110efd2f39e",
+    "status": "OBSERVED",
+    "typed_CFG_sha256": "11222eef383363dc192c788817f695be2aa8a9df477030873d9218f6fe500cc1",
+    "vector_insertion_instruction": 61
+  },
+  "identical_observations": true,
+  "independent_source_rebuilds": 2,
+  "reader_independently_verified": false,
+  "status": "OBSERVED",
+  "tests": {
+    "CAS_suite": "53 PASS",
+    "synthetic_cfg": "6 PASS"
+  }
+}

@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+An offline AIR CFG observation recovers branch and PHI predecessor IDs for the conditional CAS, identifying its merge with the initialized value. The observation does not authorize repair, establish full dataflow or resolve the native indirect branch. [Evidence](CAS_CONDITIONAL_AIR_CFG.md).
+
 The experimental CAS SDK now accepts the exact conditional profile only with pinned library, native code, replacement and metadata. Two GPU cohorts each validate 56,904 active operations and five pre-constructor refusals; earlier SDK profiles pass regression. The general AIR and SASS recognizers still refuse this shader; ordinary applications are not transparently fixed. [Evidence](CAS_DIVERGENCE_SDK.md).
 
 An exact captured conditional-CAS program is corrected inside an adapted process. Two GPU cohorts each check 56,904 active operations and 455,040 output words; native/replay/NOP controls retain the defect. This is not general recognition or a system compiler repair. [Evidence](CAS_DIVERGENCE_REPAIR.md).
