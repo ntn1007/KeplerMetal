@@ -1,0 +1,63 @@
+{
+  "build_inputs_SHA256": "52762a5076d74a64b98d42f51d07feed86930e7878babb835f10936915307d5d",
+  "cases": [
+    {
+      "gpu_dispatched": true,
+      "mode": "observe",
+      "queue_after": true,
+      "result_SHA256": "ab7148f1ca85199407c86d8cf676d33f31a2884802ce927d240c398f8bb9cf82"
+    },
+    {
+      "gpu_dispatched": false,
+      "mode": "compare",
+      "queue_after": false,
+      "result_SHA256": "a853352380e13739664dfc0f006e63482d924128d2d74f492693f037a30d12c0"
+    },
+    {
+      "gpu_dispatched": true,
+      "mode": "release",
+      "queue_after": true,
+      "result_SHA256": "3866dfbd9c979e2d47880f135e43b91258a15750f8c339aa11ed33acef8a76af"
+    },
+    {
+      "gpu_dispatched": false,
+      "mode": "release-negative",
+      "queue_after": true,
+      "result_SHA256": "9cd21151d9aa17603e0ff64899ab82f980dae8e55ade144d7bba81162d6a176d"
+    },
+    {
+      "gpu_dispatched": false,
+      "mode": "release-negative",
+      "queue_after": true,
+      "result_SHA256": "fbffe492ed3dcf4a872b45f3a46dffb4c2dc2daf3e8015d398464251a6f205a0"
+    },
+    {
+      "gpu_dispatched": true,
+      "mode": "release",
+      "queue_after": true,
+      "result_SHA256": "b7f53c33af1535cef5ee97ffc480c8551c170b13452876ada4ed898cdb607f57"
+    },
+    {
+      "gpu_dispatched": false,
+      "mode": "compare",
+      "queue_after": false,
+      "result_SHA256": "43b987f4ba1410569da3e55cbedf5357186455fb2c775a9fc142cdef0fcccfbf"
+    }
+  ],
+  "explicit_close_expected_queue_failures": 2,
+  "gpu_verified_words": 12288,
+  "guard_words": 160,
+  "hardware_video_execution_proved": false,
+  "negative_sentinel_words": 8192,
+  "reference_release_negative_controls": 2,
+  "release_gpu_processes": 2,
+  "same_object_and_name": true,
+  "scope": "Pinned process-local GPU/Metal shared alias; reusable guard and IOConnectRelease after verified extra send-right reference. Not a video decoder or general driver fix.",
+  "send_right_counts": [
+    1,
+    2,
+    1
+  ],
+  "status": "PASS_BOUNDED_REFERENCE_RELEASE",
+  "terminal_nonoverlapping_processes": 7
+}

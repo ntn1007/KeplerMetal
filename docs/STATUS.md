@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+A guarded, process-local extra shared-client reference release preserves a new Metal queue and GPU compute in two GTX trials; the existing video lease remains unqualified. [Evidence and limits](VIDEO_SHARED_REFERENCE_GUARD.md).
+
 **FAIL:** two delayed-close trials create Metal queues while an extra type-6 connection is open and receive nil after it closes; internal ownership remains unresolved. [Evidence](VIDEO_SHARED_CLOSE_TIMING.md).
 
 **FAIL:** opening and closing an extra type-6 shared client alone reproduces the later Metal queue failure in two controlled processes; a video context or association is not necessary in this setup. [Evidence](VIDEO_SHARED_ISOLATION.md).

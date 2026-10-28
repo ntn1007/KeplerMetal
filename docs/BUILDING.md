@@ -1,5 +1,7 @@
 # Build from source
 
+[VIDEO_SHARED_REFERENCE_GUARD.md](VIDEO_SHARED_REFERENCE_GUARD.md) describes the bounded alias reference-release GPU cohort and re-audit.
+
 [VIDEO_SHARED_CLOSE_TIMING.md](VIDEO_SHARED_CLOSE_TIMING.md) documents the delayed-close comparison and its audit.
 
 [VIDEO_SHARED_ISOLATION.md](VIDEO_SHARED_ISOLATION.md) documents the type-6-only isolation and failure audit.
