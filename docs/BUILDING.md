@@ -1,5 +1,7 @@
 # Build from source
 
+[VIDEO_PROVIDER_REGISTRATION.md](VIDEO_PROVIDER_REGISTRATION.md) documents historical registration bounds and its offline model.
+
 [VIDEO_GVA_PROPERTY.md](VIDEO_GVA_PROPERTY.md) documents the scoped property observer, calibration safety and static branch audit.
 
 [VIDEO_GVA_OFFLINE_FLAG.md](VIDEO_GVA_OFFLINE_FLAG.md) documents the single-key comparison and IOKit iterator observation.

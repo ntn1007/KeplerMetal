@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+A pinned historical NVIDIA video provider copies an input array through the highest set mask bit and checks a selected nonzero entry; a conservative offline model covers sparse masks. This does not establish the real caller, ABI compatibility or hardware decoding. [Evidence](VIDEO_PROVIDER_REGISTRATION.md).
+
 Nine scoped AppleGVA processes read the NVIDIA accelerator properties; `IOGVACodec` was absent in each, and hardware-required decoding still produced no images. The pinned null branch and observer calibration have bounded evidence; the complete failure cause remains open. [Evidence](VIDEO_GVA_PROPERTY.md).
 
 Removing one offline-renderer flag from a scoped AppleGVA donor suppresses the associated iGPU logs in three trials but does not enable hardware video. [Evidence](VIDEO_GVA_OFFLINE_FLAG.md).

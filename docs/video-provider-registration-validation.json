@@ -1,0 +1,96 @@
+{
+  "GPU_video_executed": false,
+  "cases": [
+    {
+      "eligible": true,
+      "index": 0,
+      "mask": 1,
+      "provided_words": 1,
+      "reason": "local-conditions-only",
+      "required_words": 1
+    },
+    {
+      "eligible": false,
+      "index": 0,
+      "mask": 0,
+      "provided_words": 0,
+      "reason": "zero-mask",
+      "required_words": 0
+    },
+    {
+      "eligible": false,
+      "index": 31,
+      "mask": 2147483648,
+      "provided_words": 1,
+      "reason": "short-table",
+      "required_words": 32
+    },
+    {
+      "eligible": false,
+      "index": 0,
+      "mask": 2147483649,
+      "provided_words": 1,
+      "reason": "short-table",
+      "required_words": 32
+    },
+    {
+      "eligible": false,
+      "index": 1,
+      "mask": 5,
+      "provided_words": 3,
+      "reason": "index-disabled",
+      "required_words": 3
+    },
+    {
+      "eligible": false,
+      "index": 2,
+      "mask": 5,
+      "provided_words": 3,
+      "reason": "zero-entry",
+      "required_words": 3
+    },
+    {
+      "eligible": false,
+      "index": 32,
+      "mask": 2147483648,
+      "provided_words": 32,
+      "reason": "index-out-of-range",
+      "required_words": 32
+    },
+    {
+      "eligible": true,
+      "index": 31,
+      "mask": 2147483648,
+      "provided_words": 32,
+      "reason": "local-conditions-only",
+      "required_words": 32
+    }
+  ],
+  "evidence_ids": [
+    "ev_122fc54c910d30b1fd59c051b77166f63d26bb2410be662865dcb02643d522bc",
+    "ev_740fd0cfab7948a61300a27da572e9cda25cb1b28442af931601b1b8e92a422d"
+  ],
+  "meaning_of_words_proved": false,
+  "provider_SHA256": "bf2110a8a74786fe06da672e35f05a0dbd554aa651a83bacf02753c5899ef567",
+  "regions": {
+    "factory": {
+      "SHA256": "1e1a7d142798e87f6a263940d321f002859dd5c3114d844205d5abdd78dad89d",
+      "file_offset": 127964,
+      "length": 571
+    },
+    "registration": {
+      "SHA256": "068e37ce92afb5a584180995d723a67ab118fc3911f32dd70751e4d211725027",
+      "file_offset": 176032,
+      "length": 255
+    },
+    "selection": {
+      "SHA256": "a08b1d1c3ff92c0f2d493d6dd4ca11ebf850241a2c29698e6bc77a9f2cd7b552",
+      "file_offset": 178774,
+      "length": 115
+    }
+  },
+  "runtime_provider_called": false,
+  "scope": "Static pinned binary and conservative offline model; no ABI or runtime compatibility established.",
+  "status": "PASS",
+  "sufficient_for_provider_success": false
+}
