@@ -45,6 +45,10 @@ The GPU-resident program was not read back. These are bounded experiments,
 not a general driver repair or transparent Metal integration. The installed
 driver and OCLP were not modified.
 
+A later [joint witness](CAS_JOINT_WITNESS.md) correlates the branch byte and
+`0x330` entry per thread in the same instrumented execution; entry origin
+remains unproved.
+
 ## Reproduce
 
 Requires the pinned local CB0 witness build, original analysis, and two sets

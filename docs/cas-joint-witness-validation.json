@@ -1,0 +1,135 @@
+{
+  "all_paths_qualified": false,
+  "cohorts": 2,
+  "correlation_same_instrumented_invocation": true,
+  "direct_origin_proved": false,
+  "performance_benchmark": false,
+  "receipts": [
+    {
+      "all_paths_qualified": false,
+      "baseline_sha256": "bd5b845519f8757538f36478e170f388320e3a7b392e744a99fa3d5dbbbfa1be",
+      "cohort": 1,
+      "direct_origin_proved": false,
+      "markers": {
+        "2": 99
+      },
+      "pattern": 0,
+      "prior_per_thread_mismatches": 0,
+      "resident_instructions_read_back": false,
+      "rows": 99,
+      "status": "PASS",
+      "trace_sha256": "975a1bc58b5ec8a5b3af7da52278eb18a296083fba9a4757a60de5e36c9afa8d"
+    },
+    {
+      "all_paths_qualified": false,
+      "baseline_sha256": "91fb14414c72e74b5924eba2b590b7132ce909b8acac1caa356998b1faf03a9f",
+      "cohort": 1,
+      "direct_origin_proved": false,
+      "markers": {
+        "152": 51,
+        "153": 48
+      },
+      "pattern": 2,
+      "prior_per_thread_mismatches": 0,
+      "resident_instructions_read_back": false,
+      "rows": 99,
+      "status": "PASS",
+      "trace_sha256": "3bd5bd4129e2eafc8b003df486ec296efb98fdee04448439630030af769c31b0"
+    },
+    {
+      "all_paths_qualified": false,
+      "baseline_sha256": "c6455aecfa2bcab244fbf8d3e202e2bde73f5d17afb49c543693c751d10ab16f",
+      "cohort": 1,
+      "direct_origin_proved": false,
+      "markers": {
+        "184": 99
+      },
+      "pattern": 3,
+      "prior_per_thread_mismatches": 0,
+      "resident_instructions_read_back": false,
+      "rows": 99,
+      "status": "PASS",
+      "trace_sha256": "254fa84639430c5096fcb0eda3fbd3ce70138e44b0d4c5506e813b160e459582"
+    },
+    {
+      "all_paths_qualified": false,
+      "baseline_sha256": "bd5b845519f8757538f36478e170f388320e3a7b392e744a99fa3d5dbbbfa1be",
+      "cohort": 1,
+      "direct_origin_proved": false,
+      "markers": {
+        "49": 99
+      },
+      "pattern": 4,
+      "prior_per_thread_mismatches": 0,
+      "resident_instructions_read_back": false,
+      "rows": 99,
+      "status": "PASS",
+      "trace_sha256": "9e59c29ee3c9df4cdc329394c89d182b1b83bfe3e2dabb447a8368f9d69b0c1e"
+    },
+    {
+      "all_paths_qualified": false,
+      "baseline_sha256": "bd5b845519f8757538f36478e170f388320e3a7b392e744a99fa3d5dbbbfa1be",
+      "cohort": 2,
+      "direct_origin_proved": false,
+      "markers": {
+        "2": 99
+      },
+      "pattern": 0,
+      "prior_per_thread_mismatches": 0,
+      "resident_instructions_read_back": false,
+      "rows": 99,
+      "status": "PASS",
+      "trace_sha256": "975a1bc58b5ec8a5b3af7da52278eb18a296083fba9a4757a60de5e36c9afa8d"
+    },
+    {
+      "all_paths_qualified": false,
+      "baseline_sha256": "91fb14414c72e74b5924eba2b590b7132ce909b8acac1caa356998b1faf03a9f",
+      "cohort": 2,
+      "direct_origin_proved": false,
+      "markers": {
+        "152": 51,
+        "153": 48
+      },
+      "pattern": 2,
+      "prior_per_thread_mismatches": 0,
+      "resident_instructions_read_back": false,
+      "rows": 99,
+      "status": "PASS",
+      "trace_sha256": "3bd5bd4129e2eafc8b003df486ec296efb98fdee04448439630030af769c31b0"
+    },
+    {
+      "all_paths_qualified": false,
+      "baseline_sha256": "c6455aecfa2bcab244fbf8d3e202e2bde73f5d17afb49c543693c751d10ab16f",
+      "cohort": 2,
+      "direct_origin_proved": false,
+      "markers": {
+        "184": 99
+      },
+      "pattern": 3,
+      "prior_per_thread_mismatches": 0,
+      "resident_instructions_read_back": false,
+      "rows": 99,
+      "status": "PASS",
+      "trace_sha256": "254fa84639430c5096fcb0eda3fbd3ce70138e44b0d4c5506e813b160e459582"
+    },
+    {
+      "all_paths_qualified": false,
+      "baseline_sha256": "bd5b845519f8757538f36478e170f388320e3a7b392e744a99fa3d5dbbbfa1be",
+      "cohort": 2,
+      "direct_origin_proved": false,
+      "markers": {
+        "49": 99
+      },
+      "pattern": 4,
+      "prior_per_thread_mismatches": 0,
+      "resident_instructions_read_back": false,
+      "rows": 99,
+      "status": "PASS",
+      "trace_sha256": "9e59c29ee3c9df4cdc329394c89d182b1b83bfe3e2dabb447a8368f9d69b0c1e"
+    }
+  ],
+  "resident_instructions_read_back": false,
+  "rows_per_process": 99,
+  "status": "PASS",
+  "trace_processes": 8
+}

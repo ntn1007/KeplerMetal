@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+Two GTX cohorts correlate the relocated indirect-branch register byte and `0x330` entry within the same instrumented CAS shader. The exact source of entry and general control flow remain unproved. [Evidence](CAS_JOINT_WITNESS.md).
+
 Three process-local GPU probes preserve the original indirect instruction and mark entry at candidate locations. The `0x330` control also marks a non-indirect-observed pattern, so marker origin remains unproved. [Evidence](CAS_TARGET_ENTRY_WITNESS.md).
 
 Two GPU witness cohorts record the low byte of a relocated conditional CAS indirect-branch register for patterns 0, 2, 3 and 4, with native output controls. Actual destination entry and the unmodified branch remain unproved. [Evidence](CAS_BRANCH_REGISTER_WITNESS.md).
