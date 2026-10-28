@@ -1,5 +1,7 @@
 # Build from source
 
+[VIDEO_PROVIDER_CONTEXT.md](VIDEO_PROVIDER_CONTEXT.md) documents the selected-service context open/close and controls.
+
 [VIDEO_PROVIDER_SERVICE.md](VIDEO_PROVIDER_SERVICE.md) documents the selected legacy service observation and pinned re-audit.
 
 [VIDEO_PROVIDER_FIELDS.md](VIDEO_PROVIDER_FIELDS.md) documents the re-audit of historical caller fields and existing controls.

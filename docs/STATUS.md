@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+Two controlled legacy calls open and close a type-3 context on AppleGVA's selected GTX service; no legacy provider call, selector dispatch or hardware video is established. [Evidence](VIDEO_PROVIDER_CONTEXT.md).
+
 Two controlled legacy AppleGVA calls select the GTX `nvAccelerator` service by its public registry ID. Sierra provider execution, compatible selector dispatch and hardware video remain unproved. [Evidence](VIDEO_PROVIDER_SERVICE.md).
 
 An independent re-audit recovers two archived observations of legacy AppleGVA provider inputs: index 0, mask 15 and a nonzero selected entry. The full array and provider/kernel compatibility remain unqualified. [Evidence](VIDEO_PROVIDER_FIELDS.md).
