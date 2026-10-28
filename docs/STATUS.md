@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+A separately compiled test client supplies the callback for a guarded no-copy release after two verified GTX commands; arbitrary application callbacks remain unqualified. [Evidence](NOCOPY_CLIENT_CALLBACK.md).
+
 A guarded test-only no-copy callback returned its own Mach VM allocation after two verified GTX commands in three cases; other applications and general resource lifetime remain unqualified. [Evidence and reproduction](NOCOPY_RELEASE_WITNESS.md).
 
 A scoped launcher now starts a selected allowlisted client under the shared GPU reservation, after checking the exact profile and signed artifacts. Six GTX client processes reproduce the native defect and validate 142,200 repaired/control CAS operations; arbitrary applications remain unqualified. [Contract and evidence](CAS_LAUNCHER.md).

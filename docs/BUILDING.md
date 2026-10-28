@@ -1,5 +1,7 @@
 # Build from source
 
+[NOCOPY_CLIENT_CALLBACK.md](NOCOPY_CLIENT_CALLBACK.md) describes the separately compiled client, scoped GPU release and raw-output auditor.
+
 [STANDALONE_CAS.md](STANDALONE_CAS.md) describes the explicitly injected, pinned public-Metal CAS client and its native/repair controls.
 
 [CAS_SDK_REGENERATED.md](CAS_SDK_REGENERATED.md) describes the current native CAS SDK, pinned decoder, isolated preparation and GTX qualification.
