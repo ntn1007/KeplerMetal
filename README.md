@@ -21,7 +21,7 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
-An adapted native CAS client now also qualifies one runtime-indexed threadgroup atomic shader on the GTX. [Evidence and limits](docs/CAS_DYNAMIC_SLOT.md).
+A purpose-built public Metal client now qualifies the runtime-indexed CAS correction with an opt-in, process-local bootstrap on the GTX. [Evidence and limits](docs/STANDALONE_DYNAMIC_CAS.md).
 
 The source-built CAS SDK passes GTX controls after regenerating certificates with the strengthened backedge recognizer. [Evidence and limits](docs/CAS_BACKEDGE_SDK.md).
 

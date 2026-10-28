@@ -1,0 +1,81 @@
+{
+  "archive_SHA256": "7f7721a1ff89a693011ab5a1438ff7239fc683bbc1fed1d48aa20b361fe9d86f",
+  "bootstrap_SHA256": "1c47638316fb825ee1c601249ef734080a7006a986016e872e9fc889deaf4def",
+  "client_A_SHA256": "f7c1754866831f23209d355307d155c379dd956056b8d3c6789fbac4e6cd883d",
+  "client_B_SHA256": "687c3e923dfe24628bd925c928fc33ac18e186362e526f2a9ecbd28e76690e44",
+  "client_imports_project_symbols": false,
+  "corrected_and_control_CAS_operations": 426600,
+  "dynamic_native_wrong_words": 42606,
+  "dynamic_optin_CAS_operations": 85320,
+  "dynamic_optin_dispatches": 72,
+  "dynamic_runs": [
+    {
+      "dispatches": 18,
+      "mode": "native-a",
+      "operations": 21330,
+      "result_SHA256": "893e61f983177a41936d3084f0da520e56396a2a5c22cd57d7ca86d45f5932f8",
+      "wrong_words": 21303
+    },
+    {
+      "dispatches": 18,
+      "mode": "native-b",
+      "operations": 21330,
+      "result_SHA256": "7b193789ccf1f7bc255caa6e89d4d01c5c809302d0d30be4bc8cff6847f015d8",
+      "wrong_words": 21303
+    },
+    {
+      "dispatches": 18,
+      "mode": "optin-a",
+      "operations": 21330,
+      "result_SHA256": "893e61f983177a41936d3084f0da520e56396a2a5c22cd57d7ca86d45f5932f8",
+      "wrong_words": 0
+    },
+    {
+      "dispatches": 18,
+      "mode": "optin-a",
+      "operations": 21330,
+      "result_SHA256": "893e61f983177a41936d3084f0da520e56396a2a5c22cd57d7ca86d45f5932f8",
+      "wrong_words": 0
+    },
+    {
+      "dispatches": 18,
+      "mode": "optin-b",
+      "operations": 21330,
+      "result_SHA256": "7b193789ccf1f7bc255caa6e89d4d01c5c809302d0d30be4bc8cff6847f015d8",
+      "wrong_words": 0
+    },
+    {
+      "dispatches": 18,
+      "mode": "optin-b",
+      "operations": 21330,
+      "result_SHA256": "7b193789ccf1f7bc255caa6e89d4d01c5c809302d0d30be4bc8cff6847f015d8",
+      "wrong_words": 0
+    }
+  ],
+  "dynamic_source_level_indices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "host_processes": 12,
+  "installed_driver_modified": false,
+  "mutated_reflection_rejected": true,
+  "native_defect_words": 170424,
+  "native_dispatches": 180,
+  "negative_controls": [
+    "denied-b",
+    "wrong-policy",
+    "wrong-library",
+    "wrong-descriptor",
+    "wrong-client",
+    "wrong-cert"
+  ],
+  "nonoverlapping": true,
+  "optin_dispatches": 360,
+  "policy_AB_SHA256": "aca9b8ff2d09b54cd65b08cbcd1d79d9f0b673827354ad954ac85cef2be4e821",
+  "policy_A_SHA256": "d68d1ecd51546e782739d8d7a84adabe4b48bb4760f904ad5f39ac2d3b730a88",
+  "scope": "Two builds of one purpose-built client; runtime-indexed shader and one neighboring sentinel, explicit local policy, not general or transparent application support",
+  "selected_reflection_equal": true,
+  "status": "PASS"
+}

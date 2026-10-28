@@ -1,0 +1,15 @@
+{
+  "GPU_dispatch": false,
+  "checks": {
+    "client": "EXPECTED_REFUSAL",
+    "duplicate-dispatch": "EXPECTED_REFUSAL",
+    "factory": "EXPECTED_REFUSAL",
+    "import-proof": "EXPECTED_REFUSAL",
+    "pixel": "EXPECTED_REFUSAL",
+    "policy": "EXPECTED_REFUSAL",
+    "reservation": "EXPECTED_REFUSAL",
+    "trace": "EXPECTED_REFUSAL",
+    "unchanged": "PASS"
+  },
+  "status": "PASS"
+}
