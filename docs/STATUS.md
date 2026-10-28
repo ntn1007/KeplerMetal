@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A historical AppleGVA stack correlates with one base-constructor branch under explicit pinned-code and entry-flow assumptions; neither the compared value nor the constructor return was observed. [Evidence](VIDEO_GVA_RTTI.md#base-constructor-branch-and-historical-stack).
+
 Static RTTI identifies the constructor associated with the observed AppleGVA selector-2 branch as `Flow_QT0`, derived from `Flow`. Live object contents and constructor completion remain unproved. [Evidence](VIDEO_GVA_RTTI.md).
 
 A process-local allocator observer records AppleGVA constructor register value 2 in three H.264 counterfactual runs. Decoder creation still fails with zero hardware images; the selector's meaning remains unknown. [Evidence](VIDEO_GVA_REGISTER.md).

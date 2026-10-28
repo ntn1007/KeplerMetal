@@ -1,0 +1,21 @@
+{
+  "GPU_or_vendor_execution_during_audit": false,
+  "analysis_object_sha256": "4bb4a9021217403a842874f832ccf13e32ac4db0950c78a1059cc2bc38f35403",
+  "auditor_sha256": "17d3bbed2d0bca37da1d1a6d15dbc871ffcd6c41d95e4b155a06fc958b53278a",
+  "constructor_return_proved": false,
+  "counterfactual_property_and_policy_used": true,
+  "historical_stack_and_selector_observation_are_separate_runs": true,
+  "historical_stack_return_offset": 117072,
+  "inference_if_pinned_entry_flow_applies": "compared word was not 0xffffffff",
+  "live_code_identity_for_all_frames_proved": false,
+  "live_comparison_or_value_observed": false,
+  "rea_bundle_sha256": "ec626263a08fdb6a8e720c42c06416ff9072c34ee0d3a9251142426b23bec0d2",
+  "rea_evidence_id": "ev_f9bb0e6b5698dd40ae995e90c2aeeab583e9a5efba8a8cb6b11e57cc00292bfe",
+  "region_sha256": "c4ef1c90c52e607a307e995c036890376ebf959ba9ade05725ff02c5cc1b7273",
+  "stack_map_sha256": "d5ae8902628d7193c32fb159fcfced0f02070c00bf84fbdfc8e5cb34bd0c219d",
+  "static_alternate_branch_offset": 117074,
+  "static_direct_call_target": 148746,
+  "status": "PASS_BOUNDED_STATIC_STACK_CORRELATION",
+  "system_modified": false,
+  "video_engine_execution_proved": false
+}

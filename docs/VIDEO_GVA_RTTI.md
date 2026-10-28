@@ -23,6 +23,35 @@ the full vtable extent, signatures and actual runtime dispatch remain unknown.
 The test used process-local property and board-policy substitutions; hardware
 decode still returned -12913 and zero images.
 
+## Base-constructor branch and historical stack
+
+In a separately recorded earlier process, the board observer captured a stack
+return at image offset 117072. In the pinned on-disk base-constructor region,
+the preceding direct call targets 148746; the earlier stack mapper also places
+the next frame in that target. The static code leading to the call compares a
+32-bit word with `0xffffffff` and branches around the call when equal. Thus,
+**if the pinned code and normal entry flow apply to that stack**, reaching the
+call is consistent with the compared word being different from `0xffffffff`.
+The word and comparison were not recorded, and another entry path or code
+drift cannot be excluded from the historical stack alone. The meaning of the
+word, the callee's return, and constructor completion remain unknown. This
+historical stack and the selector-2 measurement are from separate runs.
+
+REA/Ghidra evidence `ev_f9bb0e6b5698dd40ae995e90c2aeeab583e9a5efba8a8cb6b11e57cc00292bfe`
+covers the 157-byte recovered body of the captured 176-byte region. The
+[separate correlation receipt](video-gva-base-branch-validation.json) binds
+the region, analysis container and retained historical stack-map receipt; it
+does not re-run the historical process or verify every live frame.
+
+```bash
+R='/path/to/nvidia-880m-lab/bridge/results'
+python3 bridge/experiments/video_gva_rtti/base_branch_audit.py \
+  --capture "$R/gva-flow-base-20261029-01" \
+  --rea "$R/gva-flow-base-rea-20261029-01.private.json" \
+  --stack-map "$R/gva-overlay-stack-map-reaudit-20261028-01.json" \
+  --out "$R/gva-flow-base-branch-audit-new.json"
+```
+
 ## Evidence and reproduction
 
 The audit checks AppleGVA image UUID `ca5414f369373c059ea2d82b35afd4f0`.
