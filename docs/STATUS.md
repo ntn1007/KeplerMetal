@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+Two controlled legacy AppleGVA calls associate a newly opened type-3 video context with a new type-6 shared client on the selected GTX service; hardware video and provider integration remain unproved. [Evidence](VIDEO_PROVIDER_ASSOCIATION.md).
+
 Two controlled legacy calls open and close a type-3 context on AppleGVA's selected GTX service; no legacy provider call, selector dispatch or hardware video is established. [Evidence](VIDEO_PROVIDER_CONTEXT.md).
 
 Two controlled legacy AppleGVA calls select the GTX `nvAccelerator` service by its public registry ID. Sierra provider execution, compatible selector dispatch and hardware video remain unproved. [Evidence](VIDEO_PROVIDER_SERVICE.md).

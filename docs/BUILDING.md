@@ -1,5 +1,7 @@
 # Build from source
 
+[VIDEO_PROVIDER_ASSOCIATION.md](VIDEO_PROVIDER_ASSOCIATION.md) documents selected-service association and its pinned re-audit.
+
 [VIDEO_PROVIDER_CONTEXT.md](VIDEO_PROVIDER_CONTEXT.md) documents the selected-service context open/close and controls.
 
 [VIDEO_PROVIDER_SERVICE.md](VIDEO_PROVIDER_SERVICE.md) documents the selected legacy service observation and pinned re-audit.

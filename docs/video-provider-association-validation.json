@@ -1,0 +1,73 @@
+{
+  "build_manifest_SHA256": "d18fcab0e8f100ad1800e4eeecbdf7c44e7509ca51e7b6dbc588d51a5d6a63b6",
+  "cases": [
+    {
+      "attach": false,
+      "case": "inspect",
+      "gate_SHA256": "441c6b5c33fffc9b71cfd521fe0dc919574d00d0070d65f330c561ef146548c7",
+      "gate_calls": 0,
+      "mode": "inspect",
+      "probe": false,
+      "route": "passive"
+    },
+    {
+      "attach": false,
+      "case": "context",
+      "gate_SHA256": "f64a7f978be561383820333add1c8486b013df47e6d8ddfcd045a3ff4e86be47",
+      "gate_calls": 1,
+      "mode": "hardware",
+      "probe": true,
+      "route": "enabled"
+    },
+    {
+      "attach": true,
+      "case": "attach-1",
+      "gate_SHA256": "9b58af33c0152aa4795c74cbc125d20ca22d1bfd0acbf9a99972d13bb96be350",
+      "gate_calls": 1,
+      "mode": "hardware",
+      "probe": true,
+      "route": "enabled"
+    },
+    {
+      "attach": false,
+      "case": "wrong",
+      "gate_SHA256": "4f87f955b558475eb33f0c2d16c96b660b0c76126112de3c533392c4cf2bf71c",
+      "gate_calls": 0,
+      "mode": "hardware",
+      "probe": false,
+      "route": "wrong-name"
+    },
+    {
+      "attach": true,
+      "case": "attach-2",
+      "gate_SHA256": "9b58af33c0152aa4795c74cbc125d20ca22d1bfd0acbf9a99972d13bb96be350",
+      "gate_calls": 1,
+      "mode": "hardware",
+      "probe": true,
+      "route": "enabled"
+    },
+    {
+      "attach": false,
+      "case": "cpu",
+      "gate_SHA256": "441c6b5c33fffc9b71cfd521fe0dc919574d00d0070d65f330c561ef146548c7",
+      "gate_calls": 0,
+      "mode": "cpu",
+      "probe": false,
+      "route": "passive"
+    }
+  ],
+  "context_open_close_successes": 3,
+  "hardware_failures": 4,
+  "hardware_images": 0,
+  "hardware_video_execution_proved": false,
+  "scope": "Own-process legacy AppleGVA counterfactual; public context/shared-client association, no video selector or decode.",
+  "selected_registry_ID": 4294968416,
+  "selected_service_class": "nvAccelerator",
+  "selected_service_observations": 3,
+  "shared_client_association_successes": 2,
+  "sierra_provider_executed_by_gate": false,
+  "software_CPU_reference_bytes": 2764800,
+  "software_images": 6,
+  "status": "PASS",
+  "terminal_nonoverlapping_processes": 6
+}
