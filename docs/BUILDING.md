@@ -1,6 +1,6 @@
 # Build from source
 
-[CAS_SLOT3.md](CAS_SLOT3.md) documents the source variant and GTX/CPU qualification.
+[CAS_DYNAMIC_SLOT.md](CAS_DYNAMIC_SLOT.md) documents the runtime-indexed source variant and GTX/CPU qualification; [CAS_SLOT3.md](CAS_SLOT3.md) covers the preceding fixed-slot test.
 
 [CAS_BACKEDGE_SDK.md](CAS_BACKEDGE_SDK.md) documents the newly completed single-overlay CAS GPU qualification.
 

@@ -21,7 +21,7 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
-An adapted native CAS client now qualifies a fourth fixed threadgroup atomic slot on the GTX. [Evidence and limits](docs/CAS_SLOT3.md).
+An adapted native CAS client now also qualifies one runtime-indexed threadgroup atomic shader on the GTX. [Evidence and limits](docs/CAS_DYNAMIC_SLOT.md).
 
 The source-built CAS SDK passes GTX controls after regenerating certificates with the strengthened backedge recognizer. [Evidence and limits](docs/CAS_BACKEDGE_SDK.md).
 

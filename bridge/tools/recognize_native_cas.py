@@ -105,7 +105,7 @@ def sass_contract(code,text,component):
  if max_reg>=24:return {'qualified':False,'reason':'Register profile exceeds qualified floor24'}
  candidates=[]
  for i,(off,op) in enumerate(instructions):
-  m=re.fullmatch(r'ld lock \$p(\d+) \$r(\d+) s\[(0x[0-9a-f]+)\]',op)
+  m=re.fullmatch(r'ld lock \$p(\d+) \$r(\d+) s\[(0x[0-9a-f]+|\$r[0-9]+)\]',op)
   if not m or i+4>=len(instructions):continue
   pred,old,addr=m.groups();old=int(old)
   eq=re.fullmatch(r'\$p'+pred+r' set b32 \$r(\d+) eq s32 \$r'+str(old)+r' \$r(\d+)',instructions[i+1][1])
@@ -115,7 +115,13 @@ def sass_contract(code,text,component):
   if not sel:continue
   update,replacement=map(int,sel.groups())
   if temp in [old,cmp] or update in [old,cmp] or old==cmp:continue
-  unlock=re.fullmatch(r'\$p'+pred+r' st unlock \$p(\d+) s\['+addr+r'\] \$r'+str(update),instructions[i+3][1])
+  # A register-indexed shared address must survive every write in the lock
+  # loop. The exact same operand is required on the unlock; per-shader GPU
+  # qualification is still needed to establish the input's address bounds.
+  if addr.startswith('$r'):
+   address_register=int(addr[2:])
+   if address_register>=24 or address_register in (old,cmp,temp,update):continue
+  unlock=re.fullmatch(r'\$p'+pred+r' st unlock \$p(\d+) s\['+re.escape(addr)+r'\] \$r'+str(update),instructions[i+3][1])
   if not unlock or instructions[i+4][1]!='(not $p'+unlock[1]+') bra '+hex(off):continue
   late=[]
   for j in range(i+5,len(instructions)-1):

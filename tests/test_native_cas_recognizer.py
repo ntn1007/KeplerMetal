@@ -69,6 +69,17 @@ class CASRecognitionSafety(unittest.TestCase):
         code, text = listing(after_store='mov b32 $r5 $r0')
         self.assertFalse(sass_contract(code, text, 0)['qualified'])
 
+    def test_register_indexed_shared_address(self):
+        code, text = listing()
+        indexed = text.replace('s[0x4]', 's[$r6]')
+        result = sass_contract(code, indexed, 0)
+        self.assertTrue(result['qualified'])
+        self.assertEqual(result['shared_address'], '$r6')
+        for register in (0, 2, 4, 5, 24):
+            with self.subTest(register=register):
+                self.assertFalse(sass_contract(code, text.replace('s[0x4]', f's[$r{register}]'), 0)['qualified'])
+        self.assertFalse(sass_contract(code, indexed.replace('st unlock $p0 s[$r6]', 'st unlock $p0 s[$r7]'), 0)['qualified'])
+
     def test_post_patch_control_flow_cannot_reenter_cas(self):
         for position in ('extra', 'after_store'):
             for operation in ('bra 0x8', '$p1 bra 0x10', 'joinat 0x20'):
