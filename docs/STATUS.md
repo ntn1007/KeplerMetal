@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+A static video allocation audit identifies the NVIDIA `nvTextureBuffer` factory and conditional memory paths; no live allocation or decoding is established. [Evidence](VIDEO_ALLOCATION_CHAIN.md).
+
 Pending registered Metal completions now retain their registry gate; untracked work and general application integration remain open. [Evidence](NOCOPY_OWNED_REGISTRATION.md).
 
 A scoped registrar attaches completion handlers to explicitly registered Metal command buffers; omitted work remains undetected. [Evidence](NOCOPY_METAL_REGISTRATION.md).

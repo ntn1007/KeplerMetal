@@ -1,0 +1,33 @@
+{
+  "GPU_commands": 0,
+  "GeForce_SHA256": "44f131a958d48afd6ab675a851330c37506557c9d499484170c886c3731bdbb3",
+  "IOAcceleratorFamily2_SHA256": "37e563d6cf3626101f30b1727a4f60dec02152dff9c74c0269c30c213a7320c8",
+  "evidence_ids": [
+    "ev_73185ac90e6c691e4d2eca5f95e61e33d6f341b329cd17b6934db77cab79f6b9",
+    "ev_01ac18b1c4508e4d43852ca05e5a96648ca38b1837066e3b58b4940a4dc4ba05",
+    "ev_667eb7ed391641392816e6530d629a25b4bf4ac542f5d2b7a85607be5379554c",
+    "ev_24d9dc5d00456c0b012472ddcff41be371ec547b05a0e15ee16ae5203eba11b7",
+    "ev_6d564b892aef2099950162711b0a0439915776eece5f14da918f47f9999d3b03",
+    "ev_57331f0571fdeb06049f79fbb093da3d997443930f63f5b79cc6d765da842aa0",
+    "ev_2b6896b8c75304325670b863f96ad65078fcbb86a545a57b3ad5bf95fdf7243a",
+    "ev_3e853af7b343a8582dfa04f1efd51c872776b26b75364b367770cb54ab453303"
+  ],
+  "hardware_video_execution_proved": false,
+  "limits": [
+    "On-disk paths and vtables are static observations; live dispatch and branch choices are not observed.",
+    "The 0x400 allocation is a kernel-object allocation size, not a video frame or VRAM size.",
+    "Backing, mappings, cleanup and private input values remain unqualified on a real video request.",
+    "No authorization to call or construct private requests follows from this analysis."
+  ],
+  "native_calls": 0,
+  "nvidia_vtable_slots_checked": 8,
+  "regions_checked": 10,
+  "status": "STATIC_PASS",
+  "tamper_controls_rejected": [
+    "io",
+    "ge",
+    "kernel",
+    "nvidia",
+    "backing"
+  ]
+}
