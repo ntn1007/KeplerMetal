@@ -1,0 +1,26 @@
+{
+  "barrier_regression_invocations": 5632,
+  "chain_regression_invocations": 4329,
+  "fresh_archive_SHA256": "361e13795f7a7d4847cb98127a1d65f83052669aea7583c6f5463c2dffca312e",
+  "fresh_object_members_match": true,
+  "host_processes": 18,
+  "nonoverlapping": true,
+  "runtime_archive_SHA256": "7d69f2d021cb3c70c27cce174efbf54ba35e10746a3d9a77430d30d8436fe205",
+  "scope": "Explicit CPU snapshot copies of certified project partial-grid commands; no native Apple ICB or system-wide integration.",
+  "snapshot_checked_output_words": 48456,
+  "snapshot_invocations": 12114,
+  "snapshot_logical_dispatches": 72,
+  "snapshot_negative_observations": 48,
+  "snapshot_order_controls": 16,
+  "snapshot_verifier_versions": [
+    "47a33763153282888467730c23bb589f86054b47c60515006bc5b0d7062b8124",
+    "b33103249d0712ba647863db73c0b8b5e9c231e1b7c5a29812e391f715affa3c"
+  ],
+  "source_SHA256": {
+    "KeplerCPUICB.h": "3d8e4564547bc7ff00ce36c29650c8bf4d42a9ab4af61e1d8a87370864fbd25f",
+    "KeplerCPUICB.mm": "119215074f96852debd8ee5fe7c99545e3a21eec95604a14f56d78ad0c7c551e",
+    "KeplerPartialGridPlan.h": "f46e10ce958221a968aaf39481a71f773345830c6c68ac071a7b14bdc52299f7"
+  },
+  "status": "PASS",
+  "uniform_regression_invocations": 37264
+}

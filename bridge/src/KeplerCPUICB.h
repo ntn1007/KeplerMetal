@@ -67,9 +67,14 @@
 // Explicit experimental partial-grid adapter: only two exact registered shaders,
 // grid volume <=1024, local volume <=128 and <=16 resident launches per serial
 // range. Eligible uniform and partial slots may be mixed; unsupported shaders,
-// layouts, GPU-selected commands and copies are refused.
+// layouts, GPU-selected commands and copies are refused unless the separate
+// experimental CPU snapshot-copy opt-in below is enabled.
 // This is an adapted-process experiment, not a native Metal capability claim.
 - (BOOL)enableExperimentalPartialGridWithError:(NSError **)error;
+// Separately opts in to CPU snapshot copies of the already certified partial
+// commands. Copies retain bindings, discard cached native records, and rematerialize
+// on execution; this is not a GPU-timeline copy or native Apple ICB identity.
+- (BOOL)enableExperimentalPartialSnapshotCopyWithError:(NSError **)error;
 // Bounded GPU-timeline copy extension for native profiles owned by this scope.
 // Manifest registrations support reflected buffer layouts and static shared.
 // Dynamic shared argument0 uses a registered CPU-readable allocation bound;

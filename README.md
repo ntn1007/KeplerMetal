@@ -21,7 +21,7 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
-The native CAS recognizer now checks the full span of vector register operands, with GPU regression qualification for the existing certified shaders. [Evidence and limits](docs/CAS_REGISTER_SPAN.md).
+The opt-in project ICB adapter can now snapshot-copy certified partial-grid commands and rematerialize them after the source is reset. [Evidence and limits](docs/PARTIAL_ICB_SNAPSHOT.md).
 
 The source-built CAS SDK passes GTX controls after regenerating certificates with the strengthened backedge recognizer. [Evidence and limits](docs/CAS_BACKEDGE_SDK.md).
 

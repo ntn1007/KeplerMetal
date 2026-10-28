@@ -148,7 +148,7 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 @property(nonatomic) BOOL renderRecordArgumentsEnabled,automaticComputeEnabled,automaticRenderEnabled;
 @property(nonatomic,strong) NSHashTable *renderArgumentContexts;
 @property(nonatomic,strong) NSMutableDictionary *stablePipelineIdentities;
-@property(nonatomic) BOOL restored,experimentalPartialGridEnabled;
+@property(nonatomic) BOOL restored,experimentalPartialGridEnabled,experimentalPartialSnapshotCopyEnabled;
 @property(nonatomic) NSUInteger releasedEncoderCount;
 @property(nonatomic) NSUInteger maxKernelBindings;
 @property(nonatomic,strong) id<KPCPURenderTransport> renderEngine;
@@ -305,7 +305,11 @@ static BOOL certifiedPartialProfile(NSDictionary*p,id<MTLComputePipelineState>pi
 - (void)setThreadgroupMemoryLength:(NSUInteger)length atIndex:(NSUInteger)index{[self checkReusableMutation];if(_GPUGenerated)reject(@"GPU-selected command requires reset before CPU re-encoding");NSDictionary*p=[_owner.scope profileForPipeline:_pipeline],*memory=p[@"dynamic_threadgroup"];if(![p[@"native_registration_v1"]boolValue]||!memory||index!=[memory[@"index"]unsignedIntegerValue]||length%16||length<[memory[@"min_bytes"]unsignedIntegerValue]||length>[memory[@"max_bytes"]unsignedIntegerValue]||length+[p[@"static_threadgroup_bytes"]unsignedIntegerValue]>49152)reject(@"Threadgroup memory index/length outside registered native ABI");_threadgroupLengths[@(index)]=@(length);[self invalidate];}
 - (void)setStageInRegion:(MTLRegion)region{reject(@"Stage-in regions are not implemented");}
 - (void)reset{[self checkReusableMutation];_reusableContext=nil;_reusableGeneration=0;_pipeline=nil;[_bindings removeAllObjects];[_threadgroupLengths removeAllObjects];_hasDispatch=NO;_barrier=NO;_partialGrid3D=NO;_partialGrid=MTLSizeMake(0,0,0);_groups=MTLSizeMake(0,0,0);_local=MTLSizeMake(0,0,0);[self invalidate];}
-- (void)copyStateFrom:(KPComputeICBCommand*)s{[self checkReusableMutation];if(s.reusableContext||s.partialGrid3D)reject(@"Copying reusable or experimental partial command state is not qualified");_partialGrid3D=NO;_partialGridRecords=nil;_pipeline=s.pipeline;_bindings=[s.bindings mutableCopy];_threadgroupLengths=[s.threadgroupLengths mutableCopy];_groups=s.groups;_local=s.local;_hasDispatch=s.hasDispatch;_barrier=s.barrier;_record=s.record;_residentOwners=s.residentOwners;_residentCopyBuffer=s.residentCopyBuffer;_GPUResourceOwners=s.GPUResourceOwners;_GPUGenerated=s.GPUGenerated;}
+- (void)copyStateFrom:(KPComputeICBCommand*)s{[self checkReusableMutation];if(s.reusableContext)reject(@"Copying reusable command state is not qualified");
+ _partialGrid3D=s.partialGrid3D;_partialGrid=s.partialGrid;_pipeline=s.pipeline;_bindings=[s.bindings mutableCopy];_threadgroupLengths=[s.threadgroupLengths mutableCopy];_groups=s.groups;_local=s.local;_hasDispatch=s.hasDispatch;_barrier=s.barrier;
+ if(s.partialGrid3D){[self invalidate];return;}
+ _partialGridRecords=nil;_record=s.record;_residentOwners=s.residentOwners;_residentCopyBuffer=s.residentCopyBuffer;_GPUResourceOwners=s.GPUResourceOwners;_GPUGenerated=s.GPUGenerated;
+}
 @end
 
 // Validate the current public command state, not just a cached native record.
@@ -810,6 +814,11 @@ BOOL installRenderOverride(Class dynamic,Class original,SEL selector,IMP impleme
  _experimentalPartialGridEnabled=YES;[_eventRows addObject:@{@"operation":@"enable_experimental_partial_grid",@"max_grid_invocations":@1024,@"max_local_invocations":@128,@"max_regions":@16,@"native_ICB":@NO,@"system_modified":@NO}];return YES;
 }
 
+- (BOOL)enableExperimentalPartialSnapshotCopyWithError:(NSError**)error {
+ if(error)*error=nil;if(_restored||!_experimentalPartialGridEnabled)return fail(error,@"Partial snapshot copy requires an active partial-grid scope");
+ _experimentalPartialSnapshotCopyEnabled=YES;[_eventRows addObject:@{@"operation":@"enable_partial_snapshot_copy",@"native_ICB":@NO,@"GPU_timeline_copy":@NO,@"system_modified":@NO}];return YES;
+}
+
 - (NSArray*)events{return [_eventRows copy];}
 - (BOOL)adaptComputeEncoder:(id<MTLComputeCommandEncoder>)e error:(NSError**)error {@synchronized(_factoryLock){
  if(error)*error=nil;
@@ -973,7 +982,7 @@ BOOL installRenderOverride(Class dynamic,Class original,SEL selector,IMP impleme
 
 BOOL KPCopyCPUICBCommands(id<MTLIndirectCommandBuffer>source,NSRange range,id<MTLIndirectCommandBuffer>destination,NSUInteger index,NSError**error){
  if(![source isKindOfClass:[KPComputeICB class]]||![destination isKindOfClass:[KPComputeICB class]]||[source isKindOfClass:[KPRenderICB class]]!=[destination isKindOfClass:[KPRenderICB class]]||((KPComputeICB*)source).scope!=((KPComputeICB*)destination).scope||range.location>source.size||range.length>source.size-range.location||index>destination.size||range.length>destination.size-index)return fail(error,@"CPU ICB copy type/context/range mismatch");
- BOOL render=[source isKindOfClass:[KPRenderICB class]];KPComputeICB*s=(KPComputeICB*)source,*d=(KPComputeICB*)destination;if(!render)for(NSUInteger k=0;k<range.length;k++)if(((KPComputeICBCommand*)s.commands[range.location+k]).reusableContext||((KPComputeICBCommand*)d.commands[index+k]).reusableContext)return fail(error,@"CPU copying reusable command state is not qualified");if(!render)for(NSUInteger i=range.location;i<NSMaxRange(range);i++)if(((KPComputeICBCommand*)s.commands[i]).GPUGenerated||((KPComputeICBCommand*)s.commands[i]).partialGrid3D)return fail(error,@"GPU-selected or experimental partial command cannot be copied as a CPU snapshot");
+ BOOL render=[source isKindOfClass:[KPRenderICB class]];KPComputeICB*s=(KPComputeICB*)source,*d=(KPComputeICB*)destination;if(!render)for(NSUInteger k=0;k<range.length;k++)if(((KPComputeICBCommand*)s.commands[range.location+k]).reusableContext||((KPComputeICBCommand*)d.commands[index+k]).reusableContext)return fail(error,@"CPU copying reusable command state is not qualified");if(!render)for(NSUInteger i=range.location;i<NSMaxRange(range);i++){KPComputeICBCommand*c=s.commands[i];if(c.GPUGenerated)return fail(error,@"GPU-selected or experimental partial command cannot be copied as a CPU snapshot");if(c.partialGrid3D&&(!s.scope.experimentalPartialSnapshotCopyEnabled||!s.scope.experimentalPartialGridEnabled||s.scope.restored||!c.hasDispatch||!certifiedPartialProfile([s.scope profileForPipeline:c.pipeline],c.pipeline)))return fail(error,@"GPU-selected or experimental partial command cannot be copied as a CPU snapshot");}
  if(render&&((((KPRenderICB*)s).allowedTypes&~((KPRenderICB*)d).allowedTypes)||((KPRenderICB*)s).maxVertexBuffers>((KPRenderICB*)d).maxVertexBuffers||((KPRenderICB*)s).maxFragmentBuffers>((KPRenderICB*)d).maxFragmentBuffers))return fail(error,@"Destination render descriptor cannot hold source types");
  NSMutableArray*snapshots=[NSMutableArray new];for(NSUInteger i=0;i<range.length;i++){id c=render?[KPRenderICBCommand new]:[KPComputeICBCommand new];[c copyStateFrom:s.commands[range.location+i]];[snapshots addObject:c];}for(NSUInteger i=0;i<range.length;i++)[d.commands[index+i]copyStateFrom:snapshots[i]];
  [s.scope.eventRows addObject:@{@"operation":@"CPU_snapshot_copy",@"source_location":@(range.location),@"length":@(range.length),@"destination_index":@(index),@"GPU_timeline_copy":@NO}];return YES;
