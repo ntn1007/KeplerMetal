@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+A signed High Sierra 10.13.6 update contains the same return-14 NVIDIA video factory stub as the current profile; its on-disk video lookup is also inherited. This is static evidence, not hardware decode. [Comparison](VIDEO_HIGH_SIERRA_COMPARISON.md).
+
 A gated Metal command remains submitted across a guarded experimental video-lease lifecycle and later completes correctly in two GTX trials. Execution concurrent with teardown remains unproved. [Evidence](VIDEO_LEASE_PENDING_GPU.md).
 
 A reusable experimental guarded backend now rejects additional lifecycle failures; CPU mock and bounded GTX tests pass. Shared synchronization remains a caller responsibility. [Evidence and limitations](VIDEO_GUARDED_BACKEND.md).

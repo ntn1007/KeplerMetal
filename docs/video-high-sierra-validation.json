@@ -1,0 +1,81 @@
+{
+  "factories": {
+    "current": {
+      "UUID": "2a283a4a38263b6fb2b2e092931ad628",
+      "exact_known_return_14_stub": true,
+      "file_SHA256": "2d3894048f5d61f6735955211bba28cb1e1a0ff9a7f556ebb6c144018388a865",
+      "function_SHA256": "56ab2f750b92826bbc9b12d9878950be8e7783a12315c2efcdcd169726fe8eb4",
+      "function_bytes": 11,
+      "function_start": 16290,
+      "slice_SHA256": "2d3894048f5d61f6735955211bba28cb1e1a0ff9a7f556ebb6c144018388a865"
+    },
+    "high-sierra": {
+      "UUID": "f3dd952e850136caa455771eccb60d60",
+      "exact_known_return_14_stub": true,
+      "file_SHA256": "10632d7d5e5ae6c81be6eb98045c3eb3901613434fe6f41fa1353967d60d24fd",
+      "function_SHA256": "56ab2f750b92826bbc9b12d9878950be8e7783a12315c2efcdcd169726fe8eb4",
+      "function_bytes": 11,
+      "function_start": 124828,
+      "slice_SHA256": "d4493d63f34ea2ccc0a0a8e0dc42f25f7b18aa22916eeff3076752950ecce584"
+    },
+    "sierra": {
+      "UUID": "0d6049a09d743efe9aba0ee1d68cf36c",
+      "exact_known_return_14_stub": false,
+      "file_SHA256": "c10e2c99d988ed42e24fd27f659d413c4f92610b2b288ac808a63dbb37277ed7",
+      "function_SHA256": "1e1a7d142798e87f6a263940d321f002859dd5c3114d844205d5abdd78dad89d",
+      "function_bytes": 571,
+      "function_start": 127964,
+      "slice_SHA256": "bf2110a8a74786fe06da672e35f05a0dbd554aa651a83bacf02753c5899ef567"
+    }
+  },
+  "geforce_vtable": {
+    "current": {
+      "live_relocation_observed": false,
+      "lookup_cell": "0x91938",
+      "lookup_target": "IOAccelContext2::getTargetAndMethodForIndex (unresolved external relocation)",
+      "vtable_address": "0x90fe8"
+    },
+    "high-sierra": {
+      "live_relocation_observed": false,
+      "lookup_cell": "0x8c638",
+      "lookup_target": "IOAccelContext2::getTargetAndMethodForIndex (unresolved external relocation)",
+      "vtable_address": "0x8bce8"
+    },
+    "sierra": {
+      "live_relocation_observed": false,
+      "lookup_cell": "0x88740",
+      "lookup_target": "nvVideoContext::getTargetAndMethodForIndex",
+      "vtable_address": "0x87df0"
+    }
+  },
+  "high_sierra_factory_direct_path_to_open": "not found in bounded named direct call graph",
+  "high_sierra_io_lookup": {
+    "above_seven_static_return": "null",
+    "condition_scope": "lookup only; externalMethod fallback and live dispatch are not established",
+    "file_offset": "0x6e90",
+    "function_SHA256": "66a471167abfe05b9a0ad8ba01ec54d956b85bc635ade36ce1673448c5d9aab8",
+    "function_address": "0x6e90",
+    "length": 72
+  },
+  "high_sierra_nearby_scalar_0x105_sites": [
+    "0x2d3a2",
+    "0x2d5d9"
+  ],
+  "input_sha256": {
+    "current_ge": "44f131a958d48afd6ab675a851330c37506557c9d499484170c886c3731bdbb3",
+    "current_provider": "2d3894048f5d61f6735955211bba28cb1e1a0ff9a7f556ebb6c144018388a865",
+    "high_ge": "bcd3d0f6d90235b1fa6e0d96904bbee829063de1b60a01362946dc8aad9a1791",
+    "high_io": "c88e2773bb11d4327e9bbbd3ef742fa84f63fad8a911dfb8cca59414ae03f267",
+    "high_provider": "10632d7d5e5ae6c81be6eb98045c3eb3901613434fe6f41fa1353967d60d24fd",
+    "sierra_ge": "25a0bccd7caa884d6aa964743b35f879ec326c46d255dc6212c47e7a20f6f38e",
+    "sierra_provider": "c10e2c99d988ed42e24fd27f659d413c4f92610b2b288ac808a63dbb37277ed7"
+  },
+  "limits": [
+    "No provider, driver, private selector or GPU command was executed.",
+    "Candidate immediates are not proof of live calls, connection identity or ABI.",
+    "The static lookup result alone does not prove every externalMethod fallback or runtime dispatch.",
+    "These components come from a signed update package; it is not a complete operating system image.",
+    "No hardware decode or compatibility is established."
+  ],
+  "status": "STATIC_HIGH_SIERRA_COMPARISON_PASS"
+}
