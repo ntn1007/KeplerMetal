@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+Two bounded UID 501 opens of the selected NVIDIA port returned `kIOReturnUnsupported` without a connection; the cause and current administrator behavior remain unproved. [Evidence](VIDEO_RM_USER_OPEN.md).
+
 Four signed no-open profile controls identify the current `NVDA,Display-A` service while refusing the four-way PCI-only ambiguity; the historical privileged witness remains unqualified. [Evidence](VIDEO_RM_CURRENT_PROFILE.md).
 
 The on-disk NVIDIA device-allocation paths and a 56-byte parameter layout were compared; two GTX PCI registry observations report board value zero. User-mode RM allocation and the loaded route remain unqualified. [Evidence](VIDEO_RM_DEVICE_IDENTITY.md).

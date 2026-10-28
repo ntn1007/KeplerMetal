@@ -1,5 +1,7 @@
 # Build from source
 
+[VIDEO_RM_USER_OPEN.md](VIDEO_RM_USER_OPEN.md) documents the bounded unprivileged port observation and refusal controls.
+
 [VIDEO_RM_CURRENT_PROFILE.md](VIDEO_RM_CURRENT_PROFILE.md) documents the signed, no-open current-profile observation and captured controls.
 
 [VIDEO_RM_DEVICE_IDENTITY.md](VIDEO_RM_DEVICE_IDENTITY.md) documents the device allocation comparison and read-only PCI observation.

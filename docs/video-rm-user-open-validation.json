@@ -1,0 +1,53 @@
+{
+  "GPU_dispatches": 0,
+  "RM_calls": 0,
+  "binary_sha256": "86cf4e09ffbbd05192c02c89f5e9b53dea741ab46b2791a15f42a987a3c6075c",
+  "connections_returned": 0,
+  "hosts": [
+    {
+      "completed_at": "2026-10-28T20:41:38.648798+00:00",
+      "manifest_sha256": "b1a84ed1341ecb762d0545264c6ba089b43452be846b34c27f675176dc87d8ce",
+      "mode": "open",
+      "pid": 19191,
+      "started_at": "2026-10-28T20:41:37.399096+00:00",
+      "status": "PROFILE_REFUSED",
+      "stdout_sha256": "aa4493b78aec985037bc8fcec5816bcbed77255ec802c56cd841e89773b49a14"
+    },
+    {
+      "completed_at": "2026-10-28T20:41:53.147684+00:00",
+      "manifest_sha256": "84774c0b144243e69fb491c453a963905b1279dd2811c7f590471b4c28be2bfe",
+      "mode": "wrong-code-hash",
+      "pid": 19219,
+      "started_at": "2026-10-28T20:41:51.975088+00:00",
+      "status": "PROFILE_REFUSED",
+      "stdout_sha256": "a412c2bf19df384bf8c3b9eaad2306bbd054a196828112579bbbfffcda4ca5a9"
+    },
+    {
+      "completed_at": "2026-10-28T20:42:07.873732+00:00",
+      "manifest_sha256": "4c1921c06dfd7732d069e0810cb9c758ebc44ae7f51b88e6694eff7e67d6832e",
+      "mode": "open",
+      "pid": 19263,
+      "started_at": "2026-10-28T20:42:06.909791+00:00",
+      "status": "OPEN_REFUSED_NO_CONNECTION",
+      "stdout_sha256": "7f8bb9006cdc3932b73db8a59321d1800f6fbeb1215422e9591ccecf4d733268"
+    },
+    {
+      "completed_at": "2026-10-28T20:42:33.671434+00:00",
+      "manifest_sha256": "60cc3dad2a978bfe7bbd672498726ed8e5c9dc0268256cb41aee3eb24e50ecea",
+      "mode": "open",
+      "pid": 19322,
+      "started_at": "2026-10-28T20:42:32.863296+00:00",
+      "status": "OPEN_REFUSED_NO_CONNECTION",
+      "stdout_sha256": "644968314425f21d2be4f75bf14ae7d635ee11cdc0b1bd1042fb8e50ef7d1525"
+    }
+  ],
+  "missing_lease_pid": 19342,
+  "open_attempts": 2,
+  "open_status_hex": "0xe00002c7",
+  "runner_sha256": "30812a05c96c48dc2d6ae51aaf20f0557963acfea8931cdbe8b802a23dadbbd8",
+  "scope": "Two current-profile refusals only; unsupported return does not identify the cause or establish current administrator behavior.",
+  "signed_sha256": "d057e6574e142cd7116da6a8af03186274560d06f3f0255a838c3641cd7871e7",
+  "source_sha256": "c4cd20b346da1d318adc1018a789bea2caa7c57150572ba582d08608146d2c00",
+  "status": "PASS_BOUNDED_OPEN_OBSERVATION",
+  "uid": 501
+}
