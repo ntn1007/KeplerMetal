@@ -1,0 +1,67 @@
+{
+  "CB0_contents_read": false,
+  "GPU_submissions": 0,
+  "build_sha256": "25af3d85601dee5abb3676f1ebf2d21e17d8fd1bff8063f0959257be43786a5c",
+  "indirect_branch_semantics_proved": false,
+  "observations": [
+    {
+      "CB0_bytes": 256,
+      "CB0_equals_code_end_aligned_256": true,
+      "CB_valid_mask": 7,
+      "QMD_program_low32_matches_variant": true,
+      "code_bytes": 1344,
+      "command_bytes": 464,
+      "command_sha256": "0a2e738cfb74c3933fc7f89d8a018d11f017c09ba8ec0d789faacf8481e80c53",
+      "mode": "native",
+      "packets": 9,
+      "registers": 13,
+      "signed_host_sha256": "e0967a30f37bfad9d2c56fc4d675bcaba71072afbbbc86a5fdf278f94718f729",
+      "variant_sha256": "1d1712e5d7d4bc0a065b757b07c02b5fecf9deedda990ea9543cec491faca2c8"
+    },
+    {
+      "CB0_bytes": 256,
+      "CB0_equals_code_end_aligned_256": true,
+      "CB_valid_mask": 7,
+      "QMD_program_low32_matches_variant": true,
+      "code_bytes": 1408,
+      "command_bytes": 464,
+      "command_sha256": "0a2e738cfb74c3933fc7f89d8a018d11f017c09ba8ec0d789faacf8481e80c53",
+      "mode": "repaired",
+      "packets": 9,
+      "registers": 13,
+      "signed_host_sha256": "e0967a30f37bfad9d2c56fc4d675bcaba71072afbbbc86a5fdf278f94718f729",
+      "variant_sha256": "fad8b8d786d1fda205e682036f74fb4b576be1103df53d85bba499b7d44e9e49"
+    },
+    {
+      "CB0_bytes": 256,
+      "CB0_equals_code_end_aligned_256": true,
+      "CB_valid_mask": 7,
+      "QMD_program_low32_matches_variant": true,
+      "code_bytes": 1344,
+      "command_bytes": 464,
+      "command_sha256": "0a2e738cfb74c3933fc7f89d8a018d11f017c09ba8ec0d789faacf8481e80c53",
+      "mode": "native",
+      "packets": 9,
+      "registers": 13,
+      "signed_host_sha256": "e0967a30f37bfad9d2c56fc4d675bcaba71072afbbbc86a5fdf278f94718f729",
+      "variant_sha256": "9ae3981822d455ad507606d42b7a009251a8910ea385bce596bf56e9cb706329"
+    },
+    {
+      "CB0_bytes": 256,
+      "CB0_equals_code_end_aligned_256": true,
+      "CB_valid_mask": 7,
+      "QMD_program_low32_matches_variant": true,
+      "code_bytes": 1408,
+      "command_bytes": 464,
+      "command_sha256": "0a2e738cfb74c3933fc7f89d8a018d11f017c09ba8ec0d789faacf8481e80c53",
+      "mode": "repaired",
+      "packets": 9,
+      "registers": 13,
+      "signed_host_sha256": "e0967a30f37bfad9d2c56fc4d675bcaba71072afbbbc86a5fdf278f94718f729",
+      "variant_sha256": "2bdf0afc949ea619a454731c729a89bcbc7527678caa83e1c0e877b1dfeac183"
+    }
+  ],
+  "resident_code_readback": false,
+  "section_to_CB0_contents_proved": false,
+  "status": "PASS"
+}

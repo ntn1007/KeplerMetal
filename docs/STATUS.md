@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+Four unsubmitted native/repaired conditional CAS command captures each show a 256-byte CB0 at the variant's aligned code end. CB0 contents, the candidate-section binding and indirect-branch execution remain unproved. [Evidence](CAS_CONDITIONAL_CB0.md).
+
 The conditional CAS SDK checks the exact live auxiliary section before program substitution. GPU regression and a wrong-expected-digest constructor control passed; live `c0` binding and indirect-branch semantics remain unproved. [Evidence](CAS_CONDITIONAL_AUX_GUARD.md).
 
 The conditional CAS capture has a three-word candidate indirect-branch table; its live constant-bank binding and branch semantics remain unproved. [Evidence](CAS_INDIRECT_BRANCH.md).

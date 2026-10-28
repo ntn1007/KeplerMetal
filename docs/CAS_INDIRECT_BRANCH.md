@@ -17,6 +17,10 @@ offsets. Those properties require separate evidence. No GPU command was
 submitted by this analysis, and the capture did not read back resident GPU
 instructions.
 
+A later [passive command observation](CAS_CONDITIONAL_CB0.md) identifies a
+256-byte CB0 at the aligned code end for both pipelines, but does not read its
+contents or establish its relationship to this candidate section.
+
 The original SDK import checked the live code and metadata but did not pin the
 auxiliary section. The [new exact-profile guard](CAS_CONDITIONAL_AUX_GUARD.md)
 checks that the live constructor input contains exactly one 12-byte `0x10006`
