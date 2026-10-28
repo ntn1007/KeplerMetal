@@ -1,0 +1,123 @@
+{
+  "analyzer_SHA256": "861c44dbfedbc4580cf55de59a64ad6e784009f2a6d152af119da7fbbe149256",
+  "assembler_SHA256": "1f023d5e1f0a5afc3a04510e264159923dac3182139e03c0a67600b9b1d4428e",
+  "baseline": {
+    "GPU_dispatch": false,
+    "certificate_authorized": false,
+    "hypotheses": [
+      {
+        "CAS_offset": 848,
+        "displaced_constant_offset": 0,
+        "displaced_destination_register": 1,
+        "expected_register": 0,
+        "lock_result_register": 6,
+        "output_store_offset": 1432,
+        "redirect_offset": 1328,
+        "saved_register": 5,
+        "trace": {
+          "aliases_at_comparison": [
+            5
+          ],
+          "comparison_offset": 1320,
+          "direct_edges": 51,
+          "entry_offset": 904,
+          "reachable_instructions": 47
+        }
+      }
+    ],
+    "limitations": [
+      "entry facts and reconvergence are assumptions, not proven",
+      "decoder semantics, scheduling, AIR-to-SASS correspondence and arbitrary aliases remain unproved",
+      "per-shader GPU qualification and runtime checks remain necessary"
+    ],
+    "refusals": [],
+    "status": "HYPOTHESIS_ONLY"
+  },
+  "certificate_authorized": false,
+  "decoder_SHA256": "1c8730a9a4861f374c58407bff31d7ccb47a57eb23f9f82c6b3ea3deb079be0f",
+  "mutations": [
+    {
+      "changed_offset": 968,
+      "expected_reason": "saved register is not a must-alias",
+      "name": "copy_wrong_source",
+      "refused": true,
+      "synthetic_listing_SHA256": "69ea00e6ca14d4fa6f506c228c2009ca7cc0214a388b3444c185a60f2c1272d8",
+      "synthetic_program_SHA256": "3015f0104a6001c4123598c928dca4ccc7f1f195695f30ba0b6d24533a56a73c"
+    },
+    {
+      "changed_offset": 952,
+      "expected_reason": "saved register is not a must-alias",
+      "name": "jump_over_copy",
+      "refused": true,
+      "synthetic_listing_SHA256": "0c92820350769133d6ba78bf1c7612c567b6d62d6575c0a2e8c8087b8c35a197",
+      "synthetic_program_SHA256": "632504e8d5480ec733506ef4d4bcfa887aa5fa07fe9cdb7598a7b0aea9610b3f"
+    },
+    {
+      "changed_offset": 984,
+      "expected_reason": "saved register is not a must-alias",
+      "name": "destroy_saved_copy",
+      "refused": true,
+      "synthetic_listing_SHA256": "9124e0ed426da4d852397a0f4009254171e8a225991bfb7d495f3769be2f7f54",
+      "synthetic_program_SHA256": "733f5807f6b10d66fd112c16d837e8f97c553b1831d74438231d3dc7b1568af0"
+    },
+    {
+      "changed_offset": 984,
+      "expected_reason": "comparison input overwritten",
+      "name": "overwrite_expected",
+      "refused": true,
+      "synthetic_listing_SHA256": "1ab63e6a881ac888705b55ae477219727288ea783733825b83b86a2bb0d9762b",
+      "synthetic_program_SHA256": "70d6d56ef2c87c3583f3343e9aafa96bd042a24229831dc7f53dfaa9b01dc579"
+    },
+    {
+      "changed_offset": 984,
+      "expected_reason": "unsupported control flow in tracked slice",
+      "name": "join_inside_region",
+      "refused": true,
+      "synthetic_listing_SHA256": "ed9951e0addc19d51d74d8275f043e4a00706db265773cd3c3bab9414a108611",
+      "synthetic_program_SHA256": "964e2595f9a76874add6aa66b3c8c09d03e40ab1392b207503ec86d4e2ad5161"
+    },
+    {
+      "changed_offset": 840,
+      "expected_reason": "branch enters tracked slice",
+      "name": "jump_into_region",
+      "refused": true,
+      "synthetic_listing_SHA256": "d5c4dad5c22703d50d42cb38ffd852f0ca77f3ca04139a96232d19ae0e0e7f0b",
+      "synthetic_program_SHA256": "4a5da3ce4fb1c1d676805221adcb93cda73d23642c57a6cb20d3e9892b40089e"
+    },
+    {
+      "changed_offset": 1336,
+      "expected_reason": "unqualified later use",
+      "name": "extra_expected_use",
+      "refused": true,
+      "synthetic_listing_SHA256": "cfddd1c840ebb7ddbc772af30229803e06d46f63071ae945c97c85f2a5804a7d",
+      "synthetic_program_SHA256": "186ba021dabb2fc43f24f9f62bc9ea6a94bcfa53bd4e98d314de618895eaa02b"
+    }
+  ],
+  "other_captured_programs": [
+    {
+      "flow_status": "REFUSED",
+      "name": "dynamic-before-diagnosis",
+      "native_SHA256": "1f02ada2624d2ef8991881e829de64449482379ac231c23a1a4839ca7a4dc53b"
+    },
+    {
+      "flow_status": "REFUSED",
+      "name": "dynamic-multi-diagnosis",
+      "native_SHA256": "0b6ccbf9c40f9ab8f095dfe4abfa015c2c04b9a08fdab74905e5b9983f2ff2e9"
+    },
+    {
+      "flow_status": "REFUSED",
+      "name": "dynamic-neighbor-diagnosis",
+      "native_SHA256": "7640c32a4ea4a078dd4e3bf149a15f1fef77e4e22a56018f3f5ed6fa2c6f541c"
+    },
+    {
+      "flow_status": "REFUSED",
+      "name": "dynamic-noise-diagnosis",
+      "native_SHA256": "5597c41f302943039fd639857ef06f4c6db727814e4ecb980d76bd1fe9225588"
+    }
+  ],
+  "reconvergence_entry_is_assumed": true,
+  "source_program_SHA256": "f16bf16da56d5dc060429f6886d2e1d80eafa0a960f48b7d776a3234fb6bcb41",
+  "status": "PASS",
+  "synthetic_GPU_dispatches": 0,
+  "synthetic_code_compiler_provenance_established": false
+}
