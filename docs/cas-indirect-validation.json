@@ -1,0 +1,41 @@
+{
+  "CAS_tests_passed": 69,
+  "identical_results": true,
+  "new_GPU_dispatches": 0,
+  "offline_analysis_repeated": 2,
+  "result": {
+    "GPU_execution_proved": false,
+    "all_entries_to_slice_proved": false,
+    "authorizes_repair": false,
+    "branch_offset": 656,
+    "branch_target_semantics_proved": false,
+    "candidate_section_sha256": "6b6731dc9464fd825d2aefe82c37334875811491ee9c774bae6460f0008949ef",
+    "candidate_table_section": 65542,
+    "candidate_targets": [
+      664,
+      696,
+      816
+    ],
+    "candidate_targets_are_decoded_instructions": true,
+    "conditional_index_offsets": [
+      0,
+      4,
+      8
+    ],
+    "constant_bank_binding_proved": false,
+    "container_sha256": "adc3551baff3d2e6de1e06fd158b80d9fe6f15df744d9e28b40dfe92de327821",
+    "decoder_replayed": true,
+    "decoder_sha256": "1c8730a9a4861f374c58407bff31d7ccb47a57eb23f9f82c6b3ea3deb079be0f",
+    "index_slice_start": 616,
+    "limits": "Conditional arithmetic and candidate table only; no live c0 binding, register-indirect branch semantics, complete CFG or resident GPU readback.",
+    "listing_sha256": "e392b28d9e28cdecfd55f3fa6e4b1358ab64693a0ce47d46fedb2d85332f7ff2",
+    "program_sha256": "83fedb1873bf54ae9975d3f44bd8e8512a9639903afee18d2decef4fbcdd2eb2",
+    "simple_direct_entries_to_slice": [],
+    "status": "OBSERVED"
+  },
+  "source_sha256": {
+    "bridge/experiments/cas_divergence/analyze_indirect.py": "04e2eb634c4e0b65587ceed421f34491762aa79479a956ac2cee9c239cc48a43",
+    "tests/test_cas_indirect_branch.py": "c50b84d8707f1f50ab9d16a436d81e8128b3b51812457d1289245ed64d83f936"
+  },
+  "status": "OBSERVED"
+}

@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+The conditional CAS capture has a three-word candidate indirect-branch table; its live constant-bank binding and branch semantics remain unproved. The current exact SDK profile does not separately pin this auxiliary section at the native constructor. [Evidence](CAS_INDIRECT_BRANCH.md).
+
 An offline explicit-use inspection finds four uses of the conditional CAS expected pointer and two uses of its bitcast, limited to lifetime markers, in the pinned AIR dump. Hidden/incorrectly decoded aliases and native SASS remain unqualified. [Evidence](CAS_CONDITIONAL_AIR_CFG.md#explicit-expected-pointer-uses).
 
 An offline SSA trace follows the conditional CAS PHI through four vector insertions to a device-space store, with selected dominance checks. Alias safety, reachability on every path and native SASS flow remain unproved; no repair is authorized. [Evidence](CAS_CONDITIONAL_AIR_CFG.md#output-path-follow-up).
