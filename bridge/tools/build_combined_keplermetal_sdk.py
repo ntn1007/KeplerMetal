@@ -7,7 +7,7 @@ def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def run(argv,label):
  r=subprocess.run(argv,capture_output=True,text=True,timeout=45);(out/(label+'.stderr')).write_text(r.stderr);commands.append({'label':label,'argv':argv,'exit_code':r.returncode});(out/'commands.json').write_text(json.dumps(commands,indent=2)+'\n');print(label,r.returncode,flush=True);assert r.returncode==0,r.stderr[-3000:]
 for n in ['src','include','lib','assets','examples','runtime']:(sdk/n).mkdir()
-names=['KeplerCPUICB.h','KeplerCPUICB.mm','KeplerCommandIR.h','KeplerCommandIRPlan.inc','KeplerCommandIRScope.inc','KeplerNativeCommands.h','KeplerNativeCommands.mm','KeplerNativeRenderDraws.h','KeplerNativeRenderDraws.mm','KeplerNativeCAS.h','KeplerNativeCAS.mm','KeplerNativeCASAdapter.inc','KeplerProgramImport.h']
+names=['KeplerCPUICB.h','KeplerCPUICB.mm','KeplerCommandIR.h','KeplerCommandIRPlan.inc','KeplerCommandIRScope.inc','KeplerNativeCommands.h','KeplerNativeCommands.mm','KeplerNativeRenderDraws.h','KeplerNativeRenderDraws.mm','KeplerNativeCAS.h','KeplerNativeCAS.mm','KeplerConditionalAux.h','KeplerNativeCASAdapter.inc','KeplerProgramImport.h']
 for n in names:shutil.copyfile(ROOT/'src'/n,sdk/'src'/n)
 fp64=None
 if a.fp64_programs:

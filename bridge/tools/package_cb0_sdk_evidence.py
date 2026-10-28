@@ -9,7 +9,7 @@ for folder in (ROOT/'results').glob('combined-cb0-sdk-*'):
  files.update(p for p in folder.rglob('*') if p.is_file())
 files.update(p for p in (ROOT/'sdk-combined').rglob('*') if p.is_file())
 files.update(ROOT/n for n in ['SDK_CB0_APPLICATION_ADAPTEE.txt','results/hardware-coverage.json','tools/build_combined_keplermetal_sdk.py','tools/make_cb0_sdk_report.py','tools/package_cb0_sdk_evidence.py','tools/lab_gpu_reservation.py'])
-for name in ['KeplerCPUICB.h','KeplerCPUICB.mm','KeplerNativeCommands.h','KeplerNativeCommands.mm','KeplerNativeRenderDraws.h','KeplerNativeRenderDraws.mm','KeplerNativeCAS.h','KeplerNativeCAS.mm','KeplerNativeCASAdapter.inc','KeplerProgramImport.h']:files.add(ROOT/'src'/name)
+for name in ['KeplerCPUICB.h','KeplerCPUICB.mm','KeplerNativeCommands.h','KeplerNativeCommands.mm','KeplerNativeRenderDraws.h','KeplerNativeRenderDraws.mm','KeplerNativeCAS.h','KeplerNativeCAS.mm','KeplerConditionalAux.h','KeplerNativeCASAdapter.inc','KeplerProgramImport.h']:files.add(ROOT/'src'/name)
 magic={b'\xcf\xfa\xed\xfe',b'\xfe\xed\xfa\xcf',b'\xce\xfa\xed\xfe',b'\xfe\xed\xfa\xce',b'\xca\xfe\xba\xbe',b'\xbe\xba\xfe\xca',b'\x7fELF'};selected=[];excluded=[]
 for p in sorted(files):
  assert p.is_file() and not p.is_symlink();assert p.name not in ['coordinator.token','config.toml','id_rsa','id_ed25519'] and not p.name.startswith('.env') and 'qwen-private' not in p.parts

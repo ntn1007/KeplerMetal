@@ -71,7 +71,7 @@ extern "C" id<MTLComputePipelineState> KPCreateCertifiedNativeCASPipeline(
  if(error)*error=nil;if(evidence)*evidence=nil;
  // Refuse before parsing: a malformed nested certificate must not reach
  // exception cleanup that belongs to the active outer import.
- if(activeContext||nativeAllocationScopeActive||expectedNativeOriginal||keepNativeMetadata||certifiedLibraryData||certifiedNativeMetadata){fail(error,@"Nested CAS context refused");return nil;}
+ if(activeContext||nativeAllocationScopeActive||expectedNativeOriginal||keepNativeMetadata||certifiedLibraryData||certifiedNativeMetadata||certifiedConditionalAux){fail(error,@"Nested CAS context refused");return nil;}
  if(![libraryData isKindOfClass:NSData.class]||!libraryData.length||libraryData.length>64*1024*1024||
     ![certificateData isKindOfClass:NSData.class]||!certificateData.length||certificateData.length>1024*1024||
     !KPKepler880MIdentity(device)){fail(error,@"Unqualified CAS input/device");return nil;}
@@ -150,11 +150,11 @@ extern "C" id<MTLComputePipelineState> KPCreateCertifiedNativeCASPipeline(
     if(i!=redirect&&memcmp(a+i,b+i,8))structure=false;
   }
   if(!structure){fail(error,@"CAS trampoline/metadata structure refused");if(evidence)*evidence=@{@"gate_accepted":@NO,@"constructor_entered":@NO};return nil;}
-  if(activeContext||nativeAllocationScopeActive||expectedNativeOriginal||keepNativeMetadata||certifiedLibraryData||certifiedNativeMetadata){fail(error,@"Nested CAS context refused");return nil;}
-  certifiedLibraryData=library;certifiedNativeMetadata=metadata;
+  if(activeContext||nativeAllocationScopeActive||expectedNativeOriginal||keepNativeMetadata||certifiedLibraryData||certifiedNativeMetadata||certifiedConditionalAux){fail(error,@"Nested CAS context refused");return nil;}
+  certifiedLibraryData=library;certifiedNativeMetadata=metadata;certifiedConditionalAux=conditionalProfile;
   @try {
    pipeline=KPInternalCASCreatePreservingNativeCASPipeline(device,nil,function,original,replacement,error,&proof);
-  } @finally {certifiedLibraryData=nil;certifiedNativeMetadata=nil;}
+  } @finally {certifiedLibraryData=nil;certifiedNativeMetadata=nil;certifiedConditionalAux=false;}
   // The core captures restoration while holding importMutex. Sampling an IMP
   // before acquiring that mutex can observe another legitimate caller's hook;
   // sampling after release can observe the next caller. Neither is our baseline.
@@ -166,7 +166,7 @@ extern "C" id<MTLComputePipelineState> KPCreateCertifiedNativeCASPipeline(
       @"constructor_restored":@(restored),@"native_import":proof?:@{},
       @"scope":@"Explicit adapted-client pipeline; approved bounded AIR/SASS certificate, not general compiler repair"};
  } @catch(NSException *exception) {
-  certifiedLibraryData=nil;certifiedNativeMetadata=nil;
+  certifiedLibraryData=nil;certifiedNativeMetadata=nil;certifiedConditionalAux=false;
   if(pipeline){[pipeline release];pipeline=nil;}
   fail(error,exception.reason?:@"Invalid CAS certificate");
  }

@@ -18,7 +18,7 @@ if a.require_decoder_evidence:
 out.mkdir();sdk=out/'KeplerNativeCAS';sdk.mkdir()
 shutil.copytree(base,sdk/'assets')
 for n in ['include','src','lib','examples']:(sdk/n).mkdir()
-for n in ['KeplerNativeCAS.h','KeplerNativeCAS.mm','KeplerNativeCASAdapter.inc','KeplerProgramImport.h','KeplerGPUIdentity.h','KeplerDriverProfile.h','KeplerNativeAllocation.h','KeplerNativeAllocation.inc']:shutil.copyfile(ROOT/'src'/n,sdk/'src'/n)
+for n in ['KeplerNativeCAS.h','KeplerNativeCAS.mm','KeplerConditionalAux.h','KeplerNativeCASAdapter.inc','KeplerProgramImport.h','KeplerGPUIdentity.h','KeplerDriverProfile.h','KeplerNativeAllocation.h','KeplerNativeAllocation.inc']:shutil.copyfile(ROOT/'src'/n,sdk/'src'/n)
 shutil.copyfile(ROOT/'src/KeplerNativeCAS.h',sdk/'include/KeplerNativeCAS.h')
 shutil.copyfile(ROOT/'src/KeplerGPUIdentity.h',sdk/'include/KeplerGPUIdentity.h')
 for n in ['client.mm','build_example.py']:shutil.copyfile(ROOT/'sdk-cas/examples'/n,sdk/'examples'/n)

@@ -1,0 +1,66 @@
+{
+  "GPU_general_support": false,
+  "adapter_SHA256": "e8ea952b1ce9c84310e6402cdbeb8348984e255ff95a44c2d46bb57096ad7b95",
+  "asset_library_SHA256": "79d250c4cefb764934330b9acea8c86ddd4632d98eb3c8cf100eaff6c0f34b44",
+  "client_SHA256": "e305775c7cb8274dab6b46cba9e33ac7b8e2b4bce3f0213b04bde92dc646e95c",
+  "modes": [
+    {
+      "constructor_pin_rejections": 2,
+      "mode": "negative",
+      "pre_constructor_rejections": 6,
+      "status": "PASS",
+      "user_GPU_command_buffers": 0
+    },
+    {
+      "caller_inputs_wiped_before_commit": true,
+      "constructor_restored": true,
+      "correct_CAS_operations": 0,
+      "correct_uint32_words": 0,
+      "expected_native_defect_words": 0,
+      "general_compiler_repair": false,
+      "guard_bytes_verified": 11520,
+      "integration_level": 1,
+      "mode": "prepare",
+      "native_metadata_preserved_except_instruction_count": true,
+      "performance_benchmark": false,
+      "repaired_candidates": 4,
+      "status": "PASS",
+      "user_GPU_command_buffers": 0
+    },
+    {
+      "caller_inputs_wiped_before_commit": true,
+      "constructor_restored": null,
+      "correct_CAS_operations": 21330,
+      "correct_uint32_words": 85320,
+      "expected_native_defect_words": 85212,
+      "general_compiler_repair": false,
+      "guard_bytes_verified": 11520,
+      "integration_level": 1,
+      "mode": "native",
+      "native_metadata_preserved_except_instruction_count": null,
+      "performance_benchmark": false,
+      "repaired_candidates": 0,
+      "status": "PASS",
+      "user_GPU_command_buffers": 90
+    },
+    {
+      "caller_inputs_wiped_before_commit": true,
+      "constructor_restored": true,
+      "correct_CAS_operations": 106650,
+      "correct_uint32_words": 426600,
+      "expected_native_defect_words": 0,
+      "general_compiler_repair": false,
+      "guard_bytes_verified": 11520,
+      "integration_level": 2,
+      "mode": "execute",
+      "native_metadata_preserved_except_instruction_count": true,
+      "performance_benchmark": false,
+      "repaired_candidates": 4,
+      "status": "PASS",
+      "user_GPU_command_buffers": 90
+    }
+  ],
+  "performance_benchmark": false,
+  "status": "PASS",
+  "terminal_nonoverlapping_processes": 4
+}

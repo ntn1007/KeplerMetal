@@ -17,14 +17,14 @@ offsets. Those properties require separate evidence. No GPU command was
 submitted by this analysis, and the capture did not read back resident GPU
 instructions.
 
-The SDK import currently compares the live original code and metadata to its
-certificate, then preserves the remaining constructor payload while replacing
-the code section. It does **not independently pin the live `0x10006` bytes**
-for this profile. The existing GPU results therefore remain bounded to the
-tested constructor inputs; they do not qualify a changed auxiliary section.
-Before using this candidate table to widen the recognizer, bind and verify the
-actual constant-bank data and extend the import gate and negative tests. Do
-not assume that a library hash alone proves the compiler's auxiliary output.
+The original SDK import checked the live code and metadata but did not pin the
+auxiliary section. The [new exact-profile guard](CAS_CONDITIONAL_AUX_GUARD.md)
+checks that the live constructor input contains exactly one 12-byte `0x10006`
+section with the qualified SHA-256 before substituting the program. A mismatch
+leaves the original constructor input untouched and rejects the experimental
+pipeline before a user GPU dispatch. This does not prove that the section is
+actually bound to `c0` or widen the recognizer. Do not assume that a library
+hash alone proves the compiler's auxiliary output.
 
 The offline inspector checks the retained container fingerprint, sections,
 exact code and pinned decoder replay. Synthetic tests reject altered table

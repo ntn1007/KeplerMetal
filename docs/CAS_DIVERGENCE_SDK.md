@@ -33,10 +33,9 @@ do not read back resident GPU instructions. There is no performance benchmark
 or claim of general Metal 3/4 support. The existing NVIDIA/Apple drivers and
 OCLP were not modified.
 
-The live auxiliary `0x10006` section is not separately fingerprinted by this
-gate. A later [offline analysis](CAS_INDIRECT_BRANCH.md) identifies it as a
-possible indirect-branch table, but has not established its runtime binding.
-The recorded GPU qualification does not cover a changed auxiliary section.
+The [auxiliary guard follow-up](CAS_CONDITIONAL_AUX_GUARD.md) additionally
+pins the live `0x10006` constructor section for this exact profile. Its
+possible role as an indirect-branch table and binding to `c0` remain unproved.
 
 The rebuilt SDK also passed the earlier copied-lock profile regression: 22,482
 correct CAS operations across seven GPU processes and four pre-constructor

@@ -31,7 +31,7 @@ def signed(exe,label,args):
  run(['python3',str(ROOT/'tools/run_signed_probe.py'),'--exe',str(exe),'--out',str(ex),'--timeout','20','--']+args,label)
  d=json.loads((ex/'manifest.json').read_text());assert d['exit_code']==0 and not d['SIGKILL_requested'] and not d['authoritative_ps_status']
  return ex
-for name in ['KeplerNativeCAS.h','KeplerNativeCAS.mm','KeplerNativeCASAdapter.inc','KeplerProgramImport.h',
+for name in ['KeplerNativeCAS.h','KeplerNativeCAS.mm','KeplerConditionalAux.h','KeplerNativeCASAdapter.inc','KeplerProgramImport.h',
              'KeplerGPUIdentity.h','KeplerDriverProfile.h','KeplerNativeAllocation.h','KeplerNativeAllocation.inc']:
  shutil.copyfile(ROOT/'src'/name,sdk/'src'/name)
 shutil.copyfile(ROOT/'src/KeplerNativeCAS.h',sdk/'include/KeplerNativeCAS.h')

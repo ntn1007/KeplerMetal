@@ -1,6 +1,8 @@
 # Status, 2026-10-28
 
-The conditional CAS capture has a three-word candidate indirect-branch table; its live constant-bank binding and branch semantics remain unproved. The current exact SDK profile does not separately pin this auxiliary section at the native constructor. [Evidence](CAS_INDIRECT_BRANCH.md).
+The conditional CAS SDK checks the exact live auxiliary section before program substitution. GPU regression and a wrong-expected-digest constructor control passed; live `c0` binding and indirect-branch semantics remain unproved. [Evidence](CAS_CONDITIONAL_AUX_GUARD.md).
+
+The conditional CAS capture has a three-word candidate indirect-branch table; its live constant-bank binding and branch semantics remain unproved. [Evidence](CAS_INDIRECT_BRANCH.md).
 
 An offline explicit-use inspection finds four uses of the conditional CAS expected pointer and two uses of its bitcast, limited to lifetime markers, in the pinned AIR dump. Hidden/incorrectly decoded aliases and native SASS remain unqualified. [Evidence](CAS_CONDITIONAL_AIR_CFG.md#explicit-expected-pointer-uses).
 

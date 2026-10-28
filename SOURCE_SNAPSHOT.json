@@ -207,29 +207,39 @@
       "path": "bridge/src/KeplerNativeCAS.mm",
       "source_path": "bridge/src/KeplerNativeCAS.mm",
       "source_SHA256": "ed17e1d36acdfb938e194d2020d86261af2a4d829e4de284887c15f5f39efd1b",
-      "published_SHA256": "59f56ab25157ce0b1df2ee1905b9ae82eed95db3ef3d63c71d07b62f25dcba78",
-      "bytes": 29686,
+      "published_SHA256": "157ca5c0cb135ced48ad8c6be9c715d3662fb536550d5c44e155f3c9bcf0ada4",
+      "bytes": 30089,
       "modified_for_publication": true,
-      "previous_published_SHA256": "0ae9139f45da529f9cadbb0c098744698121270e5e1713b08aa7ae7cae036061"
+      "previous_published_SHA256": "0ae9139f45da529f9cadbb0c098744698121270e5e1713b08aa7ae7cae036061",
+      "latest_change": {
+        "previous_published_SHA256": "59f56ab25157ce0b1df2ee1905b9ae82eed95db3ef3d63c71d07b62f25dcba78",
+        "previous_bytes": 29686,
+        "reason": "Pin native conditional-CAS auxiliary section at the constructor."
+      }
     },
     {
       "path": "bridge/src/KeplerNativeCASAdapter.inc",
       "source_path": "bridge/src/KeplerNativeCASAdapter.inc",
       "source_SHA256": "57b86d64a0006d37418b418180b893a778a0da39035ec765efbd23d5ee0a2dfe",
-      "published_SHA256": "56b2138290aaddd272fa5acb8f93c53b987d74f879112804a532f3f089edc77b",
-      "bytes": 13893,
+      "published_SHA256": "e8ea952b1ce9c84310e6402cdbeb8348984e255ff95a44c2d46bb57096ad7b95",
+      "bytes": 14046,
       "modified_for_publication": true,
       "previous_published_SHA256": "cdd32884ba293cd160eced53dff9ce0031ba3bf69def322c061b53fed3341b81",
       "latest_change": {
-        "previous_published_SHA256": "3a1664a09c71c9aad4d598dd17d413f6208e05b365bdd0e7eb1538ef5f463076",
-        "previous_bytes": 12614,
-        "reason": "Add the exact conditional CAS profile with explicit refusal of general AIR/SASS qualification."
+        "previous_published_SHA256": "56b2138290aaddd272fa5acb8f93c53b987d74f879112804a532f3f089edc77b",
+        "previous_bytes": 13893,
+        "reason": "Pin native conditional-CAS auxiliary section at the constructor."
       },
       "prior_change_history": [
         {
           "previous_published_SHA256": "8c55319f9c2f2b46957ac1b0140a3c06d8dccf1c21adf0818a40de7835c72d51",
           "previous_bytes": 11653,
           "reason": "Explicit byte-pinned GPU-qualified copied-lock CAS profile; prior barrier-trampoline profile retained."
+        },
+        {
+          "previous_published_SHA256": "3a1664a09c71c9aad4d598dd17d413f6208e05b365bdd0e7eb1538ef5f463076",
+          "previous_bytes": 12614,
+          "reason": "Add the exact conditional CAS profile with explicit refusal of general AIR/SASS qualification."
         }
       ]
     },
@@ -1033,9 +1043,14 @@
       "path": "bridge/tools/build_combined_keplermetal_sdk.py",
       "source_path": "bridge/tools/build_combined_keplermetal_sdk.py",
       "source_SHA256": "9048d27d9bba47d8e530367b14a6edca68aba41da6b2b924c756a1f6d5c548cc",
-      "published_SHA256": "9048d27d9bba47d8e530367b14a6edca68aba41da6b2b924c756a1f6d5c548cc",
-      "bytes": 12988,
-      "modified_for_publication": false
+      "published_SHA256": "07595d52a8d14c346398fd5c715e2224b495f2cae2e9d7a7de45bd56a7328adc",
+      "bytes": 13013,
+      "modified_for_publication": true,
+      "latest_change": {
+        "previous_published_SHA256": "9048d27d9bba47d8e530367b14a6edca68aba41da6b2b924c756a1f6d5c548cc",
+        "previous_bytes": 12988,
+        "reason": "Include the conditional auxiliary guard header in SDK and evidence builds."
+      }
     },
     {
       "path": "bridge/tools/build_command_frontend.py",
@@ -1234,12 +1249,17 @@
       "path": "bridge/tools/build_native_cas_sdk_module.py",
       "source_path": "bridge/tools/build_native_cas_sdk_module.py",
       "source_SHA256": "9f9494d785cb021a85faa44b413a566ef62a9a4d1637c6eae05b9952f1fd589c",
-      "published_SHA256": "7ab4aeb1618616f8194784c7c62c64ca79250ecbb481a82bdab32ec7b4ea8b19",
-      "bytes": 3545,
+      "published_SHA256": "bcfa468dac549f8ae789a227d84ea4a219b0bf1cbc904d81f060fee28a8c36a6",
+      "bytes": 3570,
       "modified_for_publication": true,
       "publication_change": {
         "previous_published_SHA256": "9f9494d785cb021a85faa44b413a566ef62a9a4d1637c6eae05b9952f1fd589c",
         "reason": "Regenerate CAS SDK against exact current sources, driver profile and PCI-validated GPU identity."
+      },
+      "latest_change": {
+        "previous_published_SHA256": "7ab4aeb1618616f8194784c7c62c64ca79250ecbb481a82bdab32ec7b4ea8b19",
+        "previous_bytes": 3545,
+        "reason": "Include the conditional auxiliary guard header in SDK and evidence builds."
       }
     },
     {
@@ -2548,9 +2568,14 @@
       "path": "bridge/tools/package_cb0_sdk_evidence.py",
       "source_path": "bridge/tools/package_cb0_sdk_evidence.py",
       "source_SHA256": "a50f263b312b098bc5c039f157d13fb7b091bd70c38a8955e7755e011838204f",
-      "published_SHA256": "a50f263b312b098bc5c039f157d13fb7b091bd70c38a8955e7755e011838204f",
-      "bytes": 3649,
-      "modified_for_publication": false
+      "published_SHA256": "566bc61d7e62f53a0a893c5e454700bfadc834dde9e4760d27a7e45eaaa40663",
+      "bytes": 3674,
+      "modified_for_publication": true,
+      "latest_change": {
+        "previous_published_SHA256": "a50f263b312b098bc5c039f157d13fb7b091bd70c38a8955e7755e011838204f",
+        "previous_bytes": 3649,
+        "reason": "Include the conditional auxiliary guard header in SDK and evidence builds."
+      }
     },
     {
       "path": "bridge/tools/package_combined_shared_evidence.py",
@@ -2740,9 +2765,14 @@
       "path": "bridge/tools/package_fp64_sdk_evidence.py",
       "source_path": "bridge/tools/package_fp64_sdk_evidence.py",
       "source_SHA256": "8bf26330123b316129721c2a64f277fcd36aeb4aaa3b3f09c4b8834fd1458f5b",
-      "published_SHA256": "8bf26330123b316129721c2a64f277fcd36aeb4aaa3b3f09c4b8834fd1458f5b",
-      "bytes": 4434,
-      "modified_for_publication": false
+      "published_SHA256": "1ef5b043194a4e0bb3a5e05ee97202a275d728e2868611814362c0b5f5068bff",
+      "bytes": 4459,
+      "modified_for_publication": true,
+      "latest_change": {
+        "previous_published_SHA256": "8bf26330123b316129721c2a64f277fcd36aeb4aaa3b3f09c4b8834fd1458f5b",
+        "previous_bytes": 4434,
+        "reason": "Include the conditional auxiliary guard header in SDK and evidence builds."
+      }
     },
     {
       "path": "bridge/tools/package_gpu_bindings_evidence.py",
@@ -3000,12 +3030,17 @@
       "path": "bridge/tools/prepare_native_cas_sdk.py",
       "source_path": "bridge/tools/prepare_native_cas_sdk.py",
       "source_SHA256": "f4e514a99e1a00b1f66a277603e92ebd232539aaa26072912e0adbc69d523862",
-      "published_SHA256": "e71aa5add4912c53d710c8a5bb617d859b4f623c12dbf592eac8dd7ffe5d4216",
-      "bytes": 8731,
+      "published_SHA256": "be4b687adc60532d46dfd5372051a8afae619fbfba20699826b8de17c6acfe52",
+      "bytes": 8756,
       "modified_for_publication": true,
       "publication_change": {
         "previous_published_SHA256": "ae0a43facf525542b0fc00575b41c03fba046eb8e58e3b7250a8abff2838b896",
         "reason": "Regenerate CAS SDK against exact current sources, driver profile and PCI-validated GPU identity."
+      },
+      "latest_change": {
+        "previous_published_SHA256": "e71aa5add4912c53d710c8a5bb617d859b4f623c12dbf592eac8dd7ffe5d4216",
+        "previous_bytes": 8731,
+        "reason": "Include the conditional auxiliary guard header in SDK and evidence builds."
       }
     },
     {
@@ -3281,9 +3316,14 @@
       "path": "bridge/tools/reproduce_cpu_icb_native_cas.py",
       "source_path": "bridge/tools/reproduce_cpu_icb_native_cas.py",
       "source_SHA256": "639a6d252b0bcf3a2b3153f3b30ecf21fd77a5b34a958fab3691c055aa91421b",
-      "published_SHA256": "639a6d252b0bcf3a2b3153f3b30ecf21fd77a5b34a958fab3691c055aa91421b",
-      "bytes": 2965,
-      "modified_for_publication": false
+      "published_SHA256": "195ede62409bc536197592506bcfb47aa7fd47968e9a2f455009db5432e6dc90",
+      "bytes": 2998,
+      "modified_for_publication": true,
+      "latest_change": {
+        "previous_published_SHA256": "639a6d252b0bcf3a2b3153f3b30ecf21fd77a5b34a958fab3691c055aa91421b",
+        "previous_bytes": 2965,
+        "reason": "Include the conditional auxiliary guard header in SDK and evidence builds."
+      }
     },
     {
       "path": "bridge/tools/reproduce_cpu_icb_private_arguments.py",
@@ -7822,6 +7862,15 @@
       "published_SHA256": "aeb59ec4acbcf2eba2176f9b74f776155794f185cf938afec65564b4b7959f17",
       "bytes": 1601,
       "modified_for_publication": false
+    },
+    {
+      "path": "bridge/src/KeplerConditionalAux.h",
+      "source_path": "bridge/src/KeplerConditionalAux.h",
+      "source_SHA256": "da651e610e9d138112c48afdbe2de673c42252c59e4389e0b1a94eb14b8a6160",
+      "published_SHA256": "da651e610e9d138112c48afdbe2de673c42252c59e4389e0b1a94eb14b8a6160",
+      "bytes": 704,
+      "modified_for_publication": false,
+      "origin": "new project source, conditional CAS auxiliary gate"
     }
   ],
   "excluded_source_tools": [
@@ -7988,5 +8037,10 @@
     "previous_source_snapshot_SHA256": "586c1ee6754daa58215713dcfddafea30d09c4310d9aab875c877ee26c68711d",
     "previous_public_commit": "6798456",
     "scope": "Exact manually GPU-qualified conditional CAS API profile; no generalized recognizer."
+  },
+  "cas_conditional_aux_update": {
+    "previous_source_snapshot_SHA256": "5a69135fe8a5e7837e9bad6407d146f4679469b087446c9e6bd12f36af65752e",
+    "previous_public_commit": "cbebd56",
+    "scope": "Exact native conditional auxiliary digest enforced; no general indirect branch qualification."
   }
 }

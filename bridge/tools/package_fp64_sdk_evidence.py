@@ -9,7 +9,7 @@ for folder in (ROOT/'results').glob('combined-fp64-sdk-*'):
  files.update(p for p in folder.rglob('*') if p.is_file())
 files.update(p for p in (ROOT/'results/fp64-sdk-strided-offline-20261014').rglob('*') if p.is_file())
 files.update(p for p in (ROOT/'sdk-combined').rglob('*') if p.is_file())
-for n in ['KeplerCPUICB.h','KeplerCPUICB.mm','KeplerNativeCommands.h','KeplerNativeCommands.mm','KeplerNativeRenderDraws.h','KeplerNativeRenderDraws.mm','KeplerNativeCAS.h','KeplerNativeCAS.mm','KeplerNativeCASAdapter.inc','KeplerProgramImport.h','KeplerFP64.h','KeplerFP64.mm']:files.add(ROOT/'src'/n)
+for n in ['KeplerCPUICB.h','KeplerCPUICB.mm','KeplerNativeCommands.h','KeplerNativeCommands.mm','KeplerNativeRenderDraws.h','KeplerNativeRenderDraws.mm','KeplerNativeCAS.h','KeplerNativeCAS.mm','KeplerConditionalAux.h','KeplerNativeCASAdapter.inc','KeplerProgramImport.h','KeplerFP64.h','KeplerFP64.mm']:files.add(ROOT/'src'/n)
 for n in ['build_combined_keplermetal_sdk.py','fp64_math_compile.c','build_fp64_math.py','make_fp64_sdk_report.py','package_fp64_sdk_evidence.py','lab_gpu_reservation.py']:files.add(ROOT/'tools'/n)
 files.update(ROOT/n for n in ['SDK_FP64_APPLICATION_ADAPTEE_2026-10-14.txt','results/hardware-coverage.json'])
 magic={b'\xcf\xfa\xed\xfe',b'\xfe\xed\xfa\xcf',b'\xce\xfa\xed\xfe',b'\xfe\xed\xfa\xce',b'\xca\xfe\xba\xbe',b'\xbe\xba\xfe\xca',b'\x7fELF'}

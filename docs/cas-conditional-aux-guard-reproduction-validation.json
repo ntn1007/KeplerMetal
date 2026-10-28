@@ -1,0 +1,27 @@
+{
+  "bank_c0_binding_proved": false,
+  "gate_source_sha256": "da651e610e9d138112c48afdbe2de673c42252c59e4389e0b1a94eb14b8a6160",
+  "native_import_source_sha256": "157ca5c0cb135ced48ad8c6be9c715d3662fb536550d5c44e155f3c9bcf0ada4",
+  "negative": {
+    "GPU_dispatch": false,
+    "actual_native_input_mutated": false,
+    "code_replaced": false,
+    "constructor_restored": true,
+    "live_aux_mismatch_rejected": true,
+    "test": "wrong expected auxiliary digest"
+  },
+  "positive_imports": [
+    {
+      "live_aux_matched": true,
+      "report_sha256": "12f1d110e171948467c012a4925cd77b442699a80d2b33184f6b4d0a0980e8ed",
+      "signed_executable_sha256": "48d433ed3aa8e92ae15610e101ffd86d5cb5af201db1387f7331acca5bd8bc8f"
+    },
+    {
+      "live_aux_matched": true,
+      "report_sha256": "12f1d110e171948467c012a4925cd77b442699a80d2b33184f6b4d0a0980e8ed",
+      "signed_executable_sha256": "48d433ed3aa8e92ae15610e101ffd86d5cb5af201db1387f7331acca5bd8bc8f"
+    }
+  ],
+  "resident_GPU_instruction_readback": false,
+  "status": "PASS"
+}

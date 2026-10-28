@@ -12,6 +12,7 @@
 #include <atomic>
 #include <cstdio>
 #include <CommonCrypto/CommonDigest.h>
+#include "KeplerConditionalAux.h"
 
 namespace {
 struct Section {size_t header,payload,size;uint32_t type;};
@@ -35,6 +36,7 @@ thread_local bool nativeAllocationScopeActive=false;
 thread_local NSData *expectedNativeOriginal=nullptr;
 thread_local bool keepNativeMetadata=false;
 thread_local NSData *certifiedLibraryData=nil,*certifiedNativeMetadata=nil;
+thread_local bool certifiedConditionalAux=false;
 thread_local id<MTLFunction> certifiedSuppliedFunction=nil;
 thread_local MTLComputePipelineDescriptor *approvedPipelineDescriptor=nil;
 thread_local MTLPipelineOption certifiedPipelineOptions=MTLPipelineOptionNone;
@@ -70,7 +72,7 @@ id importInit(id self,SEL selector,const void*input,NSUInteger length,id device)
  if(!native)return nil;
  if(!c)return ((id(*)(id,SEL,const void*,NSUInteger,id))native)(self,selector,input,length,device);
  const unsigned char*b=(const unsigned char*)input;std::vector<Section>table;
- bool valid=parse(b,length,table);Section metadata={},code={};unsigned metadataCount=0,codeCount=0;
+ bool valid=parse(b,length,table);Section metadata={},code={},aux={};unsigned metadataCount=0,codeCount=0,auxCount=0;
  if(valid&&c->additionalVertex&&table.front().type==1&&table.front().size==4&&u32(b,table.front().payload)==0){
   Context vertex{c->additionalVertex,c->vertexConfig,c->events,c->payloads,false,0,80};activeContext=&vertex;
   id result=nil;
@@ -82,7 +84,7 @@ id importInit(id self,SEL selector,const void*input,NSUInteger length,id device)
   [c->events addObject:@{@"stage":@(u32(b,table.front().payload)),@"code_replaced":@NO}];
   return ((id(*)(id,SEL,const void*,NSUInteger,id))native)(self,selector,input,length,device);
  }
- if(valid)for(const auto&s:table){if(s.type==0x10004){metadata=s;metadataCount++;}if(s.type==0x10005){code=s;codeCount++;}}
+ if(valid)for(const auto&s:table){if(s.type==0x10004){metadata=s;metadataCount++;}if(s.type==0x10005){code=s;codeCount++;}if(s.type==0x10006){aux=s;auxCount++;}}
  valid=valid&&table.front().type==1&&table.front().size==4&&u32(b,table.front().payload)==c->expectedStage;
  valid=valid&&metadataCount==1&&codeCount==1&&metadata.size==232&&code.size>=c->prefixBytes&&(code.size-c->prefixBytes)%64==0;
  valid=valid&&(!u64(b,code.header)||u64(b,code.header)==16+code.size);
@@ -90,6 +92,8 @@ id importInit(id self,SEL selector,const void*input,NSUInteger length,id device)
  if(expectedNativeOriginal){expectedMatches=valid&&code.size==expectedNativeOriginal.length&&memcmp(b+code.payload,expectedNativeOriginal.bytes,code.size)==0;valid=valid&&expectedMatches;}
  bool metadataMatches=!certifiedNativeMetadata||(valid&&metadata.size==certifiedNativeMetadata.length&&memcmp(b+metadata.payload,certifiedNativeMetadata.bytes,metadata.size)==0);
  valid=valid&&metadataMatches;
+ bool auxMatches=!certifiedConditionalAux||(valid&&KPConditionalAuxMatches(auxCount?b+aux.payload:nullptr,aux.size,auxCount));
+ valid=valid&&auxMatches;
  bool localMetadataMatches=true;
  if(localMemoryContract){
   const KeplerLocalMemoryConfig&m=*localMemoryContract;
@@ -104,9 +108,10 @@ id importInit(id self,SEL selector,const void*input,NSUInteger length,id device)
   valid=valid&&localMetadataMatches;
  }
  if(valid)c->targetImports++;
- NSMutableDictionary*event=[NSMutableDictionary dictionaryWithDictionary:@{@"valid_container":@(valid),@"original_bytes":@(length),@"container_version":@(length>=8?u32(b,0):0)}];
+ NSMutableDictionary*event=[NSMutableDictionary dictionaryWithDictionary:@{@"valid_container":@(valid),@"original_bytes":@(length),@"container_version":@(length>=8?u32(b,0):0),@"code_replaced":@NO}];
  if(expectedNativeOriginal)event[@"expected_original_code_identical"]=@(expectedMatches);
  if(certifiedNativeMetadata)event[@"native_metadata_identical_to_certificate"]=@(metadataMatches);
+ if(certifiedConditionalAux)event[@"conditional_auxiliary_section_pinned"]=@(auxMatches);
  if(localMemoryContract)event[@"native_local_metadata_verified"]=@(localMetadataMatches);
  const void*passed=input;NSUInteger size=length;NSMutableData*patched=nil;
  if(valid){

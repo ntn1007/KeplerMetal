@@ -8,7 +8,7 @@ def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def run(argv,label):
  r=subprocess.run(argv,cwd=ROOT,capture_output=True,text=True,timeout=45);(out/(label+'.stdout')).write_text(r.stdout);(out/(label+'.stderr')).write_text(r.stderr);commands.append({'label':label,'argv':argv,'exit_code':r.returncode});(out/'commands.json').write_text(json.dumps(commands,indent=2)+'\n');print(label,r.returncode,flush=True);assert r.returncode==0,r.stderr[-3000:]
 sources=[]
-for folder,name in [('src','KeplerCPUICB.h'),('src','KeplerCPUICB.mm'),('src','KeplerNativeCommands.h'),('src','KeplerNativeCommands.mm'),('src','KeplerNativeCAS.h'),('src','KeplerNativeCAS.mm'),('src','KeplerNativeCASAdapter.inc'),('src','KeplerProgramImport.h'),('src','cpu_icb_native_cas_manifest.json'),('tools','cpu_icb_native_cas_probe.mm')]:
+for folder,name in [('src','KeplerCPUICB.h'),('src','KeplerCPUICB.mm'),('src','KeplerNativeCommands.h'),('src','KeplerNativeCommands.mm'),('src','KeplerNativeCAS.h'),('src','KeplerNativeCAS.mm'),('src','KeplerConditionalAux.h'),('src','KeplerNativeCASAdapter.inc'),('src','KeplerProgramImport.h'),('src','cpu_icb_native_cas_manifest.json'),('tools','cpu_icb_native_cas_probe.mm')]:
  f=out/name;shutil.copyfile(ROOT/folder/name,f);sources.append(f)
 assets=out/'assets';shutil.copytree(ROOT/'results/native-cas-sdk-build-20261014-02/KeplerNativeCAS/assets',assets)
 inp={'source_hashes':{p.name:sha(p) for p in sources},'assets_SHA256':{p.name:sha(p) for p in assets.iterdir()},'Git_commit':None,'Qwen_job_ids':[],'system_modified':False};(out/'inputs.json').write_text(json.dumps(inp,indent=2)+'\n')

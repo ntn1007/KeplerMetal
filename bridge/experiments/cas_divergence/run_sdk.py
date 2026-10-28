@@ -23,7 +23,7 @@ def need(value,message):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     for name in ('lab','build','out'):p.add_argument('--'+name,type=Path,required=True)
-    p.add_argument('--mode',choices=('native','repaired','negative-pin','negative-nop','negative-profile','negative-metadata','negative-air'),required=True)
+    p.add_argument('--mode',choices=('native','repaired','negative-pin','negative-nop','negative-profile','negative-metadata','negative-air','negative-aux'),required=True)
     a=p.parse_args();lab=a.lab.resolve();build=a.build.resolve();out=a.out.resolve()
     build.relative_to(lab/'results');out.relative_to(lab/'results')
     need(not out.exists() and out.parent.is_dir(),'fresh output required')
@@ -56,7 +56,7 @@ def main():
         lease.spawning(binary,sha(binary));registry=lab/'results/signed-native-jobs.json'
         jobs=json.loads(registry.read_text()) if registry.exists() else []
         host_mode={'negative-nop':'trampoline','negative-profile':'repaired',
-                   'negative-metadata':'repaired','negative-air':'repaired'}.get(a.mode,a.mode)
+                   'negative-metadata':'repaired','negative-air':'repaired','negative-aux':'repaired'}.get(a.mode,a.mode)
         original='wrong-original.sass' if a.mode=='negative-pin' else 'original.sass'
         replacement='trampoline.sass' if a.mode=='negative-nop' else 'original.sass' if a.mode=='native' else 'repaired.sass'
         argv=[str(library),str(out/'outputs'),host_mode,str(build/original),str(build/replacement)]
@@ -84,7 +84,13 @@ def main():
         need(sha(certificate)==certificate_sha,'certificate template changed')
         for name,digest in PINS.items():need(sha(build/name)==digest,'input changed during execution')
         report=json.loads((out/'report.json').read_text())
-        if negative:
+        if a.mode=='negative-aux':
+            proof=report['import'];native=proof['native_import'];events=native['events']
+            need(report['failure_stage']=='pipeline' and not report['GPU_dispatch'] and
+                 proof['gate_accepted'] and proof['constructor_restored'] and native['rejected_import'] and
+                 len(events)==1 and events[0]['conditional_auxiliary_section_pinned'] is False and
+                 events[0]['code_replaced'] is False, 'auxiliary mismatch not refused at constructor')
+        elif negative:
             need(report['failure_stage']=='pipeline' and not report['GPU_dispatch'] and
                  not report['import']['gate_accepted'] and not report['import']['constructor_entered'],
                  'negative input not refused before constructor')
