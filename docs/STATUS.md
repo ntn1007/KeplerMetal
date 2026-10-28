@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+The experimental CAS SDK now accepts the exact conditional profile only with pinned library, native code, replacement and metadata. Two GPU cohorts each validate 56,904 active operations and five pre-constructor refusals; earlier SDK profiles pass regression. The general AIR and SASS recognizers still refuse this shader; ordinary applications are not transparently fixed. [Evidence](CAS_DIVERGENCE_SDK.md).
+
 An exact captured conditional-CAS program is corrected inside an adapted process. Two GPU cohorts each check 56,904 active operations and 455,040 output words; native/replay/NOP controls retain the defect. This is not general recognition or a system compiler repair. [Evidence](CAS_DIVERGENCE_REPAIR.md).
 
 Conditional per-thread CAS results were compared on the GTX and an M1 Max reference. Two GTX runs reproduce 14,226 wrong active-thread expected values each while inactive values and other fields match; the M1 reference matches all checked fields. The separately captured NVIDIA output contains an indirect branch and the AIR contract refuses this shape. No new runtime repair is claimed. [Evidence](CAS_DIVERGENCE_REFERENCE.md).

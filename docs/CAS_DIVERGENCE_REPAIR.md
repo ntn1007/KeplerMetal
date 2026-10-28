@@ -44,8 +44,9 @@ hash and same repaired program hash. The auditor checks the 8-byte differences,
 the pinned decoder, signed processes, raw outputs and the M1 reference; copied
 result, guard, import-evidence, process-state and repair mutations are refused.
 
-This is **not a general compiler fix or a system driver release**. The current
-SDK does not accept this profile, and ordinary applications do not receive
+This is **not a general compiler fix or a system driver release**. The
+[experimental SDK](CAS_DIVERGENCE_SDK.md) accepts this exact fingerprinted
+profile for an explicitly adapted client; ordinary applications do not receive
 the correction. The general AIR diagnosis and indirect-branch analysis still
 refuse this shader. No speedup or new Metal family is claimed. Installed Apple
 and NVIDIA components, OCLP and firmware were not modified.

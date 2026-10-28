@@ -87,6 +87,9 @@ extern "C" id<MTLComputePipelineState> KPCreateCertifiedNativeCASPipeline(
   if(![air isKindOfClass:NSDictionary.class]||![sass isKindOfClass:NSDictionary.class]||
      ![module isKindOfClass:NSDictionary.class]){fail(error,@"Missing CAS diagnosis");return nil;}
   NSString *function=cert[@"function"];
+  id repairProfile=cert[@"repair_profile"];
+  bool conditionalProfile=[repairProfile isKindOfClass:NSString.class]&&
+      [repairProfile isEqual:@"gk104-conditional-pinned-v1"];
   NSData *original=kpCASDecode(cert[@"original_code_base64"]),*replacement=kpCASDecode(cert[@"repaired_code_base64"]),
          *metadata=kpCASDecode(cert[@"native_metadata_base64"]);
   NSUInteger component=[air[@"expected_output_component"]unsignedIntegerValue];
@@ -98,7 +101,11 @@ extern "C" id<MTLComputePipelineState> KPCreateCertifiedNativeCASPipeline(
       [function isKindOfClass:NSString.class]&&function.length&&function.length<=255&&
       (!certifiedSuppliedFunction||(certifiedSuppliedFunction.device==device&&[certifiedSuppliedFunction.name isEqual:function]))&&
       [module[@"name"]isEqual:function]&&[module[@"type"]unsignedIntValue]==2&&
-      [air[@"qualified"]boolValue]&&[sass[@"qualified"]boolValue]&&component<=3&&
+      ((!conditionalProfile&&[air[@"qualified"]boolValue]&&[sass[@"qualified"]boolValue])||
+       (conditionalProfile&&![air[@"qualified"]boolValue]&&![sass[@"qualified"]boolValue]&&
+        [air[@"reason"]isEqual:@"Expected is not directly inserted into one output vector"]&&
+        [sass[@"reason"]isEqual:@"indirect or unsupported branch"]&&
+        [cert[@"qualification"]isEqual:@"manual-exact-profile-gpu-tested"]))&&component<=3&&
       component==[sass[@"expected_output_component"]unsignedIntegerValue]&&
       kpCASModuleMatches(library,function,module)&&
       kpCASHash(library,cert[@"library_SHA256"])&&kpCASHash(embedded,module[@"sha256"])&&
@@ -112,10 +119,9 @@ extern "C" id<MTLComputePipelineState> KPCreateCertifiedNativeCASPipeline(
   NSUInteger oldRegister=[sass[@"old_register"]unsignedIntegerValue],expectedRegister=[sass[@"expected_register"]unsignedIntegerValue];
   structure=structure&&oldRegister<24&&expectedRegister<24&&oldRegister!=expectedRegister;
   const unsigned char *a=(const unsigned char*)original.bytes,*b=(const unsigned char*)replacement.bytes;
-  id repairProfile=cert[@"repair_profile"];
   bool copiedLockProfile=[repairProfile isKindOfClass:NSString.class]&&
       [repairProfile isEqual:@"gk104-livecopy-pinned-v1"];
-  structure=structure&&(!repairProfile||copiedLockProfile);
+  structure=structure&&(!repairProfile||copiedLockProfile||conditionalProfile);
   if(structure){
    structure=u32((const unsigned char*)metadata.bytes,0)==size/8-1&&
       memcmp(a+redirect,b+size+8,8)==0&&
@@ -129,6 +135,16 @@ extern "C" id<MTLComputePipelineState> KPCreateCertifiedNativeCASPipeline(
       kpCASHash(original,@"f16bf16da56d5dc060429f6886d2e1d80eafa0a960f48b7d776a3234fb6bcb41")&&
       kpCASHash(replacement,@"a193a1c62851ff483bcb3ab7fda86e9646108e36f1552f80a879616e7017e58f")&&
       kpCASHash(metadata,@"b688a341c68920bb8e8c383f5a2a87d37ac5a1c93a962a531ff8f4a289ecbf12");
+   }else if(conditionalProfile){
+    // The AIR and flow recognizers explicitly refuse this profile. Only the
+    // separately tested exact bytes are admitted; no arbitrary branch or
+    // conditional shader is inferred safe.
+    structure=structure&&[function isEqual:@"divergence_case"]&&component==0&&size==0x540&&
+      redirect==0x428&&oldRegister==0&&expectedRegister==4&&
+      kpCASHash(library,@"811e53236f858247d59ae1540efb1a74160c0e566522faadd9fa82ad60de8640")&&
+      kpCASHash(original,@"83fedb1873bf54ae9975d3f44bd8e8512a9639903afee18d2decef4fbcdd2eb2")&&
+      kpCASHash(replacement,@"d0dfcbe6cbcdbba8df91289d7eb56f122ba48eeeb91d7c6b294ceaf7c291e1e8")&&
+      kpCASHash(metadata,@"f99b8ca94aec90088ba8aee80c42b9e242a7829a81c3fedbf34b2312b08bacbe");
    }else structure=structure&&u64(a,redirect)==0xe000000000001c05ULL;
    for(NSUInteger i=0;i<size&&structure;i+=8)
     if(i!=redirect&&memcmp(a+i,b+i,8))structure=false;

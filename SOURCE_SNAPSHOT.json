@@ -216,15 +216,22 @@
       "path": "bridge/src/KeplerNativeCASAdapter.inc",
       "source_path": "bridge/src/KeplerNativeCASAdapter.inc",
       "source_SHA256": "57b86d64a0006d37418b418180b893a778a0da39035ec765efbd23d5ee0a2dfe",
-      "published_SHA256": "3a1664a09c71c9aad4d598dd17d413f6208e05b365bdd0e7eb1538ef5f463076",
-      "bytes": 12614,
+      "published_SHA256": "56b2138290aaddd272fa5acb8f93c53b987d74f879112804a532f3f089edc77b",
+      "bytes": 13893,
       "modified_for_publication": true,
       "previous_published_SHA256": "cdd32884ba293cd160eced53dff9ce0031ba3bf69def322c061b53fed3341b81",
       "latest_change": {
-        "previous_published_SHA256": "8c55319f9c2f2b46957ac1b0140a3c06d8dccf1c21adf0818a40de7835c72d51",
-        "previous_bytes": 11653,
-        "reason": "Explicit byte-pinned GPU-qualified copied-lock CAS profile; prior barrier-trampoline profile retained."
-      }
+        "previous_published_SHA256": "3a1664a09c71c9aad4d598dd17d413f6208e05b365bdd0e7eb1538ef5f463076",
+        "previous_bytes": 12614,
+        "reason": "Add the exact conditional CAS profile with explicit refusal of general AIR/SASS qualification."
+      },
+      "prior_change_history": [
+        {
+          "previous_published_SHA256": "8c55319f9c2f2b46957ac1b0140a3c06d8dccf1c21adf0818a40de7835c72d51",
+          "previous_bytes": 11653,
+          "reason": "Explicit byte-pinned GPU-qualified copied-lock CAS profile; prior barrier-trampoline profile retained."
+        }
+      ]
     },
     {
       "path": "bridge/src/KeplerNativeCommands.h",
@@ -7976,5 +7983,10 @@
     "previous_source_snapshot_SHA256": "bdb592789daf6d5ed536b48e79fa2d7d8c6edcc735dcba7f3683be59c3ab94b4",
     "previous_public_commit": "fb59eab",
     "scope": "Explicit exact-profile CAS SDK integration; not an arbitrary shader recognizer."
+  },
+  "cas_conditional_sdk_update": {
+    "previous_source_snapshot_SHA256": "586c1ee6754daa58215713dcfddafea30d09c4310d9aab875c877ee26c68711d",
+    "previous_public_commit": "6798456",
+    "scope": "Exact manually GPU-qualified conditional CAS API profile; no generalized recognizer."
   }
 }
