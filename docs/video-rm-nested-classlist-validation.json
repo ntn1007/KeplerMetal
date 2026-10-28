@@ -1,0 +1,77 @@
+{
+  "GPU_dispatches": 0,
+  "command": "0x800201",
+  "entry_flags_and_size": "0x30010",
+  "functions": {
+    "0x12ccd4": {
+      "bytes": 17,
+      "evidence_id": "ev_95ab09de203d6ef0e18109ae01f3921eaae7dcc990580c23f385fb70c801219f",
+      "file_offset": 1232084,
+      "sha256": "aaf3b9f3ab22312e9859f80c8a220d074b32d1fb2df1c2cdb669b811ee1357ad"
+    },
+    "0x12e0d9": {
+      "bytes": 35,
+      "evidence_id": "ev_0c0ce7dff6654df51fcd14cfff582adbcec2b0f02b42421ce62b415c4f1d772f",
+      "file_offset": 1237209,
+      "sha256": "7e56d6e1c6075484ab365e76476ef586ac7f34b0ddc13de2efa20e6b5d0d305f"
+    },
+    "0x12ed71": {
+      "bytes": 154,
+      "evidence_id": "ev_2cbad200ea1cdc045e72fb11663691b42a2abbf9b9fee6f2977434383771f837",
+      "file_offset": 1240433,
+      "sha256": "e7fba355f89e08c7a38fea8d5ea27452eae08fb040a9174497c951fe0daf5999"
+    },
+    "0x3307c": {
+      "bytes": 477,
+      "evidence_id": "ev_cb4a5cc906cde95a5ce61dc84cc3b662a1232462520c63e20b65fadf0a6648ac",
+      "file_offset": 209020,
+      "sha256": "9b3a24d502b3535591c292777dda581c5f3860d24d08ff89b916ea044ef6e56d"
+    },
+    "0x33259": {
+      "bytes": 82,
+      "evidence_id": "ev_0eecaa7f5903405ab3392dc3be984c65eadb9cc422f6787e7da72e23df0eda09",
+      "file_offset": 209497,
+      "sha256": "6eb9e1ceea4e8b3741bee3cb6b3b350ec0b333c68150cb2bce01941c6e60e10b"
+    },
+    "0x332ab": {
+      "bytes": 126,
+      "evidence_id": "ev_994214d77a3c376b2bbdd38143a9218eba8c53e9a533fedecffd4ebd5e1a8c4b",
+      "file_offset": 209579,
+      "sha256": "f1d3384ae57095c4357d4a22a4ded1adbe8577343b8350fe7a3d0823ba233fb4"
+    },
+    "0x451c3": {
+      "bytes": 438,
+      "evidence_id": "ev_c3c7082591044b59b3a4e235bdaab0f0fd57d241f2a5b68bef437e799f264f0b",
+      "file_offset": 283075,
+      "sha256": "e33aca3db82f62d29acf028ff51f30bf25c75e6a727435f9a6a84c98741be454"
+    },
+    "0x4537f": {
+      "bytes": 170,
+      "evidence_id": "ev_e877324aa64f19931b1e917dd95afbc55660805391cbc46eb55e4b46acca5fe8",
+      "file_offset": 283519,
+      "sha256": "0fd991271bd6e7fe6dad42d6357c708b99b8104971cfb0a8aecc1e1e720b6c94"
+    },
+    "0x6c35": {
+      "bytes": 511,
+      "evidence_id": "ev_cddd036406e685707b38676d0ab893c5e2d215dc3964f6bfdd44895bd50c6430",
+      "file_offset": 27701,
+      "sha256": "03a5eda090fd17e29920713e01ecd33a25fc67c65c9b1150ed535f930cc922af"
+    },
+    "0x6e34": {
+      "bytes": 511,
+      "evidence_id": "ev_2f37d68bece041e56cdc25af607560173a43993a030c3c1f730e4c537a38209a",
+      "file_offset": 28212,
+      "sha256": "b10b557d0e34858051412a8555d8bcf3012f465fb10239eaffd6d2ff899d9fb4"
+    }
+  },
+  "handler_local_relocation": "0x28a758",
+  "image_sha256": "36396eaecd68ddbb0482f019f38ce55d01b10379ca829da7f19b3bd8f3e26808",
+  "private_RM_calls": 0,
+  "raw_handler": "0x12e0d9",
+  "rea_sha256": "d5b64de06f54e032dea12d5a38482596bcd2239c1d61cd58302847754f66e379",
+  "scope": "File-backed observations only; user-route reachability, handles, live behavior, backend bounds and hardware video remain unqualified.",
+  "status": "PASS_STATIC_NESTED_COPY",
+  "system_modified": false,
+  "table_entry": 62,
+  "table_sha256": "c3f80a559854a4835ae18324b7880b8dba480be5ff79d51b7bb833abb37765c1"
+}

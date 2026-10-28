@@ -1,5 +1,7 @@
 # Build from source
 
+[VIDEO_RM_NESTED_CLASSLIST.md](VIDEO_RM_NESTED_CLASSLIST.md) documents the offline class-list handler and nested-buffer audit.
+
 [VIDEO_RM_CONTROL_PATH.md](VIDEO_RM_CONTROL_PATH.md) documents the offline RM control path audit and its retained evidence requirements.
 
 [UNCOMMITTED_REVOKE.md](UNCOMMITTED_REVOKE.md) documents the isolated revocation witness and pinned re-audit.

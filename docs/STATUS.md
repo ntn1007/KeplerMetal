@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+The pinned NVIDIA RM control table links `0x800201` to a nested-buffer preparation/copy path; actual user-route reachability and valid handles remain unproved. [Evidence](VIDEO_RM_NESTED_CLASSLIST.md).
+
 An offline audit relates the historical macOS RM control envelope to the installed NVIDIA dispatcher's distinct user and kernel paths. Class-list pointer marshalling and live access remain unqualified. [Evidence](VIDEO_RM_CONTROL_PATH.md).
 
 The pinned NVIDIA macOS initializer obtains its candidate class list through two static `_NvRmControl` callsites with command `0x800201`; a later public NVIDIA definition has matching two-phase layout. Live classes and user-mode transport remain unverified. [Evidence](VIDEO_CLASSLIST_PROVENANCE.md).
