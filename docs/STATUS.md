@@ -1,6 +1,6 @@
 # Status, 2026-10-27
 
-A second, separately written public Metal test client now qualifies the bounded runtime-indexed CAS shader with a three-segment certified library and the scoped launcher. Arbitrary applications and dynamic shapes remain unqualified. [Evidence](SEGMENTED_LIBRARY_CLIENT.md). The prior URL/data qualification is [here](STANDALONE_DATA_CAS.md), with the earlier SDK tests [here](CAS_DYNAMIC_SLOT.md).
+The native CAS recognizer now checks every lane of vector registers against its bounded floor. Four retained native candidates have unchanged offline diagnoses and a freshly regenerated SDK passes GPU regression. [Evidence](CAS_REGISTER_SPAN.md). A second, separately written client with segmented data remains qualified [here](SEGMENTED_LIBRARY_CLIENT.md); arbitrary applications and shaders remain unqualified.
 
 The single-overlay CAS SDK was regenerated using the backedge check and validated on the GTX; scope remains four adapted-client shader shapes. [Evidence](CAS_BACKEDGE_SDK.md).
 

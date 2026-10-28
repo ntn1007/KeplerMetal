@@ -101,7 +101,8 @@ def sass_contract(code,text,component):
    return {'qualified':False,'reason':'Unsupported undecoded instruction/bits'}
   instructions.append((offset,op.split(' [unknown:')[0]))
  if next_offset!=len(code) or len(instructions)!=len(code)//8-len(code)//64:return {'qualified':False,'reason':'Decoder did not cover every original word'}
- max_reg=max((int(x) for _,op in instructions for x in re.findall(r'\$r(\d+)',op)),default=0)
+ # The floor applies to every lane of a vector operand, not only its base.
+ max_reg=max((reg for _,op in instructions for reg in register_references(op)),default=0)
  if max_reg>=24:return {'qualified':False,'reason':'Register profile exceeds qualified floor24'}
  candidates=[]
  for i,(off,op) in enumerate(instructions):

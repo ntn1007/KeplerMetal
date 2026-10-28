@@ -2974,22 +2974,33 @@
       "path": "bridge/tools/recognize_native_cas.py",
       "source_path": "bridge/tools/recognize_native_cas.py",
       "source_SHA256": "d9783fa0258f65f50d3df9547f36701684324abcc9f99a494ba70fca41a063cb",
-      "published_SHA256": "fea02920403b9598e78d09a2ed83ea3b00e4be273e9e4f344036e8fa5a49ee24",
-      "bytes": 12504,
+      "published_SHA256": "accfc71ca96eb64787c85715f25fab9042074b577c5b25dd2728e7d6f10af1e3",
+      "bytes": 12575,
       "modified_for_publication": true,
       "publication_change": {
         "previous_published_SHA256": "9aa30b458263eeeddb782cd2a3b10ac362b6faf3ced9cbca805e55b515bebbee",
         "reason": "Require pinned decoder reproduction and preserve checked native snapshots; original source hash retained."
       },
       "latest_change": {
-        "previous_published_SHA256": "46116c7d4c9143f46cfc4ee62cf589fe3cbd9cfa9a371388377259a342446352",
-        "previous_bytes": 12115,
-        "reason": "Recognize a register-indexed shared address only when its register survives the lock loop; add synthetic rejection cases. Per-shader GPU qualification remains mandatory."
+        "previous_published_SHA256": "fea02920403b9598e78d09a2ed83ea3b00e4be273e9e4f344036e8fa5a49ee24",
+        "previous_bytes": 12504,
+        "reason": "Apply the qualified register floor to every lane of d/q operands and test synthetic over-boundary cases; historical source provenance preserved."
       },
       "previous_latest_change": {
         "previous_published_SHA256": "2dcd61e6a0205089d0ef6cc94b93d2c7de584984e48e0c43f14eeeb20686713a",
         "reason": "Conservative post-redirect backedge refusal and CPU regression tests; historical source provenance preserved."
-      }
+      },
+      "prior_change_history": [
+        {
+          "previous_published_SHA256": "2dcd61e6a0205089d0ef6cc94b93d2c7de584984e48e0c43f14eeeb20686713a",
+          "reason": "Conservative post-redirect backedge refusal and CPU regression tests; historical source provenance preserved."
+        },
+        {
+          "previous_published_SHA256": "46116c7d4c9143f46cfc4ee62cf589fe3cbd9cfa9a371388377259a342446352",
+          "previous_bytes": 12115,
+          "reason": "Recognize a register-indexed shared address only when its register survives the lock loop; add synthetic rejection cases. Per-shader GPU qualification remains mandatory."
+        }
+      ]
     },
     {
       "path": "bridge/tools/relink_command_ir_client.py",
@@ -7488,22 +7499,33 @@
       "path": "tests/test_native_cas_recognizer.py",
       "source_path": "tests/test_native_cas_recognizer.py",
       "source_SHA256": "ee6d4693d639b2225a54ac31a785bb08bad65c83cb16feacd4ad95b900fd3487",
-      "published_SHA256": "81f5d72359fe0c89b8e3cbb6ab73fd4be9f52924ea139f0eed25c3b61d9e09fa",
-      "bytes": 7303,
+      "published_SHA256": "330d47bd404fcd0b4f818599a4debe175118ff32035ad3fec407403c086d59bb",
+      "bytes": 7896,
       "modified_for_publication": true,
       "publication_change": {
         "previous_published_SHA256": "ee6d4693d639b2225a54ac31a785bb08bad65c83cb16feacd4ad95b900fd3487",
         "reason": "Exercise fail-closed disassembly coverage, decoder verification and input snapshots."
       },
       "latest_change": {
-        "previous_published_SHA256": "268e264fbee27b8524c997813afd9b4ac9171283fb05f8e143345d2dfa7e9ed4",
-        "previous_bytes": 6683,
-        "reason": "Recognize a register-indexed shared address only when its register survives the lock loop; add synthetic rejection cases. Per-shader GPU qualification remains mandatory."
+        "previous_published_SHA256": "81f5d72359fe0c89b8e3cbb6ab73fd4be9f52924ea139f0eed25c3b61d9e09fa",
+        "previous_bytes": 7303,
+        "reason": "Apply the qualified register floor to every lane of d/q operands and test synthetic over-boundary cases; historical source provenance preserved."
       },
       "previous_latest_change": {
         "previous_published_SHA256": "c3039be88a19ea99a424fdf2afe5406e511ace6ba8f76dee1de9d5eb4e40cf46",
         "reason": "Conservative post-redirect backedge refusal and CPU regression tests; historical source provenance preserved."
-      }
+      },
+      "prior_change_history": [
+        {
+          "previous_published_SHA256": "c3039be88a19ea99a424fdf2afe5406e511ace6ba8f76dee1de9d5eb4e40cf46",
+          "reason": "Conservative post-redirect backedge refusal and CPU regression tests; historical source provenance preserved."
+        },
+        {
+          "previous_published_SHA256": "268e264fbee27b8524c997813afd9b4ac9171283fb05f8e143345d2dfa7e9ed4",
+          "previous_bytes": 6683,
+          "reason": "Recognize a register-indexed shared address only when its register survives the lock loop; add synthetic rejection cases. Per-shader GPU qualification remains mandatory."
+        }
+      ]
     },
     {
       "path": "bridge/src/KeplerPartialGridPlan.h",
@@ -7778,6 +7800,15 @@
     "date": "2026-10-28",
     "previous_public_commit": "4eaa7aca8b6734ca26ed4146c1530d1c2d2f6ea3",
     "previous_snapshot_SHA256": "d7f8bd681caf421ad4f9d36e1a5ea4975e88d991e0d0bd90a06fa5cde0a6086a",
+    "files": [
+      "bridge/tools/recognize_native_cas.py",
+      "tests/test_native_cas_recognizer.py"
+    ]
+  },
+  "cas_register_span_update": {
+    "date": "2026-10-28",
+    "previous_public_commit": "9ba629b9092877b8c126ddbd3a31c7a85c31b3fa",
+    "previous_snapshot_SHA256": "2eb73392124ddea0252e482cf442208fc2cda224660911a434f89c19f69f1ed0",
     "files": [
       "bridge/tools/recognize_native_cas.py",
       "tests/test_native_cas_recognizer.py"

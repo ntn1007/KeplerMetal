@@ -1,0 +1,49 @@
+{
+  "GPU_hosts": 6,
+  "all_functions_CAS_operations": 213300,
+  "all_functions_uint32_words": 853200,
+  "dynamic_correct_CAS_operations": 42660,
+  "dynamic_native_SHA256": "7640c32a4ea4a078dd4e3bf149a15f1fef77e4e22a56018f3f5ed6fa2c6f541c",
+  "dynamic_native_wrong_words": 42606,
+  "dynamic_repaired_dispatches": 36,
+  "dynamic_shared_address": "$r2",
+  "previous_native_SHA256": "c05047171ca9812e714a75d1679c9a535d04536ebecc915f91aef0cb19141146",
+  "previous_shared_address": "0x0",
+  "previous_source_SHA256": "5bd7cfde71a0d4b7cde1679c156d61e5cac176a8d6fdbcd2374536ae0a97c5db",
+  "rebuild_object_and_client_match": true,
+  "recognizer_SHA256": "accfc71ca96eb64787c85715f25fab9042074b577c5b25dd2728e7d6f10af1e3",
+  "rows": [
+    {
+      "CAS_operations": 21330,
+      "dispatches": 18,
+      "mode": "native",
+      "result_SHA256": "f50c5e72d0c8ddcbb61287ce27391d4ebd79c9ddfa4fdbf26e7fe04228d0429f",
+      "wrong_words": 21303
+    },
+    {
+      "CAS_operations": 21330,
+      "dispatches": 18,
+      "mode": "execute",
+      "result_SHA256": "abe43be73a620e06fb48fd52a452c7131bf4d7f59b2a424a3007409174b7403e",
+      "wrong_words": 0
+    },
+    {
+      "CAS_operations": 21330,
+      "dispatches": 18,
+      "mode": "native",
+      "result_SHA256": "f50c5e72d0c8ddcbb61287ce27391d4ebd79c9ddfa4fdbf26e7fe04228d0429f",
+      "wrong_words": 21303
+    },
+    {
+      "CAS_operations": 21330,
+      "dispatches": 18,
+      "mode": "execute",
+      "result_SHA256": "abe43be73a620e06fb48fd52a452c7131bf4d7f59b2a424a3007409174b7403e",
+      "wrong_words": 0
+    }
+  ],
+  "scope": "One runtime-indexed atomic in a four-element array and one neighboring sentinel, not a general driver repair.",
+  "separate_rebuild": true,
+  "source_SHA256": "e140b506aa68b1cace774b8771350ffd9bbd3e9888afd27a71c62577f025a7ad",
+  "status": "PASS"
+}

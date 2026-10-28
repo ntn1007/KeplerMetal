@@ -1,6 +1,6 @@
 # Build from source
 
-[SEGMENTED_LIBRARY_CLIENT.md](SEGMENTED_LIBRARY_CLIENT.md) documents a separate client and three-segment library loading. [STANDALONE_DATA_CAS.md](STANDALONE_DATA_CAS.md) documents the preceding URL/data qualification. [STANDALONE_DYNAMIC_CAS.md](STANDALONE_DYNAMIC_CAS.md) documents the preceding process-local public-Metal client qualification. [CAS_DYNAMIC_SLOT.md](CAS_DYNAMIC_SLOT.md) covers the prior SDK qualification and [CAS_SLOT3.md](CAS_SLOT3.md) the fixed-slot test.
+[CAS_REGISTER_SPAN.md](CAS_REGISTER_SPAN.md) documents the updated register check and its GPU regression. [SEGMENTED_LIBRARY_CLIENT.md](SEGMENTED_LIBRARY_CLIENT.md) documents a separate client and three-segment library loading. [STANDALONE_DATA_CAS.md](STANDALONE_DATA_CAS.md) documents the preceding URL/data qualification. [STANDALONE_DYNAMIC_CAS.md](STANDALONE_DYNAMIC_CAS.md) documents the preceding process-local public-Metal client qualification. [CAS_DYNAMIC_SLOT.md](CAS_DYNAMIC_SLOT.md) covers the prior SDK qualification and [CAS_SLOT3.md](CAS_SLOT3.md) the fixed-slot test.
 
 [CAS_BACKEDGE_SDK.md](CAS_BACKEDGE_SDK.md) documents the newly completed single-overlay CAS GPU qualification.
 

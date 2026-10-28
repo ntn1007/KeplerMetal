@@ -100,6 +100,18 @@ class CASRecognitionSafety(unittest.TestCase):
         code, text = listing(extra='mov b128 $r8q $r0q')
         self.assertFalse(sass_contract(code, text, 0)['qualified'])
 
+    def test_register_floor_includes_all_vector_lanes(self):
+        for op in ('mov b64 $r20d $r23d', 'mov b128 $r20q $r22q'):
+            with self.subTest(op=op):
+                code, text = listing(extra=op)
+                result = sass_contract(code, text, 0)
+                self.assertFalse(result['qualified'])
+                self.assertIn('floor24', result['reason'])
+        code, text = listing(extra='mov b128 $r20q $r20q')
+        result = sass_contract(code, text, 0)
+        self.assertTrue(result['qualified'])
+        self.assertEqual(result['max_explicit_register'], 23)
+
     def test_invalid_component_is_rejected(self):
         code, text = listing()
         for value in (-1, 4, True, '0'):

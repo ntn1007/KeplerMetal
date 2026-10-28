@@ -21,7 +21,7 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
-A separately written public Metal client now qualifies the runtime-indexed CAS correction with a certified library supplied in three data segments. [Evidence and limits](docs/SEGMENTED_LIBRARY_CLIENT.md).
+The native CAS recognizer now checks the full span of vector register operands, with GPU regression qualification for the existing certified shaders. [Evidence and limits](docs/CAS_REGISTER_SPAN.md).
 
 The source-built CAS SDK passes GTX controls after regenerating certificates with the strengthened backedge recognizer. [Evidence and limits](docs/CAS_BACKEDGE_SDK.md).
 
