@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+The native CAS client additionally qualifies fixed threadgroup atomic slot 3; dynamic addresses remain unqualified. [Evidence](CAS_SLOT3.md).
+
 The single-overlay CAS SDK was regenerated using the backedge check and validated on the GTX; scope remains four adapted-client shader shapes. [Evidence](CAS_BACKEDGE_SDK.md).
 
 The offline CAS diagnosis now rejects post-redirect backedges that can revisit earlier code. Existing policies require regeneration. [Evidence](CAS_BACKEDGE_SAFETY.md).

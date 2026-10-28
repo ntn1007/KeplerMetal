@@ -1,5 +1,7 @@
 # Build from source
 
+[CAS_SLOT3.md](CAS_SLOT3.md) documents the source variant and GTX/CPU qualification.
+
 [CAS_BACKEDGE_SDK.md](CAS_BACKEDGE_SDK.md) documents the newly completed single-overlay CAS GPU qualification.
 
 [CAS_BACKEDGE_SAFETY.md](CAS_BACKEDGE_SAFETY.md) gives the offline backedge counterexample and regression audit.

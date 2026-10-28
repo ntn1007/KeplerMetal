@@ -1,0 +1,49 @@
+{
+  "GPU_hosts": 6,
+  "all_functions_CAS_operations": 213300,
+  "all_functions_uint32_words": 853200,
+  "previous_native_SHA256": "d39eb2371cbd96770576236ce8b48ba5b03d8dcd818db2b6826737bedaa89701",
+  "previous_shared_address": "0x4",
+  "previous_source_SHA256": "e5c1eb38b1a730b6fbce3f1c70e2b676709823a745b1fffcf2e9e4e64dd8f02b",
+  "rebuild_object_and_client_match": true,
+  "recognizer_SHA256": "46116c7d4c9143f46cfc4ee62cf589fe3cbd9cfa9a371388377259a342446352",
+  "rows": [
+    {
+      "CAS_operations": 21330,
+      "dispatches": 18,
+      "mode": "native",
+      "result_SHA256": "f50c5e72d0c8ddcbb61287ce27391d4ebd79c9ddfa4fdbf26e7fe04228d0429f",
+      "wrong_words": 21303
+    },
+    {
+      "CAS_operations": 21330,
+      "dispatches": 18,
+      "mode": "execute",
+      "result_SHA256": "24f31f632463602e47850a815da3433c4fa2b8709b9f9bfa79bca7b9cd75a21a",
+      "wrong_words": 0
+    },
+    {
+      "CAS_operations": 21330,
+      "dispatches": 18,
+      "mode": "native",
+      "result_SHA256": "f50c5e72d0c8ddcbb61287ce27391d4ebd79c9ddfa4fdbf26e7fe04228d0429f",
+      "wrong_words": 21303
+    },
+    {
+      "CAS_operations": 21330,
+      "dispatches": 18,
+      "mode": "execute",
+      "result_SHA256": "24f31f632463602e47850a815da3433c4fa2b8709b9f9bfa79bca7b9cd75a21a",
+      "wrong_words": 0
+    }
+  ],
+  "scope": "A fourth element of one explicitly allocated threadgroup atomic array; not dynamic offsets or a general driver repair.",
+  "separate_rebuild": true,
+  "slot3_correct_CAS_operations": 42660,
+  "slot3_native_SHA256": "f41a7c60ac081d3e77ebfba77dcf5eff3dab70b9129e958689de244c03adfe02",
+  "slot3_native_wrong_words": 42606,
+  "slot3_repaired_dispatches": 36,
+  "slot3_shared_address": "0xc",
+  "source_SHA256": "5250623b90ddd3571a15621143cab8e58809cdb579e7533c012fa0ea7a80c994",
+  "status": "PASS"
+}
