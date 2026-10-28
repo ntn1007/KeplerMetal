@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+A guarded no-copy prototype now invokes a retained, independent client block after two explicitly verified GTX commands; unknown workloads remain unqualified. [Evidence](NOCOPY_CLIENT_GUARD.md).
+
 A separately compiled test client supplies the actual no-copy block; a gated process-local action invokes it after two verified GTX commands. [Evidence and limits](NOCOPY_CLIENT_BLOCK.md).
 
 A separately compiled test client supplies the callback for a guarded no-copy release after two verified GTX commands; arbitrary application callbacks remain unqualified. [Evidence](NOCOPY_CLIENT_CALLBACK.md).

@@ -1,5 +1,7 @@
 # Build from source
 
+[NOCOPY_CLIENT_GUARD.md](NOCOPY_CLIENT_GUARD.md) documents an independent client block, a scoped guard and separate GPU/CPU checks.
+
 [NOCOPY_CLIENT_BLOCK.md](NOCOPY_CLIENT_BLOCK.md) documents the client-owned block experiment and separate GPU/CPU checks.
 
 [NOCOPY_CLIENT_CALLBACK.md](NOCOPY_CLIENT_CALLBACK.md) describes the separately compiled client, scoped GPU release and raw-output auditor.
