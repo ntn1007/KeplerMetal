@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+Pending registered Metal completions now retain their registry gate; untracked work and general application integration remain open. [Evidence](NOCOPY_OWNED_REGISTRATION.md).
+
 A scoped registrar attaches completion handlers to explicitly registered Metal command buffers; omitted work remains undetected. [Evidence](NOCOPY_METAL_REGISTRATION.md).
 
 A scoped no-copy guard tracks explicitly registered command completions and GPU output validation. Unknown work is not detected. [Evidence](NOCOPY_WORK_REGISTRY.md).

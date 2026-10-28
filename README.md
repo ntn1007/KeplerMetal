@@ -21,6 +21,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+The scoped Metal registrar now owns its callback gate through pending completions. [Evidence and limits](docs/NOCOPY_OWNED_REGISTRATION.md).
+
 A scoped registrar now attaches Metal completion callbacks for explicitly registered commands. [Evidence and limits](docs/NOCOPY_METAL_REGISTRATION.md).
 
 A scoped no-copy experiment now tracks explicitly registered GPU command completions before client release. [Evidence and limits](docs/NOCOPY_WORK_REGISTRY.md).

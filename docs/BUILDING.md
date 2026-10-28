@@ -1,5 +1,7 @@
 # Build from source
 
+[NOCOPY_OWNED_REGISTRATION.md](NOCOPY_OWNED_REGISTRATION.md) documents the owned completion gate, mock lifetime tests and GTX qualification.
+
 [NOCOPY_METAL_REGISTRATION.md](NOCOPY_METAL_REGISTRATION.md) documents the Metal completion registrar, mock tests and GTX qualification.
 
 [NOCOPY_WORK_REGISTRY.md](NOCOPY_WORK_REGISTRY.md) documents explicit work tracking, GPU evidence and CPU concurrency tests.
