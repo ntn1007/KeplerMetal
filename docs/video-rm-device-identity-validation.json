@@ -1,0 +1,59 @@
+{
+  "GPU_dispatches": 0,
+  "class": "0x80",
+  "cuda_sha256": "fb646845ca1f885f71cc5394c059a57aef36fdf32b1029ad891c372090c9b9f4",
+  "cuda_window_sha256": "b48bbfbccb272904a266f0b02efe1b7e345fc089f4a48ee783341286d44b98e4",
+  "functions": {
+    "0x69b5a": {
+      "bytes": 1436,
+      "evidence_id": "ev_107e366d75cf7b64500f1b38c954deab4c20ceb653844f10270e253a316d35a0",
+      "file_offset": 432986,
+      "sha256": "f802659d6a49ff68c606dc19c4464d138fa9160c2c6a979be8604024dcf5e07f"
+    },
+    "0x6a19c": {
+      "bytes": 84,
+      "evidence_id": "ev_1336587b14c65e51a0261227e31d64020e4528c27788a01cf04e076a1afbdc83",
+      "file_offset": 434588,
+      "sha256": "ead138ffb2934887b2c32ff5b925a2cfc77f5303457182a7bc2771b5b393901e"
+    },
+    "0x6a222": {
+      "bytes": 223,
+      "evidence_id": "ev_5a1e5875b8c9a5d5469e8ec930c63a3d782ab2ef4a23de66c10710eccf549590",
+      "file_offset": 434722,
+      "sha256": "bb7a1dbdd4853d0897b887f8ad9e543a51153b200d16948099da29b0af832dbb"
+    },
+    "0x924c": {
+      "bytes": 399,
+      "evidence_id": "ev_bfc8e5163b4dbfccf20ef774b911fad08635cf00b501d1c331aa4619ae6c9b45",
+      "file_offset": 37452,
+      "sha256": "c5d9476a8ff70214378a87e628b3e77111861e92d9e2b130561c49ca2621cfbf"
+    }
+  },
+  "geforce_sha256": "44f131a958d48afd6ab675a851330c37506557c9d499484170c886c3731bdbb3",
+  "header_sha256": "29d20eb01fdf6667a49f119380b10e883f2a841dc7cd335516f9cc43f6b05ad3",
+  "nonnull_parameter_bytes": 56,
+  "nvda_rea_sha256": "cce234fd43bcaa8851b92ffc8d3346f066488e0e730d83ff88a9e2156d48da89",
+  "nvda_sha256": "36396eaecd68ddbb0482f019f38ce55d01b10379ca829da7f19b3bd8f3e26808",
+  "nvda_size_function_sha256": "fb840d98839edd58659f426b419ac485b6632d813d60d01a53eda0238fd4a9b2",
+  "nvidia_515_model": {
+    "cpu_only": true,
+    "offsets": {
+      "deviceId": 0,
+      "flags": 16,
+      "hClientShare": 4,
+      "hTargetClient": 8,
+      "hTargetDevice": 12,
+      "vaLimitInternal": 40,
+      "vaMode": 48,
+      "vaSpaceSize": 24,
+      "vaStartInternal": 32
+    },
+    "size": 56,
+    "types": "modeled fixed-width NVIDIA types"
+  },
+  "private_RM_calls": 0,
+  "raw_vtable_slot": "0x92088",
+  "rea_sha256": "a00ae2450a3c4df49b6a1d12561f06653ba4aac53de8067ce075c6b4826e3931",
+  "scope": "On-disk and modeled layout only; user allocation, live handles, loaded-driver identity and cleanup are unqualified.",
+  "status": "PASS_STATIC_DEVICE_ALLOCATION"
+}

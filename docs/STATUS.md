@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+The on-disk NVIDIA device-allocation paths and a 56-byte parameter layout were compared; two GTX PCI registry observations report board value zero. User-mode RM allocation and the loaded route remain unqualified. [Evidence](VIDEO_RM_DEVICE_IDENTITY.md).
+
 The pinned NVIDIA RM control table links `0x800201` to a nested-buffer preparation/copy path; actual user-route reachability and valid handles remain unproved. [Evidence](VIDEO_RM_NESTED_CLASSLIST.md).
 
 An offline audit relates the historical macOS RM control envelope to the installed NVIDIA dispatcher's distinct user and kernel paths. Class-list pointer marshalling and live access remain unqualified. [Evidence](VIDEO_RM_CONTROL_PATH.md).

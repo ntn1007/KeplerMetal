@@ -1,0 +1,33 @@
+{
+  "observations": [
+    {
+      "GPU_dispatches": 0,
+      "IOServiceOpen_calls": 0,
+      "board_property_length": 4,
+      "board_value_u32_le": 0,
+      "device_id": "0x1198",
+      "matching_devices": 1,
+      "pci_name": "GFX0",
+      "pci_registry_id": 4294967841,
+      "private_RM_calls": 0,
+      "scope": "Registry property only; no loaded-driver path, RM handle or device allocation is established.",
+      "status": "PASS_REGISTRY_OBSERVATION",
+      "vendor_id": "0x10de"
+    },
+    {
+      "GPU_dispatches": 0,
+      "IOServiceOpen_calls": 0,
+      "board_property_length": 4,
+      "board_value_u32_le": 0,
+      "device_id": "0x1198",
+      "matching_devices": 1,
+      "pci_name": "GFX0",
+      "pci_registry_id": 4294967841,
+      "private_RM_calls": 0,
+      "scope": "Registry property only; no loaded-driver path, RM handle or device allocation is established.",
+      "status": "PASS_REGISTRY_OBSERVATION",
+      "vendor_id": "0x10de"
+    }
+  ],
+  "status": "PASS_TWO_CONSISTENT_REGISTRY_OBSERVATIONS"
+}
