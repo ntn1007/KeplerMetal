@@ -1,0 +1,32 @@
+// SPDX-License-Identifier: MIT
+#include <metal_stdlib>
+using namespace metal;
+struct P { uint seed, n, local, groups, variant; };
+kernel void test(constant P& p [[buffer(0)]], device uint4* out [[buffer(1)]],
+                 device atomic_uint* global [[buffer(3)]],
+                 uint i [[thread_position_in_grid]],
+                 uint tid [[thread_index_in_threadgroup]],
+                 uint group [[threadgroup_position_in_grid]]) {
+    uint initial = p.seed + group * 0x10001u;
+    uint replacement = p.seed ^ 0x55667788u;
+    uint slot = (p.seed + group) & 3u;
+    threadgroup atomic_uint shared[4];
+    threadgroup atomic_uint* a = &shared[slot];
+    if (tid == 0) {
+        for (uint j = 0; j < 4; ++j)
+            atomic_store_explicit(&shared[j], initial ^ (0x11110000u + j * 0x101u), memory_order_relaxed);
+        atomic_store_explicit(a, initial, memory_order_relaxed);
+    }
+    threadgroup_barrier(mem_flags::mem_threadgroup);
+    uint compare = initial ^ (p.variant ? 1u : 0u);
+    uint noise = (p.seed * 0x9e3779b9u) ^ (i * 17u);
+    bool success = atomic_compare_exchange_weak_explicit(a, &compare, replacement,
+                                                          memory_order_relaxed, memory_order_relaxed);
+    threadgroup_barrier(mem_flags::mem_threadgroup);
+    uint final = atomic_load_explicit(a, memory_order_relaxed);
+    uint guard = 0;
+    for (uint j = 0; j < 4; ++j)
+        if (j != slot)
+            guard |= atomic_load_explicit(&shared[j], memory_order_relaxed) ^ (initial ^ (0x11110000u + j * 0x101u));
+    out[i] = uint4(compare, uint(success), final, i ^ noise ^ guard);
+}

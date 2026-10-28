@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+A pinned native weak-CAS shader whose lock result moves between registers was repaired in a process-local experiment: six corrected GTX hosts checked 4,347 operations, and native/NOP/replay controls retained 2,619 wrong expected-value words. This is not general recognizer or SDK support. [Evidence](CAS_LIVE_COPY_EXPERIMENT.md).
+
 The offline CAS recognizer now accounts for register writes in instructions combined with `join`. A synthetic one-instruction counterexample is rejected; the five archived diagnoses retain their verdicts. No synthetic code was dispatched and prior certificates are not automatically requalified. [Evidence and limits](CAS_JOIN_WRITE.md).
 
 Two bounded UID 501 opens of the selected NVIDIA port returned `kIOReturnUnsupported` without a connection; the cause and current administrator behavior remain unproved. [Evidence](VIDEO_RM_USER_OPEN.md).

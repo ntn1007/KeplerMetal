@@ -1,0 +1,206 @@
+{
+  "cases": [
+    {
+      "checked_words": 1188,
+      "local": 33,
+      "mode": "native",
+      "name": "native-v1-l33",
+      "operations": 297,
+      "other_wrong_words": 0,
+      "output_SHA256": [
+        "9dfebca2c10c45662850c37d425ad225918684373e04551512d3b2a7d17006b3",
+        "0b60f6faded917f6133d10d819d45b28b7ed2e9103dad2c34d0a01d4b00bf50a",
+        "122f38cb25d227014b34944dd896e284afbf6f259da56ed37cf90908cd1dc1cf"
+      ],
+      "signed_executable_SHA256": "04c48428d3a21a5726a222f6c6ac14a56782f48ff52d56d81a75a0ef05973e40",
+      "variant": 1,
+      "wrong_expected_words": 297
+    },
+    {
+      "checked_words": 1188,
+      "local": 33,
+      "mode": "native_trampoline",
+      "name": "trampoline-v1-l33",
+      "operations": 297,
+      "other_wrong_words": 0,
+      "output_SHA256": [
+        "9dfebca2c10c45662850c37d425ad225918684373e04551512d3b2a7d17006b3",
+        "0b60f6faded917f6133d10d819d45b28b7ed2e9103dad2c34d0a01d4b00bf50a",
+        "122f38cb25d227014b34944dd896e284afbf6f259da56ed37cf90908cd1dc1cf"
+      ],
+      "signed_executable_SHA256": "04c48428d3a21a5726a222f6c6ac14a56782f48ff52d56d81a75a0ef05973e40",
+      "variant": 1,
+      "wrong_expected_words": 297
+    },
+    {
+      "checked_words": 1188,
+      "local": 33,
+      "mode": "native_repaired",
+      "name": "repaired-v1-l33",
+      "operations": 297,
+      "other_wrong_words": 0,
+      "output_SHA256": [
+        "c3e913554e70cec455cd5c957c976d7944ed7984fa3fb2ba078ff6717801b7d4",
+        "c4bfc2f2690687a2691cb9b1d084097bff988d45a25d87621dabc90a65db57a5",
+        "d927a3ebec5d33c975418235fbccb6bd4a4eb9fd0631ecf38321f5cf1727a829"
+      ],
+      "signed_executable_SHA256": "04c48428d3a21a5726a222f6c6ac14a56782f48ff52d56d81a75a0ef05973e40",
+      "variant": 1,
+      "wrong_expected_words": 0
+    },
+    {
+      "checked_words": 1188,
+      "local": 33,
+      "mode": "native",
+      "name": "native-v0-l33",
+      "operations": 297,
+      "other_wrong_words": 0,
+      "output_SHA256": [
+        "7e28bbf7022b9cac49cdb9c69f4664d617a59fef3ab7ac7edb7f57b67de62ec7",
+        "7db77c53847bddea4a898a57e18785d258aa8c6d9a9547f334025e25a96dcf60",
+        "ddb5057c9ddf447e5f7116f869b4a02827a3e1be32bcb69145a04e5b3c641129"
+      ],
+      "signed_executable_SHA256": "04c48428d3a21a5726a222f6c6ac14a56782f48ff52d56d81a75a0ef05973e40",
+      "variant": 0,
+      "wrong_expected_words": 288
+    },
+    {
+      "checked_words": 1188,
+      "local": 33,
+      "mode": "native_trampoline",
+      "name": "trampoline-v0-l33",
+      "operations": 297,
+      "other_wrong_words": 0,
+      "output_SHA256": [
+        "7e28bbf7022b9cac49cdb9c69f4664d617a59fef3ab7ac7edb7f57b67de62ec7",
+        "7db77c53847bddea4a898a57e18785d258aa8c6d9a9547f334025e25a96dcf60",
+        "ddb5057c9ddf447e5f7116f869b4a02827a3e1be32bcb69145a04e5b3c641129"
+      ],
+      "signed_executable_SHA256": "04c48428d3a21a5726a222f6c6ac14a56782f48ff52d56d81a75a0ef05973e40",
+      "variant": 0,
+      "wrong_expected_words": 288
+    },
+    {
+      "checked_words": 1188,
+      "local": 33,
+      "mode": "native_repaired",
+      "name": "repaired-v0-l33",
+      "operations": 297,
+      "other_wrong_words": 0,
+      "output_SHA256": [
+        "a89abdf29c371bfa2eada20fafa94ee9cfb67bcf36c1f084b6fe0f32c19be124",
+        "c2f738cf3dd8ec4d7371080778fee1adf076f7dc9f75562799b896fe4c05f53a",
+        "39b21a2db6e42bedb6d9a046390f6d51d3ff526bbc91433aeb0550fdaf1e8799"
+      ],
+      "signed_executable_SHA256": "04c48428d3a21a5726a222f6c6ac14a56782f48ff52d56d81a75a0ef05973e40",
+      "variant": 0,
+      "wrong_expected_words": 0
+    },
+    {
+      "checked_words": 1188,
+      "local": 33,
+      "mode": "native_replay",
+      "name": "replay-v1-l33",
+      "operations": 297,
+      "other_wrong_words": 0,
+      "output_SHA256": [
+        "9dfebca2c10c45662850c37d425ad225918684373e04551512d3b2a7d17006b3",
+        "0b60f6faded917f6133d10d819d45b28b7ed2e9103dad2c34d0a01d4b00bf50a",
+        "122f38cb25d227014b34944dd896e284afbf6f259da56ed37cf90908cd1dc1cf"
+      ],
+      "signed_executable_SHA256": "04c48428d3a21a5726a222f6c6ac14a56782f48ff52d56d81a75a0ef05973e40",
+      "variant": 1,
+      "wrong_expected_words": 297
+    },
+    {
+      "checked_words": 4608,
+      "local": 128,
+      "mode": "native",
+      "name": "native-v1-l128",
+      "operations": 1152,
+      "other_wrong_words": 0,
+      "output_SHA256": [
+        "70220879fa30efb287e856fe52b99d089e5a17bd352fde368fb025a57707b6c2",
+        "8f19e15a05c76bfc9b494a8c9c43c4cea838e8a7673ee13c1b19d7a88d90e9ee",
+        "0be216b72aad922bf9acee1acc9b6da09961bf743b50e898068ff1355641821f"
+      ],
+      "signed_executable_SHA256": "04c48428d3a21a5726a222f6c6ac14a56782f48ff52d56d81a75a0ef05973e40",
+      "variant": 1,
+      "wrong_expected_words": 1152
+    },
+    {
+      "checked_words": 4608,
+      "local": 128,
+      "mode": "native_repaired",
+      "name": "repaired-v1-l128",
+      "operations": 1152,
+      "other_wrong_words": 0,
+      "output_SHA256": [
+        "5f3b9295c2aac8e325627fca97b314c2ff9c705f4506bb1bd7d0636027878941",
+        "b50faed9548a05e78fd2d7fc7566a8332f95f52a07c60b8d7b63b8eca58284d1",
+        "f023cb0a50ea3f027936d687a38ff144d6bd7772ca4471d80cb452a6a01bf3fa"
+      ],
+      "signed_executable_SHA256": "04c48428d3a21a5726a222f6c6ac14a56782f48ff52d56d81a75a0ef05973e40",
+      "variant": 1,
+      "wrong_expected_words": 0
+    },
+    {
+      "checked_words": 4608,
+      "local": 128,
+      "mode": "native_repaired",
+      "name": "repaired-v0-l128",
+      "operations": 1152,
+      "other_wrong_words": 0,
+      "output_SHA256": [
+        "064063d31da4681796a5509ce2ef138c89fd911c686483dc3ccf2af9208c912f",
+        "b6d38850ca71f12475beca23e527eee928610f0842af872ce893c3fb8dddb035",
+        "3be0265fd737d32d0d13fe9df6947bb60618a7b26bff6c8db95e748ee70aab54"
+      ],
+      "signed_executable_SHA256": "04c48428d3a21a5726a222f6c6ac14a56782f48ff52d56d81a75a0ef05973e40",
+      "variant": 0,
+      "wrong_expected_words": 0
+    },
+    {
+      "checked_words": 1188,
+      "local": 33,
+      "mode": "native_repaired",
+      "name": "repaired-v0-l33-repeat",
+      "operations": 297,
+      "other_wrong_words": 0,
+      "output_SHA256": [
+        "a89abdf29c371bfa2eada20fafa94ee9cfb67bcf36c1f084b6fe0f32c19be124",
+        "c2f738cf3dd8ec4d7371080778fee1adf076f7dc9f75562799b896fe4c05f53a",
+        "39b21a2db6e42bedb6d9a046390f6d51d3ff526bbc91433aeb0550fdaf1e8799"
+      ],
+      "signed_executable_SHA256": "04c48428d3a21a5726a222f6c6ac14a56782f48ff52d56d81a75a0ef05973e40",
+      "variant": 0,
+      "wrong_expected_words": 0
+    },
+    {
+      "checked_words": 4608,
+      "local": 128,
+      "mode": "native_repaired",
+      "name": "repaired-v1-l128-repeat",
+      "operations": 1152,
+      "other_wrong_words": 0,
+      "output_SHA256": [
+        "5f3b9295c2aac8e325627fca97b314c2ff9c705f4506bb1bd7d0636027878941",
+        "b50faed9548a05e78fd2d7fc7566a8332f95f52a07c60b8d7b63b8eca58284d1",
+        "f023cb0a50ea3f027936d687a38ff144d6bd7772ca4471d80cb452a6a01bf3fa"
+      ],
+      "signed_executable_SHA256": "04c48428d3a21a5726a222f6c6ac14a56782f48ff52d56d81a75a0ef05973e40",
+      "variant": 1,
+      "wrong_expected_words": 0
+    }
+  ],
+  "code_residency_readback": false,
+  "negative_pin_refused_before_dispatch": true,
+  "original_SHA256": "f16bf16da56d5dc060429f6886d2e1d80eafa0a960f48b7d776a3234fb6bcb41",
+  "performance_benchmark": false,
+  "records_checked": 12,
+  "repaired_SHA256": "a193a1c62851ff483bcb3ab7fda86e9646108e36f1552f80a879616e7017e58f",
+  "scope": "one pinned shader, user-process experiment; no general compiler repair",
+  "status": "PASS",
+  "terminal_nonoverlapping_processes": 13,
+  "trampoline_SHA256": "5be52280903744eabbc4f2ca40f1560091b6c96f5ea12f73bd5b4b769018d2cc"
+}

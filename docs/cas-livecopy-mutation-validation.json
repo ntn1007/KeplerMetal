@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "case": "unchanged",
+      "accepted": true
+    },
+    {
+      "case": "value",
+      "accepted": false
+    },
+    {
+      "case": "guard",
+      "accepted": false
+    },
+    {
+      "case": "unresolved",
+      "accepted": false
+    },
+    {
+      "case": "restored",
+      "accepted": true
+    }
+  ],
+  "GPU_dispatches": 0
+}
