@@ -1,5 +1,7 @@
 # Build from source
 
+[STANDALONE_COPY_POLICY.md](STANDALONE_COPY_POLICY.md) documents the scoped client policy and GPU-copy qualification.
+
 [STANDALONE_AUTOMATIC_COPY.md](STANDALONE_AUTOMATIC_COPY.md) covers object-based scoped GPU ICB copying and preflight.
 
 [STANDALONE_PARTIAL_COPY.md](STANDALONE_PARTIAL_COPY.md) documents the public-Metal scoped GPU-copy client and its controls.

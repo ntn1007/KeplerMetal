@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+An explicit local policy selects two related public-Metal copy test clients using one signed bootstrap; third-party compatibility remains unqualified. [Evidence](STANDALONE_COPY_POLICY.md).
+
 A pinned public-Metal client performs object-based, unlabelled GPU ICB copies with whole-range preflight. Third-party applications remain unqualified. [Evidence](STANDALONE_AUTOMATIC_COPY.md).
 
 A pinned public-Metal client performs a labelled, scoped GPU copy of a mixed compute ICB; third-party applications remain unqualified. [Evidence](STANDALONE_PARTIAL_COPY.md).
