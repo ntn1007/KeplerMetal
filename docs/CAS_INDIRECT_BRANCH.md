@@ -27,6 +27,9 @@ copy mechanism.
 A further [branch-register witness](CAS_BRANCH_REGISTER_WITNESS.md) observes
 the corresponding low bytes before a relocated indirect branch for three input
 patterns. It does not record which destination block was entered.
+[Target-entry witnesses](CAS_TARGET_ENTRY_WITNESS.md) separately mark the
+candidate locations while preserving the original indirect instruction; the
+markers do not establish whether entry came from an indirect or direct path.
 
 The original SDK import checked the live code and metadata but did not pin the
 auxiliary section. The [new exact-profile guard](CAS_CONDITIONAL_AUX_GUARD.md)

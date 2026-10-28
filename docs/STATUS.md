@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+Three process-local GPU probes preserve the original indirect instruction and mark entry at candidate locations. The `0x330` control also marks a non-indirect-observed pattern, so marker origin remains unproved. [Evidence](CAS_TARGET_ENTRY_WITNESS.md).
+
 Two GPU witness cohorts record the low byte of a relocated conditional CAS indirect-branch register for patterns 0, 2, 3 and 4, with native output controls. Actual destination entry and the unmodified branch remain unproved. [Evidence](CAS_BRANCH_REGISTER_WITNESS.md).
 
 Two isolated GPU CB0 witnesses each read the three pinned candidate-section words across 99 threads; two known-value controls pass. This is a modified laboratory shader and does not trace the indirect branch. [Evidence](CAS_CB0_GPU_WITNESS.md).

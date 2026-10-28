@@ -1,0 +1,301 @@
+{
+  "cohorts": 2,
+  "entry_marker_means_indirect_origin": false,
+  "general_indirect_control_flow_proved": false,
+  "matrix": {
+    "0x298": {
+      "0": {
+        "1": 99
+      },
+      "2": {
+        "0": 99
+      },
+      "3": {
+        "1": 99
+      },
+      "4": {
+        "1": 99
+      }
+    },
+    "0x2b8": {
+      "0": {
+        "1": 99
+      },
+      "2": {
+        "1": 99
+      },
+      "3": {
+        "0": 99
+      },
+      "4": {
+        "1": 99
+      }
+    },
+    "0x330": {
+      "0": {
+        "0": 99
+      },
+      "2": {
+        "0": 48,
+        "1": 51
+      },
+      "3": {
+        "1": 99
+      },
+      "4": {
+        "0": 99
+      }
+    }
+  },
+  "original_indirect_instruction_preserved_in_import": true,
+  "performance_benchmark": false,
+  "prior_baseline_processes": 8,
+  "receipts": [
+    {
+      "baseline_sha256": "bd5b845519f8757538f36478e170f388320e3a7b392e744a99fa3d5dbbbfa1be",
+      "cohort": 1,
+      "markers": {
+        "1": 99
+      },
+      "pattern": 0,
+      "target": "0x298",
+      "trace_sha256": "e6903254e87308cc435525718628276fc82a6cc5f36fb5d32b1e003cf86c05e8"
+    },
+    {
+      "baseline_sha256": "91fb14414c72e74b5924eba2b590b7132ce909b8acac1caa356998b1faf03a9f",
+      "cohort": 1,
+      "markers": {
+        "0": 99
+      },
+      "pattern": 2,
+      "target": "0x298",
+      "trace_sha256": "91fb14414c72e74b5924eba2b590b7132ce909b8acac1caa356998b1faf03a9f"
+    },
+    {
+      "baseline_sha256": "c6455aecfa2bcab244fbf8d3e202e2bde73f5d17afb49c543693c751d10ab16f",
+      "cohort": 1,
+      "markers": {
+        "1": 99
+      },
+      "pattern": 3,
+      "target": "0x298",
+      "trace_sha256": "30b2517bd528dfb52e7818a0a7bc02a365b93a1fe2b85c6734cb940bcfb201ac"
+    },
+    {
+      "baseline_sha256": "bd5b845519f8757538f36478e170f388320e3a7b392e744a99fa3d5dbbbfa1be",
+      "cohort": 1,
+      "markers": {
+        "1": 99
+      },
+      "pattern": 4,
+      "target": "0x298",
+      "trace_sha256": "e6903254e87308cc435525718628276fc82a6cc5f36fb5d32b1e003cf86c05e8"
+    },
+    {
+      "baseline_sha256": "bd5b845519f8757538f36478e170f388320e3a7b392e744a99fa3d5dbbbfa1be",
+      "cohort": 1,
+      "markers": {
+        "1": 99
+      },
+      "pattern": 0,
+      "target": "0x2b8",
+      "trace_sha256": "e6903254e87308cc435525718628276fc82a6cc5f36fb5d32b1e003cf86c05e8"
+    },
+    {
+      "baseline_sha256": "91fb14414c72e74b5924eba2b590b7132ce909b8acac1caa356998b1faf03a9f",
+      "cohort": 1,
+      "markers": {
+        "1": 99
+      },
+      "pattern": 2,
+      "target": "0x2b8",
+      "trace_sha256": "425ee252cdc5f158b09e7c45b804cdf15742223e327072202513450b4b8aebe4"
+    },
+    {
+      "baseline_sha256": "c6455aecfa2bcab244fbf8d3e202e2bde73f5d17afb49c543693c751d10ab16f",
+      "cohort": 1,
+      "markers": {
+        "0": 99
+      },
+      "pattern": 3,
+      "target": "0x2b8",
+      "trace_sha256": "c6455aecfa2bcab244fbf8d3e202e2bde73f5d17afb49c543693c751d10ab16f"
+    },
+    {
+      "baseline_sha256": "bd5b845519f8757538f36478e170f388320e3a7b392e744a99fa3d5dbbbfa1be",
+      "cohort": 1,
+      "markers": {
+        "1": 99
+      },
+      "pattern": 4,
+      "target": "0x2b8",
+      "trace_sha256": "e6903254e87308cc435525718628276fc82a6cc5f36fb5d32b1e003cf86c05e8"
+    },
+    {
+      "baseline_sha256": "bd5b845519f8757538f36478e170f388320e3a7b392e744a99fa3d5dbbbfa1be",
+      "cohort": 1,
+      "markers": {
+        "0": 99
+      },
+      "pattern": 0,
+      "target": "0x330",
+      "trace_sha256": "bd5b845519f8757538f36478e170f388320e3a7b392e744a99fa3d5dbbbfa1be"
+    },
+    {
+      "baseline_sha256": "91fb14414c72e74b5924eba2b590b7132ce909b8acac1caa356998b1faf03a9f",
+      "cohort": 1,
+      "markers": {
+        "0": 48,
+        "1": 51
+      },
+      "pattern": 2,
+      "target": "0x330",
+      "trace_sha256": "09c154fcc09bf3000348cde4f606705cc5e7feff58e37656161f3f041a810eea"
+    },
+    {
+      "baseline_sha256": "c6455aecfa2bcab244fbf8d3e202e2bde73f5d17afb49c543693c751d10ab16f",
+      "cohort": 1,
+      "markers": {
+        "1": 99
+      },
+      "pattern": 3,
+      "target": "0x330",
+      "trace_sha256": "30b2517bd528dfb52e7818a0a7bc02a365b93a1fe2b85c6734cb940bcfb201ac"
+    },
+    {
+      "baseline_sha256": "bd5b845519f8757538f36478e170f388320e3a7b392e744a99fa3d5dbbbfa1be",
+      "cohort": 1,
+      "markers": {
+        "0": 99
+      },
+      "pattern": 4,
+      "target": "0x330",
+      "trace_sha256": "bd5b845519f8757538f36478e170f388320e3a7b392e744a99fa3d5dbbbfa1be"
+    },
+    {
+      "baseline_sha256": "bd5b845519f8757538f36478e170f388320e3a7b392e744a99fa3d5dbbbfa1be",
+      "cohort": 2,
+      "markers": {
+        "1": 99
+      },
+      "pattern": 0,
+      "target": "0x298",
+      "trace_sha256": "e6903254e87308cc435525718628276fc82a6cc5f36fb5d32b1e003cf86c05e8"
+    },
+    {
+      "baseline_sha256": "91fb14414c72e74b5924eba2b590b7132ce909b8acac1caa356998b1faf03a9f",
+      "cohort": 2,
+      "markers": {
+        "0": 99
+      },
+      "pattern": 2,
+      "target": "0x298",
+      "trace_sha256": "91fb14414c72e74b5924eba2b590b7132ce909b8acac1caa356998b1faf03a9f"
+    },
+    {
+      "baseline_sha256": "c6455aecfa2bcab244fbf8d3e202e2bde73f5d17afb49c543693c751d10ab16f",
+      "cohort": 2,
+      "markers": {
+        "1": 99
+      },
+      "pattern": 3,
+      "target": "0x298",
+      "trace_sha256": "30b2517bd528dfb52e7818a0a7bc02a365b93a1fe2b85c6734cb940bcfb201ac"
+    },
+    {
+      "baseline_sha256": "bd5b845519f8757538f36478e170f388320e3a7b392e744a99fa3d5dbbbfa1be",
+      "cohort": 2,
+      "markers": {
+        "1": 99
+      },
+      "pattern": 4,
+      "target": "0x298",
+      "trace_sha256": "e6903254e87308cc435525718628276fc82a6cc5f36fb5d32b1e003cf86c05e8"
+    },
+    {
+      "baseline_sha256": "bd5b845519f8757538f36478e170f388320e3a7b392e744a99fa3d5dbbbfa1be",
+      "cohort": 2,
+      "markers": {
+        "1": 99
+      },
+      "pattern": 0,
+      "target": "0x2b8",
+      "trace_sha256": "e6903254e87308cc435525718628276fc82a6cc5f36fb5d32b1e003cf86c05e8"
+    },
+    {
+      "baseline_sha256": "91fb14414c72e74b5924eba2b590b7132ce909b8acac1caa356998b1faf03a9f",
+      "cohort": 2,
+      "markers": {
+        "1": 99
+      },
+      "pattern": 2,
+      "target": "0x2b8",
+      "trace_sha256": "425ee252cdc5f158b09e7c45b804cdf15742223e327072202513450b4b8aebe4"
+    },
+    {
+      "baseline_sha256": "c6455aecfa2bcab244fbf8d3e202e2bde73f5d17afb49c543693c751d10ab16f",
+      "cohort": 2,
+      "markers": {
+        "0": 99
+      },
+      "pattern": 3,
+      "target": "0x2b8",
+      "trace_sha256": "c6455aecfa2bcab244fbf8d3e202e2bde73f5d17afb49c543693c751d10ab16f"
+    },
+    {
+      "baseline_sha256": "bd5b845519f8757538f36478e170f388320e3a7b392e744a99fa3d5dbbbfa1be",
+      "cohort": 2,
+      "markers": {
+        "1": 99
+      },
+      "pattern": 4,
+      "target": "0x2b8",
+      "trace_sha256": "e6903254e87308cc435525718628276fc82a6cc5f36fb5d32b1e003cf86c05e8"
+    },
+    {
+      "baseline_sha256": "bd5b845519f8757538f36478e170f388320e3a7b392e744a99fa3d5dbbbfa1be",
+      "cohort": 2,
+      "markers": {
+        "0": 99
+      },
+      "pattern": 0,
+      "target": "0x330",
+      "trace_sha256": "bd5b845519f8757538f36478e170f388320e3a7b392e744a99fa3d5dbbbfa1be"
+    },
+    {
+      "baseline_sha256": "91fb14414c72e74b5924eba2b590b7132ce909b8acac1caa356998b1faf03a9f",
+      "cohort": 2,
+      "markers": {
+        "0": 48,
+        "1": 51
+      },
+      "pattern": 2,
+      "target": "0x330",
+      "trace_sha256": "09c154fcc09bf3000348cde4f606705cc5e7feff58e37656161f3f041a810eea"
+    },
+    {
+      "baseline_sha256": "c6455aecfa2bcab244fbf8d3e202e2bde73f5d17afb49c543693c751d10ab16f",
+      "cohort": 2,
+      "markers": {
+        "1": 99
+      },
+      "pattern": 3,
+      "target": "0x330",
+      "trace_sha256": "30b2517bd528dfb52e7818a0a7bc02a365b93a1fe2b85c6734cb940bcfb201ac"
+    },
+    {
+      "baseline_sha256": "bd5b845519f8757538f36478e170f388320e3a7b392e744a99fa3d5dbbbfa1be",
+      "cohort": 2,
+      "markers": {
+        "0": 99
+      },
+      "pattern": 4,
+      "target": "0x330",
+      "trace_sha256": "bd5b845519f8757538f36478e170f388320e3a7b392e744a99fa3d5dbbbfa1be"
+    }
+  ],
+  "resident_instructions_read_back": false,
+  "rows_per_process": 99,
+  "status": "PASS",
+  "trace_processes": 24
+}
