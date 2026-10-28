@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Two scoped AppleGVA video requests return an observed zero list length from the routine immediately after the constructor; entry semantics and the cause of the empty list remain unknown. [Evidence](VIDEO_GVA_ENUMERATION_RESULT.md).
+
 Two scoped AppleGVA processes reach both instructions following the base and derived constructor calls, with same-thread selector-2 and matching caller frames. Hardware video still returns -12913. [Evidence](VIDEO_GVA_CONSTRUCTOR_RETURN.md).
 
 A CPU-only dynamic-loading calibration observes two hardware breakpoints, rejects a wrong base, and verifies the target bytes at both hits. [Evidence](VIDEO_GVA_HW_WITNESS.md).

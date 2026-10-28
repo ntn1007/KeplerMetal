@@ -1,0 +1,78 @@
+{
+  "audit_source_sha256": "56adb79aa2495f1773f0a086bb701ec0968d44c8818ac6f59b8822ba467fee2e",
+  "base_and_derived_constructor_return_in_observed_processes": true,
+  "build_sha256": "283f89156147da8fa3369c4fc11083c525279db50929662a66e2c3807d8b75f8",
+  "calibration_sha256": "7f5c5a723fb2d7f09a61760fd2f65631f6d72a673f2e79341a69cf84481c6326",
+  "caller_stack_offsets_at_hits": [
+    115492,
+    264163,
+    264163
+  ],
+  "counterfactual_property_and_policy_used": true,
+  "current_decoder_status": -12913,
+  "current_no_marker_controls": 1,
+  "current_witness_runs": 2,
+  "debugger_may_change_timing": true,
+  "dispatch_region_sha256": "cb8e85197a4b37270ced86a070fecb85bb61ea56aa98892996658a304544db0c",
+  "enumeration_entry_semantics_proved": false,
+  "enumeration_output_count": 0,
+  "enumerator_live_code_verified_by_marker_and_debugger": true,
+  "enumerator_region_sha256": "38281d047ee261127550cff96495d8aa7a911fe889fb6f7a6ac2992f3bbb274c",
+  "hardware_images": 0,
+  "hardware_video_execution_proved": false,
+  "live_object_vtable_readback_proved": false,
+  "receipts": [
+    {
+      "decoder_status": 0,
+      "frames": 6,
+      "mode": "cpu",
+      "same_thread_selector_2_hits": false,
+      "witness": "on"
+    },
+    {
+      "decoder_status": -12913,
+      "frames": 0,
+      "mode": "current",
+      "same_thread_selector_2_hits": true,
+      "witness": "on"
+    },
+    {
+      "decoder_status": -12906,
+      "frames": 0,
+      "mode": "wrong",
+      "same_thread_selector_2_hits": false,
+      "witness": "on"
+    },
+    {
+      "decoder_status": -12913,
+      "frames": 0,
+      "mode": "current",
+      "same_thread_selector_2_hits": false,
+      "witness": "off"
+    },
+    {
+      "decoder_status": -12913,
+      "frames": 0,
+      "mode": "current",
+      "same_thread_selector_2_hits": true,
+      "witness": "on"
+    }
+  ],
+  "run_receipt_sha256": [
+    "38fc92806a70a478edbebed194a980b480f642dd14b640c3b5937819549d4cfb",
+    "84aabb6f43372ad76d3f99191f87888af6bcfc7f76f305c6fa441edf1a5f661a",
+    "97a8c460e2cf7104ed5ae593c7f2f24787ea86ebe988815eb524cb3a3407ba2f",
+    "b4d6459db6efabee092003c37371312a02f8cd32539606ea15d2d570d56b94e1",
+    "80b835130fb1204fdc753c770f5ddbb1fd2c01ad8193413913633ddf0875d4be"
+  ],
+  "runner_source_hash_recorded_in_original_receipts": false,
+  "runs": 5,
+  "same_thread_selector_2_enumeration_count_zero": 2,
+  "software_controls": 1,
+  "software_images": 6,
+  "software_reference_bytes": 691200,
+  "status": "PASS_TWO_ZERO_ENUMERATION_COUNTS",
+  "system_modified": false,
+  "vendor_or_GPU_execution_during_audit": false,
+  "wrong_board_controls": 1
+}
