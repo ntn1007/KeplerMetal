@@ -28,25 +28,30 @@
       "path": "bridge/src/KeplerCPUICB.h",
       "source_path": "bridge/src/KeplerCPUICB.h",
       "source_SHA256": "263dede0101967e1bfa32fe3b081b73c476d9e09e8a9b5446ae04cf4f425ee0a",
-      "published_SHA256": "68f0133711a8dd800f2d03e12813abee9299666522720f8a7b4b7ab71684942a",
-      "bytes": 37980,
+      "published_SHA256": "105217a1e9088af310065234088c6934753f79d003927c7dec28692534090a04",
+      "bytes": 38097,
       "modified_for_publication": true,
       "previous_published_SHA256": "3380d4932230816ea334277a11fd6603ce8d07cc81f725e45ac2e2027678920c",
       "latest_change": {
+        "previous_published_SHA256": "68f0133711a8dd800f2d03e12813abee9299666522720f8a7b4b7ab71684942a",
+        "previous_bytes": 37980,
+        "reason": "Allow explicitly prepared, equal-geometry mixed partial/uniform GPU-copy ranges and conservatively track copied ownership."
+      },
+      "previous_latest_change": {
         "previous_published_SHA256": "52e3760f7843b9f235682bb21ab43222360f84d8d57321557aa87bee71c46be5",
         "previous_bytes": 37909,
         "reason": "Expand the opted-in partial GPU copy to a fully preflighted range and permit checked serial mixed execution."
-      },
-      "previous_latest_change": {
-        "previous_published_SHA256": "3d8e4564547bc7ff00ce36c29650c8bf4d42a9ab4af61e1d8a87370864fbd25f",
-        "previous_bytes": 37421,
-        "reason": "Add separately opted-in GPU-timeline copying of one prepared, equal-geometry partial project ICB command with at most eight regions and explicit ordering/ownership checks."
       },
       "prior_change_history": [
         {
           "previous_published_SHA256": "a5c0857f5287231817179d0b6a2939ab54b2d9306a73ed6260b1dabf9fce369a",
           "previous_bytes": 37026,
           "reason": "Add a separate opt-in for CPU snapshot copies of certified partial-grid commands; preserve bindings and rematerialize their partial native records."
+        },
+        {
+          "previous_published_SHA256": "3d8e4564547bc7ff00ce36c29650c8bf4d42a9ab4af61e1d8a87370864fbd25f",
+          "previous_bytes": 37421,
+          "reason": "Add separately opted-in GPU-timeline copying of one prepared, equal-geometry partial project ICB command with at most eight regions and explicit ordering/ownership checks."
         }
       ]
     },
@@ -54,25 +59,30 @@
       "path": "bridge/src/KeplerCPUICB.mm",
       "source_path": "bridge/src/KeplerCPUICB.mm",
       "source_SHA256": "3d59c2c609611ddc387e616b8945e903f6378dbd4a3b66a02cb22087ada84b60",
-      "published_SHA256": "88b49ccf6bd9b76be8ee840791aaffaa7bfea4f33fed2b25ef7e03bacbfeedd0",
-      "bytes": 162772,
+      "published_SHA256": "3bb6877715b3d456167c48c3b567398666b9eeb1f7750351be434edc1f1bb6f9",
+      "bytes": 163699,
       "modified_for_publication": true,
       "previous_published_SHA256": "183be0be67c910ebdbff61841347f6146f72e0b1512bf241d54f0d258a308828",
       "latest_change": {
+        "previous_published_SHA256": "88b49ccf6bd9b76be8ee840791aaffaa7bfea4f33fed2b25ef7e03bacbfeedd0",
+        "previous_bytes": 162772,
+        "reason": "Allow explicitly prepared, equal-geometry mixed partial/uniform GPU-copy ranges and conservatively track copied ownership."
+      },
+      "previous_latest_change": {
         "previous_published_SHA256": "78a7df2f20f1dc2cea2a318ef73a1f4c0418bd64191a9ce35b7c1990cf7b9f73",
         "previous_bytes": 160646,
         "reason": "Expand the opted-in partial GPU copy to a fully preflighted range and permit checked serial mixed execution."
-      },
-      "previous_latest_change": {
-        "previous_published_SHA256": "119215074f96852debd8ee5fe7c99545e3a21eec95604a14f56d78ad0c7c551e",
-        "previous_bytes": 153225,
-        "reason": "Add separately opted-in GPU-timeline copying of one prepared, equal-geometry partial project ICB command with at most eight regions and explicit ordering/ownership checks."
       },
       "prior_change_history": [
         {
           "previous_published_SHA256": "9e966dad4e2bc09ea8337ef9c8fd2c54c0893cbe19db6b731981ad13b522dbcf",
           "previous_bytes": 152438,
           "reason": "Add a separate opt-in for CPU snapshot copies of certified partial-grid commands; preserve bindings and rematerialize their partial native records."
+        },
+        {
+          "previous_published_SHA256": "119215074f96852debd8ee5fe7c99545e3a21eec95604a14f56d78ad0c7c551e",
+          "previous_bytes": 153225,
+          "reason": "Add separately opted-in GPU-timeline copying of one prepared, equal-geometry partial project ICB command with at most eight regions and explicit ordering/ownership checks."
         }
       ]
     },
@@ -7870,6 +7880,15 @@
     "date": "2026-10-28",
     "previous_public_commit": "a25ddfbb68bf333e0de683f68b15c295f3ee967e",
     "previous_snapshot_SHA256": "38bd599937c94def46c62aebb6231fcff4bad3404eaf6cbcf92334cf80254ad1",
+    "files": [
+      "bridge/src/KeplerCPUICB.h",
+      "bridge/src/KeplerCPUICB.mm"
+    ]
+  },
+  "partial_gpu_mixed_copy_update": {
+    "date": "2026-10-28",
+    "previous_public_commit": "d79d24063fb3ae86eec2dc80f74c77476a84c9bf",
+    "previous_snapshot_SHA256": "2b1ce5d05ddd6c512a01b4c0bfcade25b6b982722a9a8cb1751775418729794f",
     "files": [
       "bridge/src/KeplerCPUICB.h",
       "bridge/src/KeplerCPUICB.mm"

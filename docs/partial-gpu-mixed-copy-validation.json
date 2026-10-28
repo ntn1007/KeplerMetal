@@ -1,0 +1,44 @@
+{
+  "cohorts": {
+    "mixed-copy": {
+      "baseline_invocations": 342,
+      "committed_copy_blits": 32,
+      "copied_invocations": 1368,
+      "copied_user_dispatches": 16,
+      "correct_uint32_words": 5472,
+      "hosts": 12,
+      "uncommitted_predecessor_refusals": 4,
+      "uncommitted_prepare_blits": 8,
+      "uniform_preparation_and_geometry_refusals": 12
+    },
+    "reverse": {
+      "baseline_invocations": 342,
+      "committed_copy_blits": 32,
+      "copied_invocations": 1368,
+      "copied_user_dispatches": 16,
+      "correct_uint32_words": 5472,
+      "hosts": 12,
+      "uncommitted_predecessor_refusals": 4,
+      "uncommitted_prepare_blits": 8,
+      "uniform_preparation_and_geometry_refusals": 12
+    }
+  },
+  "fresh_archive_SHA256": "ca571d32afa4897b184c9b8896e9009286f185c0f0b80858f61de1c4fb688296",
+  "fresh_object_members_match": true,
+  "host_processes": 32,
+  "mixed_over_eight_refusals": 2,
+  "nonoverlapping": true,
+  "regressions": {
+    "range": 342,
+    "single": 481,
+    "uniform": 342
+  },
+  "runtime_archive_SHA256": "4a6e03fd7caab623ab337259427fb24baf81fb2bc7caf42c6683641de36ebee2",
+  "scope": "Explicitly opted-in original prepared equal-geometry partial/uniform project ICB ranges, up to eight QMDs; no native Apple ICB or general GPU-selected command support.",
+  "source_SHA256": {
+    "KeplerCPUICB.h": "105217a1e9088af310065234088c6934753f79d003927c7dec28692534090a04",
+    "KeplerCPUICB.mm": "3bb6877715b3d456167c48c3b567398666b9eeb1f7750351be434edc1f1bb6f9",
+    "KeplerPartialGridPlan.h": "f46e10ce958221a968aaf39481a71f773345830c6c68ac071a7b14bdc52299f7"
+  },
+  "status": "PASS"
+}
