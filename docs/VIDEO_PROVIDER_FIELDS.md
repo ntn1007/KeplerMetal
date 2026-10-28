@@ -22,7 +22,7 @@ The earlier lab also already contained an offline `sierra_video_config_model.py`
 
 ## Remaining work
 
-Determine the actual provenance, type, lifetime and selected service of the array entries on a qualified route, and establish the mismatch between the historical provider's kernel selector contract and the current live driver without issuing unqualified selectors. The modern default AppleGVA path, actual provider compatibility and GPU video decoding remain unproved. No system driver, framework, OCLP or firmware was modified by this re-audit.
+The [follow-up observation](VIDEO_PROVIDER_SERVICE.md) identifies the selected entry as this boot's GTX accelerator on a controlled legacy route. Determine the other entries' provenance and the selected right's lifetime, and establish the mismatch between the historical provider's kernel selector contract and the current live driver without issuing unqualified selectors. The modern default AppleGVA path, actual provider compatibility and GPU video decoding remain unproved. No system driver, framework, OCLP or firmware was modified by this re-audit.
 
 ## Reproduction
 

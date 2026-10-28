@@ -1,5 +1,7 @@
 # Build from source
 
+[VIDEO_PROVIDER_SERVICE.md](VIDEO_PROVIDER_SERVICE.md) documents the selected legacy service observation and pinned re-audit.
+
 [VIDEO_PROVIDER_FIELDS.md](VIDEO_PROVIDER_FIELDS.md) documents the re-audit of historical caller fields and existing controls.
 
 [VIDEO_PROVIDER_REGISTRATION.md](VIDEO_PROVIDER_REGISTRATION.md) documents historical registration bounds and its offline model.

@@ -1,0 +1,52 @@
+{
+  "build_manifest_SHA256": "517ffb0fb4be646efe9154a82b8ff1172823d5b6d0fb139d91573dfa576dbe48",
+  "cases": [
+    {
+      "case": "inspect",
+      "gate_SHA256": "e677aaacce33281c34ed5d214f6a5163ba37cfe364067b7a421cfc8d0cc9815c",
+      "gate_calls": 0,
+      "mode": "inspect",
+      "route": "passive"
+    },
+    {
+      "case": "enabled-1",
+      "gate_SHA256": "6641b02bf788ed3b38fc306a274bf85adf042a642bc654afb9bcbdf1c8b15691",
+      "gate_calls": 1,
+      "mode": "hardware",
+      "route": "enabled"
+    },
+    {
+      "case": "wrong",
+      "gate_SHA256": "1f85728e18178ae17ae7693264c4e12be24398281cb1d5fe680a875b131b57fe",
+      "gate_calls": 0,
+      "mode": "hardware",
+      "route": "wrong-name"
+    },
+    {
+      "case": "enabled-2",
+      "gate_SHA256": "6641b02bf788ed3b38fc306a274bf85adf042a642bc654afb9bcbdf1c8b15691",
+      "gate_calls": 1,
+      "mode": "hardware",
+      "route": "enabled"
+    },
+    {
+      "case": "cpu",
+      "gate_SHA256": "e677aaacce33281c34ed5d214f6a5163ba37cfe364067b7a421cfc8d0cc9815c",
+      "gate_calls": 0,
+      "mode": "cpu",
+      "route": "passive"
+    }
+  ],
+  "hardware_failures": 3,
+  "hardware_images": 0,
+  "hardware_video_execution_proved": false,
+  "scope": "Own-process legacy AppleGVA counterfactual and pinned test gate; public IOKit identity queries, not video dispatch.",
+  "selected_registry_ID": 4294968416,
+  "selected_service_class": "nvAccelerator",
+  "selected_service_observations": 2,
+  "sierra_provider_executed_by_gate": false,
+  "software_CPU_reference_bytes": 2764800,
+  "software_images": 6,
+  "status": "PASS",
+  "terminal_nonoverlapping_processes": 5
+}
