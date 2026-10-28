@@ -1,5 +1,7 @@
 # Build from source
 
+[VIDEO_GVA_SUPPORT_OVERLAY.md](VIDEO_GVA_SUPPORT_OVERLAY.md) documents the scoped support-table counterfactual and unchanged-return registry observation.
+
 [VIDEO_GVA_BOARD_OBSERVATION.md](VIDEO_GVA_BOARD_OBSERVATION.md) documents the pinned board-read observer and controls.
 
 [VIDEO_GVA_SELECTION_STATIC.md](VIDEO_GVA_SELECTION_STATIC.md) documents the read-only candidate-selection audit.

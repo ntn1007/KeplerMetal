@@ -1,0 +1,25 @@
+{
+  "GVA_registry_query_events_observed": 0,
+  "additional_IGPU_log_offsets": [
+    143908,
+    144196
+  ],
+  "baseline_hardware_processes": 3,
+  "board_overlay_changes_only_scoped_lookup": true,
+  "board_overlay_hardware_processes": 3,
+  "current_registry_ID": 4294968416,
+  "driver_SHA256": "44f131a958d48afd6ab675a851330c37506557c9d499484170c886c3731bdbb3",
+  "hardware_images": 0,
+  "hardware_required_failures": 10,
+  "observer_SHA256": "b8e90f2c6defa4578d34ccf29b3e305e7f152faee7c35187917fde82384db209",
+  "original_model_and_board_lookup_absent": true,
+  "other_hardware_controls": 2,
+  "plain_hardware_processes": 2,
+  "provider_absence_log_events_per_trial": 2,
+  "revised_dependency_SHA256": "822c35df095c52044c1521bbb697ecb58269b9dcf2fd4960432d7c7234c5fa75",
+  "scope": "Own process; targeted board-support counterfactual and public-call observations, not a driver fix or hardware decode.",
+  "software_CPU_reference_bytes": 691200,
+  "software_images": 6,
+  "status": "PASS",
+  "terminal_nonoverlapping_processes": 13
+}

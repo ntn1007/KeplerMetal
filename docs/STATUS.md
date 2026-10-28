@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+A bounded AppleGVA support-table counterfactual changes the observed route but still returns -12913 with zero hardware images; the NVIDIA provider path remains unresolved. [Evidence](VIDEO_GVA_SUPPORT_OVERLAY.md).
+
 AppleGVA read this iMac board ID in three process-local hardware requests; all still returned -12913 with zero images. Selection cause remains unknown. [Evidence](VIDEO_GVA_BOARD_OBSERVATION.md).
 
 A static AppleGVA follow-up identifies three board comparisons and a conditional candidate-pointer fallback; the actual runtime selection and hardware decoder remain unresolved. [Evidence](VIDEO_GVA_SELECTION_STATIC.md).
