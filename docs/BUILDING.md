@@ -1,5 +1,7 @@
 # Build from source
 
+[CAS_BACKEDGE_SDK.md](CAS_BACKEDGE_SDK.md) documents the newly completed single-overlay CAS GPU qualification.
+
 [CAS_BACKEDGE_SAFETY.md](CAS_BACKEDGE_SAFETY.md) gives the offline backedge counterexample and regression audit.
 
 [VIDEO_ALLOCATION_CHAIN.md](VIDEO_ALLOCATION_CHAIN.md) documents the offline, hash-bound video-resource allocation audit.

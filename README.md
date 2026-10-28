@@ -21,6 +21,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+The source-built CAS SDK passes GTX controls after regenerating certificates with the strengthened backedge recognizer. [Evidence and limits](docs/CAS_BACKEDGE_SDK.md).
+
 The offline CAS recognizer now refuses a demonstrated synthetic post-repair backedge. [Evidence and limitations](docs/CAS_BACKEDGE_SAFETY.md).
 
 A static audit traces the video-buffer resource factory to NVIDIA `nvTextureBuffer` and conditional backing paths. [Evidence and limits](docs/VIDEO_ALLOCATION_CHAIN.md).

@@ -96,8 +96,7 @@ python3 bridge/tools/audit_cas_sdk_qualification.py \
 python3 -m unittest discover -s tests -p test_cas_sdk_preflight.py -v
 ```
 
-The single-overlay recipe above packages the same source and local dependencies;
-the complete recipe as a single fresh overlay has not been run. The reported
+The single-overlay recipe above was later run and qualified with the strengthened recognizer; see [the later cohort](CAS_BACKEDGE_SDK.md). The reported
 cohort used the two separately recorded preparation/module overlays described
 above. Resolve any failed or uncertain signed process to a terminal reservation
 state before submitting another GPU test.
