@@ -1,5 +1,7 @@
 # Build from source
 
+[NOCOPY_CLIENT_BLOCK.md](NOCOPY_CLIENT_BLOCK.md) documents the client-owned block experiment and separate GPU/CPU checks.
+
 [NOCOPY_CLIENT_CALLBACK.md](NOCOPY_CLIENT_CALLBACK.md) describes the separately compiled client, scoped GPU release and raw-output auditor.
 
 [STANDALONE_CAS.md](STANDALONE_CAS.md) describes the explicitly injected, pinned public-Metal CAS client and its native/repair controls.

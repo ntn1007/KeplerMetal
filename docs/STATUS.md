@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+A separately compiled test client supplies the actual no-copy block; a gated process-local action invokes it after two verified GTX commands. [Evidence and limits](NOCOPY_CLIENT_BLOCK.md).
+
 A separately compiled test client supplies the callback for a guarded no-copy release after two verified GTX commands; arbitrary application callbacks remain unqualified. [Evidence](NOCOPY_CLIENT_CALLBACK.md).
 
 A guarded test-only no-copy callback returned its own Mach VM allocation after two verified GTX commands in three cases; other applications and general resource lifetime remain unqualified. [Evidence and reproduction](NOCOPY_RELEASE_WITNESS.md).

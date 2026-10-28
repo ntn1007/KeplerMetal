@@ -21,6 +21,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+A separately compiled client now supplies the actual no-copy Metal block for a guarded GTX lifetime experiment. [Evidence and limitations](docs/NOCOPY_CLIENT_BLOCK.md).
+
 A separately compiled test client now supplies the no-copy release callback after two verified GTX commands, under a narrowly pinned process-local contract. [Evidence and limits](docs/NOCOPY_CLIENT_CALLBACK.md).
 
 
