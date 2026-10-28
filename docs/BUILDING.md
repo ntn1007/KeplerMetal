@@ -1,5 +1,7 @@
 # Build from source
 
+[NOCOPY_METAL_REGISTRATION.md](NOCOPY_METAL_REGISTRATION.md) documents the Metal completion registrar, mock tests and GTX qualification.
+
 [NOCOPY_WORK_REGISTRY.md](NOCOPY_WORK_REGISTRY.md) documents explicit work tracking, GPU evidence and CPU concurrency tests.
 
 [NOCOPY_CLIENT_GUARD.md](NOCOPY_CLIENT_GUARD.md) documents an independent client block, a scoped guard and separate GPU/CPU checks.

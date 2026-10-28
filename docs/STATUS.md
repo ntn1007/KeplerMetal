@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+A scoped registrar attaches completion handlers to explicitly registered Metal command buffers; omitted work remains undetected. [Evidence](NOCOPY_METAL_REGISTRATION.md).
+
 A scoped no-copy guard tracks explicitly registered command completions and GPU output validation. Unknown work is not detected. [Evidence](NOCOPY_WORK_REGISTRY.md).
 
 A guarded no-copy prototype now invokes a retained, independent client block after two explicitly verified GTX commands; unknown workloads remain unqualified. [Evidence](NOCOPY_CLIENT_GUARD.md).
