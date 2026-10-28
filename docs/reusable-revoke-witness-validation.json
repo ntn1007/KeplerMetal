@@ -1,0 +1,51 @@
+{
+  "build_inputs_SHA256": "df2182b5713c84100123c5e2d0024dd43816e23253cb27626603c8f39ec495db",
+  "cases": [
+    {
+      "capture_SHA256": "30d2003958d2b2f4c8930ed988a7bf59a225ed2eb0658319d7a4b47f1b0a74a5",
+      "dispatches": 0,
+      "mode": "revoked-negative",
+      "result_SHA256": "30ccdd03f70b7eabfa0327f5f9a7c7f610433a7feae5e0b8b697be8c0b4d4cd7"
+    },
+    {
+      "capture_SHA256": "9038a4311bc559d4514f4200f48fcc8e88f9828c465263a11f9965c49938debd",
+      "dispatches": 1,
+      "mode": "native",
+      "result_SHA256": "50089322120a46935b2097559db6fced694bfd4c8c5e36bf5b768114ea8f1390"
+    },
+    {
+      "capture_SHA256": "742e722df151e137cd07bb22c5eeb618a615d167ac9889eb8bfa6b86de7bb830",
+      "dispatches": 1,
+      "mode": "revoked",
+      "result_SHA256": "6820a3b2f424a883730304fec3687c898a943970d295281193564e576f6bfb76"
+    },
+    {
+      "capture_SHA256": "9038a4311bc559d4514f4200f48fcc8e88f9828c465263a11f9965c49938debd",
+      "dispatches": 1,
+      "mode": "native",
+      "result_SHA256": "e925faf221853dea95108ffc24d96ba3ed4034ccdbc01183165a991824742d02"
+    },
+    {
+      "capture_SHA256": "30d2003958d2b2f4c8930ed988a7bf59a225ed2eb0658319d7a4b47f1b0a74a5",
+      "dispatches": 0,
+      "mode": "revoked-negative",
+      "result_SHA256": "16a3b264b818060ba64060d911da588a312680f4fb8c1ee3a5cd498179d8ceab"
+    },
+    {
+      "capture_SHA256": "742e722df151e137cd07bb22c5eeb618a615d167ac9889eb8bfa6b86de7bb830",
+      "dispatches": 1,
+      "mode": "revoked",
+      "result_SHA256": "ab5e7a852adaa88b7d3d6b97a7e6e06d0547cc4435e7fbf456bfaeb7f62e7952"
+    }
+  ],
+  "guard_words": 192,
+  "native_gpu_controls": 2,
+  "native_gpu_words": 8192,
+  "negative_sentinel_words": 8192,
+  "revoked_gpu_processes": 2,
+  "revoked_gpu_words": 8192,
+  "revoked_no_dispatch_controls": 2,
+  "scope": "Two direct instances of the actual lease implementation, manually configured and manually untracked in test-only code after instance revocation; no real ICB plan, automatic scope restoration or cancellation API. Ordinary serialized Objective-C sends only; cached IMPs, runtime mutation and uncoordinated threads are not controlled.",
+  "status": "PASS_BOUNDED_TWO_LEASE_WITNESS",
+  "terminal_nonoverlapping_processes": 6
+}

@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+Two actual reusable-lease instances tracking one native command buffer were tested with explicit test-only revocation and manual pending removal; real ICB cancellation remains unimplemented. [Evidence and limitations](REUSABLE_REVOKE_WITNESS.md).
+
 A process-local witness blocks ordinary commit/enqueue on one uncommitted Metal buffer and verifies subsequent GTX reuse; actual reusable-ICB cancellation remains unimplemented. [Evidence and limitations](UNCOMMITTED_REVOKE.md).
 
 A pinned on-disk kernel and IOAccelerator audit predicts an Unsupported result for selector 0x105 only under specified synchronous-path assumptions; no live selector is tested. [Evidence](VIDEO_SELECTOR_PATH.md).
