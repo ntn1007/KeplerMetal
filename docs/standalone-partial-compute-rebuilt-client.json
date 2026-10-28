@@ -1,0 +1,14 @@
+{
+  "GPU_dispatches": 2,
+  "GPU_invocations": 192,
+  "auto_processes": 1,
+  "correct_uint32_words": 1152,
+  "native_control_processes": 1,
+  "nonoverlapping": true,
+  "public_client_imports_project_symbols": false,
+  "runtime_archive_SHA256": "b7ff6e386521ba76a724df135245a0c079313fc2849836807bcbab4cffda4ea6",
+  "scope": "Archive-rebuilt pinned public-Metal test client, explicitly injected bootstrap, 1D case only.",
+  "signed_client_SHA256": "d73a44d513bf96285eee8936c3ee9597b65cac204d07eb425f24fa154b1ce317",
+  "source_runtime_objects_match": true,
+  "status": "PASS"
+}

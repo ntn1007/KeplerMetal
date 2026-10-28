@@ -64,6 +64,9 @@
         expectedManifestSHA256:(NSString *)manifestSHA256
                          error:(NSError **)error;
 - (BOOL)adaptComputeEncoder:(id<MTLComputeCommandEncoder>)encoder error:(NSError **)error;
+// Opt in to automatic adaptation of compute encoders created on this scope's
+// own queue. This is process-local and does not alter shared native classes.
+- (BOOL)enableAutomaticComputeEncoderFactoriesWithError:(NSError **)error;
 // Explicit experimental partial-grid adapter: only two exact registered shaders,
 // grid volume <=1024, local volume <=128 and <=16 resident launches per serial
 // range. Eligible uniform and partial slots may be mixed; unsupported shaders,

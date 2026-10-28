@@ -791,6 +791,7 @@ BOOL installRenderOverride(Class dynamic,Class original,SEL selector,IMP impleme
     KPScopeLink*link=objc_getAssociatedObject(e,&contextKey);if(link.scope==self&&link.renderTarget==pass.colorAttachments[0].texture)return e;
     id<MTLRenderCommandEncoder>adapted=[self adoptNativeRenderEncoder:e descriptor:pass commandBuffer:cb error:error];if(!adapted)[e endEncoding];return adapted;
 }
+- (BOOL)enableAutomaticComputeEncoderFactoriesWithError:(NSError**)error {return enableAutomaticComputeFactories(self,error);}
 - (BOOL)enableAutomaticRenderEncoderFactoriesWithError:(NSError**)error {return enableAutomaticRenderFactories(self,error);}
 
 + (instancetype)installOnDevice:(id<MTLDevice>)device queue:(id<MTLCommandQueue>)queue libraryURL:(NSURL*)url expectedSHA256:(NSString*)expected manifestURL:(NSURL*)manifestURL expectedManifestSHA256:(NSString*)manifestSHA error:(NSError**)error {

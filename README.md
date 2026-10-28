@@ -21,6 +21,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+A separately linked public-Metal test client executes a bounded partial/uniform compute ICB through an explicit process-local bootstrap. [Evidence and limits](docs/STANDALONE_PARTIAL_COMPUTE.md).
+
 The opt-in project ICB adapter copies bounded mixed partial and uniform command ranges on the GPU timeline, including a tested two-pipeline producer/consumer sequence. [Evidence and limits](docs/PARTIAL_ICB_GPU_DUAL_COPY.md).
 
 The source-built CAS SDK passes GTX controls after regenerating certificates with the strengthened backedge recognizer. [Evidence and limits](docs/CAS_BACKEDGE_SDK.md).

@@ -1,5 +1,7 @@
 # Build from source
 
+[STANDALONE_PARTIAL_COMPUTE.md](STANDALONE_PARTIAL_COMPUTE.md) covers the public-Metal partial compute client and same-runtime regressions.
+
 [PARTIAL_ICB_GPU_DUAL_COPY.md](PARTIAL_ICB_GPU_DUAL_COPY.md) documents the two-pipeline mixed-copy qualification. [PARTIAL_ICB_GPU_MIXED_COPY.md](PARTIAL_ICB_GPU_MIXED_COPY.md) covers the later mixed copy qualification. [PARTIAL_ICB_GPU_RANGE.md](PARTIAL_ICB_GPU_RANGE.md) documents the scoped GPU-timeline partial range copy and regressions. [PARTIAL_ICB_GPU_COPY.md](PARTIAL_ICB_GPU_COPY.md) retains the earlier single-command qualification. [PARTIAL_ICB_OVERLAP.md](PARTIAL_ICB_OVERLAP.md) documents the overlapping CPU snapshot cohort. [PARTIAL_ICB_SNAPSHOT.md](PARTIAL_ICB_SNAPSHOT.md) documents the preceding snapshot and same-runtime GPU regression. [CAS_REGISTER_SPAN.md](CAS_REGISTER_SPAN.md) documents the updated register check. [SEGMENTED_LIBRARY_CLIENT.md](SEGMENTED_LIBRARY_CLIENT.md) documents a separate client and three-segment library loading. [STANDALONE_DATA_CAS.md](STANDALONE_DATA_CAS.md) documents the preceding URL/data qualification. [STANDALONE_DYNAMIC_CAS.md](STANDALONE_DYNAMIC_CAS.md) documents the preceding process-local public-Metal client qualification. [CAS_DYNAMIC_SLOT.md](CAS_DYNAMIC_SLOT.md) covers the prior SDK qualification and [CAS_SLOT3.md](CAS_SLOT3.md) the fixed-slot test.
 
 [CAS_BACKEDGE_SDK.md](CAS_BACKEDGE_SDK.md) documents the newly completed single-overlay CAS GPU qualification.
