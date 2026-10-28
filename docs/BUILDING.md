@@ -1,5 +1,7 @@
 # Build from source
 
+[VIDEO_GVA_OFFLINE_FLAG.md](VIDEO_GVA_OFFLINE_FLAG.md) documents the single-key comparison and IOKit iterator observation.
+
 [VIDEO_GVA_SUPPORT_OVERLAY.md](VIDEO_GVA_SUPPORT_OVERLAY.md) documents the scoped support-table counterfactual and unchanged-return registry observation.
 
 [VIDEO_GVA_BOARD_OBSERVATION.md](VIDEO_GVA_BOARD_OBSERVATION.md) documents the pinned board-read observer and controls.

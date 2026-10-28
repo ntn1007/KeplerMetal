@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+Removing one offline-renderer flag from a scoped AppleGVA donor suppresses the associated iGPU logs in three trials but does not enable hardware video. [Evidence](VIDEO_GVA_OFFLINE_FLAG.md).
+
 A bounded AppleGVA support-table counterfactual changes the observed route but still returns -12913 with zero hardware images; the NVIDIA provider path remains unresolved. [Evidence](VIDEO_GVA_SUPPORT_OVERLAY.md).
 
 AppleGVA read this iMac board ID in three process-local hardware requests; all still returned -12913 with zero images. Selection cause remains unknown. [Evidence](VIDEO_GVA_BOARD_OBSERVATION.md).
