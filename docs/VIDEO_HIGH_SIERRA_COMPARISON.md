@@ -16,6 +16,8 @@ The [Sierra dispatch comparison](VIDEO_PROVIDER_DISPATCH.md) previously identifi
 
 The [machine-readable audit](video-high-sierra-validation.json) includes exact image hashes, UUIDs, source locations and limits. Archive SHA-256: `94c302b4633b8fa77295a6db75099e89a404a86451f279a9f47ca8f4dbfd67ac`; package SHA-256 as observed by REA: `77c717f1d71396d3e17ab7d48baacd96bde57039bd64bae45b25c60aa273f544`. The proprietary archives and extracted files remain outside this repository.
 
+A [follow-up channel inventory](VIDEO_CHANNEL_BRANCHES.md) also checks direct calls and tail jumps across all three GeForce images; indirect reachability remains unknown.
+
 ## Reproduction
 
 Apple's support page supplies the official download. Use an isolated directory with at least 12 GiB free; the image is 2.49 GB and its decompressed payload is approximately 5.8 GB. The following only reads and extracts files; it does not install the update. Verify the archive SHA above and the package signature before extraction. Always detach the read-only image, including if an intermediate command fails.

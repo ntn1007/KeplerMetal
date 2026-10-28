@@ -1,5 +1,7 @@
 # Build from source
 
+[VIDEO_CHANNEL_BRANCHES.md](VIDEO_CHANNEL_BRANCHES.md) describes the read-only three-profile direct call and jump audit.
+
 [VIDEO_HIGH_SIERRA_COMPARISON.md](VIDEO_HIGH_SIERRA_COMPARISON.md) documents signed historical components, offline extraction and the pinned comparison.
 
 [VIDEO_LEASE_PENDING_GPU.md](VIDEO_LEASE_PENDING_GPU.md) describes the submitted-command lifecycle cohort and verifier tests.

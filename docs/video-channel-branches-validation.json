@@ -1,0 +1,128 @@
+{
+  "current_video_path": {
+    "conditional_channel_types_3_4_5": "manager and object jump tables route these to the same video branches",
+    "create_object_video_zero_class": "returns zero without reaching CreateObject",
+    "direct_submitter_type_assignments": [
+      1,
+      2
+    ],
+    "guard_mask": "0xe8e00",
+    "inference_scope": "static pinned control-flow only; runtime flags, class and ABI unknown"
+  },
+  "executed_vendor_or_gpu_code": false,
+  "profiles": {
+    "current": {
+      "acquire_address": "0x148a6",
+      "acquire_symbol": "__ZN16nvChannelManager14AcquireChannelEP21nvVirtualAddressSpacejj",
+      "direct_branches": [
+        {
+          "file_offset": "0x14c5b",
+          "instruction_SHA256": "d97951562e490eb773ed9799c5c43129e7247ae8bb2f2544de97b21b12b355fb",
+          "kind": "jmp",
+          "nearest_preceding_defined_symbol": "__ZN16nvChannelManager19AcquireVideoChannelEP21nvVirtualAddressSpacejj",
+          "nearest_symbol_address": "0x14c56",
+          "site": "0x14c5b",
+          "target": "0x148a6"
+        },
+        {
+          "file_offset": "0x55ba5",
+          "instruction_SHA256": "f827504c2c52e397f444151d6b643787ece1fc480d90844f96e910826f120a4f",
+          "kind": "call",
+          "nearest_preceding_defined_symbol": "__ZN11nvSubmitter15AllocateChannelEb",
+          "nearest_symbol_address": "0x55a64",
+          "site": "0x55ba5",
+          "target": "0x148a6"
+        }
+      ],
+      "direct_branches_to_wrapper": 0,
+      "file_SHA256": "44f131a958d48afd6ab675a851330c37506557c9d499484170c886c3731bdbb3",
+      "video_wrapper_address": "0x14c56",
+      "video_wrapper_symbol": "__ZN16nvChannelManager19AcquireVideoChannelEP21nvVirtualAddressSpacejj"
+    },
+    "high": {
+      "acquire_address": "0x14a4a",
+      "acquire_symbol": "__ZN16nvChannelManager14AcquireChannelEP21nvVirtualAddressSpacejj",
+      "direct_branches": [
+        {
+          "file_offset": "0x14de5",
+          "instruction_SHA256": "e0520a6dff77841a9a700b2db62ce4bf2d6b5d1e5d6d3b9d656940206fd4d4c4",
+          "kind": "jmp",
+          "nearest_preceding_defined_symbol": "__ZN16nvChannelManager19AcquireVideoChannelEP21nvVirtualAddressSpacejj",
+          "nearest_symbol_address": "0x14de0",
+          "site": "0x14de5",
+          "target": "0x14a4a"
+        },
+        {
+          "file_offset": "0x54bf2",
+          "instruction_SHA256": "af922032530d5a5bccc481be1f3ddbc2a4d6fb14461e9b1aa53696da66db20d9",
+          "kind": "call",
+          "nearest_preceding_defined_symbol": "__ZN11nvSubmitter15AllocateChannelEb",
+          "nearest_symbol_address": "0x54a90",
+          "site": "0x54bf2",
+          "target": "0x14a4a"
+        }
+      ],
+      "direct_branches_to_wrapper": 0,
+      "file_SHA256": "bcd3d0f6d90235b1fa6e0d96904bbee829063de1b60a01362946dc8aad9a1791",
+      "video_wrapper_address": "0x14de0",
+      "video_wrapper_symbol": "__ZN16nvChannelManager19AcquireVideoChannelEP21nvVirtualAddressSpacejj"
+    },
+    "sierra": {
+      "acquire_address": "0x136fe",
+      "acquire_symbol": "__ZN16nvChannelManager14AcquireChannelEP21nvVirtualAddressSpacejjP12IOUserClient",
+      "direct_branches": [
+        {
+          "file_offset": "0x10129",
+          "instruction_SHA256": "02aed12a9896d0916c941c2112d678f115093d4f39cbdc3871f42f6f8386a830",
+          "kind": "call",
+          "nearest_preceding_defined_symbol": "__ZN11nvCLContext23AllocateChannelIfNeededEb",
+          "nearest_symbol_address": "0x1003a",
+          "site": "0x10129",
+          "target": "0x136fe"
+        },
+        {
+          "file_offset": "0x13831",
+          "instruction_SHA256": "f590e13a57e65eec63e17358319aff191bc0947aef9bbfc04992083af3782a70",
+          "kind": "jmp",
+          "nearest_preceding_defined_symbol": "__ZN16nvChannelManager19AcquireVideoChannelEP21nvVirtualAddressSpacejj",
+          "nearest_symbol_address": "0x1382c",
+          "site": "0x13831",
+          "target": "0x136fe"
+        },
+        {
+          "file_offset": "0x2d41d",
+          "instruction_SHA256": "e165e0abd5bc130c506d726fa8e457980ee0a07203d4a4599f996d5a860d2490",
+          "kind": "call",
+          "nearest_preceding_defined_symbol": "__ZN11nvGLContext23AllocateChannelIfNeededEb",
+          "nearest_symbol_address": "0x2d328",
+          "site": "0x2d41d",
+          "target": "0x136fe"
+        },
+        {
+          "file_offset": "0x4b51c",
+          "instruction_SHA256": "51ed0133e9ae7a8271a4c38f60c8dde569c495ba97655afbfc5e31be340235bf",
+          "kind": "call",
+          "nearest_preceding_defined_symbol": "__ZN11nvSubmitter15AllocateChannelEb",
+          "nearest_symbol_address": "0x4b3f6",
+          "site": "0x4b51c",
+          "target": "0x136fe"
+        },
+        {
+          "file_offset": "0x5ec35",
+          "instruction_SHA256": "75fb7121bffc25f22eb58150d49857e31c1727e64c01a8b10df38ff469546090",
+          "kind": "call",
+          "nearest_preceding_defined_symbol": "__ZN14nvVideoContext15acquire_channelE17eNVDVDChannelTypePjS1_",
+          "nearest_symbol_address": "0x5eb02",
+          "site": "0x5ec35",
+          "target": "0x136fe"
+        }
+      ],
+      "direct_branches_to_wrapper": 0,
+      "file_SHA256": "25a0bccd7caa884d6aa964743b35f879ec326c46d255dc6212c47e7a20f6f38e",
+      "video_wrapper_address": "0x1382c",
+      "video_wrapper_symbol": "__ZN16nvChannelManager19AcquireVideoChannelEP21nvVirtualAddressSpacejj"
+    }
+  },
+  "scope": "On-disk direct rel32 call/jump inventory only; no proof of live reachability, indirect dispatch, ABI compatibility, video channel allocation, or hardware decode.",
+  "status": "STATIC_CHANNEL_BRANCH_INVENTORY_PASS"
+}
