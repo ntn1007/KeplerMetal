@@ -1,0 +1,53 @@
+{
+  "bootstrap_SHA256": "506f62383a4a89ebbde26e98aa047e97b301bfc4789abeca8dfc1d37779bd222",
+  "client_SHA256": "5199a987c02187b48c9805d343b54c7bcdad4bc60eb79da006785a1ddb927fe9",
+  "foreign_library_user_dispatches": 0,
+  "host_processes": 5,
+  "native_incorrect_expected_words": 42606,
+  "nonoverlapping": true,
+  "policy_SHA256": "976c13cfe81dd61b13c6b870ae37164a76ecf9b61a7576f4b336d673cdf12a4c",
+  "repaired_CAS_operations": 42660,
+  "repaired_dispatches": 36,
+  "rows": [
+    {
+      "dispatches": 0,
+      "mode": "foreign",
+      "segments": 3
+    },
+    {
+      "dispatches": 18,
+      "incorrect_expected_words": 21303,
+      "mode": "native",
+      "operations": 21330,
+      "segments": 3,
+      "stdout_SHA256": "eb51f3b9d20e286d0bfc4eff70ed27570a95c21288f70b77416d4fb79a90d4c2"
+    },
+    {
+      "dispatches": 18,
+      "incorrect_expected_words": 21303,
+      "mode": "native",
+      "operations": 21330,
+      "segments": 3,
+      "stdout_SHA256": "eb51f3b9d20e286d0bfc4eff70ed27570a95c21288f70b77416d4fb79a90d4c2"
+    },
+    {
+      "dispatches": 18,
+      "incorrect_expected_words": 0,
+      "mode": "optin",
+      "operations": 21330,
+      "segments": 3,
+      "stdout_SHA256": "eb51f3b9d20e286d0bfc4eff70ed27570a95c21288f70b77416d4fb79a90d4c2"
+    },
+    {
+      "dispatches": 18,
+      "incorrect_expected_words": 0,
+      "mode": "optin",
+      "operations": 21330,
+      "segments": 3,
+      "stdout_SHA256": "eb51f3b9d20e286d0bfc4eff70ed27570a95c21288f70b77416d4fb79a90d4c2"
+    }
+  ],
+  "scope": "Separate purpose-built client using a known certified shader; not an independently supplied application or general Metal support.",
+  "segmented_regions_min": 3,
+  "status": "PASS"
+}
