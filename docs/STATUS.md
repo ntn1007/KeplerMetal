@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+A gated Metal command remains submitted across a guarded experimental video-lease lifecycle and later completes correctly in two GTX trials. Execution concurrent with teardown remains unproved. [Evidence](VIDEO_LEASE_PENDING_GPU.md).
+
 A reusable experimental guarded backend now rejects additional lifecycle failures; CPU mock and bounded GTX tests pass. Shared synchronization remains a caller responsibility. [Evidence and limitations](VIDEO_GUARDED_BACKEND.md).
 
 A pinned experimental backend now combines the existing video lease, an associated type-3 context and guarded type-6 reference release; two later GTX compute runs pass while explicit-close controls fail. [Evidence and limits](VIDEO_SHARED_LEASE_GPU.md).

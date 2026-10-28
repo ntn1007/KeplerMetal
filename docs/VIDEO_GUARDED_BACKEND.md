@@ -16,6 +16,8 @@ The caller must keep the borrowed Metal object alive and serialize the *entire* 
 
 No video decoding, general application support, Metal 3/4 conformance or performance improvement is established. No macOS, OCLP, driver or firmware component was changed. The ordinary native lease backend remains unqualified for continued Metal use.
 
+A [follow-up witness](VIDEO_LEASE_PENDING_GPU.md) holds a submitted Metal command incomplete across the guarded lifecycle and verifies its later GPU result. It does not establish simultaneous GPU execution or general concurrency safety.
+
 ## Reproduction
 
 Run CPU tests in the source repository:

@@ -1,0 +1,71 @@
+{
+  "build_inputs_SHA256": "34df9fb140ab09155f0ca2c78ee72364bc078ef3b948b1a95cdd107509f9ed9a",
+  "cases": [
+    {
+      "gpu_dispatched": true,
+      "mode": "control",
+      "pending_after": 2,
+      "pending_before": 2,
+      "result_SHA256": "5c47b9a512c3f6d325b19bf4975c928e7bb9c61e1449d4e4c5ed13c28acc32ed"
+    },
+    {
+      "gpu_dispatched": true,
+      "mode": "pending",
+      "pending_after": 2,
+      "pending_before": 2,
+      "result_SHA256": "db91ab90b5ef601276d088ec1fbda039b89bee9cf819503697f0068f08aa1867"
+    },
+    {
+      "gpu_dispatched": false,
+      "mode": "control-negative",
+      "pending_after": 2,
+      "pending_before": 2,
+      "result_SHA256": "46ab6a2fa182e0e711481b437a3a3484370745fcc1f7739529b0f66572618175"
+    },
+    {
+      "gpu_dispatched": false,
+      "mode": "pending-negative",
+      "pending_after": 2,
+      "pending_before": 2,
+      "result_SHA256": "1c43f0e64c672e930a22ceef47252b11d0546ff09503b4918738a0c9f92c95ce"
+    },
+    {
+      "gpu_dispatched": true,
+      "mode": "pending",
+      "pending_after": 2,
+      "pending_before": 2,
+      "result_SHA256": "948f02c5c12eb2fe823580723fd4a8f2e0be457efea6ba4a66d79a6d637d0666"
+    },
+    {
+      "gpu_dispatched": true,
+      "mode": "control",
+      "pending_after": 2,
+      "pending_before": 2,
+      "result_SHA256": "aee6767d37535aebd8c414d8b265854272594f65e3cc26210466a4ef732a8ff1"
+    },
+    {
+      "gpu_dispatched": false,
+      "mode": "pending-negative",
+      "pending_after": 2,
+      "pending_before": 2,
+      "result_SHA256": "0a3041def3b7f72ffb1dd7afb42ef84b43043cf259c3c5c74aa29f2bb7da1668"
+    }
+  ],
+  "gpu_verified_words": 16384,
+  "guard_words": 224,
+  "hardware_video_execution_proved": false,
+  "lease_gpu_processes": 2,
+  "lease_nodispatch_controls": 2,
+  "negative_sentinel_words": 12288,
+  "no_lease_gpu_processes": 2,
+  "no_lease_nodispatch_controls": 1,
+  "same_object_and_name_for_lease": true,
+  "scope": "A submitted command remained gated and incomplete while a video lease was associated and released, then completed on GTX. No proof of simultaneous GPU execution, video decode, general driver repair or uncoordinated concurrency.",
+  "send_right_counts": [
+    1,
+    2,
+    1
+  ],
+  "status": "PASS_BOUNDED_PENDING_METAL_COMMAND",
+  "terminal_nonoverlapping_processes": 7
+}
