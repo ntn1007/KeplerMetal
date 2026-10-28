@@ -1,0 +1,72 @@
+{
+  "audit_source_sha256": "8693cee7e7c9734bad1e1799f558990163fcb3837a4643fbf90a2d6f8b7543ae",
+  "base_and_derived_constructor_return_in_observed_processes": true,
+  "build_sha256": "50b7dec67194d89ee76bc8c7c996d4ba431ebec3584a55456105ec3119d08bcd",
+  "calibration_sha256": "19c76d1bba66fc1c59491aedeb4fe22b163802bfbb91e4507f8ad1778f4001a9",
+  "caller_stack_offsets_at_hits": [
+    115492,
+    264163
+  ],
+  "counterfactual_property_and_policy_used": true,
+  "current_decoder_status": -12913,
+  "current_no_marker_controls": 1,
+  "current_witness_runs": 2,
+  "debugger_may_change_timing": true,
+  "hardware_images": 0,
+  "hardware_video_execution_proved": false,
+  "live_object_vtable_readback_proved": false,
+  "receipts": [
+    {
+      "decoder_status": 0,
+      "frames": 6,
+      "mode": "cpu",
+      "same_thread_selector_2_hits": false,
+      "witness": "on"
+    },
+    {
+      "decoder_status": -12913,
+      "frames": 0,
+      "mode": "current",
+      "same_thread_selector_2_hits": true,
+      "witness": "on"
+    },
+    {
+      "decoder_status": -12906,
+      "frames": 0,
+      "mode": "wrong",
+      "same_thread_selector_2_hits": false,
+      "witness": "on"
+    },
+    {
+      "decoder_status": -12913,
+      "frames": 0,
+      "mode": "current",
+      "same_thread_selector_2_hits": false,
+      "witness": "off"
+    },
+    {
+      "decoder_status": -12913,
+      "frames": 0,
+      "mode": "current",
+      "same_thread_selector_2_hits": true,
+      "witness": "on"
+    }
+  ],
+  "run_receipt_sha256": [
+    "24bda39d563cd989de8e0875cc8bfc99405c7502b4f7c0ebe09a2707a7f0635b",
+    "edfde85848c15529da06f6dbd11d1df0859161aeb56eba8f301e4048b9057f6b",
+    "e948155fd0a0998313aa01387c93d5356cf0b9b3d00d5f37bbaa9c780b9e5783",
+    "8ae34213a339842d28ad25ad0bc24c5de1e69a05ec6529d6d651447d8246a5fb",
+    "8379658e95050ec0dc3905e44633caaae7720fb5e2ace96646532efa16cfdb3a"
+  ],
+  "runner_source_hash_recorded_in_original_receipts": false,
+  "runs": 5,
+  "same_thread_selector_2_returns": 2,
+  "software_controls": 1,
+  "software_images": 6,
+  "software_reference_bytes": 691200,
+  "status": "PASS_TWO_BOUNDED_CONSTRUCTOR_RETURNS",
+  "system_modified": false,
+  "vendor_or_GPU_execution_during_audit": false,
+  "wrong_board_controls": 1
+}

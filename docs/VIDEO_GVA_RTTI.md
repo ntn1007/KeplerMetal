@@ -23,6 +23,10 @@ the full vtable extent, signatures and actual runtime dispatch remain unknown.
 The test used process-local property and board-policy substitutions; hardware
 decode still returned -12913 and zero images.
 
+A later [hardware-breakpoint cohort](VIDEO_GVA_CONSTRUCTOR_RETURN.md) observes
+both constructor returns in two instrumented processes. It does not read back
+the object or demonstrate hardware decoding.
+
 ## Base-constructor branch and historical stack
 
 In a separately recorded earlier process, the board observer captured a stack

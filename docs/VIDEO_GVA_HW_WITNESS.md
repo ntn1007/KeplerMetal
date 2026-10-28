@@ -17,12 +17,9 @@ no system entitlement or service. No vendor program or GPU workload ran.
 The experimental [debugger callback](../bridge/experiments/video_gva_hw_witness/lldb_witness.py)
 also contains an AppleGVA profile that checks three live code-region hashes
 before arming. The separate marker source checks the pinned image UUID and the
-same hashes. **That profile has not been executed against AppleGVA.** The
-marker was compiled, but its activation and lifecycle have not been qualified
-in a video process. In particular, it must not be launched against the GPU
-until a runner retains the shared reservation across the debugger and its
-child, handles debugger stops without killing the child, and establishes their
-terminal identities. A CPU calibration is not such a runner.
+same hashes. A later [bounded video cohort](VIDEO_GVA_CONSTRUCTOR_RETURN.md)
+uses that profile with a reservation-aware debugger runner; this earlier CPU
+calibration alone did not establish the video result.
 
 The [calibration receipt](video-gva-hw-cpu-validation.json) records source and
 executable hashes and both control results. The local debugger reports the two

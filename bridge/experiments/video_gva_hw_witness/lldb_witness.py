@@ -5,6 +5,7 @@ import os
 import lldb
 
 EXPECTED = {}
+IMAGE_BASE = 0
 GVA_REGIONS = (
     (115359, 719, 'cb8e85197a4b37270ced86a070fecb85bb61ea56aa98892996658a304544db0c'),
     (117024, 176, 'c4ef1c90c52e607a307e995c036890376ebf959ba9ade05725ff02c5cc1b7273'),
@@ -13,6 +14,7 @@ GVA_REGIONS = (
 
 
 def arm(frame, bp_loc, internal_dict):
+    global IMAGE_BASE
     del bp_loc, internal_dict
     process = frame.GetThread().GetProcess()
     target = process.GetTarget()
@@ -41,6 +43,7 @@ def arm(frame, bp_loc, internal_dict):
                 print('KP_HW_ARM_FAIL live_region', flush=True)
                 return False
         addresses = [base + 232932, base + 115492]
+        IMAGE_BASE = base
     for name, address in zip(('after_base', 'after_constructor'), addresses):
         error = lldb.SBError()
         original = process.ReadMemory(address, 8, error)
@@ -77,5 +80,12 @@ def hit(frame, bp_loc, internal_dict):
     name, address, original = saved
     error = lldb.SBError()
     current = frame.GetThread().GetProcess().ReadMemory(address, len(original), error)
-    print('KP_HW_HIT name=%s bytes_match=%d' % (name, int(error.Success() and current == original)), flush=True)
+    thread = frame.GetThread()
+    register = frame.FindRegister('r14')
+    parent = thread.GetFrameAtIndex(1)
+    pc = parent.GetPC() if parent.IsValid() else 0
+    caller_offset = pc - IMAGE_BASE if IMAGE_BASE and pc >= IMAGE_BASE else 0
+    print('KP_HW_HIT name=%s bytes_match=%d thread=%d r14_valid=%d r14=%d caller_offset=%d' %
+          (name, int(error.Success() and current == original), thread.GetThreadID(),
+           int(register.IsValid()), register.GetValueAsUnsigned(0), caller_offset), flush=True)
     return False

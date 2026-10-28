@@ -1,6 +1,8 @@
 # Status, 2026-10-29
 
-A CPU-only dynamic-loading calibration observes two hardware breakpoints, rejects a wrong base, and verifies the target bytes at both hits. The AppleGVA profile has not run. [Evidence](VIDEO_GVA_HW_WITNESS.md).
+Two scoped AppleGVA processes reach both instructions following the base and derived constructor calls, with same-thread selector-2 and matching caller frames. Hardware video still returns -12913. [Evidence](VIDEO_GVA_CONSTRUCTOR_RETURN.md).
+
+A CPU-only dynamic-loading calibration observes two hardware breakpoints, rejects a wrong base, and verifies the target bytes at both hits. [Evidence](VIDEO_GVA_HW_WITNESS.md).
 
 Two scoped AppleGVA video requests produce no events at a conditional post-constructor deallocator callsite; constructor completion and hardware decode remain unproved. [Evidence](VIDEO_GVA_POSTCONSTRUCTOR.md).
 
