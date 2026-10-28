@@ -75,8 +75,9 @@
 // commands. Copies retain bindings, discard cached native records, and rematerialize
 // on execution; this is not a GPU-timeline copy or native Apple ICB identity.
 - (BOOL)enableExperimentalPartialSnapshotCopyWithError:(NSError **)error;
-// Separate opt-in for a single GPU-timeline copy of equal-geometry, prepared
-// partial commands. Both slots must be prepared explicitly; up to eight regions.
+// Separate opt-in for GPU-timeline copies of prepared partial commands.
+// Each source/destination pair must have the same geometry; all slots must be
+// prepared explicitly, with up to eight physical regions for the whole range.
 // The scoped blit selector and serial compute encoder must use the scope queue.
 - (BOOL)enableExperimentalPartialGPUCopyWithError:(NSError **)error;
 - (BOOL)prepareExperimentalPartialGPUCopyCommand:(id<MTLIndirectCommandBuffer>)buffer

@@ -1,0 +1,50 @@
+{
+  "barrier_regression_invocations": 5632,
+  "cohorts": {
+    "mixed": {
+      "baseline_invocations": 342,
+      "committed_blits": 24,
+      "copied_invocations": 1368,
+      "copied_user_dispatches": 16,
+      "correct_uint32_words": 5472,
+      "hosts": 12,
+      "predecessor_refusals": 4,
+      "uncommitted_prepare_blits": 6
+    },
+    "mixed_uniform": {
+      "baseline_invocations": 342,
+      "committed_blits": 24,
+      "copied_invocations": 1368,
+      "copied_user_dispatches": 16,
+      "correct_uint32_words": 5472,
+      "hosts": 12,
+      "predecessor_refusals": 4,
+      "uncommitted_prepare_blits": 6
+    },
+    "range": {
+      "baseline_invocations": 342,
+      "committed_blits": 48,
+      "copied_invocations": 1368,
+      "copied_user_dispatches": 16,
+      "correct_uint32_words": 5472,
+      "hosts": 12,
+      "predecessor_refusals": 4,
+      "uncommitted_prepare_blits": 12
+    }
+  },
+  "fresh_archive_SHA256": "7a9687eaea42adeecdc5d6775d0e895b5f82796f28d32a5f1600eae52e533bfb",
+  "fresh_object_members_match": true,
+  "host_processes": 46,
+  "nonoverlapping": true,
+  "runtime_archive_SHA256": "bf3190aef61b866c1a45bdd90efd7532ef523550b6e160e8c0f8b23aa833fbfd",
+  "scope": "Opted-in preflighted prepared partial project ICB ranges up to eight regions; mixed serial execution of copied and existing partial or uniform slots; not native Apple ICB.",
+  "single_regression_invocations": 962,
+  "snapshot_regression_invocations": 4329,
+  "source_SHA256": {
+    "KeplerCPUICB.h": "68f0133711a8dd800f2d03e12813abee9299666522720f8a7b4b7ab71684942a",
+    "KeplerCPUICB.mm": "88b49ccf6bd9b76be8ee840791aaffaa7bfea4f33fed2b25ef7e03bacbfeedd0",
+    "KeplerPartialGridPlan.h": "f46e10ce958221a968aaf39481a71f773345830c6c68ac071a7b14bdc52299f7"
+  },
+  "status": "PASS",
+  "uniform_regression_invocations": 37264
+}
