@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+The scoped CPU render ICB now treats selected zero-count and zero-instance triangle draws as inert. Two GTX direct/adapted process pairs match raw pixels; three invalid inputs remain refused. M1 direct/ICB references agree on the tested outcomes. [Evidence and limits](EMPTY_RENDER_DRAWS.md).
+
 Two GTX cohorts correlate the relocated indirect-branch register byte and `0x330` entry within the same instrumented CAS shader. The exact source of entry and general control flow remain unproved. [Evidence](CAS_JOINT_WITNESS.md).
 
 Three process-local GPU probes preserve the original indirect instruction and mark entry at candidate locations. The `0x330` control also marks a non-indirect-observed pattern, so marker origin remains unproved. [Evidence](CAS_TARGET_ENTRY_WITNESS.md).

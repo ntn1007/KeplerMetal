@@ -74,14 +74,14 @@
       "path": "bridge/src/KeplerCPUICB.mm",
       "source_path": "bridge/src/KeplerCPUICB.mm",
       "source_SHA256": "3d59c2c609611ddc387e616b8945e903f6378dbd4a3b66a02cb22087ada84b60",
-      "published_SHA256": "06f573eec8d1b4283f8e069bc7ba0689aac3085d5a47f4981b6450fcde1be20d",
-      "bytes": 168767,
+      "published_SHA256": "a2f29202a708be860148e2695055dfce1134990c91e2d832d6079fc7a9a28828",
+      "bytes": 168777,
       "modified_for_publication": true,
       "previous_published_SHA256": "183be0be67c910ebdbff61841347f6146f72e0b1512bf241d54f0d258a308828",
       "latest_change": {
-        "previous_published_SHA256": "87c43fd883f46425f9642f537226e3087292041ed5352533c53e48d138f23a84",
-        "previous_bytes": 163826,
-        "reason": "Add bounded whole-range preflight and preparation for partial GPU copies, plus explicit ended-blit detach for process-local automatic adaptation."
+        "previous_published_SHA256": "06f573eec8d1b4283f8e069bc7ba0689aac3085d5a47f4981b6450fcde1be20d",
+        "previous_bytes": 168767,
+        "reason": "Support bounded CPU render ICB draws with zero vertices, indices or instances as inert commands; clear stale records."
       },
       "previous_latest_change": {
         "previous_published_SHA256": "3bb6877715b3d456167c48c3b567398666b9eeb1f7750351be434edc1f1bb6f9",
@@ -108,6 +108,11 @@
           "previous_published_SHA256": "88b49ccf6bd9b76be8ee840791aaffaa7bfea4f33fed2b25ef7e03bacbfeedd0",
           "previous_bytes": 162772,
           "reason": "Allow explicitly prepared, equal-geometry mixed partial/uniform GPU-copy ranges and conservatively track copied ownership."
+        },
+        {
+          "previous_published_SHA256": "87c43fd883f46425f9642f537226e3087292041ed5352533c53e48d138f23a84",
+          "previous_bytes": 163826,
+          "reason": "Add bounded whole-range preflight and preparation for partial GPU copies, plus explicit ended-blit detach for process-local automatic adaptation."
         }
       ]
     },
@@ -1591,10 +1596,15 @@
       "path": "bridge/tools/cpu_icb_render_probe.mm",
       "source_path": "bridge/tools/cpu_icb_render_probe.mm",
       "source_SHA256": "3d16e5652bc19184c1a9372fd051f25d4bf3f49fedd67481d2c80dbfeffab68b",
-      "published_SHA256": "620a759c7b4ac3dc156eaaf5db3bb7d7cd7817711492b624dfea956e7b6cfe46",
-      "bytes": 11928,
+      "published_SHA256": "63dfccf36ebc2c18dfcd07624c519c17d79744daf65dfc3459002007360db1e1",
+      "bytes": 11940,
       "modified_for_publication": true,
-      "previous_published_SHA256": "3d16e5652bc19184c1a9372fd051f25d4bf3f49fedd67481d2c80dbfeffab68b"
+      "previous_published_SHA256": "3d16e5652bc19184c1a9372fd051f25d4bf3f49fedd67481d2c80dbfeffab68b",
+      "latest_change": {
+        "previous_published_SHA256": "620a759c7b4ac3dc156eaaf5db3bb7d7cd7817711492b624dfea956e7b6cfe46",
+        "previous_bytes": 11928,
+        "reason": "Replace formerly rejected zero-vertex case with an incomplete-triangle rejection control."
+      }
     },
     {
       "path": "bridge/tools/cpu_icb_vertex_probe.mm",
@@ -4715,10 +4725,15 @@
       "path": "bridge/tools/verify_cpu_icb_render.py",
       "source_path": "bridge/tools/verify_cpu_icb_render.py",
       "source_SHA256": "680916770b0af0a1afad5fe26bc3afc1ed99cb03875b3e5b6571cf3a91854cf6",
-      "published_SHA256": "e856e56c0373e65e40827c51fb1c184199dd6e9dc68f1fce27b7526c9e1f3bae",
-      "bytes": 8718,
+      "published_SHA256": "1c8451f4bf7c426c05a7beb698bcc9f35d9f2e6ef44484cecb81e5237223c2ea",
+      "bytes": 8803,
       "modified_for_publication": true,
-      "previous_published_SHA256": "680916770b0af0a1afad5fe26bc3afc1ed99cb03875b3e5b6571cf3a91854cf6"
+      "previous_published_SHA256": "680916770b0af0a1afad5fe26bc3afc1ed99cb03875b3e5b6571cf3a91854cf6",
+      "latest_change": {
+        "previous_published_SHA256": "e856e56c0373e65e40827c51fb1c184199dd6e9dc68f1fce27b7526c9e1f3bae",
+        "previous_bytes": 8718,
+        "reason": "Preserve historical zero-vertex rejection evidence and accept the revised incomplete-triangle control."
+      }
     },
     {
       "path": "bridge/tools/verify_cpu_icb_render_delivery.py",
@@ -8042,5 +8057,9 @@
     "previous_source_snapshot_SHA256": "5a69135fe8a5e7837e9bad6407d146f4679469b087446c9e6bd12f36af65752e",
     "previous_public_commit": "cbebd56",
     "scope": "Exact native conditional auxiliary digest enforced; no general indirect branch qualification."
+  },
+  "empty_render_update": {
+    "previous_commit": "a5482e4",
+    "scope": "CPU render ICB empty draw support and updated negative control; source snapshots remain preserved by hash."
   }
 }

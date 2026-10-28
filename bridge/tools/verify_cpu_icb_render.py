@@ -37,7 +37,8 @@ def verify(root,current=False,portable=False):
   require(sha(root/name)==h,'frozen source differs')
   if current:require(sha(Path(__file__).resolve().parents[1]/('src' if name.startswith('Kepler') else 'tools')/name)==h,'current source differs: '+name)
  expected_neg={'mixed_compute_descriptor','inherit_buffers','foreign_pipeline','unaligned_index','zero_vertices','compute_command_domain','range_bounds'}
- require({x['case'] for x in d['rejections']}==expected_neg and all(x['rejected'] for x in d['rejections']),'rejection controls missing')
+ actual_neg={x['case'] for x in d['rejections']}
+ require(actual_neg in (expected_neg, (expected_neg-{'zero_vertices'})|{'incomplete_triangle'}) and all(x['rejected'] for x in d['rejections']),'rejection controls missing')
  require(len(d['runs'])==(11 if mode=='execute' else 1),'trial count differs')
  rawhash={};out=root/'outputs'
  def load(name):p=out/name;rawhash[name]=sha(p);return p.read_bytes()
