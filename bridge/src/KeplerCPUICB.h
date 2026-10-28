@@ -75,6 +75,12 @@
 // commands. Copies retain bindings, discard cached native records, and rematerialize
 // on execution; this is not a GPU-timeline copy or native Apple ICB identity.
 - (BOOL)enableExperimentalPartialSnapshotCopyWithError:(NSError **)error;
+// Separate opt-in for a single GPU-timeline copy of equal-geometry, prepared
+// partial commands. Both slots must be prepared explicitly; up to eight regions.
+// The scoped blit selector and serial compute encoder must use the scope queue.
+- (BOOL)enableExperimentalPartialGPUCopyWithError:(NSError **)error;
+- (BOOL)prepareExperimentalPartialGPUCopyCommand:(id<MTLIndirectCommandBuffer>)buffer
+                                           index:(NSUInteger)index error:(NSError **)error;
 // Bounded GPU-timeline copy extension for native profiles owned by this scope.
 // Manifest registrations support reflected buffer layouts and static shared.
 // Dynamic shared argument0 uses a registered CPU-readable allocation bound;

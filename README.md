@@ -21,7 +21,7 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
-The opt-in project ICB adapter now qualifies overlapping CPU snapshot copies of certified partial-grid commands in both directions. [Evidence and limits](docs/PARTIAL_ICB_OVERLAP.md).
+The opt-in project ICB adapter now copies one certified partial-grid command on the GPU timeline through the scoped Metal blit selector. [Evidence and limits](docs/PARTIAL_ICB_GPU_COPY.md).
 
 The source-built CAS SDK passes GTX controls after regenerating certificates with the strengthened backedge recognizer. [Evidence and limits](docs/CAS_BACKEDGE_SDK.md).
 

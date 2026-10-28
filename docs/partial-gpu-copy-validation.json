@@ -1,0 +1,26 @@
+{
+  "barrier_regression_invocations": 5632,
+  "baseline_invocations": 481,
+  "committed_copy_blits": 40,
+  "copied_correct_uint32_words": 7696,
+  "copied_invocations": 1924,
+  "copied_user_dispatches": 8,
+  "copy_hosts": 12,
+  "fresh_archive_SHA256": "34a44ce829d55d586abc272e28cc4a04633beec79331acadaab063a5e96abb12",
+  "fresh_object_members_match": true,
+  "geometry_and_region_limit_refusals": 12,
+  "host_processes": 18,
+  "nonoverlapping": true,
+  "runtime_archive_SHA256": "5bcb34cf41561b7f4b28f11ad4ccbbd6c7afa26f8a91f33f4cdff894354b484a",
+  "scope": "One explicitly opted-in prepared equal-geometry partial project ICB command, up to eight regions; not native Apple ICB or general GPU command generation.",
+  "separate_uncommitted_predecessor_refusals": 4,
+  "snapshot_regression_invocations": 4329,
+  "source_SHA256": {
+    "KeplerCPUICB.h": "52e3760f7843b9f235682bb21ab43222360f84d8d57321557aa87bee71c46be5",
+    "KeplerCPUICB.mm": "78a7df2f20f1dc2cea2a318ef73a1f4c0418bd64191a9ce35b7c1990cf7b9f73",
+    "KeplerPartialGridPlan.h": "f46e10ce958221a968aaf39481a71f773345830c6c68ac071a7b14bdc52299f7"
+  },
+  "status": "PASS",
+  "uncommitted_prepare_blits": 10,
+  "uniform_regression_invocations": 37264
+}
