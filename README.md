@@ -21,7 +21,7 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
-The opt-in project ICB adapter can now snapshot-copy certified partial-grid commands and rematerialize them after the source is reset. [Evidence and limits](docs/PARTIAL_ICB_SNAPSHOT.md).
+The opt-in project ICB adapter now qualifies overlapping CPU snapshot copies of certified partial-grid commands in both directions. [Evidence and limits](docs/PARTIAL_ICB_OVERLAP.md).
 
 The source-built CAS SDK passes GTX controls after regenerating certificates with the strengthened backedge recognizer. [Evidence and limits](docs/CAS_BACKEDGE_SDK.md).
 

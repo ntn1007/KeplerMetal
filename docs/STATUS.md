@@ -1,6 +1,6 @@
 # Status, 2026-10-27
 
-The opt-in project ICB path now supports CPU snapshot copies of certified partial-grid commands, including tested mixtures with uniform commands. [Evidence](PARTIAL_ICB_SNAPSHOT.md). The native CAS vector-register check remains qualified [here](CAS_REGISTER_SPAN.md); arbitrary applications and shaders remain unqualified.
+The opt-in project ICB path now qualifies overlapping CPU snapshot copies in both directions inside one ICB. [Evidence](PARTIAL_ICB_OVERLAP.md). Earlier nonoverlapping and mixed-command qualification remains [here](PARTIAL_ICB_SNAPSHOT.md). The native CAS vector-register check remains qualified [here](CAS_REGISTER_SPAN.md); arbitrary applications and shaders remain unqualified.
 
 The single-overlay CAS SDK was regenerated using the backedge check and validated on the GTX; scope remains four adapted-client shader shapes. [Evidence](CAS_BACKEDGE_SDK.md).
 

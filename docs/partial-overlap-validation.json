@@ -1,0 +1,77 @@
+{
+  "checked_output_words": 34632,
+  "directions": [
+    "forward",
+    "backward"
+  ],
+  "host_processes": 6,
+  "invocations": 8658,
+  "logical_dispatches": 36,
+  "nonoverlapping": true,
+  "reference_identical_files": 240,
+  "rows": [
+    {
+      "checked_output_words": 0,
+      "direction": "forward",
+      "invocations": 0,
+      "logical_dispatches": 0,
+      "mode": "prepare",
+      "reference_identical_files": 0,
+      "result_SHA256": "d872290f2204f6efb8e1c99f23625fbf3a62bf180edd0097c48749a95bcbfe13",
+      "scenario": 0
+    },
+    {
+      "checked_output_words": 0,
+      "direction": "backward",
+      "invocations": 0,
+      "logical_dispatches": 0,
+      "mode": "prepare",
+      "reference_identical_files": 0,
+      "result_SHA256": "db7d7dfaef8121ec154cc55d9afdb55a4119d91f502266dde9161eee1f3684cf",
+      "scenario": 3
+    },
+    {
+      "checked_output_words": 3456,
+      "direction": "forward",
+      "invocations": 864,
+      "logical_dispatches": 9,
+      "mode": "execute",
+      "reference_identical_files": 60,
+      "result_SHA256": "61ea5009fcf29cad3f2288f23ec92c7c48956e4335f543ad40e086eeaa7701be",
+      "scenario": 0
+    },
+    {
+      "checked_output_words": 13860,
+      "direction": "backward",
+      "invocations": 3465,
+      "logical_dispatches": 9,
+      "mode": "execute",
+      "reference_identical_files": 60,
+      "result_SHA256": "68be1ef64c8586dba5bebda9e923fb9581bd3ee807522e2600fda12870e9cd63",
+      "scenario": 3
+    },
+    {
+      "checked_output_words": 3456,
+      "direction": "forward",
+      "invocations": 864,
+      "logical_dispatches": 9,
+      "mode": "execute",
+      "reference_identical_files": 60,
+      "result_SHA256": "502676341d0a5272c32295b8161008cda4109ee6d8593c48df211a497895acae",
+      "scenario": 0
+    },
+    {
+      "checked_output_words": 13860,
+      "direction": "backward",
+      "invocations": 3465,
+      "logical_dispatches": 9,
+      "mode": "execute",
+      "reference_identical_files": 60,
+      "result_SHA256": "dc46a571505887239432de37140730a13205713f08ad762e9c39b3f9d00b0fc2",
+      "scenario": 3
+    }
+  ],
+  "runtime_archive_SHA256": "7d69f2d021cb3c70c27cce174efbf54ba35e10746a3d9a77430d30d8436fe205",
+  "scope": "CPU snapshot overlapping ranges of the same project ICB; not a GPU-timeline copy or native Apple ICB.",
+  "status": "PASS"
+}
