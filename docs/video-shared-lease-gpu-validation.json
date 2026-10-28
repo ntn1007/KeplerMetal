@@ -1,0 +1,63 @@
+{
+  "build_inputs_SHA256": "248195636c91ea1f0cbd0718c365496a79946aa1685cc189aad656808bc377f1",
+  "cases": [
+    {
+      "gpu_dispatched": true,
+      "mode": "lease-release",
+      "queue_after": true,
+      "result_SHA256": "48784a7e2e3d7109d66d5fe69475c9ed3d2c2e849a9da4b2b59cfaa99d9ab7a2"
+    },
+    {
+      "gpu_dispatched": true,
+      "mode": "observe",
+      "queue_after": true,
+      "result_SHA256": "529a7bf7bede597a949983e06e4c33e99162485c4a989225e7f2fde03c45dbd8"
+    },
+    {
+      "gpu_dispatched": false,
+      "mode": "lease-close",
+      "queue_after": false,
+      "result_SHA256": "207c8883db6a121ebebf723522dbe11e792b50705434e7f195724f7d4d8726e3"
+    },
+    {
+      "gpu_dispatched": false,
+      "mode": "lease-negative",
+      "queue_after": true,
+      "result_SHA256": "f436c8690dee6906477196b593d254343d4ffa4bd067b5bf4ae57495cc2e234f"
+    },
+    {
+      "gpu_dispatched": true,
+      "mode": "lease-release",
+      "queue_after": true,
+      "result_SHA256": "fc198cd6dc8fe26bcbe72e901959278c073c89bead4d2510e22c6e4d44c5702e"
+    },
+    {
+      "gpu_dispatched": false,
+      "mode": "lease-negative",
+      "queue_after": true,
+      "result_SHA256": "dce20263dbdb0670621035b0c68c88fc36973fe74bb2b069119ae6852abc41d6"
+    },
+    {
+      "gpu_dispatched": false,
+      "mode": "lease-close",
+      "queue_after": false,
+      "result_SHA256": "b55b3bd0439e60552fcd150864d749e83f05c11fa42eae5ff4c8b724d18b84e5"
+    }
+  ],
+  "explicit_close_expected_queue_failures": 2,
+  "gpu_verified_words": 12288,
+  "guard_words": 160,
+  "hardware_video_execution_proved": false,
+  "negative_sentinel_words": 8192,
+  "reference_release_negative_controls": 2,
+  "release_gpu_processes": 2,
+  "same_object_and_name": true,
+  "scope": "Pinned process-local type-3 video association plus guarded type-6 alias release; no decoding, general driver fix, or concurrency proof.",
+  "send_right_counts": [
+    1,
+    2,
+    1
+  ],
+  "status": "PASS_BOUNDED_ASSOCIATED_LEASE_RELEASE",
+  "terminal_nonoverlapping_processes": 7
+}

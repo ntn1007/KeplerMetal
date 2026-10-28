@@ -10,6 +10,8 @@ The [seven-process audit](video-shared-guard-gpu-validation.json) checks the fro
 
 The final cohort uses an ordinary Metal client with a process-local observer; it does not call the legacy AppleGVA provider or establish hardware decoding. This is a bounded experimental lifecycle correction, not an installed driver repair, a general solution for all aliases, or a performance measurement. The existing [VideoContextLease](VIDEO_CONTEXT_LEASE.md) still uses its original backend and is **not integrated or qualified with this guard**. Never infer that its teardown is safe for continued Metal use from this experiment.
 
+A [subsequent witness](VIDEO_SHARED_LEASE_GPU.md) also exercises the actual type-3 association and the existing lease with a separate guarded backend.
+
 ## Re-audit and CPU tests
 
 The archived GPU result is re-audited; these commands do not rerun the GPU cohort. They require the original private lab and matching frozen source/build profile:
