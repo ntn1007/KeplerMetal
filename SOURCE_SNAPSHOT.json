@@ -28,19 +28,19 @@
       "path": "bridge/src/KeplerCPUICB.h",
       "source_path": "bridge/src/KeplerCPUICB.h",
       "source_SHA256": "263dede0101967e1bfa32fe3b081b73c476d9e09e8a9b5446ae04cf4f425ee0a",
-      "published_SHA256": "3c4c628b8cb77bdcbdbbd8e51517b72c6785cb8f2b78e5f67844d70af24770dd",
-      "bytes": 38328,
+      "published_SHA256": "656dbbd78488bb1cd17ef986ea7c43a6912afabfaf3ef059c2ce40fec1d381ba",
+      "bytes": 39050,
       "modified_for_publication": true,
       "previous_published_SHA256": "3380d4932230816ea334277a11fd6603ce8d07cc81f725e45ac2e2027678920c",
       "latest_change": {
+        "previous_published_SHA256": "3c4c628b8cb77bdcbdbbd8e51517b72c6785cb8f2b78e5f67844d70af24770dd",
+        "previous_bytes": 38328,
+        "reason": "Add bounded whole-range preflight and preparation for partial GPU copies, plus explicit ended-blit detach for process-local automatic adaptation."
+      },
+      "previous_latest_change": {
         "previous_published_SHA256": "105217a1e9088af310065234088c6934753f79d003927c7dec28692534090a04",
         "previous_bytes": 38097,
         "reason": "Expose the existing queue-local automatic compute encoder factory behind an explicit public scope opt-in."
-      },
-      "previous_latest_change": {
-        "previous_published_SHA256": "68f0133711a8dd800f2d03e12813abee9299666522720f8a7b4b7ab71684942a",
-        "previous_bytes": 37980,
-        "reason": "Allow explicitly prepared, equal-geometry mixed partial/uniform GPU-copy ranges and conservatively track copied ownership."
       },
       "prior_change_history": [
         {
@@ -57,6 +57,11 @@
           "previous_published_SHA256": "52e3760f7843b9f235682bb21ab43222360f84d8d57321557aa87bee71c46be5",
           "previous_bytes": 37909,
           "reason": "Expand the opted-in partial GPU copy to a fully preflighted range and permit checked serial mixed execution."
+        },
+        {
+          "previous_published_SHA256": "68f0133711a8dd800f2d03e12813abee9299666522720f8a7b4b7ab71684942a",
+          "previous_bytes": 37980,
+          "reason": "Allow explicitly prepared, equal-geometry mixed partial/uniform GPU-copy ranges and conservatively track copied ownership."
         }
       ]
     },
@@ -64,19 +69,19 @@
       "path": "bridge/src/KeplerCPUICB.mm",
       "source_path": "bridge/src/KeplerCPUICB.mm",
       "source_SHA256": "3d59c2c609611ddc387e616b8945e903f6378dbd4a3b66a02cb22087ada84b60",
-      "published_SHA256": "87c43fd883f46425f9642f537226e3087292041ed5352533c53e48d138f23a84",
-      "bytes": 163826,
+      "published_SHA256": "06f573eec8d1b4283f8e069bc7ba0689aac3085d5a47f4981b6450fcde1be20d",
+      "bytes": 168767,
       "modified_for_publication": true,
       "previous_published_SHA256": "183be0be67c910ebdbff61841347f6146f72e0b1512bf241d54f0d258a308828",
       "latest_change": {
+        "previous_published_SHA256": "87c43fd883f46425f9642f537226e3087292041ed5352533c53e48d138f23a84",
+        "previous_bytes": 163826,
+        "reason": "Add bounded whole-range preflight and preparation for partial GPU copies, plus explicit ended-blit detach for process-local automatic adaptation."
+      },
+      "previous_latest_change": {
         "previous_published_SHA256": "3bb6877715b3d456167c48c3b567398666b9eeb1f7750351be434edc1f1bb6f9",
         "previous_bytes": 163699,
         "reason": "Expose the existing queue-local automatic compute encoder factory behind an explicit public scope opt-in."
-      },
-      "previous_latest_change": {
-        "previous_published_SHA256": "88b49ccf6bd9b76be8ee840791aaffaa7bfea4f33fed2b25ef7e03bacbfeedd0",
-        "previous_bytes": 162772,
-        "reason": "Allow explicitly prepared, equal-geometry mixed partial/uniform GPU-copy ranges and conservatively track copied ownership."
       },
       "prior_change_history": [
         {
@@ -93,6 +98,11 @@
           "previous_published_SHA256": "78a7df2f20f1dc2cea2a318ef73a1f4c0418bd64191a9ce35b7c1990cf7b9f73",
           "previous_bytes": 160646,
           "reason": "Expand the opted-in partial GPU copy to a fully preflighted range and permit checked serial mixed execution."
+        },
+        {
+          "previous_published_SHA256": "88b49ccf6bd9b76be8ee840791aaffaa7bfea4f33fed2b25ef7e03bacbfeedd0",
+          "previous_bytes": 162772,
+          "reason": "Allow explicitly prepared, equal-geometry mixed partial/uniform GPU-copy ranges and conservatively track copied ownership."
         }
       ]
     },
@@ -7908,6 +7918,15 @@
     "date": "2026-10-28",
     "previous_public_commit": "f2dc2b750a24b29f3d8a5a4af818243339561ae4",
     "previous_snapshot_SHA256": "e8c9e05b28a274562b2fc3956486167f53ead4fb979b6c44b2a77be1317413fd",
+    "files": [
+      "bridge/src/KeplerCPUICB.h",
+      "bridge/src/KeplerCPUICB.mm"
+    ]
+  },
+  "automatic_partial_copy_update": {
+    "date": "2026-10-28",
+    "previous_public_commit": "26d26b8fbb7b1a837dcc545d3c7964fcf87bd893",
+    "previous_snapshot_SHA256": "cdf81c826c5800aed14182be01016becd3d9f4ecc360eaccf525f4e4de3d8b7b",
     "files": [
       "bridge/src/KeplerCPUICB.h",
       "bridge/src/KeplerCPUICB.mm"

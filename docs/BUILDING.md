@@ -1,5 +1,7 @@
 # Build from source
 
+[STANDALONE_AUTOMATIC_COPY.md](STANDALONE_AUTOMATIC_COPY.md) covers object-based scoped GPU ICB copying and preflight.
+
 [STANDALONE_PARTIAL_COPY.md](STANDALONE_PARTIAL_COPY.md) documents the public-Metal scoped GPU-copy client and its controls.
 
 [STANDALONE_PARTIAL_COMPUTE.md](STANDALONE_PARTIAL_COMPUTE.md) covers the public-Metal partial compute client and same-runtime regressions.

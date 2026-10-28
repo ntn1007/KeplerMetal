@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+A pinned public-Metal client performs object-based, unlabelled GPU ICB copies with whole-range preflight. Third-party applications remain unqualified. [Evidence](STANDALONE_AUTOMATIC_COPY.md).
+
 A pinned public-Metal client performs a labelled, scoped GPU copy of a mixed compute ICB; third-party applications remain unqualified. [Evidence](STANDALONE_PARTIAL_COPY.md).
 
 A pinned public-Metal client executes a bounded dual-pipeline compute ICB through an explicit process-local bootstrap; ordinary applications remain unqualified. [Evidence](STANDALONE_PARTIAL_COMPUTE.md).

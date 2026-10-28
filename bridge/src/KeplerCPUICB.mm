@@ -871,6 +871,31 @@ BOOL installRenderOverride(Class dynamic,Class original,SEL selector,IMP impleme
  if(!ok)return fail(error,reason?:@"Partial GPU copy preparation failed");[_eventRows addObject:@{@"operation":@"prepare_partial_GPU_copy",@"index":@(index),@"regions":@(count),@"user_kernel_dispatches":@0,@"GPU_initialization_used":@YES}];return YES;
 }
 
+
+- (BOOL)prepareExperimentalPartialGPUCopyFrom:(id<MTLIndirectCommandBuffer>)source sourceRange:(NSRange)range destination:(id<MTLIndirectCommandBuffer>)destination destinationIndex:(NSUInteger)index error:(NSError**)error {
+ if(error)*error=nil;
+ if(_restored||!_experimentalPartialGPUCopyEnabled||![source isKindOfClass:KPComputeICB.class]||![destination isKindOfClass:KPComputeICB.class]||[source isKindOfClass:KPRenderICB.class]||[destination isKindOfClass:KPRenderICB.class]||((KPComputeICB*)source).scope!=self||((KPComputeICB*)destination).scope!=self||!range.length||range.length>16||range.location>source.size||range.length>source.size-range.location||index>destination.size||range.length>destination.size-index||(source==destination&&NSIntersectionRange(range,NSMakeRange(index,range.length)).length))return fail(error,@"Automatic partial GPU copy context or range differs");
+ KPComputeICB*s=(KPComputeICB*)source,*d=(KPComputeICB*)destination;NSUInteger total=0;BOOL includesPartial=NO;NSDictionary*domain=nil;
+ @try{for(NSUInteger k=0;k<range.length;k++){
+  KPComputeICBCommand*a=s.commands[range.location+k],*b=d.commands[index+k];NSDictionary*pa=[self profileForPipeline:a.pipeline],*pb=[self profileForPipeline:b.pipeline];BOOL partial=a.partialGrid3D;MTLSize ag=partial?a.partialGrid:a.groups,bg=partial?b.partialGrid:b.groups;
+  BOOL same=ag.width==bg.width&&ag.height==bg.height&&ag.depth==bg.depth&&a.local.width==b.local.width&&a.local.height==b.local.height&&a.local.depth==b.local.depth;
+  if(partial!=b.partialGrid3D||a.GPUGenerated||b.GPUGenerated||a.reusableContext||b.reusableContext||a.residentOwners.count||b.residentOwners.count||!a.hasDispatch||!b.hasDispatch||!certifiedPartialProfile(pa,a.pipeline)||!certifiedPartialProfile(pb,b.pipeline)||a.pipeline!=b.pipeline||!sameResidentRegistration(pa,pb)||(domain&&!sameResidentRegistration(domain,pa))||!same)reject(@"Automatic partial GPU copy requires original equal-geometry commands");domain=pa;
+  NSUInteger invocations=0,regions=0;
+  if(partial){includesPartial=YES;if(ag.width>1023||ag.height>1023||ag.depth>1023||a.local.width>1023||a.local.height>1023||a.local.depth>1023)reject(@"Automatic partial GPU copy dimension differs");std::vector<KPPartialPlan::Region>plan;if(!KPPartialPlan::plan({(uint32_t)ag.width,(uint32_t)ag.height,(uint32_t)ag.depth},{(uint32_t)a.local.width,(uint32_t)a.local.height,(uint32_t)a.local.depth},plan))reject(@"Automatic partial GPU copy plan differs");regions=plan.size();invocations=volume(ag,1024);}
+  else {NSString*ea=residentBindingError(a,self),*eb=residentBindingError(b,self);NSUInteger g=volume(a.groups,128),l=volume(a.local,128);if(ea||eb||!g||!l||g>128/l)reject(@"Automatic uniform GPU copy profile differs");regions=1;invocations=g*l;}
+  validatePartialEnvelope(a,self,invocations);validatePartialEnvelope(b,self,invocations);total+=regions;if(total>8)reject(@"Automatic partial GPU copy range exceeds eight regions");
+ }}@catch(NSException*x){return fail(error,x.reason?:@"Automatic partial GPU copy preflight failed");}
+ if(!includesPartial)return fail(error,@"Automatic partial GPU copy requires a partial slot");
+ for(NSUInteger k=0;k<range.length;k++){KPComputeICBCommand*c=s.commands[range.location+k];for(unsigned side=0;side<2;side++){id<MTLIndirectCommandBuffer>buffer=side?destination:source;NSUInteger slot=side?index+k:range.location+k;BOOL ok=c.partialGrid3D?[self prepareExperimentalPartialGPUCopyCommand:buffer index:slot error:error]:[self prepareResidentComputeCommands:buffer range:NSMakeRange(slot,1) error:error];if(!ok)return NO;}}
+ [_eventRows addObject:@{@"operation":@"prepare_automatic_partial_GPU_copy",@"source_location":@(range.location),@"destination_index":@(index),@"length":@(range.length),@"regions":@(total),@"whole_range_preflight_before_initialization":@YES,@"user_kernel_dispatches":@0,@"GPU_initialization_may_wait":@YES}];return YES;
+}
+- (BOOL)detachEndedExperimentalBlitEncoder:(id<MTLBlitCommandEncoder>)encoder error:(NSError**)error {
+ @synchronized(_factoryLock){if(error)*error=nil;if(_restored||!encoder||scopeFor(encoder)!=self)return fail(error,@"Ended blit scope differs");NSUInteger found=NSNotFound;for(NSUInteger i=0;i<_adapted.count;i++)if(((KPAdaptedEncoder*)_adapted[i]).encoder==encoder){if(found!=NSNotFound)return fail(error,@"Duplicate adapted blit record");found=i;}
+  if(found==NSNotFound)return fail(error,@"Adapted blit record missing");KPAdaptedEncoder*r=_adapted[found];Class current=object_getClass(encoder),adapted=[NSStringFromClass(current)hasPrefix:@"KMAutoBoundBlit_"]?class_getSuperclass(current):current;if(!adapted||class_getSuperclass(adapted)!=r.originalClass||![NSStringFromClass(adapted)hasPrefix:@"KPICBBlit_"])return fail(error,@"Adapted blit class differs");
+  object_setClass(encoder,r.originalClass);objc_setAssociatedObject(encoder,&contextKey,nil,OBJC_ASSOCIATION_ASSIGN);[_adapted removeObjectAtIndex:found];return YES;
+ }
+}
+
 - (NSArray*)events{return [_eventRows copy];}
 - (BOOL)adaptComputeEncoder:(id<MTLComputeCommandEncoder>)e error:(NSError**)error {@synchronized(_factoryLock){
  if(error)*error=nil;

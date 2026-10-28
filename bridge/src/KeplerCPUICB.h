@@ -87,6 +87,15 @@
 - (BOOL)enableExperimentalPartialGPUCopyWithError:(NSError **)error;
 - (BOOL)prepareExperimentalPartialGPUCopyCommand:(id<MTLIndirectCommandBuffer>)buffer
                                            index:(NSUInteger)index error:(NSError **)error;
+// Preflight the complete original-command range before preparing any slot.
+// Preparation may submit bounded native initialization and wait; no user
+// shader is dispatched. Caller must discard a command buffer after failure.
+- (BOOL)prepareExperimentalPartialGPUCopyFrom:(id<MTLIndirectCommandBuffer>)source
+                                   sourceRange:(NSRange)range
+                                   destination:(id<MTLIndirectCommandBuffer>)destination
+                              destinationIndex:(NSUInteger)index error:(NSError **)error;
+// Detach only after the caller has ended the adapted blit encoder.
+- (BOOL)detachEndedExperimentalBlitEncoder:(id<MTLBlitCommandEncoder>)encoder error:(NSError **)error;
 // Bounded GPU-timeline copy extension for native profiles owned by this scope.
 // Manifest registrations support reflected buffer layouts and static shared.
 // Dynamic shared argument0 uses a registered CPU-readable allocation bound;

@@ -21,6 +21,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+A pinned public-Metal client now performs scoped GPU ICB copies without a command-buffer label; range preflight precedes preparation. [Evidence and limits](docs/STANDALONE_AUTOMATIC_COPY.md).
+
 A pinned public-Metal client now performs a scoped GPU ICB copy through an explicit process-local bootstrap. [Evidence and limits](docs/STANDALONE_PARTIAL_COPY.md).
 
 A separately linked public-Metal test client executes a bounded partial/uniform compute ICB through an explicit process-local bootstrap. [Evidence and limits](docs/STANDALONE_PARTIAL_COMPUTE.md).
