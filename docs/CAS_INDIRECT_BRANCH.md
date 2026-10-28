@@ -24,6 +24,9 @@ A separate [instrumented GPU witness](CAS_CB0_GPU_WITNESS.md) subsequently
 reads the three CB0 words and observes values matching the section in the
 tested profile; it does not trace the indirect branch or prove the driver's
 copy mechanism.
+A further [branch-register witness](CAS_BRANCH_REGISTER_WITNESS.md) observes
+the corresponding low bytes before a relocated indirect branch for three input
+patterns. It does not record which destination block was entered.
 
 The original SDK import checked the live code and metadata but did not pin the
 auxiliary section. The [new exact-profile guard](CAS_CONDITIONAL_AUX_GUARD.md)

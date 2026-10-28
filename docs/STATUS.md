@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+Two GPU witness cohorts record the low byte of a relocated conditional CAS indirect-branch register for patterns 0, 2, 3 and 4, with native output controls. Actual destination entry and the unmodified branch remain unproved. [Evidence](CAS_BRANCH_REGISTER_WITNESS.md).
+
 Two isolated GPU CB0 witnesses each read the three pinned candidate-section words across 99 threads; two known-value controls pass. This is a modified laboratory shader and does not trace the indirect branch. [Evidence](CAS_CB0_GPU_WITNESS.md).
 
 Four unsubmitted native/repaired conditional CAS command captures each show a 256-byte CB0 at the variant's aligned code end. These captures did not read CB0 contents or trace the branch. [Evidence](CAS_CONDITIONAL_CB0.md).

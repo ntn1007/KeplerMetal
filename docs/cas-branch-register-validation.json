@@ -1,0 +1,78 @@
+{
+  "GPU_processes": 16,
+  "GPU_rows": 1584,
+  "all_paths_qualified": false,
+  "branch_target_entry_proved": false,
+  "cohorts": 2,
+  "marker_scope": "low byte of register immediately before relocated indirect branch",
+  "performance_benchmark": false,
+  "receipts": [
+    {
+      "baseline_sha256": "bd5b845519f8757538f36478e170f388320e3a7b392e744a99fa3d5dbbbfa1be",
+      "cohort": 1,
+      "marker": "1",
+      "pattern": 0,
+      "rows": 99,
+      "trace_sha256": "e6903254e87308cc435525718628276fc82a6cc5f36fb5d32b1e003cf86c05e8"
+    },
+    {
+      "baseline_sha256": "91fb14414c72e74b5924eba2b590b7132ce909b8acac1caa356998b1faf03a9f",
+      "cohort": 1,
+      "marker": "152",
+      "pattern": 2,
+      "rows": 99,
+      "trace_sha256": "2b36d48c37d236a404c63a7eca09c21af0a7ae16ac795310fef7e1b0678fd065"
+    },
+    {
+      "baseline_sha256": "c6455aecfa2bcab244fbf8d3e202e2bde73f5d17afb49c543693c751d10ab16f",
+      "cohort": 1,
+      "marker": "184",
+      "pattern": 3,
+      "rows": 99,
+      "trace_sha256": "254fa84639430c5096fcb0eda3fbd3ce70138e44b0d4c5506e813b160e459582"
+    },
+    {
+      "baseline_sha256": "bd5b845519f8757538f36478e170f388320e3a7b392e744a99fa3d5dbbbfa1be",
+      "cohort": 1,
+      "marker": "48",
+      "pattern": 4,
+      "rows": 99,
+      "trace_sha256": "122702c9386f4a6931af81163d2cb0ee385db99766c705b4dced7678c34f67e3"
+    },
+    {
+      "baseline_sha256": "bd5b845519f8757538f36478e170f388320e3a7b392e744a99fa3d5dbbbfa1be",
+      "cohort": 2,
+      "marker": "1",
+      "pattern": 0,
+      "rows": 99,
+      "trace_sha256": "e6903254e87308cc435525718628276fc82a6cc5f36fb5d32b1e003cf86c05e8"
+    },
+    {
+      "baseline_sha256": "91fb14414c72e74b5924eba2b590b7132ce909b8acac1caa356998b1faf03a9f",
+      "cohort": 2,
+      "marker": "152",
+      "pattern": 2,
+      "rows": 99,
+      "trace_sha256": "2b36d48c37d236a404c63a7eca09c21af0a7ae16ac795310fef7e1b0678fd065"
+    },
+    {
+      "baseline_sha256": "c6455aecfa2bcab244fbf8d3e202e2bde73f5d17afb49c543693c751d10ab16f",
+      "cohort": 2,
+      "marker": "184",
+      "pattern": 3,
+      "rows": 99,
+      "trace_sha256": "254fa84639430c5096fcb0eda3fbd3ce70138e44b0d4c5506e813b160e459582"
+    },
+    {
+      "baseline_sha256": "bd5b845519f8757538f36478e170f388320e3a7b392e744a99fa3d5dbbbfa1be",
+      "cohort": 2,
+      "marker": "48",
+      "pattern": 4,
+      "rows": 99,
+      "trace_sha256": "122702c9386f4a6931af81163d2cb0ee385db99766c705b4dced7678c34f67e3"
+    }
+  ],
+  "resident_instructions_read_back": false,
+  "status": "PASS",
+  "unmodified_shader_branch_proved": false
+}

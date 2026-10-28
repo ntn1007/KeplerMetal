@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "GPU_dispatches": 0,
+  "cases": [
+    {
+      "case": "unchanged",
+      "accepted": true,
+      "expected_reason": null
+    },
+    {
+      "case": "guard",
+      "accepted": false,
+      "expected_reason": "trace guard differs"
+    },
+    {
+      "case": "marker",
+      "accepted": false,
+      "expected_reason": "unexpected marker"
+    },
+    {
+      "case": "data",
+      "accepted": false,
+      "expected_reason": "trace changed non-witness output"
+    },
+    {
+      "case": "aux-receipt",
+      "accepted": false,
+      "expected_reason": "constructor evidence differs"
+    },
+    {
+      "case": "process",
+      "accepted": false,
+      "expected_reason": "process differs"
+    },
+    {
+      "case": "code",
+      "accepted": false,
+      "expected_reason": "build differs"
+    },
+    {
+      "case": "restored",
+      "accepted": true,
+      "expected_reason": null
+    }
+  ]
+}
