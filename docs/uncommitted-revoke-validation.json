@@ -1,0 +1,51 @@
+{
+  "build_inputs_SHA256": "7aa93065ee56940e3788a5e2b3d1bebe1c0fdf2f44d03f1b6cc7418aada37b68",
+  "cases": [
+    {
+      "capture_SHA256": "30d2003958d2b2f4c8930ed988a7bf59a225ed2eb0658319d7a4b47f1b0a74a5",
+      "dispatches": 0,
+      "mode": "revoked-negative",
+      "result_SHA256": "523c016b3f545f5999d3be417918cc57876457f207aa622936640bbb48bfbc0b"
+    },
+    {
+      "capture_SHA256": "9038a4311bc559d4514f4200f48fcc8e88f9828c465263a11f9965c49938debd",
+      "dispatches": 1,
+      "mode": "native",
+      "result_SHA256": "a7e6627926c97fd3da278df626fcc10605244088265ada3f493f02196508c161"
+    },
+    {
+      "capture_SHA256": "742e722df151e137cd07bb22c5eeb618a615d167ac9889eb8bfa6b86de7bb830",
+      "dispatches": 1,
+      "mode": "revoked",
+      "result_SHA256": "377f3b811ae99349efa5a677caa8d5596a0da7fc8a453ee9787195ad695537ec"
+    },
+    {
+      "capture_SHA256": "9038a4311bc559d4514f4200f48fcc8e88f9828c465263a11f9965c49938debd",
+      "dispatches": 1,
+      "mode": "native",
+      "result_SHA256": "2c8ba06e02bfbe0c0922725a04933b9ad543de751d56b6250fbb430a87545195"
+    },
+    {
+      "capture_SHA256": "30d2003958d2b2f4c8930ed988a7bf59a225ed2eb0658319d7a4b47f1b0a74a5",
+      "dispatches": 0,
+      "mode": "revoked-negative",
+      "result_SHA256": "da8042bcee512b8449ad7417cc7ce1d9d7026cf3da195bef830682140847c70b"
+    },
+    {
+      "capture_SHA256": "742e722df151e137cd07bb22c5eeb618a615d167ac9889eb8bfa6b86de7bb830",
+      "dispatches": 1,
+      "mode": "revoked",
+      "result_SHA256": "43a0700d9276a51c3edb337ae34d867639a2695f2831615d2384291cb8c96612"
+    }
+  ],
+  "guard_words": 192,
+  "native_gpu_controls": 2,
+  "native_gpu_words": 8192,
+  "negative_sentinel_words": 8192,
+  "revoked_gpu_processes": 2,
+  "revoked_gpu_words": 8192,
+  "revoked_no_dispatch_controls": 2,
+  "scope": "Process-local native command buffer instance, serialized ordinary Objective-C commit/enqueue sends. Not an ICB cancellation API, system driver fix, or protection against cached IMPs, runtime mutation or uncoordinated threads.",
+  "status": "PASS_BOUNDED_INSTANCE_REVOCATION",
+  "terminal_nonoverlapping_processes": 6
+}

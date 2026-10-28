@@ -1,5 +1,7 @@
 # Build from source
 
+[UNCOMMITTED_REVOKE.md](UNCOMMITTED_REVOKE.md) documents the isolated revocation witness and pinned re-audit.
+
 [VIDEO_SELECTOR_PATH.md](VIDEO_SELECTOR_PATH.md) documents the bounded on-disk synchronous dispatch audit and model tests.
 
 [VIDEO_CHANNEL_BRANCHES.md](VIDEO_CHANNEL_BRANCHES.md) describes the read-only three-profile direct call and jump audit.

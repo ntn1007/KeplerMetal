@@ -7,6 +7,8 @@ parameters, buffers and geometry. Old CPU plans are rejected after reset;
 old generation-tagged roots are rejected by the native NVIDIA-compiled producer.
 This is a project ABI extension, not Apple's ICB resource-ID representation.
 
+A separate [uncommitted-buffer revocation witness](UNCOMMITTED_REVOKE.md) explores one prerequisite but does not implement cancellation for these contexts.
+
 ## Encoding contract
 
 The workspace `metal_command_buffer` header is compiled with

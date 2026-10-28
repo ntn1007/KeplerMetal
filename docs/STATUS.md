@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+A process-local witness blocks ordinary commit/enqueue on one uncommitted Metal buffer and verifies subsequent GTX reuse; actual reusable-ICB cancellation remains unimplemented. [Evidence and limitations](UNCOMMITTED_REVOKE.md).
+
 A pinned on-disk kernel and IOAccelerator audit predicts an Unsupported result for selector 0x105 only under specified synchronous-path assumptions; no live selector is tested. [Evidence](VIDEO_SELECTOR_PATH.md).
 
 A three-profile static channel audit adds tail-jump coverage and shows the historical direct video-context route versus the bounded modern branch inventory; live reachability remains unknown. [Evidence](VIDEO_CHANNEL_BRANCHES.md).
