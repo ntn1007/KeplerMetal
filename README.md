@@ -21,6 +21,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+A scoped no-copy experiment now tracks explicitly registered GPU command completions before client release. [Evidence and limits](docs/NOCOPY_WORK_REGISTRY.md).
+
 An experimental no-copy guard retains and calls an independent client block after two verified GTX commands. [Evidence and limits](docs/NOCOPY_CLIENT_GUARD.md).
 
 A separately compiled client now supplies the actual no-copy Metal block for a guarded GTX lifetime experiment. [Evidence and limitations](docs/NOCOPY_CLIENT_BLOCK.md).

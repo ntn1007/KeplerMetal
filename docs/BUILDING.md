@@ -1,5 +1,7 @@
 # Build from source
 
+[NOCOPY_WORK_REGISTRY.md](NOCOPY_WORK_REGISTRY.md) documents explicit work tracking, GPU evidence and CPU concurrency tests.
+
 [NOCOPY_CLIENT_GUARD.md](NOCOPY_CLIENT_GUARD.md) documents an independent client block, a scoped guard and separate GPU/CPU checks.
 
 [NOCOPY_CLIENT_BLOCK.md](NOCOPY_CLIENT_BLOCK.md) documents the client-owned block experiment and separate GPU/CPU checks.
