@@ -1,0 +1,47 @@
+{
+  "REA_bundle_SHA256": "62b0b5c4d5f3d455e59ed1dd6ed392d710c29c898c1e476cf1b67a43c87f9027",
+  "build_inputs_SHA256": "53b898e441ba93d489842b3c8d862cfd8b3a2b04704432dfa85e10f6a5cc93f5",
+  "cases": [
+    {
+      "gate_calls": 1,
+      "gate_sha256": "7f12a062de45cfcc71fef295d5c0177770c640a16947a1657cef64cc4b1b2bfb",
+      "mode": "hardware",
+      "route": "enabled"
+    },
+    {
+      "gate_calls": 1,
+      "gate_sha256": "7f12a062de45cfcc71fef295d5c0177770c640a16947a1657cef64cc4b1b2bfb",
+      "mode": "hardware",
+      "route": "enabled"
+    },
+    {
+      "gate_calls": 0,
+      "gate_sha256": "97f1af643303a05341f28a4ba7432ac044a4b9f72c58ac0321588328e5709126",
+      "mode": "hardware",
+      "route": "wrong-name"
+    },
+    {
+      "gate_calls": 0,
+      "gate_sha256": "bf334104114089ac705e5dd9466c6ebbb67aedc16e8481b20ec9382daab80e4a",
+      "mode": "cpu",
+      "route": "passive"
+    }
+  ],
+  "complete_vector_read": false,
+  "hardware_images": 0,
+  "hardware_required_failures": 3,
+  "historical_GVA_was_explicitly_selected": true,
+  "index": 0,
+  "mask": 15,
+  "nonoverlapping_terminal_processes": 4,
+  "observed_calls": 2,
+  "observer_source_SHA256": "f5a02c68c5a318dbdd062b59c84fdbb3df0e7bef4c758523a0def2fc40a59e60",
+  "prior_runs_reaudited": 4,
+  "required_vector_words": 4,
+  "scope": "Archived process-local legacy path and private-API replacement; no new runtime execution or actual provider integration.",
+  "selected_entry_nonzero": true,
+  "sierra_provider_loaded_by_gate": false,
+  "software_cpu_reference_bytes": 2764800,
+  "software_images": 6,
+  "status": "PASS"
+}

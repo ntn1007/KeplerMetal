@@ -1,5 +1,7 @@
 # Build from source
 
+[VIDEO_PROVIDER_FIELDS.md](VIDEO_PROVIDER_FIELDS.md) documents the re-audit of historical caller fields and existing controls.
+
 [VIDEO_PROVIDER_REGISTRATION.md](VIDEO_PROVIDER_REGISTRATION.md) documents historical registration bounds and its offline model.
 
 [VIDEO_GVA_PROPERTY.md](VIDEO_GVA_PROPERTY.md) documents the scoped property observer, calibration safety and static branch audit.
