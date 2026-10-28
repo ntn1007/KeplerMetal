@@ -7,7 +7,7 @@ parameters, buffers and geometry. Old CPU plans are rejected after reset;
 old generation-tagged roots are rejected by the native NVIDIA-compiled producer.
 This is a project ABI extension, not Apple's ICB resource-ID representation.
 
-A separate [uncommitted-buffer revocation witness](UNCOMMITTED_REVOKE.md) explores one prerequisite but does not implement cancellation for these contexts.
+A separate [experimental producer-only abandonment operation](REUSABLE_ABANDON_API.md) is available under a strict cooperative ownership contract. General cancellation remains unsupported.
 
 ## Encoding contract
 
@@ -58,8 +58,10 @@ Metal sources retain their original compilation options and pinned fixtures.
 The owner thread, queue and retained-reference requirements are explicit. The
 lease retains pending command buffers, resources and itself through completion.
 A recorded but uncommitted consumer is still pending even if the materializer
-has already completed. An uncommitted CB must eventually be committed: there is
-no cancellation API, because that buffer could otherwise be submitted later.
+has already completed. An uncommitted CB ordinarily must eventually be committed
+because it could otherwise be submitted later. The experimental operation may
+abandon only an exclusive unmaterialized producer under its strict contract;
+it does not cover general pending buffers.
 Dropping a plan does not release its pending lease. Command errors poison the
 context; allocate a fresh ICB rather than reusing that context. Wrong-thread,
 foreign-queue, unretained and inactive-generation reservations are refused.

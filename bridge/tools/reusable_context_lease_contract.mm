@@ -37,5 +37,16 @@ int main(){@autoreleasepool{
  __weak KPReusableIRContext*weak=nil;KPLeaseMockBuffer*held=[KPLeaseMockBuffer new];held.commandQueue=q;
  @autoreleasepool{KPReusableIRContext*u=[KPReusableIRContext new];u.queue=q;u.retired=NO;u.generation=11;weak=u;[u track:(id)held generation:11 error:nil];}
  if(!check(@"pending_keeps_lease_alive",weak!=nil))return 1;[held finish:MTLCommandBufferStatusCompleted];if(!check(@"completion_releases_unowned_lease",weak==nil))return 1;
+ // One command buffer can belong to multiple contexts. Sweeping one owner
+ // must not erase another when its completion callback has not run yet.
+ KPReusableIRContext*left=[KPReusableIRContext new],*right=[KPReusableIRContext new];left.queue=q;right.queue=q;left.retired=NO;right.retired=NO;left.generation=21;right.generation=22;
+ KPLeaseMockBuffer*shared=[KPLeaseMockBuffer new];shared.commandQueue=q;
+ if(![left track:(id)shared generation:21 error:nil]||![right track:(id)shared generation:22 error:nil])return 1;
+ if(!check(@"shared_owner_registry",KPReusableOwners(shared,NO).count==2))return 1;
+ shared.status=MTLCommandBufferStatusCompleted;if(![left idle:nil]||!check(@"swept_owner_preserves_other",KPReusableOwners(shared,NO).count==1&&[KPReusableOwners(shared,NO)containsObject:right]))return 1;
+ [shared finish:MTLCommandBufferStatusCompleted];if(!check(@"completion_clears_shared_owner",KPReusableOwners(shared,NO).count==0&&[right idle:nil]))return 1;
+ KPReusableIRContext*refusal=[KPReusableIRContext new];refusal.queue=q;refusal.retired=NO;refusal.generation=23;KPGPUCommandSelection*dummy=(id)[NSObject new];refusal.plan=dummy;KPLeaseMockBuffer*unqualified=[KPLeaseMockBuffer new];unqualified.commandQueue=q;
+ if(![refusal track:(id)unqualified generation:23 error:nil]||!check(@"non_native_refused_without_untracking",![refusal abandonExclusiveProducer:(id)unqualified generation:23 plan:dummy error:nil]&&refusal.pending.count==1&&KPReusableOwners(unqualified,NO).count==1))return 1;
+ [unqualified finish:MTLCommandBufferStatusCompleted];
  NSDictionary*r=@{@"status":@"PASS",@"cases":rows,@"GPU_dispatches":@0,@"mock_command_buffers":@YES};NSData*j=[NSJSONSerialization dataWithJSONObject:r options:NSJSONWritingPrettyPrinted error:nil];fwrite(j.bytes,1,j.length,stdout);puts("");return 0;
 }}

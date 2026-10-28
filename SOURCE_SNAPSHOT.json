@@ -28,14 +28,14 @@
       "path": "bridge/src/KeplerCPUICB.h",
       "source_path": "bridge/src/KeplerCPUICB.h",
       "source_SHA256": "263dede0101967e1bfa32fe3b081b73c476d9e09e8a9b5446ae04cf4f425ee0a",
-      "published_SHA256": "656dbbd78488bb1cd17ef986ea7c43a6912afabfaf3ef059c2ce40fec1d381ba",
-      "bytes": 39050,
+      "published_SHA256": "a04f4287524fa19acff6fcb89789a2d49467ab13dbcbef08b7e33f82d20fdd17",
+      "bytes": 39665,
       "modified_for_publication": true,
       "previous_published_SHA256": "3380d4932230816ea334277a11fd6603ce8d07cc81f725e45ac2e2027678920c",
       "latest_change": {
-        "previous_published_SHA256": "3c4c628b8cb77bdcbdbbd8e51517b72c6785cb8f2b78e5f67844d70af24770dd",
-        "previous_bytes": 38328,
-        "reason": "Add bounded whole-range preflight and preparation for partial GPU copies, plus explicit ended-blit detach for process-local automatic adaptation."
+        "previous_published_SHA256": "656dbbd78488bb1cd17ef986ea7c43a6912afabfaf3ef059c2ce40fec1d381ba",
+        "previous_bytes": 39050,
+        "reason": "Add cooperative, experimental exclusive reusable-producer abandonment; recorded qualification is limited to the pinned Kepler profile."
       },
       "previous_latest_change": {
         "previous_published_SHA256": "105217a1e9088af310065234088c6934753f79d003927c7dec28692534090a04",
@@ -62,6 +62,11 @@
           "previous_published_SHA256": "68f0133711a8dd800f2d03e12813abee9299666522720f8a7b4b7ab71684942a",
           "previous_bytes": 37980,
           "reason": "Allow explicitly prepared, equal-geometry mixed partial/uniform GPU-copy ranges and conservatively track copied ownership."
+        },
+        {
+          "previous_published_SHA256": "3c4c628b8cb77bdcbdbbd8e51517b72c6785cb8f2b78e5f67844d70af24770dd",
+          "previous_bytes": 38328,
+          "reason": "Add bounded whole-range preflight and preparation for partial GPU copies, plus explicit ended-blit detach for process-local automatic adaptation."
         }
       ]
     },
@@ -146,10 +151,15 @@
       "path": "bridge/src/KeplerCommandIRPlan.inc",
       "source_path": "bridge/src/KeplerCommandIRPlan.inc",
       "source_SHA256": "fb5db32241a80bb180e0a814403035637fd51d707f49925fde4606bf0b8f44c1",
-      "published_SHA256": "c430e64d606e3b80c6737d25b0105913ded44c79ca31b40aeeaa7d70d98f4608",
-      "bytes": 4574,
-      "modified_for_publication": false,
-      "previous_published_SHA256": "7fcba17b2405f5f352c8081470a854aabc60ec86c4fbbab991d59858eb94cbde"
+      "published_SHA256": "476945b66374498214a3797d08b467ac229556bce24db5e3b7ebcb5e968aa5fb",
+      "bytes": 5284,
+      "modified_for_publication": true,
+      "previous_published_SHA256": "7fcba17b2405f5f352c8081470a854aabc60ec86c4fbbab991d59858eb94cbde",
+      "latest_change": {
+        "previous_published_SHA256": "c430e64d606e3b80c6737d25b0105913ded44c79ca31b40aeeaa7d70d98f4608",
+        "previous_bytes": 4574,
+        "reason": "Add cooperative, experimental exclusive reusable-producer abandonment; recorded qualification is limited to the pinned Kepler profile."
+      }
     },
     {
       "path": "bridge/src/KeplerCommandIRScope.inc",
@@ -7931,5 +7941,15 @@
       "bridge/src/KeplerCPUICB.h",
       "bridge/src/KeplerCPUICB.mm"
     ]
+  },
+  "reusable_abandon_update": {
+    "date": "2026-10-28",
+    "previous_public_commit": "121f4272a28260cbf9b94f3692a2c30fcb7e321c",
+    "previous_snapshot_SHA256": "176cbeeb0497d349ce315ec683f4f09292cd7637a10e56843e8690e786e1a5cc",
+    "files": [
+      "bridge/src/KeplerCPUICB.h",
+      "bridge/src/KeplerCommandIRPlan.inc"
+    ],
+    "note": "The non-snapshot include and experimental client sources are tracked directly in Git."
   }
 }

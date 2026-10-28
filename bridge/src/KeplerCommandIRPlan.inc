@@ -40,3 +40,11 @@
  _producerBuffer=cb;_reusableContext.resources=self.commandIRProducerResources;
  [_eventRows addObject:@{@"operation":@"reserve_reusable_IR_producer",@"generation":@(_reusableGeneration),@"buffer_status":@(cb.status)}];return YES;
 }
+- (BOOL)experimentallyAbandonReusableProducer:(id<MTLCommandBuffer>)cb error:(NSError**)error {
+ if(error)*error=nil;KPReusableIRContext*lease=_reusableContext;if(!lease)return fail(error,@"Reusable plan required");
+ @synchronized(lease){
+  if(_selectionBuffer||!_producerBuffer||_producerBuffer!=cb||![self validateOwners:error])return fail(error,@"Only an active, unmaterialized producer may be abandoned");
+  if(![lease abandonExclusiveProducer:cb generation:_reusableGeneration plan:self error:error])return NO;
+  _producerBuffer=nil;[_eventRows addObject:@{@"operation":@"experimentally_abandon_reusable_producer",@"generation":@(_reusableGeneration),@"cooperative_owner_required":@YES}];return YES;
+ }
+}

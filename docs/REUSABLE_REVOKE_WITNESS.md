@@ -12,13 +12,13 @@ The experiment uses `NVMTLCommandBuffer` instance size 656 and verifies its two 
 
 ## Remaining work
 
-The experiment does not establish a safe cancellation API. One command buffer can be owned by multiple contexts, so an eventual implementation must coordinate *all* owners, prevent stale submission throughout their lifetimes, handle the completion handlers and resource retention, and fail closed on partial failure. Restore of automatic factory scopes, cached IMP or direct calls, runtime mutation, concurrent sends, callback release and deallocation are not tested. Revocation is not a security boundary. The existing implementation still forbids cancellation; the supported path remains completion before reuse.
+The experiment does not establish a safe general cancellation API. One command buffer can be owned by multiple contexts, so an implementation must coordinate owners, prevent stale submission throughout their lifetimes, handle the completion handlers and resource retention, and fail closed on partial failure. Restore of automatic factory scopes, cached IMP or direct calls, runtime mutation, concurrent sends, callback release and deallocation are not tested. Revocation is not a security boundary. A later [experimental producer-only operation](REUSABLE_ABANDON_API.md) refuses known multiple ownership under a strict cooperative contract; normal completion remains the supported path outside that contract.
 
 The next validation needs actual ICB plans and generation changes, multiple owners, automatic-scope restoration and lifetime/error cases, followed by the affected complete regression suite. The class substitution alone does not address uncooperative clients or transparent integration.
 
 ## Re-audit
 
-This rechecks recorded observations and does not dispatch GPU work. It requires the original local build and results; the pinned build-input digest is `df2182b5713c84100123c5e2d0024dd43816e23253cb27626603c8f39ec495db`, and the lease source digest is `ce087c8c5ef335d4aa0ef7b37339df243521093226ceba83a8ed532e738cf301`.
+This rechecks recorded observations and does not dispatch GPU work. It requires the original local build and results **and a separate checkout of commit `121f427`**, since the current lease implementation has subsequently changed. The auditor intentionally refuses a different source hash. The pinned build-input digest is `df2182b5713c84100123c5e2d0024dd43816e23253cb27626603c8f39ec495db`, and the lease source digest is `ce087c8c5ef335d4aa0ef7b37339df243521093226ceba83a8ed532e738cf301`.
 
 ```sh
 R="$HOME/Documents/ChatGPT/Metal 4/nvidia-880m-lab/bridge/results"

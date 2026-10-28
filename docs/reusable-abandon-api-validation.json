@@ -1,0 +1,52 @@
+{
+  "CPU_mock_cases": 20,
+  "build_inputs_SHA256": "69f168d148a24fee4aba2eae015587aeec79f677fc63f692767bd3703b28939a",
+  "cases": [
+    {
+      "case": "shared",
+      "pid": 12330,
+      "result_SHA256": "87f55fcce417eb98798b9d35ade205c13109369d2958eae8f492b8900aa5f6ef"
+    },
+    {
+      "case": "positive",
+      "pid": 12356,
+      "result_SHA256": "8ca3afb1c17e63f456002dc952af64052d92a9a666d708f93299cbf7450a1338"
+    },
+    {
+      "case": "positive",
+      "pid": 12395,
+      "result_SHA256": "283644e56ac866a9e95f117b6e069e1b8a13bf65ee5292080eb816e0071a0bf3"
+    }
+  ],
+  "experimental_positive_processes": 2,
+  "full_reusable_regression": {
+    "Apple_native_ICB_layout": false,
+    "delayed_consumer_processes": 1,
+    "full_objective_complete": false,
+    "identical_reusable_pointer_stage_counter_files": 48,
+    "performance_benchmark": false,
+    "premature_reuse_refusals": 464,
+    "retired_slot_consumers_refused": 80,
+    "reusable_consumer_invocations": 1602816,
+    "reusable_exact_consumer_uint32": 6411264,
+    "reusable_generations": 80,
+    "reusable_guard_bytes": 103562368,
+    "reusable_processes": 20,
+    "signed_terminal_nonoverlapping_processes": 52,
+    "stale_CPU_plans_refused": 60,
+    "stale_GPU_roots_refused": 3,
+    "static_library_SHA256": "58007bf89bb19826e4c0ec8df582ea546eed6697d5925874609251b0cf00dd3f",
+    "status": "PASS",
+    "system_modified": false
+  },
+  "full_reusable_regression_processes": 52,
+  "positive_exact_uint32": 915456,
+  "positive_generations": 8,
+  "positive_guard_bytes": 10105984,
+  "reference_matching_stage_counter_files": 32,
+  "scope": "Cooperative explicit producer-only operation; no native driver change, transparent applications, uncoordinated access, cached IMP protection or Metal feature completeness.",
+  "shared_owner_refusal_processes": 1,
+  "signed_terminal_nonoverlapping_processes": 55,
+  "static_library_SHA256": "58007bf89bb19826e4c0ec8df582ea546eed6697d5925874609251b0cf00dd3f",
+  "status": "PASS_EXPERIMENTAL_EXCLUSIVE_PRODUCER"
+}

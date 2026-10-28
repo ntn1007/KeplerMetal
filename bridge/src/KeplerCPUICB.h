@@ -485,6 +485,14 @@
 // lease survives plan release and is closed only by terminal completion.
 - (BOOL)reserveCommandIRProducerInCommandBuffer:(id<MTLCommandBuffer>)buffer
                                          error:(NSError **)error;
+// Experimental, cooperative-only recovery for a sole tracked native producer,
+// before materialization. The caller must exclusively control ALL submission,
+// class changes and saved IMPs for this CB and serialize them on its owner
+// thread. It is not a security boundary or a general Metal cancellation API.
+// The buffer is permanently unusable on success; ordinary commit/enqueue raise.
+// Multiple tracked contexts, changed profiles and submitted buffers are refused.
+- (BOOL)experimentallyAbandonReusableProducer:(id<MTLCommandBuffer>)buffer
+                                        error:(NSError **)error;
 // Declare the indirect producer resources and retain its pipeline/root/push
 // through completion. Producer must precede materialization on this same queue.
 - (BOOL)encodeCommandIRInCommandBuffer:(id<MTLCommandBuffer>)buffer

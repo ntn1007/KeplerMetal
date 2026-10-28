@@ -18,7 +18,7 @@ The private profile, output buffer and command queue belong to the test process.
 
 This is **not** an ICB cancellation API or a complete solution to the pending-lease problem. It does not test actual `KPReusableIRContext` instances, multiple contexts sharing one command buffer, interaction with automatic-factory scope restoration, callback lifetime, object deallocation, or a real application's lifecycle. An already cached native implementation pointer, a direct bypass, another party changing the object's class or an uncoordinated thread can evade the witness's method overrides. Installing the subclass while another thread invokes the object is not qualified. An application-level lock cannot control framework activity or an unrelated writer. The experiment therefore cannot be used as a security boundary or generalized to arbitrary clients.
 
-The current reusable context continues to prohibit cancellation: removing a pending lease while the original buffer can still be submitted is unsafe. Any integration needs a separately designed ownership contract and tests of the actual context, revocation lifetime and cleanup, failure paths and the complete affected GPU regressions.
+At this witness milestone the reusable context prohibited cancellation: removing a pending lease while the original buffer can still be submitted is unsafe. A later [experimental producer-only operation](REUSABLE_ABANDON_API.md) addresses a narrowly cooperative case; the limitations and evidence in this historical witness remain unchanged. General cancellation and uncoordinated clients remain unsupported.
 
 ## Re-audit
 

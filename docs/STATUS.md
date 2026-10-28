@@ -1,10 +1,12 @@
 # Status, 2026-10-28
 
-A real reusable ICB plan retains its producer independently of the lease: a lease-only abandonment pilot is refused. Two isolated witnesses manually clear both states after instance revocation and validate four GPU generations each; cancellation remains unimplemented. [Evidence and limitations](REUSABLE_PLAN_REVOKE.md).
+An experimental cooperative API abandons an exclusive, unsubmitted reusable producer and validates subsequent real ICB generations. General cancellation and transparent integration remain unimplemented. [Evidence and limitations](REUSABLE_ABANDON_API.md).
 
-Two actual reusable-lease instances tracking one native command buffer were tested with explicit test-only revocation and manual pending removal; real ICB cancellation remains unimplemented. [Evidence and limitations](REUSABLE_REVOKE_WITNESS.md).
+A real reusable ICB plan retains its producer independently of the lease: a lease-only abandonment pilot is refused. Two earlier isolated witnesses manually clear both states after instance revocation and validate four GPU generations each; their test-only mutation is superseded by the experimental API above. [Evidence and limitations](REUSABLE_PLAN_REVOKE.md).
 
-A process-local witness blocks ordinary commit/enqueue on one uncommitted Metal buffer and verifies subsequent GTX reuse; actual reusable-ICB cancellation remains unimplemented. [Evidence and limitations](UNCOMMITTED_REVOKE.md).
+Two actual reusable-lease instances tracking one native command buffer were tested with explicit test-only revocation and manual pending removal; this did not implement ICB cancellation. [Evidence and limitations](REUSABLE_REVOKE_WITNESS.md).
+
+A process-local witness blocks ordinary commit/enqueue on one uncommitted Metal buffer and verifies subsequent GTX reuse; this alone did not implement reusable-ICB cancellation. [Evidence and limitations](UNCOMMITTED_REVOKE.md).
 
 A pinned on-disk kernel and IOAccelerator audit predicts an Unsupported result for selector 0x105 only under specified synchronous-path assumptions; no live selector is tested. [Evidence](VIDEO_SELECTOR_PATH.md).
 
