@@ -1,0 +1,51 @@
+{
+  "GPU_dispatches": 0,
+  "macos": {
+    "REA_bundle_SHA256": "1298e571fa38a96d99a8b20f67e6dd5ac5f55f312ee0c7decaff4d25e4e9050c",
+    "argument_bytes": 16,
+    "class_array_pointer_field": "0x1660",
+    "class_count_field": "0x1668",
+    "control_command": "0x800201",
+    "driver_SHA256": "44f131a958d48afd6ab675a851330c37506557c9d499484170c886c3731bdbb3",
+    "executed_or_runtime_observed": false,
+    "external_call_relocations": [
+      "0xc892",
+      "0xc914"
+    ],
+    "external_symbol": "_NvRmControl",
+    "functions": {
+      "init_class_list": {
+        "REA_evidence_id": "ev_a1eeaa10ab9299e94ad109b2760ee9c3390925aaf775cdb4cfc639123d8e6ebc",
+        "SHA256": "8e23698868d379e51a167aba139aa24b5c5dba7e6533740670a224bb3c865ee4",
+        "address": "0xc842",
+        "bytes": 277,
+        "file_offset": "0xc842"
+      },
+      "initialize_device": {
+        "REA_evidence_id": "ev_d8f7af523728ae987aee4a1891b6d71cd7f60779ab314cd82396957fe334d5e1",
+        "SHA256": "146a60a8a1985ca284682be4c8f9fafb36a558b187947ef3d93ddce760b52bbb",
+        "address": "0x93dc",
+        "bytes": 626,
+        "file_offset": "0x93dc"
+      }
+    }
+  },
+  "nvidia_515_layout_model": {
+    "GPU_or_RM_call": false,
+    "actual_declared_struct_extracted": true,
+    "count_offset": 0,
+    "host_architecture": "x86_64",
+    "new_header_SHA256": "63501de37b90eac1f4b966c8f90e9e4cb3ac1696f7c479e9a33fe86ea4bd18fd",
+    "pointer_offset": 8,
+    "sizeof": 16,
+    "source_header_515_SHA256": "b3d04542cc1f353bd86667111b74da7b676e1039c1c6634418cf80295d9d52bc",
+    "source_nvtypes_SHA256": "202dce9a08a910137078289fc2219e70fab883503b5ee7b6a2397a8ce5564c5c",
+    "types": "NvU32 modeled with uint32_t; NvP64 and alignment match pinned 64-bit Clang definitions"
+  },
+  "nvidia_reference_515_commit": "1739a20efc4acb55fd1dc53dcc66057b70c2613c",
+  "nvidia_reference_main_commit": "ca2d03e6fafd4d4b56b383497d931c25b283bfcf",
+  "private_RM_calls": 0,
+  "scope": "Matching numeric command and 16-byte layout are static evidence, not proof of ABI equivalence, actual class values, live call, or permission to invoke a selector.",
+  "status": "PASS_STATIC_RM_CLASSLIST_PROVENANCE",
+  "system_modified": false
+}

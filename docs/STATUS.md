@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+The pinned NVIDIA macOS initializer obtains its candidate class list through two static `_NvRmControl` callsites with command `0x800201`; a later public NVIDIA definition has matching two-phase layout. Live classes and user-mode transport remain unverified. [Evidence](VIDEO_CLASSLIST_PROVENANCE.md).
+
 Nouveau's GK104 decoder classes also appear in the pinned on-disk macOS NVIDIA class-selection and video-object paths. Current registry properties remain ambiguous between two candidates; live selection, channel access and hardware decoding remain unproved. [Evidence](VIDEO_NOUVEAU_CLASS_COMPARISON.md).
 
 An experimental cooperative API abandons an exclusive, unsubmitted reusable producer and validates subsequent real ICB generations. General cancellation and transparent integration remain unimplemented. [Evidence and limitations](REUSABLE_ABANDON_API.md).
