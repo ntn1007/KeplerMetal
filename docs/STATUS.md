@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A process-local allocator observer records AppleGVA constructor register value 2 in three H.264 counterfactual runs. Decoder creation still fails with zero hardware images; the selector's meaning remains unknown. [Evidence](VIDEO_GVA_REGISTER.md).
+
 Offline correlation narrows one previously recorded AppleGVA constructor branch to selector candidates 2 or 9 under explicit pinned-code/stack assumptions; the actual register and hardware video remain unobserved. [Evidence](VIDEO_GVA_DISPATCH.md).
 
 The scoped CPU render ICB now treats selected zero-count and zero-instance triangle draws as inert. Two GTX direct/adapted process pairs match raw pixels; three invalid inputs remain refused. M1 direct/ICB references agree on the tested outcomes. [Evidence and limits](EMPTY_RENDER_DRAWS.md).

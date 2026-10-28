@@ -1,0 +1,90 @@
+{
+  "all_allocator_calls_observed": false,
+  "base_inputs_sha256": "d07d612a8c5ac9a116e26a57a7716b5db2703e911469b3dffab4798d6222d47e",
+  "calibration_sha256": "b90105313c5f0b5277685b3fc4e14fb66f470f6cbbb6b29d1ed677379060632c",
+  "codec_meaning_of_selector_proved": false,
+  "counterfactual_property_and_policy_used": true,
+  "current_board_observations": 3,
+  "current_hardware_create_status": -12913,
+  "current_without_witness_controls": 2,
+  "hardware_images": 0,
+  "hardware_video_execution_proved": false,
+  "hosts": 9,
+  "live_region_sha256": "cb8e85197a4b37270ced86a070fecb85bb61ea56aa98892996658a304544db0c",
+  "observed_allocation_bytes": 1536,
+  "observed_selector": 2,
+  "observer_sha256": "3a7f57be1368e8c50a5b125734f6bf6ac8a84674a567215f40046000f0b8ee48",
+  "receipts": [
+    {
+      "create_status": 0,
+      "images": 6,
+      "mode": "cpu",
+      "selector": null,
+      "witness": "on"
+    },
+    {
+      "create_status": -12906,
+      "images": 0,
+      "mode": "wrong",
+      "selector": null,
+      "witness": "on"
+    },
+    {
+      "create_status": -12913,
+      "images": 0,
+      "mode": "current",
+      "selector": 2,
+      "witness": "on"
+    },
+    {
+      "create_status": -12913,
+      "images": 0,
+      "mode": "current",
+      "selector": null,
+      "witness": "off"
+    },
+    {
+      "create_status": -12913,
+      "images": 0,
+      "mode": "current",
+      "selector": 2,
+      "witness": "on"
+    },
+    {
+      "create_status": -12906,
+      "images": 0,
+      "mode": "wrong",
+      "selector": null,
+      "witness": "on"
+    },
+    {
+      "create_status": 0,
+      "images": 6,
+      "mode": "cpu",
+      "selector": null,
+      "witness": "off"
+    },
+    {
+      "create_status": -12913,
+      "images": 0,
+      "mode": "current",
+      "selector": 2,
+      "witness": "on"
+    },
+    {
+      "create_status": -12913,
+      "images": 0,
+      "mode": "current",
+      "selector": null,
+      "witness": "off"
+    }
+  ],
+  "software_controls": 2,
+  "software_images": 12,
+  "software_reference_bytes": 1382400,
+  "status": "PASS_BOUNDED_REGISTER_OBSERVATION",
+  "system_modified": false,
+  "tail_sha256": "605653e171783c64acc52a0cbb8a80cd1c762b7ea363cc8ffc8e2bc2ecbb9d82",
+  "wrong_board_controls": 2,
+  "wrong_board_hardware_create_status": -12906
+}

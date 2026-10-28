@@ -1,0 +1,42 @@
+{
+  "GPU_execution": false,
+  "controls": [
+    {
+      "case": "untouched",
+      "expected": "PASS",
+      "result": "PASS"
+    },
+    {
+      "case": "selector",
+      "expected": "actual selector witness differs",
+      "result": "PASS"
+    },
+    {
+      "case": "profile",
+      "expected": "actual selector witness differs",
+      "result": "PASS"
+    },
+    {
+      "case": "software-pixel",
+      "expected": "software image differs",
+      "result": "PASS"
+    },
+    {
+      "case": "reference-asset",
+      "expected": "run asset differs",
+      "result": "PASS"
+    },
+    {
+      "case": "kill-request",
+      "expected": "process provenance differs",
+      "result": "PASS"
+    },
+    {
+      "case": "restored",
+      "expected": "PASS",
+      "result": "PASS"
+    }
+  ],
+  "original_files_modified": false,
+  "status": "PASS"
+}

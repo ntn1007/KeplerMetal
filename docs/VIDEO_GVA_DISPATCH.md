@@ -46,6 +46,10 @@ any result is interpreted. No private function should be called directly.
 driver, OCLP or firmware was modified. No video engine submission, decoded
 hardware image or performance improvement is claimed.
 
+A later [bounded register witness](VIDEO_GVA_REGISTER.md) records value 2 at
+the allocator in three instrumented processes. This does not establish the
+selector's semantic name or hardware video execution.
+
 ## Re-audit
 
 Requires the exact retained private lab, the current cache/profile and the
