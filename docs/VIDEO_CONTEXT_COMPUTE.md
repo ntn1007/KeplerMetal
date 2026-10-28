@@ -1,5 +1,7 @@
 # Metal queue failure after experimental video association
 
+**Follow-up:** The [type-6 isolation](VIDEO_SHARED_ISOLATION.md) reproduced the queue failure with an extra shared client alone, without a video context or association.
+
 **Qualification result: FAIL for the tested post-association Metal-queue scenario.** Although the experimental video lease previously opened, associated and closed both connections with zero return codes, this follow-up shows that those return codes do not establish that an ordinary Metal device remains usable afterward.
 
 The same signed own-process test uses a pinned legacy AppleGVA caller and selected GTX `nvAccelerator`. A retained Metal device has the same registry ID. Each measurement builds the same Metal compute pipeline and tries to create a new command queue before and after the tested lifecycle. The gate still replaces the NVIDIA create-stub with a local return-14 witness; the Sierra provider is not invoked. The earlier process-local policy/dependency substitutions remain.

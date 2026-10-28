@@ -1,5 +1,7 @@
 # Build from source
 
+[VIDEO_SHARED_ISOLATION.md](VIDEO_SHARED_ISOLATION.md) documents the type-6-only isolation and failure audit.
+
 [VIDEO_CONTEXT_COMPUTE.md](VIDEO_CONTEXT_COMPUTE.md) documents the post-association Metal queue failure and raw-output audit.
 
 [VIDEO_CONTEXT_LEASE.md](VIDEO_CONTEXT_LEASE.md) documents the optional video context lifecycle component and tests.

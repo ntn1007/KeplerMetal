@@ -1,6 +1,6 @@
 # Reusable video-context lifecycle
 
-**Qualification warning:** A later [compute follow-up](VIDEO_CONTEXT_COMPUTE.md) found that creating a new Metal queue fails after this test association and teardown in the recorded scenarios. Successful close status is not sufficient to use this lease in an application that must continue using Metal.
+**Qualification warning:** A later [compute follow-up](VIDEO_CONTEXT_COMPUTE.md), refined by [type-6 isolation](VIDEO_SHARED_ISOLATION.md), found that creating a new Metal queue fails after this test association and teardown in the recorded scenarios. Successful close status is not sufficient to use this lease in an application that must continue using Metal.
 
 `VideoContextLease` extracts the existing experimental type-3/type-6 lifecycle into a small reusable C++ component. A caller supplies an explicitly trusted backend and an already qualified, borrowed service handle. The component opens a video context, optionally opens and associates a shared client, and closes context before shared client. It records each status and attempts cleanup on failure. The component submits no GPU work or video selector and does not implement a decoder or Metal API.
 

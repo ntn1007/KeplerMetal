@@ -1,0 +1,87 @@
+{
+  "associated_pair_after_queue_failures": 2,
+  "build_SHA256": "0ebfda3dc643e49191aa683e9927ac75fc69100429169a28cc7476cb99564517",
+  "cases": [
+    {
+      "after_queue_created": true,
+      "attach": false,
+      "before_capture_SHA256": "30d2003958d2b2f4c8930ed988a7bf59a225ed2eb0658319d7a4b47f1b0a74a5",
+      "case": "none-1",
+      "pair": false,
+      "probe": false,
+      "skip_dispatch": true
+    },
+    {
+      "after_queue_created": false,
+      "attach": false,
+      "before_capture_SHA256": "30d2003958d2b2f4c8930ed988a7bf59a225ed2eb0658319d7a4b47f1b0a74a5",
+      "case": "shared-1",
+      "pair": true,
+      "probe": false,
+      "skip_dispatch": true
+    },
+    {
+      "after_queue_created": false,
+      "attach": false,
+      "before_capture_SHA256": "30d2003958d2b2f4c8930ed988a7bf59a225ed2eb0658319d7a4b47f1b0a74a5",
+      "case": "pair-1",
+      "pair": true,
+      "probe": true,
+      "skip_dispatch": true
+    },
+    {
+      "after_queue_created": false,
+      "attach": true,
+      "before_capture_SHA256": "30d2003958d2b2f4c8930ed988a7bf59a225ed2eb0658319d7a4b47f1b0a74a5",
+      "case": "attach-1",
+      "pair": false,
+      "probe": true,
+      "skip_dispatch": true
+    },
+    {
+      "after_queue_created": false,
+      "attach": true,
+      "before_capture_SHA256": "30d2003958d2b2f4c8930ed988a7bf59a225ed2eb0658319d7a4b47f1b0a74a5",
+      "case": "attach-2",
+      "pair": false,
+      "probe": true,
+      "skip_dispatch": true
+    },
+    {
+      "after_queue_created": false,
+      "attach": false,
+      "before_capture_SHA256": "30d2003958d2b2f4c8930ed988a7bf59a225ed2eb0658319d7a4b47f1b0a74a5",
+      "case": "pair-2",
+      "pair": true,
+      "probe": true,
+      "skip_dispatch": true
+    },
+    {
+      "after_queue_created": false,
+      "attach": false,
+      "before_capture_SHA256": "30d2003958d2b2f4c8930ed988a7bf59a225ed2eb0658319d7a4b47f1b0a74a5",
+      "case": "shared-2",
+      "pair": true,
+      "probe": false,
+      "skip_dispatch": true
+    },
+    {
+      "after_queue_created": true,
+      "attach": false,
+      "before_capture_SHA256": "30d2003958d2b2f4c8930ed988a7bf59a225ed2eb0658319d7a4b47f1b0a74a5",
+      "case": "none-2",
+      "pair": false,
+      "probe": false,
+      "skip_dispatch": true
+    }
+  ],
+  "guard_words": 320,
+  "hardware_video_frames": 0,
+  "no_client_after_queue_successes": 2,
+  "no_dispatch_sentinel_words": 40960,
+  "scope": "Controlled process-local legacy AppleGVA path. Opening and closing type-6 alone is sufficient to reproduce a subsequent Metal queue creation failure in the tested setup; underlying cause and broader scope unknown.",
+  "shared_only_after_queue_failures": 2,
+  "status": "EXPECTED_FAILURE_CONFIRMED",
+  "terminal_nonoverlapping_processes": 8,
+  "unassociated_pair_after_queue_failures": 2
+}
