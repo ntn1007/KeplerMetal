@@ -1,0 +1,1 @@
+{"GPU_dispatch": false, "checks": {"bootstrap": "EXPECTED_REFUSAL", "missing-refusal": "EXPECTED_REFUSAL", "reservation": "EXPECTED_REFUSAL", "second-descriptor": "EXPECTED_REFUSAL", "second-guard": "EXPECTED_REFUSAL", "second-ordering": "EXPECTED_REFUSAL", "second-preflight": "EXPECTED_REFUSAL", "second-result": "EXPECTED_REFUSAL", "unchanged": "PASS"}, "status": "PASS"}

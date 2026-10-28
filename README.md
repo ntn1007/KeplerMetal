@@ -1,5 +1,7 @@
 # KeplerMetal
 
+A separate process-local witness supports two bounded, disjoint GPU ICB copies in one encoder. [Evidence and limits](docs/STANDALONE_MULTI_COPY.md).
+
 A combined adapted-client path now brings typed pipeline and vertex setters together with indexed draws. [Contract and evidence](docs/TRIPLE_RENDER.md).
 
 The scoped typed vertex-buffer setter now selects between certified render states in an adapted application. [Evidence and limits](docs/VERTEX_BINDING_EXPERIMENT.md).

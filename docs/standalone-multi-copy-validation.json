@@ -1,0 +1,17 @@
+{
+  "bootstrap_SHA256": "5eaab1409bde330e8428174c6ecf78809a694968f522772631a9757e1b47a924",
+  "client_A_SHA256": "685eb9c474888c311081cf090e1727b827b8ca81e7b78dc7774dfcdf66022837",
+  "client_B_SHA256": "022d241ebfc87dbb0377c8f1490c2f5e91272098af909570e094485121d8d3cf",
+  "committed_copy_blits": 72,
+  "correct_uint32_words": 18468,
+  "host_processes": 13,
+  "independent_runtime_object_members_match": true,
+  "nonoverlapping": true,
+  "positive_A_two_copy_processes": 8,
+  "positive_B_one_copy_processes": 2,
+  "positive_dispatches": 36,
+  "positive_invocations": 3078,
+  "runtime_archive_SHA256": "f897291bfa5b14c1026fa79143507a901331a366c109e57c1740c74d63af0b39",
+  "scope": "Two disjoint ICB pairs, pinned shaders and one queue in purpose-built public clients; process-local injection, not general ICB or system driver support.",
+  "status": "PASS"
+}

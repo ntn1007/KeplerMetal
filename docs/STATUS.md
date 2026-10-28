@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+Eight new GTX processes validate two disjoint ICB copies per encoder for the pinned profiles; this is opt-in and not general ICB support. [Evidence](STANDALONE_MULTI_COPY.md).
+
 An explicit local policy selects two related public-Metal copy test clients using one signed bootstrap; third-party compatibility remains unqualified. [Evidence](STANDALONE_COPY_POLICY.md).
 
 A pinned public-Metal client performs object-based, unlabelled GPU ICB copies with whole-range preflight. Third-party applications remain unqualified. [Evidence](STANDALONE_AUTOMATIC_COPY.md).
