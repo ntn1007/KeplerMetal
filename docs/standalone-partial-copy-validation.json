@@ -1,0 +1,21 @@
+{
+  "bootstrap_SHA256": "b4dc444e82759822eb128eac053c7554f257ebb033b316e576fd57083bc87ea8",
+  "client_SHA256": "dada2a7f785c7d1a26baa486c7a85946a39a4b955a2e3882010585fd65289601",
+  "committed_copy_blits": 32,
+  "correct_uint32_words": 8208,
+  "fresh_archive_SHA256": "e00935c9a51484fee7bf9cb918c25f3321791e87e653d7ea3da90ae0b94b25d4",
+  "fresh_object_members_match": true,
+  "host_processes": 18,
+  "identity_or_library_refusals": 3,
+  "native_missing_ICB_controls": 2,
+  "new_copy_client_hosts": 13,
+  "nonoverlapping": true,
+  "positive_dispatches": 16,
+  "positive_invocations": 1368,
+  "public_client_imports_project_symbols": false,
+  "reused_same_runtime_control_hosts": 5,
+  "runtime_archive_SHA256": "4f2c9082485f12fcb72870c5530a4ab73d904e80f9153f95244cddabeee1a81c",
+  "same_queue_separate_order_runs": 4,
+  "scope": "One explicitly launched pinned public-Metal test client, one labelled copy buffer, one pinned dual-function registration and one queue; not general transparent driver support.",
+  "status": "PASS"
+}

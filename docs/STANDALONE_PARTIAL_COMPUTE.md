@@ -1,5 +1,7 @@
 # Public Metal client with a scoped partial-compute ICB
 
+This is the preceding compute-only qualification. A later [scoped GPU-copy client](STANDALONE_PARTIAL_COPY.md) adds one separately qualified copy path.
+
 A separately compiled client, linked only to Metal and Foundation, now creates and executes a bounded two-command compute ICB using ordinary public Metal calls. It does not import or call KeplerMetal APIs. An explicit launcher injects a project bootstrap into that one test process; the bootstrap verifies the signed executable, an exact dual-function metallib, its manifest and the GTX identity, then installs a process-local scope on one queue. The new `enableAutomaticComputeEncoderFactoriesWithError:` scope opt-in exposes the existing queue-local compute-factory adapter without modifying shared native classes.
 
 The pinned client builds two ordinary compute pipeline states from the registered library and encodes a partial `partial_builtin_barrier` producer followed by a uniform `partial_buffer_stencil` consumer. The bootstrap supplies the corresponding scope-owned pipelines for those exact verified functions. The partial grid is expanded into bounded resident commands, and the results of the barrier producer feed the consumer. This is a purpose-built test client with a process-local bootstrap, not a general-purpose driver or unmodified third-party application. It does **not** exercise GPU-timeline ICB copying; that still requires explicit preparation and scoped blit adaptation.

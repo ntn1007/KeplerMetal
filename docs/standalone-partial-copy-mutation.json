@@ -1,0 +1,1 @@
+{"GPU_dispatch": false, "checks": {"copy-descriptor": "EXPECTED_REFUSAL", "factory-event": "EXPECTED_REFUSAL", "guard": "EXPECTED_REFUSAL", "missing-refusal": "EXPECTED_REFUSAL", "native-profile": "EXPECTED_REFUSAL", "ordering": "EXPECTED_REFUSAL", "reservation": "EXPECTED_REFUSAL", "unchanged": "PASS", "wrong-result": "EXPECTED_REFUSAL"}, "status": "PASS"}

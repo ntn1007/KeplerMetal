@@ -1,5 +1,7 @@
 # Status, 2026-10-27
 
+A pinned public-Metal client performs a labelled, scoped GPU copy of a mixed compute ICB; third-party applications remain unqualified. [Evidence](STANDALONE_PARTIAL_COPY.md).
+
 A pinned public-Metal client executes a bounded dual-pipeline compute ICB through an explicit process-local bootstrap; ordinary applications remain unqualified. [Evidence](STANDALONE_PARTIAL_COMPUTE.md).
 
 The opt-in project ICB path supports bounded GPU-timeline copies of prepared mixed partial and uniform ranges, including a qualified two-pipeline sequence on the scope queue. [Evidence](PARTIAL_ICB_GPU_DUAL_COPY.md). CPU snapshot overlap qualification remains [here](PARTIAL_ICB_OVERLAP.md); broader GPU copies remain unqualified. The native CAS vector-register check remains qualified [here](CAS_REGISTER_SPAN.md); arbitrary applications and shaders remain unqualified.
