@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+**FAIL:** new Metal queue creation returned nil in four post-association/teardown trials; no-context and context-only controls succeeded. Do not treat the experimental associated lease as qualified for continued Metal use. [Evidence](VIDEO_CONTEXT_COMPUTE.md).
+
 A reusable experimental C++ lease manages the selected video context and shared-client lifecycle; two GTX associations and CPU failure-path tests pass, while video decoding remains unproved. [Evidence](VIDEO_CONTEXT_LEASE.md).
 
 Two controlled legacy AppleGVA calls associate a newly opened type-3 video context with a new type-6 shared client on the selected GTX service; hardware video and provider integration remain unproved. [Evidence](VIDEO_PROVIDER_ASSOCIATION.md).

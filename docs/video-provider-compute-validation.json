@@ -1,0 +1,87 @@
+{
+  "GPU_verified_words": 16384,
+  "attached_after_close_queue_failures": 4,
+  "build_SHA256": "0342be43fd939aa438a4e050403ced52a55118a0522d94e3ca1cc397cf91e800",
+  "cases": [
+    {
+      "after_queue_created": true,
+      "attach": false,
+      "before_capture_SHA256": "30d2003958d2b2f4c8930ed988a7bf59a225ed2eb0658319d7a4b47f1b0a74a5",
+      "case": "none-skip-1",
+      "probe": false,
+      "skip_dispatch": true
+    },
+    {
+      "after_queue_created": false,
+      "attach": true,
+      "before_capture_SHA256": "30d2003958d2b2f4c8930ed988a7bf59a225ed2eb0658319d7a4b47f1b0a74a5",
+      "case": "attach-skip-1",
+      "probe": true,
+      "skip_dispatch": true
+    },
+    {
+      "after_queue_created": true,
+      "attach": false,
+      "before_capture_SHA256": "30d2003958d2b2f4c8930ed988a7bf59a225ed2eb0658319d7a4b47f1b0a74a5",
+      "case": "context-skip-1",
+      "probe": true,
+      "skip_dispatch": true
+    },
+    {
+      "after_queue_created": false,
+      "attach": true,
+      "before_capture_SHA256": "30d2003958d2b2f4c8930ed988a7bf59a225ed2eb0658319d7a4b47f1b0a74a5",
+      "case": "attach-skip-2",
+      "probe": true,
+      "skip_dispatch": true
+    },
+    {
+      "after_queue_created": true,
+      "attach": false,
+      "before_capture_SHA256": "30d2003958d2b2f4c8930ed988a7bf59a225ed2eb0658319d7a4b47f1b0a74a5",
+      "case": "none-skip-2",
+      "probe": false,
+      "skip_dispatch": true
+    },
+    {
+      "after_queue_created": false,
+      "attach": true,
+      "before_capture_SHA256": "977e952ee91d7d7f59e3db07ef49a48ec3b928de40127dc7b13bb19db16a49ce",
+      "case": "attach-gpu-1",
+      "probe": true,
+      "skip_dispatch": false
+    },
+    {
+      "after_queue_created": true,
+      "attach": false,
+      "before_capture_SHA256": "30d2003958d2b2f4c8930ed988a7bf59a225ed2eb0658319d7a4b47f1b0a74a5",
+      "case": "context-skip-2",
+      "probe": true,
+      "skip_dispatch": true
+    },
+    {
+      "after_queue_created": true,
+      "attach": false,
+      "before_capture_SHA256": "977e952ee91d7d7f59e3db07ef49a48ec3b928de40127dc7b13bb19db16a49ce",
+      "case": "none-gpu",
+      "probe": false,
+      "skip_dispatch": false
+    },
+    {
+      "after_queue_created": false,
+      "attach": true,
+      "before_capture_SHA256": "977e952ee91d7d7f59e3db07ef49a48ec3b928de40127dc7b13bb19db16a49ce",
+      "case": "attach-gpu-2",
+      "probe": true,
+      "skip_dispatch": false
+    }
+  ],
+  "context_only_after_queue_successes": 2,
+  "guard_words": 448,
+  "hardware_video_frames": 0,
+  "no_context_after_queue_successes": 3,
+  "no_dispatch_sentinel_words": 40960,
+  "scope": "Controlled own-process legacy AppleGVA path. Queue creation fails after attached context teardown in the tested pattern; cause and broader conditions unknown.",
+  "status": "EXPECTED_FAILURE_CONFIRMED",
+  "terminal_nonoverlapping_processes": 9
+}

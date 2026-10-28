@@ -1,5 +1,7 @@
 # Association on the legacy AppleGVA selected service
 
+**Follow-up:** [Metal queue creation failed after association and teardown](VIDEO_CONTEXT_COMPUTE.md) in the tested process; the zero close statuses below do not establish continued Metal operation.
+
 The [preceding context test](VIDEO_PROVIDER_CONTEXT.md) opened a type-3 video context on the actual GTX service selected by a controlled legacy AppleGVA caller. This follow-up keeps a Metal device on the same registry ID alive, opens a type-3 context and a **new** type-6 shared connection on that selected service, and invokes the public `IOConnectAddClient(context, shared)` once. The probe closes the context and then the shared connection before releasing its Metal device. It does not acquire or identify Metal's own internal shared client.
 
 Two signed, nonoverlapping hardware-required processes each report status zero for both opens, the association and both closes; the returned port names were distinct. A context-only comparison opens and closes the type-3 connection without creating or associating a shared client. A wrong-name control never reaches the gate. Inspection and CPU controls complete the six-process cohort. Six software frames match **2,764,800 bytes** of their pinned reference; all four hardware-required requests still return `-12913` with zero frames.
