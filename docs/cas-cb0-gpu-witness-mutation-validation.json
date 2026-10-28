@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "GPU_dispatches": 0,
+  "cases": [
+    {
+      "case": "unchanged",
+      "accepted": true,
+      "expected_reason": null
+    },
+    {
+      "case": "guard",
+      "accepted": false,
+      "expected_reason": "output guard differs"
+    },
+    {
+      "case": "value",
+      "accepted": false,
+      "expected_reason": "CPU oracle mismatch"
+    },
+    {
+      "case": "witness",
+      "accepted": false,
+      "expected_reason": "CPU oracle mismatch"
+    },
+    {
+      "case": "aux-receipt",
+      "accepted": false,
+      "expected_reason": "constructor receipt differs"
+    },
+    {
+      "case": "process",
+      "accepted": false,
+      "expected_reason": "process evidence differs"
+    },
+    {
+      "case": "code",
+      "accepted": false,
+      "expected_reason": "build differs"
+    },
+    {
+      "case": "restored",
+      "accepted": true,
+      "expected_reason": null
+    }
+  ]
+}

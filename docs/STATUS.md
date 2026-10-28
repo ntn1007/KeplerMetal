@@ -1,6 +1,8 @@
 # Status, 2026-10-28
 
-Four unsubmitted native/repaired conditional CAS command captures each show a 256-byte CB0 at the variant's aligned code end. CB0 contents, the candidate-section binding and indirect-branch execution remain unproved. [Evidence](CAS_CONDITIONAL_CB0.md).
+Two isolated GPU CB0 witnesses each read the three pinned candidate-section words across 99 threads; two known-value controls pass. This is a modified laboratory shader and does not trace the indirect branch. [Evidence](CAS_CB0_GPU_WITNESS.md).
+
+Four unsubmitted native/repaired conditional CAS command captures each show a 256-byte CB0 at the variant's aligned code end. These captures did not read CB0 contents or trace the branch. [Evidence](CAS_CONDITIONAL_CB0.md).
 
 The conditional CAS SDK checks the exact live auxiliary section before program substitution. GPU regression and a wrong-expected-digest constructor control passed; live `c0` binding and indirect-branch semantics remain unproved. [Evidence](CAS_CONDITIONAL_AUX_GUARD.md).
 

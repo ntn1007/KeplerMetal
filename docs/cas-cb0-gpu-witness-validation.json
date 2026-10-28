@@ -1,0 +1,61 @@
+{
+  "CB0_gpu_values_match_captured_section": true,
+  "all_patterns_proved": false,
+  "candidate_section_sha256": "6b6731dc9464fd825d2aefe82c37334875811491ee9c774bae6460f0008949ef",
+  "indirect_branch_execution_proved": false,
+  "pairs": 2,
+  "performance_benchmark": false,
+  "receipts": [
+    {
+      "GPU_rows": 99,
+      "checked_words": 396,
+      "mode": "control",
+      "output_sha256": "032abce8bc130da31c41c7f6584ae3a289d2e6b737b38d36b50740eb104d8a8a",
+      "signed_host_sha256": "4af2190540d0c926c867c0e3336ad5d59dd4cbf27d77a2fea8421e6f6e90c73d",
+      "triplet": [
+        273,
+        546,
+        819
+      ]
+    },
+    {
+      "GPU_rows": 99,
+      "checked_words": 396,
+      "mode": "cb0",
+      "output_sha256": "927b84bb25aab0a94426ad6f2079c4f8fce353b69e9880cc05756cb06727e691",
+      "signed_host_sha256": "4af2190540d0c926c867c0e3336ad5d59dd4cbf27d77a2fea8421e6f6e90c73d",
+      "triplet": [
+        664,
+        696,
+        816
+      ]
+    },
+    {
+      "GPU_rows": 99,
+      "checked_words": 396,
+      "mode": "control",
+      "output_sha256": "032abce8bc130da31c41c7f6584ae3a289d2e6b737b38d36b50740eb104d8a8a",
+      "signed_host_sha256": "4af2190540d0c926c867c0e3336ad5d59dd4cbf27d77a2fea8421e6f6e90c73d",
+      "triplet": [
+        273,
+        546,
+        819
+      ]
+    },
+    {
+      "GPU_rows": 99,
+      "checked_words": 396,
+      "mode": "cb0",
+      "output_sha256": "927b84bb25aab0a94426ad6f2079c4f8fce353b69e9880cc05756cb06727e691",
+      "signed_host_sha256": "4af2190540d0c926c867c0e3336ad5d59dd4cbf27d77a2fea8421e6f6e90c73d",
+      "triplet": [
+        664,
+        696,
+        816
+      ]
+    }
+  ],
+  "resident_instructions_read_back": false,
+  "status": "PASS",
+  "unmodified_shader_execution_proved_by_this_witness": false
+}
