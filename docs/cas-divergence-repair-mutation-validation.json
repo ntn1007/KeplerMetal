@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "GPU_dispatches": 0,
+  "cases": [
+    {
+      "case": "unchanged",
+      "accepted": true
+    },
+    {
+      "case": "wrong-result",
+      "accepted": false
+    },
+    {
+      "case": "guard",
+      "accepted": false
+    },
+    {
+      "case": "native-input-evidence",
+      "accepted": false
+    },
+    {
+      "case": "unresolved-process",
+      "accepted": false
+    },
+    {
+      "case": "changed-repair",
+      "accepted": false
+    },
+    {
+      "case": "restored",
+      "accepted": true
+    }
+  ]
+}

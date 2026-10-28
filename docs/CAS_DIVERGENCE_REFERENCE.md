@@ -44,8 +44,10 @@ These are two distinct barriers to generalization. The capture is from a
 separate pipeline construction and does not read resident GPU instructions
 from the preceding test processes.
 
-No repair, new Metal feature, certificate or performance improvement is claimed
-by this experiment. The NVIDIA driver, Apple frameworks and OCLP were not
+This reference experiment did not itself implement a repair. A subsequent
+[exact-profile experiment](CAS_DIVERGENCE_REPAIR.md) separately qualifies a
+targeted correction on the GTX. No new Metal feature, certificate or performance
+improvement is claimed here. The NVIDIA driver, Apple frameworks and OCLP were not
 modified. The iMac's GPU runs and capture used the cooperative reservation;
 the reference used the separate M1 GPU and did not share that reservation.
 The signed host, compiled libraries, native output and raw readbacks remain in
