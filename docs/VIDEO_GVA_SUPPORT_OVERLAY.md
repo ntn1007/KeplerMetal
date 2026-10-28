@@ -1,5 +1,7 @@
 # AppleGVA support-table counterfactual
 
+**Calibration safety:** Do not use this historical observer in calibration mode with arbitrary clients. An extended calibration crashed when an opaque dictionary key was inspected as a Core Foundation object. The newer [property observer](VIDEO_GVA_PROPERTY.md) restricts calibration to an explicitly armed key and checks an opaque-key control. This warning does not change the archived observations.
+
 A pinned AppleGVA initialization path reads the iMac's model and board identifier from the locally installed `System Support` table. In three fresh H.264 hardware-required runs, both lookups returned absent. A separate process-local counterfactual supplies the value of an existing board entry only for the missing iMac board lookup. The lookup succeeds in three repeated runs and AppleGVA's observed logging changes, but **all still return -12913 and zero hardware images**. This is a diagnostic result, not a hardware decoder or driver correction.
 
 ## What changed and what was observed

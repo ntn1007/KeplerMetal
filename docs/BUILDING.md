@@ -1,5 +1,7 @@
 # Build from source
 
+[VIDEO_GVA_PROPERTY.md](VIDEO_GVA_PROPERTY.md) documents the scoped property observer, calibration safety and static branch audit.
+
 [VIDEO_GVA_OFFLINE_FLAG.md](VIDEO_GVA_OFFLINE_FLAG.md) documents the single-key comparison and IOKit iterator observation.
 
 [VIDEO_GVA_SUPPORT_OVERLAY.md](VIDEO_GVA_SUPPORT_OVERLAY.md) documents the scoped support-table counterfactual and unchanged-return registry observation.

@@ -1,0 +1,15 @@
+{
+  "GVA_UUID": "ca5414f369373c059ea2d82b35afd4f0",
+  "hardware_video_execution_proved": false,
+  "inference": "Null return follows pinned conditional branch, skipping this flag write and string conversion; later node state is not independently observed.",
+  "nonnull_flag_write_offset": 150821,
+  "nonnull_string_call_offset": 150845,
+  "null_branch_target": 150858,
+  "property_call_offset": 150807,
+  "region_SHA256": "f8a1efea62ed7f03028666fe86c35de8f06941324ac8d1ae8815ec93f0eb8a19",
+  "resident_code_pin_in_witness": true,
+  "runtime_property_result_present": false,
+  "runtime_return_offset": 150812,
+  "status": "PASS",
+  "system_modified": false
+}
