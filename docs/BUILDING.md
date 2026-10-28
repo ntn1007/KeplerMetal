@@ -1,5 +1,7 @@
 # Build from source
 
+[VIDEO_SELECTOR_PATH.md](VIDEO_SELECTOR_PATH.md) documents the bounded on-disk synchronous dispatch audit and model tests.
+
 [VIDEO_CHANNEL_BRANCHES.md](VIDEO_CHANNEL_BRANCHES.md) describes the read-only three-profile direct call and jump audit.
 
 [VIDEO_HIGH_SIERRA_COMPARISON.md](VIDEO_HIGH_SIERRA_COMPARISON.md) documents signed historical components, offline extraction and the pinned comparison.

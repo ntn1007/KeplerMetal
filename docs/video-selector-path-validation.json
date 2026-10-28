@@ -1,0 +1,27 @@
+{
+  "conditional_result": "kIOReturnUnsupported 0xe00002c7",
+  "conditions": [
+    "on-disk vtable relocations represent the actual initialized object and targets",
+    "callExternalMethod chooses the normal branch (client flag 0x2 clear)",
+    "context ready bit set",
+    "dispatch pointer null, selector not 6",
+    "the 64-bit word at arguments +0x08 is zero and input/output memory descriptors are null",
+    "selector above 7"
+  ],
+  "dwarf_capture_SHA256": "2097eb4b103118131b1521d354379e96578f3329655dd2b3bf9aec653ce3cd95",
+  "ge_SHA256": "44f131a958d48afd6ab675a851330c37506557c9d499484170c886c3731bdbb3",
+  "io_SHA256": "37e563d6cf3626101f30b1727a4f60dec02152dff9c74c0269c30c213a7320c8",
+  "kernel_SHA256": "7004ebc1020a5c7e3f075c631507f31fdc0ce3fe02e9f01f42dce1d178770a08",
+  "kernel_UUID_observed": "1291D44A-C0CD-3AC7-A9E4-CA2749B33959",
+  "kernel_memory_read": false,
+  "notes": [
+    "Kernel UUID equality is not a live kernel byte comparison.",
+    "Target connection, context state, flags, dispatch and descriptor values are not observed by this audit.",
+    "No selector was called or GPU video work executed."
+  ],
+  "observed_live_selector": false,
+  "other_selector_or_dispatch_paths": "unknown",
+  "selector_0x105_model": "CONDITIONAL_UNSUPPORTED",
+  "status": "STATIC_CONDITIONAL_SYNC_PATH_PASS",
+  "video_decode_proved": false
+}

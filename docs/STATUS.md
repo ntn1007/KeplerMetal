@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+A pinned on-disk kernel and IOAccelerator audit predicts an Unsupported result for selector 0x105 only under specified synchronous-path assumptions; no live selector is tested. [Evidence](VIDEO_SELECTOR_PATH.md).
+
 A three-profile static channel audit adds tail-jump coverage and shows the historical direct video-context route versus the bounded modern branch inventory; live reachability remains unknown. [Evidence](VIDEO_CHANNEL_BRANCHES.md).
 
 A signed High Sierra 10.13.6 update contains the same return-14 NVIDIA video factory stub as the current profile; its on-disk video lookup is also inherited. This is static evidence, not hardware decode. [Comparison](VIDEO_HIGH_SIERRA_COMPARISON.md).

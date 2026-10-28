@@ -12,6 +12,8 @@ This is separate from the [legacy AppleGVA experiment](VIDEO_LEGACY_BACKEND.md):
 
 A [High Sierra follow-up](VIDEO_HIGH_SIERRA_COMPARISON.md) identifies a matching return-14 provider stub and inherited lookup in that separately signed update; its static lookup also returns null above 7. Runtime dispatch remains unproved.
 
+A [later on-disk kernel audit](VIDEO_SELECTOR_PATH.md) connects the normal synchronous branch to the inherited lookup and predicts Unsupported under explicit assumptions; the live path is still not observed.
+
 ## Reproduction
 
 Use the existing private lab tree, including its pinned historical binaries, retained REA records and public XNU header. No vendor binary is distributed by this repository. The audit rejects any changed input and creates a fresh report:
