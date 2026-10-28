@@ -48,6 +48,25 @@ reject a component overwrite, a non-device store, an undefined or
 non-dominating value, a missing store, and a path that reaches the store
 without the PHI. [Output-path evidence](cas-conditional-air-output-validation.json).
 
+## Explicit expected-pointer uses
+
+The detailed reader additionally exposes raw instruction subcodes, flags and
+alignment fields. Removing those fields reproduces the earlier CFG dump. For
+the retained shader, the expected pointer is an entry-block allocation of one
+private i32. Its four explicit operand uses are the i8 pointer cast, the
+initializing store, the CAS argument and the subsequent load. The cast has
+subcode 11, which the retained Mesa DXIL bitcode definitions identify as
+`bitcast`; its two explicit uses are four-byte lifetime-start and lifetime-end
+markers. These operations occur in the expected order within the CAS block.
+
+The inspector rejects extra explicit uses, changed cast subcodes, unexpected
+lifetime size or order, and changed pointer address spaces. Its tests are
+synthetic and run only on the CPU. Two reader rebuilds yield the same detailed
+dump and observation. This is not an independent AIR decode or a complete
+interprocedural alias proof: unknown or incorrectly decoded uses, native SASS
+flow, and runtime behavior remain outside its scope. The result does not
+authorize a repair. [Pointer-use evidence](cas-conditional-pointer-validation.json).
+
 ## Reproduction
 
 The local retained AIR, prior typed dump, OpenNVDA header and object files are
@@ -64,8 +83,11 @@ python3 "$REPO/bridge/experiments/cas_divergence/trace_air_output.py" \
   --cfg "$LAB/results/cas-divergence-cfg-new/typed-cfg.json" \
   --previous "$LAB/results/cas-divergence-analysis-20261028-01/typed-air.json" \
   --function divergence_case --out "$LAB/results/cas-divergence-cfg-new/output-trace.json"
+python3 "$REPO/bridge/experiments/cas_divergence/reproduce_cas_pointer.py" \
+  --lab "$LAB" --out "$LAB/results/cas-divergence-pointer-new"
 python3 -m unittest discover -s "$REPO/tests" -p 'test_cas_conditional_air_cfg.py' -v
 python3 -m unittest discover -s "$REPO/tests" -p 'test_cas_air_output_trace.py' -v
+python3 -m unittest discover -s "$REPO/tests" -p 'test_cas_pointer_inspect.py' -v
 ```
 
 The full augmented dump remains local. The published evidence contains only

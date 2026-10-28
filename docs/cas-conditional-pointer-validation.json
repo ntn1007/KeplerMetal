@@ -1,0 +1,37 @@
+{
+  "CAS_tests_passed": 64,
+  "GPU_dispatches": 0,
+  "identical_results": true,
+  "reader_independently_verified": false,
+  "rebuilds": 2,
+  "result": {
+    "CAS_instruction": 49,
+    "GPU_dispatches": 0,
+    "alloca_instruction": 0,
+    "authorizes_repair": false,
+    "cast_instruction": 46,
+    "cast_pointer_uses": 2,
+    "cast_subcode": 11,
+    "cfg_sha256": "11222eef383363dc192c788817f695be2aa8a9df477030873d9218f6fe500cc1",
+    "detail_sha256": "57e0da2e7c19577a67258fa6a087d7276439e580f4d5ed1fac23b45194b09065",
+    "direct_pointer_uses": 4,
+    "expected_load_instruction": 51,
+    "initial_store_instruction": 48,
+    "inspector_sha256": "82fb387ecd555e86c4acb4b1b85fcccf88329519496135f52a6db0e503f3e538",
+    "lifetime_end_instruction": 52,
+    "lifetime_start_instruction": 47,
+    "limits": "Explicit reader-derived operands only; no independent AIR decoder, indirect/hidden aliases, SASS flow or new GPU test.",
+    "output_component": 0,
+    "reader_sha256": "16ac8185c1cd6e3b43d87d12422d772702735a6b7ed28c5614a2c8a996ab9d87",
+    "reader_source_sha256": "816fcc7947ceb9877eab5228b7541fa2bb49212be2309a60313120eea1a49abf",
+    "reproducer_sha256": "d2464caa4b428d4a0654a064498e24822e0b1071bb10e11632a25eb186c11d87",
+    "status": "OBSERVED"
+  },
+  "source_sha256": {
+    "bridge/experiments/cas_divergence/cfg_detail_dump.c": "816fcc7947ceb9877eab5228b7541fa2bb49212be2309a60313120eea1a49abf",
+    "bridge/experiments/cas_divergence/inspect_cas_pointer.py": "82fb387ecd555e86c4acb4b1b85fcccf88329519496135f52a6db0e503f3e538",
+    "bridge/experiments/cas_divergence/reproduce_cas_pointer.py": "d2464caa4b428d4a0654a064498e24822e0b1071bb10e11632a25eb186c11d87",
+    "tests/test_cas_pointer_inspect.py": "d294c200474b2950be7db77123e64adacc74dec9a73487aff8d2aca0d3422ae5"
+  },
+  "status": "OBSERVED"
+}
