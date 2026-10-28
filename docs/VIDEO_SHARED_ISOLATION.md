@@ -1,5 +1,7 @@
 # Isolating the Metal queue failure to a shared-client lifecycle
 
+**Follow-up:** [Delayed-close controls](VIDEO_SHARED_CLOSE_TIMING.md) create another queue while the extra type-6 connection is open and observe nil after it closes.
+
 The [previous test](VIDEO_CONTEXT_COMPUTE.md) found that a new Metal queue could not be created after an experimental video context and type-6 shared client were associated and closed. This controlled follow-up separates the operations in eight new signed, nonoverlapping processes on the same pinned GTX and legacy AppleGVA test path.
 
 | Operations between two queue-creation attempts | Runs | Queue before close | Queue after close |

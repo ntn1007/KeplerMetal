@@ -1,5 +1,7 @@
 # Build from source
 
+[VIDEO_SHARED_CLOSE_TIMING.md](VIDEO_SHARED_CLOSE_TIMING.md) documents the delayed-close comparison and its audit.
+
 [VIDEO_SHARED_ISOLATION.md](VIDEO_SHARED_ISOLATION.md) documents the type-6-only isolation and failure audit.
 
 [VIDEO_CONTEXT_COMPUTE.md](VIDEO_CONTEXT_COMPUTE.md) documents the post-association Metal queue failure and raw-output audit.

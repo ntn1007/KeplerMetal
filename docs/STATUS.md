@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+**FAIL:** two delayed-close trials create Metal queues while an extra type-6 connection is open and receive nil after it closes; internal ownership remains unresolved. [Evidence](VIDEO_SHARED_CLOSE_TIMING.md).
+
 **FAIL:** opening and closing an extra type-6 shared client alone reproduces the later Metal queue failure in two controlled processes; a video context or association is not necessary in this setup. [Evidence](VIDEO_SHARED_ISOLATION.md).
 
 **FAIL:** new Metal queue creation returned nil in four post-association/teardown trials; no-context and context-only controls succeeded. Do not treat the experimental associated lease as qualified for continued Metal use. [Evidence](VIDEO_CONTEXT_COMPUTE.md).
