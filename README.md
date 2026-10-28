@@ -21,6 +21,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+A process-local laboratory witness returns its own no-copy allocation after two verified GTX commands; application callbacks and general driver repair remain unqualified. [Evidence and reproduction](docs/NOCOPY_RELEASE_WITNESS.md).
+
 Two guarded processes created and released an empty real video-context wrapper attached to Metal’s GTX shared object; video decoding remains unproved. [Evidence](docs/METAL_VIDEO_CONTEXT.md).
 
 A process-local observer verifies the device-to-shared object link created naturally by Metal on the GTX; lifetime and video use remain unqualified. [Evidence](docs/METAL_SHARED_OBJECT.md).
