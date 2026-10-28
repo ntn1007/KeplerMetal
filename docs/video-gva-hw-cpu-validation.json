@@ -1,0 +1,23 @@
+{
+  "GPU_execution": false,
+  "bad_base_refused": true,
+  "both_processes_exit_zero": true,
+  "host_sha256": "e02d9829a095ea9b72a442e5f5cba1696c9e0a56f1ec8f3ae2a74de2b08d8446",
+  "library_sha256": "51729f754b86ab1f8b81d628e0269cc760aee19a1354a7151742e5a97369d87a",
+  "negative_log_sha256": "e66befa745fbb8c9b90352b05c41a0dd2bac8ff569ee07b3f7bd0b92352f8fb6",
+  "positive_hits": {
+    "after_base": 1,
+    "after_constructor": 1
+  },
+  "positive_live_code_bytes_match": true,
+  "positive_log_sha256": "d74613d613c63f79c3230a608a7f0ae3f8b3b74904ac3c1ce1fee9e77e259ebd",
+  "source_sha256": {
+    "cpu_dylib.cpp": "fb91b161339c547821880bd082240bf1bdb27a100902de4d784bb7b04abd3f60",
+    "cpu_dynamic_host.cpp": "c28dbaa6d6769c7e57ee24a9c37a4cb3e23eb5b88dc5005c3fb2ad187a7b1242",
+    "lldb_witness.py": "fa30d21192b67b190442131acf31eb3d439c852a699fbcdd1bb91e27afb27186",
+    "marker.S": "f144f656d0caee136c476bd95a2cabdf95e8f9a792509146f2de34993e30da31"
+  },
+  "status": "PASS_HARDWARE_BREAKPOINT_CPU_CALIBRATION",
+  "system_modified": false,
+  "vendor_execution": false
+}
