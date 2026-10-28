@@ -1,0 +1,19 @@
+{
+  "cooperative_threads": 8,
+  "cycles": 1600,
+  "exit_code": 0,
+  "host_architecture": "arm64",
+  "kind": "CPU mock tests only",
+  "scope": "Threads serialize mock lifecycle with a shared mutex; Metal and kernel participants not exercised.",
+  "sources_sha256": {
+    "GuardedAliasBackend.cpp": "799174046464489a9de58ea1b4eddf18a938b1ff13e323e849adf235497d6de0",
+    "GuardedAliasBackend.h": "29f477d85d9481286e1d3ffc25affa8b134314359593d0f58737151bc9b42410",
+    "SharedAliasGuard.h": "6660c23dc3937e5acf4b03c41be56d61200ef814a93c90605af9bef6a9363ff9",
+    "VideoContextLease.cpp": "3425b6193add1730bf8d688f0f93179dcff709dfbe4e92e3f0eaaf2d4b1c2dcf",
+    "VideoContextLease.h": "c8915102e4c43eb70bb8e7d8c0aeb95e8b0295091f6023b0bd3dbd73a3ba4038",
+    "test.cpp": "ef8ea3e808f0d7bc023ab8ff4b3aff44e404054e1f98db151d46d5df86c60c51"
+  },
+  "status": "PASS",
+  "stderr_empty": true,
+  "tool": "clang++ -fsanitize=thread"
+}

@@ -10,6 +10,8 @@ A later [guarded reference-release experiment](VIDEO_SHARED_REFERENCE_GUARD.md) 
 
 A further [association and guarded-release witness](VIDEO_SHARED_LEASE_GPU.md) uses this lease with a separate experimental backend and validates subsequent GTX compute. The original native backend has not been replaced or generally qualified.
 
+A separately extracted [guarded backend](VIDEO_GUARDED_BACKEND.md) adds fail-closed checks and has bounded GTX validation. It does not replace or generally qualify the original native backend.
+
 ## Validation
 
 A pinned test gate uses the component on the actual service selected by controlled AppleGVA 10.13.6. Two signed, nonoverlapping processes each open type 3 and type 6, associate them and close both successfully; a context-only control succeeds and a wrong-name control makes no gate call. A Metal device with the same registry ID remains alive through teardown. The [six-process audit](video-provider-lease-validation.json) checks frozen sources and build, signed receipts, route/identity controls, return codes, declared imports and six CPU reference images (2,764,800 bytes). Four hardware-required cases still return `-12913` and zero images. The test gate returns 14 and does not call the Sierra provider. AppleGVA selection and previous policy/dependency substitutions remain process-local.

@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+A reusable experimental guarded backend now rejects additional lifecycle failures; CPU mock and bounded GTX tests pass. Shared synchronization remains a caller responsibility. [Evidence and limitations](VIDEO_GUARDED_BACKEND.md).
+
 A pinned experimental backend now combines the existing video lease, an associated type-3 context and guarded type-6 reference release; two later GTX compute runs pass while explicit-close controls fail. [Evidence and limits](VIDEO_SHARED_LEASE_GPU.md).
 
 A guarded, process-local extra shared-client reference release preserves a new Metal queue and GPU compute in two GTX trials; the existing video lease remains unqualified. [Evidence and limits](VIDEO_SHARED_REFERENCE_GUARD.md).

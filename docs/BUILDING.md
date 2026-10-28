@@ -1,5 +1,7 @@
 # Build from source
 
+[VIDEO_GUARDED_BACKEND.md](VIDEO_GUARDED_BACKEND.md) documents the experimental reusable backend, CPU tests and pinned GPU cohort.
+
 [VIDEO_SHARED_LEASE_GPU.md](VIDEO_SHARED_LEASE_GPU.md) documents the bounded associated video-lease release cohort and audit.
 
 [VIDEO_SHARED_REFERENCE_GUARD.md](VIDEO_SHARED_REFERENCE_GUARD.md) describes the bounded alias reference-release GPU cohort and re-audit.

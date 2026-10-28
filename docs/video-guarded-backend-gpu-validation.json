@@ -1,0 +1,63 @@
+{
+  "build_inputs_SHA256": "4064037c9ead332eb2e65f39049e032fa86d72d3c650f05f384330861813d405",
+  "cases": [
+    {
+      "gpu_dispatched": true,
+      "mode": "lease-release",
+      "queue_after": true,
+      "result_SHA256": "15e70187d3b0c383833f3b0001467d8e3a3c8a7b964623e62111deb4f957e504"
+    },
+    {
+      "gpu_dispatched": true,
+      "mode": "observe",
+      "queue_after": true,
+      "result_SHA256": "f46c5b4173116fe8c7d687f6445c4bec7aefa6aa186f0161dfe14c93010c0048"
+    },
+    {
+      "gpu_dispatched": false,
+      "mode": "lease-close",
+      "queue_after": false,
+      "result_SHA256": "bed6ceb0909838f88304afff0c754e71b724b21e97d45ce79dc10a33d253fd1d"
+    },
+    {
+      "gpu_dispatched": false,
+      "mode": "lease-negative",
+      "queue_after": true,
+      "result_SHA256": "f59fb4c94d41a0c0d23f43a4c14c91677ce058c26594a50b9faa9036749da2af"
+    },
+    {
+      "gpu_dispatched": true,
+      "mode": "lease-release",
+      "queue_after": true,
+      "result_SHA256": "d6ac070ab0064141e0122d331ee974dfb9bc984912ea84d258c0c8be8cce6adc"
+    },
+    {
+      "gpu_dispatched": false,
+      "mode": "lease-negative",
+      "queue_after": true,
+      "result_SHA256": "95140a2ba1f3a70d0478a08b7a740cc7d9623652c024c6adde2549ac8704cfcf"
+    },
+    {
+      "gpu_dispatched": false,
+      "mode": "lease-close",
+      "queue_after": false,
+      "result_SHA256": "4c58ca787c6029ac13c2d77005db931f276c329345ef8a0850ef39189d353237"
+    }
+  ],
+  "explicit_close_expected_queue_failures": 2,
+  "gpu_verified_words": 12288,
+  "guard_words": 160,
+  "hardware_video_execution_proved": false,
+  "negative_sentinel_words": 8192,
+  "reference_release_negative_controls": 2,
+  "release_gpu_processes": 2,
+  "same_object_and_name": true,
+  "scope": "Pinned process-local reusable guarded backend and type-3 association; no decoding, general driver fix, or GPU concurrency proof.",
+  "send_right_counts": [
+    1,
+    2,
+    1
+  ],
+  "status": "PASS_BOUNDED_REUSABLE_GUARDED_BACKEND",
+  "terminal_nonoverlapping_processes": 7
+}
