@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+The offline CAS recognizer now accounts for register writes in instructions combined with `join`. A synthetic one-instruction counterexample is rejected; the five archived diagnoses retain their verdicts. No synthetic code was dispatched and prior certificates are not automatically requalified. [Evidence and limits](CAS_JOIN_WRITE.md).
+
 Two bounded UID 501 opens of the selected NVIDIA port returned `kIOReturnUnsupported` without a connection; the cause and current administrator behavior remain unproved. [Evidence](VIDEO_RM_USER_OPEN.md).
 
 Four signed no-open profile controls identify the current `NVDA,Display-A` service while refusing the four-way PCI-only ambiguity; the historical privileged witness remains unqualified. [Evidence](VIDEO_RM_CURRENT_PROFILE.md).

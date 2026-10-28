@@ -34,8 +34,13 @@ def register_writes(op):
  None means an unqualified instruction, never presumed to preserve registers.
  """
  text=re.sub(r'^(?:\$p\d+ |\(not \$p\d+\) )','',op);opcode=text.split()[0]
+ # JOIN is an instruction modifier: e.g. `join mov b32 $r9 $r6`
+ # both reconverges and writes $r9. Do not discard the combined operation.
+ if opcode=='join':
+  body=text[len('join'):].strip()
+  return register_writes(body) if body else None
  if opcode=='bar':return set() if re.fullmatch(r'bar popc \$p\d+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+ 0x[0-9a-f]+',text) else None
- if opcode in {'bra','join','joinat','membar','nop','exit','st'}:return set()
+ if opcode in {'bra','joinat','membar','nop','exit','st'}:return set()
  known={'mov','cvt','rcp','mul','add','sub','subr','xor','and','or','shl','shr','mad','fma','min','max','selp','slct','set','ld'}
  if opcode not in known:return None
  tokens=re.findall(r'\$[a-zA-Z]+\d*[dq]?',text)

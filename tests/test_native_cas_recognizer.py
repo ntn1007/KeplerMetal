@@ -34,6 +34,30 @@ def listing(extra='nop', address=8, after_store='exit'):
 
 
 class CASRecognitionSafety(unittest.TestCase):
+    def test_join_modifier_keeps_underlying_register_writes(self):
+        self.assertEqual(cas.register_writes('join nop'), set())
+        self.assertEqual(cas.register_writes('join mov b32 $r9 $r6'), {9})
+        self.assertEqual(cas.register_writes('join mov b64 $r9d $r6d'), {9, 10})
+        self.assertEqual(cas.register_writes('$p1 join mov b32 $r0 $r6'), {0})
+        self.assertIsNone(cas.register_writes('join unrecognized $r9 $r6'))
+        self.assertIsNone(cas.register_writes('join'))
+
+    def test_join_write_between_lock_and_comparison_is_rejected(self):
+        code, text = listing()
+        rows = text.splitlines()
+        # Insert the combined operation into the lock-result live interval;
+        # this is parser-only synthetic text, never GPU-executed.
+        ops = [row.split('     ', 1)[1] for row in rows]
+        ops[6:11] = ['join mov b32 $r4 $r6', 'set $p0 0x1 eq u32 $r0 $r4',
+                     'sched 0x0', 'membar cta', 'st b128 wb g[$r8d] $r0q']
+        words = [0] * len(ops)
+        words[9] = 0xe000000000001c05
+        code = b''.join(struct.pack('<Q', word) for word in words)
+        text = '\n'.join(f'{i * 8:08x}: {word & 0xffffffff:08x} {word >> 32:08x}     {op}'
+                         for i, (word, op) in enumerate(zip(words, ops)))
+        self.assertFalse(sass_contract(code, text, 0)['qualified'])
+        self.assertTrue(sass_contract(code, text.replace('join mov b32 $r4 $r6', 'join nop'), 0)['qualified'])
+
     def test_ordinary_output_is_accepted(self):
         code, text = listing()
         self.assertTrue(sass_contract(code, text, 0)['qualified'])

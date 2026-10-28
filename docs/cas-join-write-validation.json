@@ -1,0 +1,42 @@
+{
+  "GPU_dispatches": 0,
+  "assembler_SHA256": "1f023d5e1f0a5afc3a04510e264159923dac3182139e03c0a67600b9b1d4428e",
+  "changed_operation": "join mov b32 $r9 $r6",
+  "current_accepted": false,
+  "current_recognizer_SHA256": "d2d7ecc09b7c5b3707bd65502c34d8f322c03f7ee41b7350f6cb89c7f87b8c54",
+  "decoder_SHA256": "1c8730a9a4861f374c58407bff31d7ccb47a57eb23f9f82c6b3ea3deb079be0f",
+  "original_AIR_and_synthetic_program_are_not_proven_related": true,
+  "original_regressions": [
+    {
+      "candidate": true,
+      "function": "sdk_cas_expected",
+      "native_SHA256": "ea09f179ff169422f6f3ac8c3b1f85f020c52f5853106e68becbb0f408ef85e3"
+    },
+    {
+      "candidate": true,
+      "function": "sdk_cas_slot",
+      "native_SHA256": "d39eb2371cbd96770576236ce8b48ba5b03d8dcd818db2b6826737bedaa89701"
+    },
+    {
+      "candidate": true,
+      "function": "sdk_cas_noise",
+      "native_SHA256": "7640c32a4ea4a078dd4e3bf149a15f1fef77e4e22a56018f3f5ed6fa2c6f541c"
+    },
+    {
+      "candidate": true,
+      "function": "sdk_cas_swizzle",
+      "native_SHA256": "9d6fc4f422a49b25c20f74a3e95accca8cbbd8ac6a6f5f7f53230a14d3dec7e0"
+    },
+    {
+      "candidate": false,
+      "function": "sdk_keep_comparand",
+      "stage": "AIR"
+    }
+  ],
+  "previous_accepted": true,
+  "previous_recognizer_SHA256": "accfc71ca96eb64787c85715f25fab9042074b577c5b25dd2728e7d6f10af1e3",
+  "status": "PASS",
+  "synthetic_changed_offset": "0x390",
+  "synthetic_listing_SHA256": "cf20d75e8db1f2aff4bccde188c44ed0ff91455a5daf1ecf4cfeef2b58032316",
+  "synthetic_program_SHA256": "a64e068ac1fe9a7d696b284f29a09c519fc6452665cad215374a231aec9cccbc"
+}
