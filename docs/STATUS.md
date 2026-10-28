@@ -1,5 +1,7 @@
 # Status, 2026-10-28
 
+A reusable experimental C++ lease manages the selected video context and shared-client lifecycle; two GTX associations and CPU failure-path tests pass, while video decoding remains unproved. [Evidence](VIDEO_CONTEXT_LEASE.md).
+
 Two controlled legacy AppleGVA calls associate a newly opened type-3 video context with a new type-6 shared client on the selected GTX service; hardware video and provider integration remain unproved. [Evidence](VIDEO_PROVIDER_ASSOCIATION.md).
 
 Two controlled legacy calls open and close a type-3 context on AppleGVA's selected GTX service; no legacy provider call, selector dispatch or hardware video is established. [Evidence](VIDEO_PROVIDER_CONTEXT.md).

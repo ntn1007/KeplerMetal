@@ -1,5 +1,7 @@
 # Build from source
 
+[VIDEO_CONTEXT_LEASE.md](VIDEO_CONTEXT_LEASE.md) documents the optional video context lifecycle component and tests.
+
 [VIDEO_PROVIDER_ASSOCIATION.md](VIDEO_PROVIDER_ASSOCIATION.md) documents selected-service association and its pinned re-audit.
 
 [VIDEO_PROVIDER_CONTEXT.md](VIDEO_PROVIDER_CONTEXT.md) documents the selected-service context open/close and controls.

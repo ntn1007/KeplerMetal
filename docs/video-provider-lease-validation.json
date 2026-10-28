@@ -1,0 +1,73 @@
+{
+  "build_manifest_SHA256": "0dbc8cccb66a37e446808e6f10ec4b05396dd108b5731f10f36a1d88faff922c",
+  "cases": [
+    {
+      "attach": false,
+      "case": "inspect",
+      "gate_SHA256": "403df1720d12ce9f811e52599bab1d0eb06bd890705c241bb961c54e72845615",
+      "gate_calls": 0,
+      "mode": "inspect",
+      "probe": false,
+      "route": "passive"
+    },
+    {
+      "attach": true,
+      "case": "attach-1",
+      "gate_SHA256": "29be6c39bf7647a18b72d79efdebe6d08bc4195f050688b78d5e9f0c16bf8997",
+      "gate_calls": 1,
+      "mode": "hardware",
+      "probe": true,
+      "route": "enabled"
+    },
+    {
+      "attach": false,
+      "case": "context",
+      "gate_SHA256": "52b881545fcb4ba8edb726e43e7ecf111ba156d02391a65879c4d3f6af1c4b42",
+      "gate_calls": 1,
+      "mode": "hardware",
+      "probe": true,
+      "route": "enabled"
+    },
+    {
+      "attach": false,
+      "case": "wrong",
+      "gate_SHA256": "e1810310fff6ed9645bcda0e55382e86c656e30d8fc54b80e87e838cc7562d5d",
+      "gate_calls": 0,
+      "mode": "hardware",
+      "probe": false,
+      "route": "wrong-name"
+    },
+    {
+      "attach": true,
+      "case": "attach-2",
+      "gate_SHA256": "29be6c39bf7647a18b72d79efdebe6d08bc4195f050688b78d5e9f0c16bf8997",
+      "gate_calls": 1,
+      "mode": "hardware",
+      "probe": true,
+      "route": "enabled"
+    },
+    {
+      "attach": false,
+      "case": "cpu",
+      "gate_SHA256": "403df1720d12ce9f811e52599bab1d0eb06bd890705c241bb961c54e72845615",
+      "gate_calls": 0,
+      "mode": "cpu",
+      "probe": false,
+      "route": "passive"
+    }
+  ],
+  "context_open_close_successes": 3,
+  "hardware_failures": 4,
+  "hardware_images": 0,
+  "hardware_video_execution_proved": false,
+  "scope": "Reusable C++ lease on own-process legacy AppleGVA service; public association, no video selector or decode.",
+  "selected_registry_ID": 4294968416,
+  "selected_service_class": "nvAccelerator",
+  "selected_service_observations": 3,
+  "shared_client_association_successes": 2,
+  "sierra_provider_executed_by_gate": false,
+  "software_CPU_reference_bytes": 2764800,
+  "software_images": 6,
+  "status": "PASS",
+  "terminal_nonoverlapping_processes": 6
+}
