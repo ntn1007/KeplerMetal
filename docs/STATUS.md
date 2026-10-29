@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Six paired processes per version measure the scoped Apple ICB cache: median calling-thread encoding CPU falls from 5.257 to 1.914 ms on the selected cache-hit frames; full-frame and GPU performance are unmeasured. [Evidence](APPLE_CACHE_BENCHMARK.md).
+
 The scoped adapter reuses inherited records for the pinned Apple view profile while revalidating state; a changed mesh invalidates its record, and GTX output matches direct draws. No performance claim. [Evidence](APPLE_INHERITED_CACHE.md).
 
 Eight instrumented Apple storyboard frames with alternating state match direct GTX images when explicitly waiting only after the last commit. The adapted path did not observe more than one pending buffer; overlap is unproved. [Evidence](APPLE_STORYBOARD_INFLIGHT.md).

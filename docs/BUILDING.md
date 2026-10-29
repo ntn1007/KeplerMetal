@@ -1,5 +1,7 @@
 # Build from source
 
+[APPLE_CACHE_BENCHMARK.md](APPLE_CACHE_BENCHMARK.md) documents the paired encoding benchmark and reproducible controls.
+
 [APPLE_INHERITED_CACHE.md](APPLE_INHERITED_CACHE.md) documents the scoped inherited-record cache and reproduction.
 
 [APPLE_STORYBOARD_INFLIGHT.md](APPLE_STORYBOARD_INFLIGHT.md) documents the queued-frame witness and reproduction.

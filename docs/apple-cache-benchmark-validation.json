@@ -1,0 +1,863 @@
+{
+  "adapted_packets_checked": 1440,
+  "archive_sha256": [
+    "5c0816e7907c2fc15bc9fb341f6ad71df48daccaeba303d0635d11d6cab41cdf",
+    "0abdd64c77ffd4aec09b382d3110d04188209fe64492f6f1f4729d0a80c147db"
+  ],
+  "benchmark_pairs": 6,
+  "benchmark_processes": 12,
+  "benchmark_scope": "executeCommandsInBuffer caller thread only",
+  "control_processes": 2,
+  "cpu_clock": "CLOCK_THREAD_CPUTIME_ID",
+  "frames_total": 112,
+  "gpu_time_measured": false,
+  "guards_checked": 57344,
+  "original_app_executable": false,
+  "pixels_checked": 344064,
+  "runs": [
+    {
+      "image_sha256": [
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc"
+      ],
+      "manifest_sha256": "28cff6564eb882b1b8117b4833978c7abe39507f1e9e5b073cc002da3cedfe3e",
+      "mode": "direct",
+      "selected_medians_ns": null,
+      "timings": [],
+      "version": "cache"
+    },
+    {
+      "image_sha256": [
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb",
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb",
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb",
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb",
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb",
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb",
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb",
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb"
+      ],
+      "manifest_sha256": "256525b724fa4e9c374b4e7b1dea632394ee1c76028cfcc8397e4dfed67f7a48",
+      "mode": "blank",
+      "selected_medians_ns": null,
+      "timings": [],
+      "version": "cache"
+    },
+    {
+      "image_sha256": [
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc"
+      ],
+      "manifest_sha256": "e36c08511b72143e7d20eef4a70ff0ddef61beaee127e23c63056ee8ca6ab403",
+      "mode": "auto",
+      "selected_medians_ns": {
+        "thread_cpu_ns": 5363284.0,
+        "wall_ns": 5446000.0
+      },
+      "timings": [
+        {
+          "frame": 0,
+          "thread_cpu_ns": 8118569,
+          "wall_ns": 8547000
+        },
+        {
+          "frame": 1,
+          "thread_cpu_ns": 5540351,
+          "wall_ns": 5544000
+        },
+        {
+          "frame": 2,
+          "thread_cpu_ns": 5284153,
+          "wall_ns": 5343000
+        },
+        {
+          "frame": 3,
+          "thread_cpu_ns": 5355437,
+          "wall_ns": 5856000
+        },
+        {
+          "frame": 4,
+          "thread_cpu_ns": 5437354,
+          "wall_ns": 5441000
+        },
+        {
+          "frame": 5,
+          "thread_cpu_ns": 5444817,
+          "wall_ns": 5472000
+        },
+        {
+          "frame": 6,
+          "thread_cpu_ns": 5371131,
+          "wall_ns": 5420000
+        },
+        {
+          "frame": 7,
+          "thread_cpu_ns": 4802200,
+          "wall_ns": 4805000
+        }
+      ],
+      "version": "baseline"
+    },
+    {
+      "image_sha256": [
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc"
+      ],
+      "manifest_sha256": "7b5a38fb73c3d725cde71d9b4565ae6887c707a1994eb6163846699ce8e76fbe",
+      "mode": "auto",
+      "selected_medians_ns": {
+        "thread_cpu_ns": 1940145.0,
+        "wall_ns": 1944500.0
+      },
+      "timings": [
+        {
+          "frame": 0,
+          "thread_cpu_ns": 7078131,
+          "wall_ns": 7081000
+        },
+        {
+          "frame": 1,
+          "thread_cpu_ns": 1875704,
+          "wall_ns": 1878000
+        },
+        {
+          "frame": 2,
+          "thread_cpu_ns": 1994934,
+          "wall_ns": 1998000
+        },
+        {
+          "frame": 3,
+          "thread_cpu_ns": 2085755,
+          "wall_ns": 2098000
+        },
+        {
+          "frame": 4,
+          "thread_cpu_ns": 2169508,
+          "wall_ns": 2172000
+        },
+        {
+          "frame": 5,
+          "thread_cpu_ns": 1943580,
+          "wall_ns": 1946000
+        },
+        {
+          "frame": 6,
+          "thread_cpu_ns": 1838296,
+          "wall_ns": 1841000
+        },
+        {
+          "frame": 7,
+          "thread_cpu_ns": 1936710,
+          "wall_ns": 1943000
+        }
+      ],
+      "version": "cache"
+    },
+    {
+      "image_sha256": [
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc"
+      ],
+      "manifest_sha256": "5031ba0e4ecf9d52dce464fe0cabefa84de516e428d0feee702ee39d73a32c3e",
+      "mode": "auto",
+      "selected_medians_ns": {
+        "thread_cpu_ns": 5301286.0,
+        "wall_ns": 5315000.0
+      },
+      "timings": [
+        {
+          "frame": 0,
+          "thread_cpu_ns": 8921415,
+          "wall_ns": 9040000
+        },
+        {
+          "frame": 1,
+          "thread_cpu_ns": 6145369,
+          "wall_ns": 6278000
+        },
+        {
+          "frame": 2,
+          "thread_cpu_ns": 5358400,
+          "wall_ns": 5382000
+        },
+        {
+          "frame": 3,
+          "thread_cpu_ns": 5003946,
+          "wall_ns": 5026000
+        },
+        {
+          "frame": 4,
+          "thread_cpu_ns": 5038108,
+          "wall_ns": 5048000
+        },
+        {
+          "frame": 5,
+          "thread_cpu_ns": 5122577,
+          "wall_ns": 5139000
+        },
+        {
+          "frame": 6,
+          "thread_cpu_ns": 5538464,
+          "wall_ns": 5589000
+        },
+        {
+          "frame": 7,
+          "thread_cpu_ns": 5244172,
+          "wall_ns": 5248000
+        }
+      ],
+      "version": "baseline"
+    },
+    {
+      "image_sha256": [
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc"
+      ],
+      "manifest_sha256": "26989d99880dc49c2112ed69072c36436cd7176085ec0afd528164734920e09c",
+      "mode": "auto",
+      "selected_medians_ns": {
+        "thread_cpu_ns": 1871820.0,
+        "wall_ns": 1879500.0
+      },
+      "timings": [
+        {
+          "frame": 0,
+          "thread_cpu_ns": 6959591,
+          "wall_ns": 6962000
+        },
+        {
+          "frame": 1,
+          "thread_cpu_ns": 2022500,
+          "wall_ns": 2048000
+        },
+        {
+          "frame": 2,
+          "thread_cpu_ns": 1914722,
+          "wall_ns": 1918000
+        },
+        {
+          "frame": 3,
+          "thread_cpu_ns": 1867352,
+          "wall_ns": 1875000
+        },
+        {
+          "frame": 4,
+          "thread_cpu_ns": 2133175,
+          "wall_ns": 2136000
+        },
+        {
+          "frame": 5,
+          "thread_cpu_ns": 1876288,
+          "wall_ns": 1884000
+        },
+        {
+          "frame": 6,
+          "thread_cpu_ns": 1777627,
+          "wall_ns": 1780000
+        },
+        {
+          "frame": 7,
+          "thread_cpu_ns": 1790930,
+          "wall_ns": 1794000
+        }
+      ],
+      "version": "cache"
+    },
+    {
+      "image_sha256": [
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc"
+      ],
+      "manifest_sha256": "9cd7a688aee207b174df517417f421f3925813fe129909edfaafb2f3dc65fc99",
+      "mode": "auto",
+      "selected_medians_ns": {
+        "thread_cpu_ns": 5190490.5,
+        "wall_ns": 5208000.0
+      },
+      "timings": [
+        {
+          "frame": 0,
+          "thread_cpu_ns": 6897185,
+          "wall_ns": 6900000
+        },
+        {
+          "frame": 1,
+          "thread_cpu_ns": 5458339,
+          "wall_ns": 5462000
+        },
+        {
+          "frame": 2,
+          "thread_cpu_ns": 5227312,
+          "wall_ns": 5246000
+        },
+        {
+          "frame": 3,
+          "thread_cpu_ns": 5098107,
+          "wall_ns": 5102000
+        },
+        {
+          "frame": 4,
+          "thread_cpu_ns": 4858185,
+          "wall_ns": 4861000
+        },
+        {
+          "frame": 5,
+          "thread_cpu_ns": 5670158,
+          "wall_ns": 5712000
+        },
+        {
+          "frame": 6,
+          "thread_cpu_ns": 5153669,
+          "wall_ns": 5170000
+        },
+        {
+          "frame": 7,
+          "thread_cpu_ns": 4880887,
+          "wall_ns": 4896000
+        }
+      ],
+      "version": "baseline"
+    },
+    {
+      "image_sha256": [
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc"
+      ],
+      "manifest_sha256": "2c10e2ee0a3f9f5b1189f58e7988a1a4f4162cf3e3ccfbd52bd0c96a402ac829",
+      "mode": "auto",
+      "selected_medians_ns": {
+        "thread_cpu_ns": 1918682.0,
+        "wall_ns": 1922000.0
+      },
+      "timings": [
+        {
+          "frame": 0,
+          "thread_cpu_ns": 6917669,
+          "wall_ns": 6950000
+        },
+        {
+          "frame": 1,
+          "thread_cpu_ns": 1928900,
+          "wall_ns": 1932000
+        },
+        {
+          "frame": 2,
+          "thread_cpu_ns": 1938983,
+          "wall_ns": 1942000
+        },
+        {
+          "frame": 3,
+          "thread_cpu_ns": 2050675,
+          "wall_ns": 2086000
+        },
+        {
+          "frame": 4,
+          "thread_cpu_ns": 2175320,
+          "wall_ns": 2178000
+        },
+        {
+          "frame": 5,
+          "thread_cpu_ns": 1876759,
+          "wall_ns": 1880000
+        },
+        {
+          "frame": 6,
+          "thread_cpu_ns": 1897466,
+          "wall_ns": 1901000
+        },
+        {
+          "frame": 7,
+          "thread_cpu_ns": 1908464,
+          "wall_ns": 1912000
+        }
+      ],
+      "version": "cache"
+    },
+    {
+      "image_sha256": [
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc"
+      ],
+      "manifest_sha256": "f438984788dca1de8d2f8676b2be8ed0dc1bd1650ef76af5cb1a74edb016d4f1",
+      "mode": "auto",
+      "selected_medians_ns": {
+        "thread_cpu_ns": 5692192.5,
+        "wall_ns": 5700500.0
+      },
+      "timings": [
+        {
+          "frame": 0,
+          "thread_cpu_ns": 6801401,
+          "wall_ns": 6804000
+        },
+        {
+          "frame": 1,
+          "thread_cpu_ns": 5524401,
+          "wall_ns": 5527000
+        },
+        {
+          "frame": 2,
+          "thread_cpu_ns": 5432393,
+          "wall_ns": 5441000
+        },
+        {
+          "frame": 3,
+          "thread_cpu_ns": 5141251,
+          "wall_ns": 5151000
+        },
+        {
+          "frame": 4,
+          "thread_cpu_ns": 5277422,
+          "wall_ns": 5298000
+        },
+        {
+          "frame": 5,
+          "thread_cpu_ns": 5859984,
+          "wall_ns": 5874000
+        },
+        {
+          "frame": 6,
+          "thread_cpu_ns": 6099509,
+          "wall_ns": 6213000
+        },
+        {
+          "frame": 7,
+          "thread_cpu_ns": 6753133,
+          "wall_ns": 6934000
+        }
+      ],
+      "version": "baseline"
+    },
+    {
+      "image_sha256": [
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc"
+      ],
+      "manifest_sha256": "e2b30f15a89421a8bddf4eab2cc4e1f7d28ed6f1cded7ea72246fce86bdf80b2",
+      "mode": "auto",
+      "selected_medians_ns": {
+        "thread_cpu_ns": 2144094.5,
+        "wall_ns": 2154000.0
+      },
+      "timings": [
+        {
+          "frame": 0,
+          "thread_cpu_ns": 8068144,
+          "wall_ns": 8106000
+        },
+        {
+          "frame": 1,
+          "thread_cpu_ns": 2229727,
+          "wall_ns": 2232000
+        },
+        {
+          "frame": 2,
+          "thread_cpu_ns": 2144178,
+          "wall_ns": 2147000
+        },
+        {
+          "frame": 3,
+          "thread_cpu_ns": 2230013,
+          "wall_ns": 2238000
+        },
+        {
+          "frame": 4,
+          "thread_cpu_ns": 3149471,
+          "wall_ns": 3217000
+        },
+        {
+          "frame": 5,
+          "thread_cpu_ns": 1920464,
+          "wall_ns": 1923000
+        },
+        {
+          "frame": 6,
+          "thread_cpu_ns": 2144011,
+          "wall_ns": 2161000
+        },
+        {
+          "frame": 7,
+          "thread_cpu_ns": 1840388,
+          "wall_ns": 1843000
+        }
+      ],
+      "version": "cache"
+    },
+    {
+      "image_sha256": [
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc"
+      ],
+      "manifest_sha256": "22f1d0d58ba78d88e51ac1291118f4fbf2fa30a65115e3f70203780645c48a09",
+      "mode": "auto",
+      "selected_medians_ns": {
+        "thread_cpu_ns": 5135563.5,
+        "wall_ns": 5141500.0
+      },
+      "timings": [
+        {
+          "frame": 0,
+          "thread_cpu_ns": 6914647,
+          "wall_ns": 6917000
+        },
+        {
+          "frame": 1,
+          "thread_cpu_ns": 5982474,
+          "wall_ns": 6005000
+        },
+        {
+          "frame": 2,
+          "thread_cpu_ns": 5189561,
+          "wall_ns": 5193000
+        },
+        {
+          "frame": 3,
+          "thread_cpu_ns": 5349466,
+          "wall_ns": 6038000
+        },
+        {
+          "frame": 4,
+          "thread_cpu_ns": 4947435,
+          "wall_ns": 4950000
+        },
+        {
+          "frame": 5,
+          "thread_cpu_ns": 4961610,
+          "wall_ns": 4969000
+        },
+        {
+          "frame": 6,
+          "thread_cpu_ns": 4984218,
+          "wall_ns": 4988000
+        },
+        {
+          "frame": 7,
+          "thread_cpu_ns": 5081566,
+          "wall_ns": 5090000
+        }
+      ],
+      "version": "baseline"
+    },
+    {
+      "image_sha256": [
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc"
+      ],
+      "manifest_sha256": "988bd870c94744a902ef755fabca9edca1475d969588cdbc966f2414755d58d9",
+      "mode": "auto",
+      "selected_medians_ns": {
+        "thread_cpu_ns": 1856982.0,
+        "wall_ns": 1861500.0
+      },
+      "timings": [
+        {
+          "frame": 0,
+          "thread_cpu_ns": 7071040,
+          "wall_ns": 7074000
+        },
+        {
+          "frame": 1,
+          "thread_cpu_ns": 2146456,
+          "wall_ns": 2149000
+        },
+        {
+          "frame": 2,
+          "thread_cpu_ns": 2038584,
+          "wall_ns": 2062000
+        },
+        {
+          "frame": 3,
+          "thread_cpu_ns": 1893757,
+          "wall_ns": 1896000
+        },
+        {
+          "frame": 4,
+          "thread_cpu_ns": 2198905,
+          "wall_ns": 2202000
+        },
+        {
+          "frame": 5,
+          "thread_cpu_ns": 1797935,
+          "wall_ns": 1801000
+        },
+        {
+          "frame": 6,
+          "thread_cpu_ns": 1816220,
+          "wall_ns": 1827000
+        },
+        {
+          "frame": 7,
+          "thread_cpu_ns": 1820207,
+          "wall_ns": 1823000
+        }
+      ],
+      "version": "cache"
+    },
+    {
+      "image_sha256": [
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc"
+      ],
+      "manifest_sha256": "572da278022f74b68133b8581258d36e6f6cffd8dddeebee1e6e6ca729a502a2",
+      "mode": "auto",
+      "selected_medians_ns": {
+        "thread_cpu_ns": 5211848.5,
+        "wall_ns": 5228500.0
+      },
+      "timings": [
+        {
+          "frame": 0,
+          "thread_cpu_ns": 6558406,
+          "wall_ns": 6561000
+        },
+        {
+          "frame": 1,
+          "thread_cpu_ns": 5649728,
+          "wall_ns": 5658000
+        },
+        {
+          "frame": 2,
+          "thread_cpu_ns": 5498598,
+          "wall_ns": 5502000
+        },
+        {
+          "frame": 3,
+          "thread_cpu_ns": 5272496,
+          "wall_ns": 5276000
+        },
+        {
+          "frame": 4,
+          "thread_cpu_ns": 4904593,
+          "wall_ns": 4914000
+        },
+        {
+          "frame": 5,
+          "thread_cpu_ns": 5140058,
+          "wall_ns": 5155000
+        },
+        {
+          "frame": 6,
+          "thread_cpu_ns": 5122352,
+          "wall_ns": 5126000
+        },
+        {
+          "frame": 7,
+          "thread_cpu_ns": 5151201,
+          "wall_ns": 5181000
+        }
+      ],
+      "version": "baseline"
+    },
+    {
+      "image_sha256": [
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc"
+      ],
+      "manifest_sha256": "4c958842ec905041f51ec5d09373863bb62d515825b6928c3d5e77745c56b2be",
+      "mode": "auto",
+      "selected_medians_ns": {
+        "thread_cpu_ns": 1909052.0,
+        "wall_ns": 1912000.0
+      },
+      "timings": [
+        {
+          "frame": 0,
+          "thread_cpu_ns": 7317407,
+          "wall_ns": 7320000
+        },
+        {
+          "frame": 1,
+          "thread_cpu_ns": 1922346,
+          "wall_ns": 1925000
+        },
+        {
+          "frame": 2,
+          "thread_cpu_ns": 1893035,
+          "wall_ns": 1896000
+        },
+        {
+          "frame": 3,
+          "thread_cpu_ns": 1895758,
+          "wall_ns": 1899000
+        },
+        {
+          "frame": 4,
+          "thread_cpu_ns": 2553706,
+          "wall_ns": 2561000
+        },
+        {
+          "frame": 5,
+          "thread_cpu_ns": 2015467,
+          "wall_ns": 2050000
+        },
+        {
+          "frame": 6,
+          "thread_cpu_ns": 2252354,
+          "wall_ns": 2261000
+        },
+        {
+          "frame": 7,
+          "thread_cpu_ns": 1851187,
+          "wall_ns": 1853000
+        }
+      ],
+      "version": "cache"
+    }
+  ],
+  "source_core_sha256": [
+    "e7561f8f60f9fde126db7e7eb6b8913235582924d1f9fb2c0c163dc37cad2367",
+    "8212f9cece201bba4e231e4795c6fb0b380c638992cd75f05ef28af14e627b4e"
+  ],
+  "statistics_ns": {
+    "thread_cpu_ns": {
+      "baseline_median_of_process_medians": 5256567.25,
+      "baseline_process_medians": [
+        5363284.0,
+        5301286.0,
+        5190490.5,
+        5692192.5,
+        5135563.5,
+        5211848.5
+      ],
+      "cache_median_of_process_medians": 1913867.0,
+      "cache_process_medians": [
+        1940145.0,
+        1871820.0,
+        1918682.0,
+        2144094.5,
+        1856982.0,
+        1909052.0
+      ],
+      "median_paired_speed_ratio": 2.747222144181568,
+      "paired_ratios": [
+        2.7643727659530604,
+        2.8321558696883247,
+        2.7052375015766033,
+        2.654823516407509,
+        2.765542961644216,
+        2.730071522410076
+      ]
+    },
+    "wall_ns": {
+      "baseline_median_of_process_medians": 5271750.0,
+      "baseline_process_medians": [
+        5446000.0,
+        5315000.0,
+        5208000.0,
+        5700500.0,
+        5141500.0,
+        5228500.0
+      ],
+      "cache_median_of_process_medians": 1917000.0,
+      "cache_process_medians": [
+        1944500.0,
+        1879500.0,
+        1922000.0,
+        2154000.0,
+        1861500.0,
+        1912000.0
+      ],
+      "median_paired_speed_ratio": 2.7482955030754206,
+      "paired_ratios": [
+        2.800719979429159,
+        2.827879755254057,
+        2.7096774193548385,
+        2.646471680594243,
+        2.7620198764437283,
+        2.734571129707113
+      ]
+    }
+  },
+  "status": "PASS_PAIRED_CACHE_BENCHMARK",
+  "system_driver_changed": false,
+  "system_file_hashes_unchanged": true,
+  "timed_frames_per_process": [
+    1,
+    2,
+    3,
+    5,
+    6,
+    7
+  ],
+  "timed_observations_per_version": 36,
+  "transparent_integration": false,
+  "wall_clock": "CLOCK_MONOTONIC"
+}
