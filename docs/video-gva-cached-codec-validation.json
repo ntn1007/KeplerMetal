@@ -1,0 +1,29 @@
+{
+  "auditor_sha256": "6f9f43cb30755ff5e70eeb1e111a772169458e2233491ccd68d864b05ebdbce7",
+  "branch_targets_verified": 9,
+  "cached_first_byte_check_offset": 150406,
+  "cached_first_byte_node_offset": 8,
+  "cached_reactivation_offset": 150416,
+  "conversion_call_offset": 150845,
+  "conversion_destination_node_offset": 8,
+  "flag_set_before_conversion_offset": 150820,
+  "hardware_video_execution_proved": false,
+  "image_function_start_offset": 148746,
+  "mapping_sha256": "2d9c4ed04bcdbdd4049bb7ed88f0a545d3f42b1b478ab320e43fc8feb6a39ffd",
+  "matching_auxiliary_byte_check_offset": 150395,
+  "matching_identifier_check_offset": 150382,
+  "node_lifetime_proved": false,
+  "nvidia_value_identified": false,
+  "property_call_offset": 150807,
+  "region_sha256": "f8a1efea62ed7f03028666fe86c35de8f06941324ac8d1ae8815ec93f0eb8a19",
+  "reset_nonzero_identifier_offset": 150105,
+  "runtime_reactivation_observed": false,
+  "status": "PASS_STATIC_BOUNDED",
+  "system_modified": false,
+  "window_sha256": {
+    "allocation": "6c689ab3491517c03c1603209adbef41e1632d100482ac4057e5af693fa9ee0c",
+    "conversion": "9906572baa19d659c60d32846526992c7bf2645c862d5586778d59cd585967e0",
+    "lookup": "b41ffc38c5e78526b2c7b83c9de39ee61f789b6109c5bb1b8893a48d2437c608",
+    "reset": "85c594011332622077d67431498df11d75c561545c56528087ddb10a997f239a"
+  }
+}

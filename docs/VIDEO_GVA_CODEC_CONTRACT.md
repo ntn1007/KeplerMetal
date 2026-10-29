@@ -44,6 +44,8 @@ evidence that those devices are active here. No legitimate GTX 880M value has
 yet been identified. Supplying one of these other-vendor values, an arbitrary
 string or a Boolean would be an experiment, not evidence of Kepler support.
 
+A subsequent [static cached-entry audit](VIDEO_GVA_CACHED_CODEC.md) identifies a conditional reactivation path that checks the first byte at the same structure-relative offset as the conversion destination. Runtime reuse and entry lifetime remain unproved.
+
 No GPU or vendor program was executed for this audit; no driver, system or OCLP
 component was changed. The next useful work is to find the actual NVIDIA
 producer or a historical runtime record that binds the value to a compatible

@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A pinned AppleGVA list path clears and conditionally reactivates a cached entry using its identifier, another byte and the first byte at the codec conversion destination. This is static only; reuse, node lifetime and hardware video remain unproved. [Evidence](VIDEO_GVA_CACHED_CODEC.md).
+
 The retained High Sierra update has no `IOGVACodec` key in 15 inspected GeForce/NVDA plists and no literal in 19 selected binaries; dynamic or other producers remain unexcluded. [Evidence](VIDEO_GVA_HIGH_SIERRA_INVENTORY.md).
 
 The pinned AppleGVA non-null codec-property path calls `CFStringGetCString` with a 32-byte ASCII buffer; the inspected Apple and NVIDIA plists do not identify a Kepler value. [Evidence](VIDEO_GVA_CODEC_CONTRACT.md).
