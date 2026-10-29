@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+The observed VideoToolbox call site statically targets the Metal enumeration import; before/after live snapshots point to MetalOld even with interposition. The returned list and video failure remain unknown. [Evidence](VIDEO_VT_IMPORT_BINDING.md).
+
 Public Metal enumeration interposition sees the GTX in direct controls but captures no call in failed VideoToolbox windows; framework binding and VideoToolbox enumeration remain unresolved. [Evidence](VIDEO_VT_DEVICE_ENUMERATION.md).
 
 Bounded main-thread stacks connect the observed Metal device/shared constructors to public VideoToolbox session creation in two failed requests. The failure cause and hardware video remain unproved. [Evidence](VIDEO_VT_OBJECT_STACKS.md).

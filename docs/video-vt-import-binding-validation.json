@@ -1,0 +1,658 @@
+{
+  "audit_sha256": "2868ad480da14af688f94a06e99e43230b2849f04990c3873bda22445786e75c",
+  "audit_time_kernel_file_sha256": {
+    "/System/Library/Extensions/GeForce.kext/Contents/MacOS/GeForce": "44f131a958d48afd6ab675a851330c37506557c9d499484170c886c3731bdbb3",
+    "/System/Library/Extensions/IOAcceleratorFamily2.kext/Contents/MacOS/IOAcceleratorFamily2": "37e563d6cf3626101f30b1727a4f60dec02152dff9c74c0269c30c213a7320c8"
+  },
+  "audit_time_macos_build": "25G241",
+  "audit_time_macos_version": "26.7.1",
+  "audit_time_pci_device": "10de:1198",
+  "audit_time_reported_vram": "8 GB",
+  "build_sha256": "f54da10984ad5d884d577637963d6eb0f95be65cae7d2e5b43f50311ef430e5f",
+  "cache_callsite_offset": "0x5fd9f6",
+  "cache_function_sha256": "f38fc93a01c9f5c715b94b5a2fe6a45c7ebccba26cdd0cedcadb06b7ffe9478b",
+  "cache_image_uuid": "e7231bea63883d0a95c0a93ce970b96b",
+  "cache_import": "_MTLCopyAllDevicesWithObserver",
+  "caller_thread_or_stack_verified": false,
+  "hardware_create_statuses": [
+    -12906,
+    -12906,
+    -12906,
+    -12906
+  ],
+  "hardware_device_shared_matches": 2,
+  "hardware_enumeration_absence_proved": false,
+  "hardware_frames": 0,
+  "hardware_observed_intercepted_all_api_calls": 0,
+  "hardware_observed_intercepted_observer_api_calls": 0,
+  "hardware_required_processes": 4,
+  "hardware_video_execution_proved": false,
+  "intervals_nonoverlapping": true,
+  "live_binding_at_call_proved": false,
+  "live_caller_code_bytes_verified": false,
+  "live_kernel_method_dispatch_proved": false,
+  "m1_audit_sha256": "4dd8a9f263b05b573e9a97fda1ed4b10c55bd910e95a773b763fa25bcd167433",
+  "m1_hardware_sessions_report_acceleration": 4,
+  "metal_control_all_api_calls": 2,
+  "metal_control_observer_api_calls": 2,
+  "metal_control_processes": 4,
+  "metal_device_shared_matches": 2,
+  "metal_file_sha256": "fd1e8e07491819334a1b3e788f01bc0d4fef0229c1022cb2fc29031c5c5dc97e",
+  "observation_process_local_only": true,
+  "observed_device_caller": {
+    "image": "MetalOld.dylib",
+    "nearest_symbol": "-[MTLIOAccelDevice initWithAcceleratorPort:]",
+    "offset": 7441
+  },
+  "observed_hardware_processes": 2,
+  "observed_shared_caller": {
+    "image": "MetalOld.dylib",
+    "nearest_symbol": "-[MTLIOAccelDevice lazyInitialize]",
+    "offset": 738937
+  },
+  "other_processes_observed": false,
+  "processes": 12,
+  "reference_sha256": "d73962c0592ae107d343591bf2d72e013015813e3b2ceff71d37e2c5fee36cd1",
+  "rows": [
+    {
+      "binding_after": {
+        "target_image": "MetalOld.dylib",
+        "target_offset": 170390,
+        "target_symbol": "MTLCopyAllDevicesWithObserver",
+        "valid": true
+      },
+      "binding_before": {
+        "target_image": "MetalOld.dylib",
+        "target_offset": 170390,
+        "target_symbol": "MTLCopyAllDevicesWithObserver",
+        "valid": true
+      },
+      "create_status": 0,
+      "frames": 0,
+      "manifest_sha256": "3d12e959de792c16e6495c40dca5e1a6f612d66dbe208d1d4b8443aee99d04b4",
+      "mode": "metal-observed",
+      "observation": {
+        "all_calls": 1,
+        "all_devices": 1,
+        "all_failures": 0,
+        "all_target_matches": 1,
+        "config_calls": 0,
+        "config_failures": 0,
+        "config_status": -1,
+        "config_values": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "config_values_match_object": 0,
+        "create_calls": 1,
+        "device_caller": {
+          "image": "MetalOld.dylib",
+          "image_offset": 7441,
+          "resolved": true,
+          "symbol": "-[MTLIOAccelDevice initWithAcceleratorPort:]"
+        },
+        "enumeration_calls": 1,
+        "enumeration_devices": 1,
+        "enumeration_failures": 0,
+        "enumeration_target_matches": 1,
+        "matching_nonnull": 1,
+        "matching_type": 1,
+        "object_after": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "object_before": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "registry_query_failures": 0,
+        "return_unchanged": true,
+        "shared_caller": {
+          "image": "MetalOld.dylib",
+          "image_offset": 738937,
+          "resolved": true,
+          "symbol": "-[MTLIOAccelDevice lazyInitialize]"
+        },
+        "shared_calls": 1,
+        "shared_failures": 0,
+        "shared_matching_argument": 1,
+        "shared_nonnull": 1,
+        "shared_stored_device_matches": 1,
+        "shared_type_matches": 1,
+        "type_or_profile_failures": 0
+      },
+      "stdout_sha256": "3a81fef219f388c4680a06443903b65c069e7bef69268f4b0a7370c6ded5d7fe"
+    },
+    {
+      "binding_after": {
+        "target_image": "MetalOld.dylib",
+        "target_offset": 170390,
+        "target_symbol": "MTLCopyAllDevicesWithObserver",
+        "valid": true
+      },
+      "binding_before": {
+        "target_image": "MetalOld.dylib",
+        "target_offset": 170390,
+        "target_symbol": "MTLCopyAllDevicesWithObserver",
+        "valid": true
+      },
+      "create_status": -12906,
+      "frames": 0,
+      "manifest_sha256": "57094764f3b42db95fe1b6d7b820092588d7a86a57551454ea7dee5c76fa560d",
+      "mode": "hardware-observed",
+      "observation": {
+        "all_calls": 0,
+        "all_devices": 0,
+        "all_failures": 0,
+        "all_target_matches": 0,
+        "config_calls": 0,
+        "config_failures": 0,
+        "config_status": -1,
+        "config_values": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "config_values_match_object": 0,
+        "create_calls": 1,
+        "device_caller": {
+          "image": "MetalOld.dylib",
+          "image_offset": 7441,
+          "resolved": true,
+          "symbol": "-[MTLIOAccelDevice initWithAcceleratorPort:]"
+        },
+        "enumeration_calls": 0,
+        "enumeration_devices": 0,
+        "enumeration_failures": 0,
+        "enumeration_target_matches": 0,
+        "matching_nonnull": 1,
+        "matching_type": 1,
+        "object_after": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "object_before": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "registry_query_failures": 0,
+        "return_unchanged": true,
+        "shared_caller": {
+          "image": "MetalOld.dylib",
+          "image_offset": 738937,
+          "resolved": true,
+          "symbol": "-[MTLIOAccelDevice lazyInitialize]"
+        },
+        "shared_calls": 1,
+        "shared_failures": 0,
+        "shared_matching_argument": 1,
+        "shared_nonnull": 1,
+        "shared_stored_device_matches": 1,
+        "shared_type_matches": 1,
+        "type_or_profile_failures": 0
+      },
+      "stdout_sha256": "fc2bdd4a04e1b947519870f6a5fb9e1f67c90d42db7332a19411e402e95ea796"
+    },
+    {
+      "binding_after": {
+        "target_image": "MetalOld.dylib",
+        "target_offset": 170390,
+        "target_symbol": "MTLCopyAllDevicesWithObserver",
+        "valid": true
+      },
+      "binding_before": {
+        "target_image": "MetalOld.dylib",
+        "target_offset": 170390,
+        "target_symbol": "MTLCopyAllDevicesWithObserver",
+        "valid": true
+      },
+      "create_status": 0,
+      "frames": 0,
+      "manifest_sha256": "8fa2b696669ea959945ff1c49764b1e2517b7194b775f59994474556f55588c3",
+      "mode": "metal-plain",
+      "observation": null,
+      "stdout_sha256": "acaa6515fcb321639af7ebe1246773f0e30c78bdb0bf4fb0c6f1bb94bbf9c072"
+    },
+    {
+      "binding_after": {
+        "target_image": "MetalOld.dylib",
+        "target_offset": 170390,
+        "target_symbol": "MTLCopyAllDevicesWithObserver",
+        "valid": true
+      },
+      "binding_before": {
+        "target_image": "MetalOld.dylib",
+        "target_offset": 170390,
+        "target_symbol": "MTLCopyAllDevicesWithObserver",
+        "valid": true
+      },
+      "create_status": 0,
+      "frames": 6,
+      "manifest_sha256": "9246be1dfb1a4078c3ed5412b1bd0a3e307b60cdc136fc05ed069e9dac48bdf9",
+      "mode": "software-observed",
+      "observation": {
+        "all_calls": 0,
+        "all_devices": 0,
+        "all_failures": 0,
+        "all_target_matches": 0,
+        "config_calls": 0,
+        "config_failures": 0,
+        "config_status": -1,
+        "config_values": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "config_values_match_object": 0,
+        "create_calls": 0,
+        "device_caller": {
+          "image": "",
+          "image_offset": 0,
+          "resolved": false,
+          "symbol": ""
+        },
+        "enumeration_calls": 0,
+        "enumeration_devices": 0,
+        "enumeration_failures": 0,
+        "enumeration_target_matches": 0,
+        "matching_nonnull": 0,
+        "matching_type": 0,
+        "object_after": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "object_before": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "registry_query_failures": 0,
+        "return_unchanged": true,
+        "shared_caller": {
+          "image": "",
+          "image_offset": 0,
+          "resolved": false,
+          "symbol": ""
+        },
+        "shared_calls": 0,
+        "shared_failures": 0,
+        "shared_matching_argument": 0,
+        "shared_nonnull": 0,
+        "shared_stored_device_matches": 0,
+        "shared_type_matches": 0,
+        "type_or_profile_failures": 0
+      },
+      "stdout_sha256": "30367d5f72c6f0527a47b8220c7929073d09cfdaca68e2e5b1c48e9c124a94c6"
+    },
+    {
+      "binding_after": {
+        "target_image": "MetalOld.dylib",
+        "target_offset": 170390,
+        "target_symbol": "MTLCopyAllDevicesWithObserver",
+        "valid": true
+      },
+      "binding_before": {
+        "target_image": "MetalOld.dylib",
+        "target_offset": 170390,
+        "target_symbol": "MTLCopyAllDevicesWithObserver",
+        "valid": true
+      },
+      "create_status": -12906,
+      "frames": 0,
+      "manifest_sha256": "20d1ad35bbedcee3dddab8a9b8dd8c723db82d624b471b880d500da66633362f",
+      "mode": "hardware-plain",
+      "observation": null,
+      "stdout_sha256": "d4554d24feb89f7d0d26b1fb3b29008311811b3e612e8b201f3a5c9f03f31bab"
+    },
+    {
+      "binding_after": {
+        "target_image": "MetalOld.dylib",
+        "target_offset": 170390,
+        "target_symbol": "MTLCopyAllDevicesWithObserver",
+        "valid": true
+      },
+      "binding_before": {
+        "target_image": "MetalOld.dylib",
+        "target_offset": 170390,
+        "target_symbol": "MTLCopyAllDevicesWithObserver",
+        "valid": true
+      },
+      "create_status": 0,
+      "frames": 6,
+      "manifest_sha256": "cda3d25c94ad670c59ab6c16a1a85b7679f21f3760e1a4bcce1917bd83d49954",
+      "mode": "software-plain",
+      "observation": null,
+      "stdout_sha256": "5d073885362689ad0059309c8addff282d19e52c379def803a02b3e0d699d4c5"
+    },
+    {
+      "binding_after": {
+        "target_image": "MetalOld.dylib",
+        "target_offset": 170390,
+        "target_symbol": "MTLCopyAllDevicesWithObserver",
+        "valid": true
+      },
+      "binding_before": {
+        "target_image": "MetalOld.dylib",
+        "target_offset": 170390,
+        "target_symbol": "MTLCopyAllDevicesWithObserver",
+        "valid": true
+      },
+      "create_status": 0,
+      "frames": 0,
+      "manifest_sha256": "86babd3fcc0f9ae7b5d4a7d58bfdae9dc2c56422da64ab2fc4e6b196010662c0",
+      "mode": "metal-observed",
+      "observation": {
+        "all_calls": 1,
+        "all_devices": 1,
+        "all_failures": 0,
+        "all_target_matches": 1,
+        "config_calls": 0,
+        "config_failures": 0,
+        "config_status": -1,
+        "config_values": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "config_values_match_object": 0,
+        "create_calls": 1,
+        "device_caller": {
+          "image": "MetalOld.dylib",
+          "image_offset": 7441,
+          "resolved": true,
+          "symbol": "-[MTLIOAccelDevice initWithAcceleratorPort:]"
+        },
+        "enumeration_calls": 1,
+        "enumeration_devices": 1,
+        "enumeration_failures": 0,
+        "enumeration_target_matches": 1,
+        "matching_nonnull": 1,
+        "matching_type": 1,
+        "object_after": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "object_before": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "registry_query_failures": 0,
+        "return_unchanged": true,
+        "shared_caller": {
+          "image": "MetalOld.dylib",
+          "image_offset": 738937,
+          "resolved": true,
+          "symbol": "-[MTLIOAccelDevice lazyInitialize]"
+        },
+        "shared_calls": 1,
+        "shared_failures": 0,
+        "shared_matching_argument": 1,
+        "shared_nonnull": 1,
+        "shared_stored_device_matches": 1,
+        "shared_type_matches": 1,
+        "type_or_profile_failures": 0
+      },
+      "stdout_sha256": "3a81fef219f388c4680a06443903b65c069e7bef69268f4b0a7370c6ded5d7fe"
+    },
+    {
+      "binding_after": {
+        "target_image": "MetalOld.dylib",
+        "target_offset": 170390,
+        "target_symbol": "MTLCopyAllDevicesWithObserver",
+        "valid": true
+      },
+      "binding_before": {
+        "target_image": "MetalOld.dylib",
+        "target_offset": 170390,
+        "target_symbol": "MTLCopyAllDevicesWithObserver",
+        "valid": true
+      },
+      "create_status": -12906,
+      "frames": 0,
+      "manifest_sha256": "98322269e589fb62f6f617f65526c7684e75fc36ca58932f57d4c6fd6028e724",
+      "mode": "hardware-observed",
+      "observation": {
+        "all_calls": 0,
+        "all_devices": 0,
+        "all_failures": 0,
+        "all_target_matches": 0,
+        "config_calls": 0,
+        "config_failures": 0,
+        "config_status": -1,
+        "config_values": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "config_values_match_object": 0,
+        "create_calls": 1,
+        "device_caller": {
+          "image": "MetalOld.dylib",
+          "image_offset": 7441,
+          "resolved": true,
+          "symbol": "-[MTLIOAccelDevice initWithAcceleratorPort:]"
+        },
+        "enumeration_calls": 0,
+        "enumeration_devices": 0,
+        "enumeration_failures": 0,
+        "enumeration_target_matches": 0,
+        "matching_nonnull": 1,
+        "matching_type": 1,
+        "object_after": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "object_before": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "registry_query_failures": 0,
+        "return_unchanged": true,
+        "shared_caller": {
+          "image": "MetalOld.dylib",
+          "image_offset": 738937,
+          "resolved": true,
+          "symbol": "-[MTLIOAccelDevice lazyInitialize]"
+        },
+        "shared_calls": 1,
+        "shared_failures": 0,
+        "shared_matching_argument": 1,
+        "shared_nonnull": 1,
+        "shared_stored_device_matches": 1,
+        "shared_type_matches": 1,
+        "type_or_profile_failures": 0
+      },
+      "stdout_sha256": "fc2bdd4a04e1b947519870f6a5fb9e1f67c90d42db7332a19411e402e95ea796"
+    },
+    {
+      "binding_after": {
+        "target_image": "MetalOld.dylib",
+        "target_offset": 170390,
+        "target_symbol": "MTLCopyAllDevicesWithObserver",
+        "valid": true
+      },
+      "binding_before": {
+        "target_image": "MetalOld.dylib",
+        "target_offset": 170390,
+        "target_symbol": "MTLCopyAllDevicesWithObserver",
+        "valid": true
+      },
+      "create_status": 0,
+      "frames": 0,
+      "manifest_sha256": "f089b555c3eb9850873e04bf949f755ccde7195bb20ed0cb22120da5407cbdd4",
+      "mode": "metal-plain",
+      "observation": null,
+      "stdout_sha256": "acaa6515fcb321639af7ebe1246773f0e30c78bdb0bf4fb0c6f1bb94bbf9c072"
+    },
+    {
+      "binding_after": {
+        "target_image": "MetalOld.dylib",
+        "target_offset": 170390,
+        "target_symbol": "MTLCopyAllDevicesWithObserver",
+        "valid": true
+      },
+      "binding_before": {
+        "target_image": "MetalOld.dylib",
+        "target_offset": 170390,
+        "target_symbol": "MTLCopyAllDevicesWithObserver",
+        "valid": true
+      },
+      "create_status": 0,
+      "frames": 6,
+      "manifest_sha256": "b83a3d0c7f325c84332b1e61f6c8ae3c5a63578b6db001e3a440bff7987994c1",
+      "mode": "software-observed",
+      "observation": {
+        "all_calls": 0,
+        "all_devices": 0,
+        "all_failures": 0,
+        "all_target_matches": 0,
+        "config_calls": 0,
+        "config_failures": 0,
+        "config_status": -1,
+        "config_values": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "config_values_match_object": 0,
+        "create_calls": 0,
+        "device_caller": {
+          "image": "",
+          "image_offset": 0,
+          "resolved": false,
+          "symbol": ""
+        },
+        "enumeration_calls": 0,
+        "enumeration_devices": 0,
+        "enumeration_failures": 0,
+        "enumeration_target_matches": 0,
+        "matching_nonnull": 0,
+        "matching_type": 0,
+        "object_after": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "object_before": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "registry_query_failures": 0,
+        "return_unchanged": true,
+        "shared_caller": {
+          "image": "",
+          "image_offset": 0,
+          "resolved": false,
+          "symbol": ""
+        },
+        "shared_calls": 0,
+        "shared_failures": 0,
+        "shared_matching_argument": 0,
+        "shared_nonnull": 0,
+        "shared_stored_device_matches": 0,
+        "shared_type_matches": 0,
+        "type_or_profile_failures": 0
+      },
+      "stdout_sha256": "30367d5f72c6f0527a47b8220c7929073d09cfdaca68e2e5b1c48e9c124a94c6"
+    },
+    {
+      "binding_after": {
+        "target_image": "MetalOld.dylib",
+        "target_offset": 170390,
+        "target_symbol": "MTLCopyAllDevicesWithObserver",
+        "valid": true
+      },
+      "binding_before": {
+        "target_image": "MetalOld.dylib",
+        "target_offset": 170390,
+        "target_symbol": "MTLCopyAllDevicesWithObserver",
+        "valid": true
+      },
+      "create_status": -12906,
+      "frames": 0,
+      "manifest_sha256": "b689a8b36bd15b7a25c2bad655ee447db9adf54d6472b008e1df3ca48a6cca1a",
+      "mode": "hardware-plain",
+      "observation": null,
+      "stdout_sha256": "d4554d24feb89f7d0d26b1fb3b29008311811b3e612e8b201f3a5c9f03f31bab"
+    },
+    {
+      "binding_after": {
+        "target_image": "MetalOld.dylib",
+        "target_offset": 170390,
+        "target_symbol": "MTLCopyAllDevicesWithObserver",
+        "valid": true
+      },
+      "binding_before": {
+        "target_image": "MetalOld.dylib",
+        "target_offset": 170390,
+        "target_symbol": "MTLCopyAllDevicesWithObserver",
+        "valid": true
+      },
+      "create_status": 0,
+      "frames": 6,
+      "manifest_sha256": "544f0c5260bebf10b25515dea239c58174bee1ef5bdf74693e35a7d2fc973288",
+      "mode": "software-plain",
+      "observation": null,
+      "stdout_sha256": "5d073885362689ad0059309c8addff282d19e52c379def803a02b3e0d699d4c5"
+    }
+  ],
+  "runtime_code_bytes_verified_scope": "5-byte call and 6-byte stub only",
+  "software_bytes_compared": 2764800,
+  "software_device_shared_matches": 0,
+  "software_frames": 24,
+  "software_processes": 4,
+  "source_sha256": {
+    "client.mm": "c0b5df1190c35b847c620368edc96a8d8c0ecddd99104e50906e2c814e7c5e2d",
+    "observer.mm": "58f55086bdb8b6d351d36af9772c8d44776607fbcffb04d0d6cac3cde2d617fe"
+  },
+  "status": "PASS_VT_IMPORT_BINDING",
+  "system_modified": false,
+  "system_profile_files": 3
+}
