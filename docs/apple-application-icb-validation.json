@@ -1,0 +1,272 @@
+{
+  "actual_apple_renderer": true,
+  "adapted_packets_checked": 240,
+  "apple_archive_sha256": "559d91d42ba4d4adff9517600de522d12f8fbc3270982ac6e0d0b5bfd414f311",
+  "apple_controller_instantiated": true,
+  "apple_controller_source_sha256": {
+    "AAPLViewController.h": "dbf1a0d311e41205ac2c90ca473d79141c404784fdfd2ff560d86dc5ed6a44ad",
+    "AAPLViewController.m": "c77b3bcf6babfc5c4d180c636abf0985595cb208bf79043951a93c88994b5970",
+    "macOS/Base.lproj/Main.storyboard": "2260b7d84632cf2378792554cbc7bc02d36af80009bd5e97c8d2b868b766e926"
+  },
+  "apple_source_sha256": {
+    "AAPLRenderer.h": "9507af071733eba63c43ca787f1e5fb25516a38877eb7844376923b678f4373a",
+    "AAPLRenderer.m": "124bb0bb75b7961ebfe3d7e5fd41bbeec2c7c4d74c5f3a9fb211ec017f58c230",
+    "AAPLShaderTypes.h": "7f6b70576fb1e00422520f273530fd55e4fe5036c42b11bdf74205bae64609a2"
+  },
+  "apple_storyboard_instantiated": true,
+  "application_bundle_executed": true,
+  "application_modified": true,
+  "archive_sha256": "0abdd64c77ffd4aec09b382d3110d04188209fe64492f6f1f4729d0a80c147db",
+  "automatic_encoder_events_per_adapted_process": 24,
+  "automatic_render_factory_enabled": true,
+  "blank_frames": 16,
+  "blank_uniform": true,
+  "build_sha256": "8f86b202c5705b116e535c4219d593fee86adcf78f52d802e6abfba8705880d6",
+  "cache_reuses_per_adapted_process": 104,
+  "checked_system_files_unchanged": true,
+  "client_render_encoder_events_per_adapted_process": 8,
+  "depth_store_action": "dont_care",
+  "direct_adapted_images_identical": true,
+  "draw_frames": 32,
+  "drawable_color_readback": true,
+  "frames": 48,
+  "guard_bytes_checked": 24576,
+  "invalid_store_refusals": 16,
+  "materializations_per_adapted_process": 16,
+  "modified_executable": true,
+  "native_class_IMPs_checked_unchanged": true,
+  "original_unmodified_executable": false,
+  "performance_benchmark": false,
+  "pixels_compared": 147456,
+  "processes": 6,
+  "queue_class_restored": true,
+  "recording_encoder_events_per_adapted_process": 16,
+  "runs": [
+    {
+      "image_sha256": [
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc"
+      ],
+      "manifest_sha256": "41db1a5dc70f02a6b5614d64e393a6e90ebd86f0cb892c1bbb28e8bd56142a09",
+      "mode": "direct",
+      "pending_observations": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "submission_statuses": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "image_sha256": [
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc"
+      ],
+      "manifest_sha256": "4122b944e026e3c17761aedb5c548ba2fd9424d5fffe1da58f7c55fed198a221",
+      "mode": "auto",
+      "pending_observations": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "submission_statuses": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "image_sha256": [
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc"
+      ],
+      "manifest_sha256": "65b1d09a314e5f4ce691a966306c491039bc7e5617e440add193523dea9f68c4",
+      "mode": "direct",
+      "pending_observations": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "submission_statuses": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "image_sha256": [
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "24019fb1fe40b6347a60deafc8f4aa4b7c68219e880aa1ea7c046757e06f89fa",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc",
+        "76a0c859e6f01acdbdea34f57f9098098f55aa06f1302f7664941ab42756b04f",
+        "b0c4b1937287936bd90f4e4d684c95e7f7667cd797dee83c3308f564b18eb3cc"
+      ],
+      "manifest_sha256": "12aa32314c036e9a1819044cc51351a05deb9e7051444f6b6398806d0af56698",
+      "mode": "auto",
+      "pending_observations": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "submission_statuses": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "image_sha256": [
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb",
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb",
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb",
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb",
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb",
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb",
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb",
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb"
+      ],
+      "manifest_sha256": "1a086fbaf4108814616fa12ef27dde4e6328d6fadc7001999419a87e6e0fbf24",
+      "mode": "blank",
+      "pending_observations": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "submission_statuses": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "image_sha256": [
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb",
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb",
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb",
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb",
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb",
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb",
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb",
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb"
+      ],
+      "manifest_sha256": "b960d347b1950e98a98075bce16c89dad25a3427699a25136c4117141f98b6d2",
+      "mode": "blank",
+      "pending_observations": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        1,
+        1
+      ],
+      "submission_statuses": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ]
+    }
+  ],
+  "shared_native_methods_replaced": false,
+  "short_rebind_refusals": 2,
+  "status": "PASS_APPLE_APPLICATION_ICB",
+  "transparent_system_integration": false,
+  "vertex_counts": [
+    36,
+    48,
+    60,
+    72,
+    84,
+    96,
+    108,
+    120,
+    288,
+    324,
+    360,
+    396,
+    432,
+    468,
+    504
+  ],
+  "visible_presentation_proved": false
+}

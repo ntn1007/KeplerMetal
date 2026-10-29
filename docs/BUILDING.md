@@ -1,5 +1,7 @@
 # Build from source
 
+[APPLE_APPLICATION_ICB.md](APPLE_APPLICATION_ICB.md) documents the local Apple sample application witness and reproduction.
+
 [APPLE_AUTOMATIC_STORYBOARD.md](APPLE_AUTOMATIC_STORYBOARD.md) documents automatic encoder adaptation in the Apple storyboard and its reproduction.
 
 [APPLE_CACHE_BENCHMARK.md](APPLE_CACHE_BENCHMARK.md) documents the paired encoding benchmark and reproducible controls.

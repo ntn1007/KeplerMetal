@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A locally instrumented Apple sample application now runs through NSApplicationMain and its storyboard on GTX; scoped ICB images match direct and blank controls. The original unmodified executable and transparent integration remain unproved. [Evidence](APPLE_APPLICATION_ICB.md).
+
 The locally adapted Apple storyboard now uses its ordinary render-encoder factory with queue-local automatic adaptation; GTX output matches direct controls and three shared NVIDIA method IMPs remain unchanged. [Evidence](APPLE_AUTOMATIC_STORYBOARD.md).
 
 Six paired processes per version measure the scoped Apple ICB cache: median calling-thread encoding CPU falls from 5.257 to 1.914 ms on the selected cache-hit frames; full-frame and GPU performance are unmeasured. [Evidence](APPLE_CACHE_BENCHMARK.md).
