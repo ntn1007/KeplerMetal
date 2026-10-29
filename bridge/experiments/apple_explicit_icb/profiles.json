@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "library_SHA256": "adf18526f6b8fe358a30d3088dd801440b5509ac50126857174de03e17fba5bf",
+  "pipelines": [
+    {
+      "name": "apple_explicit",
+      "vertex": "vertexShader",
+      "fragment": "fragmentShader",
+      "attributes": [],
+      "layouts": [],
+      "apple_explicit_buffers": true
+    }
+  ]
+}

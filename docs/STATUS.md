@@ -1,8 +1,10 @@
 # Status, 2026-10-29
 
-The Apple CPU ICB sample shader renders correct native GTX outputs for two base instances and shared/private frame buffers; the private case blits in the same command buffer. ICB adaptation remains unimplemented. [Evidence](APPLE_EXPLICIT_NATIVE.md).
+The scoped CPU render ICB now executes the hash-pinned Apple sample shader with three explicit buffers, including a private frame buffer and base instances 0/1, matching direct GTX output. [Evidence and limits](APPLE_EXPLICIT_ICB.md).
 
-The current Apple CPU ICB sample builds, but its actual shader's three explicit buffers and its scoped three-buffer descriptor are refused in two GTX non-dispatch reflection probes. The sample app was not executed. [Evidence](APPLE_CPU_ICB_GAP.md).
+The Apple CPU ICB sample shader renders correct native GTX outputs for two base instances and shared/private frame buffers; the private case blits in the same command buffer. [Native evidence](APPLE_EXPLICIT_NATIVE.md).
+
+The current Apple CPU ICB sample builds; its shader's three explicit buffers and three-buffer descriptor were initially refused in GTX reflection probes, before the exact-profile implementation above. The sample app was not executed. [Evidence](APPLE_CPU_ICB_GAP.md).
 
 A separately compiled public-Metal client executes inherited render ICBs through a pinned process-local bootstrap on the GTX. One M1 direct/native ICB reference agrees within that device; no third-party client or transparent system integration is qualified. [Evidence](STANDALONE_INHERITED_PIPELINE.md).
 

@@ -302,19 +302,19 @@
       "path": "bridge/src/KeplerNativeRenderDraws.mm",
       "source_path": "bridge/src/KeplerNativeRenderDraws.mm",
       "source_SHA256": "370abcc54cd28f4b9b6731b9a8d7b9debf21067a79d8aba9ac16b4782e0d32a5",
-      "published_SHA256": "cdb5553fa81e6861a4f5bb1ae5d8d708afbe23123a8070b80ebaa74fbde0a742",
-      "bytes": 78362,
+      "published_SHA256": "23425d2add17cd257819990666cb7857ef7cf757cf46d8bd67cc69fae067791c",
+      "bytes": 79868,
       "modified_for_publication": true,
       "previous_published_SHA256": "ab893268a9ca9383b430b203cc8896b095c4e891d76d7c3728730fdaa2ed06cb",
       "latest_change": {
+        "previous_published_SHA256": "cdb5553fa81e6861a4f5bb1ae5d8d708afbe23123a8070b80ebaa74fbde0a742",
+        "previous_bytes": 78362,
+        "reason": "Accept the exact Apple sample explicit-buffer shader with reflection, geometry and per-buffer bounds checks."
+      },
+      "previous_latest_change": {
         "previous_published_SHA256": "23a47b662d93729d2129d28ac5550835334f8e2f2d4eb71dad955f3809f7ed1d",
         "previous_bytes": 77031,
         "reason": "Add a hash-certified two-buffer point transform with count-dependent bounds, reflected access and CPU ICB replay."
-      },
-      "previous_latest_change": {
-        "previous_published_SHA256": "0771f30cecda7a52df3bd962762e38626cfe3aa932e4d18f26a25594c39b99ff",
-        "previous_bytes": 75058,
-        "reason": "Support a hash-certified, bounded point-draw shader with a writable shared vertex buffer in the scoped CPU render ICB."
       },
       "prior_change_history": [
         {
@@ -326,6 +326,11 @@
           "previous_published_SHA256": "0dfe799c9048c498fc3cce3e92be79ea85c2196d775c3784c85553d0af53fb04",
           "previous_bytes": 74980,
           "reason": "Allow explicit direct geometry contracts for nonindexed stage-in triangle counts 4 and 5 while preserving execution-time equality checks."
+        },
+        {
+          "previous_published_SHA256": "0771f30cecda7a52df3bd962762e38626cfe3aa932e4d18f26a25594c39b99ff",
+          "previous_bytes": 75058,
+          "reason": "Support a hash-certified, bounded point-draw shader with a writable shared vertex buffer in the scoped CPU render ICB."
         }
       ]
     },
@@ -8124,5 +8129,11 @@
     "previous_public_commit": "76d0ed8",
     "previous_snapshot_SHA256": "76cf660515e807371a3e7d336663ab4f0b4425969e8001cfdd615c8c2d7dab2d",
     "scope": "Bounded scoped render inheritance; GPU indirect render guard tracked in Git."
+  },
+  "apple_explicit_icb_update": {
+    "date": "2026-10-29",
+    "previous_public_commit": "c3c6ebe",
+    "previous_snapshot_SHA256": "b7c97bcd4c8415973d003abd40d3ebaa1ce5b252c9b5a9cd36019a833b86446d",
+    "scope": "Exact Apple shader explicit-buffer registration and bounds; GPU indirect preparation remains refused."
   }
 }

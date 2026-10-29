@@ -25,8 +25,9 @@ sequence completes correctly; without a missing-blit control it does not prove
 that every individual synchronization operation was necessary. No performance
 comparison was made, and only a bounded set of system-file hashes was checked.
 
-This establishes a native reference for implementing explicit-buffer bounds,
-registration and ICB execution. It does not yet implement those features.
+This establishes a native reference. A subsequent [scoped ICB prototype](APPLE_EXPLICIT_ICB.md)
+implements and tests these buffers for this exact shader; it does not qualify
+the full Apple sample application.
 
 ## Reproduce
 

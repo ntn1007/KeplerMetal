@@ -23,9 +23,11 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+The scoped CPU render ICB executes the hash-pinned Apple sample shader with three explicit buffers; bounded GTX cases match native rendering. [Evidence and limits](docs/APPLE_EXPLICIT_ICB.md).
+
 The Apple sample shader executes through native Metal on GTX with explicit buffers and shared or private frame state. [Evidence and limits](docs/APPLE_EXPLICIT_NATIVE.md).
 
-The current Apple CPU ICB sample exposes a measured integration gap: its three explicit vertex buffers are not yet accepted by the scoped adapter. [Evidence](docs/APPLE_CPU_ICB_GAP.md).
+The Apple CPU ICB sample exposed a measured explicit-buffer integration gap, subsequently addressed for its exact shader profile. [Evidence](docs/APPLE_CPU_ICB_GAP.md).
 
 A separately compiled public-Metal client uses inherited render pipelines through an opt-in local bootstrap on GTX; an M1 native ICB reference is also recorded. [Evidence and limits](docs/STANDALONE_INHERITED_PIPELINE.md).
 

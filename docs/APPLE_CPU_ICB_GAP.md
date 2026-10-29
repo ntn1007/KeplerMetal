@@ -47,13 +47,11 @@ checks hashes, process termination, reflection, refusals and a bounded set of
 unchanged system-file hashes.
 
 The [subsequent native reference](APPLE_EXPLICIT_NATIVE.md) executes the sample
-shader on the GTX with shared and private frame buffers and base instances 0/1;
-it does not use an ICB. The next integration work is an explicit-buffer vertex profile with verified
-reflection and bounds, followed by a GPU direct/adapted comparison of the
-sample shader, including `baseInstance` and the private-frame blit dependency.
-Then a bounded multi-command test and application-local integration can be
-assessed. These steps do not imply Mac 2 conformance or transparent driver
-replacement.
+shader on the GTX with shared and private frame buffers and base instances 0/1.
+The later [scoped ICB profile](APPLE_EXPLICIT_ICB.md) qualifies those cases for
+the exact shader with explicit bounds. A bounded multi-command test and
+application-local integration remain to be assessed. These steps do not imply
+Mac 2 conformance or transparent driver replacement.
 
 ## Reproduce
 
