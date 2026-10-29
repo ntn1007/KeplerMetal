@@ -23,6 +23,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+A separately compiled public-Metal client uses inherited render pipelines through an opt-in local bootstrap on GTX; an M1 native ICB reference is also recorded. [Evidence and limits](docs/STANDALONE_INHERITED_PIPELINE.md).
+
 A GTX cohort verifies inherited pipeline changes within one encoder and a following ordinary draw, in a bounded scoped client. [Evidence and limits](docs/RENDER_INHERITED_SAME_ENCODER.md).
 
 A scoped CPU render ICB inherits a registered parent pipeline for a bounded triangle test on GTX; direct and adapted pixels match when the parent pipeline changes. [Evidence and limits](docs/RENDER_INHERITED_PIPELINE.md).

@@ -1,0 +1,61 @@
+{
+  "archive_sha256": "7b9b59f0307dfe762d17da1db257a04b84aa078ff424970a2716ba089fe8f64a",
+  "build_sha256": "ab021bf06aa737988cd08ce131425ea44cb65f8a6c80ebb5f80e5e9f7d27f295",
+  "checked_system_files_unchanged": true,
+  "full_icb_contract": false,
+  "gtx_checked_float_channels": 49152,
+  "gtx_completed_images": 4,
+  "gtx_direct_adapted_exact": true,
+  "gtx_guard_bytes": 2048,
+  "gtx_processes": 8,
+  "gtx_refusal_controls": 4,
+  "m1_capture_not_gtx_execution": true,
+  "m1_direct_native_icb_match": true,
+  "m1_image_sha256": "d240fe84dcf0cc903b0f5643cb7090a0c99b11b44a18af085c7a4d7c74bbe8dc",
+  "m1_provenance_sha256": "57b2d36e3f83f96537e52fc871036bc842861279c02bbaae7f58ab5d840652c6",
+  "m1_raw_float_bits_match_gtx": false,
+  "no_project_symbol_imports": true,
+  "performance_benchmark": false,
+  "public_client_sha256": "00e2ae9f36653df47b47d054690b9824959559c6da449fa6a74fc781a7cbc3d7",
+  "runs": [
+    {
+      "image_sha256": "f3d355a7a9851879b2e2ecb7ba224a03014c9f9f2c35b19e5ee1e968a73b509a",
+      "manifest_sha256": "b8e36a4f85a7944a455e4b0aeeebb64a0c05dafe5c35aba17389f651fb7eef1c",
+      "mode": "direct"
+    },
+    {
+      "image_sha256": "f3d355a7a9851879b2e2ecb7ba224a03014c9f9f2c35b19e5ee1e968a73b509a",
+      "manifest_sha256": "ef5d0527b19e99c5ea47f12150610a40e0c33468b3256b9250ff1bc0a7278694",
+      "mode": "auto"
+    },
+    {
+      "image_sha256": "f3d355a7a9851879b2e2ecb7ba224a03014c9f9f2c35b19e5ee1e968a73b509a",
+      "manifest_sha256": "e3aa965753e6fe20d5c01f496f15ce38a0be91a34298b5583305a970a4027e83",
+      "mode": "direct"
+    },
+    {
+      "image_sha256": "f3d355a7a9851879b2e2ecb7ba224a03014c9f9f2c35b19e5ee1e968a73b509a",
+      "manifest_sha256": "09c9a8804b16274c1143cb8efb8801dfefc3489c7d68d9dd0d3209d16785d4c4",
+      "mode": "auto"
+    },
+    {
+      "manifest_sha256": "5d674b98cdd91244ba9889f84981b27f0e04eefc111facda3e83ee6e2329d9b8",
+      "mode": "native"
+    },
+    {
+      "manifest_sha256": "b748f3b05e4402b8d9cacd005e0cbbf9650e1c2a1202e4b28a25514fa0d20b0b",
+      "mode": "wrong-client"
+    },
+    {
+      "manifest_sha256": "bfff482b01ce4c54f4f6f2dfc511acfb5fd0657d4ae3babc62bc78f053962e58",
+      "mode": "wrong-manifest"
+    },
+    {
+      "manifest_sha256": "5a82e49d66cbae6df9e49e8976259418417012d07499777e4b9ed267eaf21c08",
+      "mode": "wrong-library"
+    }
+  ],
+  "status": "PASS_PUBLIC_CLIENT_INHERITED_PIPELINE",
+  "third_party_client": false,
+  "transparent_system_integration": false
+}
