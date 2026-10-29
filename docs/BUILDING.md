@@ -1,5 +1,7 @@
 # Build from source
 
+[APPLE_AUTOMATIC_STORYBOARD.md](APPLE_AUTOMATIC_STORYBOARD.md) documents automatic encoder adaptation in the Apple storyboard and its reproduction.
+
 [APPLE_CACHE_BENCHMARK.md](APPLE_CACHE_BENCHMARK.md) documents the paired encoding benchmark and reproducible controls.
 
 [APPLE_INHERITED_CACHE.md](APPLE_INHERITED_CACHE.md) documents the scoped inherited-record cache and reproduction.
