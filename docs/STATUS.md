@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Two calibrated request-window witnesses show property return in window 1 and list-selection hits in windows 1, 2 and 3; asynchronous causality and allocation lifetime remain unproved. All hardware-required requests still fail. [Evidence](VIDEO_GVA_REQUEST_WINDOW.md).
+
 An integrated repeat client passes six CPU H.264 sessions with 4,147,200 matching bytes. Twelve hardware-required requests still produce no images; two debugger runs have one property hit, four list hits and no cached-byte-check hit each. [Evidence](VIDEO_GVA_REPEAT_INTEGRATED.md).
 
 A standalone dependency-observer variant passes six CPU observation scopes and six pinned-profile inspection scopes. The integrated client has since passed repeated software VideoToolbox sessions; hardware-required requests still fail. [Evidence](VIDEO_GVA_REPEAT_DEPENDENCY_PROTOTYPE.md).
