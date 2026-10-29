@@ -121,6 +121,12 @@ def sass_contract(code,text,component):
  direct=r'(?:(?:\$p\d+|\(not \$p\d+\)) )?(?:bra|joinat) 0x[0-9a-f]+'
  if any(re.search(r'\b(?:bra|joinat)\b',op) and not re.fullmatch(direct,op) for _,op in instructions):
   return {'qualified':False,'reason':'Indirect or unsupported branch/reconvergence target'}
+ # The pinned GK104 decoder also names stack/return, break/continue,
+ # exception and quad-mode operations. None is represented in this model;
+ # their target, execution mask and stack effects cannot be treated as no edge.
+ unmodeled=r'\b(?:call|prelongjmp|prebrk|precont|preret|longjmp|ret|discard|rtt|brk|cont|quadon|quadpop|bpt)\b'
+ if any(re.search(unmodeled,op) for _,op in instructions):
+  return {'qualified':False,'reason':'Unmodeled GK104 control-flow or execution-mask operation'}
  # The floor applies to every lane of a vector operand, not only its base.
  max_reg=max((reg for _,op in instructions for reg in register_references(op)),default=0)
  if max_reg>=24:return {'qualified':False,'reason':'Register profile exceeds qualified floor24'}

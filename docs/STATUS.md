@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+The offline CAS recognizer now refuses additional unmodeled GK104 stack, return, break/continue, exception and execution-mask operations. Ten one-word assembled-and-decoded controls are refused and four archived verdicts remain unchanged; no synthetic program was dispatched. [Evidence](CAS_UNMODELED_CONTROL.md).
+
 The offline CAS recognizer now refuses reconvergence targets established inside the lock region and pointing beyond the repair redirect. Three assembled-and-decoded examples are refused, with four archived verdicts unchanged; none was dispatched. [Evidence](CAS_RECONVERGENCE_BYPASS.md).
 
 The offline CAS recognizer now refuses unmodeled indirect branches anywhere in the program. Three assembled-and-decoded pre-lock examples that the preceding recognizer accepted are refused; four archived verdicts remain unchanged. No mutated shader was dispatched. [Evidence](CAS_INDIRECT_ENTRY_GUARD.md).
