@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+In two failed VideoToolbox requests, the enumerated GTX object enters the next natural call and that call returns non-null. Its meaning and hardware video remain unproved. [Evidence](VIDEO_VT_DEVICE_TRANSFORM.md).
+
 Two debugged VideoToolbox requests enumerate a first Metal object linked to the selected GTX 880M registry entry; the later decoder decision and hardware video remain unproved. [Evidence](VIDEO_VT_FIRST_DEVICE_IDENTITY.md).
 
 A bounded debugger witness sees a non-null Metal enumeration result and return value 1 after the first enumeration selector call in two failed VideoToolbox requests. List identity and hardware video remain unproved. [Evidence](VIDEO_VT_FIRST_ENUM_BATCH.md).
