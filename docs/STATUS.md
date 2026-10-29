@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+An incomplete CPU-only H.264 BSP stream-staging component matches Mesa begin/next helpers across six chunkings of a 43,898-byte fixture. Picture descriptors and GPU transport remain unimplemented; the buffer must not be submitted. [Evidence](VIDEO_BSP_STAGING.md).
+
 Two instrumented H.264 requests observe -12913 at the AppleGVA return and its direct VideoToolbox post-call site on the same thread; public creation also returns -12913. Hardware video remains unproved. [Evidence](VIDEO_GVA_PUBLIC_ERROR.md).
 
 Two instrumented H.264 requests show AppleGVA's caller receiving result 1 and count 0, then reaching its conditional exit; its alternative path is not reached. The VideoToolbox error mapping and hardware decode remain unproved. [Evidence](VIDEO_GVA_CALLER_FLOW.md).
