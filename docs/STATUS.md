@@ -1,12 +1,14 @@
 # Status, 2026-10-29
 
+CPU-only H.264 VP picture and reference-state modeling matches pinned Mesa helpers across 4,096 synthetic configurations. No video channel or GPU execution is established. [Evidence](VIDEO_VP_PICTURE.md).
+
 CPU-only H.264 reference/intermediate layout planning matches Mesa helpers across 4,096 configurations; fixture and MacBook sanitizer regressions pass. No GPU memory or video channel is allocated. [Evidence](VIDEO_REFERENCE_LAYOUT.md).
 
 Bounded baseline-H.264 field extraction matches an independent FFmpeg trace for six fixture pictures and 12 slice headers; M1 ASan/UBSan produces the same staged bytes as iMac. The parser is partial and GPU video remains unimplemented. [Evidence](VIDEO_BSP_BASELINE.md).
 
-CPU preparation of H.264 BSP picture blocks now matches Mesa's original helper for 4,096 synthetic inputs; the stream regression passes. Parsing, reference surfaces and GPU transport remain unimplemented. [Evidence](VIDEO_BSP_PICTURE.md).
+CPU preparation of H.264 BSP picture blocks now matches Mesa's original helper for 4,096 synthetic inputs; the stream regression passes. Complete parsing, reference surfaces and GPU transport remain unimplemented. [Evidence](VIDEO_BSP_PICTURE.md).
 
-An incomplete CPU-only H.264 BSP stream-staging component matches Mesa begin/next helpers across six chunkings of a 43,898-byte fixture. VP picture parameters and GPU transport remain unimplemented; the buffer must not be submitted. [Evidence](VIDEO_BSP_STAGING.md).
+An incomplete CPU-only H.264 BSP stream-staging component matches Mesa begin/next helpers across six chunkings of a 43,898-byte fixture. The later VP model is not integrated with GPU transport; the buffer must not be submitted. [Evidence](VIDEO_BSP_STAGING.md).
 
 Two instrumented H.264 requests observe -12913 at the AppleGVA return and its direct VideoToolbox post-call site on the same thread; public creation also returns -12913. Hardware video remains unproved. [Evidence](VIDEO_GVA_PUBLIC_ERROR.md).
 

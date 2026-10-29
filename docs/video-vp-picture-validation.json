@@ -1,0 +1,27 @@
+{
+  "bytes_per_case": 756,
+  "cases": 4096,
+  "generated_reference_sha256": "db6a036b28510c9b1940e5457c6b9c4b15f0dd6217826d6da7e42e01d7374005",
+  "gpu_transport_implemented": false,
+  "hardware_video_execution_proved": false,
+  "inputs_are_synthetic": true,
+  "mesa_archive_sha256": "bce5f7fbebb934373b86c999a064d52fb5065878dc57f287f95346648ec832e9",
+  "mesa_source_sha256": {
+    "src/gallium/drivers/nouveau/nouveau_vp3_video.h": "86d97313e8ae883186f1c389a67ebcb69ebe4e5089d55d094fac5ec21acb80bc",
+    "src/gallium/drivers/nouveau/nouveau_vp3_video_vp.c": "3c44d8153d08764aacf012cd46186819a120979c34f87adb0a3bee592d898c9f"
+  },
+  "mesa_vp_helpers_executed_on_cpu": true,
+  "source_sha256": {
+    "H264Stream.h": "c54cefe3dcff353d8aff27f3955d0b9aea4249a288ab623a9522277175054763",
+    "VideoLayout.cpp": "934403950258167baccc92aeb2d24b0c031fdb83ed6c199d81c1261ee2a158e7",
+    "VideoLayout.h": "730b86192b7ac04cf5b6b310b12b76f46a18f2ea6946f56261b5f97843601df8",
+    "VideoPicture.cpp": "f2d73943faee3423620c64233c62caf1205476c233ed781a7e8bf8db3f732387",
+    "VideoPicture.h": "fff5191307c94b325127e99d4f2d1b4e348bc1e63231c3793789c2e7ba79c822",
+    "compare_video_picture.cpp": "93858549f17e5c652aca19afdd91105beff3dac3486deb65515aa53dc880d133",
+    "validate.py": "53a2263326066e60d2f6fc8fbff70dcc8bb0ab833bcd0374a088a62165165bb5",
+    "validate_layout.py": "b25936418709e1fc4a0f0cc2fbe0febade6207ae2220722f871be74731287498",
+    "validate_video_picture.py": "c92ac8a89e9f3f02a130a8abac1581ef177294190172fd66f5dd34242bb60b17"
+  },
+  "status": "PASS_MESA_VP_BLOCKS_CPU",
+  "system_modified": false
+}

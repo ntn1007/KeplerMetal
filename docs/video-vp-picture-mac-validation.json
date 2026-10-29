@@ -1,0 +1,20 @@
+{
+  "architecture": "arm64",
+  "baseline_receipt_sha256": "2faa46947d6c5807c07ac2aea335ac393115588a0fc53fcc7788f14256b8c3fd",
+  "binary_sha256": "c75486af7a2fe1fb8a689a62b91315db90035fca44d478a897c06ee6c3f3d52c",
+  "cases": 4096,
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "hardware_video_execution_proved": false,
+  "script_sha256": "5f976c30727d5f40d03e4a06301caa69b56efbd4f8bd7e790a7eb86a9fe3653d",
+  "source_sha256": {
+    "H264Stream.h": "c54cefe3dcff353d8aff27f3955d0b9aea4249a288ab623a9522277175054763",
+    "VideoLayout.cpp": "934403950258167baccc92aeb2d24b0c031fdb83ed6c199d81c1261ee2a158e7",
+    "VideoLayout.h": "730b86192b7ac04cf5b6b310b12b76f46a18f2ea6946f56261b5f97843601df8",
+    "VideoPicture.cpp": "f2d73943faee3423620c64233c62caf1205476c233ed781a7e8bf8db3f732387",
+    "VideoPicture.h": "fff5191307c94b325127e99d4f2d1b4e348bc1e63231c3793789c2e7ba79c822",
+    "compare_video_picture.cpp": "93858549f17e5c652aca19afdd91105beff3dac3486deb65515aa53dc880d133",
+    "mesa-vp-reference.private.c": "db6a036b28510c9b1940e5457c6b9c4b15f0dd6217826d6da7e42e01d7374005"
+  },
+  "status": "PASS_MACBOOK_VP_ASAN_UBSAN",
+  "transfer_hashes_match_before_after": true
+}
