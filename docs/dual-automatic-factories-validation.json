@@ -1,0 +1,203 @@
+{
+  "status": "PASS_MIXED_AUTOMATIC_COMPUTE_RENDER_GPU",
+  "processes": 6,
+  "automatic_processes": 4,
+  "modes": [
+    "execute",
+    "auto-compute-first",
+    "auto-render-first",
+    "execute",
+    "auto-compute-first",
+    "auto-render-first"
+  ],
+  "frames": 54,
+  "checked_float_channels": 663552,
+  "gpu_compute_invocations": 1152,
+  "cross_mode_image_hashes_match": true,
+  "automatic_encoder_count_includes_internal_preparation": true,
+  "source_sha256": "3d9d852dbb28b5f3cd298cebb6dee8fbd061d09640ffac8077991517b843ca6b",
+  "experiment_sha256": "b059856b0c021c5a67b41bf8d02847f68a7b0938b9d1d05b8837cda7b8c47002",
+  "audit_sha256": "94c169fcae562d7f40b34109fdd42154564aee2a1138e59795163b1b7729055d",
+  "runtime_sha256": "4a0ed89819e9d14fd8c19212f25a278f6c409d6e610e52fbde9d97a9c7360782",
+  "oracle_sha256": "b46d25bff2e33467086de1868f02f5cbf5fabd34e15c8d4d730fa3f6b937d1e1",
+  "source_oracle_sha256": "a912147784e8e15b9711f4c0430c0380dbfb2fb7da0efb6476af01a4b0d5b3ff",
+  "rows": [
+    {
+      "mode": "execute",
+      "signed_host_sha256": "67156fdb02090ec14ce7343f10b4d3ee846174969f0c34ff7da2954edddf5334",
+      "image_sha256": [
+        "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "be45fade14526a094cf72dd7a17644b5efc242660d3f414c9806a5e6e240244d",
+        "aac0ad5570e72a59c1f5b27873621ab810d34547bf2261108bcd4ffd123aecd1",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8"
+      ],
+      "automatic_compute_encoders": 0,
+      "automatic_render_encoders": 0,
+      "channels": 110592,
+      "gpu_compute_invocations": 192,
+      "reservation_id": "67fc087cccc84a879be98f41ac7c1fcd",
+      "process_terminal": true,
+      "GPU_identity": {
+        "PCI_device_id": 4504,
+        "PCI_vendor_id": 4318,
+        "PCI_registry_id": 4294967841,
+        "schema": 1,
+        "name": "NVIDIA GeForce GTX 880M",
+        "registry_id": 4294968416
+      }
+    },
+    {
+      "mode": "auto-compute-first",
+      "signed_host_sha256": "67156fdb02090ec14ce7343f10b4d3ee846174969f0c34ff7da2954edddf5334",
+      "image_sha256": [
+        "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "be45fade14526a094cf72dd7a17644b5efc242660d3f414c9806a5e6e240244d",
+        "aac0ad5570e72a59c1f5b27873621ab810d34547bf2261108bcd4ffd123aecd1",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8"
+      ],
+      "automatic_compute_encoders": 11,
+      "automatic_render_encoders": 11,
+      "channels": 110592,
+      "gpu_compute_invocations": 192,
+      "reservation_id": "610f85a674814f22a8bb44b190bf264d",
+      "process_terminal": true,
+      "GPU_identity": {
+        "PCI_device_id": 4504,
+        "PCI_vendor_id": 4318,
+        "PCI_registry_id": 4294967841,
+        "schema": 1,
+        "name": "NVIDIA GeForce GTX 880M",
+        "registry_id": 4294968416
+      }
+    },
+    {
+      "mode": "auto-render-first",
+      "signed_host_sha256": "67156fdb02090ec14ce7343f10b4d3ee846174969f0c34ff7da2954edddf5334",
+      "image_sha256": [
+        "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "be45fade14526a094cf72dd7a17644b5efc242660d3f414c9806a5e6e240244d",
+        "aac0ad5570e72a59c1f5b27873621ab810d34547bf2261108bcd4ffd123aecd1",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8"
+      ],
+      "automatic_compute_encoders": 11,
+      "automatic_render_encoders": 11,
+      "channels": 110592,
+      "gpu_compute_invocations": 192,
+      "reservation_id": "5f4f708c88984bfb998c361def3262a2",
+      "process_terminal": true,
+      "GPU_identity": {
+        "PCI_device_id": 4504,
+        "PCI_vendor_id": 4318,
+        "PCI_registry_id": 4294967841,
+        "schema": 1,
+        "name": "NVIDIA GeForce GTX 880M",
+        "registry_id": 4294968416
+      }
+    },
+    {
+      "mode": "execute",
+      "signed_host_sha256": "67156fdb02090ec14ce7343f10b4d3ee846174969f0c34ff7da2954edddf5334",
+      "image_sha256": [
+        "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "be45fade14526a094cf72dd7a17644b5efc242660d3f414c9806a5e6e240244d",
+        "aac0ad5570e72a59c1f5b27873621ab810d34547bf2261108bcd4ffd123aecd1",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8"
+      ],
+      "automatic_compute_encoders": 0,
+      "automatic_render_encoders": 0,
+      "channels": 110592,
+      "gpu_compute_invocations": 192,
+      "reservation_id": "886bc010a6394230b6889f468121a608",
+      "process_terminal": true,
+      "GPU_identity": {
+        "PCI_device_id": 4504,
+        "PCI_vendor_id": 4318,
+        "PCI_registry_id": 4294967841,
+        "schema": 1,
+        "name": "NVIDIA GeForce GTX 880M",
+        "registry_id": 4294968416
+      }
+    },
+    {
+      "mode": "auto-compute-first",
+      "signed_host_sha256": "67156fdb02090ec14ce7343f10b4d3ee846174969f0c34ff7da2954edddf5334",
+      "image_sha256": [
+        "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "be45fade14526a094cf72dd7a17644b5efc242660d3f414c9806a5e6e240244d",
+        "aac0ad5570e72a59c1f5b27873621ab810d34547bf2261108bcd4ffd123aecd1",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8"
+      ],
+      "automatic_compute_encoders": 11,
+      "automatic_render_encoders": 11,
+      "channels": 110592,
+      "gpu_compute_invocations": 192,
+      "reservation_id": "fb8e6f5a664d4de4ab50197b043667e9",
+      "process_terminal": true,
+      "GPU_identity": {
+        "PCI_device_id": 4504,
+        "PCI_vendor_id": 4318,
+        "PCI_registry_id": 4294967841,
+        "schema": 1,
+        "name": "NVIDIA GeForce GTX 880M",
+        "registry_id": 4294968416
+      }
+    },
+    {
+      "mode": "auto-render-first",
+      "signed_host_sha256": "67156fdb02090ec14ce7343f10b4d3ee846174969f0c34ff7da2954edddf5334",
+      "image_sha256": [
+        "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "be45fade14526a094cf72dd7a17644b5efc242660d3f414c9806a5e6e240244d",
+        "aac0ad5570e72a59c1f5b27873621ab810d34547bf2261108bcd4ffd123aecd1",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+        "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8"
+      ],
+      "automatic_compute_encoders": 11,
+      "automatic_render_encoders": 11,
+      "channels": 110592,
+      "gpu_compute_invocations": 192,
+      "reservation_id": "8693614ac3cf41ee8488c647d35af026",
+      "process_terminal": true,
+      "GPU_identity": {
+        "PCI_device_id": 4504,
+        "PCI_vendor_id": 4318,
+        "PCI_registry_id": 4294967841,
+        "schema": 1,
+        "name": "NVIDIA GeForce GTX 880M",
+        "registry_id": 4294968416
+      }
+    }
+  ],
+  "unmodified_application_tested": false,
+  "system_modified": false,
+  "performance_benchmark": false
+}

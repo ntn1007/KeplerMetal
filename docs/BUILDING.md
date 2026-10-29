@@ -1,5 +1,7 @@
 # Build from source
 
+[DUAL_AUTOMATIC_FACTORIES.md](DUAL_AUTOMATIC_FACTORIES.md) documents the mixed compute/render automatic-factory GPU witness.
+
 [VIDEO_DPB_PROFILES.md](VIDEO_DPB_PROFILES.md) documents the CPU reference-order and POC comparison.
 
 [VIDEO_DPB_OBSERVATION.md](VIDEO_DPB_OBSERVATION.md) documents the software reference-state observation and reproduction.

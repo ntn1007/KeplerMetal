@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A mixed compute/render ICB GPU witness now passes with both queue-local automatic factories enabled in either order: six serialized processes and 54 matching frames. Explicit opt-in and pinned profiles remain required. [Evidence](DUAL_AUTOMATIC_FACTORIES.md).
+
 Twenty CPU VP proposals compare two reference orders and two POC bases against pinned Mesa; arm64 sanitizers agree, while VA-API execution and NVIDIA correctness remain unproved. [Evidence](VIDEO_DPB_PROFILES.md).
 
 Software FFmpeg short-term snapshots match the five modeled P-picture reference sets while using the reverse order and a +65536 POC representation; NVIDIA ordering and decoding remain unproved. [Evidence](VIDEO_DPB_OBSERVATION.md).

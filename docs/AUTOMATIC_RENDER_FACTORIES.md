@@ -30,8 +30,7 @@ Another queue and the shared native method implementations remain untouched in
 the cases tested. When the automatic mode is not enabled, the old explicit
 encoder API behaves as before. Enabling rendering alone leaves ordinary compute
 encoders native; the existing compute-only factory path is separately regression
-checked. Simultaneous automatic compute and rendering activation in the same
-scope is not yet qualified.
+checked. Simultaneous automatic compute and rendering activation is now qualified for a bounded mixed workload in [DUAL_AUTOMATIC_FACTORIES.md](DUAL_AUTOMATIC_FACTORIES.md).
 
 For a render pass outside the existing exact profile, the client receives a
 queue-local guarded encoder: ordinary native drawing is inherited unchanged,
