@@ -7,6 +7,10 @@ Nouveau VP3 code. It concatenates caller-provided byte chunks at offset
 length and flag at offsets `0x100` and `0x110`. It zeroes the rest of its
 owned vector. It neither parses H.264 nor constructs the picture parameters.
 
+A later [experimental picture preparation](VIDEO_BSP_PICTURE.md) combines this
+stream staging with a Mesa-derived H.264 BSP picture block. Its inputs must be
+supplied by a caller; the combined buffer is still not GPU-submittable.
+
 **The buffer is incomplete and must not be sent to the GPU.** It contains no
 qualified picture descriptor, GPU addresses, channel bindings or submission
 commands. The code is not yet wired into the main runtime. Neither a compatible
@@ -58,6 +62,5 @@ python3 "$E/validate.py" --archive /path/to/mesa-26.2.4.tar.xz \
   --fixture /path/to/fixture-annexb.h264 --out /path/to/new-results
 ```
 
-The next implementation boundary is the H.264 picture descriptor and frame
-ownership; in parallel, the macOS channel and address-space contract remains
-unqualified. Neither should be inferred from this CPU staging comparison.
+The stream-only comparison does not qualify picture descriptors or frame
+ownership. The macOS channel and address-space contract remains unqualified.

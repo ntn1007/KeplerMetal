@@ -47,4 +47,45 @@ StagingStatus stage_h264_stream(const ByteChunk* chunks, size_t count,
         return StagingStatus::allocation_failed;
     }
 }
+
+StagingStatus prepare_h264_bsp_picture(const H264Picture& p,
+                                      const ByteChunk* chunks, size_t count,
+                                      std::vector<uint8_t>& out,
+                                      uint32_t& bsp_flags) noexcept {
+    // Project bounds prevent arithmetic overflow; they are not hardware caps.
+    if (!p.width || !p.height || p.width > 65535 || p.height > 65535 ||
+        !p.slice_count || p.slice_count > 0xfff || p.pic_order_cnt_type > 2 ||
+        p.weighted_bipred_idc > 2) return StagingStatus::invalid_input;
+    const uint8_t flags[] = {p.delta_pic_order_always_zero_flag, p.frame_mbs_only_flag,
+        p.direct_8x8_inference_flag, p.entropy_coding_mode_flag,
+        p.bottom_field_pic_order_in_frame_present_flag, p.weighted_pred_flag,
+        p.deblocking_filter_control_present_flag, p.redundant_pic_cnt_present_flag,
+        p.transform_8x8_mode_flag, p.mb_adaptive_frame_field_flag,
+        p.field_pic_flag, p.bottom_field_flag};
+    for (uint8_t flag : flags) if (flag > 1) return StagingStatus::invalid_input;
+
+    std::vector<uint8_t> staged;
+    const auto status = stage_h264_stream(chunks, count, staged);
+    if (status != StagingStatus::ok) return status;
+    const uint32_t fields[] = {
+        1, p.log2_max_frame_num_minus4, p.pic_order_cnt_type,
+        p.log2_max_pic_order_cnt_lsb_minus4, p.delta_pic_order_always_zero_flag,
+        p.frame_mbs_only_flag, p.direct_8x8_inference_flag,
+        (p.width + 15) / 16, (p.height + 15) / 16,
+        p.entropy_coding_mode_flag, p.bottom_field_pic_order_in_frame_present_flag,
+        0, 0, 0, p.num_ref_idx_l0_active_minus1, p.num_ref_idx_l1_active_minus1,
+        p.weighted_pred_flag, p.weighted_bipred_idc,
+        static_cast<uint32_t>(static_cast<int32_t>(p.pic_init_qp_minus26)),
+        p.deblocking_filter_control_present_flag, p.redundant_pic_cnt_present_flag,
+        p.transform_8x8_mode_flag, p.mb_adaptive_frame_field_flag
+    };
+    for (size_t i = 0; i < sizeof(fields) / sizeof(fields[0]); ++i)
+        write_le32(staged, 4 * i, fields[i]);
+    staged[0x5c] = p.field_pic_flag;
+    staged[0x5d] = p.bottom_field_flag;
+    const uint32_t flags_out = ((p.slice_count << 4) & 0xfff0u) | 3u | (1u << 17);
+    out.swap(staged);
+    bsp_flags = flags_out;
+    return StagingStatus::ok;
+}
 } // namespace kepler::video

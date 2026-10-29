@@ -1,0 +1,21 @@
+{
+  "cases": 4096,
+  "compared_picture_bytes": 507904,
+  "gpu_transport_implemented": false,
+  "h264_bitstream_parsed": false,
+  "hardware_video_execution_proved": false,
+  "mesa_archive_sha256": "bce5f7fbebb934373b86c999a064d52fb5065878dc57f287f95346648ec832e9",
+  "mesa_h264_picture_helper_executed_on_cpu": true,
+  "mesa_source_sha256": "377e44eae4a6196a61b41e9d1361ef896670eab4ace7885cb37ebb34338fd5ea",
+  "picture_bytes_per_case": 124,
+  "source_sha256": {
+    "H264Stream.cpp": "d604ad21278f907f27a581d46af3d1f9b788306a8d1b0d9579ae6cb08f8d65e4",
+    "H264Stream.h": "c54cefe3dcff353d8aff27f3955d0b9aea4249a288ab623a9522277175054763",
+    "compare_picture.cpp": "bf2dee58ae0ffd2cae23b1ba19a07214dc6b395256e3e457f54d55b0aca44a33",
+    "validate.py": "53a2263326066e60d2f6fc8fbff70dcc8bb0ab833bcd0374a088a62165165bb5",
+    "validate_picture.py": "f6b12febdf8e09a0651410b656247456d5ec4245f41eea43bf2e5904dc208a83"
+  },
+  "status": "PASS_MESA_H264_BSP_PICTURES_CPU",
+  "system_modified": false,
+  "watchdog_bit_checked_separately": true
+}

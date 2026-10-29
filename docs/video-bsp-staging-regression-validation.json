@@ -1,0 +1,22 @@
+{
+  "chunkings": 6,
+  "fixture_bytes": 43898,
+  "fixture_sha256": "12858642f02b0e1d98ddf409dd729a879b6a7a5d3434c860882532ca4f6b40af",
+  "gpu_transport_implemented": false,
+  "hardware_video_execution_proved": false,
+  "mesa_archive_sha256": "bce5f7fbebb934373b86c999a064d52fb5065878dc57f287f95346648ec832e9",
+  "mesa_source_sha256": "377e44eae4a6196a61b41e9d1361ef896670eab4ace7885cb37ebb34338fd5ea",
+  "output_sha256": "57c8e005ad36a1218f705895b09ce49c2e3079acca95b6ec784b05207c7700d3",
+  "picture_descriptor_implemented": false,
+  "reference_uses_mesa_begin_and_next": true,
+  "reference_uses_mesa_end": false,
+  "source_sha256": {
+    "H264Stream.cpp": "d604ad21278f907f27a581d46af3d1f9b788306a8d1b0d9579ae6cb08f8d65e4",
+    "H264Stream.h": "c54cefe3dcff353d8aff27f3955d0b9aea4249a288ab623a9522277175054763",
+    "stage_tool.cpp": "8ce8edfcd164b1d3c19a3c5e3a08757f66e6d3a2137d87f00d5f99c05c91dc03",
+    "test.cpp": "72c712751b091b7d66d5aa0537ca7edd34bb8c3594d95607e8b61cbee4e799ef",
+    "validate.py": "53a2263326066e60d2f6fc8fbff70dcc8bb0ab833bcd0374a088a62165165bb5"
+  },
+  "status": "PASS_MESA_CPU_STREAM_STAGING",
+  "system_modified": false
+}
