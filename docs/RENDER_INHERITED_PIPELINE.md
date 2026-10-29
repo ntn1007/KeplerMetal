@@ -38,8 +38,9 @@ On the same rebuilt archive, earlier [trailing triangle](inherited-pipeline-trai
 and [writable point](inherited-pipeline-point-regression.json) suites pass.
 
 The test uses one side-effect-free shader library, two registered profiles,
-one command and one triangle, on separate render encoders. Changes within the
-same encoder, indexed draws, inherited buffers, compute inheritance, GPU
+one command and one triangle, on separate render encoders. A subsequent
+[same-encoder cohort](RENDER_INHERITED_SAME_ENCODER.md) also checks pipeline
+switching and a following direct draw. Indexed draws, inherited buffers, compute inheritance, GPU
 generated commands, concurrent use, unregistered pipelines, arbitrary shaders
 and transparent application integration are not qualified. Legacy inherited
 pipelines and indexed inherited draws are explicitly refused. No performance

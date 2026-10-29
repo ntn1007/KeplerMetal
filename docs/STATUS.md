@@ -1,6 +1,8 @@
 # Status, 2026-10-29
 
-A scoped CPU render ICB now inherits a registered parent pipeline at each execution. GTX direct/adapted captures agree across smooth/flat/smooth pipeline changes on separate encoders; same-encoder changes and general ICB support remain unqualified. [Evidence](RENDER_INHERITED_PIPELINE.md).
+A same-encoder inherited-pipeline cohort matches direct GTX output across smooth/flat/smooth changes and a following direct draw without rebinding. [Evidence and limits](RENDER_INHERITED_SAME_ENCODER.md).
+
+A scoped CPU render ICB now inherits a registered parent pipeline at each execution. GTX direct/adapted captures agree across smooth/flat/smooth pipeline changes on separate encoders; general ICB support remains unqualified. [Evidence](RENDER_INHERITED_PIPELINE.md).
 
 A public-Metal client loads the certified point shader through file, URL, data and two-segment data APIs under process-local opt-in; 27 GTX processes include native and wrong-library controls. [Evidence](STANDALONE_POINT_LOADERS.md).
 
