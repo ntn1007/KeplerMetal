@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A pinned 15-command ICB renders correctly into an unattached CAMetalLayer drawable on GTX; callbacks fired with zero presentation timestamps, so visible display remains unproved. [Evidence](APPLE_DRAWABLE_ICB.md).
+
 A two-command Apple-shader ICB matches direct GTX results for enabled/disabled depth writes and clear-depth controls. [Evidence and limits](APPLE_DEPTH_DEPENDENCY.md).
 
 A controlled Apple-shader ICB test matches direct GTX results for depth `less`/`never` and front/back winding. [Evidence](APPLE_VIEW_DEPTH_CULL.md).

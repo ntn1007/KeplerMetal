@@ -13,6 +13,8 @@ This is still a synthetic offscreen scene with an application-local adapter,
 not the Apple application, an MTKView drawable or transparent macOS support.
 The exact shader, target dimensions and descriptor are pinned. Resizing,
 other profiles, overlapping frames and GPU-encoded ICBs remain unqualified.
+A [subsequent test](APPLE_DRAWABLE_ICB.md) renders to a real, unattached
+CAMetalLayer drawable; it does not establish visible presentation.
 
 ## Evidence and failure investigation
 

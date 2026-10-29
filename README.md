@@ -23,6 +23,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+A pinned 15-command ICB renders to an unattached CAMetalLayer drawable on GTX; onscreen presentation remains unproved. [Evidence and limits](docs/APPLE_DRAWABLE_ICB.md).
+
 A scoped two-command Apple-shader ICB reproduces depth-write dependencies on GTX, with direct and clear-depth controls. [Evidence and limits](docs/APPLE_DEPTH_DEPENDENCY.md).
 
 A bounded GTX ICB test verifies depth comparison and back-face rejection against direct draws and CPU pixel expectations. [Evidence and limits](docs/APPLE_VIEW_DEPTH_CULL.md).
