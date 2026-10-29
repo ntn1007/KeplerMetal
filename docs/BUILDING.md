@@ -1,5 +1,7 @@
 # Build from source
 
+[VIDEO_REPLY_IDENTITY.md](VIDEO_REPLY_IDENTITY.md) documents the offline resource-reply identity analysis.
+
 [VIDEO_ONE_REFERENCE_POC2.md](VIDEO_ONE_REFERENCE_POC2.md) documents the CPU-only single-reference fixture and reproduction.
 
 [CAS_RECONVERGENCE_GUARD.md](CAS_RECONVERGENCE_GUARD.md) documents the offline reconvergence counterexamples and reproduction.

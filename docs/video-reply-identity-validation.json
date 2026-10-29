@@ -1,0 +1,48 @@
+{
+  "function_bodies_sha256": {
+    "machine": "3a3522181c0b04368175f837cc58c644abeae5f1804fe513afb1af49c3b9fb28",
+    "namespace": "0269faaa59c968a6cc17fac0c2c374591d041590edeee0767a9581702af862c1",
+    "ordinary": "6442047166a21b81fe32f5c8f4732d5b73db3674c977dfdb83fbef3e889984ab",
+    "resource": "a240064908acc4c7999341e7a0fb7d3b0be436458650e43f65d343f267fe59fd",
+    "video": "1846ead1bc333cb0249a67da9a727e7c76e0e1558e62103dfe5b0b9c08f6c59b"
+  },
+  "hardware_video_execution_proved": false,
+  "ioaccel_sha256": "37e563d6cf3626101f30b1727a4f60dec02152dff9c74c0269c30c213a7320c8",
+  "limits": [
+    "Static file and decompiler evidence; live code, object identity and layout are unverified.",
+    "Conditional panic path is not an observed failure and no untrusted selector input is claimed to reach it.",
+    "Returned values are not established as GPU addresses, valid mappings or safe to use.",
+    "No selector, channel, ownership or cleanup is authorized."
+  ],
+  "live_resource_or_reply_observed": false,
+  "native_method_called": false,
+  "ordinary_resource_reply_offsets": [
+    "0x10",
+    "0x18"
+  ],
+  "panic_target_statically_present": true,
+  "prior_evidence_sha256": "7bead58f8621856548e64a66d6db7c9fee4d40357ad4bcce3b5d7eada98c6f5b",
+  "rea_bundle_sha256": "2b495cf244219ff82bc88d68a27a5dab44daeed33cb3b11c5fc2d9aa4d8c18bd",
+  "rea_evidence_ids": {
+    "machine": "ev_1e269c37f956818dbb4b05eeb92074a4d0bd6b1fdb3078e35e66db4772268227",
+    "namespace": "ev_48229cf29413a8fc19babaea90fc6c7b1492cf8a5d20abe9313aec4e01c24e52",
+    "ordinary": "ev_a0789b08c009780d402edf2bfb453ee445063f7da7e6243e98e6b475a03a2c29",
+    "resource": "ev_96202f162ea88502ff6568d8488de45dd586c1f9d38099f911bea7570ecc9932"
+  },
+  "shared_namespace_lookup_checks_index_and_mapping": true,
+  "status": "PASS_STATIC_VIDEO_REPLY_IDENTITY",
+  "system_modified": false,
+  "video_evidence_id": "ev_73185ac90e6c691e4d2eca5f95e61e33d6f341b329cd17b6934db77cab79f6b9",
+  "video_reply_offsets": {
+    "other_outputs": [
+      "0x00",
+      "0x08",
+      "0x10"
+    ],
+    "resource_id_u32": "0x28",
+    "shared_address_outputs": [
+      "0x18",
+      "0x20"
+    ]
+  }
+}

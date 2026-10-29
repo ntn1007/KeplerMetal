@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A pinned offline video-reply audit links the resource identifier and two shared-address fields to the same helper used for ordinary resources; no live reply or video execution is established. [Evidence](VIDEO_REPLY_IDENTITY.md).
+
 A CPU-only H.264 POC2/one-reference proposal now matches five pinned Mesa blocks and FFmpeg's software reference snapshots; arm64 sanitizers and the older two-reference output regression pass. Hardware video remains unproved. [Evidence](VIDEO_ONE_REFERENCE_POC2.md).
 
 The offline CAS recognizer now rejects five synthetic unmodeled reconvergence targets while preserving four archived verdicts; its retained reconvergence shape remains an assumption, not a general safety proof. [Evidence](CAS_RECONVERGENCE_GUARD.md).
