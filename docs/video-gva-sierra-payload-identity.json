@@ -1,0 +1,14 @@
+{
+  "GPU_execution": false,
+  "chunks": 348,
+  "compressed_sha256": "90c20d97c7e277f41d662eda9ae5caef263579ca206f0b44a7f710d3c8377ed4",
+  "decoded_bytes": 5835166720,
+  "decoded_sha256": "09314e94e288a088ac761b61e6fe7a0bac2967dc93478b8454b7c912d7a15834",
+  "payload_bytes": 1690995204,
+  "signature_rechecked": false,
+  "status": "PASS_PBZX_DECODE_IDENTITY",
+  "survey_sha256": "dcce021f886710d4faebb196178a7dcc54bb60d160de8f6595ef942424528940",
+  "system_modified": false,
+  "vendor_execution": false,
+  "verifier_sha256": "4c89ada50307558a419862b657358dd5819bdefdf7c22b962f1a48ab29ec53c3"
+}

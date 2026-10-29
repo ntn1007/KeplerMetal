@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A full Sierra payload survey finds 14 `IOGVACodec` literal matches, none NVIDIA-labelled; NVIDIA startup has a separate static `NVDA,mm-version` property path. No NVIDIA codec value or video execution is proved. [Evidence](VIDEO_GVA_SIERRA_SURVEY.md).
+
 A retained AMD driver conditionally passes `IOGVACodec` and `VCE` to a vtable slot relocated to `IORegistryEntry::setProperty`; its runtime and any NVIDIA value remain unproved. [Evidence](VIDEO_GVA_AMD_DYNAMIC_PROPERTY.md).
 
 The entire retained High Sierra update payload was scanned for literal `IOGVACodec`: 15 regular members match, none NVIDIA-labelled. Nested compression and dynamic producers remain unexamined. [Evidence](VIDEO_GVA_ARCHIVE_SURVEY.md).

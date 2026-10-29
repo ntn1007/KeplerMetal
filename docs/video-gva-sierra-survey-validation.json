@@ -1,0 +1,219 @@
+{
+  "GPU_execution": false,
+  "archive_bytes": 5835166720,
+  "archive_sha256": "09314e94e288a088ac761b61e6fe7a0bac2967dc93478b8454b7c912d7a15834",
+  "complete_installation_searched": false,
+  "dynamically_produced_property_excluded": false,
+  "matches": [
+    {
+      "literal_counts": {
+        "ascii": 1,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/Extensions/AMDRadeonX3000.kext/Contents/MacOS/AMDRadeonX3000",
+      "plist_key_values": [],
+      "plist_parse": "not_plist",
+      "sha256": "9932e65cab1268e309de30f45109d573e1a9073db1836d15a9196607e712b52a",
+      "size": 6754704
+    },
+    {
+      "literal_counts": {
+        "ascii": 1,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/Extensions/AMDRadeonX4000.kext/Contents/MacOS/AMDRadeonX4000",
+      "plist_key_values": [],
+      "plist_parse": "not_plist",
+      "sha256": "37d38935c3fb2695c867b5c4314d7099c516aa94488358d24f59186985763333",
+      "size": 10397008
+    },
+    {
+      "literal_counts": {
+        "ascii": 1,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/Extensions/AMDRadeonX4100.kext/Contents/MacOS/AMDRadeonX4100",
+      "plist_key_values": [],
+      "plist_parse": "not_plist",
+      "sha256": "f08eaf339e6bc54dfe25505c5ac6ecbdbacb0389ceeacfc010c0cddca4911401",
+      "size": 9015728
+    },
+    {
+      "literal_counts": {
+        "ascii": 1,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/Extensions/AMDRadeonX4150.kext/Contents/MacOS/AMDRadeonX4150",
+      "plist_key_values": [],
+      "plist_parse": "not_plist",
+      "sha256": "d7e960ba6d268c37a01bc39a7cd79295621363205107439830f2e7a58d8f834e",
+      "size": 9015728
+    },
+    {
+      "literal_counts": {
+        "ascii": 1,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/Extensions/AMDRadeonX4200.kext/Contents/MacOS/AMDRadeonX4200",
+      "plist_key_values": [],
+      "plist_parse": "not_plist",
+      "sha256": "ad0570fcd3acaa1d0bc4929e28a1279e9d66fb2ee4cfcd60bfdd18bbd5eff3a0",
+      "size": 9460064
+    },
+    {
+      "literal_counts": {
+        "ascii": 1,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/Extensions/AppleIntelBDWGraphics.kext/Contents/Info.plist",
+      "plist_key_values": [
+        {
+          "string": "Gen8",
+          "type": "str"
+        }
+      ],
+      "plist_parse": "ok",
+      "sha256": "5f5b032b14be02ab2ecc1d58c3188792d167186672dc968afdd2f7b66fe80c21",
+      "size": 5323
+    },
+    {
+      "literal_counts": {
+        "ascii": 1,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/Extensions/AppleIntelHD3000Graphics.kext/Contents/Info.plist",
+      "plist_key_values": [
+        {
+          "string": "Gen6",
+          "type": "str"
+        }
+      ],
+      "plist_parse": "ok",
+      "sha256": "441fff7db707e7529196d15d706285182367bf4f99eece7973eb037add222cb7",
+      "size": 2713
+    },
+    {
+      "literal_counts": {
+        "ascii": 1,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/Extensions/AppleIntelHD4000Graphics.kext/Contents/Info.plist",
+      "plist_key_values": [
+        {
+          "string": "Gen7",
+          "type": "str"
+        }
+      ],
+      "plist_parse": "ok",
+      "sha256": "1bbea22e6aa0b23c1072c60e0b389adbd8ead4279c7afe981e64a538593e3ebf",
+      "size": 3982
+    },
+    {
+      "literal_counts": {
+        "ascii": 1,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/Extensions/AppleIntelHD5000Graphics.kext/Contents/Info.plist",
+      "plist_key_values": [
+        {
+          "string": "Gen75",
+          "type": "str"
+        }
+      ],
+      "plist_parse": "ok",
+      "sha256": "eec377de52502344dc5bf2a61090f7f040d99fe87d3f46b6c4b07a89983854c2",
+      "size": 4158
+    },
+    {
+      "literal_counts": {
+        "ascii": 1,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/Extensions/AppleIntelKBLGraphics.kext/Contents/Info.plist",
+      "plist_key_values": [
+        {
+          "string": "Gen95",
+          "type": "str"
+        }
+      ],
+      "plist_parse": "ok",
+      "sha256": "59a4dbbc682ef1dfdc1282b3bbb4a433bee3478bb3d58914709d29606e38af14",
+      "size": 5360
+    },
+    {
+      "literal_counts": {
+        "ascii": 1,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/Extensions/AppleIntelSKLGraphics.kext/Contents/Info.plist",
+      "plist_key_values": [
+        {
+          "string": "Gen9",
+          "type": "str"
+        }
+      ],
+      "plist_parse": "ok",
+      "sha256": "707ea8481edca76f48602386ca068036169d2d694215397c1f0e5a8027c3b0cd",
+      "size": 5522
+    },
+    {
+      "literal_counts": {
+        "ascii": 2,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/Frameworks/VideoToolbox.framework/Versions/A/VideoToolbox",
+      "plist_key_values": [],
+      "plist_parse": "not_plist",
+      "sha256": "5fc1f2e5b8ad837ebfb8a75a70dae72d5b2c9c90f0dddc1ea75d82ff9cde5a70",
+      "size": 8102112
+    },
+    {
+      "literal_counts": {
+        "ascii": 4,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/PrivateFrameworks/AppleGVA.framework/Versions/A/AppleGVA",
+      "plist_key_values": [],
+      "plist_parse": "not_plist",
+      "sha256": "6f76a9c1c3d5f26b73783828f00452fb0465fb0cb38ab9d078148c854ea0740c",
+      "size": 1816736
+    },
+    {
+      "literal_counts": {
+        "ascii": 2,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/PrivateFrameworks/AppleVPA.framework/Versions/A/AppleVPA",
+      "plist_key_values": [],
+      "plist_parse": "not_plist",
+      "sha256": "5ce9a2bd10142135e1419d826160019ac3845f808f657f2ff707ed8f171a2ed7",
+      "size": 923840
+    }
+  ],
+  "oversize_plists": 0,
+  "property_name": "IOGVACodec",
+  "records": 105031,
+  "regular_members": 70898,
+  "scanner_sha256": "78c2c16401dad56bbd27dd7d549aaa0a39ad056cc5cde9a4ef214735277722cb",
+  "scope": "All regular members in retained Sierra payload, three literal encodings; nested compression excluded",
+  "source_signature_rechecked": false,
+  "status": "PASS_SIERRA_REGULAR_MEMBER_LITERAL_SURVEY",
+  "system_modified": false,
+  "trailing_bytes": 410,
+  "vendor_execution": false,
+  "wrapper_sha256": "a09a715a788f5e7047427477f6d5a0bd7338cee447016f9a90e6668c0cea511e"
+}
