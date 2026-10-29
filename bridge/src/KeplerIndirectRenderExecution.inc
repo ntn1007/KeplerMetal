@@ -1,5 +1,6 @@
 // Included in the scope's private namespace. Never reads GPU range contents.
 id prepareIndirectRenderRecord(KPRenderICBCommand*c,KPCPUICBScope*scope,NSError**error){
+    if(c.owner.inheritPipelineState){fail(error,@"GPU indirect render preparation cannot capture inherited pipelines");return nil;}
     if(!c.hasDraw)return NSNull.null;
     NSDictionary*p=[scope.renderEngine profileForPipeline:c.pipeline];if(!p){fail(error,@"Indirect render pipeline is not registered");return nil;}
     BOOL legacy=[p[@"legacy"]boolValue];

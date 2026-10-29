@@ -23,6 +23,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+A scoped CPU render ICB inherits a registered parent pipeline for a bounded triangle test on GTX; direct and adapted pixels match when the parent pipeline changes. [Evidence and limits](docs/RENDER_INHERITED_PIPELINE.md).
+
 A local policy selects between two related public-Metal ICB-copy test clients without rebuilding the process-local bootstrap. [Evidence and limits](docs/STANDALONE_COPY_POLICY.md).
 
 A pinned public-Metal client now performs scoped GPU ICB copies without a command-buffer label; range preflight precedes preparation. [Evidence and limits](docs/STANDALONE_AUTOMATIC_COPY.md).

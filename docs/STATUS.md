@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A scoped CPU render ICB now inherits a registered parent pipeline at each execution. GTX direct/adapted captures agree across smooth/flat/smooth pipeline changes on separate encoders; same-encoder changes and general ICB support remain unqualified. [Evidence](RENDER_INHERITED_PIPELINE.md).
+
 A public-Metal client loads the certified point shader through file, URL, data and two-segment data APIs under process-local opt-in; 27 GTX processes include native and wrong-library controls. [Evidence](STANDALONE_POINT_LOADERS.md).
 
 A public-Metal-only test client executes the certified point transform through explicitly injected process-local ICB adaptation; native missing-selector and four identity/descriptor controls stop before dispatch. [Evidence](STANDALONE_POINT_TRANSFORM.md).

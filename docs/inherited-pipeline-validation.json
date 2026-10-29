@@ -1,0 +1,62 @@
+{
+  "archive_sha256": "7b9b59f0307dfe762d17da1db257a04b84aa078ff424970a2716ba089fe8f64a",
+  "baseline_archive_sha256": "9c5edae4c0bf28878d2a808e117c21472a455ff5236048f88f2f9ed9b3ad22e3",
+  "baseline_direct_passed": true,
+  "baseline_refusal_before_dispatch": true,
+  "build_sha256": "d555589e0b91ecc8db79006cc2066984d8149004fe9f2123e5295b0f60733050",
+  "checked_float_channels": 147456,
+  "checked_guard_bytes": 6144,
+  "completed_render_buffers": 12,
+  "distinct_pipeline_images": true,
+  "expected_api_refusals": 14,
+  "full_icb_contract": false,
+  "identical_direct_adapted_raw_images": true,
+  "performance_benchmark": false,
+  "pipeline_sequence": [
+    "smooth",
+    "flat",
+    "smooth"
+  ],
+  "processes": 4,
+  "runs": [
+    {
+      "images_sha256": [
+        "22458b0bb60c9488f4232a87d5bcc1c59b63220902984381658a40c736a32ed0",
+        "b61f453b344e885e427b17def727915113b0b6cdfb7949d4efdd4db356d2db03",
+        "22458b0bb60c9488f4232a87d5bcc1c59b63220902984381658a40c736a32ed0"
+      ],
+      "manifest_sha256": "28f460576c822221041e19f826540342aa97e43237976306d16ff7d80b95f803",
+      "mode": "direct"
+    },
+    {
+      "images_sha256": [
+        "22458b0bb60c9488f4232a87d5bcc1c59b63220902984381658a40c736a32ed0",
+        "b61f453b344e885e427b17def727915113b0b6cdfb7949d4efdd4db356d2db03",
+        "22458b0bb60c9488f4232a87d5bcc1c59b63220902984381658a40c736a32ed0"
+      ],
+      "manifest_sha256": "391111baccd5438a96be055b619f78f828f59a1c864c69ff43101b9da03da8f9",
+      "mode": "auto"
+    },
+    {
+      "images_sha256": [
+        "22458b0bb60c9488f4232a87d5bcc1c59b63220902984381658a40c736a32ed0",
+        "b61f453b344e885e427b17def727915113b0b6cdfb7949d4efdd4db356d2db03",
+        "22458b0bb60c9488f4232a87d5bcc1c59b63220902984381658a40c736a32ed0"
+      ],
+      "manifest_sha256": "e1b521c0344c4e4ef6ef24c922d6444c0f71032ad5ca11f9c93631249825c6e5",
+      "mode": "direct"
+    },
+    {
+      "images_sha256": [
+        "22458b0bb60c9488f4232a87d5bcc1c59b63220902984381658a40c736a32ed0",
+        "b61f453b344e885e427b17def727915113b0b6cdfb7949d4efdd4db356d2db03",
+        "22458b0bb60c9488f4232a87d5bcc1c59b63220902984381658a40c736a32ed0"
+      ],
+      "manifest_sha256": "ec4b579cb2d276f9af618421f9310c68176d03cd2e502724f58a872a813748df",
+      "mode": "auto"
+    }
+  ],
+  "status": "PASS_INHERITED_PIPELINE_GPU",
+  "system_files_checked_unchanged": true,
+  "transparent_system_integration": false
+}

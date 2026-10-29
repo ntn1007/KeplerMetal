@@ -74,19 +74,19 @@
       "path": "bridge/src/KeplerCPUICB.mm",
       "source_path": "bridge/src/KeplerCPUICB.mm",
       "source_SHA256": "3d59c2c609611ddc387e616b8945e903f6378dbd4a3b66a02cb22087ada84b60",
-      "published_SHA256": "1cdb428eb966bee339baf4b23f2da6d42d1bc3fd49fd74fdfad8f8125e16cb65",
-      "bytes": 170706,
+      "published_SHA256": "2b5ea3188323a354f70f5ce4c23364d2aa0cf4c2ebbfa8f47ae973601c55a453",
+      "bytes": 171496,
       "modified_for_publication": true,
       "previous_published_SHA256": "183be0be67c910ebdbff61841347f6146f72e0b1512bf241d54f0d258a308828",
       "latest_change": {
+        "previous_published_SHA256": "1cdb428eb966bee339baf4b23f2da6d42d1bc3fd49fd74fdfad8f8125e16cb65",
+        "previous_bytes": 170706,
+        "reason": "Allow bounded render-ICB pipeline inheritance, rematerialize for each current parent pipeline, and guard incompatible snapshots."
+      },
+      "previous_latest_change": {
         "previous_published_SHA256": "855d1bcbc9bc32e51b7ecba129a8488c79d8e75585ea33be5006437c440224d8",
         "previous_bytes": 170656,
         "reason": "Add a hash-certified two-buffer point transform with count-dependent bounds, reflected access and CPU ICB replay."
-      },
-      "previous_latest_change": {
-        "previous_published_SHA256": "e3cf9ca5d4db29157c00542eae594a31f57ec398b1c48301aa04a5ed1e305acb",
-        "previous_bytes": 170000,
-        "reason": "Support a hash-certified, bounded point-draw shader with a writable shared vertex buffer in the scoped CPU render ICB."
       },
       "prior_change_history": [
         {
@@ -133,6 +133,11 @@
           "previous_published_SHA256": "e5e8d83cec4e162040ee7ee4b52c9dd4865652298b0db3db180ba1ae0b53c988",
           "previous_bytes": 169864,
           "reason": "Allow bounded non-indexed triangle counts 4 and 5 on registered nonlegacy stage-in render pipelines with existing full-range fetch checks."
+        },
+        {
+          "previous_published_SHA256": "e3cf9ca5d4db29157c00542eae594a31f57ec398b1c48301aa04a5ed1e305acb",
+          "previous_bytes": 170000,
+          "reason": "Support a hash-certified, bounded point-draw shader with a writable shared vertex buffer in the scoped CPU render ICB."
         }
       ]
     },
@@ -8113,5 +8118,11 @@
   "empty_render_update": {
     "previous_commit": "a5482e4",
     "scope": "CPU render ICB empty draw support and updated negative control; source snapshots remain preserved by hash."
+  },
+  "inherited_pipeline_update": {
+    "date": "2026-10-29",
+    "previous_public_commit": "76d0ed8",
+    "previous_snapshot_SHA256": "76cf660515e807371a3e7d336663ab4f0b4425969e8001cfdd615c8c2d7dab2d",
+    "scope": "Bounded scoped render inheritance; GPU indirect render guard tracked in Git."
   }
 }
