@@ -1,5 +1,7 @@
 # Build from source
 
+[CAS_RECONVERGENCE_GUARD.md](CAS_RECONVERGENCE_GUARD.md) documents the offline reconvergence counterexamples and reproduction.
+
 [STANDALONE_MIXED_REFLECTION.md](STANDALONE_MIXED_REFLECTION.md) documents the scoped native compute reflection experiment and reproduction.
 
 [STANDALONE_MIXED_BUNDLES.md](STANDALONE_MIXED_BUNDLES.md) documents default Metal library bundle loading and reproduction.

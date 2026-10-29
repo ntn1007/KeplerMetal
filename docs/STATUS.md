@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+The offline CAS recognizer now rejects five synthetic unmodeled reconvergence targets while preserving four archived verdicts; its retained reconvergence shape remains an assumption, not a general safety proof. [Evidence](CAS_RECONVERGENCE_GUARD.md).
+
 A pinned standalone client now uses the native compute pipeline reflection factory with process-local ICB adaptation: 16 GTX output processes and four refusals pass; the reflection describes the same approved function, while the returned registered pipeline is a separate object. General pipeline equivalence remains unproved. [Evidence](STANDALONE_MIXED_REFLECTION.md).
 
 A pinned app can now load its compute default Metal library from the main bundle and render library from a separate bundle under process-local adaptation; 25 serialized processes include five refusals. [Evidence](STANDALONE_MIXED_BUNDLES.md).

@@ -174,6 +174,20 @@ def sass_contract(code,text,component):
   # or re-enter the fixed lock/unlock sequence without the ld-lock itself.
   if any(off<target<=comparison and not off<=source<=comparison for source,target in branches):continue
   if any(off<target<=retry for _,target in branches):continue
+  # Reconvergence is not an ordinary direct branch. Keep the one observed
+  # scoped shape as an explicit assumption: a single joinat before ld-lock
+  # resumes immediately after the join following the retry. Reject any other
+  # target entering the lock-to-comparison interval, including schedule words.
+  reconvergence=[]
+  for source,operation in instructions:
+   match=re.fullmatch(r'(?:(?:\$p\d+|\(not \$p\d+\)) )?joinat (0x[0-9a-f]+)',operation)
+   if match:
+    target=int(match[1],16);target=target+8 if target%64==0 else target
+    if off<target<=comparison:reconvergence.append((source,target))
+  if reconvergence:
+   if i+6>=len(instructions) or instructions[i+5][1]!='join nop':continue
+   assumed_entry=instructions[i+6][0]
+   if len(reconvergence)!=1 or reconvergence[0][0]>=off or reconvergence[0][1]!=assumed_entry:continue
   # A post-patch backedge can re-enter the lock/compare region after cmp has
   # been changed. Refuse even if the path is unreachable or conditionally safe;
   # this structural check does not establish complete control-flow semantics.

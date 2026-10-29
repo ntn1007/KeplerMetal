@@ -1,0 +1,81 @@
+{
+  "archived_cases": [
+    {
+      "name": "slot1",
+      "native_SHA256": "d39eb2371cbd96770576236ce8b48ba5b03d8dcd818db2b6826737bedaa89701",
+      "qualified": true
+    },
+    {
+      "name": "permuted",
+      "native_SHA256": "9d6fc4f422a49b25c20f74a3e95accca8cbbd8ac6a6f5f7f53230a14d3dec7e0",
+      "qualified": true
+    },
+    {
+      "name": "live_noise",
+      "native_SHA256": "c05047171ca9812e714a75d1679c9a535d04536ebecc915f91aef0cb19141146",
+      "qualified": true
+    },
+    {
+      "name": "original_compare_control",
+      "native_SHA256": "ea09f179ff169422f6f3ac8c3b1f85f020c52f5853106e68becbb0f408ef85e3",
+      "qualified": false
+    }
+  ],
+  "assembler_sha256": "1f023d5e1f0a5afc3a04510e264159923dac3182139e03c0a67600b9b1d4428e",
+  "counterexamples": [
+    {
+      "listing_sha256": "838204d32121c3c79a7d39ef2cc4ae161c129feb2922df12d30e9218ec545f7b",
+      "name": "enter_compare",
+      "offset": "0x238",
+      "operation": "joinat 0x2c8",
+      "previous_qualified": true,
+      "synthetic_program_sha256": "9767ab48e383b8d3560828e3031a963ba6847312931562276efaeb6a2cf62291",
+      "updated_qualified": false
+    },
+    {
+      "listing_sha256": "d30b3aa5de83f4079da97d10c88df7c2fda1062328a980c67576c97b9822cb36",
+      "name": "enter_lock",
+      "offset": "0x238",
+      "operation": "joinat 0x258",
+      "previous_qualified": true,
+      "synthetic_program_sha256": "03e20ddd4b7ea9d0f0a9bbcc14619fd7f6cf0c92d3df69f4890cc291c465b1ef",
+      "updated_qualified": false
+    },
+    {
+      "listing_sha256": "0187f2a18e76363378e37c44df5b4844018730dcc911a941ba480cfcad0af921",
+      "name": "enter_compare_schedule",
+      "offset": "0x238",
+      "operation": "joinat 0x2c0",
+      "previous_qualified": true,
+      "synthetic_program_sha256": "227c905769d124ef42edc230d62c423163ec40f16d66b9a2b2b000d4088d969a",
+      "updated_qualified": false
+    },
+    {
+      "listing_sha256": "cb8690f450ca0ef2d0231fb4ba82c439c8f6edfcace82c25284471f8408e2c7a",
+      "name": "enter_from_loop",
+      "offset": "0x2b8",
+      "operation": "joinat 0x260",
+      "previous_qualified": true,
+      "synthetic_program_sha256": "8b2bed465225ac5b2ddef5ec1895372418dfc8412112f6a51c3ab92e6f39f6c1",
+      "updated_qualified": false
+    },
+    {
+      "listing_sha256": "59af30eed2eaed4d8025826d9ae6388fdac5a24d44fd8731400e07a5fdc5c23d",
+      "name": "nested_same_target",
+      "offset": "0x238",
+      "operation": "joinat 0x280",
+      "previous_qualified": true,
+      "synthetic_program_sha256": "61ae609ffe19dec057a92c5ae3401f5bd2bc88e6545ebff661957b9330a2921d",
+      "updated_qualified": false
+    }
+  ],
+  "current_recognizer_sha256": "7cebf0cb923e4321931a3362b028b8ee73bfc51a32cea4b729986d61d88f8944",
+  "decoder_semantics_proved": false,
+  "decoder_sha256": "1c8730a9a4861f374c58407bff31d7ccb47a57eb23f9f82c6b3ea3deb079be0f",
+  "gpu_dispatches": 0,
+  "original_program_sha256": "d39eb2371cbd96770576236ce8b48ba5b03d8dcd818db2b6826737bedaa89701",
+  "previous_recognizer_sha256": "a1a5a7edc7828b5a05a12b14835049f59d0692ae45393bc26ac18e2fa6373a6a",
+  "status": "PASS_CAS_RECONVERGENCE_GUARD",
+  "synthetic_air_sass_compiler_correspondence_proved": false,
+  "system_modified": false
+}
