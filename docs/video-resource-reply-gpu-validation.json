@@ -1,0 +1,67 @@
+{
+  "status": "PASS_LIVE_REPLY_SAME_BUFFER_GPU",
+  "hosts": 6,
+  "matching_real_buffer_creations": 4,
+  "gpu_dispatch_processes": 2,
+  "no_dispatch_controls": 2,
+  "identity_controls": 2,
+  "cpu_checked_bytes": 16777216,
+  "gpu_checked_words": 8192,
+  "captured_fields_compared_inside_process": true,
+  "raw_addresses_exported": false,
+  "independent_raw_field_recomparison": false,
+  "explicit_gpu_commands": true,
+  "hardware_video_execution_proved": false,
+  "generic_metal_buffer_is_video_buffer": false,
+  "system_modified": false,
+  "source_sha256": "c71c69887248aa0dba2bee11ff13bd77b4764d8fcd9ca8aaa6a378f0e8118444",
+  "runner_sha256": "8b5cdb7e7dca517793b862e56899cde4ed73f89393a092bc7e4e629a53c0e91b",
+  "library_sha256": "527205c76995a2bc9d8ed8f1dc1559ed3248ebd269a52526d67aaa1e3e0a5518",
+  "application_sha256": "939bb263845f209bc6270de96a244e18cbcf3699b29342147babeb70191d5c7e",
+  "prior_receipt_sha256": "f0aa19b311e3643f01fe2f82a6da5033bc6162b4f24f48abb8e10c430c9f1089",
+  "audit_sha256": "edbdb8d3b1e66a20850ba43258a3ca763f62cc06ea1f19f5d7b7ad04ca6bb080",
+  "rows": [
+    {
+      "mode": "inventory",
+      "host_sha256": "939bb263845f209bc6270de96a244e18cbcf3699b29342147babeb70191d5c7e",
+      "stdout_sha256": "0ce49ca934dd3677e23575ccca612271fe0252c1dc9e80ba52a326cc250ecc9e",
+      "reservation_id": "d7c366e351014086a14f8e333cf07c36",
+      "terminal": true
+    },
+    {
+      "mode": "control",
+      "host_sha256": "939bb263845f209bc6270de96a244e18cbcf3699b29342147babeb70191d5c7e",
+      "stdout_sha256": "be5cd703cc8fea1defcd09c93d3621035351b6035422ff2ce088c7985329b1a1",
+      "reservation_id": "17a8880e636e43b48827cbbd7d61c2f7",
+      "terminal": true
+    },
+    {
+      "mode": "no-gpu",
+      "host_sha256": "939bb263845f209bc6270de96a244e18cbcf3699b29342147babeb70191d5c7e",
+      "stdout_sha256": "dc99bb0fa5af3cec05e618b9b6467f3f3e7f8e7074ad1e4f406b57baeb62e2a8",
+      "reservation_id": "daf3293b93494487b1392ed29bed93e4",
+      "terminal": true
+    },
+    {
+      "mode": "gpu",
+      "host_sha256": "939bb263845f209bc6270de96a244e18cbcf3699b29342147babeb70191d5c7e",
+      "stdout_sha256": "9785440585e516571e644405ad67c1742251935ffb2de037e202148d4c36fbb8",
+      "reservation_id": "e175b6f771064ae99ef1a5de87bf66fb",
+      "terminal": true
+    },
+    {
+      "mode": "gpu",
+      "host_sha256": "939bb263845f209bc6270de96a244e18cbcf3699b29342147babeb70191d5c7e",
+      "stdout_sha256": "ebb83bdfea445da1cabd5f3839681de989ce1ad0eb4b344708049d604ac828cb",
+      "reservation_id": "1a4bcef527964e0280e900cec6b3a572",
+      "terminal": true
+    },
+    {
+      "mode": "no-gpu",
+      "host_sha256": "939bb263845f209bc6270de96a244e18cbcf3699b29342147babeb70191d5c7e",
+      "stdout_sha256": "0a73499b92439d6dd7a0d8ec90caf772150d244e6690c8d8c3fb23e031c53ddd",
+      "reservation_id": "941ce3faa3aa4b238e89446247dbc576",
+      "terminal": true
+    }
+  ]
+}

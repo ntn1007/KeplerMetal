@@ -1,5 +1,7 @@
 # Build from source
 
+[VIDEO_RESOURCE_REPLY_GPU.md](VIDEO_RESOURCE_REPLY_GPU.md) documents the native GTX computation and resource-reply correlation.
+
 [VIDEO_RESOURCE_REPLY_LIVE.md](VIDEO_RESOURCE_REPLY_LIVE.md) documents the bounded live ordinary-resource reply comparison.
 
 [VIDEO_REPLY_IDENTITY.md](VIDEO_REPLY_IDENTITY.md) documents the offline resource-reply identity analysis.

@@ -1,0 +1,29 @@
+{
+  "status": "PASS_REPLY_GPU_AUDIT_MUTATIONS",
+  "mutations": [
+    {
+      "mutation": "gpu-value",
+      "refused": true
+    },
+    {
+      "mutation": "guard-value",
+      "refused": true
+    },
+    {
+      "mutation": "no-dispatch",
+      "refused": true
+    },
+    {
+      "mutation": "missing-match",
+      "refused": true
+    },
+    {
+      "mutation": "unfinished",
+      "refused": true
+    }
+  ],
+  "source_audit_sha256": "edbdb8d3b1e66a20850ba43258a3ca763f62cc06ea1f19f5d7b7ad04ca6bb080",
+  "script_sha256": "cb26fbea666995a1a8deffca70925e4f156493b2223f0a855519d637f5af0ec7",
+  "native_calls": 0,
+  "gpu_execution": false
+}

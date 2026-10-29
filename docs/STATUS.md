@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Two GTX processes now compute on the same ordinary Metal buffers whose creation-reply fields were matched; two no-dispatch controls and 16,777,216 CPU-checked bytes pass. Video-resource identity and decoding remain unproved. [Evidence](VIDEO_RESOURCE_REPLY_GPU.md).
+
 Two ordinary 4 MiB Metal allocations now match selected creation-reply fields to their live wrapper inside each test process; no video resource or explicit GPU execution is established. [Evidence](VIDEO_RESOURCE_REPLY_LIVE.md).
 
 A pinned offline video-reply audit links the resource identifier and two shared-address fields to the same helper used for ordinary resources; no live reply or video execution is established. [Evidence](VIDEO_REPLY_IDENTITY.md).
