@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A synthetic 15-command ICB using the Apple sample shader matches direct GTX images across two frame generations, including a private frame buffer. The original Apple app remains untested. [Evidence](APPLE_MULTI_ICB.md).
+
 The scoped CPU render ICB now executes the hash-pinned Apple sample shader with three explicit buffers, including a private frame buffer and base instances 0/1, matching direct GTX output. [Evidence and limits](APPLE_EXPLICIT_ICB.md).
 
 The Apple CPU ICB sample shader renders correct native GTX outputs for two base instances and shared/private frame buffers; the private case blits in the same command buffer. [Native evidence](APPLE_EXPLICIT_NATIVE.md).

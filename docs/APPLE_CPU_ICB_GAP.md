@@ -49,9 +49,10 @@ unchanged system-file hashes.
 The [subsequent native reference](APPLE_EXPLICIT_NATIVE.md) executes the sample
 shader on the GTX with shared and private frame buffers and base instances 0/1.
 The later [scoped ICB profile](APPLE_EXPLICIT_ICB.md) qualifies those cases for
-the exact shader with explicit bounds. A bounded multi-command test and
-application-local integration remain to be assessed. These steps do not imply
-Mac 2 conformance or transparent driver replacement.
+the exact shader with explicit bounds; a [synthetic 15-command test](APPLE_MULTI_ICB.md)
+also passes. The original sample application and application-local integration
+remain to be assessed. These steps do not imply Mac 2 conformance or transparent
+driver replacement.
 
 ## Reproduce
 

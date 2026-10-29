@@ -23,6 +23,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+A synthetic 15-command ICB using the Apple sample shader matches direct GTX rendering across updated frame state. [Evidence and limits](docs/APPLE_MULTI_ICB.md).
+
 The scoped CPU render ICB executes the hash-pinned Apple sample shader with three explicit buffers; bounded GTX cases match native rendering. [Evidence and limits](docs/APPLE_EXPLICIT_ICB.md).
 
 The Apple sample shader executes through native Metal on GTX with explicit buffers and shared or private frame state. [Evidence and limits](docs/APPLE_EXPLICIT_NATIVE.md).

@@ -9,7 +9,8 @@ alignment; the tested profile admits complete non-indexed triangles, one
 instance and base instances 0–14. The ICB inherits its parent's pipeline.
 
 This is a specific prototype, not general support for arbitrary vertex
-shaders. The original Apple application, its 15-command scene, actual
+shaders. A subsequent [synthetic 15-command test](APPLE_MULTI_ICB.md) extends
+the qualification. The original Apple application, its scene, actual
 drawable/depth configuration and transparent system integration remain
 unqualified. The GPU-generated ICB preparation path explicitly refuses this
 profile. The application remains responsible for correct resource ordering and
