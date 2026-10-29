@@ -1,5 +1,7 @@
 # Build from source
 
+[STANDALONE_MIXED_REFLECTION.md](STANDALONE_MIXED_REFLECTION.md) documents the scoped native compute reflection experiment and reproduction.
+
 [STANDALONE_MIXED_BUNDLES.md](STANDALONE_MIXED_BUNDLES.md) documents default Metal library bundle loading and reproduction.
 
 [STANDALONE_MIXED_LOADERS.md](STANDALONE_MIXED_LOADERS.md) documents mixed-domain public Metal library loaders and reproduction.

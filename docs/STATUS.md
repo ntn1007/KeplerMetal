@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A pinned standalone client now uses the native compute pipeline reflection factory with process-local ICB adaptation: 16 GTX output processes and four refusals pass; the reflection describes the same approved function, while the returned registered pipeline is a separate object. General pipeline equivalence remains unproved. [Evidence](STANDALONE_MIXED_REFLECTION.md).
+
 A pinned app can now load its compute default Metal library from the main bundle and render library from a separate bundle under process-local adaptation; 25 serialized processes include five refusals. [Evidence](STANDALONE_MIXED_BUNDLES.md).
 
 A pinned standalone compute/render application now supports file, URL, data and segmented data library loads across all 16 route pairs on GTX; 39 serialized processes include eleven refusals. Process-local injection remains required. [Evidence](STANDALONE_MIXED_LOADERS.md).
