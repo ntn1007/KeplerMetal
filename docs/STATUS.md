@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A scoped synthetic codec string flips the observed AppleGVA node flag in two requests, but enumeration remains zero and hardware video fails. This fabricated value is not a NVIDIA codec configuration. [Evidence](VIDEO_GVA_CODEC_COUNTERFACTUAL.md).
+
 Two scoped node-address watches record no matching intercepted free or zone-free calls through the last list stop. Other allocator routes, earlier or later frees, and allocation lifetime remain unproved. [Evidence](VIDEO_GVA_HEAP_TRACK.md).
 
 In three instrumented processes, the pinned AppleGVA free-call slot pointed to a CPU-calibrated observer at arm time. No node address was armed, and lifetime or other deallocation paths remain unproved. [Evidence](VIDEO_GVA_HEAP_BINDING.md).

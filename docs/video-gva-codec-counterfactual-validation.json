@@ -1,0 +1,80 @@
+{
+  "base_inputs_sha256": "e294055be5116a482ad9d7d8d3a6a22cd61680235c5ecce2f7b8f201b0a725a9",
+  "build_sha256": "aaeea20bb86692ebec37a6a09f0a79d3dd95800e998469b985451f05f0b0bb08",
+  "cfstring_control": "PASS",
+  "full_cause_identified": false,
+  "hardware_video_execution_proved": false,
+  "limitations": "Scoped process and pinned build only; arbitrary string; allocator identity and causal branch not proved.",
+  "predicate_controls": "PASS",
+  "runner_sha256": "3ba7fc17be2d30b53adf0eb3722c0adab92af271eff4829291778b7d60483f7c",
+  "runs": [
+    {
+      "decoder_status": 0,
+      "lldb_log_sha256": "6fb963a3e09f530b7043dc236ee84d2b32a675da8ea78ba01d91fbc9719f9896",
+      "manifest_sha256": "92e20bac4c85b28bec3fe146312830c5299d1b94b83e91885e2708adf60adb62",
+      "mode": "cpu",
+      "output_frames": 6,
+      "probe": "off",
+      "property_injected": false,
+      "stderr_sha256": "473a1ad9bd5dfe9507596ad5c1dc182f984626d5df764f1b3517f8aef203a58d",
+      "stdout_sha256": "548beef25edf8c4b164fb1f87f8877818becdbcf6de8df1d03f4584ac1d94a92"
+    },
+    {
+      "decoder_status": -12913,
+      "lldb_log_sha256": "b42ab0c18f5fd8e76b125aa00d8ef193ea6d6acda8ca3261b89441c8cf08b71e",
+      "manifest_sha256": "15b3184c5bd9dda6730dbe80b7835d488defdadb3fd690f053ce84ef328dc610",
+      "mode": "current",
+      "output_frames": 0,
+      "probe": "wrong-key",
+      "property_injected": false,
+      "stderr_sha256": "3df29bcc27243e6351f91e23dac405db4013f4cc272452d1fa7275f763320116",
+      "stdout_sha256": "56441f490c30882a3bbc9f0cb07806fd5dffc817ffb7b7d9adbaacdc087faa2f"
+    },
+    {
+      "decoder_status": -12913,
+      "lldb_log_sha256": "ae2259acb7bcf7cb29c9dd3dd829fd4ed4727705f917b46f8390e386a39efe23",
+      "manifest_sha256": "5f6840e35c731ae57bccec4cede1ee9176f453744437510098d01347bf170dd5",
+      "mode": "current",
+      "output_frames": 0,
+      "probe": "wrong-id",
+      "property_injected": false,
+      "stderr_sha256": "8f594c8c02ad9ddec132c569d004c6a5649ae831de39b0811d9825feed931a81",
+      "stdout_sha256": "e3ebd37d0218b54118b25cd01d78a1cfcf7ac27e4e4bc757650e42a9cc86ecb7"
+    },
+    {
+      "decoder_status": -12913,
+      "lldb_log_sha256": "07502543b4e94e1d95d0e819e1fc23d8e2a2299b6d5fd57ad200da12fb1a2993",
+      "manifest_sha256": "f353ccea3b0a63213c839099baf7946aeb2399b7213e4c55d5dc6cfb1ebd8ae7",
+      "mode": "current",
+      "output_frames": 0,
+      "probe": "off",
+      "property_injected": false,
+      "stderr_sha256": "3dba17e9769e69d5d45a3a50fca47cfe9ab37c97ed3f7754c6eb4631a1cadcf7",
+      "stdout_sha256": "c1d191e5387d7cff0d1541c15744644439dd1c799588b4531425201824bb4047"
+    },
+    {
+      "decoder_status": -12913,
+      "lldb_log_sha256": "93bdfba474b72fe301cbf2e7cef42fb14028c031ca7d76d58e6d0a20889b91b3",
+      "manifest_sha256": "ee316f260c167e765c01ff09b7d05e8b8eab197b5572d91feccc9111170b1c0e",
+      "mode": "current",
+      "output_frames": 0,
+      "probe": "synthetic",
+      "property_injected": true,
+      "stderr_sha256": "27bdbfe51627c164e0a3ec48ace408f12790e5b5d77621ee7d2d86ac359cebe2",
+      "stdout_sha256": "f4022e6122e44b7ba9160b4239250225dccf777f7ee233fbe6cd1a006c6664d6"
+    },
+    {
+      "decoder_status": -12913,
+      "lldb_log_sha256": "43b6935140ad51ceebf0d39530096817a279add58086470ca6ffd24b0913ae63",
+      "manifest_sha256": "ae400dd4cd8047d1ba0171ce25140070221779eb9fa95ca12a70ed0af31c5bc2",
+      "mode": "current",
+      "output_frames": 0,
+      "probe": "synthetic",
+      "property_injected": true,
+      "stderr_sha256": "1b309cb367e592b3b70ebc49ab5d0e6c7e244a9de96dd12af2f7d7469cb62a66",
+      "stdout_sha256": "7acca6918830026d77350032db81242a5050fb778c8f7f6d77ab780a0fbc66f4"
+    }
+  ],
+  "status": "PASS_BOUNDED_AUDIT",
+  "synthetic_value_is_nvidia_configuration": false
+}

@@ -47,9 +47,7 @@ string or a Boolean would be an experiment, not evidence of Kepler support.
 A subsequent [static cached-entry audit](VIDEO_GVA_CACHED_CODEC.md) identifies a conditional reactivation path that checks the first byte at the same structure-relative offset as the conversion destination. Runtime reuse and entry lifetime remain unproved.
 
 No GPU or vendor program was executed for this audit; no driver, system or OCLP
-component was changed. The next useful work is to find the actual NVIDIA
-producer or a historical runtime record that binds the value to a compatible
-GPU and driver, before considering a process-local counterfactual.
+component was changed. A subsequent [process-local counterfactual](VIDEO_GVA_CODEC_COUNTERFACTUAL.md) tested a fabricated string: the node flag changed, but enumeration and hardware decoding still failed. An actual NVIDIA producer or historical runtime value remains unidentified.
 
 ## Reproduction on the retained profile
 
