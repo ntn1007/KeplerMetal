@@ -1,0 +1,14 @@
+{
+  "auditor_sha256": "71ab9a11d90dbf1dc70d839eb5458fde00ce9360768b027938d54605a5527912",
+  "calibration_sha256": "d443cf9a8c389f9f0a504b9266bd83d0984980e8c60cdb02a52b915b0764dd9f",
+  "callback_exercised_at_CPU_hardware_breakpoint": true,
+  "callback_source_sha256": "b9b971c7343230233ef060ec4db25f2521b60b8f8fec8496e004d0cf5cbf52e2",
+  "cases": 4,
+  "hardware_video_execution_proved": false,
+  "node_lifetime_proved": false,
+  "status": "PASS_CALIBRATION_BOUND_TO_PRIOR_VIDEO_WITNESS",
+  "system_modified": false,
+  "video_build_sha256": "f9b8ceafa70ed1d83d8e369b59597df7881b5ba8346f2c02d7446b85e46c305a",
+  "video_cached_path_hit_proved": false,
+  "wrong_base_refused": true
+}

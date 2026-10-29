@@ -1,6 +1,8 @@
 # Status, 2026-10-29
 
-Two fresh-process H.264 requests had zero hits at the resolved cached-entry check; the property query returned null and decoding remained -12913. Same-process reuse and actual cache-field reader calibration remain untested. [Evidence](VIDEO_GVA_CACHE_WITNESS.md).
+A CPU-only real-hardware-breakpoint calibration exercises the exact earlier cache reader on four node cases and refuses a wrong base. The AppleGVA cache branch itself remains unobserved. [Evidence](VIDEO_GVA_CACHE_READER_CALIBRATION.md).
+
+Two fresh-process H.264 requests had zero hits at the resolved cached-entry check; the property query returned null and decoding remained -12913. Same-process reuse remains untested; the cache-field reader was subsequently calibrated on an original CPU target. [Evidence](VIDEO_GVA_CACHE_WITNESS.md).
 
 A pinned AppleGVA list path clears and conditionally reactivates a cached entry using its identifier, another byte and the first byte at the codec conversion destination. This is static only; reuse, node lifetime and hardware video remain unproved. [Evidence](VIDEO_GVA_CACHED_CODEC.md).
 

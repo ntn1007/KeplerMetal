@@ -14,7 +14,9 @@ was continuous. Each request used a fresh process and one decoder request: it
 does not test repeated sessions within the same process. A zero-hit breakpoint
 does not validate the callback's live cache-field reader; two mock-process
 CPU tests cover its handling of nonzero, zero, and unreadable bytes, but a
-real-breakpoint cached-field calibration remains **NOT RUN**. The hardware
+real-breakpoint cached-field calibration was **NOT RUN at the time of these
+video trials**. A [subsequent CPU calibration](VIDEO_GVA_CACHE_READER_CALIBRATION.md)
+exercised the same callback at four hardware-breakpoint hits. The hardware
 breakpoint framework itself passed seven CPU-only processes and a reserved
 CPU control. The debugger and counterfactuals can affect behavior. The
 reservation coordinates participating laboratory runners, not arbitrary apps.
