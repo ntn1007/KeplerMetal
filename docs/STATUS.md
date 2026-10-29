@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A 15-command ICB renders with a framebuffer-only layer attached to a non-key window; the separate depth output matches direct GTX and blank controls. All presentation timestamps remain zero, so visible display is unproved. [Evidence](APPLE_WINDOW_ICB.md).
+
 A 15-command ICB renders with an unattached framebuffer-only drawable; a separate depth attachment matches direct GTX results and blank controls. Presentation timestamps remain zero. [Evidence](APPLE_FRAMEBUFFER_ONLY_ICB.md).
 
 A pinned 15-command ICB renders correctly into an unattached CAMetalLayer drawable on GTX; callbacks fired with zero presentation timestamps, so visible display remains unproved. [Evidence](APPLE_DRAWABLE_ICB.md).

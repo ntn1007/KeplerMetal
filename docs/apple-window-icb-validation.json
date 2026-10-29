@@ -1,0 +1,96 @@
+{
+  "adapted_packets_checked": 120,
+  "apple_app_executed": false,
+  "apple_archive_sha256": "559d91d42ba4d4adff9517600de522d12f8fbc3270982ac6e0d0b5bfd414f311",
+  "apple_library_sha256": "adf18526f6b8fe358a30d3088dd801440b5509ac50126857174de03e17fba5bf",
+  "archive_sha256": "c67feb4b50274737e6bbf3c6f0d621d970c8db804fc4eb572651810b6174cf55",
+  "blank_depth_all_one": true,
+  "blank_render_buffers": 8,
+  "build_sha256": "e3b89f83055f3b8c0abcac6166bbc021d96e54e7adffca77d84d725fdb2186d2",
+  "checked_system_files_unchanged": true,
+  "commands_per_draw_render": 15,
+  "completed_render_buffers": 24,
+  "depth_floats_checked": 73728,
+  "direct_adapted_depth_identical": true,
+  "draw_render_buffers": 16,
+  "drawable_color_readback": false,
+  "drawable_framebuffer_only": true,
+  "frame_update_generations": 2,
+  "guard_bytes_checked": 12288,
+  "last_slot_short_object_refusals": 2,
+  "layer_attached_to_window": true,
+  "nonzero_presented_timestamps": 0,
+  "performance_benchmark": false,
+  "presented_callbacks": 24,
+  "private_copy_negative_control": false,
+  "private_frame_copy_before_draw": true,
+  "processes": 6,
+  "runs": [
+    {
+      "depth_sha256": {
+        "private-0.bin": "5e1109adfa3eabf47ca414f8f0ec3802267bbf7abb0d54cf20bb0d20a94509d4",
+        "private-1.bin": "71cde6d07b5dddc9d177a9bd6b0c0d3c0f5ef4d2c1a17271f4a1c2cec24415bf",
+        "shared-0.bin": "5e1109adfa3eabf47ca414f8f0ec3802267bbf7abb0d54cf20bb0d20a94509d4",
+        "shared-1.bin": "71cde6d07b5dddc9d177a9bd6b0c0d3c0f5ef4d2c1a17271f4a1c2cec24415bf"
+      },
+      "manifest_sha256": "cd68c3fca2f933f9c0aad2c7d9f08520ea0b6ed5b5907ae805343e276001ecf9",
+      "mode": "direct"
+    },
+    {
+      "depth_sha256": {
+        "private-0.bin": "5e1109adfa3eabf47ca414f8f0ec3802267bbf7abb0d54cf20bb0d20a94509d4",
+        "private-1.bin": "71cde6d07b5dddc9d177a9bd6b0c0d3c0f5ef4d2c1a17271f4a1c2cec24415bf",
+        "shared-0.bin": "5e1109adfa3eabf47ca414f8f0ec3802267bbf7abb0d54cf20bb0d20a94509d4",
+        "shared-1.bin": "71cde6d07b5dddc9d177a9bd6b0c0d3c0f5ef4d2c1a17271f4a1c2cec24415bf"
+      },
+      "manifest_sha256": "4a76eda2fc7ab188a4904974f1ca5d56071b5417aef8831d92d7396027771caa",
+      "mode": "auto"
+    },
+    {
+      "depth_sha256": {
+        "private-0.bin": "5e1109adfa3eabf47ca414f8f0ec3802267bbf7abb0d54cf20bb0d20a94509d4",
+        "private-1.bin": "71cde6d07b5dddc9d177a9bd6b0c0d3c0f5ef4d2c1a17271f4a1c2cec24415bf",
+        "shared-0.bin": "5e1109adfa3eabf47ca414f8f0ec3802267bbf7abb0d54cf20bb0d20a94509d4",
+        "shared-1.bin": "71cde6d07b5dddc9d177a9bd6b0c0d3c0f5ef4d2c1a17271f4a1c2cec24415bf"
+      },
+      "manifest_sha256": "387bb2bf1e45b3bdbd3496a560b2fce375059d8e687659a742f90065406fb7b7",
+      "mode": "direct"
+    },
+    {
+      "depth_sha256": {
+        "private-0.bin": "5e1109adfa3eabf47ca414f8f0ec3802267bbf7abb0d54cf20bb0d20a94509d4",
+        "private-1.bin": "71cde6d07b5dddc9d177a9bd6b0c0d3c0f5ef4d2c1a17271f4a1c2cec24415bf",
+        "shared-0.bin": "5e1109adfa3eabf47ca414f8f0ec3802267bbf7abb0d54cf20bb0d20a94509d4",
+        "shared-1.bin": "71cde6d07b5dddc9d177a9bd6b0c0d3c0f5ef4d2c1a17271f4a1c2cec24415bf"
+      },
+      "manifest_sha256": "1a11f86f2b8bedfdb875a21041c3fbd59b00b0f30fa7558b713c8f05e30b79fa",
+      "mode": "auto"
+    },
+    {
+      "depth_sha256": {
+        "private-0.bin": "0d7627b3d43cadfb392aa0f15f6940fa0e6c61211acb966e4b4c3e5150b1cfb3",
+        "private-1.bin": "0d7627b3d43cadfb392aa0f15f6940fa0e6c61211acb966e4b4c3e5150b1cfb3",
+        "shared-0.bin": "0d7627b3d43cadfb392aa0f15f6940fa0e6c61211acb966e4b4c3e5150b1cfb3",
+        "shared-1.bin": "0d7627b3d43cadfb392aa0f15f6940fa0e6c61211acb966e4b4c3e5150b1cfb3"
+      },
+      "manifest_sha256": "fab69e6d34b5d7a9f477b5633a9d5b75f6792a19a9f7c2912858913cdd31a597",
+      "mode": "blank"
+    },
+    {
+      "depth_sha256": {
+        "private-0.bin": "0d7627b3d43cadfb392aa0f15f6940fa0e6c61211acb966e4b4c3e5150b1cfb3",
+        "private-1.bin": "0d7627b3d43cadfb392aa0f15f6940fa0e6c61211acb966e4b4c3e5150b1cfb3",
+        "shared-0.bin": "0d7627b3d43cadfb392aa0f15f6940fa0e6c61211acb966e4b4c3e5150b1cfb3",
+        "shared-1.bin": "0d7627b3d43cadfb392aa0f15f6940fa0e6c61211acb966e4b4c3e5150b1cfb3"
+      },
+      "manifest_sha256": "96c0d96726eb8e278b74e6627cdd3474077f96f47a10231495a19ab37bb1bbbc",
+      "mode": "blank"
+    }
+  ],
+  "same_icb_reused_for_each_frame": true,
+  "status": "PASS_WINDOW_ICB_DEPTH",
+  "transparent_system_integration": false,
+  "visible_display_proved": false,
+  "window_key": false,
+  "window_visible": true
+}
