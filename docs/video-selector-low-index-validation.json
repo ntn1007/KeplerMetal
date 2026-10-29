@@ -1,0 +1,188 @@
+{
+  "actual_live_dispatch_observed": false,
+  "any_mapping_authorized": false,
+  "any_selector_called": false,
+  "audit_source_sha256": "e5a9d462864703271fc99667bd7020bb5822e4e585445ffc10efdc0a15fd4c25",
+  "current_ioaccel_sha256": "37e563d6cf3626101f30b1727a4f60dec02152dff9c74c0269c30c213a7320c8",
+  "dispatch_helper_sha256": "c4e9d52baeaea26ba10adb2ca61e0700f636570ad59e97da23c12631b9a6a876",
+  "exact_shape_does_not_imply_semantic_compatibility": true,
+  "hardware_video_execution_proved": false,
+  "legacy_geforce_sha256": "25a0bccd7caa884d6aa964743b35f879ec326c46d255dc6212c47e7a20f6f38e",
+  "legacy_indices_above_current_table": [
+    "0x108",
+    "0x109",
+    "0x10a",
+    "0x10b",
+    "0x10c"
+  ],
+  "limits": "Static file profiles only; semantic equivalence and other dispatch routes remain unproved.",
+  "low_index_proposals": [
+    {
+      "candidate_index": 0,
+      "current_method": "__ZN15IOAccelContext26finishEv",
+      "current_shape": [
+        0,
+        0,
+        0
+      ],
+      "decision": "REJECT_UNQUALIFIED",
+      "legacy_method": "get_decoder_config",
+      "legacy_selector": "0x100",
+      "legacy_shape": [
+        0,
+        0,
+        1
+      ],
+      "mapping_authorized": false,
+      "member_pointer_kind": "direct",
+      "same_shape": false
+    },
+    {
+      "candidate_index": 1,
+      "current_method": "__ZN15IOAccelContext215set_client_infoEP17IOAccelClientInfoy",
+      "current_shape": [
+        4,
+        0,
+        4294967295
+      ],
+      "decision": "REJECT_UNQUALIFIED",
+      "legacy_method": "set_source_size",
+      "legacy_selector": "0x101",
+      "legacy_shape": [
+        4,
+        0,
+        4294967295
+      ],
+      "mapping_authorized": false,
+      "member_pointer_kind": "direct",
+      "same_shape": true
+    },
+    {
+      "candidate_index": 2,
+      "current_method": "__ZN15IOAccelContext219submit_data_buffersEP33IOAccelContextSubmitDataBuffersInP34IOAccelContextSubmitDataBuffersOutyPy",
+      "current_shape": [
+        3,
+        136,
+        4294967295
+      ],
+      "decision": "REJECT_UNQUALIFIED",
+      "legacy_method": "get_3d_config",
+      "legacy_selector": "0x102",
+      "legacy_shape": [
+        0,
+        0,
+        1
+      ],
+      "mapping_authorized": false,
+      "member_pointer_kind": "direct",
+      "same_shape": false
+    },
+    {
+      "candidate_index": 3,
+      "current_method": "__ZN15IOAccelContext215get_data_bufferEP29IOAccelContextGetDataBufferInP30IOAccelContextGetDataBufferOutyPy",
+      "current_shape": [
+        3,
+        8,
+        4294967295
+      ],
+      "decision": "REJECT_UNQUALIFIED",
+      "legacy_method": "get_fb_config",
+      "legacy_selector": "0x103",
+      "legacy_shape": [
+        0,
+        0,
+        1
+      ],
+      "mapping_authorized": false,
+      "member_pointer_kind": "direct",
+      "same_shape": false
+    },
+    {
+      "candidate_index": 4,
+      "current_method": "__ZN15IOAccelContext217reclaim_resourcesEv",
+      "current_shape": [
+        0,
+        0,
+        0
+      ],
+      "decision": "REJECT_UNQUALIFIED",
+      "legacy_method": "check_acc_cap",
+      "legacy_selector": "0x104",
+      "legacy_shape": [
+        0,
+        0,
+        1
+      ],
+      "mapping_authorized": false,
+      "member_pointer_kind": "direct",
+      "same_shape": false
+    },
+    {
+      "candidate_index": 5,
+      "current_method": "__ZN15IOAccelContext218finish_fence_eventEj",
+      "current_shape": [
+        0,
+        1,
+        0
+      ],
+      "decision": "REJECT_UNQUALIFIED",
+      "legacy_method": "acquire_channel",
+      "legacy_selector": "0x105",
+      "legacy_shape": [
+        0,
+        1,
+        2
+      ],
+      "mapping_authorized": false,
+      "member_pointer_kind": "direct",
+      "same_shape": false
+    },
+    {
+      "candidate_index": 6,
+      "current_method": null,
+      "current_shape": [
+        0,
+        0,
+        0
+      ],
+      "decision": "REJECT_UNQUALIFIED",
+      "legacy_method": "map_texture",
+      "legacy_selector": "0x106",
+      "legacy_shape": [
+        4,
+        1,
+        0
+      ],
+      "mapping_authorized": false,
+      "member_pointer_kind": "null",
+      "same_shape": false
+    },
+    {
+      "candidate_index": 7,
+      "current_method": "__ZN15IOAccelContext224set_background_renderingEj",
+      "current_shape": [
+        0,
+        1,
+        0
+      ],
+      "decision": "REJECT_UNQUALIFIED",
+      "legacy_method": "cipher_initiate",
+      "legacy_selector": "0x107",
+      "legacy_shape": [
+        3,
+        256,
+        280
+      ],
+      "mapping_authorized": false,
+      "member_pointer_kind": "direct",
+      "same_shape": false
+    }
+  ],
+  "profile_helper_sha256": "3f0e6b796f90de5f7a578dd9abe6fc924530ad2853086ef8c583990953ac0506",
+  "source_receipt_sha256": {
+    "video-dispatch-validation.json": "1759b2f62d244bc5be2b78101fbaabe90d412dc7def1352d69b74e604254cad5",
+    "video-method-contract-validation.json": "8b008472d677222b694c64bb761bda6ab1134748f12676f134b5e16fe700bb87",
+    "video-selector-path-validation.json": "fe0645917c9a7cf44e6689223896e75a768e7d0c177fe879e07094fa26cef200"
+  },
+  "status": "PASS_STATIC_SELECTOR_COMPARISON"
+}

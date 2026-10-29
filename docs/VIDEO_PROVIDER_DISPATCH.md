@@ -12,6 +12,8 @@ This is separate from the [legacy AppleGVA experiment](VIDEO_LEGACY_BACKEND.md):
 
 A [High Sierra follow-up](VIDEO_HIGH_SIERRA_COMPARISON.md) identifies a matching return-14 provider stub and inherited lookup in that separately signed update; its static lookup also returns null above 7. Runtime dispatch remains unproved.
 
+A later [descriptor comparison](VIDEO_SELECTOR_TRANSLATION_GUARD.md) shows why simply subtracting `0x100` is not a qualified translation, including a pair with matching descriptor shapes but different named operations.
+
 A [later on-disk kernel audit](VIDEO_SELECTOR_PATH.md) connects the normal synchronous branch to the inherited lookup and predicts Unsupported under explicit assumptions; the live path is still not observed.
 
 ## Reproduction
