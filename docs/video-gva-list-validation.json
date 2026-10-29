@@ -1,0 +1,97 @@
+{
+  "audit_source_sha256": "045b60a17f12a67f1b5c5e4bb9357166dc866026bfbb2ca2d60c2ddd5d5f243f",
+  "base_constructor_return_inferred_from_pinned_flow": true,
+  "build_sha256": "2ef4c23ea5e89abad6a2d042698c5eb91bad1284acfbe197e5fa5f8081afa0c4",
+  "calibration_sha256": "3ffb7ab40dbb5d69452448d2394dbc7284c757cf70178eb23556642f1758d82b",
+  "caller_stack_offsets_at_hits": [
+    147562,
+    264163,
+    146279,
+    264163
+  ],
+  "counterfactual_property_and_policy_used": true,
+  "current_decoder_status": -12913,
+  "current_no_marker_controls": 1,
+  "current_witness_runs": 2,
+  "debugger_may_change_timing": true,
+  "derived_constructor_return_observed": true,
+  "dispatch_region_sha256": "cb8e85197a4b37270ced86a070fecb85bb61ea56aa98892996658a304544db0c",
+  "enumeration_entry_semantics_proved": false,
+  "enumeration_output_count": 0,
+  "enumerator_live_code_verified_by_marker_and_debugger": true,
+  "enumerator_region_sha256": "38281d047ee261127550cff96495d8aa7a911fe889fb6f7a6ac2992f3bbb274c",
+  "flag_463_zero_excluded_under_pinned_normal_flow": true,
+  "global_head_nonnull": true,
+  "hardware_images": 0,
+  "hardware_video_execution_proved": false,
+  "inner_live_code_verified_by_marker_and_debugger": true,
+  "inner_region_sha256": "4c07b6daa5d9e4449c3f77192951ffa230915193befe87cbbf443e25226fa564",
+  "live_object_vtable_readback_proved": false,
+  "node_registry_object_identity_proved": false,
+  "node_stability_after_debugger_resume_proved": false,
+  "observed_node_count": 1,
+  "observed_node_flags_460_to_463": [
+    1,
+    0,
+    0,
+    0
+  ],
+  "observed_node_kind_decimal": 17039368,
+  "receipts": [
+    {
+      "decoder_status": 0,
+      "frames": 6,
+      "mode": "cpu",
+      "same_thread_selector_2_hits": false,
+      "witness": "on"
+    },
+    {
+      "decoder_status": -12913,
+      "frames": 0,
+      "mode": "current",
+      "same_thread_selector_2_hits": true,
+      "witness": "on"
+    },
+    {
+      "decoder_status": -12906,
+      "frames": 0,
+      "mode": "wrong",
+      "same_thread_selector_2_hits": false,
+      "witness": "on"
+    },
+    {
+      "decoder_status": -12913,
+      "frames": 0,
+      "mode": "current",
+      "same_thread_selector_2_hits": false,
+      "witness": "off"
+    },
+    {
+      "decoder_status": -12913,
+      "frames": 0,
+      "mode": "current",
+      "same_thread_selector_2_hits": true,
+      "witness": "on"
+    }
+  ],
+  "registry_renderer_id_matches_numerically": true,
+  "run_receipt_sha256": [
+    "72177a695ade921e198bb49c3e2597318efc9dc8243e6641f39c25f3439deebe",
+    "74d512fc2e0f08c517b1a611cd981406443a274ef57c7a2b4c0dc9db35d0a3da",
+    "1afa69d2e7888210ab391e7fb093273110fa628ffad60f1b574e6f465e70e153",
+    "f9cb7c4715214d325438314d00cda0e28c476eaffa31adb2322d59f4b08a48bc",
+    "23d56513fd965ec7cbaa829a5f8cc2397e66e6171ef4012a5cc7aba4bfd50ef3"
+  ],
+  "runner_source_hash_recorded_in_original_receipts": true,
+  "runs": 5,
+  "same_thread_selector_2_enumeration_count_zero": 2,
+  "selection_flag": 0,
+  "software_controls": 1,
+  "software_images": 6,
+  "software_reference_bytes": 691200,
+  "status": "PASS_TWO_SINGLE_NODE_FILTER_OBSERVATIONS",
+  "system_modified": false,
+  "tail_null": true,
+  "vendor_or_GPU_execution_during_audit": false,
+  "wrong_board_controls": 1
+}

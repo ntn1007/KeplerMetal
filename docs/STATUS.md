@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Two scoped video processes have a one-entry AppleGVA list with filter byte `0x463` equal to zero; pinned code would skip that entry under the observed selection mode if it remains unchanged. The byte's meaning and hardware decode remain unknown. [Evidence](VIDEO_GVA_LIST_FILTER.md).
+
 Two scoped AppleGVA video requests return an observed zero list length from the routine immediately after the constructor; entry semantics and the cause of the empty list remain unknown. [Evidence](VIDEO_GVA_ENUMERATION_RESULT.md).
 
 Two scoped AppleGVA processes reach both instructions following the base and derived constructor calls, with same-thread selector-2 and matching caller frames. Hardware video still returns -12913. [Evidence](VIDEO_GVA_CONSTRUCTOR_RETURN.md).
