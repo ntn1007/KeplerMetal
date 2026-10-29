@@ -1,0 +1,47 @@
+{
+  "agx_selector_semantics_qualified": false,
+  "bytes_compared": 5529600,
+  "cohorts": [
+    {
+      "cohort_receipt_sha256": "7c3265e08a4c0450a8e4003e04b0a353ade1feed29423cf0747ffa55ad9181ca",
+      "reference_macos_version": "27.2",
+      "reservation_id": "52d1e851133e4154b9b7924f16eba7ef",
+      "signed_binary_sha256": {
+        "client": "a9e1b7691e706bb8e97651983a99c8e939df335068f43522d4448ad13aae870a",
+        "observer.dylib": "7126f7d3b866575658d13eadb6af7816e011d6d31a85256580c32bc22eb587f2"
+      }
+    },
+    {
+      "cohort_receipt_sha256": "e6c8e460b3839b8578c854580fffb2e891fa0ecd3886a00d4da95c55641eb5e0",
+      "reference_macos_version": "27.2",
+      "reservation_id": "c83c7f3600e7455d9b67e909fa9d49f1",
+      "signed_binary_sha256": {
+        "client": "a9e1b7691e706bb8e97651983a99c8e939df335068f43522d4448ad13aae870a",
+        "observer.dylib": "7126f7d3b866575658d13eadb6af7816e011d6d31a85256580c32bc22eb587f2"
+      }
+    }
+  ],
+  "differing_bytes": 0,
+  "frames": 48,
+  "hardware_processes": 4,
+  "hardware_sessions_report_acceleration": 4,
+  "nvidia_video_execution_proved": false,
+  "observation_is_process_local": true,
+  "observed_agx_processes": 2,
+  "observed_processes": 4,
+  "observed_software_agx_processes": 0,
+  "other_processes_observed": false,
+  "processes": 8,
+  "reference_sha256": "d73962c0592ae107d343591bf2d72e013015813e3b2ceff71d37e2c5fee36cd1",
+  "returned_port_name_correlation_only": true,
+  "software_property_status": -12900,
+  "source_sha256": {
+    "audit.py": "540dc78484bf5ba0f985d48ca00e62d0bc8eab7ef4293a104857e5f464fea277",
+    "client.mm": "8e7fb4433adcdd0179a1745dfad7b9442c3b1d4f1b4affd17edfb545b142b32b",
+    "observer.c": "b9f6e9f8a92b996a93c8409665803ca3285e16cb1bbf175cf17b6c7f6d0479d1",
+    "observer.h": "ab9c41e70d38c83b34edaece99d7c163145f4864b264ff16420a7063b4ec28f8",
+    "run.py": "4f055ce29d68814e18ef377887e6f4f2755f6c18c44bd577af01dc0fb575503e"
+  },
+  "status": "PASS_TWO_REFERENCE_COHORTS",
+  "system_modified": false
+}

@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Two public VideoToolbox reference cohorts on Apple Silicon match 48 software-reference frames; own-process observations identify IOSurface and AGX calls only within the monitored window. The NVIDIA video ABI remains unqualified. [Evidence](VIDEO_M1_CLIENT_OBSERVER.md).
+
 A pinned video-buffer request path can skip the requested-size load in an empty-list branch; its CPU size helper matches 4,096 synthetic cases. Returned mappings and hardware video remain unqualified. [Evidence](VIDEO_BUFFER_SIZE_PATH.md).
 
 One real restricted baseline H.264 IDR now produces a CPU VP block matching FFmpeg-derived fields and pinned Mesa, with MacBook sanitizer checks; five P frames are refused. No hardware decoding is established. [Evidence](VIDEO_IDR_VP.md).
