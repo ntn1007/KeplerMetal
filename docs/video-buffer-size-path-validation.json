@@ -1,0 +1,51 @@
+{
+  "branch_interpretation": "conditional static only, not live context",
+  "cases": 4096,
+  "class_candidates": [
+    0,
+    1
+  ],
+  "code_regions": {
+    "0x7c52": {
+      "bytes": 267,
+      "end_exclusive": "0x7d5d",
+      "file_offset": 31826,
+      "sha256": "2a261a8c5fcc9590528afda765b639012af60a03cb11b581351e29aa167ef339"
+    },
+    "0x9ede": {
+      "bytes": 145,
+      "end_exclusive": "0x9f6f",
+      "file_offset": 40670,
+      "sha256": "1e5a4c35d4b28e5dca9e0b5c33c40e6a706b2b0447523fb9cfb275e1bac1954f"
+    },
+    "0x9f70": {
+      "bytes": 203,
+      "end_exclusive": "0xa03b",
+      "file_offset": 40816,
+      "sha256": "ae56e29ff9fa623fc4b8770880eaa6133b476e43b56650578b18e5a30269edbc"
+    },
+    "0xadec": {
+      "bytes": 129,
+      "end_exclusive": "0xae6d",
+      "file_offset": 44524,
+      "sha256": "ce9b1ea62eb27466752292710887201d5958d9451298bcb9e26462132719211f"
+    }
+  },
+  "cpu_helper_executed_on_synthetic_memory": true,
+  "first_branch_skips_size_load": true,
+  "gpu_connections_opened": false,
+  "growth_factor": 2,
+  "hardware_video_execution_proved": false,
+  "helper_evidence_id": "ev_d2cf4c019488b13eab432078e37e85d8b9fa3c547f9958c38a62f2556aede5dc",
+  "image_sha256": "37e563d6cf3626101f30b1727a4f60dec02152dff9c74c0269c30c213a7320c8",
+  "initial_size_bytes": 65536,
+  "modified_helper_refused_before_execution": true,
+  "new_evidence_bundle_sha256": "9635db888ec07284dadf3298cf16da5c89d4d64056a9077fa02e074c97368652",
+  "source_sha256": {
+    "audit.py": "f9faf0167727a9d92e3cfc8652ab0548b5b63cd02b99bc41d1b7fa3c0844f834",
+    "compare.cpp": "e545d2316f1c241dfa3fde7aa34e96395212c95ab9ebbd618b91eb6445faf6eb"
+  },
+  "status": "PASS_PINNED_BUFFER_SIZE_CPU",
+  "system_modified": false,
+  "upper_size_bytes": 524288
+}
