@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+The pinned AppleGVA non-null codec-property path calls `CFStringGetCString` with a 32-byte ASCII buffer; the inspected Apple and NVIDIA plists do not identify a Kepler value. [Evidence](VIDEO_GVA_CODEC_CONTRACT.md).
+
 Two scoped video processes correlate a null AppleGVA `IOGVACodec` return and zero node byte with the same later list-head address. Allocation lifetime and hardware decoding remain unproved. [Evidence](VIDEO_GVA_PROPERTY_NODE_LINK.md).
 
 Two scoped video processes have a one-entry AppleGVA list with filter byte `0x463` equal to zero; pinned code would skip that entry under the observed selection mode if it remains unchanged. The byte's meaning and hardware decode remain unknown. [Evidence](VIDEO_GVA_LIST_FILTER.md).

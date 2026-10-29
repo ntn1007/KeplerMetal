@@ -1,0 +1,133 @@
+{
+  "GPU_execution": false,
+  "auditor_source_sha256": "0a6fc5cc03f274a5d02cdddaa8da8b351233783c0376050a0a73fa57e08482d1",
+  "call_contract_scope": "Pinned AppleGVA path, not proof of a valid NVIDIA value or live non-null call.",
+  "cf_control": {
+    "GPU_execution": false,
+    "guards_intact": true,
+    "status": "PASS",
+    "synthetic_31_ascii_bytes": true,
+    "synthetic_32_ascii_bytes_refused": true,
+    "synthetic_non_ascii_refused": true,
+    "vendor_execution": false
+  },
+  "cf_control_binary_sha256": "5ab47c41a20f256660c54838030d22fd36897b5fd37e8c32898bd174ec0d5051",
+  "cf_control_source_sha256": "eed05067ec944f6ce3c6f2c32481171cf0ef740d13e665f6f35939fb00de3c82",
+  "current_and_high_sierra_apple_plists": [
+    {
+      "bundle_version": "10.3.2",
+      "codec_key_in_plist": false,
+      "plist_sha256": "2b666df85091a02c6610cc517523e923b6a7e434cc8f974caf9d0e981a3b392e",
+      "profile": "high_sierra",
+      "video_bundle_name": "GeForceVADriver"
+    },
+    {
+      "bundle_version": "16.0.0",
+      "codec_key_in_plist": false,
+      "plist_sha256": "994ef3f131f22c5b528e5a2b05b02c80567397026e8e4a83eb88b1715f52959b",
+      "profile": "current",
+      "video_bundle_name": "GeForceVADriver"
+    }
+  ],
+  "gpu_support_proved": false,
+  "nvidia_codec_value_identified": false,
+  "other_vendor_plist_controls": [
+    {
+      "active_GPU_proved": false,
+      "family": "Intel_ICL",
+      "personality_count": 1,
+      "plist_sha256": "82ae3ea9439a38da77569569dd624b49a6064fb363eafe37efac0f93e4c8fc73",
+      "string_value": "Gen11"
+    },
+    {
+      "active_GPU_proved": false,
+      "family": "AMD_Navi",
+      "personality_count": 5,
+      "plist_sha256": "b23242e2202383f7f7fe2dbc053fbf211a18298065e8fe752bf68064bb10ab98",
+      "string_value": "AMDVCN2"
+    }
+  ],
+  "package_current_trust_verified": false,
+  "package_signature_current_status": "expired_certificate",
+  "property_may_be_set_dynamically": true,
+  "region_sha256": "f8a1efea62ed7f03028666fe86c35de8f06941324ac8d1ae8815ec93f0eb8a19",
+  "static_contract": {
+    "buffer_bytes": 32,
+    "buffer_offset_in_node": 8,
+    "conversion_return_checked_in_captured_sequence": false,
+    "encoding_constant": 1536,
+    "flag_write_before_conversion_offset": 150821,
+    "null_target_offset": 150858,
+    "property_call_offset": 150807,
+    "string_call_offset": 150845
+  },
+  "static_stub_map_sha256": "2d9c4ed04bcdbdd4049bb7ed88f0a545d3f42b1b478ab320e43fc8feb6a39ffd",
+  "status": "PASS_BOUNDED_CODEC_CONTRACT_AUDIT",
+  "system_modified": false,
+  "vendor_execution": false,
+  "web_driver_executables_scanned": false,
+  "web_driver_package_sha256": "a877c0ef81fbbb4d42bee6c1de063fff47d610a5397ffc6ce7617f28269bfe73",
+  "web_driver_payload_sha256": "d7d5b7c6957f59a1287ba50987c1968f1a9cb12031c09b5bff05d3743f315528",
+  "web_driver_plists": [
+    {
+      "bundle_version": "10.3.3",
+      "codec_key_in_plist": false,
+      "member": "./Library/Extensions/GeForceTeslaWeb.kext/Contents/Info.plist",
+      "sha256": "37e750f4c802fd651d49a8ed87d8b1390b3dd14b67ed0289f2799e6882b4c950"
+    },
+    {
+      "bundle_version": "10.3.3",
+      "codec_key_in_plist": false,
+      "member": "./Library/Extensions/GeForceWeb.kext/Contents/Info.plist",
+      "sha256": "bde8d8114ab4fa41a1aea94fbbb213dbf99d6a142cf0634a873f62783faba448"
+    },
+    {
+      "bundle_version": "10.3.3",
+      "codec_key_in_plist": false,
+      "member": "./Library/Extensions/NVDAGF100HalWeb.kext/Contents/Info.plist",
+      "sha256": "ef4d5a81cb95a6f0ba9468b8d541078741e2ec9ca1176fc9c50332130bd2b548"
+    },
+    {
+      "bundle_version": "10.3.3",
+      "codec_key_in_plist": false,
+      "member": "./Library/Extensions/NVDAGK100HalWeb.kext/Contents/Info.plist",
+      "sha256": "43e9b138f90c5564ca52b64de8ddd4d3acf18f7d440121ad37d0d95afeb74372"
+    },
+    {
+      "bundle_version": "10.3.3",
+      "codec_key_in_plist": false,
+      "member": "./Library/Extensions/NVDAGM100HalWeb.kext/Contents/Info.plist",
+      "sha256": "f7e298d82b813fcb037324bc1970426b14462d324db54c98587a4ac9081a4872"
+    },
+    {
+      "bundle_version": "10.3.3",
+      "codec_key_in_plist": false,
+      "member": "./Library/Extensions/NVDAGP100HalWeb.kext/Contents/Info.plist",
+      "sha256": "17759ff9108981254821bf7972c0f7575925c59966a923aa788b06a578d8cd67"
+    },
+    {
+      "bundle_version": "10.3.3",
+      "codec_key_in_plist": false,
+      "member": "./Library/Extensions/NVDANV50HalTeslaWeb.kext/Contents/Info.plist",
+      "sha256": "ea8536500f977f9dcb6801af9aa766ab844f7fefe6d7219c57029c0139fc0e8c"
+    },
+    {
+      "bundle_version": "10.3.3",
+      "codec_key_in_plist": false,
+      "member": "./Library/Extensions/NVDAResmanTeslaWeb.kext/Contents/Info.plist",
+      "sha256": "9e7eef2154afeec988eba69c165f4011702afa0da7b3660b15003c7bf4fe134f"
+    },
+    {
+      "bundle_version": "10.3.3",
+      "codec_key_in_plist": false,
+      "member": "./Library/Extensions/NVDAResmanWeb.kext/Contents/Info.plist",
+      "sha256": "cd21664a7eca168c3579a44cb76662f908c3e1d1dca2a878d006ceedd38bab40"
+    },
+    {
+      "bundle_version": "10.3.3",
+      "codec_key_in_plist": false,
+      "member": "./Library/Extensions/NVDAStartupWeb.kext/Contents/Info.plist",
+      "sha256": "aa4b985545e51e0735a745b05aea4450eb9da1099e38f1786a94089a0c130ca9"
+    }
+  ]
+}
