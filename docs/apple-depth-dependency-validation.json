@@ -1,0 +1,60 @@
+{
+  "adapted_packets_checked": 12,
+  "apple_app_executed": false,
+  "apple_archive_sha256": "559d91d42ba4d4adff9517600de522d12f8fbc3270982ac6e0d0b5bfd414f311",
+  "apple_library_sha256": "adf18526f6b8fe358a30d3088dd801440b5509ac50126857174de03e17fba5bf",
+  "archive_sha256": "c67feb4b50274737e6bbf3c6f0d621d970c8db804fc4eb572651810b6174cf55",
+  "build_sha256": "1255d0d939c3b1aca77821a1d07afb82ee0c671bc62a42c3620f84ad2ee12ce7",
+  "checked_system_files_unchanged": true,
+  "clear_zero_rejects_both": true,
+  "color_bytes_checked": 147456,
+  "completed_render_buffers": 12,
+  "depth_texture_cpu_readback": false,
+  "direct_adapted_raw_images_identical": true,
+  "guard_bytes_checked": 6144,
+  "performance_benchmark": false,
+  "processes": 4,
+  "runs": [
+    {
+      "images_sha256": {
+        "clear_zero": "cb86b2fa21c22e8ea6a4cd86286c254b83bb95eea5a410f74446125ceefd8d19",
+        "write_off": "25a0fdd3f9243504091dbe3b22d11933be4935be848b6d4ace33065a9c8ea620",
+        "write_on": "f8bc4df6cbae452377342ce759a4e7475bad16c78da55ab8adeed1e5a40b5315"
+      },
+      "manifest_sha256": "7fdb888b869a6e33150f678224b1fcae9e150718e86a81c5d8399e7b397bd0d9",
+      "mode": "direct"
+    },
+    {
+      "images_sha256": {
+        "clear_zero": "cb86b2fa21c22e8ea6a4cd86286c254b83bb95eea5a410f74446125ceefd8d19",
+        "write_off": "25a0fdd3f9243504091dbe3b22d11933be4935be848b6d4ace33065a9c8ea620",
+        "write_on": "f8bc4df6cbae452377342ce759a4e7475bad16c78da55ab8adeed1e5a40b5315"
+      },
+      "manifest_sha256": "bbd5fa27474089e96266625ce394a5802ee40a14a627c9629d4ab2bcee107d12",
+      "mode": "auto"
+    },
+    {
+      "images_sha256": {
+        "clear_zero": "cb86b2fa21c22e8ea6a4cd86286c254b83bb95eea5a410f74446125ceefd8d19",
+        "write_off": "25a0fdd3f9243504091dbe3b22d11933be4935be848b6d4ace33065a9c8ea620",
+        "write_on": "f8bc4df6cbae452377342ce759a4e7475bad16c78da55ab8adeed1e5a40b5315"
+      },
+      "manifest_sha256": "75cdcf2127e14f210c01491ef627a61a99cd3cad84f87fb54f79281b1e225f9c",
+      "mode": "direct"
+    },
+    {
+      "images_sha256": {
+        "clear_zero": "cb86b2fa21c22e8ea6a4cd86286c254b83bb95eea5a410f74446125ceefd8d19",
+        "write_off": "25a0fdd3f9243504091dbe3b22d11933be4935be848b6d4ace33065a9c8ea620",
+        "write_on": "f8bc4df6cbae452377342ce759a4e7475bad16c78da55ab8adeed1e5a40b5315"
+      },
+      "manifest_sha256": "a5bf62baf5350ccbda3bf6a4a559ce5f8fdee94bd78303afa1d87e9f12419be9",
+      "mode": "auto"
+    }
+  ],
+  "status": "PASS_APPLE_DEPTH_DEPENDENCY",
+  "transparent_system_integration": false,
+  "two_draws_same_depth": true,
+  "write_off_allows_second": true,
+  "write_on_preserves_first": true
+}

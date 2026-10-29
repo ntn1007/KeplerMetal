@@ -18,6 +18,8 @@ The two negative cases change winding and depth comparison separately. The
 front-facing positive case proves the triangle and pipeline render in the
 same setup. Depth writes are enabled, but these outputs do not independently
 verify a later depth read or an occlusion ordering involving multiple draws.
+A [subsequent controlled two-draw test](APPLE_DEPTH_DEPENDENCY.md) compares
+the resulting colors with depth writes enabled and disabled.
 
 ## Evidence
 

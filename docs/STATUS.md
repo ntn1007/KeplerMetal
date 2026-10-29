@@ -1,6 +1,8 @@
 # Status, 2026-10-29
 
-A controlled Apple-shader ICB test matches direct GTX results for depth `less`/`never` and front/back winding; multi-draw occlusion remains unqualified. [Evidence](APPLE_VIEW_DEPTH_CULL.md).
+A two-command Apple-shader ICB matches direct GTX results for enabled/disabled depth writes and clear-depth controls. [Evidence and limits](APPLE_DEPTH_DEPENDENCY.md).
+
+A controlled Apple-shader ICB test matches direct GTX results for depth `less`/`never` and front/back winding. [Evidence](APPLE_VIEW_DEPTH_CULL.md).
 
 A pinned Apple shader ICB profile renders 15 commands to BGRA8 with a depth attachment and back-face cull state, matching direct GTX images. [Evidence](APPLE_VIEW_ICB.md).
 
