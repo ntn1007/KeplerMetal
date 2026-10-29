@@ -1,0 +1,44 @@
+{
+  "audit_sha256": "361e07695b1bac8007b641b61ddbd7d6d400f79ffe4ecc7154dd4a41aad5804c",
+  "checks": [
+    {
+      "case": "batch",
+      "reason": "video enumeration identity differs",
+      "rejected": true
+    },
+    {
+      "case": "identity",
+      "reason": "video enumeration identity differs",
+      "rejected": true
+    },
+    {
+      "case": "item",
+      "reason": "video enumeration identity differs",
+      "rejected": true
+    },
+    {
+      "case": "device",
+      "reason": "video enumeration identity differs",
+      "rejected": true
+    },
+    {
+      "case": "arm",
+      "reason": "debug receipt differs",
+      "rejected": true
+    },
+    {
+      "case": "diagnostic",
+      "reason": "video diagnostic differs",
+      "rejected": true
+    },
+    {
+      "case": "frames",
+      "reason": "hardware result differs",
+      "rejected": true
+    }
+  ],
+  "gpu_execution": false,
+  "originals_modified": false,
+  "source_sha256": "59004b058c9f526c6a1e229e6a779c315f417ad7798e5d0dced0d43b6623cac6",
+  "status": "PASS_MUTATIONS_REJECTED"
+}

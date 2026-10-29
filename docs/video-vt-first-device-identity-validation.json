@@ -1,0 +1,111 @@
+{
+  "all_devices_identity_proved": false,
+  "audit_sha256": "361e07695b1bac8007b641b61ddbd7d6d400f79ffe4ecc7154dd4a41aad5804c",
+  "build_sha256": "aae7b087bc1fca89d12a0db2e38cce56cf287e207903c70a44760404ae511ae8",
+  "cache_function_sha256": "f38fc93a01c9f5c715b94b5a2fe6a45c7ebccba26cdd0cedcadb06b7ffe9478b",
+  "cache_uuid": "e7231bea63883d0a95c0a93ce970b96b",
+  "calibration_sha256": "28116d32df9e36e8703037877bab2d422f93997069fa0535659cb0af71c2fcaa",
+  "debugger_timing_may_change": true,
+  "dispatch_target_at_arm": "objc_msgSend",
+  "first_batch_count": 1,
+  "first_device_matches_selected_registry": true,
+  "hardware_debug_processes": 2,
+  "hardware_plain_processes": 2,
+  "hardware_video_execution_proved": false,
+  "metalold_live_region_sha256": "f2df1f2af9af40e440eb1b78a4010bdbf6f4eaa4618a2d19322c5e4026f7a7fe",
+  "metalold_sha256": "fd1e8e07491819334a1b3e788f01bc0d4fef0229c1022cb2fc29031c5c5dc97e",
+  "rows": [
+    {
+      "frames": 0,
+      "lldb_log_sha256": "a336f17dc1914bd3c01e1332f9bb5f2926f224c5d98273377738d15f5a72324d",
+      "manifest_sha256": "44bfb207afb21f9760d54ffeef0368db4f15096da0afb8e8e9ba9e7923dabfe9",
+      "mode": "hardware-debug",
+      "observations": [
+        "device_registry_match",
+        "nonnull_list",
+        "first_batch_one",
+        "first_item_device_match",
+        "same_thread"
+      ],
+      "status": -12906,
+      "stdout_sha256": "d4554d24feb89f7d0d26b1fb3b29008311811b3e612e8b201f3a5c9f03f31bab"
+    },
+    {
+      "frames": 6,
+      "lldb_log_sha256": "a05ea417b5059459c7c344b5e574053d42fc5d03d51326d9c7ba5b9b37c13bfe",
+      "manifest_sha256": "4b2a8562d3b6dd2926459ae5858e6a601baa5f9c13c4fbf49ecb23dfe00c53c1",
+      "mode": "software-debug",
+      "observations": [],
+      "status": 0,
+      "stdout_sha256": "5d073885362689ad0059309c8addff282d19e52c379def803a02b3e0d699d4c5"
+    },
+    {
+      "frames": 0,
+      "lldb_log_sha256": null,
+      "manifest_sha256": "bccc7ed12282bbd61fd57cfd81126178694c9a327e043d1cce621311bbb90e0f",
+      "mode": "hardware-plain",
+      "observations": [],
+      "status": -12906,
+      "stdout_sha256": "d4554d24feb89f7d0d26b1fb3b29008311811b3e612e8b201f3a5c9f03f31bab"
+    },
+    {
+      "frames": 6,
+      "lldb_log_sha256": null,
+      "manifest_sha256": "d58446d993313b5e1e8eaca60a50543976eec884309f4ecc29e8b1e6ac9230bc",
+      "mode": "software-plain",
+      "observations": [],
+      "status": 0,
+      "stdout_sha256": "5d073885362689ad0059309c8addff282d19e52c379def803a02b3e0d699d4c5"
+    },
+    {
+      "frames": 0,
+      "lldb_log_sha256": "ce86ebb104dffe259f397b99a0cff8a4d2f1e8d210e9db32c86134b3ba28801f",
+      "manifest_sha256": "de200e78b8e7fa5f1be2094d963dac228c5a1938c9ea582a58ba5c2c879d720a",
+      "mode": "hardware-debug",
+      "observations": [
+        "device_registry_match",
+        "nonnull_list",
+        "first_batch_one",
+        "first_item_device_match",
+        "same_thread"
+      ],
+      "status": -12906,
+      "stdout_sha256": "d4554d24feb89f7d0d26b1fb3b29008311811b3e612e8b201f3a5c9f03f31bab"
+    },
+    {
+      "frames": 6,
+      "lldb_log_sha256": "ea96b06929e0f2e96d28bea940039280b94bb5b3a43c45a540dc5f84cf6d7cae",
+      "manifest_sha256": "fc528d8e9d8eb037db4207e0d1e60b763bb945903bca13a7f631eaab9e4a9b8c",
+      "mode": "software-debug",
+      "observations": [],
+      "status": 0,
+      "stdout_sha256": "5d073885362689ad0059309c8addff282d19e52c379def803a02b3e0d699d4c5"
+    },
+    {
+      "frames": 0,
+      "lldb_log_sha256": null,
+      "manifest_sha256": "a4bc4fb02d85114bcda3a4b5fac6b2a0a008778a50e876abbe87b8edcca8667f",
+      "mode": "hardware-plain",
+      "observations": [],
+      "status": -12906,
+      "stdout_sha256": "d4554d24feb89f7d0d26b1fb3b29008311811b3e612e8b201f3a5c9f03f31bab"
+    },
+    {
+      "frames": 6,
+      "lldb_log_sha256": null,
+      "manifest_sha256": "d08ed9322494f855e68cb2cd700de761fe2d35f433ee0f2b9add2fdcfbfa6ddc",
+      "mode": "software-plain",
+      "observations": [],
+      "status": 0,
+      "stdout_sha256": "5d073885362689ad0059309c8addff282d19e52c379def803a02b3e0d699d4c5"
+    }
+  ],
+  "runner_sha256": "196d329421f484bf563dfa90bc15dcc3b15aabc6977b23e2c151208bc58397d1",
+  "same_thread_and_list": true,
+  "selector": "countByEnumeratingWithState:objects:count:",
+  "software_bytes_compared": 2764800,
+  "software_frames": 24,
+  "status": "PASS_VT_FIRST_DEVICE_IDENTITY",
+  "system_modified": false,
+  "total_device_count_proved": false
+}
