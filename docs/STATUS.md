@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+The GTX device helper returns the same pointer observed after a call bound to dictionary creation at arm time; its contents, decoder selection and hardware video remain unknown. [Evidence](VIDEO_VT_DEVICE_DICTIONARY.md).
+
 In two failed VideoToolbox requests, the enumerated GTX object enters the next natural call and that call returns non-null. Its meaning and hardware video remain unproved. [Evidence](VIDEO_VT_DEVICE_TRANSFORM.md).
 
 Two debugged VideoToolbox requests enumerate a first Metal object linked to the selected GTX 880M registry entry; the later decoder decision and hardware video remain unproved. [Evidence](VIDEO_VT_FIRST_DEVICE_IDENTITY.md).
