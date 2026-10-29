@@ -1,6 +1,8 @@
 # Status, 2026-10-29
 
-A pinned Apple shader ICB profile now renders 15 commands to BGRA8 with a depth attachment and back-face cull state, matching direct GTX images. Depth-test and back-face rejection controls remain open. [Evidence](APPLE_VIEW_ICB.md).
+A controlled Apple-shader ICB test matches direct GTX results for depth `less`/`never` and front/back winding; multi-draw occlusion remains unqualified. [Evidence](APPLE_VIEW_DEPTH_CULL.md).
+
+A pinned Apple shader ICB profile renders 15 commands to BGRA8 with a depth attachment and back-face cull state, matching direct GTX images. [Evidence](APPLE_VIEW_ICB.md).
 
 A synthetic 15-command ICB using the Apple sample shader matches direct GTX images across two frame generations, including a private frame buffer. The original Apple app remains untested. [Evidence](APPLE_MULTI_ICB.md).
 

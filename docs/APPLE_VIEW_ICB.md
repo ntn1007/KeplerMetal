@@ -38,7 +38,8 @@ every prefix bit.
 
 Positive images confirm rendering with the configured depth attachment and
 back-face cull state. They do **not** independently prove depth-test behavior or
-that reversed faces are rejected: no such negative controls were run. A
+that reversed faces are rejected in this cohort. A [subsequent controlled test](APPLE_VIEW_DEPTH_CULL.md)
+checks `less` versus `never` and reversed winding with the same profile. A
 missing-blit negative control and overlapping-frame tests also remain open.
 Signed process outcomes, nonoverlapping GPU reservations and selected system
 hashes were checked; no performance comparison was made.

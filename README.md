@@ -23,6 +23,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+A bounded GTX ICB test verifies depth comparison and back-face rejection against direct draws and CPU pixel expectations. [Evidence and limits](docs/APPLE_VIEW_DEPTH_CULL.md).
+
 A bounded Apple-shader ICB renders to BGRA8 with a depth attachment and back-face cull state on GTX. [Evidence and limits](docs/APPLE_VIEW_ICB.md).
 
 A synthetic 15-command ICB using the Apple sample shader matches direct GTX rendering across updated frame state. [Evidence and limits](docs/APPLE_MULTI_ICB.md).
