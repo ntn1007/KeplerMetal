@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Core Video NV12 IOSurface planes now have a native GTX Metal compute witness: two kernels and single-plane/no-dispatch controls match 147,456 CPU-checked bytes. Dedicated video decode and encode remain unproved. [Evidence](VIDEO_CVMETAL_NV12.md).
+
 A locally instrumented Apple sample application now runs through NSApplicationMain and its storyboard on GTX; scoped ICB images match direct and blank controls. The original unmodified executable and transparent integration remain unproved. [Evidence](APPLE_APPLICATION_ICB.md).
 
 The locally adapted Apple storyboard now uses its ordinary render-encoder factory with queue-local automatic adaptation; GTX output matches direct controls and three shared NVIDIA method IMPs remain unchanged. [Evidence](APPLE_AUTOMATIC_STORYBOARD.md).

@@ -1,5 +1,7 @@
 # Build from source
 
+[VIDEO_CVMETAL_NV12.md](VIDEO_CVMETAL_NV12.md) documents the Core Video/Metal NV12 witness and reproduction.
+
 [APPLE_APPLICATION_ICB.md](APPLE_APPLICATION_ICB.md) documents the local Apple sample application witness and reproduction.
 
 [APPLE_AUTOMATIC_STORYBOARD.md](APPLE_AUTOMATIC_STORYBOARD.md) documents automatic encoder adaptation in the Apple storyboard and its reproduction.

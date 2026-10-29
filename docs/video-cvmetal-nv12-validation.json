@@ -1,0 +1,162 @@
+{
+  "build_sha256": "a73116a6a3f8b1ed4e4adfd0d6e95d33f352d36bfd72b39994a32ce8e62cb7f7",
+  "chroma_bytes_per_image": 6144,
+  "completed_gpu_dispatches": 8,
+  "cpu_checked_bytes": 147456,
+  "kernel_library_sha256": "33827f502a82df1d50f9cc8d75b2fa82b27397f809c8411c97c83bb40c24ad08",
+  "kernel_source_sha256": "a9f81b68e23620bfd160e732512a9479a3fa4d65c4accb7f8c65567f781bfbbb",
+  "luma_bytes_per_image": 12288,
+  "modes": [
+    "gpu",
+    "y-only",
+    "uv-only",
+    "none"
+  ],
+  "padding_bytes_checked": 0,
+  "performance_benchmark": false,
+  "physical_transfer_count_measured": false,
+  "processes": 8,
+  "runs": [
+    {
+      "capture_sha256": "080cb67117b3cc66546cb27744ad4bb8646fd424430a73c0beef1f602d3ac2b7",
+      "manifest_sha256": "ddfa80b457880b51f6bf0c526827b7ddb21ae66e7550c514581eeebc0a34c2f3",
+      "mode": "gpu",
+      "row_bytes": [
+        128,
+        128
+      ],
+      "storage_modes": [
+        1,
+        1
+      ],
+      "synchronized": [
+        true,
+        true
+      ]
+    },
+    {
+      "capture_sha256": "224a9cee1f8a49205a58ccfc0aef66c5a36d0b3ac595226dbbe974d130c41d7b",
+      "manifest_sha256": "8c50afd5c41f4155bcf1af4298402793764c5358f16fc68f7a695aa0a1bd8de4",
+      "mode": "y-only",
+      "row_bytes": [
+        128,
+        128
+      ],
+      "storage_modes": [
+        1,
+        1
+      ],
+      "synchronized": [
+        true,
+        false
+      ]
+    },
+    {
+      "capture_sha256": "76d271fd52d1e4f5cbfaff6693083b4da73a194c29d5bf4d5e4b7f29d7916d84",
+      "manifest_sha256": "196922b262dcf904988b6cc0c85a8769126778f9e75fadac5cbeacb420781a3f",
+      "mode": "uv-only",
+      "row_bytes": [
+        128,
+        128
+      ],
+      "storage_modes": [
+        1,
+        1
+      ],
+      "synchronized": [
+        false,
+        true
+      ]
+    },
+    {
+      "capture_sha256": "fa1b4d688bb2b318e13b455cf806b84f5f92018505656c4d9ff78bb734162ea0",
+      "manifest_sha256": "7261a95e6cc8f76d67508af7dfa69601e966a37b67c93649f468aaec41335d7c",
+      "mode": "none",
+      "row_bytes": [
+        128,
+        128
+      ],
+      "storage_modes": [
+        1,
+        1
+      ],
+      "synchronized": [
+        false,
+        false
+      ]
+    },
+    {
+      "capture_sha256": "080cb67117b3cc66546cb27744ad4bb8646fd424430a73c0beef1f602d3ac2b7",
+      "manifest_sha256": "c60c6d6fce7da6236a161607dbd1bbac2a0e091012e3636c9ea002ab446978ef",
+      "mode": "gpu",
+      "row_bytes": [
+        128,
+        128
+      ],
+      "storage_modes": [
+        1,
+        1
+      ],
+      "synchronized": [
+        true,
+        true
+      ]
+    },
+    {
+      "capture_sha256": "224a9cee1f8a49205a58ccfc0aef66c5a36d0b3ac595226dbbe974d130c41d7b",
+      "manifest_sha256": "2dea64f07fdb08481143516dd8c24108a2c7e7c75206e9a8253b128c60ac46fa",
+      "mode": "y-only",
+      "row_bytes": [
+        128,
+        128
+      ],
+      "storage_modes": [
+        1,
+        1
+      ],
+      "synchronized": [
+        true,
+        false
+      ]
+    },
+    {
+      "capture_sha256": "76d271fd52d1e4f5cbfaff6693083b4da73a194c29d5bf4d5e4b7f29d7916d84",
+      "manifest_sha256": "2feed050826c1bc398b3a5d63af1d454486c2926cb3b42770556f0f9fc401f9b",
+      "mode": "uv-only",
+      "row_bytes": [
+        128,
+        128
+      ],
+      "storage_modes": [
+        1,
+        1
+      ],
+      "synchronized": [
+        false,
+        true
+      ]
+    },
+    {
+      "capture_sha256": "fa1b4d688bb2b318e13b455cf806b84f5f92018505656c4d9ff78bb734162ea0",
+      "manifest_sha256": "b84f0ed750ad1e1022e680a8fb36b089da1d0756bed8a4d6f4834798e5ed9505",
+      "mode": "none",
+      "row_bytes": [
+        128,
+        128
+      ],
+      "storage_modes": [
+        1,
+        1
+      ],
+      "synchronized": [
+        false,
+        false
+      ]
+    }
+  ],
+  "same_iosurface_and_planes_observed": true,
+  "status": "PASS_CVMETAL_NV12",
+  "system_files_unchanged": true,
+  "video_hardware_decode_proved": false,
+  "video_hardware_encode_proved": false
+}
