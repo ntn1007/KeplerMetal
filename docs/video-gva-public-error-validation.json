@@ -1,0 +1,71 @@
+{
+  "audit_source_sha256": "5577ac75c1a98aa1150c69b4732b6e9eafa2f4fe340ec7c5eabde1c7adc5707e",
+  "build_sha256": "6366752a29dc30e3b85475fd8cd8b5e5cde15b88f77ee371e63fd88326a05e62",
+  "calibration_sha256": "9f2a8dcea766e97428f44fb1f73b414b7a2c042f167331ec6813f3ba593a7218",
+  "context_region_sha256": "2ce45fe6c3ffc591e794e46655393ba2848540f55c891bfbf1f189e6d0e4c9e0",
+  "counterfactual_property_and_policy_used": true,
+  "current_no_marker_controls": 1,
+  "current_witness_runs": 2,
+  "debugger_may_change_timing": true,
+  "gva_return": -12913,
+  "hardware_images": 0,
+  "hardware_video_execution_proved": false,
+  "public_decoder_status": -12913,
+  "receipts": [
+    {
+      "decoder_status": 0,
+      "frames": 6,
+      "mode": "cpu",
+      "same_thread_return_chain": false,
+      "witness": "on"
+    },
+    {
+      "decoder_status": -12913,
+      "frames": 0,
+      "mode": "current",
+      "same_thread_return_chain": true,
+      "witness": "on"
+    },
+    {
+      "decoder_status": -12906,
+      "frames": 0,
+      "mode": "wrong",
+      "same_thread_return_chain": false,
+      "witness": "on"
+    },
+    {
+      "decoder_status": -12913,
+      "frames": 0,
+      "mode": "current",
+      "same_thread_return_chain": false,
+      "witness": "off"
+    },
+    {
+      "decoder_status": -12913,
+      "frames": 0,
+      "mode": "current",
+      "same_thread_return_chain": true,
+      "witness": "on"
+    }
+  ],
+  "run_receipt_sha256": [
+    "b96c00282d858d24eabc26bf51469f106024f7874fc37acf19f7dc1354c4d73b",
+    "fe4dceb9de42c45417852fe5fe11d5a4f9e10ef56eca6ee05f36df6095ffebd3",
+    "2c2d4e56065d8dfbce6db430202b60bd141ebbbf2304525bdf746011eb80c97d",
+    "9f7c3e7b0e6eab86f2cb50b82545bc5fbc333701cf088be2e123b17d9476d0cc",
+    "eaa6fa0af7a632c115e8992e094ede71a16291cd53ce33133b01d146be538b5e"
+  ],
+  "runner_source_hash_recorded_in_original_receipts": true,
+  "runs": 5,
+  "runtime_direct_caller_match": true,
+  "same_thread_direct_error_returns": 2,
+  "software_controls": 1,
+  "software_images": 6,
+  "software_reference_bytes": 691200,
+  "status": "PASS_TWO_DIRECT_VIDEOTOOLBOX_ERROR_RETURNS",
+  "system_modified": false,
+  "vendor_or_GPU_execution_during_audit": false,
+  "videotoolbox_postcall_result": -12913,
+  "vt_region_sha256": "f3cb75d0d4d4c97e2ca66ed815bd0fa636d96f6c955ba98d0fe8be39860a7a60",
+  "wrong_board_controls": 1
+}

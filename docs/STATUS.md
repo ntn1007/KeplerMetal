@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Two instrumented H.264 requests observe -12913 at the AppleGVA return and its direct VideoToolbox post-call site on the same thread; public creation also returns -12913. Hardware video remains unproved. [Evidence](VIDEO_GVA_PUBLIC_ERROR.md).
+
 Two instrumented H.264 requests show AppleGVA's caller receiving result 1 and count 0, then reaching its conditional exit; its alternative path is not reached. The VideoToolbox error mapping and hardware decode remain unproved. [Evidence](VIDEO_GVA_CALLER_FLOW.md).
 
 Two scoped H.264 requests observe zero enumeration count followed by dispatch register `EAX = 1` on the same thread; both still return -12913 and no frames. The caller's handling and hardware video remain unproved. [Evidence](VIDEO_GVA_DISPATCH_RESULT.md).
