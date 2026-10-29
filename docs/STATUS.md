@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+The current Apple CPU ICB sample builds, but its actual shader's three explicit buffers and its scoped three-buffer descriptor are refused in two GTX non-dispatch reflection probes. The sample app was not executed. [Evidence](APPLE_CPU_ICB_GAP.md).
+
 A separately compiled public-Metal client executes inherited render ICBs through a pinned process-local bootstrap on the GTX. One M1 direct/native ICB reference agrees within that device; no third-party client or transparent system integration is qualified. [Evidence](STANDALONE_INHERITED_PIPELINE.md).
 
 A same-encoder inherited-pipeline cohort matches direct GTX output across smooth/flat/smooth changes and a following direct draw without rebinding. [Evidence and limits](RENDER_INHERITED_SAME_ENCODER.md).

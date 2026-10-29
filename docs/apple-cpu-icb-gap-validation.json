@@ -1,0 +1,52 @@
+{
+  "apple_app_executed": false,
+  "apple_app_sha256": "8e679357630981267f25785ee99666748372cbee949ac5cbb2403fe45648f3b7",
+  "apple_archive_sha256": "559d91d42ba4d4adff9517600de522d12f8fbc3270982ac6e0d0b5bfd414f311",
+  "apple_build_log_sha256": "1522cdcf8a014c853c3e2369532cb72244a2a198793892d707973a7a995e6e2f",
+  "apple_build_succeeded": true,
+  "apple_sample_gpu_execution_proved": false,
+  "apple_sample_object_count": 15,
+  "apple_source_sha256": {
+    "Renderer/AAPLShaderTypes.h": "7f6b70576fb1e00422520f273530fd55e4fe5036c42b11bdf74205bae64609a2",
+    "Renderer/AAPLShaders.metal": "175efc7a343ddb1a98f9d3467bb9e73f7d5a42c3ad54ab5567240c732fe02976"
+  },
+  "checked_system_files_unchanged": true,
+  "full_icb_contract": false,
+  "gpu_dispatches": 0,
+  "mac1_advertised": true,
+  "mac2_advertised": false,
+  "processes": 2,
+  "runs": [
+    {
+      "manifest_sha256": "e2d60763886c3d74725a31dd31708e819327bacfcae907ef1bf28acf0afdd7a1",
+      "stdout_sha256": "8b7635ef41d8625699c525f79a06fe095e92487150207230845b90966a036e68"
+    },
+    {
+      "manifest_sha256": "f04046ca5b589cf376d70d2b53f12a2b91f84643683493fd9ad5a54c013c7602",
+      "stdout_sha256": "8b7635ef41d8625699c525f79a06fe095e92487150207230845b90966a036e68"
+    }
+  ],
+  "scoped_registration_refused": true,
+  "scoped_three_buffer_descriptor_refused": true,
+  "status": "PASS_APPLE_SAMPLE_GAP_REFLECTION",
+  "vertex_arguments": [
+    [
+      0,
+      "vertices",
+      16,
+      4
+    ],
+    [
+      1,
+      "object_params",
+      8,
+      4
+    ],
+    [
+      2,
+      "frame_state",
+      8,
+      256
+    ]
+  ]
+}

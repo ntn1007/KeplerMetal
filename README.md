@@ -23,6 +23,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+The current Apple CPU ICB sample exposes a measured integration gap: its three explicit vertex buffers are not yet accepted by the scoped adapter. [Evidence](docs/APPLE_CPU_ICB_GAP.md).
+
 A separately compiled public-Metal client uses inherited render pipelines through an opt-in local bootstrap on GTX; an M1 native ICB reference is also recorded. [Evidence and limits](docs/STANDALONE_INHERITED_PIPELINE.md).
 
 A GTX cohort verifies inherited pipeline changes within one encoder and a following ordinary draw, in a bounded scoped client. [Evidence and limits](docs/RENDER_INHERITED_SAME_ENCODER.md).
