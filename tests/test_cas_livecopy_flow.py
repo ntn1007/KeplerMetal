@@ -50,6 +50,19 @@ class CASMustAliasFlow(unittest.TestCase):
             with self.subTest(op=op),self.assertRaises(ValueError):
                 self.trace([op,'set $p0 0x1 eq u32 $r0 $r6'])
 
+    def test_predicated_reconvergence_and_exit_inside_slice_refused(self):
+        for op in ('$p1 join nop', '(not $p1) join mov b32 $r7 $r8',
+                   '$p1 exit', '(not $p1) exit', '$p1 joinat 0x10',
+                   '(not $p1) joinat 0x10'):
+            with self.subTest(op=op),self.assertRaises(ValueError):
+                self.trace([op,'mov b32 $r5 $r6','set $p0 0x1 eq u32 $r0 $r5'])
+
+    def test_predicated_joinat_from_outside_slice_refused(self):
+        for op in ('$p1 joinat 0x18', '(not $p1) joinat 0x18'):
+            ops=graph(op,'mov b32 $r5 $r6','nop','set $p0 0x1 eq u32 $r0 $r5')
+            with self.subTest(op=op),self.assertRaises(ValueError):
+                trace_region(ops,1,3,6,0)
+
     def test_branch_leaving_slice_refused(self):
         with self.assertRaises(ValueError):
             self.trace(['$p1 bra 0x80','set $p0 0x1 eq u32 $r0 $r6'])

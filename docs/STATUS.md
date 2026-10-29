@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+The offline copied-lock CAS analyzer now refuses predicated exits and reconvergence in its modeled slice; two assembled synthetic exits previously yielded hypotheses. No certificate or GPU dispatch is authorized. [Evidence](CAS_PREDICATED_CONTROL.md).
+
 A hash-certified two-buffer point transform now runs through the scoped CPU render ICB on GTX for counts through 256, matching direct and CPU results; count-dependent bounds and same-object alias checks are enforced. [Evidence](VERTEX_POINT_TRANSFORM.md).
 
 Two GTX direct/adapted pairs qualify the certified point-write output consumed by a later compute pass, within one buffer or two committed buffers on one queue, without an intervening CPU wait. [Evidence](VERTEX_POINT_DEPENDENCY.md).

@@ -1,0 +1,31 @@
+{
+  "certificate_authorized": false,
+  "counterexamples": [
+    {
+      "current_status": "REFUSED",
+      "decoded_listing_sha256": "92d2c4e184a2668d4f5e7b61105db2f79fdcdc52ea0571a2ff337ad570097c05",
+      "name": "predicate_true",
+      "operation": "$p1 exit",
+      "previous_status": "HYPOTHESIS_ONLY",
+      "synthetic_program_sha256": "8212e88e7311a3f8e1f112dc84df193f6f1af6c1753de28fefba340e55f9d0ef"
+    },
+    {
+      "current_status": "REFUSED",
+      "decoded_listing_sha256": "02d25a253fbcea0273442b87ee50d306d6a04cf72e29cc35c5e4d8cc4e1407fd",
+      "name": "predicate_false",
+      "operation": "(not $p1) exit",
+      "previous_status": "HYPOTHESIS_ONLY",
+      "synthetic_program_sha256": "2b829f31c9f622d355afe44ec16dbb08b1e150ac95ef758a506b62d4ff20ca89"
+    }
+  ],
+  "current_analyzer_sha256": "a5eee166d36a94d6ecc567cda9282961e8aa1d08594404bcf803b07d4a267f0f",
+  "decoder_semantics_proved": false,
+  "gpu_dispatches": 0,
+  "mutated_offset": "0x3d8",
+  "original_program_sha256": "f16bf16da56d5dc060429f6886d2e1d80eafa0a960f48b7d776a3234fb6bcb41",
+  "original_result_unchanged": true,
+  "previous_analyzer_sha256": "861c44dbfedbc4580cf55de59a64ad6e784009f2a6d152af119da7fbbe149256",
+  "status": "PASS_PREDICATED_CAS_CONTROL",
+  "synthetic_air_sass_compiler_correspondence_proved": false,
+  "system_modified": false
+}

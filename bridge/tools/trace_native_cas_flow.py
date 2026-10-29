@@ -61,8 +61,11 @@ def trace_region(instructions,start,end,original,expected):
             if not m:fail('indirect or unsupported branch')
             target=int(m[1],16);target=target+8 if target%64==0 else target
             if start_off<=target<=end_off and not start<=i<end:fail('branch enters tracked slice')
-        if op.startswith('joinat '):
-            m=re.fullmatch(r'joinat (0x[0-9a-f]+)',op)
+        if opcode=='joinat':
+            # Predicate-dependent reconvergence has no model here, including
+            # a target outside this slice or at its assumed entry.
+            if unpredicated!=op:fail('predicated reconvergence is unmodelled')
+            m=re.fullmatch(r'joinat (0x[0-9a-f]+)',unpredicated)
             if not m:fail('unsupported reconvergence target')
             target=int(m[1],16);target=target+8 if target%64==0 else target
             # Entry reconvergence remains an explicit, unproved assumption;
@@ -73,7 +76,8 @@ def trace_region(instructions,start,end,original,expected):
         i=pending.popleft()
         if i==end:continue
         off,op=instructions[i]
-        if op.startswith(('join ','joinat ','exit','call','ret','break','trap')):fail('unsupported control flow in tracked slice')
+        unpredicated=re.sub(r'^(?:\$p\d+ |\(not \$p\d+\) )','',op)
+        if unpredicated.split()[0] in {'join','joinat','exit','call','ret','break','trap'}:fail('unsupported control flow in tracked slice')
         writes=register_writes(op)
         if writes is None:fail('unrecognized register effects')
         if expected in writes:fail('comparison input overwritten')

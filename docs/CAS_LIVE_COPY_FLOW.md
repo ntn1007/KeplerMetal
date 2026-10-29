@@ -18,6 +18,10 @@ in register 0 and the proposed redirect at `0x530`. The modeled slice covers
 [exact-profile experiment](CAS_LIVE_COPY_SDK.md); it is not a new GPU test or
 independent proof that the same relation holds for all lanes.
 
+A later [control-flow correction](CAS_PREDICATED_CONTROL.md) refuses predicated
+exits and reconvergence that the earlier analyzer overlooked. Historical
+results retain their original analyzer hashes.
+
 The model begins **after** the reconvergence instruction with the entry facts
 assumed. It does not prove that every relevant lane executed the CAS or that
 Kepler reconvergence semantics are correctly modeled. The pinned decoder's
