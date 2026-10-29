@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A standalone metadata observer variant passes six CPU generations and 600 concurrent gate cycles. It is not yet connected to the multi-session video host; the dependency observer remains single-use. [Evidence](VIDEO_GVA_REPEAT_METADATA_PROTOTYPE.md).
+
 Two diagnostic CPU repetitions show the metadata observer accepting the first begin and refusing the second before decode. The dependency observer has a separate one-shot guard; repeated hardware video remains untested. [Evidence](VIDEO_GVA_REPEAT_METADATA.md).
 
 A same-process video repetition CPU preflight failed on the second helper; its exact cause is unresolved. Static audit separately shows the existing dependency observer only admits one session creation. No repeated hardware-video trial was run. [Evidence](VIDEO_GVA_REPEAT_PREFLIGHT.md).

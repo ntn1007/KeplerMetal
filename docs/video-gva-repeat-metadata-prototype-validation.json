@@ -1,0 +1,35 @@
+{
+  "gate_cycles": 600,
+  "gate_sha256": "2e37ca9cdf033e4ef602cc826f72bba1df8a6f59a64e80cde036938bc98a3a40",
+  "gpu_execution": false,
+  "hardware_video_execution_proved": false,
+  "host_sha256": "ed3bbcc237d409773c01d9c8a87617a572bd9a0009b0c23dfd307701accbb520",
+  "integration_in_video_host": false,
+  "library_sha256": "e4ab52048d0953d2b01156fff3cf3c9017b1d29d7408c990ce4cae83396395e6",
+  "logs_sha256": {
+    "gate-0": "0456770d0fc1addf5fa2ad7416cc273ab5000c5cbd4ab628782f5d5721b456d2",
+    "gate-1": "52fac7ffada0f713181455dc03a227e3439f0790abd3333ea79e3114cea4dd23",
+    "metadata-0": "8bb2462ee45930a448bf1b41078e7a397c359921a5446006e0021f3acb3a1681",
+    "metadata-1": "8bb2462ee45930a448bf1b41078e7a397c359921a5446006e0021f3acb3a1681"
+  },
+  "metadata_generations_per_process": 3,
+  "metadata_processes": 2,
+  "negative_cases": [
+    "wrong-owner",
+    "concurrent-begin",
+    "invalid-sites",
+    "stale-ticket",
+    "timeout-poison"
+  ],
+  "qualifier_sha256": "2b8a08bde3e1e96174f7b18bf3a77f27ed42f4440ca3c87b1ed1ad60e051781c",
+  "sources_sha256": {
+    "metadata_repeat.mm": "95af4f9a4b5eafb3565191bdfc8a4476d57f5c35792a20e02ce6802137d451ba",
+    "metadata_repeat_test.mm": "ab147fedec5de59d474fd5b238c0cf6de1925ec9a002db04293f2d58f5516b73",
+    "repeat_gate.h": "bb2fdc9e3701623c913e807f74122fe8826a30f8f919abc078c948246d617755",
+    "repeat_gate_test.cpp": "501e27c9d6e2862149c708f43bc0bf03b1de01ab48eaee7e7d9631a8bf73c9ea",
+    "video_registry_metadata.h": "f7ebc76ae6bd798c202a1ee410672fab1e0546c239ea7773c90bd7deb29e478d"
+  },
+  "status": "PASS_CPU_REPEAT_METADATA_PROTOTYPE",
+  "system_modified": false,
+  "worker_threads_per_process": 4
+}
