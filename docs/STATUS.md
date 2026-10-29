@@ -1,8 +1,10 @@
 # Status, 2026-10-29
 
-A standalone dependency-observer variant passes six CPU observation scopes and six pinned-profile inspection scopes. It has not been qualified with actual repeated VideoToolbox session creation or linked to the video client. [Evidence](VIDEO_GVA_REPEAT_DEPENDENCY_PROTOTYPE.md).
+An integrated repeat client passes six CPU H.264 sessions with 4,147,200 matching bytes. Twelve hardware-required requests still produce no images; two debugger runs have one property hit, four list hits and no cached-byte-check hit each. [Evidence](VIDEO_GVA_REPEAT_INTEGRATED.md).
 
-A standalone metadata observer variant passes six CPU generations and 600 concurrent gate cycles. It is not yet connected to the multi-session video host; the separate dependency prototype has since passed standalone CPU checks. [Evidence](VIDEO_GVA_REPEAT_METADATA_PROTOTYPE.md).
+A standalone dependency-observer variant passes six CPU observation scopes and six pinned-profile inspection scopes. The integrated client has since passed repeated software VideoToolbox sessions; hardware-required requests still fail. [Evidence](VIDEO_GVA_REPEAT_DEPENDENCY_PROTOTYPE.md).
+
+A standalone metadata observer variant passes six CPU generations and 600 concurrent gate cycles. It has since been linked with the dependency prototype into a bounded multi-session video test. [Evidence](VIDEO_GVA_REPEAT_METADATA_PROTOTYPE.md).
 
 Two diagnostic CPU repetitions show the metadata observer accepting the first begin and refusing the second before decode. The dependency observer has a separate one-shot guard; repeated hardware video remains untested. [Evidence](VIDEO_GVA_REPEAT_METADATA.md).
 
