@@ -74,19 +74,19 @@
       "path": "bridge/src/KeplerCPUICB.mm",
       "source_path": "bridge/src/KeplerCPUICB.mm",
       "source_SHA256": "3d59c2c609611ddc387e616b8945e903f6378dbd4a3b66a02cb22087ada84b60",
-      "published_SHA256": "a2f29202a708be860148e2695055dfce1134990c91e2d832d6079fc7a9a28828",
-      "bytes": 168777,
+      "published_SHA256": "e5e8d83cec4e162040ee7ee4b52c9dd4865652298b0db3db180ba1ae0b53c988",
+      "bytes": 169864,
       "modified_for_publication": true,
       "previous_published_SHA256": "183be0be67c910ebdbff61841347f6146f72e0b1512bf241d54f0d258a308828",
       "latest_change": {
+        "previous_published_SHA256": "a2f29202a708be860148e2695055dfce1134990c91e2d832d6079fc7a9a28828",
+        "previous_bytes": 168777,
+        "reason": "Accept one- and two-vertex or indexed incomplete triangles only for the pinned side-effect-free legacy render pipeline, with execution-time state recheck."
+      },
+      "previous_latest_change": {
         "previous_published_SHA256": "06f573eec8d1b4283f8e069bc7ba0689aac3085d5a47f4981b6450fcde1be20d",
         "previous_bytes": 168767,
         "reason": "Support bounded CPU render ICB draws with zero vertices, indices or instances as inert commands; clear stale records."
-      },
-      "previous_latest_change": {
-        "previous_published_SHA256": "3bb6877715b3d456167c48c3b567398666b9eeb1f7750351be434edc1f1bb6f9",
-        "previous_bytes": 163699,
-        "reason": "Expose the existing queue-local automatic compute encoder factory behind an explicit public scope opt-in."
       },
       "prior_change_history": [
         {
@@ -113,6 +113,11 @@
           "previous_published_SHA256": "87c43fd883f46425f9642f537226e3087292041ed5352533c53e48d138f23a84",
           "previous_bytes": 163826,
           "reason": "Add bounded whole-range preflight and preparation for partial GPU copies, plus explicit ended-blit detach for process-local automatic adaptation."
+        },
+        {
+          "previous_published_SHA256": "3bb6877715b3d456167c48c3b567398666b9eeb1f7750351be434edc1f1bb6f9",
+          "previous_bytes": 163699,
+          "reason": "Expose the existing queue-local automatic compute encoder factory behind an explicit public scope opt-in."
         }
       ]
     },

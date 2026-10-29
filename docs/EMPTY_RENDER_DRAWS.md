@@ -7,7 +7,7 @@ profile**. The command clears any previously materialized record and is
 represented as inert in the scoped command list. Reset still clears its state.
 Nonzero commands use the existing transport. The normal index-buffer type,
 device, offset and range checks remain in force even for empty indexed draws.
-Incomplete triangles and unsupported primitive types are still refused.
+At this earlier milestone incomplete triangles and unsupported primitive types were refused. A later [bounded legacy-profile extension](PARTIAL_TRIANGLE_ICB.md) accepts one or two vertices or indices.
 
 This is a branch B extension of the project-owned, opt-in ICB implementation.
 It does not modify the Apple/NVIDIA driver or make ICBs transparent to ordinary
