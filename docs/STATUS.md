@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+An Apple M1 Max native reference now verifies one inherited compute ICB across parent pipeline switches A/B/A, with direct comparisons and a no-dispatch control. The GTX adapter still refuses this feature and no Kepler execution is claimed. [Evidence](COMPUTE_ICB_INHERIT_REFERENCE.md).
+
 The offline CAS recognizer now refuses additional unmodeled GK104 stack, return, break/continue, exception and execution-mask operations. Ten one-word assembled-and-decoded controls are refused and four archived verdicts remain unchanged; no synthetic program was dispatched. [Evidence](CAS_UNMODELED_CONTROL.md).
 
 The offline CAS recognizer now refuses reconvergence targets established inside the lock region and pointing beyond the repair redirect. Three assembled-and-decoded examples are refused, with four archived verdicts unchanged; none was dispatched. [Evidence](CAS_RECONVERGENCE_BYPASS.md).

@@ -1,0 +1,26 @@
+{
+  "capture_hashes_verified_after_transfer": true,
+  "capture_pair_sha256": {
+    "pair-0": "e83596f1631ee6159068f1eb2588aac54b718052ff9fdc64b0b87264ec4a2ab7",
+    "pair-1": "db8b54e62442bf31b21e517b37619e5a9c5e8409623fb786f26ed8f168955104",
+    "pair-2": "e83596f1631ee6159068f1eb2588aac54b718052ff9fdc64b0b87264ec4a2ab7"
+  },
+  "correct_uint32_values": 384,
+  "direct_runs": 3,
+  "indirect_runs": 3,
+  "kepler_gpu_execution": false,
+  "new_gpu_execution_by_audit": false,
+  "no_dispatch_words": 64,
+  "pipeline_order": [
+    "a",
+    "b",
+    "a"
+  ],
+  "recorded_process_exit": "observed separately by SSH",
+  "reference_executable_sha256": "d304c2597abcd5d7ef6b0d6724f001f655a9f99b25cc6bb05576e3b0bf123c67",
+  "remote_stdout_sha256": "8141caeecdfe7ef8a21db8a08504dfa6efe611b3c4872ebcd848a908526aa15b",
+  "reset_tested": false,
+  "scope": "native M1 Max, one inherited compute ICB, explicit buffer, serial submissions",
+  "source_sha256": "fef542286d3369f4ac970c08158ee44bad1d667ee4a8b5b0b29b42aee84a4883",
+  "status": "PASS_M1_NATIVE_COMPUTE_INHERIT_REFERENCE"
+}
