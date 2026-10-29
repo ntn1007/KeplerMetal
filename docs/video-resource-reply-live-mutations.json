@@ -1,0 +1,33 @@
+{
+  "status": "PASS_REPLY_LIVE_AUDIT_MUTATIONS",
+  "mutations": [
+    {
+      "mutation": "different-pair",
+      "refused": true
+    },
+    {
+      "mutation": "wrong-match",
+      "refused": true
+    },
+    {
+      "mutation": "extra-reply",
+      "refused": true
+    },
+    {
+      "mutation": "raw-export",
+      "refused": true
+    },
+    {
+      "mutation": "baseline-target",
+      "refused": true
+    },
+    {
+      "mutation": "nonterminal",
+      "refused": true
+    }
+  ],
+  "source_audit_sha256": "797ba9fb956eca422bc7213b00eb6318f80bfff3e8c105f2b225dbbfc86b216c",
+  "script_sha256": "ef63f2b648afbc67048b51578fb167ce38df92556085e4cec3ac43826df1fbb3",
+  "native_calls": 0,
+  "gpu_execution": false
+}

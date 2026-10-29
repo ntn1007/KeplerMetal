@@ -1,0 +1,64 @@
+{
+  "status": "PASS_LIVE_METAL_REPLY_FIELDS",
+  "hosts": 6,
+  "matching_real_buffer_creations": 2,
+  "baseline_controls": 2,
+  "identity_controls": 2,
+  "resource_bytes_cpu_checked": 8388608,
+  "captured_fields_compared_inside_process": true,
+  "raw_addresses_exported": false,
+  "independent_raw_field_recomparison": false,
+  "explicit_gpu_commands": false,
+  "hardware_video_execution_proved": false,
+  "generic_metal_buffer_is_video_buffer": false,
+  "system_modified": false,
+  "source_sha256": "0bae0cc8055a34d8a16fba5cf723945ee42c3bf8df517100b2bc30003c2d62fa",
+  "runner_sha256": "08dfe4ff93522e16ce28bc2cc219014ee8e23e325bb9743e224bba1b48708046",
+  "library_sha256": "bb9024b38f17bd3a23f762d0b3242f4612d348506712d65245de827d8ab442fa",
+  "application_sha256": "95066e4003deb9def117f53d65c833cae575b47eb8ef5172509f6ec80cfc0148",
+  "audit_sha256": "797ba9fb956eca422bc7213b00eb6318f80bfff3e8c105f2b225dbbfc86b216c",
+  "rows": [
+    {
+      "mode": "inventory",
+      "host_sha256": "95066e4003deb9def117f53d65c833cae575b47eb8ef5172509f6ec80cfc0148",
+      "stdout_sha256": "1fc8b909ed1a1bb95f3f544b1cfefb17317d46d2d68459a35efca9ca03191e23",
+      "reservation_id": "6b067c6e2f1d4158873832ad2e7f90e5",
+      "terminal": true
+    },
+    {
+      "mode": "control",
+      "host_sha256": "95066e4003deb9def117f53d65c833cae575b47eb8ef5172509f6ec80cfc0148",
+      "stdout_sha256": "90c7c50b9ef8e6f480dbb29b1d6e51b3368722e0ccdd1d5f3e93bc3afb9077ba",
+      "reservation_id": "7414f6f196014be085edbd09c93a9e6e",
+      "terminal": true
+    },
+    {
+      "mode": "baseline",
+      "host_sha256": "95066e4003deb9def117f53d65c833cae575b47eb8ef5172509f6ec80cfc0148",
+      "stdout_sha256": "861f0ccf7f0116cc7314971e067e480ae30927c12f9cd5cfd739997f93b20933",
+      "reservation_id": "f09b4544480f486186b49cfcfe68e449",
+      "terminal": true
+    },
+    {
+      "mode": "large",
+      "host_sha256": "95066e4003deb9def117f53d65c833cae575b47eb8ef5172509f6ec80cfc0148",
+      "stdout_sha256": "6c0f201a6dcb2d8870db5a2b5586b45087a273760ca558a68a5318a3a840ea94",
+      "reservation_id": "9e9929eb56bc42ac8ec7fff6395f27c9",
+      "terminal": true
+    },
+    {
+      "mode": "baseline",
+      "host_sha256": "95066e4003deb9def117f53d65c833cae575b47eb8ef5172509f6ec80cfc0148",
+      "stdout_sha256": "35794e95b6a7fe306cd22642cac05673c8ff11bd8e2d6712319260353afb3e01",
+      "reservation_id": "f0c28a51db0148c8b24f9dd15373fdfd",
+      "terminal": true
+    },
+    {
+      "mode": "large",
+      "host_sha256": "95066e4003deb9def117f53d65c833cae575b47eb8ef5172509f6ec80cfc0148",
+      "stdout_sha256": "90e8272268c84fc206d298629eb70db8674c32bf16562fedcda3d8c230965b4e",
+      "reservation_id": "e0d970d823a84aaa95d35735728909e1",
+      "terminal": true
+    }
+  ]
+}
