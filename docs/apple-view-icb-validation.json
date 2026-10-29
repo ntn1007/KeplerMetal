@@ -1,0 +1,75 @@
+{
+  "adapted_packets_checked": 120,
+  "apple_app_executed": false,
+  "apple_archive_sha256": "559d91d42ba4d4adff9517600de522d12f8fbc3270982ac6e0d0b5bfd414f311",
+  "apple_library_sha256": "adf18526f6b8fe358a30d3088dd801440b5509ac50126857174de03e17fba5bf",
+  "archive_sha256": "c67feb4b50274737e6bbf3c6f0d621d970c8db804fc4eb572651810b6174cf55",
+  "backface_rejection_independently_proved": false,
+  "build_sha256": "8ce858f0e50e45239630fb8fe830f5d39de27958153e4b670ea4f8d9b7f769f0",
+  "checked_system_files_unchanged": true,
+  "color_bytes_compared": 196608,
+  "commands_per_render": 15,
+  "completed_render_buffers": 16,
+  "depth_comparison_independently_proved": false,
+  "direct_adapted_raw_images_identical": true,
+  "first_draw_prefix_preserved": true,
+  "frame_update_generations": 2,
+  "general_explicit_shaders_supported": false,
+  "guard_bytes_checked": 8192,
+  "independent_center_pixels_checked": 240,
+  "initial_encoder_cleanup_assertion": true,
+  "last_slot_short_object_refusals": 2,
+  "negative_command_buffers_submitted": false,
+  "performance_benchmark": false,
+  "pre_patch_prefix_refused": true,
+  "prefix_unsubmitted_observation_processes": 2,
+  "prior_profile_refused": true,
+  "private_copy_negative_control": false,
+  "private_frame_copy_before_draw": true,
+  "processes": 4,
+  "runs": [
+    {
+      "images_sha256": {
+        "private-0.bin": "6ba35a038c22d26d784a58d58af71e48458f8e81425283641ecf130a689bb2ab",
+        "private-1.bin": "c1ea3c0c6450d9323fa38b8b3cf628663abcd4d1c52046512e0263690dd335b8",
+        "shared-0.bin": "6ba35a038c22d26d784a58d58af71e48458f8e81425283641ecf130a689bb2ab",
+        "shared-1.bin": "c1ea3c0c6450d9323fa38b8b3cf628663abcd4d1c52046512e0263690dd335b8"
+      },
+      "manifest_sha256": "e0b6592b4ec7b8fe822c0bef3107062af6938f1761644ce68a10372caf91f7eb",
+      "mode": "direct"
+    },
+    {
+      "images_sha256": {
+        "private-0.bin": "6ba35a038c22d26d784a58d58af71e48458f8e81425283641ecf130a689bb2ab",
+        "private-1.bin": "c1ea3c0c6450d9323fa38b8b3cf628663abcd4d1c52046512e0263690dd335b8",
+        "shared-0.bin": "6ba35a038c22d26d784a58d58af71e48458f8e81425283641ecf130a689bb2ab",
+        "shared-1.bin": "c1ea3c0c6450d9323fa38b8b3cf628663abcd4d1c52046512e0263690dd335b8"
+      },
+      "manifest_sha256": "a4f584373469403a3618d8b920a5847ffb9c7eb1a4b535045c517ae5ee1d3c5b",
+      "mode": "auto"
+    },
+    {
+      "images_sha256": {
+        "private-0.bin": "6ba35a038c22d26d784a58d58af71e48458f8e81425283641ecf130a689bb2ab",
+        "private-1.bin": "c1ea3c0c6450d9323fa38b8b3cf628663abcd4d1c52046512e0263690dd335b8",
+        "shared-0.bin": "6ba35a038c22d26d784a58d58af71e48458f8e81425283641ecf130a689bb2ab",
+        "shared-1.bin": "c1ea3c0c6450d9323fa38b8b3cf628663abcd4d1c52046512e0263690dd335b8"
+      },
+      "manifest_sha256": "759abc8a5cd287daf47c6a968215095af73a192e16e45e9e1e6a7ff636e1ce81",
+      "mode": "direct"
+    },
+    {
+      "images_sha256": {
+        "private-0.bin": "6ba35a038c22d26d784a58d58af71e48458f8e81425283641ecf130a689bb2ab",
+        "private-1.bin": "c1ea3c0c6450d9323fa38b8b3cf628663abcd4d1c52046512e0263690dd335b8",
+        "shared-0.bin": "6ba35a038c22d26d784a58d58af71e48458f8e81425283641ecf130a689bb2ab",
+        "shared-1.bin": "c1ea3c0c6450d9323fa38b8b3cf628663abcd4d1c52046512e0263690dd335b8"
+      },
+      "manifest_sha256": "c3b2700c2cc787882b79089f3bae807e8b7e7b3fae8202972cf3eff1427eef8b",
+      "mode": "auto"
+    }
+  ],
+  "same_icb_reused_for_each_frame": true,
+  "status": "PASS_APPLE_VIEW_15_COMMAND_ICB",
+  "transparent_system_integration": false
+}

@@ -1,0 +1,44 @@
+{
+  "archive_sha256": "c67feb4b50274737e6bbf3c6f0d621d970c8db804fc4eb572651810b6174cf55",
+  "build_sha256": "bd2066624964d6b947dbca64d0d0e3d1e3432acdf0d1939897eed591f20d5793",
+  "checked_float_channels": 49152,
+  "checked_guard_bytes": 2048,
+  "checked_system_files_unchanged": true,
+  "completed_render_buffers": 4,
+  "cpu_exact_caller_pixels": 3072,
+  "cpu_exact_flat_pixels": 3072,
+  "followup_direct_draw_without_pipeline_or_vertex_rebind": true,
+  "full_icb_contract": false,
+  "performance_benchmark": false,
+  "processes": 4,
+  "raw_direct_and_adapted_images_match": true,
+  "runs": [
+    {
+      "image_sha256": "f3d355a7a9851879b2e2ecb7ba224a03014c9f9f2c35b19e5ee1e968a73b509a",
+      "manifest_sha256": "c3dbe50067581db9dd80132503763d973875358d8be123dd53cd35f916a9a4fe",
+      "mode": "direct"
+    },
+    {
+      "image_sha256": "f3d355a7a9851879b2e2ecb7ba224a03014c9f9f2c35b19e5ee1e968a73b509a",
+      "manifest_sha256": "0a53363fe47e202f4407b0ec98a1b558887a629d872d1bee135a878e40e24f9b",
+      "mode": "auto"
+    },
+    {
+      "image_sha256": "f3d355a7a9851879b2e2ecb7ba224a03014c9f9f2c35b19e5ee1e968a73b509a",
+      "manifest_sha256": "54c0b6b285217db1ef714ba9e552caa8667e9c9e5b863705394939cb173657fd",
+      "mode": "direct"
+    },
+    {
+      "image_sha256": "f3d355a7a9851879b2e2ecb7ba224a03014c9f9f2c35b19e5ee1e968a73b509a",
+      "manifest_sha256": "4730ab4ed1d52621bc788f3fee771fd3b7461a0b389f1642869d7455c83fbf70",
+      "mode": "auto"
+    }
+  ],
+  "same_encoder_pipeline_sequence": [
+    "smooth",
+    "flat",
+    "smooth"
+  ],
+  "status": "PASS_INHERITED_SAME_ENCODER_GPU",
+  "transparent_system_integration": false
+}

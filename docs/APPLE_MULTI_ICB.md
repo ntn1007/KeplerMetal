@@ -13,6 +13,10 @@ depth state or view. It uses the scoped prototype, the pinned library and
 manifest, and a 64×48 floating-point target. General ICB support, transparent
 application integration and GPU-encoded ICBs remain unqualified.
 
+A [subsequent offscreen profile](APPLE_VIEW_ICB.md) adds BGRA color, a depth
+attachment and back-face cull state, while retaining the same qualification
+limits for the original application.
+
 ## Evidence
 
 Two direct/adapted pairs on the GTX produce 16 completed render buffers. The

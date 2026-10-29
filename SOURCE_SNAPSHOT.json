@@ -302,19 +302,19 @@
       "path": "bridge/src/KeplerNativeRenderDraws.mm",
       "source_path": "bridge/src/KeplerNativeRenderDraws.mm",
       "source_SHA256": "370abcc54cd28f4b9b6731b9a8d7b9debf21067a79d8aba9ac16b4782e0d32a5",
-      "published_SHA256": "23425d2add17cd257819990666cb7857ef7cf757cf46d8bd67cc69fae067791c",
-      "bytes": 79868,
+      "published_SHA256": "f0b8c7f42545a937450f0b9b1efe7e669af9073c71bef6b70d223bf221987e4e",
+      "bytes": 80791,
       "modified_for_publication": true,
       "previous_published_SHA256": "ab893268a9ca9383b430b203cc8896b095c4e891d76d7c3728730fdaa2ed06cb",
       "latest_change": {
+        "previous_published_SHA256": "23425d2add17cd257819990666cb7857ef7cf757cf46d8bd67cc69fae067791c",
+        "previous_bytes": 79868,
+        "reason": "Allow the pinned Apple shader BGRA8/depth profile and preserve its strictly observed first-draw state prefix."
+      },
+      "previous_latest_change": {
         "previous_published_SHA256": "cdb5553fa81e6861a4f5bb1ae5d8d708afbe23123a8070b80ebaa74fbde0a742",
         "previous_bytes": 78362,
         "reason": "Accept the exact Apple sample explicit-buffer shader with reflection, geometry and per-buffer bounds checks."
-      },
-      "previous_latest_change": {
-        "previous_published_SHA256": "23a47b662d93729d2129d28ac5550835334f8e2f2d4eb71dad955f3809f7ed1d",
-        "previous_bytes": 77031,
-        "reason": "Add a hash-certified two-buffer point transform with count-dependent bounds, reflected access and CPU ICB replay."
       },
       "prior_change_history": [
         {
@@ -331,6 +331,11 @@
           "previous_published_SHA256": "0771f30cecda7a52df3bd962762e38626cfe3aa932e4d18f26a25594c39b99ff",
           "previous_bytes": 75058,
           "reason": "Support a hash-certified, bounded point-draw shader with a writable shared vertex buffer in the scoped CPU render ICB."
+        },
+        {
+          "previous_published_SHA256": "23a47b662d93729d2129d28ac5550835334f8e2f2d4eb71dad955f3809f7ed1d",
+          "previous_bytes": 77031,
+          "reason": "Add a hash-certified two-buffer point transform with count-dependent bounds, reflected access and CPU ICB replay."
         }
       ]
     },
@@ -8135,5 +8140,11 @@
     "previous_public_commit": "c3c6ebe",
     "previous_snapshot_SHA256": "b7c97bcd4c8415973d003abd40d3ebaa1ce5b252c9b5a9cd36019a833b86446d",
     "scope": "Exact Apple shader explicit-buffer registration and bounds; GPU indirect preparation remains refused."
+  },
+  "apple_view_icb_update": {
+    "date": "2026-10-29",
+    "previous_public_commit": "d8e7997",
+    "previous_snapshot_SHA256": "3bf0d373a0af4c67372843434131182987cfe6cf7a6c5b795017580d88d7ce69",
+    "scope": "Exact BGRA8/depth Apple shader profile and bounded observed prefix; no system integration."
   }
 }
