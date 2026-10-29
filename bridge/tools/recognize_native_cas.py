@@ -84,6 +84,14 @@ def air_contract(module,function='test'):
    value=node['operands'][0]
  if len(reachable)!=1 or types[values[reachable[0]['operands'][0]]['type']]['address_space']!=1:
   return {'qualified':False,'reason':'No unique device output store preserving expected component'}
+ store=reachable[0]
+ # This recognizer has no dominance or cross-block data-flow model. Require
+ # the whole observed output path to remain in the same straight-line block;
+ # an SSA use in another block is not proof that every CAS path stores it.
+ if not load['index']<item['index']<store['index'] or any(
+    x['block']!=call['block'] or x['op'] in (8,9,10,12)
+    for x in ins if load['index']<x['index']<=store['index']):
+  return {'qualified':False,'reason':'Expected output is not on the same straight-line post-CAS path'}
  return {'qualified':True,'expected_output_component':idx['integer'],'CAS_instruction':call['index'],
          'expected_pointer_value':pointer,'expected_load_instruction':load['index'],'output_store_instruction':reachable[0]['index'],
          'scope':'Single local i32 weak CAS, direct post-call expected load to uint4 device output; broader CFG/alias/ABI cases rejected.'}

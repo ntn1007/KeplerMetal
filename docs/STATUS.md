@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+The offline CAS recognizer now refuses output insertions or stores outside the same straight-line AIR block as the expected-pointer load. Six parsed-JSON counterexamples are rejected while four archived verdicts remain unchanged; no shader or certificate was requalified. [Evidence](CAS_AIR_OUTPUT_PATH.md).
+
 The pinned Apple Release view profile now admits dimensions 1–4096 on each axis. Two original-executable runs and a 48-frame adapted matrix match direct references across eight tested extents, including 2560 × 1440 and 4096 × 4096; intermediate combinations are not exhaustively qualified. Scope, instrumentation and shader restrictions remain. [Evidence](APPLE_BOUNDED_EXTENTS.md).
 
 The scoped Apple Release ICB path now accepts the sample's observed 800 × 600 initial drawable, without resizing its window. Two original-app captures, two 48-frame fixed/transition matrices, extent refusals and same-runtime 64 × 48/stage-in regressions pass. Capture still changes the view's framebuffer-only setting; support remains limited to two exact extents and one shader profile. [Evidence](APPLE_NATURAL_EXTENT.md).

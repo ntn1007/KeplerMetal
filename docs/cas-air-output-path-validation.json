@@ -1,0 +1,85 @@
+{
+  "compiled_mutated_air": false,
+  "current_source_sha256": "bf9555f211ec49ff2b429cfcfba6ac23e63eebcd3af14e913bf540b37d9bf285",
+  "gpu_execution": false,
+  "mutations_are_parsed_json_only": true,
+  "previous_source_sha256": "7cebf0cb923e4321931a3362b028b8ee73bfc51a32cea4b729986d61d88f8944",
+  "prior_certificates_changed": false,
+  "rows": [
+    {
+      "after": true,
+      "before": true,
+      "case": "slot1",
+      "component": 0,
+      "kind": "retained_parsed_air",
+      "typed_air_sha256": "bb54a9ad58db6bd8b379c063f47531202495fa18f46af2a2dade4037292b8284"
+    },
+    {
+      "after": false,
+      "before": true,
+      "case": "slot1",
+      "kind": "insert_other_block",
+      "reason": "Expected output is not on the same straight-line post-CAS path"
+    },
+    {
+      "after": false,
+      "before": true,
+      "case": "slot1",
+      "kind": "store_other_block",
+      "reason": "Expected output is not on the same straight-line post-CAS path"
+    },
+    {
+      "after": true,
+      "before": true,
+      "case": "live_noise",
+      "component": 0,
+      "kind": "retained_parsed_air",
+      "typed_air_sha256": "7697425e32b92dbdc897dd3f104ad168c303258a1696ccdc560443f9c96b221b"
+    },
+    {
+      "after": false,
+      "before": true,
+      "case": "live_noise",
+      "kind": "insert_other_block",
+      "reason": "Expected output is not on the same straight-line post-CAS path"
+    },
+    {
+      "after": false,
+      "before": true,
+      "case": "live_noise",
+      "kind": "store_other_block",
+      "reason": "Expected output is not on the same straight-line post-CAS path"
+    },
+    {
+      "after": true,
+      "before": true,
+      "case": "permuted",
+      "component": 1,
+      "kind": "retained_parsed_air",
+      "typed_air_sha256": "699a7c6b99b3ed0e154a0f5f69979f746a08a3097be431ca91c417178da67be3"
+    },
+    {
+      "after": false,
+      "before": true,
+      "case": "permuted",
+      "kind": "insert_other_block",
+      "reason": "Expected output is not on the same straight-line post-CAS path"
+    },
+    {
+      "after": false,
+      "before": true,
+      "case": "permuted",
+      "kind": "store_other_block",
+      "reason": "Expected output is not on the same straight-line post-CAS path"
+    },
+    {
+      "after": false,
+      "before": false,
+      "case": "original_compare_control",
+      "component": null,
+      "kind": "retained_parsed_air",
+      "typed_air_sha256": "6b0ad5a7f04c8180b41bacacb49dfd8bb8a25f4070f0a5d239f1b067e021592c"
+    }
+  ],
+  "status": "PASS"
+}

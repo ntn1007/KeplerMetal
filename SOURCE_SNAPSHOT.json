@@ -3192,22 +3192,22 @@
       "path": "bridge/tools/recognize_native_cas.py",
       "source_path": "bridge/tools/recognize_native_cas.py",
       "source_SHA256": "d9783fa0258f65f50d3df9547f36701684324abcc9f99a494ba70fca41a063cb",
-      "published_SHA256": "7cebf0cb923e4321931a3362b028b8ee73bfc51a32cea4b729986d61d88f8944",
-      "bytes": 14511,
+      "published_SHA256": "bf9555f211ec49ff2b429cfcfba6ac23e63eebcd3af14e913bf540b37d9bf285",
+      "bytes": 15040,
       "modified_for_publication": true,
       "publication_change": {
         "previous_published_SHA256": "9aa30b458263eeeddb782cd2a3b10ac362b6faf3ced9cbca805e55b515bebbee",
         "reason": "Require pinned decoder reproduction and preserve checked native snapshots; original source hash retained."
       },
       "latest_change": {
+        "previous_published_SHA256": "7cebf0cb923e4321931a3362b028b8ee73bfc51a32cea4b729986d61d88f8944",
+        "previous_bytes": 14511,
+        "reason": "Refuse AIR output paths crossing blocks or terminators; add conservative CPU regression cases."
+      },
+      "previous_latest_change": {
         "previous_published_SHA256": "a1a5a7edc7828b5a05a12b14835049f59d0692ae45393bc26ac18e2fa6373a6a",
         "previous_bytes": 13671,
         "reason": "Reject unmodeled reconvergence targets inside the native CAS candidate; retain the observed entry as an explicit assumption."
-      },
-      "previous_latest_change": {
-        "previous_published_SHA256": "accfc71ca96eb64787c85715f25fab9042074b577c5b25dd2728e7d6f10af1e3",
-        "previous_bytes": 12575,
-        "reason": "Track GPR writes in JOIN-modified operations; offline synthetic counterexample and tests."
       },
       "prior_change_history": [
         {
@@ -3232,6 +3232,11 @@
           "previous_published_SHA256": "d2d7ecc09b7c5b3707bd65502c34d8f322c03f7ee41b7350f6cb89c7f87b8c54",
           "previous_bytes": 12810,
           "reason": "Reject direct branches entering a CAS candidate after its lock and into the fixed lock sequence; test both predicates and schedule-word targets."
+        },
+        {
+          "previous_published_SHA256": "accfc71ca96eb64787c85715f25fab9042074b577c5b25dd2728e7d6f10af1e3",
+          "previous_bytes": 12575,
+          "reason": "Track GPR writes in JOIN-modified operations; offline synthetic counterexample and tests."
         }
       ]
     },
@@ -7742,22 +7747,22 @@
       "path": "tests/test_native_cas_recognizer.py",
       "source_path": "tests/test_native_cas_recognizer.py",
       "source_SHA256": "ee6d4693d639b2225a54ac31a785bb08bad65c83cb16feacd4ad95b900fd3487",
-      "published_SHA256": "b5d1f72f6ddc865c13a8c40bec9431e0c02894750aa3ec0ff12bfb7d69322b0c",
-      "bytes": 11226,
+      "published_SHA256": "8a4e55bbd3b36a47db697961509c98dd4ebb3a1bded7b651efeb9525560ed248",
+      "bytes": 13220,
       "modified_for_publication": true,
       "publication_change": {
         "previous_published_SHA256": "ee6d4693d639b2225a54ac31a785bb08bad65c83cb16feacd4ad95b900fd3487",
         "reason": "Exercise fail-closed disassembly coverage, decoder verification and input snapshots."
       },
       "latest_change": {
+        "previous_published_SHA256": "b5d1f72f6ddc865c13a8c40bec9431e0c02894750aa3ec0ff12bfb7d69322b0c",
+        "previous_bytes": 11226,
+        "reason": "Refuse AIR output paths crossing blocks or terminators; add conservative CPU regression cases."
+      },
+      "previous_latest_change": {
         "previous_published_SHA256": "bca0ce2ea40e3501700d1a3c232931accd38732f40b4a450e991d949dad9e23b",
         "previous_bytes": 10299,
         "reason": "Reject unmodeled reconvergence targets inside the native CAS candidate; retain the observed entry as an explicit assumption."
-      },
-      "previous_latest_change": {
-        "previous_published_SHA256": "330d47bd404fcd0b4f818599a4debe175118ff32035ad3fec407403c086d59bb",
-        "previous_bytes": 7896,
-        "reason": "Track GPR writes in JOIN-modified operations; offline synthetic counterexample and tests."
       },
       "prior_change_history": [
         {
@@ -7782,6 +7787,11 @@
           "previous_published_SHA256": "471948d767b838cedc81b7e562e752a69f891e31360322ffa478fe37253ae63e",
           "previous_bytes": 9360,
           "reason": "Reject direct branches entering a CAS candidate after its lock and into the fixed lock sequence; test both predicates and schedule-word targets."
+        },
+        {
+          "previous_published_SHA256": "330d47bd404fcd0b4f818599a4debe175118ff32035ad3fec407403c086d59bb",
+          "previous_bytes": 7896,
+          "reason": "Track GPR writes in JOIN-modified operations; offline synthetic counterexample and tests."
         }
       ]
     },

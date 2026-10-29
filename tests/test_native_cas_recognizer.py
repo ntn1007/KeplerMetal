@@ -34,6 +34,43 @@ def listing(extra='nop', address=8, after_store='exit'):
 
 
 class CASRecognitionSafety(unittest.TestCase):
+    @staticmethod
+    def air_fixture():
+        # Synthetic typed-AIR model, not an encoded or GPU-executable shader.
+        types = [dict(kind=2, bits=32), dict(kind=3, address_space=3, element=0),
+                 dict(kind=3, address_space=0, element=0),
+                 dict(kind=4, count=4, element=0),
+                 dict(kind=3, address_space=1, element=0)]
+        values = [dict(type=1), dict(type=2), dict(type=0), dict(type=3),
+                  dict(type=0, kind=2, integer=0), dict(type=3), dict(type=4), dict(type=0)]
+        instructions = [
+            dict(index=0, block=0, op=16, callee='air.atomic.local.cmpxchg.weak.i32',
+                 type=0, operands=[99, 0, 1], value=7),
+            dict(index=1, block=0, op=14, type=0, operands=[1], value=2),
+            dict(index=2, block=0, op=5, type=3, operands=[3, 2, 4], value=5),
+            dict(index=3, block=0, op=15, type=0, operands=[6, 5], value=999),
+        ]
+        return dict(types=types, functions=[dict(name='test', values=values, instructions=instructions)])
+
+    def test_air_output_chain_must_stay_in_the_post_cas_block(self):
+        module = self.air_fixture()
+        self.assertTrue(cas.air_contract(module)['qualified'])
+        for position in (2, 3):
+            with self.subTest(position=position):
+                altered = self.air_fixture()
+                altered['functions'][0]['instructions'][position]['block'] = 1
+                self.assertFalse(cas.air_contract(altered)['qualified'])
+
+    def test_air_output_path_cannot_cross_a_control_terminator(self):
+        for op in (8, 9, 10, 12):
+            module = self.air_fixture()
+            instructions = module['functions'][0]['instructions']
+            instructions.insert(2, dict(index=2, block=0, op=op, operands=[], value=998))
+            instructions[3]['index'] = 3
+            instructions[4]['index'] = 4
+            with self.subTest(op=op):
+                self.assertFalse(cas.air_contract(module)['qualified'])
+
     def test_join_modifier_keeps_underlying_register_writes(self):
         self.assertEqual(cas.register_writes('join nop'), set())
         self.assertEqual(cas.register_writes('join mov b32 $r9 $r6'), {9})
