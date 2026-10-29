@@ -1,5 +1,7 @@
 # Build from source
 
+[APPLE_REAL_RENDERER.md](APPLE_REAL_RENDERER.md) documents the locally adapted Apple renderer comparison and reproduction.
+
 [APPLE_MTKVIEW_ICB.md](APPLE_MTKVIEW_ICB.md) documents the MTKView delegate ICB depth witness and reproduction.
 
 [APPLE_WINDOW_ICB.md](APPLE_WINDOW_ICB.md) documents the window-attached ICB depth witness and serialized reproduction.

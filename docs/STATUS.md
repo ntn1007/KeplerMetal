@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+The locally adapted Apple sample renderer now draws its actual 15 gear meshes through scoped CPU ICBs on GTX: captured images match direct draws and blank controls. The original UI, visible display and transparent integration remain unproved. [Evidence](APPLE_REAL_RENDERER.md).
+
 The 15-command scoped ICB matches direct GPU depth output through MTKView draw callbacks and its own drawable/render-pass descriptor. Presentation timestamps remain zero; visible pixels and the original Apple app are unproved. [Evidence](APPLE_MTKVIEW_ICB.md).
 
 A 15-command ICB renders with a framebuffer-only layer attached to a non-key window; the separate depth output matches direct GTX and blank controls. All presentation timestamps remain zero, so visible display is unproved. [Evidence](APPLE_WINDOW_ICB.md).
