@@ -1,0 +1,84 @@
+{
+  "audit_sha256": "eba90d7a6080e35175b6c025e73a1ef5a1797ea2cf3ac23a95210876c7add98b",
+  "checks": [
+    {
+      "case": "device",
+      "reason": "video enumeration identity differs",
+      "rejected": true
+    },
+    {
+      "case": "set-key",
+      "reason": "registration call observation differs",
+      "rejected": true
+    },
+    {
+      "case": "apply",
+      "reason": "availability path differs",
+      "rejected": true
+    },
+    {
+      "case": "callback",
+      "reason": "availability path differs",
+      "rejected": true
+    },
+    {
+      "case": "available",
+      "reason": "availability path differs",
+      "rejected": true
+    },
+    {
+      "case": "append-input",
+      "reason": "availability path differs",
+      "rejected": true
+    },
+    {
+      "case": "append-return",
+      "reason": "availability path differs",
+      "rejected": true
+    },
+    {
+      "case": "branch",
+      "reason": "enumeration decision differs",
+      "rejected": true
+    },
+    {
+      "case": "out-store",
+      "reason": "output observation differs",
+      "rejected": true
+    },
+    {
+      "case": "out-after",
+      "reason": "output observation differs",
+      "rejected": true
+    },
+    {
+      "case": "out-status",
+      "reason": "output observation differs",
+      "rejected": true
+    },
+    {
+      "case": "count",
+      "reason": "request filter observation differs",
+      "rejected": true
+    },
+    {
+      "case": "gtx-item",
+      "reason": "request filter observation differs",
+      "rejected": true
+    },
+    {
+      "case": "request-input",
+      "reason": "request filter observation differs",
+      "rejected": true
+    },
+    {
+      "case": "request-result",
+      "reason": "request filter observation differs",
+      "rejected": true
+    }
+  ],
+  "gpu_execution": false,
+  "originals_modified": false,
+  "source_sha256": "4428a196491a02d952f9b688867c1d46aaefeeef4149890b10d3d48503c9b357",
+  "status": "PASS_MUTATIONS_REJECTED"
+}
