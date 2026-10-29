@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Two three-request video witnesses show zero hits at one statically mapped AppleGVA node-free callsite. Other deallocation paths and node lifetime remain unproved; hardware video still fails. [Evidence](VIDEO_GVA_NODE_FREE.md).
+
 Two calibrated request-window witnesses show property return in window 1 and list-selection hits in windows 1, 2 and 3; asynchronous causality and allocation lifetime remain unproved. All hardware-required requests still fail. [Evidence](VIDEO_GVA_REQUEST_WINDOW.md).
 
 An integrated repeat client passes six CPU H.264 sessions with 4,147,200 matching bytes. Twelve hardware-required requests still produce no images; two debugger runs have one property hit, four list hits and no cached-byte-check hit each. [Evidence](VIDEO_GVA_REPEAT_INTEGRATED.md).

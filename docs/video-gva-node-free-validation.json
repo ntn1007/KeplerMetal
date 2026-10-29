@@ -1,0 +1,123 @@
+{
+  "allocation_lifetime_proved": false,
+  "audit_source_sha256": "8aa5247a35479ac230bd992d733eee64269eb48c448c19ff41e679438f8353bd",
+  "build_sha256": "64e5956e9be97dc7f71b1f027ee33bcc531345ebf11178070fd1ffd32cc4f5bb",
+  "calibration_sha256": "541b4739bc27c97e55d6f6962c481cb273c511dbd9f9d520107b730cb29239d3",
+  "current_witnesses": 2,
+  "hardware_video_execution_proved": false,
+  "list_windows": [
+    1,
+    1,
+    2,
+    3
+  ],
+  "node_free_callsite_hits": 0,
+  "other_free_paths_excluded": false,
+  "property_windows": [
+    1
+  ],
+  "request_window_proves_async_causality": false,
+  "reserved_control_sha256": "903fe358012bb0636c0382ae555719a4d1f89a11be866a90f0b7c89a91db69c3",
+  "runs": [
+    {
+      "manifest_sha256": "edfdb4f8e9dff271b35dac0e9c8159aa6ab704a12acc30f173bbfa4a17406c93",
+      "mode": "cpu",
+      "request_windows": [],
+      "statuses": [
+        0,
+        0,
+        0
+      ],
+      "witness": "on"
+    },
+    {
+      "manifest_sha256": "d35122e58c422176b3b40aeff26d108a56dd1d1b4693fea2b703ef6e6abdb024",
+      "mode": "wrong",
+      "request_windows": [],
+      "statuses": [
+        -12906,
+        -12906,
+        -12906
+      ],
+      "witness": "on"
+    },
+    {
+      "manifest_sha256": "42e011bcd4b2f35cc4dc3db8da37d4ee327e2e97f7300b5ccc2638f34a332682",
+      "mode": "current",
+      "request_windows": [],
+      "statuses": [
+        -12913,
+        -12913,
+        -12913
+      ],
+      "witness": "off"
+    },
+    {
+      "manifest_sha256": "6039eb78b5610c6205198f90e6b454b9082bb4866a7053c7574e9839cad48342",
+      "mode": "current",
+      "request_windows": [
+        [
+          "property_return",
+          1
+        ],
+        [
+          "list_entry",
+          1
+        ],
+        [
+          "list_entry",
+          1
+        ],
+        [
+          "list_entry",
+          2
+        ],
+        [
+          "list_entry",
+          3
+        ]
+      ],
+      "statuses": [
+        -12913,
+        -12913,
+        -12913
+      ],
+      "witness": "on"
+    },
+    {
+      "manifest_sha256": "dbbd78a60da4b40de7509c6a71897b939ad6d45dc38f18f171beb0caefc4fa89",
+      "mode": "current",
+      "request_windows": [
+        [
+          "property_return",
+          1
+        ],
+        [
+          "list_entry",
+          1
+        ],
+        [
+          "list_entry",
+          1
+        ],
+        [
+          "list_entry",
+          2
+        ],
+        [
+          "list_entry",
+          3
+        ]
+      ],
+      "statuses": [
+        -12913,
+        -12913,
+        -12913
+      ],
+      "witness": "on"
+    }
+  ],
+  "software_reference_bytes_matched": 2073600,
+  "status": "PASS_TWO_BOUNDED_NODE_FREE_WITNESSES",
+  "system_modified": false
+}
