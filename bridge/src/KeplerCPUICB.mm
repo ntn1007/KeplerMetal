@@ -41,6 +41,7 @@
 - (id<MTLRenderPipelineState>)pipelineForName:(NSString*)name;
 - (NSDictionary*)profileForPipeline:(id<MTLRenderPipelineState>)pipeline;
 - (BOOL)acceptsRenderTarget:(id<MTLTexture>)target;
+- (BOOL)acceptsRenderTarget:(id<MTLTexture>)target forPipeline:(id<MTLRenderPipelineState>)pipeline;
 - (NSUInteger)maxVertexBindings;
 - (NSUInteger)maxFragmentBindings;
 - (BOOL)encodeFragmentArgumentBuffer:(id<MTLBuffer>)buffer offset:(NSUInteger)offset pipelineName:(NSString*)name bindingIndex:(NSUInteger)index resources:(NSDictionary*)resources error:(NSError**)error;
@@ -589,7 +590,7 @@ static void executePartialRange(NSArray<KPComputeICBCommand*>*commands,NSRange r
         }
         if(!c.hasDraw)continue;id<MTLRenderPipelineState>effectivePipeline=self.inheritPipelineState?link.callerRenderPipeline:c.pipeline;NSDictionary*p=[scope.renderEngine profileForPipeline:effectivePipeline];if(!p)reject(@"Render command has no owned pipeline");if(self.inheritPipelineState&&[p[@"legacy"]boolValue])reject(@"Inherited legacy pipeline is not qualified");if(c.pointWrite!=[p[@"vertex_point_write"]boolValue])reject(@"Render primitive/profile changed after draw");NSError*error=nil;
         KPScopeLink*passLink=objc_getAssociatedObject(encoder,&contextKey);if([p[@"depth_format"]unsignedIntegerValue]!=passLink.renderPass.depthAttachment.texture.pixelFormat||[p[@"stencil_format"]unsignedIntegerValue]!=passLink.renderPass.stencilAttachment.texture.pixelFormat)reject(@"Pipeline depth/stencil formats differ from observed render pass");
-        if(([p[@"target_width"]unsignedIntegerValue]?:64)!=target.width||([p[@"target_height"]unsignedIntegerValue]?:48)!=target.height||([p[@"color_format"]unsignedIntegerValue]?:MTLPixelFormatRGBA32Float)!=target.pixelFormat)reject(@"Pipeline target extent/format differs from observed render pass");
+        if(![scope.renderEngine acceptsRenderTarget:target forPipeline:effectivePipeline])reject(@"Pipeline target extent/format differs from observed render pass");
         BOOL legacy=[p[@"legacy"]boolValue];BOOL valid=c.kind&&!legacy?[scope.renderEngine validateIndexedVertexBindings:c.vertexBindings pipeline:effectivePipeline indexCount:c.vertexCount indexBuffer:c.indices indexOffset:c.offset kind:c.kind instances:c.instances baseVertex:c.baseVertex baseInstance:c.baseInstance error:&error]:[scope.renderEngine validateVertexBindings:c.vertexBindings pipeline:effectivePipeline vertexStart:c.vertexStart vertexCount:c.vertexCount instances:c.instances baseInstance:c.baseInstance error:&error];
         if(!valid||(legacy&&c.baseVertex))reject(error.localizedDescription?:@"Legacy baseVertex must remain zero");
         for(NSNumber*j in c.vertexBindings)[changedBindings addIndex:j.unsignedIntegerValue];if(![scope.renderEngine validateFragmentBindings:c.fragmentBindings pipeline:effectivePipeline error:&error])reject(error.localizedDescription);for(NSNumber*j in c.fragmentBindings)[changedFragmentBindings addIndex:j.unsignedIntegerValue];

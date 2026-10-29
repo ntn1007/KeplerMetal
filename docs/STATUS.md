@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+The scoped Apple Release ICB path now accepts the sample's observed 800 × 600 initial drawable, without resizing its window. Two original-app captures, two 48-frame fixed/transition matrices, extent refusals and same-runtime 64 × 48/stage-in regressions pass. Capture still changes the view's framebuffer-only setting; support remains limited to two exact extents and one shader profile. [Evidence](APPLE_NATURAL_EXTENT.md).
+
 One scoped bootstrap now selects two distinct signed builds of the same Apple Release sample through an explicit local policy. Five GTX captures match the direct reference; two policy refusals exit before bootstrap device discovery. The policy is caller-controlled, the shader profile is still pinned, and third-party or transparent integration remains unproved. [Evidence](APPLE_RELEASE_POLICY.md).
 
 The scoped original Apple Release application now creates its registered pipeline from the exact bytes of its own default library. Two original-app captures, one old-library regression, six no-dispatch registration refusals and a separate 48-frame source-adapted matrix pass. The pipeline object remains substituted and integration is process-local and profile-specific. [Evidence](APPLE_RELEASE_LIBRARY_ICB.md).

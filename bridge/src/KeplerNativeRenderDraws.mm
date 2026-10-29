@@ -171,7 +171,14 @@ BOOL validate(NSData*d,NSUInteger kind,id<MTLBuffer>indices,NSUInteger offset,NS
     NSArray*uploadLease=@[c,seed,countSeed,configuration,counts,selector?:[NSNull null],selection?:[NSNull null],_argumentSelectorLibrary?:p[@"library_owner"]];[cb addCompletedHandler:^(id<MTLCommandBuffer>done){ticket.completedSuccessfully=done.status==MTLCommandBufferStatusCompleted;ticket.failed=!ticket.completedSuccessfully;(void)uploadLease.count;}];if(counter)*counter=counts;return result;
 }
 - (id<MTLRenderPipelineState>)pipelineForName:(NSString*)name{return _vertexPipelines[name];}
-- (BOOL)acceptsRenderTarget:(id<MTLTexture>)target{if(!target||target.device!=_queue.device)return NO;if(target.width==64&&target.height==48&&target.pixelFormat==MTLPixelFormatRGBA32Float)return YES;for(NSDictionary*p in _vertexProfiles.allValues)if([p[@"target_width"]unsignedIntegerValue]==target.width&&[p[@"target_height"]unsignedIntegerValue]==target.height&&[p[@"color_format"]unsignedIntegerValue]==target.pixelFormat)return YES;return NO;}
+- (BOOL)acceptsRenderTarget:(id<MTLTexture>)target forPipeline:(id<MTLRenderPipelineState>)pipeline {
+    if(!target||target.device!=_queue.device)return NO;NSDictionary*p=[self profileForPipeline:pipeline];if(!p)return NO;
+    if([p[@"legacy"]boolValue])return target.width==64&&target.height==48&&target.pixelFormat==MTLPixelFormatRGBA32Float;
+    BOOL ordinary=[p[@"target_width"]unsignedIntegerValue]==target.width&&[p[@"target_height"]unsignedIntegerValue]==target.height;
+    BOOL appleNative=[p[@"apple_explicit_view"]boolValue]&&[p[@"library_SHA256"]isEqual:@"04d8d8ae6a4485d3be0262e971c365cfff1d5bb04f88f24cdbdfa0ffdee6afa2"]&&target.width==800&&target.height==600;
+    return (ordinary||appleNative)&&[p[@"color_format"]unsignedIntegerValue]==target.pixelFormat;
+}
+- (BOOL)acceptsRenderTarget:(id<MTLTexture>)target{if(!target||target.device!=_queue.device)return NO;if(target.width==64&&target.height==48&&target.pixelFormat==MTLPixelFormatRGBA32Float)return YES;for(id<MTLRenderPipelineState>pipeline in _vertexPipelines.allValues)if([self acceptsRenderTarget:target forPipeline:pipeline])return YES;return NO;}
 - (NSDictionary*)profileForPipeline:(id<MTLRenderPipelineState>)pipeline {
     if(pipeline==_pipeline)return @{@"name":@"legacy-state",@"legacy":@YES};
     return pipeline?_vertexProfiles[[NSValue valueWithPointer:(__bridge const void*)pipeline]]:nil;

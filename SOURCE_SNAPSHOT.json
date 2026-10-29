@@ -74,21 +74,26 @@
       "path": "bridge/src/KeplerCPUICB.mm",
       "source_path": "bridge/src/KeplerCPUICB.mm",
       "source_SHA256": "3d59c2c609611ddc387e616b8945e903f6378dbd4a3b66a02cb22087ada84b60",
-      "published_SHA256": "8212f9cece201bba4e231e4795c6fb0b380c638992cd75f05ef28af14e627b4e",
-      "bytes": 172446,
+      "published_SHA256": "da59ba31768779a565688a140b9d56c1ba466366089d46b427af72baa1352e3e",
+      "bytes": 172410,
       "modified_for_publication": true,
-      "previous_published_SHA256": "183be0be67c910ebdbff61841347f6146f72e0b1512bf241d54f0d258a308828",
+      "previous_published_SHA256": "8212f9cece201bba4e231e4795c6fb0b380c638992cd75f05ef28af14e627b4e",
       "latest_change": {
+        "previous_published_SHA256": "8212f9cece201bba4e231e4795c6fb0b380c638992cd75f05ef28af14e627b4e",
+        "previous_bytes": 172446,
+        "reason": "Validate each render target against the owning pipeline rather than a single fixed extent."
+      },
+      "previous_latest_change": {
         "previous_published_SHA256": "e7561f8f60f9fde126db7e7eb6b8913235582924d1f9fb2c0c163dc37cad2367",
         "previous_bytes": 171556,
         "reason": "Reuse bounded inherited Apple render records only while pipeline and command state remain valid."
       },
-      "previous_latest_change": {
-        "previous_published_SHA256": "2b5ea3188323a354f70f5ce4c23364d2aa0cf4c2ebbfa8f47ae973601c55a453",
-        "previous_bytes": 171496,
-        "reason": "Accept DontCare depth store for qualified render passes while retaining all other attachment validation."
-      },
       "prior_change_history": [
+        {
+          "previous_published_SHA256": "2b5ea3188323a354f70f5ce4c23364d2aa0cf4c2ebbfa8f47ae973601c55a453",
+          "previous_bytes": 171496,
+          "reason": "Accept DontCare depth store for qualified render passes while retaining all other attachment validation."
+        },
         {
           "previous_published_SHA256": "9e966dad4e2bc09ea8337ef9c8fd2c54c0893cbe19db6b731981ad13b522dbcf",
           "previous_bytes": 152438,
@@ -312,21 +317,26 @@
       "path": "bridge/src/KeplerNativeRenderDraws.mm",
       "source_path": "bridge/src/KeplerNativeRenderDraws.mm",
       "source_SHA256": "370abcc54cd28f4b9b6731b9a8d7b9debf21067a79d8aba9ac16b4782e0d32a5",
-      "published_SHA256": "b2da1e8a46d99502f619b8d800de693e53a09d878c5432db4243aa8231d5242e",
-      "bytes": 81040,
+      "published_SHA256": "a8a47bb8c34fd01c69331b322d695b0e63eb4550c45f962f188275274e08938b",
+      "bytes": 81716,
       "modified_for_publication": true,
-      "previous_published_SHA256": "f0b8c7f42545a937450f0b9b1efe7e669af9073c71bef6b70d223bf221987e4e",
+      "previous_published_SHA256": "b2da1e8a46d99502f619b8d800de693e53a09d878c5432db4243aa8231d5242e",
       "latest_change": {
+        "previous_published_SHA256": "b2da1e8a46d99502f619b8d800de693e53a09d878c5432db4243aa8231d5242e",
+        "previous_bytes": 81040,
+        "reason": "Accept 800 by 600 only for the pinned Apple Release view profile while preserving existing profile bounds."
+      },
+      "previous_latest_change": {
         "previous_published_SHA256": "f0b8c7f42545a937450f0b9b1efe7e669af9073c71bef6b70d223bf221987e4e",
         "previous_bytes": 80791,
         "reason": "Allow the exact Apple Release default-library hash only for the existing bounded view profile."
       },
-      "previous_latest_change": {
-        "previous_published_SHA256": "23425d2add17cd257819990666cb7857ef7cf757cf46d8bd67cc69fae067791c",
-        "previous_bytes": 79868,
-        "reason": "Allow the pinned Apple shader BGRA8/depth profile and preserve its strictly observed first-draw state prefix."
-      },
       "prior_change_history": [
+        {
+          "previous_published_SHA256": "23425d2add17cd257819990666cb7857ef7cf757cf46d8bd67cc69fae067791c",
+          "previous_bytes": 79868,
+          "reason": "Allow the pinned Apple shader BGRA8/depth profile and preserve its strictly observed first-draw state prefix."
+        },
         {
           "previous_published_SHA256": "cdb5553fa81e6861a4f5bb1ae5d8d708afbe23123a8070b80ebaa74fbde0a742",
           "previous_bytes": 78362,

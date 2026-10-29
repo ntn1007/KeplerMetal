@@ -23,6 +23,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+The scoped Apple Release ICB sample now renders at its observed initial 800 × 600 extent without resizing its window; fixed-size and extent-transition captures pass. [Evidence and limits](docs/APPLE_NATURAL_EXTENT.md).
+
 A local policy lets one scoped bootstrap select two builds of the Apple Release ICB sample; five GTX captures and two policy refusals pass. [Evidence and limits](docs/APPLE_RELEASE_POLICY.md).
 
 The scoped Apple Release ICB application now uses its own default library bytes for the registered pipeline; original-app captures and an expanded adapted-app matrix pass. [Evidence and limits](docs/APPLE_RELEASE_LIBRARY_ICB.md).

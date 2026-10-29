@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "library_SHA256": "04d8d8ae6a4485d3be0262e971c365cfff1d5bb04f88f24cdbdfa0ffdee6afa2",
+  "pipelines": [
+    {
+      "name": "apple_explicit_view",
+      "vertex": "vertexShader",
+      "fragment": "fragmentShader",
+      "attributes": [],
+      "layouts": [],
+      "apple_explicit_buffers": true,
+      "color_format": 80,
+      "depth_format": 252
+    }
+  ]
+}
