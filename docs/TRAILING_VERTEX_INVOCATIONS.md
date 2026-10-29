@@ -26,8 +26,9 @@ resources in a non-void vertex function; this result should not be generalized
 without establishing the contract for other workloads.
 
 Native reflection reported one active read/write buffer at index 0 on both
-machines. KeplerMetal's current stage-in registration refuses writable vertex
-arguments, so this witness neither proves nor extends adapter support. The
+machines. KeplerMetal's stage-in registration refuses arbitrary writable vertex
+arguments. A later, distinct [certified point-write profile](VERTEX_POINT_ADAPTER.md)
+does not make this witness an adapter test. The
 previous [4/5-vertex adapter test](RENDER_TRAILING_VERTICES.md) used a different,
 read-only shader; this witness must not be presented as testing that adapter.
 Apple describes [render-stage resource usage](https://developer.apple.com/documentation/metal/mtlrendercommandencoder/useresource(_:usage:stages:))

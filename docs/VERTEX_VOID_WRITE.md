@@ -33,8 +33,9 @@ thereby guarantee these exact triangle masks. The earlier
 experiment and its compiler warning should not be attributed to this void
 shader.
 
-KeplerMetal currently rejects writable vertex arguments and does not qualify
-point draws in this adapter. To extend it, the implementation must separately
+A later [adapter experiment](VERTEX_POINT_ADAPTER.md) supports one hash-certified
+point-write shader and shared buffer; general writable vertex arguments and point
+draws remain unqualified. Further extension must separately
 qualify a matching pipeline, shader access and bounds, writable resource usage
 and residency, buffer lifetime and GPU ordering, and command recording and
 execution. Relaxing reflection alone would leave those obligations unmet. No

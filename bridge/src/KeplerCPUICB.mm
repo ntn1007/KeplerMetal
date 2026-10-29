@@ -229,6 +229,7 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 @property(nonatomic,strong) id<MTLBuffer> indices;
 @property(nonatomic) NSUInteger kind,offset,instances;
 @property(nonatomic) NSUInteger vertexStart,vertexCount,baseInstance;
+@property(nonatomic) BOOL pointWrite;
 @property(nonatomic) NSInteger baseVertex;
 @property(nonatomic,strong) NSMutableDictionary *vertexBindings,*fragmentBindings;
 @property(nonatomic) BOOL hasDraw;
@@ -552,18 +553,20 @@ static void executePartialRange(NSArray<KPComputeICBCommand*>*commands,NSRange r
     BOOL extended=[_owner.scope.renderEngine maxVertexBindings]>0;
     NSDictionary*profile=[_owner.scope.renderEngine profileForPipeline:_pipeline];
     BOOL incomplete=count>0&&count<3&&[profile[@"legacy"]boolValue];
+    BOOL pointWrite=[profile[@"vertex_point_write"]boolValue];
     BOOL trailing=(count==4||count==5)&&extended&&profile&&![profile[@"legacy"]boolValue];
+    if(pointWrite){if(!_owner||!(_owner.allowedTypes&MTLIndirectCommandTypeDraw)||type!=MTLPrimitiveTypePoint||start||count>5||instances!=1||base)reject(@"Point-write draw outside certified profile");_pointWrite=YES;_kind=0;_indices=nil;_offset=0;_instances=instances;_vertexStart=start;_vertexCount=count;_baseInstance=base;_baseVertex=0;_hasDraw=count>0;_record=nil;return;}
     if(!_owner||!(_owner.allowedTypes&MTLIndirectCommandTypeDraw)||type!=MTLPrimitiveTypeTriangle||(count%3&&!incomplete&&!trailing)||count>4096||instances>64||start>65536-count||base>65536-instances||(incomplete&&(start||instances>2||base||_vertexBindings.count||_fragmentBindings.count))||(!extended&&(start||(count!=3&&count!=0&&!incomplete)||instances>2||base)))reject(@"Direct render geometry outside supported profile");
-    _kind=0;_indices=nil;_offset=0;_instances=instances;_vertexStart=start;_vertexCount=count;_baseInstance=base;_baseVertex=0;_hasDraw=count&&instances&&!incomplete;_record=nil;
+    _pointWrite=NO;_kind=0;_indices=nil;_offset=0;_instances=instances;_vertexStart=start;_vertexCount=count;_baseInstance=base;_baseVertex=0;_hasDraw=count&&instances&&!incomplete;_record=nil;
 }
 - (void)drawIndexedPrimitives:(MTLPrimitiveType)type indexCount:(NSUInteger)count indexType:(MTLIndexType)indexType indexBuffer:(id<MTLBuffer>)indices indexBufferOffset:(NSUInteger)offset instanceCount:(NSUInteger)instances baseVertex:(NSInteger)vertexBase baseInstance:(NSUInteger)base{
     NSUInteger bytes=indexType==MTLIndexTypeUInt16?2:indexType==MTLIndexTypeUInt32?4:0;BOOL extended=_owner.maxVertexBuffers>0;
     BOOL incomplete=count>0&&count<3&&[[_owner.scope.renderEngine profileForPipeline:_pipeline][@"legacy"]boolValue];
     if(!_owner||!(_owner.allowedTypes&MTLIndirectCommandTypeDrawIndexed)||type!=MTLPrimitiveTypeTriangle||(count%3&&!incomplete)||count>4096||!bytes||!indices||indices.device!=_owner.scope.device||offset%bytes||offset>indices.length||count*bytes>indices.length-offset||instances>64||base>65536-instances||vertexBase<-65536||vertexBase>65536||(incomplete&&(instances>2||vertexBase||base||_vertexBindings.count||_fragmentBindings.count))||(!extended&&((count!=3&&count!=0&&!incomplete)||instances>2||vertexBase||base||_vertexBindings.count)))reject(@"Indexed render geometry outside supported profile");
-    _kind=bytes==2?1:2;_indices=indices;_offset=offset;_instances=instances;_vertexStart=0;_vertexCount=count;_baseInstance=base;_baseVertex=vertexBase;_hasDraw=count&&instances&&!incomplete;_record=nil;
+    _pointWrite=NO;_kind=bytes==2?1:2;_indices=indices;_offset=offset;_instances=instances;_vertexStart=0;_vertexCount=count;_baseInstance=base;_baseVertex=vertexBase;_hasDraw=count&&instances&&!incomplete;_record=nil;
 }
-- (void)reset{_pipeline=nil;_indices=nil;_hasDraw=NO;_record=nil;_kind=_offset=_instances=_vertexStart=_vertexCount=_baseInstance=0;_baseVertex=0;[_vertexBindings removeAllObjects];[_fragmentBindings removeAllObjects];}
-- (void)copyStateFrom:(KPRenderICBCommand*)s{_pipeline=s.pipeline;_indices=s.indices;_kind=s.kind;_offset=s.offset;_instances=s.instances;_vertexStart=s.vertexStart;_vertexCount=s.vertexCount;_baseInstance=s.baseInstance;_baseVertex=s.baseVertex;_vertexBindings=[s.vertexBindings mutableCopy];_fragmentBindings=[s.fragmentBindings mutableCopy];_hasDraw=s.hasDraw;_record=s.record;}
+- (void)reset{_pipeline=nil;_indices=nil;_hasDraw=NO;_pointWrite=NO;_record=nil;_kind=_offset=_instances=_vertexStart=_vertexCount=_baseInstance=0;_baseVertex=0;[_vertexBindings removeAllObjects];[_fragmentBindings removeAllObjects];}
+- (void)copyStateFrom:(KPRenderICBCommand*)s{_pipeline=s.pipeline;_indices=s.indices;_kind=s.kind;_offset=s.offset;_instances=s.instances;_vertexStart=s.vertexStart;_vertexCount=s.vertexCount;_baseInstance=s.baseInstance;_baseVertex=s.baseVertex;_pointWrite=s.pointWrite;_vertexBindings=[s.vertexBindings mutableCopy];_fragmentBindings=[s.fragmentBindings mutableCopy];_hasDraw=s.hasDraw;_record=s.record;}
 @end
 
 @implementation KPRenderICB
@@ -581,7 +584,7 @@ static void executePartialRange(NSArray<KPComputeICBCommand*>*commands,NSRange r
         if(!c.hasDraw&&c.vertexCount>0&&c.vertexCount<3&&c.instances){
             if(![[scope.renderEngine profileForPipeline:c.pipeline][@"legacy"]boolValue]||c.vertexStart||c.baseInstance||c.baseVertex||c.instances>2||c.vertexBindings.count||c.fragmentBindings.count)reject(@"Incomplete triangle state changed outside legacy profile");
         }
-        if(!c.hasDraw)continue;NSDictionary*p=[scope.renderEngine profileForPipeline:c.pipeline];if(!p)reject(@"Render command has no owned pipeline");NSError*error=nil;
+        if(!c.hasDraw)continue;NSDictionary*p=[scope.renderEngine profileForPipeline:c.pipeline];if(!p)reject(@"Render command has no owned pipeline");if(c.pointWrite!=[p[@"vertex_point_write"]boolValue])reject(@"Render primitive/profile changed after draw");NSError*error=nil;
         KPScopeLink*passLink=objc_getAssociatedObject(encoder,&contextKey);if([p[@"depth_format"]unsignedIntegerValue]!=passLink.renderPass.depthAttachment.texture.pixelFormat||[p[@"stencil_format"]unsignedIntegerValue]!=passLink.renderPass.stencilAttachment.texture.pixelFormat)reject(@"Pipeline depth/stencil formats differ from observed render pass");
         if(([p[@"target_width"]unsignedIntegerValue]?:64)!=target.width||([p[@"target_height"]unsignedIntegerValue]?:48)!=target.height||([p[@"color_format"]unsignedIntegerValue]?:MTLPixelFormatRGBA32Float)!=target.pixelFormat)reject(@"Pipeline target extent/format differs from observed render pass");
         BOOL legacy=[p[@"legacy"]boolValue];BOOL valid=c.kind&&!legacy?[scope.renderEngine validateIndexedVertexBindings:c.vertexBindings pipeline:c.pipeline indexCount:c.vertexCount indexBuffer:c.indices indexOffset:c.offset kind:c.kind instances:c.instances baseVertex:c.baseVertex baseInstance:c.baseInstance error:&error]:[scope.renderEngine validateVertexBindings:c.vertexBindings pipeline:c.pipeline vertexStart:c.vertexStart vertexCount:c.vertexCount instances:c.instances baseInstance:c.baseInstance error:&error];

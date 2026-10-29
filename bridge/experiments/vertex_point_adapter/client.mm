@@ -1,0 +1,36 @@
+// SPDX-License-Identifier: MIT
+// Compare a certified point-write profile through native and scoped CPU ICB paths.
+#import <Foundation/Foundation.h>
+#import <Metal/Metal.h>
+#import "KeplerCPUICB.h"
+#include <stdint.h>
+#include <string.h>
+static void need(BOOL ok,NSString*why){if(!ok)@throw [NSException exceptionWithName:@"PointAdapterTest" reason:why userInfo:nil];}
+static MTLRenderPassDescriptor*pass(id<MTLTexture>t){MTLRenderPassDescriptor*p=[MTLRenderPassDescriptor renderPassDescriptor];p.colorAttachments[0].texture=t;p.colorAttachments[0].loadAction=MTLLoadActionClear;p.colorAttachments[0].storeAction=MTLStoreActionStore;return p;}
+static id<MTLTexture>target(id<MTLDevice>d){MTLTextureDescriptor*t=[MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatRGBA32Float width:64 height:48 mipmapped:NO];t.storageMode=MTLStorageModePrivate;t.usage=MTLTextureUsageRenderTarget;return [d newTextureWithDescriptor:t];}
+int main(int argc,char**argv){@autoreleasepool{@try{
+ need(argc==6,@"usage legacy shader manifest output direct|auto");NSString*mode=@(argv[5]);BOOL automatic=[mode isEqual:@"auto"];need(automatic||[mode isEqual:@"direct"],@"mode");
+ NSData*legacy=[NSData dataWithContentsOfFile:@(argv[1])],*shader=[NSData dataWithContentsOfFile:@(argv[2])],*manifest=[NSData dataWithContentsOfFile:@(argv[3])];need(legacy&&shader&&manifest,@"missing input");
+ id<MTLDevice>d=MTLCreateSystemDefaultDevice();need([d.name isEqual:@"NVIDIA GeForce GTX 880M"],@"device differs");id<MTLCommandQueue>q=[d newCommandQueue];NSError*error=nil;
+ KPCPUICBScope*s=[KPCPUICBScope installRenderingOnDevice:d queue:q libraryData:legacy expectedSHA256:@"965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7" error:&error];need(s!=nil,error.description?:@"scope failed");
+ NSMutableData*badShader=[shader mutableCopy],*badManifest=[manifest mutableCopy];((uint8_t*)badShader.mutableBytes)[0]^=1;((uint8_t*)badManifest.mutableBytes)[0]^=1;NSUInteger registrationRefusals=0;
+ if(![s registerRenderVertexLibraryData:badShader expectedSHA256:@"d3c4675aa2e0668be09527c8a861487ea092b7697c082a9224defe6dbd4ffacc" manifestData:manifest expectedManifestSHA256:@"ced84e50369e64f2269ebfd0e9587565c1895bc2f933cc4fc8bed73259cc091c" error:&error])registrationRefusals++;
+ if(![s registerRenderVertexLibraryData:shader expectedSHA256:@"d3c4675aa2e0668be09527c8a861487ea092b7697c082a9224defe6dbd4ffacc" manifestData:badManifest expectedManifestSHA256:@"ced84e50369e64f2269ebfd0e9587565c1895bc2f933cc4fc8bed73259cc091c" error:&error])registrationRefusals++;need(registrationRefusals==2,@"identity controls failed");error=nil;
+ need([s registerRenderVertexLibraryData:shader expectedSHA256:@"d3c4675aa2e0668be09527c8a861487ea092b7697c082a9224defe6dbd4ffacc" manifestData:manifest expectedManifestSHA256:@"ced84e50369e64f2269ebfd0e9587565c1895bc2f933cc4fc8bed73259cc091c" error:&error],error.description?:@"registration failed");id<MTLRenderPipelineState>pipeline=[s renderPipelineForName:@"point_write"];need(pipeline!=nil,@"missing pipeline");
+ MTLIndirectCommandBufferDescriptor*desc=[MTLIndirectCommandBufferDescriptor new];desc.commandTypes=MTLIndirectCommandTypeDraw;desc.maxVertexBufferBindCount=1;id<MTLIndirectCommandBuffer>commands=automatic?[d newIndirectCommandBufferWithDescriptor:desc maxCommandCount:1 options:MTLResourceStorageModeShared]:nil;need(!automatic||commands,@"missing ICB");NSUInteger rejected=0;
+ if(automatic){
+  id<MTLIndirectRenderCommand>c=[commands indirectRenderCommandAtIndex:0];[c setRenderPipelineState:pipeline];
+  for(NSUInteger i=0;i<5;i++){@try{[c drawPrimitives:i==0?MTLPrimitiveTypeTriangle:MTLPrimitiveTypePoint vertexStart:i==2?1:0 vertexCount:i==1?6:3 instanceCount:i==3?2:1 baseInstance:i==4?1:0];}@catch(NSException*x){if([x.name isEqual:@"KeplerCPUICBUnsupported"])rejected++;}}
+  for(NSString*which in @[@"short",@"missing",@"pipeline",@"private"]){[commands resetWithRange:NSMakeRange(0,1)];c=[commands indirectRenderCommandAtIndex:0];[c setRenderPipelineState:pipeline];id<MTLBuffer>b=[d newBufferWithLength:[which isEqual:@"short"]?64:132 options:[which isEqual:@"private"]?MTLResourceStorageModePrivate:MTLResourceStorageModeShared];if(![which isEqual:@"missing"])[c setVertexBuffer:b offset:64 atIndex:0];[c drawPrimitives:MTLPrimitiveTypePoint vertexStart:0 vertexCount:3 instanceCount:1 baseInstance:0];if([which isEqual:@"pipeline"])[c setRenderPipelineState:[s renderPipeline]];
+   id<MTLCommandBuffer>cb=[q commandBuffer];id<MTLRenderCommandEncoder>e=[s renderEncoderWithDescriptor:pass(target(d)) commandBuffer:cb error:&error];need(e!=nil,@"negative encoder");@try{[e executeCommandsInBuffer:commands withRange:NSMakeRange(0,1)];}@catch(NSException*x){if([x.name isEqual:@"KeplerCPUICBUnsupported"])rejected++;}[e endEncoding];need(cb.status==MTLCommandBufferStatusNotEnqueued,@"negative buffer submitted");
+  }need(rejected==9,@"negative controls failed");
+ }
+ NSMutableArray*rows=[NSMutableArray new];for(NSUInteger count=0;count<=5;count++){@autoreleasepool{
+  id<MTLBuffer>buf=[d newBufferWithLength:132 options:MTLResourceStorageModeShared];need(buf!=nil,@"buffer missing");memset(buf.contents,0xa5,buf.length);*((uint32_t*)((uint8_t*)buf.contents+64))=0;
+  if(automatic){[commands resetWithRange:NSMakeRange(0,1)];id<MTLIndirectRenderCommand>c=[commands indirectRenderCommandAtIndex:0];[c setRenderPipelineState:pipeline];[c setVertexBuffer:buf offset:64 atIndex:0];[c drawPrimitives:MTLPrimitiveTypePoint vertexStart:0 vertexCount:count instanceCount:1 baseInstance:0];}
+  id<MTLCommandBuffer>cb=[q commandBuffer];id<MTLRenderCommandEncoder>e=[s renderEncoderWithDescriptor:pass(target(d)) commandBuffer:cb error:&error];need(e!=nil,error.description?:@"encoder failed");
+  if(automatic)[e executeCommandsInBuffer:commands withRange:NSMakeRange(0,1)];else{[e setRenderPipelineState:pipeline];[e setVertexBuffer:buf offset:64 atIndex:0];[e drawPrimitives:MTLPrimitiveTypePoint vertexStart:0 vertexCount:count instanceCount:1 baseInstance:0];}
+  [e endEncoding];[cb commit];[cb waitUntilCompleted];need(cb.status==MTLCommandBufferStatusCompleted,cb.error.description?:@"GPU failed");uint8_t*b=(uint8_t*)buf.contents;uint32_t actual=*((uint32_t*)(b+64));need(actual==(1u<<count)-1,@"atomic result differs");for(NSUInteger i=0;i<64;i++)need(b[i]==0xa5&&b[68+i]==0xa5,@"guard changed");NSString*file=[@(argv[4]) stringByAppendingPathComponent:[NSString stringWithFormat:@"count-%lu.bin",(unsigned long)count]];need([[NSData dataWithBytes:b length:buf.length]writeToURL:[NSURL fileURLWithPath:file] options:NSDataWritingWithoutOverwriting error:&error],@"capture failed");[rows addObject:@{@"count":@(count),@"mask":@(actual),@"completed":@YES,@"guards":@YES}];
+ }}
+ NSArray*events=s.events;[s restore];NSDictionary*out=@{@"status":@"PASS",@"device":d.name,@"registry_id":@(d.registryID),@"mode":mode,@"rejections":@(rejected),@"registration_refusals":@(registrationRefusals),@"results":rows,@"events":events};NSData*j=[NSJSONSerialization dataWithJSONObject:out options:NSJSONWritingPrettyPrinted error:&error];need(j!=nil,@"json failed");fwrite(j.bytes,1,j.length,stdout);putchar('\n');return 0;
+ }@catch(NSException*x){fprintf(stderr,"%s: %s\n",x.name.UTF8String,x.reason.UTF8String);return 1;}}}

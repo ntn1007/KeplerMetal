@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "library_SHA256": "d3c4675aa2e0668be09527c8a861487ea092b7697c082a9224defe6dbd4ffacc",
+  "pipelines": [
+    {
+      "name": "point_write",
+      "vertex": "vs_point_write",
+      "fragment": "",
+      "attributes": [],
+      "layouts": [],
+      "vertex_point_write": true
+    }
+  ]
+}

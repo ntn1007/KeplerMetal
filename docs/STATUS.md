@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+The scoped CPU render ICB supports a hash-certified point-write vertex shader and bounded shared buffer; two GTX direct/adapted pairs match raw outputs, with registration and geometry refusals. General writable shaders remain unsupported. [Evidence](VERTEX_POINT_ADAPTER.md).
+
 A process-local native point-packet replay with a writable vertex shader matches direct GTX masks for counts 0–5 across two pairs; it does not yet add adapter support. [Evidence](VERTEX_POINT_REPLAY.md).
 
 Native rasterization-disabled void vertex writes work on GTX for point draws 1–5, with positive bitmasks; triangle counts 1/2 and trailing 4/5 show no corresponding writes in these tests. M1 results agree; adapter support remains absent. [Evidence](VERTEX_VOID_WRITE.md).

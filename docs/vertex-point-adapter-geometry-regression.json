@@ -1,0 +1,54 @@
+{
+  "archive_sha256": "d3b486058d77aa724c9a7374fe93ba10c35a9a4d3553dec0e58270b620b35981",
+  "baseline_explicit_geometry_refused": true,
+  "build_sha256": "49ac4d36cb9e7bed11ae6d4d6e228b51e558a1825c4b19e2ba1ebef0c63c2789",
+  "checked_float_channels": 98304,
+  "expected_api_refusals": 4,
+  "general_metal_support": false,
+  "guard_bytes": 4096,
+  "packet_counts_verified": [
+    4,
+    5
+  ],
+  "performance_benchmark": false,
+  "processes": 4,
+  "rendered_cases": 8,
+  "runs": [
+    {
+      "images_sha256": {
+        "4": "ad54a279b3c738206061e86dc4598c2675204b2fb3b9d4461821b1f5524da7fc",
+        "5": "ad54a279b3c738206061e86dc4598c2675204b2fb3b9d4461821b1f5524da7fc"
+      },
+      "manifest_sha256": "8596a8c45875221ec091e2500c5753e08e07605f94d8598b31e1714268ec458b",
+      "mode": "direct"
+    },
+    {
+      "images_sha256": {
+        "4": "ad54a279b3c738206061e86dc4598c2675204b2fb3b9d4461821b1f5524da7fc",
+        "5": "ad54a279b3c738206061e86dc4598c2675204b2fb3b9d4461821b1f5524da7fc"
+      },
+      "manifest_sha256": "ca5a30225d4b019bb6ea74cb96f16e056c0390b60c0073cbdc5d975a4f209dfb",
+      "mode": "auto"
+    },
+    {
+      "images_sha256": {
+        "4": "ad54a279b3c738206061e86dc4598c2675204b2fb3b9d4461821b1f5524da7fc",
+        "5": "ad54a279b3c738206061e86dc4598c2675204b2fb3b9d4461821b1f5524da7fc"
+      },
+      "manifest_sha256": "1ec1ca2e712298ee0b8efe8d07f46e69b51072264bfd860be69a4bab603fcde0",
+      "mode": "direct"
+    },
+    {
+      "images_sha256": {
+        "4": "ad54a279b3c738206061e86dc4598c2675204b2fb3b9d4461821b1f5524da7fc",
+        "5": "ad54a279b3c738206061e86dc4598c2675204b2fb3b9d4461821b1f5524da7fc"
+      },
+      "manifest_sha256": "3f766e7736dcc111907b652cc8b8179ad4dd793b94b06e8e601ecfb4fb65fc66",
+      "mode": "auto"
+    }
+  ],
+  "same_raw_pixels_direct_and_adapted": true,
+  "status": "PASS_TRAILING_GEOMETRY_GPU",
+  "system_modified": false,
+  "trailing_vertex_invocations_proved": false
+}
