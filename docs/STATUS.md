@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Six software-decoded H.264 frames now feed native GTX Metal NV12 kernels; eight processes match the archived FFmpeg and CPU transformation oracles across 11,059,200 bytes. Dedicated video engines remain unproved. [Evidence](VIDEO_VT_CVMETAL.md).
+
 Core Video NV12 IOSurface planes now have a native GTX Metal compute witness: two kernels and single-plane/no-dispatch controls match 147,456 CPU-checked bytes. Dedicated video decode and encode remain unproved. [Evidence](VIDEO_CVMETAL_NV12.md).
 
 A locally instrumented Apple sample application now runs through NSApplicationMain and its storyboard on GTX; scoped ICB images match direct and blank controls. The original unmodified executable and transparent integration remain unproved. [Evidence](APPLE_APPLICATION_ICB.md).

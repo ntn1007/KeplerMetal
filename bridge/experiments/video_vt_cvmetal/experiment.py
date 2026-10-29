@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+"""Build and serialize VideoToolbox software decode plus GPU NV12 tests."""
+import argparse,datetime,hashlib,importlib.util,json,os,shutil,subprocess,sys
+from pathlib import Path
+HERE=Path(__file__).resolve().parent;BRIDGE=HERE.parents[1]
+sys.path.insert(0,str(BRIDGE/'experiments/cas_divergence'))
+from run_repair import SYSTEM
+
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def need(x,why):
+    if not x:raise ValueError(why)
+def command(args):
+    r=subprocess.run(list(map(str,args)),capture_output=True,text=True,timeout=120)
+    need(r.returncode==0,str(args[0])+' failed: '+r.stderr[-2500:]);return r.stdout
+def main():
+    p=argparse.ArgumentParser(description=__doc__);sub=p.add_subparsers(dest='action',required=True)
+    b=sub.add_parser('build')
+    for n in ('lab','out','fixture','reference'):b.add_argument('--'+n,type=Path,required=True)
+    r=sub.add_parser('run')
+    for n in ('lab','build','out'):r.add_argument('--'+n,type=Path,required=True)
+    r.add_argument('--mode',choices=('gpu','y-only','uv-only','none'),required=True)
+    a=p.parse_args();lab=a.lab.resolve();out=a.out.resolve();out.relative_to(lab/'results');need(not out.exists() and out.parent.is_dir(),'fresh output required')
+    if a.action=='build':
+        need({k:sha(k) for k in SYSTEM}==SYSTEM,'system differs');out.mkdir()
+        expected={'fixture.json':'fdd6b495c5710c210dee34c5ef4e2c5894d6be3deeeeed2aae2bf43d4073152c','frame-000.avcc':'8b0f93f2bf081d7e413bcd75f35cba8361be21dbf4afbd92c130e4c80d34048c','frame-001.avcc':'5c23f0e206472abaf7e051a016c99184b4fb8c6a8cf8c71b0dc7cc2f1b99ae03','frame-002.avcc':'fcdf3656e7624c8fc0b5d063724df2cba390c2b183a932ad0f9adf843bacda9d','frame-003.avcc':'6cf9f20f947526056e8d3378f6c0623068e8df3fcd2a721022fa04262a1ba9f1','frame-004.avcc':'e2a9ff1fbfae5284a01d3ad11f3026fa2dda1f756245849d59cd17edf75ac942','frame-005.avcc':'881c77a204f55337cbb39eca2f46af1ca301c67b5774d23787e163c7d7a9411a'}
+        need({x.name:sha(x) for x in a.fixture.iterdir() if x.is_file()}==expected and sha(a.reference)=='d73962c0592ae107d343591bf2d72e013015813e3b2ceff71d37e2c5fee36cd1','fixture/reference differs');(out/'fixture').mkdir()
+        for n in expected:shutil.copyfile(a.fixture/n,out/'fixture'/n)
+        shutil.copyfile(a.reference,out/'reference.nv12')
+        for n in ('client.mm','kernels.metal'):shutil.copyfile(HERE/n,out/n)
+        command(['xcrun','-sdk','macosx','metal','-std=macos-metal2.0','-c',out/'kernels.metal','-o',out/'kernels.air'])
+        command(['xcrun','-sdk','macosx','metallib',out/'kernels.air','-o',out/'kernels.metallib'])
+        command(['xcrun','clang++','-arch','x86_64','-O2','-std=c++17','-fobjc-arc',out/'client.mm','-framework','Metal','-framework','Foundation','-framework','CoreVideo','-framework','IOSurface','-framework','VideoToolbox','-framework','CoreMedia','-o',out/'application'])
+        command(['codesign','--force','--sign','-',out/'application']);command(['codesign','--verify','--strict',out/'application'])
+        record={'status':'PREPARED_ONLY','fixture_sha256':expected,'files_sha256':{x.name:sha(x) for x in out.iterdir() if x.is_file()},'system':SYSTEM,'gpu_execution':False}
+        (out/'build.json').write_text(json.dumps(record,indent=2,sort_keys=True)+'\n');print(json.dumps({'status':'PREPARED_ONLY','gpu_execution':False}));return
+    build=a.build.resolve();build.relative_to(lab/'results');record=json.loads((build/'build.json').read_text());need(record['status']=='PREPARED_ONLY' and record['system']==SYSTEM and {k:sha(k) for k in SYSTEM}==SYSTEM,'build/system differs')
+    for n,h in record['files_sha256'].items():need(sha(build/n)==h,'build differs '+n)
+    need({x.name:sha(x) for x in (build/'fixture').iterdir() if x.is_file()}==record['fixture_sha256'],'fixture differs')
+    for n in ('client.mm','kernels.metal'):need(sha(build/n)==sha(HERE/n),'source differs '+n)
+    leasepath=lab/'results/video-rm-access-build-20261018-03/runtime/lab_gpu_reservation.py';need(sha(leasepath)=='ee637d27c5af482b1fbce396f6a49ef234b09a7d8602aeb36edc422f46b61248','reservation differs');spec=importlib.util.spec_from_file_location('cvmetal_reservation',leasepath);mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(mod);lease=mod.GPUReservation(lab);child=None;terminal=False
+    try:
+        out.mkdir();(out/'outputs').mkdir();shutil.copyfile(build/'application',out/'application');host=out/'application';host.chmod(0o755);need(sha(host)==record['files_sha256']['application'],'host differs');command(['codesign','--verify','--strict',host]);args=[str(build/'kernels.metallib'),str(build/'fixture'),str(out/'outputs'),a.mode];env={k:v for k,v in os.environ.items() if not k.startswith(('DYLD_','LD_','KM_','KP_'))};lease.spawning(host,sha(host));started=datetime.datetime.now(datetime.timezone.utc).isoformat()
+        with (out/'stdout.json').open('wb') as stdout,(out/'stderr.log').open('wb') as stderr:
+            child=subprocess.Popen([str(host),*args],stdout=stdout,stderr=stderr,pass_fds=(lease.fd,),env=env);lease.bind_child(child.pid);print(json.dumps({'status':'STARTED','pid':child.pid}),flush=True);code=child.wait()
+        table=mod.process_table();need(child.pid not in table and not any(x['command']==str(host) or x['command'].startswith(str(host)+' ') for x in table.values()),'child still visible');terminal=True;lease.finish(code,False,'')
+        result={'status':'TERMINAL','exit_code':code,'pid':child.pid,'mode':a.mode,'started_at':started,'completed_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'reservation':dict(lease.data),'host_sha256':sha(host),'build_sha256':sha(build/'build.json'),'runner_sha256':sha(Path(__file__)),'stdout_sha256':sha(out/'stdout.json'),'stderr_sha256':sha(out/'stderr.log'),'system_before':SYSTEM,'system_after':{k:sha(k) for k in SYSTEM}}
+        (out/'manifest.json').write_text(json.dumps(result,indent=2,sort_keys=True)+'\n');need(code==0 and result['system_after']==SYSTEM,'run failed or system differs');report=json.loads((out/'stdout.json').read_text());need(report['status']=='PASS' and report['mode']==a.mode,'client differs');print(json.dumps({'status':'TERMINAL','dispatches':report['gpu_dispatches']}),flush=True)
+    except BaseException:
+        if lease.fd is not None and (child is None or not terminal):lease.finish(0 if child is None else None,False,'' if child is None else 'child terminal outcome not established')
+        raise
+    finally:lease.close()
+if __name__=='__main__':main()

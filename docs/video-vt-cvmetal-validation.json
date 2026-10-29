@@ -1,0 +1,132 @@
+{
+  "annexb_sha256": "12858642f02b0e1d98ddf409dd729a879b6a7a5d3434c860882532ca4f6b40af",
+  "build_sha256": "13612680be98e7bf4bb8fca12bd7c13aefa60be8f6acc82977584f482ee8b719",
+  "completed_gpu_dispatches": 48,
+  "decoder_hardware_disabled": true,
+  "decoder_hardware_property_statuses": [
+    -12900
+  ],
+  "distinct_surface_identity_checked": true,
+  "fixture_sha256": {
+    "fixture.json": "fdd6b495c5710c210dee34c5ef4e2c5894d6be3deeeeed2aae2bf43d4073152c",
+    "frame-000.avcc": "8b0f93f2bf081d7e413bcd75f35cba8361be21dbf4afbd92c130e4c80d34048c",
+    "frame-001.avcc": "5c23f0e206472abaf7e051a016c99184b4fb8c6a8cf8c71b0dc7cc2f1b99ae03",
+    "frame-002.avcc": "fcdf3656e7624c8fc0b5d063724df2cba390c2b183a932ad0f9adf843bacda9d",
+    "frame-003.avcc": "6cf9f20f947526056e8d3378f6c0623068e8df3fcd2a721022fa04262a1ba9f1",
+    "frame-004.avcc": "e2a9ff1fbfae5284a01d3ad11f3026fa2dda1f756245849d59cd17edf75ac942",
+    "frame-005.avcc": "881c77a204f55337cbb39eca2f46af1ca301c67b5774d23787e163c7d7a9411a"
+  },
+  "frames": 48,
+  "hardware_video_decode_proved": false,
+  "hardware_video_encode_proved": false,
+  "performance_benchmark": false,
+  "physical_transfer_count_measured": false,
+  "processes": 8,
+  "reference_acceleration": "none",
+  "reference_ffmpeg_architecture": "arm64",
+  "reference_ffmpeg_sha256": "c8173e9755795978bce8e104f8d7044fabe7d6d84044aba37d3648c6f4e4e1a8",
+  "reference_nv12_sha256": "d73962c0592ae107d343591bf2d72e013015813e3b2ceff71d37e2c5fee36cd1",
+  "reference_receipt_sha256": "0033febb5a30d14d640a19c5e34730b3b272764a757c3b6a905408df27e49e97",
+  "reference_reexecuted_this_cohort": false,
+  "runs": [
+    {
+      "dest_sha256": [
+        "fd76256c3b6613c406f4625681bdfe13772e63a6e3ac7987a3040cb3508e8d12",
+        "27c122711752550dda0bdf14de38f38fdd7766e7a48bcee956de7a94fa990ff3",
+        "72382f0138c75ab01a76ed15343c7f92747a05b1b9319194791ea7128e80b586",
+        "52b219039676dc826e9bdadf1f8bc3d80474dfc7079b353f764e082bc0e473b0",
+        "dda2386a741b13a984169afb77bda0da5b1d36476637f435d683bd3108d9d505",
+        "a3492d2a2e8fb269c0d85e253460bdf8fc592edab23fe6117c1d0983c267a3ff"
+      ],
+      "manifest_sha256": "a0634cc734e37df4c887bfc5e2c0fe1772c2ba8cf47d16e7a1e2e0b32f8792cb",
+      "mode": "gpu"
+    },
+    {
+      "dest_sha256": [
+        "ea2280487e667ae6be0bba3851f6645663bf4787d5950fb8aef16b3c8fcdc971",
+        "473a0c64f2f06ae7b7f933967328f5ab6242d39add115a4647f25fef92435851",
+        "c18fefcdd45de94dc14d81f930df8413c36e0d11c47dbc85a5253d5e4d57145a",
+        "c441173ce74803d412eb60322673ac2d291db20045450f96e364581e854647ab",
+        "88b30b603a75ab988cd8d24fbe7021ad33f6d41e6a0347edd61e87b7933cf300",
+        "c1ed8e535b36f6c1ce691e6d643f132b0186cf380b683b48dde45c48b2801393"
+      ],
+      "manifest_sha256": "5b1c8d277753bc579a5404316c13f19adc1f32ea95cc950e385b14612efa74df",
+      "mode": "y-only"
+    },
+    {
+      "dest_sha256": [
+        "23234a99da6e9a59a6b82e73f2b898c61cd00cdc766be4e0ceee32cd10f7c515",
+        "73048a917bc79ff2569f112127dc45247a8236a8b108b1448bf44dce19f202dc",
+        "234ba8dcdf1fd9eaeaa1095aa78b5023d20e335490803332d72637d54a485c37",
+        "50ca2251420bfbd14486d947023eb303d2731932070559d1ac45eb663722c714",
+        "42806bbd55eee9204b489b5b7d379054419bef6f024c2bc6265bef9e173f4880",
+        "c4fd4f5726c1de10cd9523179afe090da735d13126a998e88e5c63f6870d85bf"
+      ],
+      "manifest_sha256": "019e7990033fc37cf2f84cfc60ec164a86c75b70c9f2d9c26162df80a0487ecd",
+      "mode": "uv-only"
+    },
+    {
+      "dest_sha256": [
+        "e4410d3fd7a6952d57c88d615c46c4d428840f7ab9b8e565166d4be0e1f5ae08",
+        "e4410d3fd7a6952d57c88d615c46c4d428840f7ab9b8e565166d4be0e1f5ae08",
+        "e4410d3fd7a6952d57c88d615c46c4d428840f7ab9b8e565166d4be0e1f5ae08",
+        "e4410d3fd7a6952d57c88d615c46c4d428840f7ab9b8e565166d4be0e1f5ae08",
+        "e4410d3fd7a6952d57c88d615c46c4d428840f7ab9b8e565166d4be0e1f5ae08",
+        "e4410d3fd7a6952d57c88d615c46c4d428840f7ab9b8e565166d4be0e1f5ae08"
+      ],
+      "manifest_sha256": "ae0f38eb1f2fc7fc1888db1e399a99cc9f1cfe94bcfa9671dbc0e6bd9acef469",
+      "mode": "none"
+    },
+    {
+      "dest_sha256": [
+        "fd76256c3b6613c406f4625681bdfe13772e63a6e3ac7987a3040cb3508e8d12",
+        "27c122711752550dda0bdf14de38f38fdd7766e7a48bcee956de7a94fa990ff3",
+        "72382f0138c75ab01a76ed15343c7f92747a05b1b9319194791ea7128e80b586",
+        "52b219039676dc826e9bdadf1f8bc3d80474dfc7079b353f764e082bc0e473b0",
+        "dda2386a741b13a984169afb77bda0da5b1d36476637f435d683bd3108d9d505",
+        "a3492d2a2e8fb269c0d85e253460bdf8fc592edab23fe6117c1d0983c267a3ff"
+      ],
+      "manifest_sha256": "b363bb4c5e77513467263587840426b22164d963ac83a603e1f1ff15acd58a60",
+      "mode": "gpu"
+    },
+    {
+      "dest_sha256": [
+        "ea2280487e667ae6be0bba3851f6645663bf4787d5950fb8aef16b3c8fcdc971",
+        "473a0c64f2f06ae7b7f933967328f5ab6242d39add115a4647f25fef92435851",
+        "c18fefcdd45de94dc14d81f930df8413c36e0d11c47dbc85a5253d5e4d57145a",
+        "c441173ce74803d412eb60322673ac2d291db20045450f96e364581e854647ab",
+        "88b30b603a75ab988cd8d24fbe7021ad33f6d41e6a0347edd61e87b7933cf300",
+        "c1ed8e535b36f6c1ce691e6d643f132b0186cf380b683b48dde45c48b2801393"
+      ],
+      "manifest_sha256": "bf74633a9ae75c8991246c5176e87221a7002dfe6a657eb253f570b51016f10a",
+      "mode": "y-only"
+    },
+    {
+      "dest_sha256": [
+        "23234a99da6e9a59a6b82e73f2b898c61cd00cdc766be4e0ceee32cd10f7c515",
+        "73048a917bc79ff2569f112127dc45247a8236a8b108b1448bf44dce19f202dc",
+        "234ba8dcdf1fd9eaeaa1095aa78b5023d20e335490803332d72637d54a485c37",
+        "50ca2251420bfbd14486d947023eb303d2731932070559d1ac45eb663722c714",
+        "42806bbd55eee9204b489b5b7d379054419bef6f024c2bc6265bef9e173f4880",
+        "c4fd4f5726c1de10cd9523179afe090da735d13126a998e88e5c63f6870d85bf"
+      ],
+      "manifest_sha256": "3ee631b7e15bec2348a40d8bf2948c23e9bc4719ee7a719d006052675343bc9b",
+      "mode": "uv-only"
+    },
+    {
+      "dest_sha256": [
+        "e4410d3fd7a6952d57c88d615c46c4d428840f7ab9b8e565166d4be0e1f5ae08",
+        "e4410d3fd7a6952d57c88d615c46c4d428840f7ab9b8e565166d4be0e1f5ae08",
+        "e4410d3fd7a6952d57c88d615c46c4d428840f7ab9b8e565166d4be0e1f5ae08",
+        "e4410d3fd7a6952d57c88d615c46c4d428840f7ab9b8e565166d4be0e1f5ae08",
+        "e4410d3fd7a6952d57c88d615c46c4d428840f7ab9b8e565166d4be0e1f5ae08",
+        "e4410d3fd7a6952d57c88d615c46c4d428840f7ab9b8e565166d4be0e1f5ae08"
+      ],
+      "manifest_sha256": "944e02652d389b2fc8b385eb1636bd5a5bf161f2f659941879ba139fe84568eb",
+      "mode": "none"
+    }
+  ],
+  "source_and_destination_bytes_checked": 11059200,
+  "status": "PASS_SOFTWARE_VT_METAL_NV12",
+  "system_files_unchanged": true
+}

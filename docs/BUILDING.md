@@ -1,5 +1,7 @@
 # Build from source
 
+[VIDEO_VT_CVMETAL.md](VIDEO_VT_CVMETAL.md) documents the H.264 software-decode to GTX Metal NV12 witness.
+
 [VIDEO_CVMETAL_NV12.md](VIDEO_CVMETAL_NV12.md) documents the Core Video/Metal NV12 witness and reproduction.
 
 [APPLE_APPLICATION_ICB.md](APPLE_APPLICATION_ICB.md) documents the local Apple sample application witness and reproduction.
