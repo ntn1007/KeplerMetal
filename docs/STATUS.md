@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+One scoped bootstrap now selects two distinct signed builds of the same Apple Release sample through an explicit local policy. Five GTX captures match the direct reference; two policy refusals exit before bootstrap device discovery. The policy is caller-controlled, the shader profile is still pinned, and third-party or transparent integration remains unproved. [Evidence](APPLE_RELEASE_POLICY.md).
+
 The scoped original Apple Release application now creates its registered pipeline from the exact bytes of its own default library. Two original-app captures, one old-library regression, six no-dispatch registration refusals and a separate 48-frame source-adapted matrix pass. The pipeline object remains substituted and integration is process-local and profile-specific. [Evidence](APPLE_RELEASE_LIBRARY_ICB.md).
 
 Two runs of the unchanged-source Apple Release ICB application now reach 15 adapted draws and produce drawable captures matching a direct GTX reference. Explicit process-local injection substitutes a separately compiled pinned shader pipeline and configures the view; Release assertions are disabled. General or transparent support remains unproved. [Evidence](APPLE_ORIGINAL_APPLICATION_ICB.md).

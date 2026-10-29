@@ -1,0 +1,81 @@
+{
+  "apple_archive_sha256": "559d91d42ba4d4adff9517600de522d12f8fbc3270982ac6e0d0b5bfd414f311",
+  "blank_control_differs": true,
+  "bootstrap_sha256": "af4d2e02a99bce1d3498796de0631b1c06724edf085839a2f4c1b4bef3acaae4",
+  "client_a_sha256": "2d0719f33e5ff3cb28de0911cd3d3dcf839e3b286dbd10460bf3f738f17d4837",
+  "client_b_sha256": "a18e488294a1ae55010bd2d0f2d1116b7969b35596f9cf64f7344c31a2bc88b2",
+  "different_x86_64_text_sections": true,
+  "draws_per_process": 15,
+  "frames_equal_direct_reference": true,
+  "independent_third_party_apps": false,
+  "matching_signed_sections_per_client": [
+    22,
+    22
+  ],
+  "performance_benchmark": false,
+  "pipeline_replacement": true,
+  "pixels_per_process": 3072,
+  "policy_a_sha256": "f5247f26617d4abb743ea5acf0d667dac3b90b20c633780d233a04f7d1558330",
+  "policy_ab_sha256": "05069dab6636eaa2e6b578c2952e09194e718ebd598bf427814765215b5f9380",
+  "policy_is_independent_authority": false,
+  "policy_unit_refusals": 12,
+  "process_local_injection": true,
+  "refusal_before_bootstrap_device_discovery": true,
+  "refusal_processes": 2,
+  "runs": [
+    {
+      "case": "normal",
+      "client": "a",
+      "frame_sha256": "a7c62db073ac8b049e735340c0f99abcb43083c36221c47fcc81a0faeda5cc35",
+      "manifest_sha256": "732da8a55af5d3dcfc795c54879948be069705a416dc47e4d2ff7a33fc24941e",
+      "policy": "a"
+    },
+    {
+      "case": "normal",
+      "client": "a",
+      "frame_sha256": "a7c62db073ac8b049e735340c0f99abcb43083c36221c47fcc81a0faeda5cc35",
+      "manifest_sha256": "ce1a47f749971da6275ae8d2f2206f90f7e1303991c1527bcb17fd626515df15",
+      "policy": "ab"
+    },
+    {
+      "case": "normal",
+      "client": "b",
+      "frame_sha256": "a7c62db073ac8b049e735340c0f99abcb43083c36221c47fcc81a0faeda5cc35",
+      "manifest_sha256": "38a4e00048042782253585755f50514c45c7e23c6b9a2658083c0670af5d2638",
+      "policy": "ab"
+    },
+    {
+      "case": "normal",
+      "client": "a",
+      "frame_sha256": "a7c62db073ac8b049e735340c0f99abcb43083c36221c47fcc81a0faeda5cc35",
+      "manifest_sha256": "0d041fdfd6bb2472957fc4fed3cbe193eec829afa46cf7689b1b806aef26144f",
+      "policy": "ab"
+    },
+    {
+      "case": "normal",
+      "client": "b",
+      "frame_sha256": "a7c62db073ac8b049e735340c0f99abcb43083c36221c47fcc81a0faeda5cc35",
+      "manifest_sha256": "4a9bfe18e5f4872683c3ef332390b848ccd9d813243ace6c0caa5618485bd4db",
+      "policy": "ab"
+    },
+    {
+      "case": "denied-client",
+      "client": "b",
+      "manifest_sha256": "438cbdc94eceeca5eaad78a6d98b442fcb79da0d8c2093dcdd06c42bf46105e3",
+      "policy": "a"
+    },
+    {
+      "case": "wrong-policy-hash",
+      "client": "a",
+      "manifest_sha256": "ebd937ca64848b0cf76808fd625138b40d6107f9bccf27fda9dbe0a95b8e31c6",
+      "policy": "ab"
+    }
+  ],
+  "runtime_sha256": "3708f0fbba99fb4cb70007b68851820940e99cb685815ce4958b6aa25ab6cd45",
+  "source_files_matched_to_archive": 17,
+  "status": "PASS_SCOPED_APP_POLICY",
+  "successful_render_processes": 5,
+  "system_hashes_unchanged": true,
+  "transparent_system_integration": false,
+  "two_builds_same_apple_sample": true
+}
