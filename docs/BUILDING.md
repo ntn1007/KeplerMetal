@@ -1,5 +1,7 @@
 # Build from source
 
+[APPLE_DEPTH_DONTCARE.md](APPLE_DEPTH_DONTCARE.md) documents the scoped depth-store extension and reproduction.
+
 [APPLE_REAL_RENDERER.md](APPLE_REAL_RENDERER.md) documents the locally adapted Apple renderer comparison and reproduction.
 
 [APPLE_MTKVIEW_ICB.md](APPLE_MTKVIEW_ICB.md) documents the MTKView delegate ICB depth witness and reproduction.

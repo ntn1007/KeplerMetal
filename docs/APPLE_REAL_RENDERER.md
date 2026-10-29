@@ -13,8 +13,8 @@ adapter for the sample shader and pipeline; direct mode replaces ICB execution
 with equivalent direct draws, while blank mode emits no draws. All modes use
 the same renderer and mesh generator. The harness makes the drawable readable
 (`framebufferOnly = NO`), stores color and depth, copies only its own color
-texture into a guarded buffer, and waits for each command buffer. The depth
-store is required by the adapter's current pass validation. Apple sources,
+texture into a guarded buffer, and waits for each command buffer. At this historical milestone the depth
+store was required by the adapter. A [subsequent extension](APPLE_DEPTH_DONTCARE.md) accepts the default `DontCare` action. Apple sources,
 compiled Apple artifacts and proprietary drivers are not in this repository.
 This is a modified-process integration, not transparent driver integration.
 

@@ -1,0 +1,97 @@
+{
+  "actual_apple_renderer": true,
+  "adapted_packets_checked": 60,
+  "apple_archive_sha256": "559d91d42ba4d4adff9517600de522d12f8fbc3270982ac6e0d0b5bfd414f311",
+  "apple_original_ui_executed": false,
+  "apple_source_sha256": {
+    "AAPLRenderer.h": "9507af071733eba63c43ca787f1e5fb25516a38877eb7844376923b678f4373a",
+    "AAPLRenderer.m": "124bb0bb75b7961ebfe3d7e5fd41bbeec2c7c4d74c5f3a9fb211ec017f58c230",
+    "AAPLShaderTypes.h": "7f6b70576fb1e00422520f273530fd55e4fe5036c42b11bdf74205bae64609a2"
+  },
+  "application_modified": true,
+  "archive_sha256": "5c0816e7907c2fc15bc9fb341f6ad71df48daccaeba303d0635d11d6cab41cdf",
+  "blank_frames": 4,
+  "blank_uniform": true,
+  "build_sha256": "455f34c9bbab6826f639672fd44dfe3f392e2789a1b099c6ecee749e878d72cb",
+  "checked_system_files_unchanged": true,
+  "depth_store_action": "dont_care",
+  "direct_adapted_images_identical": true,
+  "draw_frames": 8,
+  "drawable_color_readback": true,
+  "frames": 12,
+  "guard_bytes_checked": 6144,
+  "invalid_store_refusals": 4,
+  "performance_benchmark": false,
+  "pixels_compared": 36864,
+  "processes": 6,
+  "runs": [
+    {
+      "image_sha256": [
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7"
+      ],
+      "manifest_sha256": "da0c77368be4acbc55a35afabe9439e4fc10aceb7bfa7db7f71709814df84028",
+      "mode": "direct"
+    },
+    {
+      "image_sha256": [
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7"
+      ],
+      "manifest_sha256": "ed0f306edac98a2494d8f11e5031908e99cd914c2c26474ee2f3a67f955a32e3",
+      "mode": "auto"
+    },
+    {
+      "image_sha256": [
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7"
+      ],
+      "manifest_sha256": "94857c41b19741350a4e77e9e6f53ac87abab90c1de7dcddbeff4a8f1406b03a",
+      "mode": "direct"
+    },
+    {
+      "image_sha256": [
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7",
+        "20bf6672042af17a178c7f603de13b78ae14bfd7e2c3218e04d4d4a31d2ab4f7"
+      ],
+      "manifest_sha256": "8422c77e3b053352e2d5221d44cfca2da1654c41468f190ecfb89a41261c61d6",
+      "mode": "auto"
+    },
+    {
+      "image_sha256": [
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb",
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb"
+      ],
+      "manifest_sha256": "f549f1c9dd72cc7327a79f49b25624610cbdf783759a691b51b39764946b9870",
+      "mode": "blank"
+    },
+    {
+      "image_sha256": [
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb",
+        "cc8fcc2ab9a489bbe8283abb6c17bccf1f5c112e22a0801f213ce08c7acafafb"
+      ],
+      "manifest_sha256": "2551758f1e0e7c16b6e9d44e35edb0c1964af97204c43bd2ed7ad7d47ab9cbb9",
+      "mode": "blank"
+    }
+  ],
+  "status": "PASS_DEPTH_DONTCARE",
+  "transparent_system_integration": false,
+  "vertex_counts": [
+    36,
+    48,
+    60,
+    72,
+    84,
+    96,
+    108,
+    120,
+    288,
+    324,
+    360,
+    396,
+    432,
+    468,
+    504
+  ],
+  "visible_presentation_proved": false
+}
