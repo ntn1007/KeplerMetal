@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+One real restricted baseline H.264 IDR now produces a CPU VP block matching FFmpeg-derived fields and pinned Mesa, with MacBook sanitizer checks; five P frames are refused. No hardware decoding is established. [Evidence](VIDEO_IDR_VP.md).
+
 CPU-only H.264 VP picture and reference-state modeling matches pinned Mesa helpers across 4,096 synthetic configurations. No video channel or GPU execution is established. [Evidence](VIDEO_VP_PICTURE.md).
 
 CPU-only H.264 reference/intermediate layout planning matches Mesa helpers across 4,096 configurations; fixture and MacBook sanitizer regressions pass. No GPU memory or video channel is allocated. [Evidence](VIDEO_REFERENCE_LAYOUT.md).

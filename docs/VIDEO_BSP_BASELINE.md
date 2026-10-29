@@ -22,9 +22,9 @@ experimental [relative layout planner](VIDEO_REFERENCE_LAYOUT.md). This is a
 model of initial Mesa allocations, not a measurement on the GTX.
 
 **The resulting BSP buffer remains incomplete and must not be submitted to a
-GPU.** VP picture parameters, reference surfaces, mappings, video channels,
-commands and synchronization are still missing. No hardware decoding or
-performance improvement is claimed.
+GPU.** A later [CPU-only VP model for one restricted IDR](VIDEO_IDR_VP.md)
+does not provide actual reference surfaces, mappings, video channels, commands
+or synchronization. No hardware decoding or performance improvement is claimed.
 
 ## Evidence
 

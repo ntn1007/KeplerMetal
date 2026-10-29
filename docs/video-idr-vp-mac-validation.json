@@ -1,0 +1,31 @@
+{
+  "architecture": "arm64",
+  "binary_sha256": "433793b4fc37782fb038910beae381501473d367abcc102d1d66a8316cc53796",
+  "block_sha256": "380fde2ed50f03f48a968baa37ab66abd7e82b8a0d2b2b1bd74456807effd53b",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "hardware_video_execution_proved": false,
+  "local_receipt_sha256": "5f42a8dcc4459348eeab07e472a835180d74323c40a601b4d2ff887acf5ac419",
+  "p_frame_refused": true,
+  "script_sha256": "bf110ebecea59ea87957b988d8e3bcc2564d3e35f76960a4797fe17d54fe8015",
+  "source_and_fixture_sha256": {
+    "H264Baseline.cpp": "2a1002d8ad15729023fc0107e9e488c5aae4f20b0d9b656f6008ceb6df6cf132",
+    "H264Baseline.h": "67d4ba2eb7e31f91fe34c8c4b0519eb0fbe114579a9f3a84d3094c4d3533e9a2",
+    "H264Stream.cpp": "d604ad21278f907f27a581d46af3d1f9b788306a8d1b0d9579ae6cb08f8d65e4",
+    "H264Stream.h": "c54cefe3dcff353d8aff27f3955d0b9aea4249a288ab623a9522277175054763",
+    "VideoIdr.cpp": "1d2de5358f6573030aef31d7d67075e42e7f7b67584d197f709168a0bdb7382c",
+    "VideoIdr.h": "7fe4087b63a9571d7f4581e6ef832f48924a38b81969ce2851fe107254cc3aa4",
+    "VideoLayout.cpp": "934403950258167baccc92aeb2d24b0c031fdb83ed6c199d81c1261ee2a158e7",
+    "VideoLayout.h": "730b86192b7ac04cf5b6b310b12b76f46a18f2ea6946f56261b5f97843601df8",
+    "VideoPicture.cpp": "f2d73943faee3423620c64233c62caf1205476c233ed781a7e8bf8db3f732387",
+    "VideoPicture.h": "fff5191307c94b325127e99d4f2d1b4e348bc1e63231c3793789c2e7ba79c822",
+    "frame-000.avcc": "8b0f93f2bf081d7e413bcd75f35cba8361be21dbf4afbd92c130e4c80d34048c",
+    "frame-001.avcc": "5c23f0e206472abaf7e051a016c99184b4fb8c6a8cf8c71b0dc7cc2f1b99ae03",
+    "idr_picture_tool.cpp": "37b8036419e97e8fd1d3833603d3a614ce5a91fa1228753454260ce7e4f12731",
+    "param-0.bin": "4b26633d7f851efeef2e0bd1e5f0fd9841fb2fa019656983e36b5577456d8f75",
+    "param-1.bin": "d1ef2c5e892c5b6c1c0a92906803fc8fc11f7d1753ba34f15ff24f16f705609e",
+    "test_baseline.cpp": "66f7d850969a78ab1b3d3aec27ec92f1c5397243ec0f911f2a20c3bec8d9921c",
+    "test_video_idr.cpp": "536803076c722c14e52d97a21be014d8272cf4161bc31c48b9ed977c74d00d76"
+  },
+  "status": "PASS_MACBOOK_REAL_IDR_ASAN_UBSAN",
+  "transfer_hashes_match_before_after": true
+}

@@ -31,10 +31,15 @@ static std::vector<uint8_t> sps() {
     w.ue(19); w.ue(14); w.bits(1, 1); w.bits(1, 1); w.bits(0, 1); w.bits(0, 1); w.finish();
     w.bytes.insert(w.bytes.begin(), 0x67); return w.bytes;
 }
-static std::vector<uint8_t> pps() {
+static std::vector<uint8_t> pps(int chroma = 0, bool constrained = false) {
     Writer w; w.ue(0); w.ue(0); w.bits(0, 1); w.bits(1, 1); w.ue(0); w.ue(0); w.ue(0);
-    w.bits(0, 1); w.bits(0, 2); w.se(2); w.se(0); w.se(0); w.bits(0, 1); w.bits(0, 1); w.bits(0, 1); w.finish();
+    w.bits(0, 1); w.bits(0, 2); w.se(2); w.se(0); w.se(chroma); w.bits(0, 1); w.bits(constrained, 1); w.bits(0, 1); w.finish();
     w.bytes.insert(w.bytes.begin(), 0x68); return w.bytes;
+}
+static std::vector<uint8_t> idr_slice(uint32_t first, bool no_output, bool long_term) {
+    Writer w; w.ue(first); w.ue(2); w.ue(0); w.bits(0,5); w.ue(0); w.bits(0,7); w.se(0);
+    w.bits(no_output,1); w.bits(long_term,1); w.finish();
+    w.bytes.insert(w.bytes.begin(),0x65); return w.bytes;
 }
 static std::vector<uint8_t> slice(uint32_t first, uint32_t frame, uint32_t type = 0, int ref_override = -1) {
     Writer w; w.ue(first); w.ue(type); w.ue(0); w.bits(frame, 5); w.bits(2, 7); w.se(0);
@@ -55,6 +60,17 @@ int main() {
     assert(out.picture.width == 320 && out.picture.height == 240 && out.picture.slice_count == 2 && out.max_references == 2);
     assert(out.frame_num == 1 && out.poc_lsb == 2 && out.first_macroblocks == std::vector<uint32_t>({0, 150}));
     assert(out.picture.pic_init_qp_minus26 == 2 && out.picture.num_ref_idx_l0_active_minus1 == 0);
+    assert(out.is_reference && !out.is_idr && !out.chroma_qp_offset && !out.constrained_intra);
+    const auto rich_pps=pps(-4,true); std::vector<uint8_t> idr;
+    append(idr,idr_slice(0,false,false)); append(idr,idr_slice(150,false,false));
+    ParsedBaselinePicture parsed_idr;
+    assert(parse_baseline_picture(s.data(),s.size(),rich_pps.data(),rich_pps.size(),idr.data(),idr.size(),parsed_idr));
+    assert(parsed_idr.is_idr && parsed_idr.is_reference && parsed_idr.chroma_qp_offset==-4 &&
+           parsed_idr.constrained_intra && !parsed_idr.delta_poc_bottom && !parsed_idr.idr_long_term);
+    std::vector<uint8_t> marked; append(marked,idr_slice(0,true,true));
+    ParsedBaselinePicture marked_idr;
+    assert(parse_baseline_picture(s.data(),s.size(),p.data(),p.size(),marked.data(),marked.size(),marked_idr));
+    assert(marked_idr.is_idr && marked_idr.idr_no_output_prior && marked_idr.idr_long_term);
     VideoLayout layout;
     assert(plan_h264_layout(out.picture.width, out.picture.height, out.max_references,
                             out.picture.slice_count, 11161600, layout));
@@ -72,6 +88,9 @@ int main() {
         assert(!parse_baseline_picture(ss.data(), ss.size(), pp.data(), pp.size(), aa.data(), aa.size(), out));
         assert(out.annex_b == before && out.frame_num == 1);
     };
+    reject(s,pps(13),sample); reject(s,pps(-13),sample);
+    std::vector<uint8_t> mixed_idr; append(mixed_idr,idr_slice(0,false,false)); append(mixed_idr,idr_slice(150,false,true));
+    reject(s,p,mixed_idr);
     for (size_t i = 0; i < s.size(); ++i) reject(std::vector<uint8_t>(s.begin(), s.begin() + i), p, sample);
     for (size_t i = 0; i < p.size(); ++i) reject(s, std::vector<uint8_t>(p.begin(), p.begin() + i), sample);
     for (size_t i = 0; i < sample.size(); ++i) {

@@ -1,0 +1,89 @@
+{
+  "complete_slice_parsed": false,
+  "fixture_annex_sha256": "12858642f02b0e1d98ddf409dd729a879b6a7a5d3434c860882532ca4f6b40af",
+  "frames": 6,
+  "gpu_transport_implemented": false,
+  "hardware_video_execution_proved": false,
+  "reference_binary_sha256": "7f6028378534aa10a2dfa07d807ddcc0d18c869bf5c2f64c89efcc18ee88c4ee",
+  "reference_receipt_sha256": "5b9d47ea22f6e51765dd432bb7556e5506ad79422d4122dc00a1068bd8951e6b",
+  "reference_stage_comparison": true,
+  "reference_trace_sha256": "d5b460b411df4ea82205ea57661e72e99fef525b47a1402a54352af8d881f85c",
+  "reference_version": "ffmpeg version 9.0.2 Copyright (c) 2000-2026 the FFmpeg developers",
+  "rows": [
+    {
+      "first_macroblocks": [
+        0,
+        150
+      ],
+      "frame": 0,
+      "frame_num": 0,
+      "slice_count": 2,
+      "staged_sha256": "ae8312fc5776f673a75e928218989a427d897c7d9d8c79bf2b7c0564a8006431"
+    },
+    {
+      "first_macroblocks": [
+        0,
+        150
+      ],
+      "frame": 1,
+      "frame_num": 1,
+      "slice_count": 2,
+      "staged_sha256": "320d346b652935337aa8bfeeeaba4b0f6cc1ffd5bf0d01b2080f4f9f74553282"
+    },
+    {
+      "first_macroblocks": [
+        0,
+        150
+      ],
+      "frame": 2,
+      "frame_num": 2,
+      "slice_count": 2,
+      "staged_sha256": "554fa4f315181c032f0434342f9555f1dc47b8b16dea03f3cf80b0e5db40b570"
+    },
+    {
+      "first_macroblocks": [
+        0,
+        150
+      ],
+      "frame": 3,
+      "frame_num": 3,
+      "slice_count": 2,
+      "staged_sha256": "cc6cedadcadde964074510386e62e07853e24c197e60efd858afeec4982b541c"
+    },
+    {
+      "first_macroblocks": [
+        0,
+        150
+      ],
+      "frame": 4,
+      "frame_num": 4,
+      "slice_count": 2,
+      "staged_sha256": "813a7acbcc7d8ee6624bd3b3edeee5a47fb58da1820155666acdffd5f237beb1"
+    },
+    {
+      "first_macroblocks": [
+        0,
+        150
+      ],
+      "frame": 5,
+      "frame_num": 5,
+      "slice_count": 2,
+      "staged_sha256": "10fe82b620a2571cee61d1bd4b761f2dea00ea2e2e1e26b899ffa5d869d25f2f"
+    }
+  ],
+  "slice_headers": 12,
+  "source_sha256": {
+    "H264Baseline.cpp": "2a1002d8ad15729023fc0107e9e488c5aae4f20b0d9b656f6008ceb6df6cf132",
+    "H264Baseline.h": "67d4ba2eb7e31f91fe34c8c4b0519eb0fbe114579a9f3a84d3094c4d3533e9a2",
+    "H264Stream.cpp": "d604ad21278f907f27a581d46af3d1f9b788306a8d1b0d9579ae6cb08f8d65e4",
+    "H264Stream.h": "c54cefe3dcff353d8aff27f3955d0b9aea4249a288ab623a9522277175054763",
+    "VideoLayout.cpp": "934403950258167baccc92aeb2d24b0c031fdb83ed6c199d81c1261ee2a158e7",
+    "VideoLayout.h": "730b86192b7ac04cf5b6b310b12b76f46a18f2ea6946f56261b5f97843601df8",
+    "baseline_tool.cpp": "a31d37b2ad83998f23d531862a663d93a1fb9a5947175ed970d77e7add9b4dba",
+    "test_baseline.cpp": "66f7d850969a78ab1b3d3aec27ec92f1c5397243ec0f911f2a20c3bec8d9921c",
+    "validate_baseline.py": "b1ff52eed819c258b7eb45ac7654d3721b9b42bd267fd7b19018c11885747e4e"
+  },
+  "status": "PASS_SIX_FFMPEG_BASELINE_HEADERS_CPU",
+  "system_modified": false,
+  "vui_parsed": false
+}

@@ -52,6 +52,8 @@ struct Headers {
     H264Picture picture{};
     uint32_t sps_id = 0, pps_id = 0, frame_bits = 0, poc_bits = 0;
     uint32_t l0_default = 0, l1_default = 0, max_references = 0;
+    int8_t chroma_qp_offset = 0;
+    bool constrained_intra = false;
 };
 
 bool sps_header(const uint8_t* nal, size_t n, Headers& h) {
@@ -88,20 +90,21 @@ bool pps_header(const uint8_t* nal, size_t n, Headers& h) {
     const uint32_t entropy = b.take(1), bottom_poc = b.take(1), slice_groups = b.ue();
     h.l0_default = b.ue(); h.l1_default = b.ue();
     const uint32_t weighted = b.take(1), bipred = b.take(2);
-    const int32_t qp = b.se(); (void)b.se(); (void)b.se();
-    const uint32_t deblock = b.take(1); (void)b.take(1); const uint32_t redundant = b.take(1);
+    const int32_t qp = b.se(); (void)b.se(); const int32_t chroma = b.se();
+    const uint32_t deblock = b.take(1), constrained = b.take(1), redundant = b.take(1);
     if (!b.ok || h.pps_id > 255 || sps_id != h.sps_id || slice_groups != 0 ||
-        h.l0_default > 31 || h.l1_default != 0 || bipred > 2 || qp < -26 || qp > 25 ||
+        h.l0_default > 31 || h.l1_default != 0 || bipred > 2 || qp < -26 || qp > 25 || chroma < -12 || chroma > 12 ||
         redundant || !b.trailing_only()) return false;
     h.picture.entropy_coding_mode_flag = entropy;
     h.picture.bottom_field_pic_order_in_frame_present_flag = bottom_poc;
     h.picture.weighted_pred_flag = weighted; h.picture.weighted_bipred_idc = bipred;
     h.picture.pic_init_qp_minus26 = static_cast<int8_t>(qp);
     h.picture.deblocking_filter_control_present_flag = deblock;
+    h.chroma_qp_offset = static_cast<int8_t>(chroma); h.constrained_intra = constrained;
     return true;
 }
 
-struct Slice { uint32_t first, type, pps, frame, poc, idr, l0; int32_t delta; bool reference, is_idr; };
+struct Slice { uint32_t first, type, pps, frame, poc, idr, l0; int32_t delta; bool reference, is_idr, no_output, long_term; };
 bool slice_header(const uint8_t* nal, size_t n, const Headers& h, Slice& s) {
     const uint8_t type = nal[0] & 31;
     std::vector<uint8_t> data;
@@ -118,6 +121,7 @@ bool slice_header(const uint8_t* nal, size_t n, const Headers& h, Slice& s) {
         const uint32_t override_refs = b.take(1);
         s.l0 = override_refs ? b.ue() : h.l0_default;
     }
+    if (s.is_idr) { s.no_output = b.take(1); s.long_term = b.take(1); }
     return b.ok && s.l0 <= 31;
 }
 }
@@ -148,7 +152,8 @@ bool parse_baseline_picture(const uint8_t* sps, size_t sps_size,
                 else if (current.first <= result.first_macroblocks.back() || current.type != first.type ||
                          current.pps != first.pps || current.frame != first.frame || current.poc != first.poc ||
                          current.idr != first.idr || current.delta != first.delta || current.l0 != first.l0 ||
-                         current.reference != first.reference || current.is_idr != first.is_idr) return false;
+                         current.reference != first.reference || current.is_idr != first.is_idr ||
+                         current.no_output != first.no_output || current.long_term != first.long_term) return false;
                 result.first_macroblocks.push_back(current.first);
                 if (result.first_macroblocks.size() > 4095) return false;
             } else if (type != 6) return false; // SEI is preserved but not parsed
@@ -163,6 +168,9 @@ bool parse_baseline_picture(const uint8_t* sps, size_t sps_size,
         h.picture.num_ref_idx_l1_active_minus1 = 0;
         result.picture = h.picture; result.frame_num = first.frame; result.poc_lsb = first.poc;
         result.slice_type = first.type; result.pps_id = first.pps; result.max_references = h.max_references;
+        result.delta_poc_bottom = first.delta; result.chroma_qp_offset = h.chroma_qp_offset;
+        result.constrained_intra = h.constrained_intra; result.is_reference = first.reference;
+        result.is_idr = first.is_idr; result.idr_no_output_prior = first.no_output; result.idr_long_term = first.long_term;
         out = std::move(result);
         return true;
     } catch (const std::bad_alloc&) { return false; }

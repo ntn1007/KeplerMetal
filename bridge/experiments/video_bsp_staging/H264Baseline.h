@@ -7,6 +7,10 @@ namespace kepler::video {
 struct ParsedBaselinePicture {
     H264Picture picture{};
     uint32_t frame_num = 0, poc_lsb = 0, slice_type = 0, pps_id = 0, max_references = 0;
+    int32_t delta_poc_bottom = 0;
+    int8_t chroma_qp_offset = 0;
+    bool constrained_intra = false, is_reference = false, is_idr = false;
+    bool idr_no_output_prior = false, idr_long_term = false;
     std::vector<uint32_t> first_macroblocks;
     std::vector<uint8_t> annex_b;
 };
