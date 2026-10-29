@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+In two failed VideoToolbox requests, the next batch for the GTX-containing list is empty and the zero comparison branch is reached. Its later effect and hardware video remain unknown. [Evidence](VIDEO_VT_ENUMERATION_DECISION.md).
+
 VideoToolbox reads non-null `RegistryID` and `IORegistryName` values from the GTX-linked dictionary; its comparison with `IGPU` returns zero. The subsequent decision and hardware video remain unknown. [Evidence](VIDEO_VT_DEVICE_KEY_READS.md).
 
 The GTX device helper returns the same pointer observed after a call bound to dictionary creation at arm time; its contents, decoder selection and hardware video remain unknown. [Evidence](VIDEO_VT_DEVICE_DICTIONARY.md).

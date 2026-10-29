@@ -1,0 +1,49 @@
+{
+  "audit_sha256": "e3706dab9a90683d5bc3a3f71dfbb8e68b055ee704455fafb02fc24022f11413",
+  "checks": [
+    {
+      "case": "batch",
+      "reason": "video enumeration identity differs",
+      "rejected": true
+    },
+    {
+      "case": "item",
+      "reason": "video enumeration identity differs",
+      "rejected": true
+    },
+    {
+      "case": "device",
+      "reason": "video enumeration identity differs",
+      "rejected": true
+    },
+    {
+      "case": "compare-result",
+      "reason": "key comparison differs",
+      "rejected": true
+    },
+    {
+      "case": "next",
+      "reason": "enumeration decision differs",
+      "rejected": true
+    },
+    {
+      "case": "same-list",
+      "reason": "enumeration decision differs",
+      "rejected": true
+    },
+    {
+      "case": "branch",
+      "reason": "enumeration decision differs",
+      "rejected": true
+    },
+    {
+      "case": "path",
+      "reason": "enumeration decision differs",
+      "rejected": true
+    }
+  ],
+  "gpu_execution": false,
+  "originals_modified": false,
+  "source_sha256": "e903fcac2cf29da176bb6297651079a609bc266a8d960ba13fec840addff0f75",
+  "status": "PASS_MUTATIONS_REJECTED"
+}
