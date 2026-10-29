@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Software FFmpeg short-term snapshots match the five modeled P-picture reference sets while using the reverse order and a +65536 POC representation; NVIDIA ordering and decoding remain unproved. [Evidence](VIDEO_DPB_OBSERVATION.md).
+
 Five restricted H.264 P-picture parameter proposals match trace-derived and pinned Mesa CPU oracles, with arm64 ASan/UBSan checks; reference completion is simulated and hardware decoding remains unproved. [Evidence](VIDEO_PREDICTIVE_PICTURE.md).
 
 A full Sierra payload survey finds 14 `IOGVACodec` literal matches, none NVIDIA-labelled; NVIDIA startup has a separate static `NVDA,mm-version` property path. No NVIDIA codec value or video execution is proved. [Evidence](VIDEO_GVA_SIERRA_SURVEY.md).

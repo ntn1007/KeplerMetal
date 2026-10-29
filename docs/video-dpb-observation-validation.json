@@ -1,0 +1,96 @@
+{
+  "all_six_pixels_match_reference": true,
+  "architecture": "arm64",
+  "ffmpeg_log_sha256": "d552a7b90f79c0c86fac919763880abefac709e63fc37051cdc037ed7be511d5",
+  "ffmpeg_sha256": "7f6028378534aa10a2dfa07d807ddcc0d18c869bf5c2f64c89efcc18ee88c4ee",
+  "ffmpeg_version": "ffmpeg version 9.0.2 Copyright (c) 2000-2026 the FFmpeg developers",
+  "fixture_sha256": "12858642f02b0e1d98ddf409dd729a879b6a7a5d3434c860882532ca4f6b40af",
+  "frame_hashes": [
+    "08a637a390635930afdf1ebf296cbab8344308f071c8aa588c39c343e99baedf",
+    "ca570af2cc623a098a32dea466fcfd117d363ae58fc11694f737cdca759ea78b",
+    "dba64e8d0b90fc16d8d919f9adca4472c123d88c6ea4aef0323ecc71ca51061c",
+    "2cae5de85dfea4ed5209fdff8939ca992c6c7bd44e16818bbc24a41abc9dd69c",
+    "2c32753b9c23ce249d0f40d55ac7179592457075876f11918da4211d90bfbcc4",
+    "8ca00531d101569815c8b67cb65ab3094ca933776004e58a392b3dcbef483d61"
+  ],
+  "framehash_sha256": "916e191a8df9cc090fc48eff03a6736a79f1904df855702389b1a61db8d168d5",
+  "frames_decoded": 6,
+  "hardware_ref_list_semantics_proved": false,
+  "hardware_video_execution_proved": false,
+  "long_term_refs_observed": false,
+  "pixel_reference_distinct_decoder_implementation": false,
+  "pixel_reference_separate_ffmpeg_binary": true,
+  "pixel_reference_sha256": "d73962c0592ae107d343591bf2d72e013015813e3b2ceff71d37e2c5fee36cd1",
+  "predictive_receipt_sha256": "eb828af32b718e0f8edd2686e4448d7444da7eae06a776f4d50f554dcb44dac6",
+  "rows": [
+    {
+      "ffmpeg_poc": 65538,
+      "frame": 1,
+      "proposal_poc": 2,
+      "proposal_refs_oldest_first": [
+        0
+      ],
+      "short_refs_recent_first": [
+        0
+      ]
+    },
+    {
+      "ffmpeg_poc": 65540,
+      "frame": 2,
+      "proposal_poc": 4,
+      "proposal_refs_oldest_first": [
+        0,
+        1
+      ],
+      "short_refs_recent_first": [
+        1,
+        0
+      ]
+    },
+    {
+      "ffmpeg_poc": 65542,
+      "frame": 3,
+      "proposal_poc": 6,
+      "proposal_refs_oldest_first": [
+        1,
+        2
+      ],
+      "short_refs_recent_first": [
+        2,
+        1
+      ]
+    },
+    {
+      "ffmpeg_poc": 65544,
+      "frame": 4,
+      "proposal_poc": 8,
+      "proposal_refs_oldest_first": [
+        2,
+        3
+      ],
+      "short_refs_recent_first": [
+        3,
+        2
+      ]
+    },
+    {
+      "ffmpeg_poc": 65546,
+      "frame": 5,
+      "proposal_poc": 10,
+      "proposal_refs_oldest_first": [
+        3,
+        4
+      ],
+      "short_refs_recent_first": [
+        4,
+        3
+      ]
+    }
+  ],
+  "same_ref_numbers_different_order": true,
+  "slice_snapshots": 12,
+  "software_ffmpeg_poc_offset": 65536,
+  "source_sha256": "da2243ce9cd12ba8de02ec395272f7b851c7a26ce54d894e36fbd8b96cb50168",
+  "status": "PASS_SOFTWARE_DPB_SNAPSHOTS",
+  "system_modified": false
+}
