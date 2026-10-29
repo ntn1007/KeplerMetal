@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A hash-certified two-buffer point transform now runs through the scoped CPU render ICB on GTX for counts through 256, matching direct and CPU results; count-dependent bounds and same-object alias checks are enforced. [Evidence](VERTEX_POINT_TRANSFORM.md).
+
 Two GTX direct/adapted pairs qualify the certified point-write output consumed by a later compute pass, within one buffer or two committed buffers on one queue, without an intervening CPU wait. [Evidence](VERTEX_POINT_DEPENDENCY.md).
 
 The scoped CPU render ICB supports a hash-certified point-write vertex shader and bounded shared buffer; two GTX direct/adapted pairs match raw outputs, with registration and geometry refusals. General writable shaders remain unsupported. [Evidence](VERTEX_POINT_ADAPTER.md).

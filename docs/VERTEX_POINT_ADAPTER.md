@@ -1,7 +1,7 @@
 # Certified point-write profile for the scoped CPU render ICB
 
-The opt-in KeplerMetal CPU render ICB can now execute **one hash-certified
-`void` vertex shader** that atomically writes to a shared buffer while drawing
+The opt-in KeplerMetal CPU render ICB can execute this hash-certified
+`void` vertex shader that atomically writes to a shared buffer while drawing
 points with rasterization disabled. The shader writes only four bytes at buffer
 index 0, and bounds its vertex ID to five. The adapter accepts counts 0–5,
 start 0, one instance and base instance 0. It checks the exact shader library
@@ -10,7 +10,8 @@ hash and manifest, reflected read/write ABI, bound device, shared storage,
 pipeline and resources at execution, declares read/write vertex resource usage,
 and retains the record and resources through command-buffer completion.
 
-The profile is deliberately tied to the exact locally built metallib and the
+A later [two-buffer transform profile](VERTEX_POINT_TRANSFORM.md) is qualified
+separately. This profile is tied to the exact locally built metallib and the
 pinned NVIDIA driver ABI. It does **not** support arbitrary writable shaders,
 point rendering in general, indexed draws, GPU-generated commands or transparent
 system-wide Metal integration. Cross-queue ordering, concurrent use, private or

@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "library_SHA256": "0bd90c4639674a1542e535b06c56a47d550f6784a2bd127278d55b0c393438ae",
+  "pipelines": [
+    {
+      "name": "point_transform",
+      "vertex": "vs_point_transform",
+      "fragment": "",
+      "attributes": [],
+      "layouts": [],
+      "vertex_point_transform": true
+    }
+  ]
+}

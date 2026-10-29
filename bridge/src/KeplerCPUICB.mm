@@ -555,7 +555,7 @@ static void executePartialRange(NSArray<KPComputeICBCommand*>*commands,NSRange r
     BOOL incomplete=count>0&&count<3&&[profile[@"legacy"]boolValue];
     BOOL pointWrite=[profile[@"vertex_point_write"]boolValue];
     BOOL trailing=(count==4||count==5)&&extended&&profile&&![profile[@"legacy"]boolValue];
-    if(pointWrite){if(!_owner||!(_owner.allowedTypes&MTLIndirectCommandTypeDraw)||type!=MTLPrimitiveTypePoint||start||count>5||instances!=1||base)reject(@"Point-write draw outside certified profile");_pointWrite=YES;_kind=0;_indices=nil;_offset=0;_instances=instances;_vertexStart=start;_vertexCount=count;_baseInstance=base;_baseVertex=0;_hasDraw=count>0;_record=nil;return;}
+    if(pointWrite){if(!_owner||!(_owner.allowedTypes&MTLIndirectCommandTypeDraw)||type!=MTLPrimitiveTypePoint||start||count>[profile[@"point_count_limit"]unsignedIntegerValue]||instances!=1||base)reject(@"Point-write draw outside certified profile");_pointWrite=YES;_kind=0;_indices=nil;_offset=0;_instances=instances;_vertexStart=start;_vertexCount=count;_baseInstance=base;_baseVertex=0;_hasDraw=count>0;_record=nil;return;}
     if(!_owner||!(_owner.allowedTypes&MTLIndirectCommandTypeDraw)||type!=MTLPrimitiveTypeTriangle||(count%3&&!incomplete&&!trailing)||count>4096||instances>64||start>65536-count||base>65536-instances||(incomplete&&(start||instances>2||base||_vertexBindings.count||_fragmentBindings.count))||(!extended&&(start||(count!=3&&count!=0&&!incomplete)||instances>2||base)))reject(@"Direct render geometry outside supported profile");
     _pointWrite=NO;_kind=0;_indices=nil;_offset=0;_instances=instances;_vertexStart=start;_vertexCount=count;_baseInstance=base;_baseVertex=0;_hasDraw=count&&instances&&!incomplete;_record=nil;
 }
