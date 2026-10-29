@@ -1,0 +1,103 @@
+{
+  "audit_sha256": "84908a34ca9590084306185b92ea78493757501cf459bd60981f7e87a33ff52d",
+  "build_sha256": "6bd7278aa89e8a60bd1cca34c3153fa92099cb4f39dc9b739410dcc0deed0420",
+  "cache_function_sha256": "f38fc93a01c9f5c715b94b5a2fe6a45c7ebccba26cdd0cedcadb06b7ffe9478b",
+  "cache_uuid": "e7231bea63883d0a95c0a93ce970b96b",
+  "calibration_sha256": "b8a3377f49a4a8590831969c9d05b190462ad7310ea24189fc5e992746ee95ae",
+  "debugger_timing_may_change": true,
+  "device_identity_proved": false,
+  "first_batch_count": 1,
+  "hardware_debug_processes": 2,
+  "hardware_plain_processes": 2,
+  "hardware_video_execution_proved": false,
+  "rows": [
+    {
+      "frames": 0,
+      "lldb_log_sha256": "58f96c5080327147b67fa495b4c52e291f20be246ad2d36bfd2ead952f77bdae",
+      "manifest_sha256": "125c10a698299757698703f2db9cc5fbb85cdf9bc1e96b42c9cb5cda6380bc5d",
+      "mode": "hardware-debug",
+      "observations": [
+        "nonnull_list",
+        "first_batch_one",
+        "same_thread_and_list"
+      ],
+      "status": -12906,
+      "stdout_sha256": "d4554d24feb89f7d0d26b1fb3b29008311811b3e612e8b201f3a5c9f03f31bab"
+    },
+    {
+      "frames": 6,
+      "lldb_log_sha256": "1bdb733034f3dc5031b07264449d3864228077ebc9dba3f45669bde98a1cde98",
+      "manifest_sha256": "1b73c80e888959f3e0b2125656cd55c3b0d7ed0171dfdab9a1b1178247abf0c2",
+      "mode": "software-debug",
+      "observations": [],
+      "status": 0,
+      "stdout_sha256": "5d073885362689ad0059309c8addff282d19e52c379def803a02b3e0d699d4c5"
+    },
+    {
+      "frames": 0,
+      "lldb_log_sha256": null,
+      "manifest_sha256": "0286bbb184beddcd092e2e1bc0d6e9e322c11d12bdcb463bb409dd140cd5a515",
+      "mode": "hardware-plain",
+      "observations": [],
+      "status": -12906,
+      "stdout_sha256": "d4554d24feb89f7d0d26b1fb3b29008311811b3e612e8b201f3a5c9f03f31bab"
+    },
+    {
+      "frames": 6,
+      "lldb_log_sha256": null,
+      "manifest_sha256": "ba281495b1c9e5501d239a6850982f15592cf7a790e8c0d066962948107ab4f4",
+      "mode": "software-plain",
+      "observations": [],
+      "status": 0,
+      "stdout_sha256": "5d073885362689ad0059309c8addff282d19e52c379def803a02b3e0d699d4c5"
+    },
+    {
+      "frames": 0,
+      "lldb_log_sha256": "f76a2a0926256ceeb5f6edf6e158a0fc078546cfa4688c0b9e5d48e237b85e7b",
+      "manifest_sha256": "d1a4fbc4daa45842f603ac9f8510cc412d221e43e8fcd5eb6cf90c9c19c78a12",
+      "mode": "hardware-debug",
+      "observations": [
+        "nonnull_list",
+        "first_batch_one",
+        "same_thread_and_list"
+      ],
+      "status": -12906,
+      "stdout_sha256": "d4554d24feb89f7d0d26b1fb3b29008311811b3e612e8b201f3a5c9f03f31bab"
+    },
+    {
+      "frames": 6,
+      "lldb_log_sha256": "d190eee0cdeb015ba2cf09ce44d4f931c8bca9dfefe412770222865ade3202bf",
+      "manifest_sha256": "4873d44e0600219cc708e73773443cf4324bfbf4bd6d44f6703fc1d162e5c68b",
+      "mode": "software-debug",
+      "observations": [],
+      "status": 0,
+      "stdout_sha256": "5d073885362689ad0059309c8addff282d19e52c379def803a02b3e0d699d4c5"
+    },
+    {
+      "frames": 0,
+      "lldb_log_sha256": null,
+      "manifest_sha256": "42c34a7b878c39482b7fcf62022b651b137fb77e650594d4e769aac6d0e4c032",
+      "mode": "hardware-plain",
+      "observations": [],
+      "status": -12906,
+      "stdout_sha256": "d4554d24feb89f7d0d26b1fb3b29008311811b3e612e8b201f3a5c9f03f31bab"
+    },
+    {
+      "frames": 6,
+      "lldb_log_sha256": null,
+      "manifest_sha256": "53b6594380a289bef0d9f8d19aa8686f6165e5608056c038e79fbe00b5a69ea1",
+      "mode": "software-plain",
+      "observations": [],
+      "status": 0,
+      "stdout_sha256": "5d073885362689ad0059309c8addff282d19e52c379def803a02b3e0d699d4c5"
+    }
+  ],
+  "runner_sha256": "196d329421f484bf563dfa90bc15dcc3b15aabc6977b23e2c151208bc58397d1",
+  "same_thread_and_list": true,
+  "selector": "countByEnumeratingWithState:objects:count:",
+  "software_bytes_compared": 2764800,
+  "software_frames": 24,
+  "status": "PASS_VT_FIRST_ENUM_BATCH",
+  "system_modified": false,
+  "total_device_count_proved": false
+}

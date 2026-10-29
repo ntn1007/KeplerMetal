@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A bounded debugger witness sees a non-null Metal enumeration result and return value 1 after the first enumeration selector call in two failed VideoToolbox requests. List identity and hardware video remain unproved. [Evidence](VIDEO_VT_FIRST_ENUM_BATCH.md).
+
 The observed VideoToolbox call site statically targets the Metal enumeration import; before/after live snapshots point to MetalOld even with interposition. The returned list and video failure remain unknown. [Evidence](VIDEO_VT_IMPORT_BINDING.md).
 
 Public Metal enumeration interposition sees the GTX in direct controls but captures no call in failed VideoToolbox windows; framework binding and VideoToolbox enumeration remain unresolved. [Evidence](VIDEO_VT_DEVICE_ENUMERATION.md).
