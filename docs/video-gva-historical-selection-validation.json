@@ -1,0 +1,19 @@
+{
+  "candidate_value": "0x01040008",
+  "condition": "one counted candidate and nonzero NVIDIA-class candidate",
+  "current_runtime_cause_proved": false,
+  "evidence_id": "ev_931bf92d58c7106a382a89793c44f1a449547dd15df2b697589287a5b3134103",
+  "excluded_request_values_on_that_branch": [
+    5,
+    9
+  ],
+  "function_sha256": "663c2667a023594584d8adad46535c9431dbd4ebfa1e30835a80ffecc5b1a5ae",
+  "hardware_video_execution_proved": false,
+  "historical_sha256": "54dc80c41bab45492d1eb601fb1d242b513107645d068bf24edee155b965681f",
+  "rea_bundle_sha256": "6ad2ada34fa269ea9c41dabd86c7b5926cb48f4b210f6a8a1eb46f9af69b14eb",
+  "request_value_semantics_proved": false,
+  "selection_always_proved": false,
+  "status": "PASS_PINNED_STATIC_BRANCH",
+  "system_modified": false,
+  "vendor_code_executed": false
+}
