@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A CPU-only H.264 POC2/one-reference proposal now matches five pinned Mesa blocks and FFmpeg's software reference snapshots; arm64 sanitizers and the older two-reference output regression pass. Hardware video remains unproved. [Evidence](VIDEO_ONE_REFERENCE_POC2.md).
+
 The offline CAS recognizer now rejects five synthetic unmodeled reconvergence targets while preserving four archived verdicts; its retained reconvergence shape remains an assumption, not a general safety proof. [Evidence](CAS_RECONVERGENCE_GUARD.md).
 
 A pinned standalone client now uses the native compute pipeline reflection factory with process-local ICB adaptation: 16 GTX output processes and four refusals pass; the reflection describes the same approved function, while the returned registered pipeline is a separate object. General pipeline equivalence remains unproved. [Evidence](STANDALONE_MIXED_REFLECTION.md).

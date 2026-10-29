@@ -7,7 +7,7 @@ bool prepare_baseline_idr(const ParsedBaselinePicture& p, uint8_t slot,
     if (!p.is_idr || !p.is_reference || p.slice_type != 2 || p.frame_num || p.poc_lsb ||
         p.delta_poc_bottom || p.idr_no_output_prior || p.idr_long_term || !p.max_references ||
         p.max_references > 16 || slot > p.max_references || !identity ||
-        p.picture.pic_order_cnt_type || p.picture.frame_mbs_only_flag != 1 ||
+        (p.picture.pic_order_cnt_type != 0 && p.picture.pic_order_cnt_type != 2) || p.picture.frame_mbs_only_flag != 1 ||
         p.picture.field_pic_flag || p.picture.bottom_field_flag ||
         p.first_macroblocks.size() != p.picture.slice_count || p.first_macroblocks.empty() ||
         p.first_macroblocks.front() != 0) return false;

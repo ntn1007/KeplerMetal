@@ -64,8 +64,8 @@ bool sps_header(const uint8_t* nal, size_t n, Headers& h) {
     (void)b.take(8); // level
     h.sps_id = b.ue();
     const uint32_t frame_log = b.ue(), poc_type = b.ue();
-    if (!b.ok || profile != 66 || (constraints & 3) || h.sps_id > 31 || frame_log > 12 || poc_type != 0) return false;
-    const uint32_t poc_log = b.ue(), max_refs = b.ue();
+    if (!b.ok || profile != 66 || (constraints & 3) || h.sps_id > 31 || frame_log > 12 || (poc_type != 0 && poc_type != 2)) return false;
+    const uint32_t poc_log = poc_type == 0 ? b.ue() : 0, max_refs = b.ue();
     h.frame_gaps_allowed = b.take(1);
     const uint32_t width_minus_one = b.ue(), height_minus_one = b.ue();
     const uint32_t progressive = b.take(1), direct = b.take(1), cropped = b.take(1);
@@ -77,7 +77,7 @@ bool sps_header(const uint8_t* nal, size_t n, Headers& h) {
     h.picture.width = (width_minus_one + 1) * 16;
     h.picture.height = (height_minus_one + 1) * 16;
     h.picture.log2_max_frame_num_minus4 = frame_log;
-    h.picture.pic_order_cnt_type = 0; h.picture.log2_max_pic_order_cnt_lsb_minus4 = poc_log;
+    h.picture.pic_order_cnt_type = poc_type; h.picture.log2_max_pic_order_cnt_lsb_minus4 = poc_log;
     h.picture.frame_mbs_only_flag = 1; h.picture.direct_8x8_inference_flag = direct;
     return true;
 }
@@ -111,11 +111,11 @@ bool slice_header(const uint8_t* nal, size_t n, const Headers& h, Slice& s) {
     if ((type != 1 && type != 5) || !rbsp(nal, n, type, data)) return false;
     s.reference = (nal[0] & 0x60) != 0; s.is_idr = type == 5;
     if (s.is_idr && !s.reference) return false;
-    Bits b{data}; s.first = b.ue(); s.type = b.ue(); s.pps = b.ue();
-    if (!b.ok || (s.type != 0 && s.type != 2) || (s.is_idr && s.type != 2) || s.pps != h.pps_id) return false;
+    Bits b{data}; s.first = b.ue(); const uint32_t coded_type = b.ue(); s.type = coded_type % 5; s.pps = b.ue();
+    if (!b.ok || coded_type > 9 || (s.type != 0 && s.type != 2) || (s.is_idr && s.type != 2) || s.pps != h.pps_id) return false;
     s.frame = b.take(h.frame_bits); s.idr = s.is_idr ? b.ue() : 0;
-    s.poc = b.take(h.poc_bits);
-    s.delta = h.picture.bottom_field_pic_order_in_frame_present_flag ? b.se() : 0;
+    s.poc = h.picture.pic_order_cnt_type == 0 ? b.take(h.poc_bits) : 0;
+    s.delta = h.picture.pic_order_cnt_type == 0 && h.picture.bottom_field_pic_order_in_frame_present_flag ? b.se() : 0;
     s.l0 = 0;
     if (s.type == 0) {
         const uint32_t override_refs = b.take(1);

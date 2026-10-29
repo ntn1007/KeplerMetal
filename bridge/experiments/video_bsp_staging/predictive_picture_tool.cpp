@@ -29,9 +29,9 @@ int main(int argc,char** argv) {
         } else {
             std::array<ReferenceState,17> slots{};
             std::array<PictureReference,2> refs{};
-            const unsigned count=i==1?1:2, first=i-count, target=i%3;
+            const unsigned count=i<p.max_references?i:p.max_references, first=i-count, target=i%(p.max_references+1);
             for(unsigned j=0;j<count;j++) {
-                const unsigned frame=first+j, slot=frame%3;
+                const unsigned frame=first+j, slot=frame%(p.max_references+1);
                 slots[slot]=completed[frame]; refs[j].identity=completed[frame].identity;
                 refs[j].slot=static_cast<uint8_t>(slot); refs[j].top=refs[j].bottom=true;
                 refs[j].frame_index=frame; refs[j].top_order=refs[j].bottom_order=static_cast<int32_t>(frame*2);

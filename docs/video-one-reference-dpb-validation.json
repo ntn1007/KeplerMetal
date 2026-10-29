@@ -1,0 +1,32 @@
+{
+  "architecture": "arm64",
+  "decode_log_sha256": "2b5ebb43cb0b1a0ef2377952e6338c69b309afaefaa7bfabf639c8cc0aa65784",
+  "decoded_reference_frames": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "ffmpeg_sha256": "7f6028378534aa10a2dfa07d807ddcc0d18c869bf5c2f64c89efcc18ee88c4ee",
+  "fixture_sha256": "4b4f9fb55be0741a00991bdf81b3b93147525e3268b0d0a2140e549ed13a4323",
+  "frame_hashes": [
+    "cf62d8b22b4028e220db6dab54c18cf91461f52e065f5dc424e73719f4b2435f",
+    "7cc5cb214860bda4644b744a0f95468754af214a3aaa8866f2747e752e8c3f5a",
+    "709c91e50847201db029842ba6648e2a0f2689b55914d969c66d4e7f549f32bb",
+    "78d6bbb253fbb74927166263db0327747ac35ef409dd15b5dc17f86e7984de46",
+    "5807f0e6e0da903a2a59b1720d34dab9788b95686b5700daf823007d1766a6aa",
+    "357b941af77c95ff6e7aff1155172de68fb438a2083f015833d4fb611751cc62"
+  ],
+  "framehash_sha256": "b917a5f86bb9689f14551f51079a92f29bf5729947ae59cda749e5d97c2b67e9",
+  "frames_decoded": 6,
+  "hardware_video_execution_proved": false,
+  "parser_sha256": "da2243ce9cd12ba8de02ec395272f7b851c7a26ce54d894e36fbd8b96cb50168",
+  "proposal_receipt_sha256": "d84946d612b6857403f7fea114b40a1963e2d9b94c6e923b8b53e7dc49a9a9fe",
+  "reference_comparison_same_ffmpeg_binary": true,
+  "script_sha256": "c48cdaf2ee3219c40684b96a5488a863a8df7b94cece23e7bc015f7debe7d63b",
+  "slice_snapshots": 12,
+  "software_nv12_sha256": "4c7bf3b3ef3f556bbd08bcae63b319010b112a8c9b13fbc8d299b51f8e45d4c4",
+  "status": "PASS_ONE_REF_POC2_SOFTWARE_DPB",
+  "system_modified": false
+}

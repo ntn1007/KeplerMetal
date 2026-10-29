@@ -49,4 +49,19 @@ int main() {
     assert(prepare_baseline_p(p,slots,refs,2,2,12,out));
     assert(get32(out,0x38)==4 && get32(out,0x5c)==1);
     refs[1].slot=0; assert(!prepare_baseline_p(p,slots,refs,2,2,12,out));
+    // One-reference POC type 2: frame 2 references only frame 1.
+    p.max_references=1; p.picture.pic_order_cnt_type=2; p.poc_lsb=0;
+    std::array<ReferenceState,17> one{}; one[0].identity=13;
+    one[1].identity=11; one[1].decoded_top=one[1].decoded_bottom=true;
+    std::array<PictureReference,2> previous{}; previous[0].identity=11; previous[0].slot=1;
+    previous[0].top=previous[0].bottom=true; previous[0].frame_index=1;
+    previous[0].top_order=previous[0].bottom_order=2;
+    assert(prepare_baseline_p(p,one,previous,1,0,13,out));
+    assert(get32(out,0x38)==4 && get32(out,0x3c)==4 && get32(out,0x4c)==1);
+    const auto single=out;
+    p.poc_lsb=4; assert(!prepare_baseline_p(p,one,previous,1,0,13,out)); p.poc_lsb=0;
+    previous[0].frame_index=0; assert(!prepare_baseline_p(p,one,previous,1,0,13,out)); previous[0].frame_index=1;
+    p.frame_num=32; assert(!prepare_baseline_p(p,one,previous,1,0,13,out)); p.frame_num=2;
+    assert(!prepare_baseline_p(p,one,previous,2,0,13,out));
+    assert(out.bytes==single.bytes && out.target_after.identity==single.target_after.identity);
 }

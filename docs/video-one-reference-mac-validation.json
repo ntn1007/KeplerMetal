@@ -1,0 +1,42 @@
+{
+  "architecture": "arm64",
+  "gpu_submission": false,
+  "hardware_video_execution_proved": false,
+  "input_sha256": {
+    "H264Baseline.cpp": "a74211f65c6de80f40b77e5770d9aef7c19494864ab9aea54533bc24f93c6407",
+    "H264Baseline.h": "5ab473296ca45e0433412710bdba6fae3b0f288f71ae638e170134f225500794",
+    "H264Stream.cpp": "d604ad21278f907f27a581d46af3d1f9b788306a8d1b0d9579ae6cb08f8d65e4",
+    "H264Stream.h": "c54cefe3dcff353d8aff27f3955d0b9aea4249a288ab623a9522277175054763",
+    "VideoIdr.cpp": "09bf4c12a851313fa25ec505803cd2b717dba15b32fb5ea7b6ad0d25bde103a3",
+    "VideoIdr.h": "7fe4087b63a9571d7f4581e6ef832f48924a38b81969ce2851fe107254cc3aa4",
+    "VideoLayout.cpp": "934403950258167baccc92aeb2d24b0c031fdb83ed6c199d81c1261ee2a158e7",
+    "VideoLayout.h": "730b86192b7ac04cf5b6b310b12b76f46a18f2ea6946f56261b5f97843601df8",
+    "VideoPicture.cpp": "f2d73943faee3423620c64233c62caf1205476c233ed781a7e8bf8db3f732387",
+    "VideoPicture.h": "fff5191307c94b325127e99d4f2d1b4e348bc1e63231c3793789c2e7ba79c822",
+    "VideoPredictive.cpp": "4aa7408a32d91b88623ecc4d95e0fdbbbf6b7b3efe6e657980057267554079ee",
+    "VideoPredictive.h": "3cca944d82191994a4b55603286af0f0586ed5b3529899d399b3994e30c915e4",
+    "frame-000.avcc": "dcd5f12f6b4f57cd77e3ab4a87d1ece77aa590b2b97a4fc4de31e4fe5ceaafba",
+    "frame-001.avcc": "838f438e4c342c05a2f3d53f6321af38b94bbb0bb362868c0c80d1bfa18dc1f5",
+    "frame-002.avcc": "6c9b28610d5d850ecc50f6da60ce840f47e2e6871179387ed261cdb26a1c7b2b",
+    "frame-003.avcc": "c2510ed27297f4cc7b3b02efffa2513ada0925ffeb8c4bce1e0b91017a9c324f",
+    "frame-004.avcc": "30ad63d27154cad7f7fe391a8b0e6056322f478416fafce732ecc3e54e06d568",
+    "frame-005.avcc": "442772dde50fc1b9b95664bc07c019c0cfb267d00e9037d509ae5f8127012596",
+    "param-0.bin": "df87895444b619b3ee8dc111e330739d1036fa8ad0a9e55a468c2d5edd9bad49",
+    "param-1.bin": "02115ac26216f7491ada16416042fac8c0d181ae6e336f3e1d9e49b2c99a24a5",
+    "predictive_picture_tool.cpp": "bbf93c0c8f404db6e16a54516362d57e80e8bdc6bd94bc9b833b65ef93f5a138",
+    "test_baseline.cpp": "497bddefe21a1ab868f51801f721474b6f763230b3fe5742b030709efaa57d48",
+    "test_video_idr.cpp": "536803076c722c14e52d97a21be014d8272cf4161bc31c48b9ed977c74d00d76",
+    "test_video_predictive.cpp": "3d95dc3a3a6b9ced51b1ef6efc1e782d90e5d63c7e7ca6dc2422a4e2cbc48438"
+  },
+  "local_receipt_sha256": "d84946d612b6857403f7fea114b40a1963e2d9b94c6e923b8b53e7dc49a9a9fe",
+  "proposal_sha256": [
+    "48c3ad9d199a9ad699fc317fb4be0d65bccbb2a53f7660ec045d654fddd40940",
+    "4fa1a651f163222c951b60583c18a1f1870099ee2ffe4a91aa8493a56cebac58",
+    "877c9b0a8991901baee7ebc50b83efdab95f03409ff9b1d5dd303d3c6647d7db",
+    "cb6d21c231daf562345b421e973ffda7a04c05af81fa169a4c681289d6195ca7",
+    "e41c7e1eb24e6c1fc4bd75a93ac9f913c87717146f5e480f31ead27b61af68c6"
+  ],
+  "script_sha256": "4a8546f87e328f158a7161ed509a6eba119df99a98b54d38b9ef85b3761bcfa5",
+  "status": "PASS_MACBOOK_ONE_REF_POC2_ASAN_UBSAN",
+  "transfer_hashes_match_before_after": true
+}

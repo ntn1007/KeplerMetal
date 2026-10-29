@@ -31,6 +31,17 @@ static std::vector<uint8_t> sps() {
     w.ue(19); w.ue(14); w.bits(1, 1); w.bits(1, 1); w.bits(0, 1); w.bits(0, 1); w.finish();
     w.bytes.insert(w.bytes.begin(), 0x67); return w.bytes;
 }
+static std::vector<uint8_t> sps_poc2() {
+    Writer w; w.bits(66,8); w.bits(0,8); w.bits(13,8); w.ue(0); w.ue(1); w.ue(2); w.ue(1);
+    w.bits(0,1); w.ue(19); w.ue(14); w.bits(1,1); w.bits(1,1); w.bits(0,1); w.bits(0,1); w.finish();
+    w.bytes.insert(w.bytes.begin(),0x67); return w.bytes;
+}
+static std::vector<uint8_t> poc2_slice(uint32_t type, bool idr) {
+    Writer w; w.ue(0); w.ue(type); w.ue(0); w.bits(idr ? 0 : 1,5);
+    if(idr) { w.ue(0); w.bits(0,1); w.bits(0,1); }
+    else { w.bits(0,1); w.bits(0,1); w.bits(0,1); }
+    w.finish(); w.bytes.insert(w.bytes.begin(),idr?0x65:0x41); return w.bytes;
+}
 static std::vector<uint8_t> pps(int chroma = 0, bool constrained = false) {
     Writer w; w.ue(0); w.ue(0); w.bits(0, 1); w.bits(1, 1); w.ue(0); w.ue(0); w.ue(0);
     w.bits(0, 1); w.bits(0, 2); w.se(2); w.se(0); w.se(chroma); w.bits(0, 1); w.bits(constrained, 1); w.bits(0, 1); w.finish();
@@ -83,6 +94,16 @@ int main() {
     ParsedBaselinePicture marked_idr;
     assert(parse_baseline_picture(s.data(),s.size(),p.data(),p.size(),marked.data(),marked.size(),marked_idr));
     assert(marked_idr.is_idr && marked_idr.idr_no_output_prior && marked_idr.idr_long_term);
+    const auto s2=sps_poc2(); std::vector<uint8_t> type2idr; append(type2idr,poc2_slice(7,true));
+    ParsedBaselinePicture v2;
+    assert(parse_baseline_picture(s2.data(),s2.size(),p.data(),p.size(),type2idr.data(),type2idr.size(),v2));
+    assert(v2.is_idr && v2.slice_type==2 && v2.picture.pic_order_cnt_type==2 && v2.max_references==1 && v2.poc_lsb==0);
+    std::vector<uint8_t> type2p; append(type2p,poc2_slice(5,false));
+    assert(parse_baseline_picture(s2.data(),s2.size(),p.data(),p.size(),type2p.data(),type2p.size(),v2));
+    assert(!v2.is_idr && v2.slice_type==0 && v2.frame_num==1 && v2.poc_lsb==0 && v2.delta_poc_bottom==0 && v2.p_simple_reference_controls);
+    const auto v2_before=v2.annex_b; std::vector<uint8_t> invalid_type; append(invalid_type,poc2_slice(10,false));
+    assert(!parse_baseline_picture(s2.data(),s2.size(),p.data(),p.size(),invalid_type.data(),invalid_type.size(),v2));
+    assert(v2.annex_b==v2_before);
     VideoLayout layout;
     assert(plan_h264_layout(out.picture.width, out.picture.height, out.max_references,
                             out.picture.slice_count, 11161600, layout));
