@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Two scoped H.264 requests observe zero enumeration count followed by dispatch register `EAX = 1` on the same thread; both still return -12913 and no frames. The caller's handling and hardware video remain unproved. [Evidence](VIDEO_GVA_DISPATCH_RESULT.md).
+
 The pinned historical AppleGVA can count an NVIDIA-class candidate and still return before output-list append for request values 5 or 9 on its single-candidate path; their meaning and the current refusal remain unproved. [Static evidence](VIDEO_GVA_HISTORICAL_SELECTION.md).
 
 Six software-decoded H.264 frames now feed native GTX Metal NV12 kernels; eight processes match the archived FFmpeg and CPU transformation oracles across 11,059,200 bytes. Dedicated video engines remain unproved. [Evidence](VIDEO_VT_CVMETAL.md).
