@@ -49,7 +49,7 @@ python3 "$E/validate_picture.py" --archive /path/to/mesa-26.2.4.tar.xz \
   --out /path/to/new-picture-results
 ```
 
-The next useful work is to obtain correct parameters and picture boundaries
-from real H.264 inputs and to qualify reference surfaces. The separate macOS
-video channel and address-space contract must also be established before any
-hardware submission can be tested.
+A later [bounded baseline-header extractor](VIDEO_BSP_BASELINE.md) obtains
+selected fields from a real, externally delimited test fixture. Reference
+surfaces and the separate macOS video channel and address-space contract still
+need qualification before any hardware submission can be tested.

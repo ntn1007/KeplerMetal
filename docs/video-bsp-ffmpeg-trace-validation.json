@@ -1,0 +1,16 @@
+{
+  "after_sha256": "ecfd6eebd5c9a968a6a0642c4a3cdc66ed050721682f5bf55607ab7be3c3e1f1",
+  "architecture": "arm64",
+  "before_sha256": "ecfd6eebd5c9a968a6a0642c4a3cdc66ed050721682f5bf55607ab7be3c3e1f1",
+  "binary_sha256_before_after": "7f6028378534aa10a2dfa07d807ddcc0d18c869bf5c2f64c89efcc18ee88c4ee",
+  "capture_source_sha256": "2fb1fd91a91226c93fb19ea1fb99654293fca7e24eecbb2073001019fe0a031c",
+  "exit_code": 0,
+  "ffmpeg_version": "ffmpeg version 9.0.2 Copyright (c) 2000-2026 the FFmpeg developers",
+  "fixture_sha256_before_after": "12858642f02b0e1d98ddf409dd729a879b6a7a5d3434c860882532ca4f6b40af",
+  "hardware_decode": false,
+  "operation": "stream copy and header trace",
+  "remote_files_written": false,
+  "status": "PASS_FFMPEG_TRACE_CAPTURE",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "trace_sha256": "d5b460b411df4ea82205ea57661e72e99fef525b47a1402a54352af8d881f85c"
+}
