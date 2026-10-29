@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Two diagnostic CPU repetitions show the metadata observer accepting the first begin and refusing the second before decode. The dependency observer has a separate one-shot guard; repeated hardware video remains untested. [Evidence](VIDEO_GVA_REPEAT_METADATA.md).
+
 A same-process video repetition CPU preflight failed on the second helper; its exact cause is unresolved. Static audit separately shows the existing dependency observer only admits one session creation. No repeated hardware-video trial was run. [Evidence](VIDEO_GVA_REPEAT_PREFLIGHT.md).
 
 A CPU-only real-hardware-breakpoint calibration exercises the exact earlier cache reader on four node cases and refuses a wrong base. The AppleGVA cache branch itself remains unobserved. [Evidence](VIDEO_GVA_CACHE_READER_CALIBRATION.md).

@@ -1,0 +1,30 @@
+{
+  "auditor_sha256": "8d269a3a86cd7e7be2793ee2fe547b0c36051e28250b0a582c0ee56e15c252a3",
+  "build_sha256": "54b85781d63ba1cc078f7a5f4c3699c08d257fe54492b1657c50a4836bbb3e3e",
+  "metadata_library_sha256": "1bcc9953b8d69f583bbc2c736f90ce13f9329a7b8c3c9ae1250254b51a534a7b",
+  "metadata_source_sha256": "0600566954b3803ae954d5f826703855ff54c1d76243a5c27736fabe4c967217",
+  "original_failure_cause_directly_observed": false,
+  "repeated_hardware_video_proved": false,
+  "runs": [
+    {
+      "first_cpu_frame_bytes_matched": 691200,
+      "first_metadata_begin": true,
+      "manifest_sha256": "a801df6e1cd650eeb9049a47c02d3a91a771ef0189b5bb761924708f3b2e48aa",
+      "second_helper_nil": true,
+      "second_metadata_begin": false,
+      "stderr_sha256": "aa6e40c34c9dcb7a9c5d89fc9f65c38f0412c231280e0fd3f909605ba73c9447"
+    },
+    {
+      "first_cpu_frame_bytes_matched": 691200,
+      "first_metadata_begin": true,
+      "manifest_sha256": "e2b9da6b74d8c5d6ae5244d29fcff9b96d4db5afa705ceb2a8293714348e3ab3",
+      "second_helper_nil": true,
+      "second_metadata_begin": false,
+      "stderr_sha256": "e47374e51bb3bddd2f518686b7ed61038152764b98a87ed920627ba85d3cf614"
+    }
+  ],
+  "second_metadata_begin_refused_before_decode": true,
+  "status": "PASS_TWO_CPU_METADATA_DIAGNOSTICS",
+  "system_modified": false,
+  "wrapper_original_sha256": "c54d0ea4c8b4152319821320abaecc860a3adcf6324a6a30932edc22feaf50b8"
+}

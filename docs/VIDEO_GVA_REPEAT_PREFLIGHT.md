@@ -6,7 +6,7 @@ control did not qualify**: the first helper returned and produced six frames
 matching 691,200 reference bytes; the second helper returned `nil`, so the
 third request was not started. The host exited with code 10. These markers do
 not establish that the second `VTDecompressionSessionCreate` was reached, or
-why the second helper returned `nil`. No hardware-video repetition was run.
+why the second helper returned `nil`. A [later instrumented diagnostic](VIDEO_GVA_REPEAT_METADATA.md) identifies a metadata-observer refusal in two new CPU runs; it did not instrument this earlier run. No hardware-video repetition was run.
 
 Independently, static inspection of the pinned dependency observer shows a
 separate, definite obstacle: its interposed session-creation path uses
