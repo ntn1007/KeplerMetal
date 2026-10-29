@@ -1,0 +1,74 @@
+{
+  "all_deallocation_paths_covered": false,
+  "allocation_lifetime_proved": false,
+  "auditor_sha256": "f2325ecbd8e2a96c2a08b8f576fe784443d70a6f0e73ad3c3fe26a558087faf7",
+  "binding_observations": 3,
+  "build_sha256": "5743b11f6c1d72ebeb87239745f37e25071d995abdec769ae7dec6184ba19a3e",
+  "free_event_observed": false,
+  "free_slot_offset": 847829912,
+  "hardware_video_execution_proved": false,
+  "heap_calibration_sha256": "240c3c6eae4992a4fa2b8b854f59ed4a2d277685774dd242b5e2dbc564925d76",
+  "linked_callsite_offset": 150964,
+  "runs": [
+    {
+      "free_binding_matches_observer_at_arm": false,
+      "manifest_sha256": "d20d7f2e9851bb0c0996d8fc72276f68bdc5055ca754e0b39e5d4866f7a5b6e3",
+      "mode": "cpu",
+      "status_per_request": [
+        0,
+        0,
+        0
+      ],
+      "witness": "on"
+    },
+    {
+      "free_binding_matches_observer_at_arm": true,
+      "manifest_sha256": "7e26c58280fb8af2da8be66ca49169d6bfc058e4a8ea044df3db2d25377172bc",
+      "mode": "wrong",
+      "status_per_request": [
+        -12906,
+        -12906,
+        -12906
+      ],
+      "witness": "on"
+    },
+    {
+      "free_binding_matches_observer_at_arm": false,
+      "manifest_sha256": "c077dab6621fb7028f6a3524c2d1995189210d88d6378a6a84a7d207e0848a64",
+      "mode": "current",
+      "status_per_request": [
+        -12913,
+        -12913,
+        -12913
+      ],
+      "witness": "off"
+    },
+    {
+      "free_binding_matches_observer_at_arm": true,
+      "manifest_sha256": "9858b422aabb016ea2fb73c3043591c98d91b7573d4caf86c3d73b4dcd66c8cd",
+      "mode": "current",
+      "status_per_request": [
+        -12913,
+        -12913,
+        -12913
+      ],
+      "witness": "on"
+    },
+    {
+      "free_binding_matches_observer_at_arm": true,
+      "manifest_sha256": "2f1980193c1c5f5af628803849fc6d0cec97649396854c86eabcb15e9b60a618",
+      "mode": "current",
+      "status_per_request": [
+        -12913,
+        -12913,
+        -12913
+      ],
+      "witness": "on"
+    }
+  ],
+  "static_mapping_sha256": "2d9c4ed04bcdbdd4049bb7ed88f0a545d3f42b1b478ab320e43fc8feb6a39ffd",
+  "static_region_sha256": "f8a1efea62ed7f03028666fe86c35de8f06941324ac8d1ae8815ec93f0eb8a19",
+  "status": "PASS_THREE_PINNED_FREE_SLOT_BINDINGS",
+  "system_modified": false,
+  "tracking_pointer_armed": false
+}

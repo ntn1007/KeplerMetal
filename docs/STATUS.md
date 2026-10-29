@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+In three instrumented processes, the pinned AppleGVA free-call slot pointed to a CPU-calibrated observer at arm time. No node address was armed, and lifetime or other deallocation paths remain unproved. [Evidence](VIDEO_GVA_HEAP_BINDING.md).
+
 Two three-request video witnesses show zero hits at one statically mapped AppleGVA node-free callsite. Other deallocation paths and node lifetime remain unproved; hardware video still fails. [Evidence](VIDEO_GVA_NODE_FREE.md).
 
 Two calibrated request-window witnesses show property return in window 1 and list-selection hits in windows 1, 2 and 3; asynchronous causality and allocation lifetime remain unproved. All hardware-required requests still fail. [Evidence](VIDEO_GVA_REQUEST_WINDOW.md).
