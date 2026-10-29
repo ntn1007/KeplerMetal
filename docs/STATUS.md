@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Two synthetic-property video requests hit the renderer classifier and then its skip instruction with the same pointer value and observed field `0x01040008`; enumeration and hardware decode still fail. [Evidence and limits](VIDEO_GVA_CLASSIFICATION_WITNESS.md).
+
 The pinned AppleGVA selector additionally filters renderer IDs: the observed `0x01040008` matches neither accepted numeric group. This is a static inference from earlier stopped snapshots, not a traced branch or hardware-video fix. [Evidence](VIDEO_GVA_RENDERER_FILTER.md).
 
 A scoped synthetic codec string flips the observed AppleGVA node flag in two requests, but enumeration remains zero and hardware video fails. This fabricated value is not a NVIDIA codec configuration. [Evidence](VIDEO_GVA_CODEC_COUNTERFACTUAL.md).

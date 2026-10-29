@@ -28,6 +28,8 @@ does not exclude subsequent mutation. The full VideoToolbox failure cause is
 not established; changing the numeric field or bypassing the filter would not
 by itself prove the decoder or provider compatible.
 
+A subsequent [runtime witness](VIDEO_GVA_CLASSIFICATION_WITNESS.md) observed classification followed by the skip instruction with the same pointer value in two synthetic-property requests; individual branch instructions and object lifetime remain unproved.
+
 The node field matches the separately recorded `IOVARendererID` **numerically**;
 that match does not prove object identity or the meaning of Apple's categories.
 The synthetic string is not an NVIDIA configuration value. No new GPU or vendor

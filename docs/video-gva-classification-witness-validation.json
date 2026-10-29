@@ -1,0 +1,80 @@
+{
+  "build_sha256": "deadc5a0e449afbd9faa9c3efc49cbd0193729ef1c1efd19fac700adeb8702a7",
+  "calibration_sha256": "7a6ba2b5fe2de239f36d211c6929d746863b8a32965b960108fa69647a0a7c8f",
+  "classification_then_same_pointer_skip_per_run": 2,
+  "full_failure_cause_identified": false,
+  "hardware_decoder_status": -12913,
+  "hardware_frames": 0,
+  "hardware_video_execution_proved": false,
+  "individual_machine_branches_stepped": false,
+  "node_allocation_lifetime_proved": false,
+  "observed_field": "0x01040008",
+  "prior_static_audit_sha256": "c7de2912ab0600b69037d176cdd21f1d932390dadb55a80e7790aa58f4fb8911",
+  "reserved_control_sha256": "dea998561122c99177406cb2c1cea8265ae38f40e7e5008f3e541e9a9850b430",
+  "runs": [
+    {
+      "decoder_status": 0,
+      "lldb_log_sha256": "203222605af900cac4b9233f438f9a4e91a53f055af237c87f8b3cfeadac7c75",
+      "manifest_sha256": "eca6c868e91d56914cbc493c1e0c0a35bbe0b32bf9d279f0f31648bad0e068e1",
+      "mode": "cpu",
+      "output_frames": 6,
+      "probe": "off",
+      "witness": "on",
+      "witness_hits": 0
+    },
+    {
+      "decoder_status": -12913,
+      "lldb_log_sha256": "9c6a307bc3947cb7210a2edbee06bb9ed4c984fae11e2ead8976bf163788b47c",
+      "manifest_sha256": "aa0ff949e117e8e2a49e7f762c787a4e990ce2b5eeb72176f56701d7b197324e",
+      "mode": "current",
+      "output_frames": 0,
+      "probe": "off",
+      "witness": "on",
+      "witness_hits": 3
+    },
+    {
+      "decoder_status": -12913,
+      "lldb_log_sha256": "dad3bf1ffcedfdf43f36a2bc825a70740643dda3c82fb912072be784915f0d49",
+      "manifest_sha256": "5b7c1efb14f51f8b49792f89a372d4e35f34af1c86fd6df9570a8fd97a6a1fff",
+      "mode": "current",
+      "output_frames": 0,
+      "probe": "synthetic",
+      "witness": "on",
+      "witness_hits": 5
+    },
+    {
+      "decoder_status": -12913,
+      "lldb_log_sha256": "f816fbc0a5518e99d3ecb856cb2aa2b353c2adc24e28454faeb63eccc7a54229",
+      "manifest_sha256": "586b104b1fffb1c63edfd849b3b0c7759d5ae402c1d6b71eb291122d04255d65",
+      "mode": "current",
+      "output_frames": 0,
+      "probe": "synthetic",
+      "witness": "on",
+      "witness_hits": 5
+    },
+    {
+      "decoder_status": -12906,
+      "lldb_log_sha256": "16160a8038547d7303e57859ed21af491fb6d4c5c7938ee66c9f95bb774b56d3",
+      "manifest_sha256": "07648b8dabdb34a12144eb47a34e58027f0bc81ec85fec7d647b0c3fba47800b",
+      "mode": "wrong",
+      "output_frames": 0,
+      "probe": "off",
+      "witness": "on",
+      "witness_hits": 0
+    },
+    {
+      "decoder_status": -12913,
+      "lldb_log_sha256": "ab5a037058090ca2096f2edab8c84bba2c636977e91106ad9f12972b096f95b6",
+      "manifest_sha256": "d2b6b166a47c0f99e39ff65128edf691eb43d10df55618bafdc4980904b88744",
+      "mode": "current",
+      "output_frames": 0,
+      "probe": "off",
+      "witness": "off",
+      "witness_hits": 0
+    }
+  ],
+  "source_region_sha256": "4c07b6daa5d9e4449c3f77192951ffa230915193befe87cbbf443e25226fa564",
+  "status": "PASS_BOUNDED_CLASSIFICATION_WITNESS",
+  "synthetic_runs": 2,
+  "system_modified": false
+}
