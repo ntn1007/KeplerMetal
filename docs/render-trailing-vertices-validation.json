@@ -1,0 +1,60 @@
+{
+  "archive_sha256": "c8dae5ab3c4a40dff7db0f69a2020198d98092ae9cea05993abe8b35a1a92a5c",
+  "baseline_direct_3_4_5_passed": true,
+  "baseline_refusal_before_count4": true,
+  "build_sha256": "c7ca58dcbea4a8f478cebe40c1c7956d5299d716b3b28bd9dd6f4f960d60a48e",
+  "checked_float_channels": 147456,
+  "expected_api_refusals": 10,
+  "general_metal_support": false,
+  "guard_bytes": 6144,
+  "packet_counts_verified": [
+    3,
+    4,
+    5
+  ],
+  "performance_benchmark": false,
+  "processes": 4,
+  "rendered_cases": 12,
+  "runs": [
+    {
+      "images_sha256": {
+        "3": "ad54a279b3c738206061e86dc4598c2675204b2fb3b9d4461821b1f5524da7fc",
+        "4": "ad54a279b3c738206061e86dc4598c2675204b2fb3b9d4461821b1f5524da7fc",
+        "5": "ad54a279b3c738206061e86dc4598c2675204b2fb3b9d4461821b1f5524da7fc"
+      },
+      "manifest_sha256": "8d28ec703dd13ba3d6342d50b029a25a7297f3ca6111420120de9bef130c00c7",
+      "mode": "direct"
+    },
+    {
+      "images_sha256": {
+        "3": "ad54a279b3c738206061e86dc4598c2675204b2fb3b9d4461821b1f5524da7fc",
+        "4": "ad54a279b3c738206061e86dc4598c2675204b2fb3b9d4461821b1f5524da7fc",
+        "5": "ad54a279b3c738206061e86dc4598c2675204b2fb3b9d4461821b1f5524da7fc"
+      },
+      "manifest_sha256": "52fd57ec79ae9d48c4e946eba0094c54b2e221a080b609162d3263ddadf71d73",
+      "mode": "auto"
+    },
+    {
+      "images_sha256": {
+        "3": "ad54a279b3c738206061e86dc4598c2675204b2fb3b9d4461821b1f5524da7fc",
+        "4": "ad54a279b3c738206061e86dc4598c2675204b2fb3b9d4461821b1f5524da7fc",
+        "5": "ad54a279b3c738206061e86dc4598c2675204b2fb3b9d4461821b1f5524da7fc"
+      },
+      "manifest_sha256": "783eab8161a6b3c52bf0e137c1b852a7fe8742ed85f80468606ce8e0a606c22a",
+      "mode": "direct"
+    },
+    {
+      "images_sha256": {
+        "3": "ad54a279b3c738206061e86dc4598c2675204b2fb3b9d4461821b1f5524da7fc",
+        "4": "ad54a279b3c738206061e86dc4598c2675204b2fb3b9d4461821b1f5524da7fc",
+        "5": "ad54a279b3c738206061e86dc4598c2675204b2fb3b9d4461821b1f5524da7fc"
+      },
+      "manifest_sha256": "c9535681d8dedfcd5ab262166fa251f8df901361fc18eb40b2bda7c02c344f57",
+      "mode": "auto"
+    }
+  ],
+  "same_raw_pixels_direct_and_adapted": true,
+  "status": "PASS_TRAILING_VERTEX_GPU",
+  "system_modified": false,
+  "trailing_vertex_invocations_proved": false
+}

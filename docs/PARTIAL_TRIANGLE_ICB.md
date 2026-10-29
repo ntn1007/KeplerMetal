@@ -19,8 +19,8 @@ registered pipeline and vertex binding, plus restoration and copying; its
 coverage remains bounded.
 
 This is an **opt-in application-local** extension, not a system driver update
-or transparent Metal support. Non-legacy shaders, three-plus counts with a
-remainder, other primitive types, GPU-generated ICBs, arbitrary resources and
+or transparent Metal support. Non-legacy incomplete draws and three-plus counts with a remainder remain
+unqualified except for the separately tested [four/five-vertex stage-in profile](RENDER_TRAILING_VERTICES.md). Other primitive types, GPU-generated ICBs, arbitrary resources and
 all indirect-command-buffer introspection remain unqualified. No performance
 claim is made.
 

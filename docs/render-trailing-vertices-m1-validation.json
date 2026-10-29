@@ -1,0 +1,26 @@
+{
+  "device": "Apple M1 Max",
+  "host_binary_sha256_observed": "2159b907a693dea7258a468ce98e594046f26d48c9f937a2eb1f2b501336e545",
+  "input_sha256": {
+    "direct": "84341833ac5448c8e5d291b9a0e6af873e28e419afb25ad00000db67134feadb",
+    "icb": "bb494ab416eea457295e3f2e527723a628dd21ae03c3868d639112d2dc389c7a",
+    "source": "282639cada9e03cfeb3aa198c05258617b76a9eacf15c5357db7d41c63c638bb"
+  },
+  "macOS_version_observed": "27.2 (26B123)",
+  "nvidia_gpu_execution_proved": false,
+  "raw_images_retained": false,
+  "results": [
+    {
+      "all_command_buffers_completed": true,
+      "cases": 6,
+      "mode": "direct"
+    },
+    {
+      "all_command_buffers_completed": true,
+      "cases": 6,
+      "mode": "icb"
+    }
+  ],
+  "sdk_version_observed": "27.0",
+  "status": "PASS"
+}

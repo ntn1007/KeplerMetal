@@ -550,8 +550,10 @@ static void executePartialRange(NSArray<KPComputeICBCommand*>*commands,NSRange r
 }
 - (void)drawPrimitives:(MTLPrimitiveType)type vertexStart:(NSUInteger)start vertexCount:(NSUInteger)count instanceCount:(NSUInteger)instances baseInstance:(NSUInteger)base{
     BOOL extended=[_owner.scope.renderEngine maxVertexBindings]>0;
-    BOOL incomplete=count>0&&count<3&&[[_owner.scope.renderEngine profileForPipeline:_pipeline][@"legacy"]boolValue];
-    if(!_owner||!(_owner.allowedTypes&MTLIndirectCommandTypeDraw)||type!=MTLPrimitiveTypeTriangle||(count%3&&!incomplete)||count>4096||instances>64||start>65536-count||base>65536-instances||(incomplete&&(start||instances>2||base||_vertexBindings.count||_fragmentBindings.count))||(!extended&&(start||(count!=3&&count!=0&&!incomplete)||instances>2||base)))reject(@"Direct render geometry outside supported profile");
+    NSDictionary*profile=[_owner.scope.renderEngine profileForPipeline:_pipeline];
+    BOOL incomplete=count>0&&count<3&&[profile[@"legacy"]boolValue];
+    BOOL trailing=(count==4||count==5)&&extended&&profile&&![profile[@"legacy"]boolValue];
+    if(!_owner||!(_owner.allowedTypes&MTLIndirectCommandTypeDraw)||type!=MTLPrimitiveTypeTriangle||(count%3&&!incomplete&&!trailing)||count>4096||instances>64||start>65536-count||base>65536-instances||(incomplete&&(start||instances>2||base||_vertexBindings.count||_fragmentBindings.count))||(!extended&&(start||(count!=3&&count!=0&&!incomplete)||instances>2||base)))reject(@"Direct render geometry outside supported profile");
     _kind=0;_indices=nil;_offset=0;_instances=instances;_vertexStart=start;_vertexCount=count;_baseInstance=base;_baseVertex=0;_hasDraw=count&&instances&&!incomplete;_record=nil;
 }
 - (void)drawIndexedPrimitives:(MTLPrimitiveType)type indexCount:(NSUInteger)count indexType:(MTLIndexType)indexType indexBuffer:(id<MTLBuffer>)indices indexBufferOffset:(NSUInteger)offset instanceCount:(NSUInteger)instances baseVertex:(NSInteger)vertexBase baseInstance:(NSUInteger)base{

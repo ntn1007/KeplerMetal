@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A scoped non-indexed stage-in render ICB accepts four or five vertices; two GTX direct/adapted pairs match pixels and retain the requested packet counts. Invocation of trailing vertices is not proved. [Evidence](RENDER_TRAILING_VERTICES.md).
+
 Two GTX processes verify the incomplete-triangle guard rejects changed pipeline or vertex binding before submission; unchanged, restored and copied commands pass pixel controls. [Evidence](PARTIAL_TRIANGLE_STATE_GUARD.md).
 
 The scoped legacy CPU render ICB now accepts one- or two-vertex/index triangles as inert commands; two GTX direct/adapted pairs and prior zero-draw regression match. Other shaders and broader changed-state behavior remain unqualified. [Evidence](PARTIAL_TRIANGLE_ICB.md).
