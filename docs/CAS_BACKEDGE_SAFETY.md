@@ -2,6 +2,9 @@
 
 The offline CAS recognizer now refuses a decoded `bra` or `joinat` located after the proposed redirect when its target is at or before that redirect. Such a path could revisit the lock/compare region after the repair has changed the expected-value register. The rule is conservative: it can reject unreachable or otherwise safe paths, and is not a full control-flow or dataflow proof.
 
+A later [incoming-branch correction](CAS_INCOMING_BRANCH.md) also refuses
+direct branches that bypass the lock and enter the candidate interval.
+
 ## Evidence
 
 A local **synthetic** counterexample changes one eight-byte instruction of the archived `slot1` SASS program at `0x2d8` into `bra 0x250`, targeting the lock instruction after the proposed redirect at `0x2d0`. The local assembler produced the branch; the pinned offline decoder reproduced the complete modified listing. Given the original fixture's AIR and the modified SASS, the previous full diagnosis accepted the pair; the updated diagnosis refuses it. The unchanged AIR and modified SASS are deliberately paired for the experiment and are **not proven to come from the same compilation**. Neither the modified program nor a repaired version was dispatched. There is no evidence that the native compiler emitted this case or that a historical GPU-qualified shader is defective.

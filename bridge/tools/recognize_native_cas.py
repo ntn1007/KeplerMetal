@@ -159,8 +159,21 @@ def sass_contract(code,text,component):
     other_use=True;break
   if other_use:continue
   edges=[(source,int(target,16)) for source,op2 in instructions for target in re.findall(r'(?:bra|joinat) (0x[0-9a-f]+)',op2)]
+  # Decoder branch targets may identify a schedule word rather than the next
+  # executable instruction. Apply the same normalization as the flow tracer.
+  edges=[(source,target+8 if target%64==0 else target) for source,target in edges]
   targets=[target for _,target in edges]
   if patch in targets or patch+8 in targets:continue
+  branches=[]
+  for source,operation in instructions:
+   branch=re.fullmatch(r'(?:(?:\$p\d+|\(not \$p\d+\)) )?bra (0x[0-9a-f]+)',operation)
+   if branch:
+    target=int(branch[1],16);branches.append((source,target+8 if target%64==0 else target))
+  comparison=instructions[j][0];retry=instructions[i+4][0]
+  # No direct branch may enter after ld-lock from outside the matched region,
+  # or re-enter the fixed lock/unlock sequence without the ld-lock itself.
+  if any(off<target<=comparison and not off<=source<=comparison for source,target in branches):continue
+  if any(off<target<=retry for _,target in branches):continue
   # A post-patch backedge can re-enter the lock/compare region after cmp has
   # been changed. Refuse even if the path is unreachable or conditionally safe;
   # this structural check does not establish complete control-flow semantics.

@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+The offline CAS candidate recognizer rejects direct branches that enter a candidate after its lock or enter its fixed lock sequence. Four assembled synthetic counterexamples are refused; prior archived verdicts remain unchanged. [Evidence](CAS_INCOMING_BRANCH.md).
+
 The offline copied-lock CAS analyzer now refuses predicated exits and reconvergence in its modeled slice; two assembled synthetic exits previously yielded hypotheses. No certificate or GPU dispatch is authorized. [Evidence](CAS_PREDICATED_CONTROL.md).
 
 A hash-certified two-buffer point transform now runs through the scoped CPU render ICB on GTX for counts through 256, matching direct and CPU results; count-dependent bounds and same-object alias checks are enforced. [Evidence](VERTEX_POINT_TRANSFORM.md).

@@ -115,6 +115,20 @@ class CASRecognitionSafety(unittest.TestCase):
         code, text = listing(extra='bra 0x58')
         self.assertTrue(sass_contract(code, text, 0)['qualified'])
 
+    def test_external_branch_cannot_skip_lock_or_enter_retry_sequence(self):
+        for operation in ('bra 0x38', '$p1 bra 0x38', 'bra 0x18', '(not $p1) bra 0x18', 'bra 0x40'):
+            ops=['sched 0x0',operation,'ld lock $p1 $r4 s[0x4]',
+                 '$p1 set b32 $r2 eq s32 $r4 $r0',
+                 '$p1 slct b32 $r5 $r1 $r4 ne s32 $r2',
+                 '$p1 st unlock $p0 s[0x4] $r5','(not $p0) bra 0x10',
+                 'set $p0 0x1 eq u32 $r0 $r4','sched 0x0','membar cta',
+                 'st b128 wb g[$r8d] $r0q','exit','nop','nop','nop','nop']
+            words=[0]*len(ops);words[9]=0xe000000000001c05
+            code=b''.join(struct.pack('<Q',w) for w in words)
+            text='\n'.join(f'{i*8:08x}: {w&0xffffffff:08x} {w>>32:08x}     {op}' for i,(w,op) in enumerate(zip(words,ops)))
+            with self.subTest(operation=operation):
+                self.assertFalse(sass_contract(code,text,0)['qualified'])
+
     def test_address_alias_is_rejected(self):
         code, text = listing(address=0)
         self.assertFalse(sass_contract(code, text, 0)['qualified'])

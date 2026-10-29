@@ -1,0 +1,72 @@
+{
+  "archived_cases": [
+    {
+      "name": "slot1",
+      "native_SHA256": "d39eb2371cbd96770576236ce8b48ba5b03d8dcd818db2b6826737bedaa89701",
+      "qualified": true
+    },
+    {
+      "name": "permuted",
+      "native_SHA256": "9d6fc4f422a49b25c20f74a3e95accca8cbbd8ac6a6f5f7f53230a14d3dec7e0",
+      "qualified": true
+    },
+    {
+      "name": "live_noise",
+      "native_SHA256": "c05047171ca9812e714a75d1679c9a535d04536ebecc915f91aef0cb19141146",
+      "qualified": true
+    },
+    {
+      "name": "original_compare_control",
+      "native_SHA256": "ea09f179ff169422f6f3ac8c3b1f85f020c52f5853106e68becbb0f408ef85e3",
+      "qualified": false
+    }
+  ],
+  "assembler_sha256": "1f023d5e1f0a5afc3a04510e264159923dac3182139e03c0a67600b9b1d4428e",
+  "counterexamples": [
+    {
+      "listing_sha256": "4044268222903df6029516c0dea63b7bab5be7755c0d85974c489ab972870501",
+      "name": "skip_lock",
+      "offset": "0x238",
+      "operation": "bra 0x2c8",
+      "previous_qualified": true,
+      "synthetic_program_sha256": "46f712703d5588eff9aa397f9c7db5827c2f227b8f2ff6cf3b32699f7b5acca4",
+      "updated_qualified": false
+    },
+    {
+      "listing_sha256": "22dd9eac646f5ffcf715192393fa809ebee9563ef0479fe51d74bc737e181b63",
+      "name": "conditional_enter_lock",
+      "offset": "0x238",
+      "operation": "$p1 bra 0x258",
+      "previous_qualified": true,
+      "synthetic_program_sha256": "eb10b9fd154104bd81649868d5f54fc9daf46076d75a85f4b5b2536869439c86",
+      "updated_qualified": false
+    },
+    {
+      "listing_sha256": "bf77828dbd06a0b3912e0381e143a0fc6ee128ae198118216dc1af8784552d47",
+      "name": "skip_to_schedule",
+      "offset": "0x238",
+      "operation": "bra 0x2c0",
+      "previous_qualified": true,
+      "synthetic_program_sha256": "c71a20e875d65d65023ec4f4835dda3b912520ab951f6f970f22f39d1792939a",
+      "updated_qualified": false
+    },
+    {
+      "listing_sha256": "4970eb66154b6ad571d9598ccebf1527c6cbd91c4c81783fcd60dd63cf1670ea",
+      "name": "retry_into_unlock_region",
+      "offset": "0x2b8",
+      "operation": "$p0 bra 0x260",
+      "previous_qualified": true,
+      "synthetic_program_sha256": "a29434ccab6809c5cce07f3b68658239d42abb1d3348e4af25efc5b37e2d06dd",
+      "updated_qualified": false
+    }
+  ],
+  "current_recognizer_sha256": "a1a5a7edc7828b5a05a12b14835049f59d0692ae45393bc26ac18e2fa6373a6a",
+  "decoder_semantics_proved": false,
+  "decoder_sha256": "1c8730a9a4861f374c58407bff31d7ccb47a57eb23f9f82c6b3ea3deb079be0f",
+  "gpu_dispatches": 0,
+  "original_program_sha256": "d39eb2371cbd96770576236ce8b48ba5b03d8dcd818db2b6826737bedaa89701",
+  "previous_recognizer_sha256": "d2d7ecc09b7c5b3707bd65502c34d8f322c03f7ee41b7350f6cb89c7f87b8c54",
+  "status": "PASS_CAS_INCOMING_BRANCH",
+  "synthetic_air_sass_compiler_correspondence_proved": false,
+  "system_modified": false
+}
