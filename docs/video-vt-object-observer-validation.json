@@ -1,0 +1,370 @@
+{
+  "audit_sha256": "b34a189b01bd6a93369a042511d0d1189f442f358d78946b7d0be02bf1496b85",
+  "audit_time_kernel_file_sha256": {
+    "/System/Library/Extensions/GeForce.kext/Contents/MacOS/GeForce": "44f131a958d48afd6ab675a851330c37506557c9d499484170c886c3731bdbb3",
+    "/System/Library/Extensions/IOAcceleratorFamily2.kext/Contents/MacOS/IOAcceleratorFamily2": "37e563d6cf3626101f30b1727a4f60dec02152dff9c74c0269c30c213a7320c8"
+  },
+  "audit_time_macos_build": "25G241",
+  "audit_time_macos_version": "26.7.1",
+  "audit_time_pci_device": "10de:1198",
+  "audit_time_reported_vram": "8 GB",
+  "build_sha256": "c25be63806d07a7208561aa3293283f1643732b90bd0337b4ace14aac9124c46",
+  "hardware_create_statuses": [
+    -12906,
+    -12906,
+    -12906,
+    -12906
+  ],
+  "hardware_device_shared_matches": 2,
+  "hardware_frames": 0,
+  "hardware_required_processes": 4,
+  "hardware_video_execution_proved": false,
+  "intervals_nonoverlapping": true,
+  "live_kernel_method_dispatch_proved": false,
+  "m1_audit_sha256": "4dd8a9f263b05b573e9a97fda1ed4b10c55bd910e95a773b763fa25bcd167433",
+  "m1_hardware_sessions_report_acceleration": 4,
+  "metal_control_processes": 4,
+  "metal_device_shared_matches": 2,
+  "observation_process_local_only": true,
+  "observed_hardware_processes": 2,
+  "other_processes_observed": false,
+  "processes": 12,
+  "reference_sha256": "d73962c0592ae107d343591bf2d72e013015813e3b2ceff71d37e2c5fee36cd1",
+  "rows": [
+    {
+      "create_status": 0,
+      "frames": 0,
+      "manifest_sha256": "1420d8c4c29557c78a43b074b5d0afc4978bc73aea3e3dd8da745f9229a9fc64",
+      "mode": "metal-observed",
+      "observation": {
+        "config_calls": 0,
+        "config_failures": 0,
+        "config_status": -1,
+        "config_values": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "config_values_match_object": 0,
+        "create_calls": 1,
+        "matching_nonnull": 1,
+        "matching_type": 1,
+        "object_after": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "object_before": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "registry_query_failures": 0,
+        "return_unchanged": true,
+        "shared_calls": 1,
+        "shared_failures": 0,
+        "shared_matching_argument": 1,
+        "shared_nonnull": 1,
+        "shared_stored_device_matches": 1,
+        "shared_type_matches": 1,
+        "type_or_profile_failures": 0
+      },
+      "stdout_sha256": "e74a03c2a43559b7f5951f301026c5d290c871e5aaf583afd3d371966095b0db"
+    },
+    {
+      "create_status": -12906,
+      "frames": 0,
+      "manifest_sha256": "83300c371f45630004f1db92cf668c46dd540eedd7ec2699cac4d7cbb8ca98c7",
+      "mode": "hardware-observed",
+      "observation": {
+        "config_calls": 0,
+        "config_failures": 0,
+        "config_status": -1,
+        "config_values": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "config_values_match_object": 0,
+        "create_calls": 1,
+        "matching_nonnull": 1,
+        "matching_type": 1,
+        "object_after": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "object_before": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "registry_query_failures": 0,
+        "return_unchanged": true,
+        "shared_calls": 1,
+        "shared_failures": 0,
+        "shared_matching_argument": 1,
+        "shared_nonnull": 1,
+        "shared_stored_device_matches": 1,
+        "shared_type_matches": 1,
+        "type_or_profile_failures": 0
+      },
+      "stdout_sha256": "fa4104df1c1d984d37f428e0d28af3c7d6cafea0043fb8c4411bc501a7af5e73"
+    },
+    {
+      "create_status": 0,
+      "frames": 0,
+      "manifest_sha256": "e695b2c9c6e4bc70ad7adb8705fc37e67911357c927e51379298e5b9b4d1d986",
+      "mode": "metal-plain",
+      "observation": null,
+      "stdout_sha256": "de9159767d1286890e9c4701f8205be7f31a57fbd59ec2975f24bb1451090b62"
+    },
+    {
+      "create_status": 0,
+      "frames": 6,
+      "manifest_sha256": "b5033927603ff8256b8854013c4f8c9237aceae027d9d5c73f7dc4315615d690",
+      "mode": "software-observed",
+      "observation": {
+        "config_calls": 0,
+        "config_failures": 0,
+        "config_status": -1,
+        "config_values": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "config_values_match_object": 0,
+        "create_calls": 0,
+        "matching_nonnull": 0,
+        "matching_type": 0,
+        "object_after": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "object_before": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "registry_query_failures": 0,
+        "return_unchanged": true,
+        "shared_calls": 0,
+        "shared_failures": 0,
+        "shared_matching_argument": 0,
+        "shared_nonnull": 0,
+        "shared_stored_device_matches": 0,
+        "shared_type_matches": 0,
+        "type_or_profile_failures": 0
+      },
+      "stdout_sha256": "489e0248a283a60abf0a18e60dc07f2ade3e22fbfd3df191f7b8e96620ec28e1"
+    },
+    {
+      "create_status": -12906,
+      "frames": 0,
+      "manifest_sha256": "08787541f2580eb85b699b28d6783a89bd535a8f25f84e8f65dc132b251c9c66",
+      "mode": "hardware-plain",
+      "observation": null,
+      "stdout_sha256": "d7aedff80b5ee8331ae1f8f3e252b0a03a9e43afc7cca36b93d68dfae66360ff"
+    },
+    {
+      "create_status": 0,
+      "frames": 6,
+      "manifest_sha256": "9d5fea8d3736c5fa7ee5316df8d66417f55874365d3c5c6055894f70658147e8",
+      "mode": "software-plain",
+      "observation": null,
+      "stdout_sha256": "f1cb37786835a440db4935376b1e3a5ce11d53c3eae4a36f87e369c9cd4589dc"
+    },
+    {
+      "create_status": -12906,
+      "frames": 0,
+      "manifest_sha256": "2476cbe94cbedf6c54675aea8c0a741ac04df59c4f75ab36240bae76cf641179",
+      "mode": "hardware-plain",
+      "observation": null,
+      "stdout_sha256": "d7aedff80b5ee8331ae1f8f3e252b0a03a9e43afc7cca36b93d68dfae66360ff"
+    },
+    {
+      "create_status": 0,
+      "frames": 0,
+      "manifest_sha256": "25e6865f1409e7db422e2662143e8db9915d92cb0f25e5f83c6817046b280a19",
+      "mode": "metal-observed",
+      "observation": {
+        "config_calls": 0,
+        "config_failures": 0,
+        "config_status": -1,
+        "config_values": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "config_values_match_object": 0,
+        "create_calls": 1,
+        "matching_nonnull": 1,
+        "matching_type": 1,
+        "object_after": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "object_before": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "registry_query_failures": 0,
+        "return_unchanged": true,
+        "shared_calls": 1,
+        "shared_failures": 0,
+        "shared_matching_argument": 1,
+        "shared_nonnull": 1,
+        "shared_stored_device_matches": 1,
+        "shared_type_matches": 1,
+        "type_or_profile_failures": 0
+      },
+      "stdout_sha256": "e74a03c2a43559b7f5951f301026c5d290c871e5aaf583afd3d371966095b0db"
+    },
+    {
+      "create_status": -12906,
+      "frames": 0,
+      "manifest_sha256": "b91708ed9f93bb7ed398e8235074e312b71075dfc035e2ebfdf74fed8b1e03fa",
+      "mode": "hardware-observed",
+      "observation": {
+        "config_calls": 0,
+        "config_failures": 0,
+        "config_status": -1,
+        "config_values": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "config_values_match_object": 0,
+        "create_calls": 1,
+        "matching_nonnull": 1,
+        "matching_type": 1,
+        "object_after": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "object_before": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "registry_query_failures": 0,
+        "return_unchanged": true,
+        "shared_calls": 1,
+        "shared_failures": 0,
+        "shared_matching_argument": 1,
+        "shared_nonnull": 1,
+        "shared_stored_device_matches": 1,
+        "shared_type_matches": 1,
+        "type_or_profile_failures": 0
+      },
+      "stdout_sha256": "fa4104df1c1d984d37f428e0d28af3c7d6cafea0043fb8c4411bc501a7af5e73"
+    },
+    {
+      "create_status": 0,
+      "frames": 0,
+      "manifest_sha256": "1966546d73eee2773e11e05d60771c9ed735091ddffced8bf04f9761190a5741",
+      "mode": "metal-plain",
+      "observation": null,
+      "stdout_sha256": "de9159767d1286890e9c4701f8205be7f31a57fbd59ec2975f24bb1451090b62"
+    },
+    {
+      "create_status": 0,
+      "frames": 6,
+      "manifest_sha256": "33c7e0996dd421437aab553816712dc8cd16b764e9321691bcbc0220e44eab88",
+      "mode": "software-plain",
+      "observation": null,
+      "stdout_sha256": "f1cb37786835a440db4935376b1e3a5ce11d53c3eae4a36f87e369c9cd4589dc"
+    },
+    {
+      "create_status": 0,
+      "frames": 6,
+      "manifest_sha256": "5fb50f0e32d1b4548a7d6653f7eee51d4c6d1d109cc306dc15a859749145e53f",
+      "mode": "software-observed",
+      "observation": {
+        "config_calls": 0,
+        "config_failures": 0,
+        "config_status": -1,
+        "config_values": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "config_values_match_object": 0,
+        "create_calls": 0,
+        "matching_nonnull": 0,
+        "matching_type": 0,
+        "object_after": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "object_before": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "registry_query_failures": 0,
+        "return_unchanged": true,
+        "shared_calls": 0,
+        "shared_failures": 0,
+        "shared_matching_argument": 0,
+        "shared_nonnull": 0,
+        "shared_stored_device_matches": 0,
+        "shared_type_matches": 0,
+        "type_or_profile_failures": 0
+      },
+      "stdout_sha256": "489e0248a283a60abf0a18e60dc07f2ade3e22fbfd3df191f7b8e96620ec28e1"
+    }
+  ],
+  "software_bytes_compared": 2764800,
+  "software_device_shared_matches": 0,
+  "software_frames": 24,
+  "software_processes": 4,
+  "source_sha256": {
+    "client.mm": "b8694ff6810b9c91353fa0366608ea118a2ebd7e69e609ebfea61c4b3eb307e4",
+    "observer.mm": "4fddacf71792a2fe58cb36e46d3d68ceb1016ceb72437257de3035424876a2d2"
+  },
+  "status": "PASS_VT_DEVICE_SHARED_OBJECTS",
+  "system_modified": false,
+  "system_profile_files": 3
+}

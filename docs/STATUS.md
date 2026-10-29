@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+During two failed native VideoToolbox requests, a scoped observer matched natural device/shared objects to the selected NVIDIA PCI target; matching Metal controls pass. The actual consumer and hardware video remain unproved. [Evidence](VIDEO_VT_OBJECT_OBSERVER.md).
+
 Naturally occurring iMac VideoToolbox calls now have observed status, length and caller metadata; a type-5 return of 1 precedes successful later calls, and the matching on-disk caller overwrites that value without an immediate test. Hardware create still fails. [Evidence](VIDEO_IMAC_CALL_CONTRACT.md).
 
 Eight public VideoToolbox iMac processes confirm software pixels and four `-12906` hardware-create failures; observed failed cases open `nvAccelerator` types 5/6. No NVIDIA video decoding is established. [Evidence](VIDEO_IMAC_CLIENT_OBSERVER.md).
