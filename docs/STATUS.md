@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Two scoped node-address watches record no matching intercepted free or zone-free calls through the last list stop. Other allocator routes, earlier or later frees, and allocation lifetime remain unproved. [Evidence](VIDEO_GVA_HEAP_TRACK.md).
+
 In three instrumented processes, the pinned AppleGVA free-call slot pointed to a CPU-calibrated observer at arm time. No node address was armed, and lifetime or other deallocation paths remain unproved. [Evidence](VIDEO_GVA_HEAP_BINDING.md).
 
 Two three-request video witnesses show zero hits at one statically mapped AppleGVA node-free callsite. Other deallocation paths and node lifetime remain unproved; hardware video still fails. [Evidence](VIDEO_GVA_NODE_FREE.md).

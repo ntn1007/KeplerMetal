@@ -1,0 +1,74 @@
+{
+  "all_deallocation_paths_covered": false,
+  "allocation_lifetime_proved": false,
+  "auditor_sha256": "0568fb19d9477aa7cfa7f472bebb6e6151489667710df4d36b7dd4ee052e0398",
+  "binding_observations": 3,
+  "build_sha256": "c2cb5f8247e4189b2c23f00a7e92dea5ed99f86412519dd27eb030d1eef953dc",
+  "free_slot_offset": 847829912,
+  "hardware_video_execution_proved": false,
+  "heap_calibration_sha256": "fa132cb842f4fe07642ac82bf3636972986f68c16cbb597708b35bee53fc79f9",
+  "linked_callsite_offset": 150964,
+  "matched_free_or_zone_events_before_last_list": 0,
+  "runs": [
+    {
+      "free_binding_matches_observer_at_arm": false,
+      "manifest_sha256": "d836e660ee85983913e85aeca21b0a91c4201c98f0a16a9963dbc43580efe361",
+      "mode": "cpu",
+      "status_per_request": [
+        0,
+        0,
+        0
+      ],
+      "witness": "on"
+    },
+    {
+      "free_binding_matches_observer_at_arm": true,
+      "manifest_sha256": "ae86ba83f6ebb40a45358b33391fb6f9c5f9fbbd77189d77e9d9fbc0dbfd706c",
+      "mode": "wrong",
+      "status_per_request": [
+        -12906,
+        -12906,
+        -12906
+      ],
+      "witness": "on"
+    },
+    {
+      "free_binding_matches_observer_at_arm": false,
+      "manifest_sha256": "9d29ba31b54ac78223c8738fc5ca4405aa2153a4991e592b383d2cc5d6447595",
+      "mode": "current",
+      "status_per_request": [
+        -12913,
+        -12913,
+        -12913
+      ],
+      "witness": "off"
+    },
+    {
+      "free_binding_matches_observer_at_arm": true,
+      "manifest_sha256": "af468782fe0fedd2ab96f429d9851eaaff42a13e1d08dc6e64f22a00d9af3c6b",
+      "mode": "current",
+      "status_per_request": [
+        -12913,
+        -12913,
+        -12913
+      ],
+      "witness": "on"
+    },
+    {
+      "free_binding_matches_observer_at_arm": true,
+      "manifest_sha256": "b901ce02cd0dcec8269f8a319bcec96f19a0d2476fed8dd9e2ebacca07192324",
+      "mode": "current",
+      "status_per_request": [
+        -12913,
+        -12913,
+        -12913
+      ],
+      "witness": "on"
+    }
+  ],
+  "static_mapping_sha256": "2d9c4ed04bcdbdd4049bb7ed88f0a545d3f42b1b478ab320e43fc8feb6a39ffd",
+  "static_region_sha256": "f8a1efea62ed7f03028666fe86c35de8f06941324ac8d1ae8815ec93f0eb8a19",
+  "status": "PASS_TWO_SCOPED_NODE_FREE_TRACKS",
+  "system_modified": false,
+  "tracking_pointer_armed": true
+}
