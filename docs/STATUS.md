@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Naturally occurring iMac VideoToolbox calls now have observed status, length and caller metadata; a type-5 return of 1 precedes successful later calls, and the matching on-disk caller overwrites that value without an immediate test. Hardware create still fails. [Evidence](VIDEO_IMAC_CALL_CONTRACT.md).
+
 Eight public VideoToolbox iMac processes confirm software pixels and four `-12906` hardware-create failures; observed failed cases open `nvAccelerator` types 5/6. No NVIDIA video decoding is established. [Evidence](VIDEO_IMAC_CLIENT_OBSERVER.md).
 
 Two public VideoToolbox reference cohorts on Apple Silicon match 48 software-reference frames; own-process observations identify IOSurface and AGX calls only within the monitored window. The NVIDIA video ABI remains unqualified. [Evidence](VIDEO_M1_CLIENT_OBSERVER.md).

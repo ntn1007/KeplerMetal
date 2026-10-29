@@ -1,0 +1,24 @@
+{
+  "auditor_sha256": "8eb6f097e114da41f84f560c884fab29d91a9276f18cb20a7a3421848d440b9b",
+  "checks": [
+    {
+      "case": "selector",
+      "reason": "NVIDIA call observation differs",
+      "rejected": true
+    },
+    {
+      "case": "create-status",
+      "reason": "hardware result differs",
+      "rejected": true
+    },
+    {
+      "case": "returned-size",
+      "reason": "call contract differs",
+      "rejected": true
+    }
+  ],
+  "gpu_execution": false,
+  "originals_modified": false,
+  "source_sha256": "9adee959279d3fcaac01330c346d4039252566c1aa01163e593cf602ad93fb06",
+  "status": "PASS_MUTATIONS_REJECTED"
+}

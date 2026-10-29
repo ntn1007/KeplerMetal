@@ -1,0 +1,17 @@
+{
+  "build_sha256": "5a2671a71720cc079a14e5448769350138d249e8140f4de10984931900c7eb2a",
+  "calibration_source_sha256": "7f0cb879c67fb1386b0a64684479b7a36f2a8c1c29472ca7a2a61714ea635845",
+  "cases": 3,
+  "gpu_connection_opened": false,
+  "host_sha256": "7c5c231dfd6dd955cec845a537b5ff6212a935d77ccd859fd3bb574937583e87",
+  "null_port_only": true,
+  "observer_sha256": "e95ab3f16e85319bceaecaa748cacdb95d6a28cfaaeae592aa371e84704d48e9",
+  "returned_statuses": [
+    268435459,
+    268435459,
+    268435459
+  ],
+  "runner_sha256": "0a2b2f4dae8121be29ffa577d38b1e62fef158e232759416ee9c72d270f43790",
+  "status": "PASS_NULL_PORT_CALIBRATION",
+  "system_modified": false
+}
