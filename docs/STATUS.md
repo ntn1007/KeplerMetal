@@ -1,5 +1,9 @@
 # Status, 2026-10-29
 
+A retained AMD driver conditionally passes `IOGVACodec` and `VCE` to a vtable slot relocated to `IORegistryEntry::setProperty`; its runtime and any NVIDIA value remain unproved. [Evidence](VIDEO_GVA_AMD_DYNAMIC_PROPERTY.md).
+
+The entire retained High Sierra update payload was scanned for literal `IOGVACodec`: 15 regular members match, none NVIDIA-labelled. Nested compression and dynamic producers remain unexamined. [Evidence](VIDEO_GVA_ARCHIVE_SURVEY.md).
+
 Two failed VideoToolbox requests search `IOGVACodec` through the retained, verified NVIDIA service and receive null. The complete cause and hardware video remain unproved. [Evidence](VIDEO_VT_SERVICE_RETAINED.md).
 
 Two failed VideoToolbox requests search for `IOGVACodec` on a nonzero service in the IOService plane and receive null. The service identity and cause of failure remain unproved. [Evidence](VIDEO_VT_PROPERTY_IDENTITY.md).

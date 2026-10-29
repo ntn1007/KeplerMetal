@@ -1,0 +1,234 @@
+{
+  "GPU_execution": false,
+  "archive_bytes": 5801167872,
+  "archive_sha256": "b48e6eaaacb86400dfc9e84ed85a8df666baa24af7ca3a632b73607a1d2f4cc6",
+  "auditor_sha256": "78c2c16401dad56bbd27dd7d549aaa0a39ad056cc5cde9a4ef214735277722cb",
+  "complete_installation_searched": false,
+  "dynamic_producers_excluded": false,
+  "matches": [
+    {
+      "literal_counts": {
+        "ascii": 1,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/Extensions/AMDRadeonX3000.kext/Contents/MacOS/AMDRadeonX3000",
+      "plist_key_values": [],
+      "plist_parse": "not_plist",
+      "sha256": "0b288cd12e22f0ba40a241dbf42a6a00d779e1a028d670f73c1e487229711f86",
+      "size": 6698064
+    },
+    {
+      "literal_counts": {
+        "ascii": 1,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/Extensions/AMDRadeonX4000.kext/Contents/MacOS/AMDRadeonX4000",
+      "plist_key_values": [],
+      "plist_parse": "not_plist",
+      "sha256": "e7885b39a028bb03e06999cc45b6919466451e8ba2f94d9f5d6bad26125e7573",
+      "size": 6407648
+    },
+    {
+      "literal_counts": {
+        "ascii": 1,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/Extensions/AMDRadeonX5000.kext/Contents/Info.plist",
+      "plist_key_values": [
+        {
+          "string": "AMDU7V4",
+          "type": "str"
+        }
+      ],
+      "plist_parse": "ok",
+      "sha256": "cc1729e12da8991a55658697a84e5ec8612fc10329e6de7f5f9753b315f6b319",
+      "size": 3952
+    },
+    {
+      "literal_counts": {
+        "ascii": 1,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/Extensions/AMDRadeonX5000.kext/Contents/MacOS/AMDRadeonX5000",
+      "plist_key_values": [],
+      "plist_parse": "not_plist",
+      "sha256": "725aef855f8645c12ccb96690feea3327a6f3e41af1d719a68b02ef0d8e89dec",
+      "size": 3670656
+    },
+    {
+      "literal_counts": {
+        "ascii": 1,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/Extensions/AppleIntelBDWGraphics.kext/Contents/Info.plist",
+      "plist_key_values": [
+        {
+          "string": "Gen8",
+          "type": "str"
+        }
+      ],
+      "plist_parse": "ok",
+      "sha256": "fa655eafbbaa72841f7350e9102d39d19adf3c94ab647469f54fd2c044d553fb",
+      "size": 5503
+    },
+    {
+      "literal_counts": {
+        "ascii": 1,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/Extensions/AppleIntelHD3000Graphics.kext/Contents/Info.plist",
+      "plist_key_values": [
+        {
+          "string": "Gen6",
+          "type": "str"
+        }
+      ],
+      "plist_parse": "ok",
+      "sha256": "dae0aa16a115b7cb88d0ad3363122c40a96844747cad3895a285488d718a18e3",
+      "size": 2935
+    },
+    {
+      "literal_counts": {
+        "ascii": 1,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/Extensions/AppleIntelHD4000Graphics.kext/Contents/Info.plist",
+      "plist_key_values": [
+        {
+          "string": "Gen7",
+          "type": "str"
+        }
+      ],
+      "plist_parse": "ok",
+      "sha256": "402681f8063c95dbaef7ea4865a04130a19435d4cc18bb6d195f85834673d0f4",
+      "size": 4097
+    },
+    {
+      "literal_counts": {
+        "ascii": 1,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/Extensions/AppleIntelHD5000Graphics.kext/Contents/Info.plist",
+      "plist_key_values": [
+        {
+          "string": "Gen75",
+          "type": "str"
+        }
+      ],
+      "plist_parse": "ok",
+      "sha256": "bc03e23127a06e9329eb157b785ec0062c45771c6417dbeb4aa3c5d939d89d64",
+      "size": 4216
+    },
+    {
+      "literal_counts": {
+        "ascii": 1,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/Extensions/AppleIntelKBLGraphics.kext/Contents/Info.plist",
+      "plist_key_values": [
+        {
+          "string": "Gen95",
+          "type": "str"
+        }
+      ],
+      "plist_parse": "ok",
+      "sha256": "edf40251d9c175405c088c7b64ef5d0febee4783183556a7315ade3cf19cfa40",
+      "size": 6380
+    },
+    {
+      "literal_counts": {
+        "ascii": 1,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/Extensions/AppleIntelSKLGraphics.kext/Contents/Info.plist",
+      "plist_key_values": [
+        {
+          "string": "Gen9",
+          "type": "str"
+        }
+      ],
+      "plist_parse": "ok",
+      "sha256": "c3b301a4254c9ca69700e0d587790265e25e04079ae6e53f1becaf16750be441",
+      "size": 6315
+    },
+    {
+      "literal_counts": {
+        "ascii": 2,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/Frameworks/CoreMedia.framework/Versions/A/CoreMedia",
+      "plist_key_values": [],
+      "plist_parse": "not_plist",
+      "sha256": "20ff9dc1714e7a13c933e435839bfdacc2008d769caa741268175f408f28d4b8",
+      "size": 3315216
+    },
+    {
+      "literal_counts": {
+        "ascii": 2,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/Frameworks/VideoToolbox.framework/Versions/A/VideoToolbox",
+      "plist_key_values": [],
+      "plist_parse": "not_plist",
+      "sha256": "5657643e5cbd0330aab64a8d5050bce10677d0eff149b91859e255aab3637d49",
+      "size": 7910256
+    },
+    {
+      "literal_counts": {
+        "ascii": 6,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/PrivateFrameworks/AppleGVA.framework/Versions/A/AppleGVA",
+      "plist_key_values": [],
+      "plist_parse": "not_plist",
+      "sha256": "fd3bb85c44252b11431cee998fb35906ed51ab0a8d5ea6afa5fd79c636a46948",
+      "size": 2113456
+    },
+    {
+      "literal_counts": {
+        "ascii": 2,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/PrivateFrameworks/AppleVPA.framework/Versions/A/AppleVPA",
+      "plist_key_values": [],
+      "plist_parse": "not_plist",
+      "sha256": "d2f3b432c30fe56be0422236fa1d5e71dbc1401731b0a7b9b1434bdb6f4dfec1",
+      "size": 999312
+    },
+    {
+      "literal_counts": {
+        "ascii": 1,
+        "utf16be": 0,
+        "utf16le": 0
+      },
+      "name": "./System/Library/Video/Plug-Ins/AppleGVAHEVCEncoder.bundle/Contents/MacOS/AppleGVAHEVCEncoder",
+      "plist_key_values": [],
+      "plist_parse": "not_plist",
+      "sha256": "42fa9da077e4238a58856749f6f64faa73693bae4c74b9524761182f1b63effa",
+      "size": 240800
+    }
+  ],
+  "oversize_plists": 0,
+  "property_name": "IOGVACodec",
+  "records": 86095,
+  "regular_members": 54110,
+  "scope": "All regular members in retained High Sierra update payload; ASCII and UTF-16 byte sequences; no decompression of nested files",
+  "status": "PASS_FULL_REGULAR_MEMBER_LITERAL_SURVEY",
+  "system_modified": false,
+  "trailing_bytes": 389,
+  "vendor_execution": false
+}

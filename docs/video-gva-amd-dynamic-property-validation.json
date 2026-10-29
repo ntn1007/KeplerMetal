@@ -1,0 +1,33 @@
+{
+  "GPU_execution": false,
+  "amd_runtime_tested": false,
+  "amd_value": "VCE",
+  "audit_sha256": "ea24965a895a54f6d5066c1882ee5a33fe1ac37e197a184b9f49b63b78431a10",
+  "binary_sha256": "0b288cd12e22f0ba40a241dbf42a6a00d779e1a028d670f73c1e487229711f86",
+  "code_window_sha256": "4e3a0798d174fdcf8afffa87ad087ec128e98fb2ce8c2cd48d6e1ff75070dabc",
+  "conditional_byte_offset": "0x6d",
+  "conditional_integer_offset": "0x2508",
+  "conditional_integer_value": 5,
+  "dynamic_call_target_proved": false,
+  "function_start": "0x93e",
+  "hardware_video_execution_proved": false,
+  "key": "IOGVACodec",
+  "key_reference": "0xcd2",
+  "nvidia_value_proved": false,
+  "rea_bundle_sha256": "217c6cf96a1322809406ab5b66f57508091788b5a437226bbba16c2860a23329",
+  "rea_evidence_ids": [
+    "ev_b10f0527b93cd766fd36e523447f865bbafcf6baa6082d192b85547231e84a32",
+    "ev_a4f49e7d46190b9e619c7a4263b9f56f23feec47a73105114bc82bd28327178a",
+    "ev_889ff8a572c35eeb0eb2be6b99d8b0e4a92a16b3c4aa766273ba125c9615b287",
+    "ev_a22bcc92ae3dfcfa641e48868f39172375b5b38984d3f544ac81b0302aede469"
+  ],
+  "relocated_symbol": "IORegistryEntry::setProperty(char const*, char const*)",
+  "status": "PASS_AMD_STATIC_PROPERTY_PATH",
+  "survey_sha256": "b05af996899104c37edc13e1b9cc9841a0c12810ffbb1d4ce91db281a02d81ab",
+  "system_modified": false,
+  "value_reference": "0xcd9",
+  "vendor_execution": false,
+  "virtual_call": "0xce6",
+  "vtable_slot_relocation": "0x220cd0",
+  "vtable_symbol": "0x220a50"
+}

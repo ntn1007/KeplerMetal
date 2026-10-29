@@ -1,0 +1,18 @@
+{
+  "GPU_execution": false,
+  "archive_sha256": "b48e6eaaacb86400dfc9e84ed85a8df666baa24af7ca3a632b73607a1d2f4cc6",
+  "dynamic_producers_excluded": false,
+  "earlier_nvidia_members_absent": 34,
+  "earlier_plist_controls_matched": 7,
+  "hardware_video_execution_proved": false,
+  "matching_members": 15,
+  "nvidia_literal_members_found": 0,
+  "prior_sha256": "1a1158268d0ed38adc046aa148941a2b4cf160af46b08ef503beefd77999ab80",
+  "regular_members": 54110,
+  "scanned_nested_compression": false,
+  "status": "PASS_SURVEY_CROSSCHECK",
+  "survey_sha256": "b05af996899104c37edc13e1b9cc9841a0c12810ffbb1d4ce91db281a02d81ab",
+  "system_modified": false,
+  "vendor_execution": false,
+  "verifier_sha256": "c8bc4c37b2e19a033e5fced3f78291aade5c90a2bf20d6efb5c1f8823abf92c3"
+}
