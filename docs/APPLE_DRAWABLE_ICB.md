@@ -36,6 +36,10 @@ framebuffer-only mode, test overlapping frames or qualify transparent Metal
 integration. There is no missing-blit control or performance comparison. The
 system driver and OCLP were not modified.
 
+A [subsequent framebuffer-only cohort](APPLE_FRAMEBUFFER_ONLY_ICB.md) checks
+the same type of draw through a separate depth attachment; it still does not
+establish visible presentation.
+
 ## Reproduce
 
 Obtain the pinned shader and carrier as described in [the sample analysis](APPLE_CPU_ICB_GAP.md).

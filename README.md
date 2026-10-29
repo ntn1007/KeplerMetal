@@ -23,6 +23,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+A scoped 15-command ICB works with an unattached framebuffer-only drawable; a separate depth readback matches direct and blank GTX controls. [Evidence and limits](docs/APPLE_FRAMEBUFFER_ONLY_ICB.md).
+
 A pinned 15-command ICB renders to an unattached CAMetalLayer drawable on GTX; onscreen presentation remains unproved. [Evidence and limits](docs/APPLE_DRAWABLE_ICB.md).
 
 A scoped two-command Apple-shader ICB reproduces depth-write dependencies on GTX, with direct and clear-depth controls. [Evidence and limits](docs/APPLE_DEPTH_DEPENDENCY.md).
