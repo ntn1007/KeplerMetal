@@ -4,7 +4,7 @@ The project-owned CPU render ICB accepts non-indexed triangle draws of four or
 five vertices for registered nonlegacy stage-in pipelines. It preserves the
 requested vertex count in the native command record, and validates buffer bounds
 through the last requested vertex. The existing declared-geometry checks and
-execution-time checks remain in effect. Counts one and two remain restricted to
+execution-time checks remain in effect. A follow-up also qualifies [explicit geometry contracts for counts 4/5](RENDER_TRAILING_GEOMETRY.md). Counts one and two remain restricted to
 the separately qualified legacy inert path; count seven and legacy counts four
 or five remain refused. Indexed behavior is unchanged.
 

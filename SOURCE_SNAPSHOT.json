@@ -287,11 +287,16 @@
       "path": "bridge/src/KeplerNativeRenderDraws.mm",
       "source_path": "bridge/src/KeplerNativeRenderDraws.mm",
       "source_SHA256": "370abcc54cd28f4b9b6731b9a8d7b9debf21067a79d8aba9ac16b4782e0d32a5",
-      "published_SHA256": "0dfe799c9048c498fc3cce3e92be79ea85c2196d775c3784c85553d0af53fb04",
-      "bytes": 74980,
+      "published_SHA256": "0771f30cecda7a52df3bd962762e38626cfe3aa932e4d18f26a25594c39b99ff",
+      "bytes": 75058,
       "modified_for_publication": true,
       "previous_published_SHA256": "ab893268a9ca9383b430b203cc8896b095c4e891d76d7c3728730fdaa2ed06cb",
       "latest_change": {
+        "previous_published_SHA256": "0dfe799c9048c498fc3cce3e92be79ea85c2196d775c3784c85553d0af53fb04",
+        "previous_bytes": 74980,
+        "reason": "Allow explicit direct geometry contracts for nonindexed stage-in triangle counts 4 and 5 while preserving execution-time equality checks."
+      },
+      "previous_latest_change": {
         "previous_published_SHA256": "00912bd644278615244d05c13629bfa2551fe1d7ad817365b7766cc05504f68a",
         "previous_bytes": 74958,
         "reason": "Allow bounded non-indexed triangle counts 4 and 5 on registered nonlegacy stage-in render pipelines with existing full-range fetch checks."
