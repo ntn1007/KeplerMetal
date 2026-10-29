@@ -1,0 +1,403 @@
+{
+  "status": "PASS_STANDALONE_DEFAULT_BUNDLE_LIBRARIES_GPU",
+  "processes": 25,
+  "output_processes": 20,
+  "expected_refusals": 5,
+  "compute_render_route_combinations": 4,
+  "checked_float_channels": 245760,
+  "same_output_all_direct_auto": true,
+  "client_no_kepler_imports_checked": true,
+  "explicit_process_injection_required": true,
+  "app_bundle_code_signed_as_unit": false,
+  "executable_signature_checked_outside_bundle": true,
+  "unmodified_third_party_application": false,
+  "full_ICB_contract": false,
+  "hardware_video_execution_proved": false,
+  "system_modified": false,
+  "performance_benchmark": false,
+  "negative_initialization_blit_executed_for_wrong_libraries_and_descriptor": true,
+  "runtime_sha256": "4a0ed89819e9d14fd8c19212f25a278f6c409d6e610e52fbde9d97a9c7360782",
+  "prior_receipt_sha256": "451395f94c225ba40cae784ac228ae653c33831ab494136e1c28c0fb4b930c26",
+  "client_source_sha256": "b49a6b9ef2de77868577648bcd315a3caeb3eb607bc20530f99d6848ef8bc77d",
+  "bootstrap_source_sha256": "e8063caeb9c46aab0f11e52adb037e084e04280914e460709a28abd5dd08fcb0",
+  "current_runner_source_sha256": "028b2fde837914c48b2912d2fa68a35b7e06a70ffb4894b8e619402648a96ff4",
+  "runner_source_pinned_per_run": false,
+  "audit_sha256": "859324095b1c568f9260ea271648ed7464fbf1bda14c73c01491184d144fd5a5",
+  "rows": [
+    {
+      "mode": "wrong-compute",
+      "compute_route": "main",
+      "render_route": "bundle",
+      "exit_code": 1,
+      "reservation_id": "77aff76878564cbca93f740f92c5dae3",
+      "pixel_sha256": null,
+      "bundle_file_hashes": {
+        "Probe.app/Contents/Info.plist": "542ecbfba4503bfa73ee18e99067d61def9815afc466cdd356c807f829f525c3",
+        "Probe.app/Contents/Resources/default.metallib": "e921bf52ef84bb25d06ce582c68bc879ff92436b61dc469dcd08f76034f7d534",
+        "Render.bundle/Contents/Info.plist": "18a48f335c8bf4347172b7da893edf44e2630e77ec1fc5850f4b289bbdefe347",
+        "Render.bundle/Contents/Resources/default.metallib": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"
+      },
+      "terminal": true
+    },
+    {
+      "mode": "wrong-render",
+      "compute_route": "main",
+      "render_route": "bundle",
+      "exit_code": 1,
+      "reservation_id": "71f39f2834bc46f491d5ec05e7b9d6bc",
+      "pixel_sha256": null,
+      "bundle_file_hashes": {
+        "Probe.app/Contents/Info.plist": "542ecbfba4503bfa73ee18e99067d61def9815afc466cdd356c807f829f525c3",
+        "Probe.app/Contents/Resources/default.metallib": "7478ba6e51f7bb4c466e60e4b07cf7af15c8abe04d04f3211cb2f1f2c6525911",
+        "Render.bundle/Contents/Info.plist": "18a48f335c8bf4347172b7da893edf44e2630e77ec1fc5850f4b289bbdefe347",
+        "Render.bundle/Contents/Resources/default.metallib": "930a133f6dd91d969eaa8df8fbf833e691801558b65489578d574cbb82bd91ac"
+      },
+      "terminal": true
+    },
+    {
+      "mode": "bad-descriptor",
+      "compute_route": "main",
+      "render_route": "bundle",
+      "exit_code": 1,
+      "reservation_id": "28729279202e477a91563e84861c9c96",
+      "pixel_sha256": null,
+      "bundle_file_hashes": {
+        "Probe.app/Contents/Info.plist": "542ecbfba4503bfa73ee18e99067d61def9815afc466cdd356c807f829f525c3",
+        "Probe.app/Contents/Resources/default.metallib": "7478ba6e51f7bb4c466e60e4b07cf7af15c8abe04d04f3211cb2f1f2c6525911",
+        "Render.bundle/Contents/Info.plist": "18a48f335c8bf4347172b7da893edf44e2630e77ec1fc5850f4b289bbdefe347",
+        "Render.bundle/Contents/Resources/default.metallib": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"
+      },
+      "terminal": true
+    },
+    {
+      "mode": "wrong-client",
+      "compute_route": "main",
+      "render_route": "bundle",
+      "exit_code": 3,
+      "reservation_id": "b302b786f5df4760a85164780ed5d538",
+      "pixel_sha256": null,
+      "bundle_file_hashes": {
+        "Probe.app/Contents/Info.plist": "542ecbfba4503bfa73ee18e99067d61def9815afc466cdd356c807f829f525c3",
+        "Probe.app/Contents/Resources/default.metallib": "7478ba6e51f7bb4c466e60e4b07cf7af15c8abe04d04f3211cb2f1f2c6525911",
+        "Render.bundle/Contents/Info.plist": "18a48f335c8bf4347172b7da893edf44e2630e77ec1fc5850f4b289bbdefe347",
+        "Render.bundle/Contents/Resources/default.metallib": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"
+      },
+      "terminal": true
+    },
+    {
+      "mode": "wrong-manifest",
+      "compute_route": "main",
+      "render_route": "bundle",
+      "exit_code": 3,
+      "reservation_id": "1a55b0fc4a3142d68de9dae3233ba09d",
+      "pixel_sha256": null,
+      "bundle_file_hashes": {
+        "Probe.app/Contents/Info.plist": "542ecbfba4503bfa73ee18e99067d61def9815afc466cdd356c807f829f525c3",
+        "Probe.app/Contents/Resources/default.metallib": "7478ba6e51f7bb4c466e60e4b07cf7af15c8abe04d04f3211cb2f1f2c6525911",
+        "Render.bundle/Contents/Info.plist": "18a48f335c8bf4347172b7da893edf44e2630e77ec1fc5850f4b289bbdefe347",
+        "Render.bundle/Contents/Resources/default.metallib": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"
+      },
+      "terminal": true
+    },
+    {
+      "mode": "direct",
+      "compute_route": "main",
+      "render_route": "bundle",
+      "exit_code": 0,
+      "reservation_id": "7e696ffa3cfe4cf59ef5f5603bab7e8c",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "bundle_file_hashes": {
+        "Probe.app/Contents/Info.plist": "542ecbfba4503bfa73ee18e99067d61def9815afc466cdd356c807f829f525c3",
+        "Probe.app/Contents/Resources/default.metallib": "7478ba6e51f7bb4c466e60e4b07cf7af15c8abe04d04f3211cb2f1f2c6525911",
+        "Render.bundle/Contents/Info.plist": "18a48f335c8bf4347172b7da893edf44e2630e77ec1fc5850f4b289bbdefe347",
+        "Render.bundle/Contents/Resources/default.metallib": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"
+      },
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "main",
+      "render_route": "bundle",
+      "exit_code": 0,
+      "reservation_id": "28d877290419490e8a8991bf7f87e1f0",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "bundle_file_hashes": {
+        "Probe.app/Contents/Info.plist": "542ecbfba4503bfa73ee18e99067d61def9815afc466cdd356c807f829f525c3",
+        "Probe.app/Contents/Resources/default.metallib": "7478ba6e51f7bb4c466e60e4b07cf7af15c8abe04d04f3211cb2f1f2c6525911",
+        "Render.bundle/Contents/Info.plist": "18a48f335c8bf4347172b7da893edf44e2630e77ec1fc5850f4b289bbdefe347",
+        "Render.bundle/Contents/Resources/default.metallib": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"
+      },
+      "terminal": true
+    },
+    {
+      "mode": "direct",
+      "compute_route": "main",
+      "render_route": "file",
+      "exit_code": 0,
+      "reservation_id": "99bd877e997d4168afe3a28615bb9221",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "bundle_file_hashes": {
+        "Probe.app/Contents/Info.plist": "542ecbfba4503bfa73ee18e99067d61def9815afc466cdd356c807f829f525c3",
+        "Probe.app/Contents/Resources/default.metallib": "7478ba6e51f7bb4c466e60e4b07cf7af15c8abe04d04f3211cb2f1f2c6525911",
+        "Render.bundle/Contents/Info.plist": "18a48f335c8bf4347172b7da893edf44e2630e77ec1fc5850f4b289bbdefe347",
+        "Render.bundle/Contents/Resources/default.metallib": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"
+      },
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "main",
+      "render_route": "file",
+      "exit_code": 0,
+      "reservation_id": "a8eae8458bfd4116bc0b0a3adcc2754c",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "bundle_file_hashes": {
+        "Probe.app/Contents/Info.plist": "542ecbfba4503bfa73ee18e99067d61def9815afc466cdd356c807f829f525c3",
+        "Probe.app/Contents/Resources/default.metallib": "7478ba6e51f7bb4c466e60e4b07cf7af15c8abe04d04f3211cb2f1f2c6525911",
+        "Render.bundle/Contents/Info.plist": "18a48f335c8bf4347172b7da893edf44e2630e77ec1fc5850f4b289bbdefe347",
+        "Render.bundle/Contents/Resources/default.metallib": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"
+      },
+      "terminal": true
+    },
+    {
+      "mode": "direct",
+      "compute_route": "file",
+      "render_route": "bundle",
+      "exit_code": 0,
+      "reservation_id": "4ab19f7a7cb44ba0a84245a6d7bbda4e",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "bundle_file_hashes": {
+        "Probe.app/Contents/Info.plist": "542ecbfba4503bfa73ee18e99067d61def9815afc466cdd356c807f829f525c3",
+        "Probe.app/Contents/Resources/default.metallib": "7478ba6e51f7bb4c466e60e4b07cf7af15c8abe04d04f3211cb2f1f2c6525911",
+        "Render.bundle/Contents/Info.plist": "18a48f335c8bf4347172b7da893edf44e2630e77ec1fc5850f4b289bbdefe347",
+        "Render.bundle/Contents/Resources/default.metallib": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"
+      },
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "file",
+      "render_route": "bundle",
+      "exit_code": 0,
+      "reservation_id": "1a092f89c6df4c1fb5602e54fdde0b6e",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "bundle_file_hashes": {
+        "Probe.app/Contents/Info.plist": "542ecbfba4503bfa73ee18e99067d61def9815afc466cdd356c807f829f525c3",
+        "Probe.app/Contents/Resources/default.metallib": "7478ba6e51f7bb4c466e60e4b07cf7af15c8abe04d04f3211cb2f1f2c6525911",
+        "Render.bundle/Contents/Info.plist": "18a48f335c8bf4347172b7da893edf44e2630e77ec1fc5850f4b289bbdefe347",
+        "Render.bundle/Contents/Resources/default.metallib": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"
+      },
+      "terminal": true
+    },
+    {
+      "mode": "direct",
+      "compute_route": "file",
+      "render_route": "file",
+      "exit_code": 0,
+      "reservation_id": "65cef87ac68d4cf48410752b426a8e17",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "bundle_file_hashes": {
+        "Probe.app/Contents/Info.plist": "542ecbfba4503bfa73ee18e99067d61def9815afc466cdd356c807f829f525c3",
+        "Probe.app/Contents/Resources/default.metallib": "7478ba6e51f7bb4c466e60e4b07cf7af15c8abe04d04f3211cb2f1f2c6525911",
+        "Render.bundle/Contents/Info.plist": "18a48f335c8bf4347172b7da893edf44e2630e77ec1fc5850f4b289bbdefe347",
+        "Render.bundle/Contents/Resources/default.metallib": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"
+      },
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "file",
+      "render_route": "file",
+      "exit_code": 0,
+      "reservation_id": "06d6ee33a6964d7c9cf69986c42dec62",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "bundle_file_hashes": {
+        "Probe.app/Contents/Info.plist": "542ecbfba4503bfa73ee18e99067d61def9815afc466cdd356c807f829f525c3",
+        "Probe.app/Contents/Resources/default.metallib": "7478ba6e51f7bb4c466e60e4b07cf7af15c8abe04d04f3211cb2f1f2c6525911",
+        "Render.bundle/Contents/Info.plist": "18a48f335c8bf4347172b7da893edf44e2630e77ec1fc5850f4b289bbdefe347",
+        "Render.bundle/Contents/Resources/default.metallib": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"
+      },
+      "terminal": true
+    },
+    {
+      "mode": "direct",
+      "compute_route": "main",
+      "render_route": "bundle",
+      "exit_code": 0,
+      "reservation_id": "cf0513ffcc164288b3433f9cda22de4f",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "bundle_file_hashes": {
+        "Probe.app/Contents/Info.plist": "542ecbfba4503bfa73ee18e99067d61def9815afc466cdd356c807f829f525c3",
+        "Probe.app/Contents/Resources/default.metallib": "7478ba6e51f7bb4c466e60e4b07cf7af15c8abe04d04f3211cb2f1f2c6525911",
+        "Render.bundle/Contents/Info.plist": "18a48f335c8bf4347172b7da893edf44e2630e77ec1fc5850f4b289bbdefe347",
+        "Render.bundle/Contents/Resources/default.metallib": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"
+      },
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "main",
+      "render_route": "bundle",
+      "exit_code": 0,
+      "reservation_id": "110dd8627b8347eb8bbbccd65e33ac98",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "bundle_file_hashes": {
+        "Probe.app/Contents/Info.plist": "542ecbfba4503bfa73ee18e99067d61def9815afc466cdd356c807f829f525c3",
+        "Probe.app/Contents/Resources/default.metallib": "7478ba6e51f7bb4c466e60e4b07cf7af15c8abe04d04f3211cb2f1f2c6525911",
+        "Render.bundle/Contents/Info.plist": "18a48f335c8bf4347172b7da893edf44e2630e77ec1fc5850f4b289bbdefe347",
+        "Render.bundle/Contents/Resources/default.metallib": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"
+      },
+      "terminal": true
+    },
+    {
+      "mode": "direct",
+      "compute_route": "main",
+      "render_route": "file",
+      "exit_code": 0,
+      "reservation_id": "0a964f4935424d41a7302931d33a6358",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "bundle_file_hashes": {
+        "Probe.app/Contents/Info.plist": "542ecbfba4503bfa73ee18e99067d61def9815afc466cdd356c807f829f525c3",
+        "Probe.app/Contents/Resources/default.metallib": "7478ba6e51f7bb4c466e60e4b07cf7af15c8abe04d04f3211cb2f1f2c6525911",
+        "Render.bundle/Contents/Info.plist": "18a48f335c8bf4347172b7da893edf44e2630e77ec1fc5850f4b289bbdefe347",
+        "Render.bundle/Contents/Resources/default.metallib": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"
+      },
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "main",
+      "render_route": "file",
+      "exit_code": 0,
+      "reservation_id": "0dbfbbdb86c544da9185382cf6c16d9c",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "bundle_file_hashes": {
+        "Probe.app/Contents/Info.plist": "542ecbfba4503bfa73ee18e99067d61def9815afc466cdd356c807f829f525c3",
+        "Probe.app/Contents/Resources/default.metallib": "7478ba6e51f7bb4c466e60e4b07cf7af15c8abe04d04f3211cb2f1f2c6525911",
+        "Render.bundle/Contents/Info.plist": "18a48f335c8bf4347172b7da893edf44e2630e77ec1fc5850f4b289bbdefe347",
+        "Render.bundle/Contents/Resources/default.metallib": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"
+      },
+      "terminal": true
+    },
+    {
+      "mode": "direct",
+      "compute_route": "file",
+      "render_route": "bundle",
+      "exit_code": 0,
+      "reservation_id": "5dcf5e42c2124b00a9e54a8254c03dd6",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "bundle_file_hashes": {
+        "Probe.app/Contents/Info.plist": "542ecbfba4503bfa73ee18e99067d61def9815afc466cdd356c807f829f525c3",
+        "Probe.app/Contents/Resources/default.metallib": "7478ba6e51f7bb4c466e60e4b07cf7af15c8abe04d04f3211cb2f1f2c6525911",
+        "Render.bundle/Contents/Info.plist": "18a48f335c8bf4347172b7da893edf44e2630e77ec1fc5850f4b289bbdefe347",
+        "Render.bundle/Contents/Resources/default.metallib": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"
+      },
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "file",
+      "render_route": "bundle",
+      "exit_code": 0,
+      "reservation_id": "088fb9110670409a823300b3c54533b0",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "bundle_file_hashes": {
+        "Probe.app/Contents/Info.plist": "542ecbfba4503bfa73ee18e99067d61def9815afc466cdd356c807f829f525c3",
+        "Probe.app/Contents/Resources/default.metallib": "7478ba6e51f7bb4c466e60e4b07cf7af15c8abe04d04f3211cb2f1f2c6525911",
+        "Render.bundle/Contents/Info.plist": "18a48f335c8bf4347172b7da893edf44e2630e77ec1fc5850f4b289bbdefe347",
+        "Render.bundle/Contents/Resources/default.metallib": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"
+      },
+      "terminal": true
+    },
+    {
+      "mode": "direct",
+      "compute_route": "file",
+      "render_route": "file",
+      "exit_code": 0,
+      "reservation_id": "71ff7a2804f94c8897bac31c876b559e",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "bundle_file_hashes": {
+        "Probe.app/Contents/Info.plist": "542ecbfba4503bfa73ee18e99067d61def9815afc466cdd356c807f829f525c3",
+        "Probe.app/Contents/Resources/default.metallib": "7478ba6e51f7bb4c466e60e4b07cf7af15c8abe04d04f3211cb2f1f2c6525911",
+        "Render.bundle/Contents/Info.plist": "18a48f335c8bf4347172b7da893edf44e2630e77ec1fc5850f4b289bbdefe347",
+        "Render.bundle/Contents/Resources/default.metallib": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"
+      },
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "file",
+      "render_route": "file",
+      "exit_code": 0,
+      "reservation_id": "e9b64e8a49924e4eb1c03a76ecec4f28",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "bundle_file_hashes": {
+        "Probe.app/Contents/Info.plist": "542ecbfba4503bfa73ee18e99067d61def9815afc466cdd356c807f829f525c3",
+        "Probe.app/Contents/Resources/default.metallib": "7478ba6e51f7bb4c466e60e4b07cf7af15c8abe04d04f3211cb2f1f2c6525911",
+        "Render.bundle/Contents/Info.plist": "18a48f335c8bf4347172b7da893edf44e2630e77ec1fc5850f4b289bbdefe347",
+        "Render.bundle/Contents/Resources/default.metallib": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"
+      },
+      "terminal": true
+    },
+    {
+      "mode": "no-producer",
+      "compute_route": "main",
+      "render_route": "bundle",
+      "exit_code": 0,
+      "reservation_id": "cbf4976ef0cf4cbb8a4645f812b5cf9d",
+      "pixel_sha256": "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+      "bundle_file_hashes": {
+        "Probe.app/Contents/Info.plist": "542ecbfba4503bfa73ee18e99067d61def9815afc466cdd356c807f829f525c3",
+        "Probe.app/Contents/Resources/default.metallib": "7478ba6e51f7bb4c466e60e4b07cf7af15c8abe04d04f3211cb2f1f2c6525911",
+        "Render.bundle/Contents/Info.plist": "18a48f335c8bf4347172b7da893edf44e2630e77ec1fc5850f4b289bbdefe347",
+        "Render.bundle/Contents/Resources/default.metallib": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"
+      },
+      "terminal": true
+    },
+    {
+      "mode": "no-render",
+      "compute_route": "main",
+      "render_route": "bundle",
+      "exit_code": 0,
+      "reservation_id": "d9aec6f912534ad1b9ba42b8c861e977",
+      "pixel_sha256": "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+      "bundle_file_hashes": {
+        "Probe.app/Contents/Info.plist": "542ecbfba4503bfa73ee18e99067d61def9815afc466cdd356c807f829f525c3",
+        "Probe.app/Contents/Resources/default.metallib": "7478ba6e51f7bb4c466e60e4b07cf7af15c8abe04d04f3211cb2f1f2c6525911",
+        "Render.bundle/Contents/Info.plist": "18a48f335c8bf4347172b7da893edf44e2630e77ec1fc5850f4b289bbdefe347",
+        "Render.bundle/Contents/Resources/default.metallib": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"
+      },
+      "terminal": true
+    },
+    {
+      "mode": "no-producer",
+      "compute_route": "main",
+      "render_route": "bundle",
+      "exit_code": 0,
+      "reservation_id": "9ad9fcdd96f3485ebebd236a8ccf017b",
+      "pixel_sha256": "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+      "bundle_file_hashes": {
+        "Probe.app/Contents/Info.plist": "542ecbfba4503bfa73ee18e99067d61def9815afc466cdd356c807f829f525c3",
+        "Probe.app/Contents/Resources/default.metallib": "7478ba6e51f7bb4c466e60e4b07cf7af15c8abe04d04f3211cb2f1f2c6525911",
+        "Render.bundle/Contents/Info.plist": "18a48f335c8bf4347172b7da893edf44e2630e77ec1fc5850f4b289bbdefe347",
+        "Render.bundle/Contents/Resources/default.metallib": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"
+      },
+      "terminal": true
+    },
+    {
+      "mode": "no-render",
+      "compute_route": "main",
+      "render_route": "bundle",
+      "exit_code": 0,
+      "reservation_id": "938c17b57e0243aeac97731f4417852b",
+      "pixel_sha256": "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+      "bundle_file_hashes": {
+        "Probe.app/Contents/Info.plist": "542ecbfba4503bfa73ee18e99067d61def9815afc466cdd356c807f829f525c3",
+        "Probe.app/Contents/Resources/default.metallib": "7478ba6e51f7bb4c466e60e4b07cf7af15c8abe04d04f3211cb2f1f2c6525911",
+        "Render.bundle/Contents/Info.plist": "18a48f335c8bf4347172b7da893edf44e2630e77ec1fc5850f4b289bbdefe347",
+        "Render.bundle/Contents/Resources/default.metallib": "965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7"
+      },
+      "terminal": true
+    }
+  ]
+}

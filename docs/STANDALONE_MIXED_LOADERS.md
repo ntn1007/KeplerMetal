@@ -16,6 +16,8 @@ For the segmented input the application observed two regions via `dispatch_data_
 
 The test does not prove full Metal ICB support, hardware video decoding, visible presentation or a speed gain. It does not qualify an app outside this exact profile. It extends the earlier [point-transform loader test](STANDALONE_POINT_LOADERS.md) to a single application containing both compute and render libraries and their GPU dependency.
 
+The later [bundle-default extension](STANDALONE_MIXED_BUNDLES.md) tests the main application and an additional bundle.
+
 ## Reproduction
 
 Use the matching SDK/driver profile, the pinned compute/render metallibs and a common laboratory reservation. Build outputs and run directories must be fresh. Resolve any unknown process state before retrying.

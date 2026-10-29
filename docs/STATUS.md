@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A pinned app can now load its compute default Metal library from the main bundle and render library from a separate bundle under process-local adaptation; 25 serialized processes include five refusals. [Evidence](STANDALONE_MIXED_BUNDLES.md).
+
 A pinned standalone compute/render application now supports file, URL, data and segmented data library loads across all 16 route pairs on GTX; 39 serialized processes include eleven refusals. Process-local injection remains required. [Evidence](STANDALONE_MIXED_LOADERS.md).
 
 A pinned standalone public Metal executable creates its own compute/render pipelines and completes a GPU indirect sequence through explicit process-local injection; eight output processes and three refusals pass. Third-party and transparent integration remain unproved. [Evidence](STANDALONE_MIXED_APPLICATION.md).

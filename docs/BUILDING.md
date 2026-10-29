@@ -1,5 +1,7 @@
 # Build from source
 
+[STANDALONE_MIXED_BUNDLES.md](STANDALONE_MIXED_BUNDLES.md) documents default Metal library bundle loading and reproduction.
+
 [STANDALONE_MIXED_LOADERS.md](STANDALONE_MIXED_LOADERS.md) documents mixed-domain public Metal library loaders and reproduction.
 
 [STANDALONE_MIXED_APPLICATION.md](STANDALONE_MIXED_APPLICATION.md) documents the process-local standalone mixed client and reproduction.
