@@ -1,0 +1,39 @@
+{
+  "auditor_sha256": "14ab9cc51be84ed118d899034212e92c70fc27473fe5a7576e89e4e1c6cada1d",
+  "checks": [
+    {
+      "case": "shared-link",
+      "reason": "device/shared object observation differs",
+      "rejected": true
+    },
+    {
+      "case": "device-type",
+      "reason": "device/shared object observation differs",
+      "rejected": true
+    },
+    {
+      "case": "config-called",
+      "reason": "object observer safety differs",
+      "rejected": true
+    },
+    {
+      "case": "create-status",
+      "reason": "hardware result differs",
+      "rejected": true
+    },
+    {
+      "case": "caller-image",
+      "reason": "caller not resolved",
+      "rejected": true
+    },
+    {
+      "case": "caller-offset",
+      "reason": "caller profile differs",
+      "rejected": true
+    }
+  ],
+  "gpu_execution": false,
+  "originals_modified": false,
+  "source_sha256": "d987cc52d5fff6c5679962243d2895fb6a10227e1eda35c67e1b982fbb0bbd55",
+  "status": "PASS_MUTATIONS_REJECTED"
+}

@@ -1,0 +1,454 @@
+{
+  "audit_sha256": "14ab9cc51be84ed118d899034212e92c70fc27473fe5a7576e89e4e1c6cada1d",
+  "audit_time_kernel_file_sha256": {
+    "/System/Library/Extensions/GeForce.kext/Contents/MacOS/GeForce": "44f131a958d48afd6ab675a851330c37506557c9d499484170c886c3731bdbb3",
+    "/System/Library/Extensions/IOAcceleratorFamily2.kext/Contents/MacOS/IOAcceleratorFamily2": "37e563d6cf3626101f30b1727a4f60dec02152dff9c74c0269c30c213a7320c8"
+  },
+  "audit_time_macos_build": "25G241",
+  "audit_time_macos_version": "26.7.1",
+  "audit_time_pci_device": "10de:1198",
+  "audit_time_reported_vram": "8 GB",
+  "build_sha256": "85ee62226e6f2b0dab516e15947e11e8cb422e2df5c64231c5f1ff5a9d3d9da8",
+  "caller_thread_or_stack_verified": false,
+  "hardware_create_statuses": [
+    -12906,
+    -12906,
+    -12906,
+    -12906
+  ],
+  "hardware_device_shared_matches": 2,
+  "hardware_frames": 0,
+  "hardware_required_processes": 4,
+  "hardware_video_execution_proved": false,
+  "intervals_nonoverlapping": true,
+  "live_caller_code_bytes_verified": false,
+  "live_kernel_method_dispatch_proved": false,
+  "m1_audit_sha256": "4dd8a9f263b05b573e9a97fda1ed4b10c55bd910e95a773b763fa25bcd167433",
+  "m1_hardware_sessions_report_acceleration": 4,
+  "metal_control_processes": 4,
+  "metal_device_shared_matches": 2,
+  "observation_process_local_only": true,
+  "observed_device_caller": {
+    "image": "MetalOld.dylib",
+    "nearest_symbol": "-[MTLIOAccelDevice initWithAcceleratorPort:]",
+    "offset": 7441
+  },
+  "observed_hardware_processes": 2,
+  "observed_shared_caller": {
+    "image": "MetalOld.dylib",
+    "nearest_symbol": "-[MTLIOAccelDevice lazyInitialize]",
+    "offset": 738937
+  },
+  "other_processes_observed": false,
+  "processes": 12,
+  "reference_sha256": "d73962c0592ae107d343591bf2d72e013015813e3b2ceff71d37e2c5fee36cd1",
+  "rows": [
+    {
+      "create_status": 0,
+      "frames": 0,
+      "manifest_sha256": "e2b1216607a408a6a8243de4f2207100dbb624e86cad3ef42909a3016a400677",
+      "mode": "metal-observed",
+      "observation": {
+        "config_calls": 0,
+        "config_failures": 0,
+        "config_status": -1,
+        "config_values": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "config_values_match_object": 0,
+        "create_calls": 1,
+        "device_caller": {
+          "image": "MetalOld.dylib",
+          "image_offset": 7441,
+          "resolved": true,
+          "symbol": "-[MTLIOAccelDevice initWithAcceleratorPort:]"
+        },
+        "matching_nonnull": 1,
+        "matching_type": 1,
+        "object_after": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "object_before": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "registry_query_failures": 0,
+        "return_unchanged": true,
+        "shared_caller": {
+          "image": "MetalOld.dylib",
+          "image_offset": 738937,
+          "resolved": true,
+          "symbol": "-[MTLIOAccelDevice lazyInitialize]"
+        },
+        "shared_calls": 1,
+        "shared_failures": 0,
+        "shared_matching_argument": 1,
+        "shared_nonnull": 1,
+        "shared_stored_device_matches": 1,
+        "shared_type_matches": 1,
+        "type_or_profile_failures": 0
+      },
+      "stdout_sha256": "769a07a8f3f040ebc84934903ba51448ef6452f2a37da1182c2fe961c49f4a23"
+    },
+    {
+      "create_status": -12906,
+      "frames": 0,
+      "manifest_sha256": "92f3e800c6a66c7500ad5fcdbf25333452a4982c3a50164cfd0c7e0c26222074",
+      "mode": "hardware-observed",
+      "observation": {
+        "config_calls": 0,
+        "config_failures": 0,
+        "config_status": -1,
+        "config_values": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "config_values_match_object": 0,
+        "create_calls": 1,
+        "device_caller": {
+          "image": "MetalOld.dylib",
+          "image_offset": 7441,
+          "resolved": true,
+          "symbol": "-[MTLIOAccelDevice initWithAcceleratorPort:]"
+        },
+        "matching_nonnull": 1,
+        "matching_type": 1,
+        "object_after": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "object_before": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "registry_query_failures": 0,
+        "return_unchanged": true,
+        "shared_caller": {
+          "image": "MetalOld.dylib",
+          "image_offset": 738937,
+          "resolved": true,
+          "symbol": "-[MTLIOAccelDevice lazyInitialize]"
+        },
+        "shared_calls": 1,
+        "shared_failures": 0,
+        "shared_matching_argument": 1,
+        "shared_nonnull": 1,
+        "shared_stored_device_matches": 1,
+        "shared_type_matches": 1,
+        "type_or_profile_failures": 0
+      },
+      "stdout_sha256": "d6b337756f85327ecec56e53f58aec34f84fa96a140356b702b3bb81f263bfc7"
+    },
+    {
+      "create_status": 0,
+      "frames": 0,
+      "manifest_sha256": "47e20e6cd069314e552143aa338e1600bd7e599f30d950fe3861cf1dc1894431",
+      "mode": "metal-plain",
+      "observation": null,
+      "stdout_sha256": "de9159767d1286890e9c4701f8205be7f31a57fbd59ec2975f24bb1451090b62"
+    },
+    {
+      "create_status": 0,
+      "frames": 6,
+      "manifest_sha256": "7c1a49e7e9a1d4657986ea5193847533d774f50feeed3d73bd5a4f0b8e3e0206",
+      "mode": "software-observed",
+      "observation": {
+        "config_calls": 0,
+        "config_failures": 0,
+        "config_status": -1,
+        "config_values": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "config_values_match_object": 0,
+        "create_calls": 0,
+        "device_caller": {
+          "image": "",
+          "image_offset": 0,
+          "resolved": false,
+          "symbol": ""
+        },
+        "matching_nonnull": 0,
+        "matching_type": 0,
+        "object_after": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "object_before": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "registry_query_failures": 0,
+        "return_unchanged": true,
+        "shared_caller": {
+          "image": "",
+          "image_offset": 0,
+          "resolved": false,
+          "symbol": ""
+        },
+        "shared_calls": 0,
+        "shared_failures": 0,
+        "shared_matching_argument": 0,
+        "shared_nonnull": 0,
+        "shared_stored_device_matches": 0,
+        "shared_type_matches": 0,
+        "type_or_profile_failures": 0
+      },
+      "stdout_sha256": "21d52765fd970f5991ad260d13effac26d2f9d95c444c062d8138065977f3d7e"
+    },
+    {
+      "create_status": -12906,
+      "frames": 0,
+      "manifest_sha256": "bb08606a9c095a5bb8313926fbb31e09fc0c84bf7fdf81e217c56450c1ce0817",
+      "mode": "hardware-plain",
+      "observation": null,
+      "stdout_sha256": "d7aedff80b5ee8331ae1f8f3e252b0a03a9e43afc7cca36b93d68dfae66360ff"
+    },
+    {
+      "create_status": 0,
+      "frames": 6,
+      "manifest_sha256": "30f1f7910ae29fd99c7e8a222b10cbdd5218e77101e44b6f07847b72ed05fbd3",
+      "mode": "software-plain",
+      "observation": null,
+      "stdout_sha256": "f1cb37786835a440db4935376b1e3a5ce11d53c3eae4a36f87e369c9cd4589dc"
+    },
+    {
+      "create_status": 0,
+      "frames": 0,
+      "manifest_sha256": "f37e02ed8ed759e31caa6533b3ebe9b2c6e166347a00724a0792ac54ac2f883f",
+      "mode": "metal-observed",
+      "observation": {
+        "config_calls": 0,
+        "config_failures": 0,
+        "config_status": -1,
+        "config_values": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "config_values_match_object": 0,
+        "create_calls": 1,
+        "device_caller": {
+          "image": "MetalOld.dylib",
+          "image_offset": 7441,
+          "resolved": true,
+          "symbol": "-[MTLIOAccelDevice initWithAcceleratorPort:]"
+        },
+        "matching_nonnull": 1,
+        "matching_type": 1,
+        "object_after": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "object_before": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "registry_query_failures": 0,
+        "return_unchanged": true,
+        "shared_caller": {
+          "image": "MetalOld.dylib",
+          "image_offset": 738937,
+          "resolved": true,
+          "symbol": "-[MTLIOAccelDevice lazyInitialize]"
+        },
+        "shared_calls": 1,
+        "shared_failures": 0,
+        "shared_matching_argument": 1,
+        "shared_nonnull": 1,
+        "shared_stored_device_matches": 1,
+        "shared_type_matches": 1,
+        "type_or_profile_failures": 0
+      },
+      "stdout_sha256": "769a07a8f3f040ebc84934903ba51448ef6452f2a37da1182c2fe961c49f4a23"
+    },
+    {
+      "create_status": -12906,
+      "frames": 0,
+      "manifest_sha256": "185b8fb91be5160e5f835dc54ea363f546442b76da021c83d77fa9fbeffccc99",
+      "mode": "hardware-observed",
+      "observation": {
+        "config_calls": 0,
+        "config_failures": 0,
+        "config_status": -1,
+        "config_values": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "config_values_match_object": 0,
+        "create_calls": 1,
+        "device_caller": {
+          "image": "MetalOld.dylib",
+          "image_offset": 7441,
+          "resolved": true,
+          "symbol": "-[MTLIOAccelDevice initWithAcceleratorPort:]"
+        },
+        "matching_nonnull": 1,
+        "matching_type": 1,
+        "object_after": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "object_before": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "registry_query_failures": 0,
+        "return_unchanged": true,
+        "shared_caller": {
+          "image": "MetalOld.dylib",
+          "image_offset": 738937,
+          "resolved": true,
+          "symbol": "-[MTLIOAccelDevice lazyInitialize]"
+        },
+        "shared_calls": 1,
+        "shared_failures": 0,
+        "shared_matching_argument": 1,
+        "shared_nonnull": 1,
+        "shared_stored_device_matches": 1,
+        "shared_type_matches": 1,
+        "type_or_profile_failures": 0
+      },
+      "stdout_sha256": "d6b337756f85327ecec56e53f58aec34f84fa96a140356b702b3bb81f263bfc7"
+    },
+    {
+      "create_status": 0,
+      "frames": 0,
+      "manifest_sha256": "daf6ca392beb15cb9c8560214be060d5918e8b15fc200de65e4a82eb1926ceb2",
+      "mode": "metal-plain",
+      "observation": null,
+      "stdout_sha256": "de9159767d1286890e9c4701f8205be7f31a57fbd59ec2975f24bb1451090b62"
+    },
+    {
+      "create_status": 0,
+      "frames": 6,
+      "manifest_sha256": "8f14c7d91ebd33d0215d86cbec991a6aeec511597a07aead24518dc2512c6954",
+      "mode": "software-observed",
+      "observation": {
+        "config_calls": 0,
+        "config_failures": 0,
+        "config_status": -1,
+        "config_values": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "config_values_match_object": 0,
+        "create_calls": 0,
+        "device_caller": {
+          "image": "",
+          "image_offset": 0,
+          "resolved": false,
+          "symbol": ""
+        },
+        "matching_nonnull": 0,
+        "matching_type": 0,
+        "object_after": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "object_before": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "registry_query_failures": 0,
+        "return_unchanged": true,
+        "shared_caller": {
+          "image": "",
+          "image_offset": 0,
+          "resolved": false,
+          "symbol": ""
+        },
+        "shared_calls": 0,
+        "shared_failures": 0,
+        "shared_matching_argument": 0,
+        "shared_nonnull": 0,
+        "shared_stored_device_matches": 0,
+        "shared_type_matches": 0,
+        "type_or_profile_failures": 0
+      },
+      "stdout_sha256": "21d52765fd970f5991ad260d13effac26d2f9d95c444c062d8138065977f3d7e"
+    },
+    {
+      "create_status": -12906,
+      "frames": 0,
+      "manifest_sha256": "ce3a6df43db921b9c9a8c4e93be1f5d5af4095dbbf4f9a750782efa218a4db2f",
+      "mode": "hardware-plain",
+      "observation": null,
+      "stdout_sha256": "d7aedff80b5ee8331ae1f8f3e252b0a03a9e43afc7cca36b93d68dfae66360ff"
+    },
+    {
+      "create_status": 0,
+      "frames": 6,
+      "manifest_sha256": "b640408d1a738e326314dc67c558988ff95c9d5a93acf664c4543d2a4a398469",
+      "mode": "software-plain",
+      "observation": null,
+      "stdout_sha256": "f1cb37786835a440db4935376b1e3a5ce11d53c3eae4a36f87e369c9cd4589dc"
+    }
+  ],
+  "software_bytes_compared": 2764800,
+  "software_device_shared_matches": 0,
+  "software_frames": 24,
+  "software_processes": 4,
+  "source_sha256": {
+    "client.mm": "b8694ff6810b9c91353fa0366608ea118a2ebd7e69e609ebfea61c4b3eb307e4",
+    "observer.mm": "c8fc2f432e64cddb99faa3dacfd9da7496d3680e013d3e9fce10c060848e4682"
+  },
+  "status": "PASS_VT_OBJECT_CALLERS",
+  "system_modified": false,
+  "system_profile_files": 3
+}

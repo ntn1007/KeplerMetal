@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+The selected device/shared constructors during two failed VideoToolbox requests have immediate `MetalOld.dylib` caller labels identical to Metal controls; their upstream initiator and hardware video remain unproved. [Evidence](VIDEO_VT_OBJECT_CALLERS.md).
+
 During two failed native VideoToolbox requests, a scoped observer matched natural device/shared objects to the selected NVIDIA PCI target; matching Metal controls pass. The actual consumer and hardware video remain unproved. [Evidence](VIDEO_VT_OBJECT_OBSERVER.md).
 
 Naturally occurring iMac VideoToolbox calls now have observed status, length and caller metadata; a type-5 return of 1 precedes successful later calls, and the matching on-disk caller overwrites that value without an immediate test. Hardware create still fails. [Evidence](VIDEO_IMAC_CALL_CONTRACT.md).
