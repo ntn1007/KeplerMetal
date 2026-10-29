@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A separately compiled public-Metal client now runs a scoped GPU compute-to-indexed-render sequence through ordinary encoder factories; direct and indirect results agree across eight serial controls. Explicit host setup remains required. [Evidence](PUBLIC_MIXED_CLIENT.md).
+
 A mixed compute/render ICB GPU witness now passes with both queue-local automatic factories enabled in either order: six serialized processes and 54 matching frames. Explicit opt-in and pinned profiles remain required. [Evidence](DUAL_AUTOMATIC_FACTORIES.md).
 
 Twenty CPU VP proposals compare two reference orders and two POC bases against pinned Mesa; arm64 sanitizers agree, while VA-API execution and NVIDIA correctness remain unproved. [Evidence](VIDEO_DPB_PROFILES.md).

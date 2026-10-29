@@ -1,0 +1,222 @@
+{
+  "status": "PASS_PUBLIC_MIXED_METAL_CLIENT_GPU",
+  "processes": 8,
+  "modes": [
+    "direct",
+    "icb",
+    "no-producer",
+    "no-render",
+    "direct",
+    "icb",
+    "no-producer",
+    "no-render"
+  ],
+  "checked_float_channels": 98304,
+  "matching_direct_and_icb": true,
+  "GPU_counter_per_active_process": 32,
+  "client_no_kepler_imports_checked": true,
+  "explicit_host_scope_required": true,
+  "unmodified_third_party_application": false,
+  "full_ICB_contract": false,
+  "system_modified": false,
+  "performance_benchmark": false,
+  "client_source_sha256": "a9ef16c755c87aef5275de4ba387a461e68018c2c36eeeb0108abe505367c504",
+  "host_source_sha256": "938060275e70f6a07077ccb4d5db558427a7b2cfceca2696ff1e7535eadd6e8a",
+  "experiment_sha256": "5d2299701982b04d038013c2a98121422f9a927cd1110a43b22ffb26f6a41545",
+  "audit_sha256": "7a6c39645226ad357aa71a5a56c379c12de6ea04343a490da576032f5fcc5070",
+  "runtime_sha256": "4a0ed89819e9d14fd8c19212f25a278f6c409d6e610e52fbde9d97a9c7360782",
+  "rows": [
+    {
+      "mode": "direct",
+      "GPU_identity": {
+        "PCI_device_id": 4504,
+        "PCI_vendor_id": 4318,
+        "PCI_registry_id": 4294967841,
+        "schema": 1,
+        "name": "NVIDIA GeForce GTX 880M",
+        "registry_id": 4294968416
+      },
+      "reservation_id": "a73a05490b1b4ce299dc520389ccdb71",
+      "signed_host_sha256": "2f276b325b6e6614cc59ef65efaef14e73102b9ee5a1c31a6d5a19e73a0efd7c",
+      "client_sha256": "e6896f487aa1391f518fb7a2a0ebc4fba9f1e97658f51655d81aa10a6244b7c6",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "indices_sha256": "20972f9806f02b5db163e546e91ac72d31503796f9b656c36432abaffe392894",
+      "counter_sha256": "71f5aeca695d899855a93c3ce1d480a6bb804c94aa4b9e001b8261e2de528236",
+      "automatic_encoder_counts": {
+        "automatic_compute_encoder": 1,
+        "automatic_render_encoder": 1,
+        "executeCommandsInBuffer": 0,
+        "execute_CPU_render_ICB": 0
+      },
+      "terminal": true
+    },
+    {
+      "mode": "icb",
+      "GPU_identity": {
+        "PCI_device_id": 4504,
+        "PCI_vendor_id": 4318,
+        "PCI_registry_id": 4294967841,
+        "schema": 1,
+        "name": "NVIDIA GeForce GTX 880M",
+        "registry_id": 4294968416
+      },
+      "reservation_id": "11bea8acfc5f4c9fb70748702506a127",
+      "signed_host_sha256": "2f276b325b6e6614cc59ef65efaef14e73102b9ee5a1c31a6d5a19e73a0efd7c",
+      "client_sha256": "e6896f487aa1391f518fb7a2a0ebc4fba9f1e97658f51655d81aa10a6244b7c6",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "indices_sha256": "20972f9806f02b5db163e546e91ac72d31503796f9b656c36432abaffe392894",
+      "counter_sha256": "71f5aeca695d899855a93c3ce1d480a6bb804c94aa4b9e001b8261e2de528236",
+      "automatic_encoder_counts": {
+        "automatic_compute_encoder": 2,
+        "automatic_render_encoder": 2,
+        "executeCommandsInBuffer": 1,
+        "execute_CPU_render_ICB": 1
+      },
+      "terminal": true
+    },
+    {
+      "mode": "no-producer",
+      "GPU_identity": {
+        "PCI_device_id": 4504,
+        "PCI_vendor_id": 4318,
+        "PCI_registry_id": 4294967841,
+        "schema": 1,
+        "name": "NVIDIA GeForce GTX 880M",
+        "registry_id": 4294968416
+      },
+      "reservation_id": "4010f377459d41c1a581bc070e4f5bc0",
+      "signed_host_sha256": "2f276b325b6e6614cc59ef65efaef14e73102b9ee5a1c31a6d5a19e73a0efd7c",
+      "client_sha256": "e6896f487aa1391f518fb7a2a0ebc4fba9f1e97658f51655d81aa10a6244b7c6",
+      "pixel_sha256": "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+      "indices_sha256": "1e8ac1abb341090ab18b309bbbfa04a862d756f78e39eb1a38cbe4ea4d769811",
+      "counter_sha256": "a28c7c430849a34d96cd54cda5c2e2927f28ba33315bde9b3390e548e81e1ec6",
+      "automatic_encoder_counts": {
+        "automatic_compute_encoder": 1,
+        "automatic_render_encoder": 2,
+        "executeCommandsInBuffer": 1,
+        "execute_CPU_render_ICB": 1
+      },
+      "terminal": true
+    },
+    {
+      "mode": "no-render",
+      "GPU_identity": {
+        "PCI_device_id": 4504,
+        "PCI_vendor_id": 4318,
+        "PCI_registry_id": 4294967841,
+        "schema": 1,
+        "name": "NVIDIA GeForce GTX 880M",
+        "registry_id": 4294968416
+      },
+      "reservation_id": "556148cf1a2b41aca27a1979498ffeb9",
+      "signed_host_sha256": "2f276b325b6e6614cc59ef65efaef14e73102b9ee5a1c31a6d5a19e73a0efd7c",
+      "client_sha256": "e6896f487aa1391f518fb7a2a0ebc4fba9f1e97658f51655d81aa10a6244b7c6",
+      "pixel_sha256": "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+      "indices_sha256": "20972f9806f02b5db163e546e91ac72d31503796f9b656c36432abaffe392894",
+      "counter_sha256": "71f5aeca695d899855a93c3ce1d480a6bb804c94aa4b9e001b8261e2de528236",
+      "automatic_encoder_counts": {
+        "automatic_compute_encoder": 2,
+        "automatic_render_encoder": 1,
+        "executeCommandsInBuffer": 1,
+        "execute_CPU_render_ICB": 1
+      },
+      "terminal": true
+    },
+    {
+      "mode": "direct",
+      "GPU_identity": {
+        "PCI_device_id": 4504,
+        "PCI_vendor_id": 4318,
+        "PCI_registry_id": 4294967841,
+        "schema": 1,
+        "name": "NVIDIA GeForce GTX 880M",
+        "registry_id": 4294968416
+      },
+      "reservation_id": "98b319d5df19469a8504eff811e10db3",
+      "signed_host_sha256": "2f276b325b6e6614cc59ef65efaef14e73102b9ee5a1c31a6d5a19e73a0efd7c",
+      "client_sha256": "e6896f487aa1391f518fb7a2a0ebc4fba9f1e97658f51655d81aa10a6244b7c6",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "indices_sha256": "20972f9806f02b5db163e546e91ac72d31503796f9b656c36432abaffe392894",
+      "counter_sha256": "71f5aeca695d899855a93c3ce1d480a6bb804c94aa4b9e001b8261e2de528236",
+      "automatic_encoder_counts": {
+        "automatic_compute_encoder": 1,
+        "automatic_render_encoder": 1,
+        "executeCommandsInBuffer": 0,
+        "execute_CPU_render_ICB": 0
+      },
+      "terminal": true
+    },
+    {
+      "mode": "icb",
+      "GPU_identity": {
+        "PCI_device_id": 4504,
+        "PCI_vendor_id": 4318,
+        "PCI_registry_id": 4294967841,
+        "schema": 1,
+        "name": "NVIDIA GeForce GTX 880M",
+        "registry_id": 4294968416
+      },
+      "reservation_id": "29d55d935a1c49f58491b0ca367e3f48",
+      "signed_host_sha256": "2f276b325b6e6614cc59ef65efaef14e73102b9ee5a1c31a6d5a19e73a0efd7c",
+      "client_sha256": "e6896f487aa1391f518fb7a2a0ebc4fba9f1e97658f51655d81aa10a6244b7c6",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "indices_sha256": "20972f9806f02b5db163e546e91ac72d31503796f9b656c36432abaffe392894",
+      "counter_sha256": "71f5aeca695d899855a93c3ce1d480a6bb804c94aa4b9e001b8261e2de528236",
+      "automatic_encoder_counts": {
+        "automatic_compute_encoder": 2,
+        "automatic_render_encoder": 2,
+        "executeCommandsInBuffer": 1,
+        "execute_CPU_render_ICB": 1
+      },
+      "terminal": true
+    },
+    {
+      "mode": "no-producer",
+      "GPU_identity": {
+        "PCI_device_id": 4504,
+        "PCI_vendor_id": 4318,
+        "PCI_registry_id": 4294967841,
+        "schema": 1,
+        "name": "NVIDIA GeForce GTX 880M",
+        "registry_id": 4294968416
+      },
+      "reservation_id": "890aeef17a424822956f18e6b4901254",
+      "signed_host_sha256": "2f276b325b6e6614cc59ef65efaef14e73102b9ee5a1c31a6d5a19e73a0efd7c",
+      "client_sha256": "e6896f487aa1391f518fb7a2a0ebc4fba9f1e97658f51655d81aa10a6244b7c6",
+      "pixel_sha256": "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+      "indices_sha256": "1e8ac1abb341090ab18b309bbbfa04a862d756f78e39eb1a38cbe4ea4d769811",
+      "counter_sha256": "a28c7c430849a34d96cd54cda5c2e2927f28ba33315bde9b3390e548e81e1ec6",
+      "automatic_encoder_counts": {
+        "automatic_compute_encoder": 1,
+        "automatic_render_encoder": 2,
+        "executeCommandsInBuffer": 1,
+        "execute_CPU_render_ICB": 1
+      },
+      "terminal": true
+    },
+    {
+      "mode": "no-render",
+      "GPU_identity": {
+        "PCI_device_id": 4504,
+        "PCI_vendor_id": 4318,
+        "PCI_registry_id": 4294967841,
+        "schema": 1,
+        "name": "NVIDIA GeForce GTX 880M",
+        "registry_id": 4294968416
+      },
+      "reservation_id": "335fca8a304144f09daec8e41c7a2cd8",
+      "signed_host_sha256": "2f276b325b6e6614cc59ef65efaef14e73102b9ee5a1c31a6d5a19e73a0efd7c",
+      "client_sha256": "e6896f487aa1391f518fb7a2a0ebc4fba9f1e97658f51655d81aa10a6244b7c6",
+      "pixel_sha256": "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+      "indices_sha256": "20972f9806f02b5db163e546e91ac72d31503796f9b656c36432abaffe392894",
+      "counter_sha256": "71f5aeca695d899855a93c3ce1d480a6bb804c94aa4b9e001b8261e2de528236",
+      "automatic_encoder_counts": {
+        "automatic_compute_encoder": 2,
+        "automatic_render_encoder": 1,
+        "executeCommandsInBuffer": 1,
+        "execute_CPU_render_ICB": 1
+      },
+      "terminal": true
+    }
+  ]
+}
