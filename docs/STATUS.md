@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Eight instrumented Apple storyboard frames with alternating state match direct GTX images when explicitly waiting only after the last commit. The adapted path did not observe more than one pending buffer; overlap is unproved. [Evidence](APPLE_STORYBOARD_INFLIGHT.md).
+
 An instrumented host instantiates the original Apple storyboard and locally adapted controller/renderer; scoped ICB GTX color output matches direct and blank controls. The original executable and transparent integration remain unproved. [Evidence](APPLE_STORYBOARD_ICB.md).
 
 The scoped render adapter now accepts depth store `DontCare`: the adapted Apple renderer matches direct GTX images with MTKView's default action, depth ordering works in a separate cohort, and `Store` regression passes. [Evidence](APPLE_DEPTH_DONTCARE.md).
