@@ -1,0 +1,19 @@
+{
+  "audit_source_sha256": "dc1c67bffbc22cb3c2f3f7af93089cc936455254478736cb4691066ec715bfb2",
+  "base_inputs_sha256": "d07d612a8c5ac9a116e26a57a7716b5db2703e911469b3dffab4798d6222d47e",
+  "build_sha256": "bbc80a89da77f822b9023f73161144eebd95c3157498a80cb8e4c20d0982255b",
+  "failed_log_sha256": "72cc5588051c548ccd2e462b45a3c9560ddae85d34930071bb8eb1885e0e2b27",
+  "first_request_cpu_reference_bytes_matched": 691200,
+  "first_request_returned": true,
+  "guard_proved_cause_of_helper_nil": false,
+  "hardware_video_execution_proved": false,
+  "new_gpu_video_request": false,
+  "one_shot_guard_statically_confirmed": true,
+  "reconciliation_sha256": "b43451eea951b7eb3d83312598d6536ad877befaabda54f48b8fc46823fede8f",
+  "second_helper_returned_nil": true,
+  "second_session_creation_proved": false,
+  "source_sha256": "f5a4845045975c9deba0aca80c42d5a2216c64b72f37d234d3935b6a97f45db4",
+  "status": "PASS_RETAINED_CPU_FAILURE_AND_ONE_SHOT_AUDIT",
+  "system_modified": false,
+  "third_request_started": false
+}

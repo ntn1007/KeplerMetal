@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A same-process video repetition CPU preflight failed on the second helper; its exact cause is unresolved. Static audit separately shows the existing dependency observer only admits one session creation. No repeated hardware-video trial was run. [Evidence](VIDEO_GVA_REPEAT_PREFLIGHT.md).
+
 A CPU-only real-hardware-breakpoint calibration exercises the exact earlier cache reader on four node cases and refuses a wrong base. The AppleGVA cache branch itself remains unobserved. [Evidence](VIDEO_GVA_CACHE_READER_CALIBRATION.md).
 
 Two fresh-process H.264 requests had zero hits at the resolved cached-entry check; the property query returned null and decoding remained -12913. Same-process reuse remains untested; the cache-field reader was subsequently calibrated on an original CPU target. [Evidence](VIDEO_GVA_CACHE_WITNESS.md).
