@@ -1,0 +1,19 @@
+{
+  "auditor_sha256": "da3973a5bfca02670d92d791592fb439f90d068b066582d5f5003747ff11b0cc",
+  "checks": [
+    {
+      "case": "selector",
+      "reason": "NVIDIA call observation differs",
+      "rejected": true
+    },
+    {
+      "case": "create-status",
+      "reason": "hardware result differs",
+      "rejected": true
+    }
+  ],
+  "gpu_execution": false,
+  "originals_modified": false,
+  "source_sha256": "a80cd340daa018748ce6ae9db03cc4b861e99fa3a8ceb87aaeedb6e44aecad6d",
+  "status": "PASS_MUTATIONS_REJECTED"
+}

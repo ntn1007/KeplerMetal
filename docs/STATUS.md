@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Eight public VideoToolbox iMac processes confirm software pixels and four `-12906` hardware-create failures; observed failed cases open `nvAccelerator` types 5/6. No NVIDIA video decoding is established. [Evidence](VIDEO_IMAC_CLIENT_OBSERVER.md).
+
 Two public VideoToolbox reference cohorts on Apple Silicon match 48 software-reference frames; own-process observations identify IOSurface and AGX calls only within the monitored window. The NVIDIA video ABI remains unqualified. [Evidence](VIDEO_M1_CLIENT_OBSERVER.md).
 
 A pinned video-buffer request path can skip the requested-size load in an empty-list branch; its CPU size helper matches 4,096 synthetic cases. Returned mappings and hardware video remain unqualified. [Evidence](VIDEO_BUFFER_SIZE_PATH.md).

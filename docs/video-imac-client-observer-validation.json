@@ -1,0 +1,521 @@
+{
+  "audit_sha256": "da3973a5bfca02670d92d791592fb439f90d068b066582d5f5003747ff11b0cc",
+  "audit_time_kernel_file_sha256": {
+    "/System/Library/Extensions/GeForce.kext/Contents/MacOS/GeForce": "44f131a958d48afd6ab675a851330c37506557c9d499484170c886c3731bdbb3",
+    "/System/Library/Extensions/IOAcceleratorFamily2.kext/Contents/MacOS/IOAcceleratorFamily2": "37e563d6cf3626101f30b1727a4f60dec02152dff9c74c0269c30c213a7320c8"
+  },
+  "audit_time_macos_build": "25G241",
+  "audit_time_macos_version": "26.7.1",
+  "audit_time_pci_device": "10de:1198",
+  "audit_time_reported_vram": "8 GB",
+  "build_sha256": "706c82cab6dc9f8d95dc625222029e73f6a389a095aa7afee835584d235b781c",
+  "hardware_create_statuses": [
+    -12906,
+    -12906,
+    -12906,
+    -12906
+  ],
+  "hardware_frames": 0,
+  "hardware_required_processes": 4,
+  "hardware_video_execution_proved": false,
+  "intervals_nonoverlapping": true,
+  "live_kernel_method_dispatch_proved": false,
+  "m1_audit_sha256": "4dd8a9f263b05b573e9a97fda1ed4b10c55bd910e95a773b763fa25bcd167433",
+  "m1_hardware_sessions_report_acceleration": 4,
+  "observation_process_local_only": true,
+  "observed_hardware_processes": 2,
+  "other_processes_observed": false,
+  "processes": 8,
+  "reference_sha256": "d73962c0592ae107d343591bf2d72e013015813e3b2ceff71d37e2c5fee36cd1",
+  "rows": [
+    {
+      "create_status": 0,
+      "detail_events": [],
+      "frames": 6,
+      "manifest_sha256": "9229b9f39eb0fb5055a22548b236599a6b9f8dd8b66faaaefdbcd879458b67c4",
+      "mode": "software-plain",
+      "observed_counts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "services": [],
+      "stdout_sha256": "bbb510fb6a5afe5de0942204f6b19e6ad8f30c04936f01ef7461921bf1a83044"
+    },
+    {
+      "create_status": -12906,
+      "detail_events": [
+        {
+          "kind": 1,
+          "selector": 13,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 44,
+          "service": 0
+        },
+        {
+          "kind": 2,
+          "selector": 9,
+          "service": 1
+        },
+        {
+          "kind": 2,
+          "selector": 2,
+          "service": 1
+        },
+        {
+          "kind": 2,
+          "selector": 0,
+          "service": 1
+        },
+        {
+          "kind": 2,
+          "selector": 7,
+          "service": 1
+        },
+        {
+          "kind": 1,
+          "selector": 32,
+          "service": 0
+        },
+        {
+          "kind": 2,
+          "selector": 9,
+          "service": 2
+        },
+        {
+          "kind": 2,
+          "selector": 10,
+          "service": 2
+        }
+      ],
+      "frames": 0,
+      "manifest_sha256": "699c43408967ab39a33ce0e5931ed687bc5ab7c466eb36164d49f47bc7b580b2",
+      "mode": "hardware-observed",
+      "observed_counts": [
+        3,
+        3,
+        6,
+        0
+      ],
+      "services": [
+        {
+          "class": "IOSurfaceRoot",
+          "name": "IOSurfaceRoot",
+          "type": 0
+        },
+        {
+          "class": "nvAccelerator",
+          "name": "nvAccelerator",
+          "type": 5
+        },
+        {
+          "class": "nvAccelerator",
+          "name": "nvAccelerator",
+          "type": 6
+        }
+      ],
+      "stdout_sha256": "3bbf7df7f02c5e20b6af7ed87858ad9faeb491d40484c5da3c34e413b381b814"
+    },
+    {
+      "create_status": 0,
+      "detail_events": [
+        {
+          "kind": 1,
+          "selector": 13,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 44,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 34,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 34,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 57,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 10,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 9,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 34,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 34,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 9,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 34,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 34,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 9,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 34,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 34,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 9,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 34,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 34,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 9,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 34,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 34,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 9,
+          "service": 0
+        }
+      ],
+      "frames": 6,
+      "manifest_sha256": "14df8ac8fe5522832f14f1bfa530656154c55f7a3d0cf921fcffa79cdaf19ede",
+      "mode": "software-observed",
+      "observed_counts": [
+        1,
+        22,
+        0,
+        0
+      ],
+      "services": [
+        {
+          "class": "IOSurfaceRoot",
+          "name": "IOSurfaceRoot",
+          "type": 0
+        }
+      ],
+      "stdout_sha256": "730ae0f7861730ed7df966f57fe3724d8ada134a829f1173cfed5c3fd003c5d5"
+    },
+    {
+      "create_status": -12906,
+      "detail_events": [],
+      "frames": 0,
+      "manifest_sha256": "fdfe4c19771f3c54c26bd4419796fcd92d9f0670331d9d8228d8bdca5d543909",
+      "mode": "hardware-plain",
+      "observed_counts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "services": [],
+      "stdout_sha256": "28a4ef169b858bc58f37fe92d397c56ccefc6a64c084825dcb23558897f4f4df"
+    },
+    {
+      "create_status": -12906,
+      "detail_events": [],
+      "frames": 0,
+      "manifest_sha256": "c80e1661444580077329748a069a1f0b906bdf2b9a83ef0bff887e860601fa8d",
+      "mode": "hardware-plain",
+      "observed_counts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "services": [],
+      "stdout_sha256": "28a4ef169b858bc58f37fe92d397c56ccefc6a64c084825dcb23558897f4f4df"
+    },
+    {
+      "create_status": 0,
+      "detail_events": [
+        {
+          "kind": 1,
+          "selector": 13,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 44,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 34,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 34,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 57,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 10,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 9,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 34,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 34,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 9,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 34,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 34,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 9,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 34,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 34,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 9,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 34,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 34,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 9,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 34,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 34,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 9,
+          "service": 0
+        }
+      ],
+      "frames": 6,
+      "manifest_sha256": "57936b30822f1ecfbdd9808836e62a569733d4aca4f5c31f42d9659c19b0641b",
+      "mode": "software-observed",
+      "observed_counts": [
+        1,
+        22,
+        0,
+        0
+      ],
+      "services": [
+        {
+          "class": "IOSurfaceRoot",
+          "name": "IOSurfaceRoot",
+          "type": 0
+        }
+      ],
+      "stdout_sha256": "730ae0f7861730ed7df966f57fe3724d8ada134a829f1173cfed5c3fd003c5d5"
+    },
+    {
+      "create_status": -12906,
+      "detail_events": [
+        {
+          "kind": 1,
+          "selector": 13,
+          "service": 0
+        },
+        {
+          "kind": 1,
+          "selector": 44,
+          "service": 0
+        },
+        {
+          "kind": 2,
+          "selector": 9,
+          "service": 1
+        },
+        {
+          "kind": 2,
+          "selector": 2,
+          "service": 1
+        },
+        {
+          "kind": 2,
+          "selector": 0,
+          "service": 1
+        },
+        {
+          "kind": 2,
+          "selector": 7,
+          "service": 1
+        },
+        {
+          "kind": 1,
+          "selector": 32,
+          "service": 0
+        },
+        {
+          "kind": 2,
+          "selector": 9,
+          "service": 2
+        },
+        {
+          "kind": 2,
+          "selector": 10,
+          "service": 2
+        }
+      ],
+      "frames": 0,
+      "manifest_sha256": "ffbb158f5c8b847150d879356c04641627aafd3f358b71ba11c43aeb92e729eb",
+      "mode": "hardware-observed",
+      "observed_counts": [
+        3,
+        3,
+        6,
+        0
+      ],
+      "services": [
+        {
+          "class": "IOSurfaceRoot",
+          "name": "IOSurfaceRoot",
+          "type": 0
+        },
+        {
+          "class": "nvAccelerator",
+          "name": "nvAccelerator",
+          "type": 5
+        },
+        {
+          "class": "nvAccelerator",
+          "name": "nvAccelerator",
+          "type": 6
+        }
+      ],
+      "stdout_sha256": "3bbf7df7f02c5e20b6af7ed87858ad9faeb491d40484c5da3c34e413b381b814"
+    },
+    {
+      "create_status": 0,
+      "detail_events": [],
+      "frames": 6,
+      "manifest_sha256": "9116b73757d5ac95e8cc36279a4d44b5fde1f6ab70042c8b76b8bca3650791d6",
+      "mode": "software-plain",
+      "observed_counts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "services": [],
+      "stdout_sha256": "bbb510fb6a5afe5de0942204f6b19e6ad8f30c04936f01ef7461921bf1a83044"
+    }
+  ],
+  "software_bytes_compared": 2764800,
+  "software_frames": 24,
+  "software_processes": 4,
+  "source_sha256": {
+    "client.mm": "8449c91e2635c9cfccf8c2613c62a714bf3b25d174e4a7c803e460a2d6068133",
+    "observer.c": "b9f6e9f8a92b996a93c8409665803ca3285e16cb1bbf175cf17b6c7f6d0479d1",
+    "observer.h": "ab9c41e70d38c83b34edaece99d7c163145f4864b264ff16420a7063b4ec28f8"
+  },
+  "status": "PASS_BOUNDED_IMAC_VT_OBSERVATION",
+  "system_modified": false,
+  "system_profile_files": 3
+}
