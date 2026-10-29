@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Two runs of the unchanged-source Apple Release ICB application now reach 15 adapted draws and produce drawable captures matching a direct GTX reference. Explicit process-local injection substitutes a separately compiled pinned shader pipeline and configures the view; Release assertions are disabled. General or transparent support remains unproved. [Evidence](APPLE_ORIGINAL_APPLICATION_ICB.md).
+
 Two GTX processes now compute on the same ordinary Metal buffers whose creation-reply fields were matched; two no-dispatch controls and 16,777,216 CPU-checked bytes pass. Video-resource identity and decoding remain unproved. [Evidence](VIDEO_RESOURCE_REPLY_GPU.md).
 
 Two ordinary 4 MiB Metal allocations now match selected creation-reply fields to their live wrapper inside each test process; no video resource or explicit GPU execution is established. [Evidence](VIDEO_RESOURCE_REPLY_LIVE.md).

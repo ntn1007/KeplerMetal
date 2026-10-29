@@ -23,6 +23,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+The unchanged-source Apple Release ICB sample runs with an explicit process-local adaptation; two GPU captures match an archived direct-draw reference. [Evidence and limits](docs/APPLE_ORIGINAL_APPLICATION_ICB.md).
+
 A scoped 15-command ICB works with an unattached framebuffer-only drawable; a separate depth readback matches direct and blank GTX controls. [Evidence and limits](docs/APPLE_FRAMEBUFFER_ONLY_ICB.md).
 
 A pinned 15-command ICB renders to an unattached CAMetalLayer drawable on GTX; onscreen presentation remains unproved. [Evidence and limits](docs/APPLE_DRAWABLE_ICB.md).

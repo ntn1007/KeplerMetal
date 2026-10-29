@@ -1,0 +1,38 @@
+{
+  "all_12800_bytes_equal_to_direct": true,
+  "apple_archive_sha256": "559d91d42ba4d4adff9517600de522d12f8fbc3270982ac6e0d0b5bfd414f311",
+  "blank_control_differs": true,
+  "default_release_metallib_sha256": "04d8d8ae6a4485d3be0262e971c365cfff1d5bb04f88f24cdbdfa0ffdee6afa2",
+  "draws_per_run": 15,
+  "general_support_proved": false,
+  "manifest_sha256": "6930ed313d2e1b1e836f189afb2db7c0286f10afb9c867ec3fe9659390e16732",
+  "matching_x86_64_sections": 16,
+  "original_app_sources_modified": false,
+  "original_unsigned_executable_sha256": "1740ed2ab95a8ffc1ab782fd4ddfa6ba8fa3a938f50b68df90e60c903fa37016",
+  "performance_benchmark": false,
+  "pipeline_shader_substituted": true,
+  "pixels_per_run": 3072,
+  "process_local_injection": true,
+  "release_assertions_disabled": true,
+  "runs": [
+    {
+      "frame_in_manifest": false,
+      "frame_sha256": "a7c62db073ac8b049e735340c0f99abcb43083c36221c47fcc81a0faeda5cc35",
+      "manifest_sha256": "4af487c65693baeb261d17448c5a2652b6a2942de433d6db57624a44783c7d2b",
+      "report_sha256": "26610a2ddfcaece83971d60bad1b502a9b74bf9ecea0846e6b6919d846c4637c"
+    },
+    {
+      "frame_in_manifest": true,
+      "frame_sha256": "a7c62db073ac8b049e735340c0f99abcb43083c36221c47fcc81a0faeda5cc35",
+      "manifest_sha256": "486154ac48a3a5bc0eaa04a7b8ad15e46178c5fef485d7557debefe53576c4f6",
+      "report_sha256": "7d26f098d5c50f6b4b5f94c2d7de0c2ccb4281b914af04d219663f956cbebf9a"
+    }
+  ],
+  "signed_executable_sha256": "67013deea655671d1ff2d4191b3abedd129e43ce95c8c4b4a6394d7be856d417",
+  "source_files_matched_to_archive": 17,
+  "status": "PASS_BOUNDED_ORIGINAL_APP",
+  "substituted_metallib_sha256": "adf18526f6b8fe358a30d3088dd801440b5509ac50126857174de03e17fba5bf",
+  "system_hashes_unchanged": true,
+  "transparent_system_integration": false,
+  "view_configuration_modified_for_capture": true
+}
