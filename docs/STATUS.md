@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Native rasterization-disabled void vertex writes work on GTX for point draws 1–5, with positive bitmasks; triangle counts 1/2 and trailing 4/5 show no corresponding writes in these tests. M1 results agree; adapter support remains absent. [Evidence](VERTEX_VOID_WRITE.md).
+
 Registered nonlegacy stage-in pipelines can declare exact direct counts 4/5; GTX direct/adapted pixels match and mismatched counts are refused before submission. [Evidence](RENDER_TRAILING_GEOMETRY.md).
 
 A native direct vertex atomic witness on two GTX and two M1 runs records bits for IDs 0–2 and no bits for trailing IDs 3–4 at counts 4/5. This does not prove whether trailing vertices were invoked; the adapter was not tested. [Evidence](TRAILING_VERTEX_INVOCATIONS.md).

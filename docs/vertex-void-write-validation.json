@@ -1,0 +1,48 @@
+{
+  "adapter_tested": false,
+  "counts": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "gpu_processes_gtx": 2,
+  "gtx_runs": [
+    {
+      "manifest_sha256": "8bb1090cb1570db876a1d72e66792dda25c4fbaf8b0adc611b68da77958c61b6",
+      "stdout_sha256": "abaf12c4a70d272fe434675f219bf57102bd6b8e321f6e6a2914bedf95bb7d16"
+    },
+    {
+      "manifest_sha256": "48757faf85f83cdd2cce004bf971c74616f849ea2916d948e216dfa45bcb5d68",
+      "stdout_sha256": "abaf12c4a70d272fe434675f219bf57102bd6b8e321f6e6a2914bedf95bb7d16"
+    }
+  ],
+  "guards_intact": true,
+  "m1_capture_sha256": "ae2b6c362b8ba58c0d017e95b24253291d1881bf34792d2d3e1d4226ba3cf133",
+  "m1_host_binary_sha256_observed": "af905eb8825c5d888b5ec4a67cbdc5ffc208a9061494ed4d1a467cba20aad191",
+  "m1_os_observed": "27.2 (26B123)",
+  "performance_benchmark": false,
+  "point_masks": [
+    0,
+    1,
+    3,
+    7,
+    15,
+    31
+  ],
+  "reference_runs_m1": 2,
+  "source_sha256": "b4081e526379f8d5d1113bb2ea65b3806b027e52746bd7a04c6e2c0838bab99f",
+  "status": "PASS_NATIVE_VOID_VERTEX_WRITE",
+  "system_files_checked_unchanged": true,
+  "trailing_invocation_proved": false,
+  "triangle_masks": [
+    0,
+    0,
+    0,
+    7,
+    7,
+    7
+  ]
+}
