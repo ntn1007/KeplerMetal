@@ -196,12 +196,16 @@ def sass_contract(code,text,component):
   # scoped shape as an explicit assumption: a single joinat before ld-lock
   # resumes immediately after the join following the retry. Reject any other
   # target entering the lock-to-comparison interval, including schedule words.
-  reconvergence=[]
+  reconvergence=[];reconvergence_bypasses_redirect=False
   for source,operation in instructions:
    match=re.fullmatch(r'(?:(?:\$p\d+|\(not \$p\d+\)) )?joinat (0x[0-9a-f]+)',operation)
    if match:
     target=int(match[1],16);target=target+8 if target%64==0 else target
+    # The SIMT stack is not modeled; conservatively reject a target beyond
+    # the redirect established after lock entry, even if it is unreachable.
+    if off<=source<patch and target>patch:reconvergence_bypasses_redirect=True
     if off<target<=comparison:reconvergence.append((source,target))
+  if reconvergence_bypasses_redirect:continue
   if reconvergence:
    if i+6>=len(instructions) or instructions[i+5][1]!='join nop':continue
    assumed_entry=instructions[i+6][0]

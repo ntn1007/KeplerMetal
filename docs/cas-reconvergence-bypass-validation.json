@@ -1,0 +1,63 @@
+{
+  "archived_cases": [
+    {
+      "name": "slot1",
+      "native_sha256": "d39eb2371cbd96770576236ce8b48ba5b03d8dcd818db2b6826737bedaa89701",
+      "qualified": true
+    },
+    {
+      "name": "permuted",
+      "native_sha256": "9d6fc4f422a49b25c20f74a3e95accca8cbbd8ac6a6f5f7f53230a14d3dec7e0",
+      "qualified": true
+    },
+    {
+      "name": "live_noise",
+      "native_sha256": "c05047171ca9812e714a75d1679c9a535d04536ebecc915f91aef0cb19141146",
+      "qualified": true
+    },
+    {
+      "name": "original_compare_control",
+      "native_sha256": "ea09f179ff169422f6f3ac8c3b1f85f020c52f5853106e68becbb0f408ef85e3",
+      "qualified": false
+    }
+  ],
+  "assembler_sha256": "1f023d5e1f0a5afc3a04510e264159923dac3182139e03c0a67600b9b1d4428e",
+  "counterexamples": [
+    {
+      "listing_sha256": "fe4986603e29843ae0566741ad867feea260dd44423ea8fe9167c87502c726a8",
+      "name": "next_instruction",
+      "offset": "0x2a0",
+      "operation": "joinat 0x2f8",
+      "previous_qualified": true,
+      "synthetic_program_sha256": "2abacbf8b2cb22393394ec107a6d7ef5baf76214c9dbdc67fdf685dd08d49cda",
+      "updated_qualified": false
+    },
+    {
+      "listing_sha256": "f7ac88a3a517830457baf4caf828a350558326bb46e89fed350ffd5b54b27a26",
+      "name": "schedule_word",
+      "offset": "0x2a0",
+      "operation": "joinat 0x300",
+      "previous_qualified": true,
+      "synthetic_program_sha256": "cc55e7b3b8b080cb85898d819021344e72fe1643629bf544238a7d96981daada",
+      "updated_qualified": false
+    },
+    {
+      "listing_sha256": "82284aa479d393d74d4a2991baacbcb0ac3c2337b079cfba7947eb7eacce79e9",
+      "name": "output_store",
+      "offset": "0x2a0",
+      "operation": "joinat 0x328",
+      "previous_qualified": true,
+      "synthetic_program_sha256": "bb3b7647f886698a6869b3d300328820d422c4718f2cc3728d4d1f12886322bb",
+      "updated_qualified": false
+    }
+  ],
+  "current_recognizer_sha256": "76e6896003443224ff23b12c792ba2c54589fade55c543129b29c52271ee0f4b",
+  "decoder_semantics_proved": false,
+  "decoder_sha256": "1c8730a9a4861f374c58407bff31d7ccb47a57eb23f9f82c6b3ea3deb079be0f",
+  "gpu_dispatches": 0,
+  "original_program_sha256": "d39eb2371cbd96770576236ce8b48ba5b03d8dcd818db2b6826737bedaa89701",
+  "previous_recognizer_sha256": "1b5bcd072a94021b0eee966b67d0fcc9763462abdd1e2f2a311bab4a15e259e7",
+  "status": "PASS_OFFLINE_RECONVERGENCE_BYPASS_GUARD",
+  "synthetic_air_sass_compiler_correspondence_proved": false,
+  "system_modified": false
+}

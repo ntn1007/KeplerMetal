@@ -3192,22 +3192,22 @@
       "path": "bridge/tools/recognize_native_cas.py",
       "source_path": "bridge/tools/recognize_native_cas.py",
       "source_SHA256": "d9783fa0258f65f50d3df9547f36701684324abcc9f99a494ba70fca41a063cb",
-      "published_SHA256": "1b5bcd072a94021b0eee966b67d0fcc9763462abdd1e2f2a311bab4a15e259e7",
-      "bytes": 15831,
+      "published_SHA256": "76e6896003443224ff23b12c792ba2c54589fade55c543129b29c52271ee0f4b",
+      "bytes": 16145,
       "modified_for_publication": true,
       "publication_change": {
         "previous_published_SHA256": "9aa30b458263eeeddb782cd2a3b10ac362b6faf3ced9cbca805e55b515bebbee",
         "reason": "Require pinned decoder reproduction and preserve checked native snapshots; original source hash retained."
       },
       "latest_change": {
+        "previous_published_SHA256": "1b5bcd072a94021b0eee966b67d0fcc9763462abdd1e2f2a311bab4a15e259e7",
+        "previous_bytes": 15831,
+        "reason": "Refuse unmodeled reconvergence targets from the lock region beyond the CAS redirect; add offline regression cases."
+      },
+      "previous_latest_change": {
         "previous_published_SHA256": "92258a746924e8e1589e4d38f1480d43fc7d6b99fd2bbf820887ba9ecfcfc863",
         "previous_bytes": 15266,
         "reason": "Refuse unmodeled indirect branch targets anywhere in native CAS diagnosis and add offline regression cases."
-      },
-      "previous_latest_change": {
-        "previous_published_SHA256": "bf9555f211ec49ff2b429cfcfba6ac23e63eebcd3af14e913bf540b37d9bf285",
-        "previous_bytes": 15040,
-        "reason": "Refuse direct branches skipping the CAS redirect after lock entry; add decoder-shaped CPU regression cases."
       },
       "prior_change_history": [
         {
@@ -3247,6 +3247,11 @@
           "previous_published_SHA256": "7cebf0cb923e4321931a3362b028b8ee73bfc51a32cea4b729986d61d88f8944",
           "previous_bytes": 14511,
           "reason": "Refuse AIR output paths crossing blocks or terminators; add conservative CPU regression cases."
+        },
+        {
+          "previous_published_SHA256": "bf9555f211ec49ff2b429cfcfba6ac23e63eebcd3af14e913bf540b37d9bf285",
+          "previous_bytes": 15040,
+          "reason": "Refuse direct branches skipping the CAS redirect after lock entry; add decoder-shaped CPU regression cases."
         }
       ]
     },
@@ -7757,22 +7762,22 @@
       "path": "tests/test_native_cas_recognizer.py",
       "source_path": "tests/test_native_cas_recognizer.py",
       "source_SHA256": "ee6d4693d639b2225a54ac31a785bb08bad65c83cb16feacd4ad95b900fd3487",
-      "published_SHA256": "777be2b672781f7b85e5433f74fbc800b60110bd93505a8333c2b407b1c65b97",
-      "bytes": 15625,
+      "published_SHA256": "7bfd43689e13bedeef01b736f94ddf1c8da9ca74924839ffa98f88a874fb4ce2",
+      "bytes": 16562,
       "modified_for_publication": true,
       "publication_change": {
         "previous_published_SHA256": "ee6d4693d639b2225a54ac31a785bb08bad65c83cb16feacd4ad95b900fd3487",
         "reason": "Exercise fail-closed disassembly coverage, decoder verification and input snapshots."
       },
       "latest_change": {
+        "previous_published_SHA256": "777be2b672781f7b85e5433f74fbc800b60110bd93505a8333c2b407b1c65b97",
+        "previous_bytes": 15625,
+        "reason": "Refuse unmodeled reconvergence targets from the lock region beyond the CAS redirect; add offline regression cases."
+      },
+      "previous_latest_change": {
         "previous_published_SHA256": "a8bb4c9d2fa369e6a66bb3f77f762f781a4c57a47dd701427303bfb122c8a89f",
         "previous_bytes": 14402,
         "reason": "Refuse unmodeled indirect branch targets anywhere in native CAS diagnosis and add offline regression cases."
-      },
-      "previous_latest_change": {
-        "previous_published_SHA256": "8a4e55bbd3b36a47db697961509c98dd4ebb3a1bded7b651efeb9525560ed248",
-        "previous_bytes": 13220,
-        "reason": "Refuse direct branches skipping the CAS redirect after lock entry; add decoder-shaped CPU regression cases."
       },
       "prior_change_history": [
         {
@@ -7812,6 +7817,11 @@
           "previous_published_SHA256": "b5d1f72f6ddc865c13a8c40bec9431e0c02894750aa3ec0ff12bfb7d69322b0c",
           "previous_bytes": 11226,
           "reason": "Refuse AIR output paths crossing blocks or terminators; add conservative CPU regression cases."
+        },
+        {
+          "previous_published_SHA256": "8a4e55bbd3b36a47db697961509c98dd4ebb3a1bded7b651efeb9525560ed248",
+          "previous_bytes": 13220,
+          "reason": "Refuse direct branches skipping the CAS redirect after lock entry; add decoder-shaped CPU regression cases."
         }
       ]
     },

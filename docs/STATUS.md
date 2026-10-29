@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+The offline CAS recognizer now refuses reconvergence targets established inside the lock region and pointing beyond the repair redirect. Three assembled-and-decoded examples are refused, with four archived verdicts unchanged; none was dispatched. [Evidence](CAS_RECONVERGENCE_BYPASS.md).
+
 The offline CAS recognizer now refuses unmodeled indirect branches anywhere in the program. Three assembled-and-decoded pre-lock examples that the preceding recognizer accepted are refused; four archived verdicts remain unchanged. No mutated shader was dispatched. [Evidence](CAS_INDIRECT_ENTRY_GUARD.md).
 
 The offline CAS recognizer now refuses direct branches that skip the proposed redirect after entering the lock region. Three assembled-and-decoded counterexamples are rejected; no mutated shader was executed. [Evidence](CAS_SKIP_REDIRECT.md).
