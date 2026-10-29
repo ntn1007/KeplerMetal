@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A public-Metal-only test client executes the certified point transform through explicitly injected process-local ICB adaptation; native missing-selector and four identity/descriptor controls stop before dispatch. [Evidence](STANDALONE_POINT_TRANSFORM.md).
+
 The offline CAS candidate recognizer rejects direct branches that enter a candidate after its lock or enter its fixed lock sequence. Four assembled synthetic counterexamples are refused; prior archived verdicts remain unchanged. [Evidence](CAS_INCOMING_BRANCH.md).
 
 The offline copied-lock CAS analyzer now refuses predicated exits and reconvergence in its modeled slice; two assembled synthetic exits previously yielded hypotheses. No certificate or GPU dispatch is authorized. [Evidence](CAS_PREDICATED_CONTROL.md).

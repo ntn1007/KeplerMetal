@@ -23,7 +23,8 @@ stack. It does not implement arbitrary vertex shaders, GPU-generated ICBs,
 indexed draws, arbitrary storage modes, concurrent use or transparent Metal
 support. Cross-queue ordering and aliasing across distinct objects are not
 qualified. The application remains responsible for CPU/GPU synchronization.
-No speed claim is made.
+A [public-Metal-only test client](STANDALONE_POINT_TRANSFORM.md) later used this
+profile through explicit process-local opt-in. No speed claim is made.
 
 ## Validation
 
