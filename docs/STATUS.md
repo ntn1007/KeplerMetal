@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+The 15-command scoped ICB matches direct GPU depth output through MTKView draw callbacks and its own drawable/render-pass descriptor. Presentation timestamps remain zero; visible pixels and the original Apple app are unproved. [Evidence](APPLE_MTKVIEW_ICB.md).
+
 A 15-command ICB renders with a framebuffer-only layer attached to a non-key window; the separate depth output matches direct GTX and blank controls. All presentation timestamps remain zero, so visible display is unproved. [Evidence](APPLE_WINDOW_ICB.md).
 
 A 15-command ICB renders with an unattached framebuffer-only drawable; a separate depth attachment matches direct GTX results and blank controls. Presentation timestamps remain zero. [Evidence](APPLE_FRAMEBUFFER_ONLY_ICB.md).
