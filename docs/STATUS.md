@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A native direct vertex atomic witness on two GTX and two M1 runs records bits for IDs 0–2 and no bits for trailing IDs 3–4 at counts 4/5. This does not prove whether trailing vertices were invoked; the adapter was not tested. [Evidence](TRAILING_VERTEX_INVOCATIONS.md).
+
 A scoped non-indexed stage-in render ICB accepts four or five vertices; two GTX direct/adapted pairs match pixels and retain the requested packet counts. Invocation of trailing vertices is not proved. [Evidence](RENDER_TRAILING_VERTICES.md).
 
 Two GTX processes verify the incomplete-triangle guard rejects changed pipeline or vertex binding before submission; unchanged, restored and copied commands pass pixel controls. [Evidence](PARTIAL_TRIANGLE_STATE_GUARD.md).

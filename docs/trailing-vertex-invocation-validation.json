@@ -1,0 +1,36 @@
+{
+  "adapter_tested": false,
+  "counts": [
+    0,
+    3,
+    4,
+    5
+  ],
+  "gpu_processes_gtx": 2,
+  "gtx_runs": [
+    {
+      "manifest_sha256": "a18ef111819579e0508530908d91872afbf5014afe96ebda68cae586fbe0cf17",
+      "stdout_sha256": "ebf06b4840a9db1151455dc22d62f3250fd2f90e6c72f2de02a11238de92a6da"
+    },
+    {
+      "manifest_sha256": "895386650dedd38617c58b7443c2e5ccf7f204e988d7b3c5f1be48840ad8a224",
+      "stdout_sha256": "ebf06b4840a9db1151455dc22d62f3250fd2f90e6c72f2de02a11238de92a6da"
+    }
+  ],
+  "guards_intact": true,
+  "m1_capture_sha256": "661c06a36aa7b99328b9460d1aba1e573582ba084b1a652af1c1aee73c7ff30b",
+  "m1_host_binary_sha256_observed": "e2db28ff2caf32655328d59e2e54748163746962989adeb02ff02040ecc3c133",
+  "m1_os_observed": "27.2 (26B123)",
+  "observed_masks": [
+    0,
+    7,
+    7,
+    7
+  ],
+  "performance_benchmark": false,
+  "reference_runs_m1": 2,
+  "source_sha256": "3e3bf0b04d4b9e600b71c9a8dd3b630f418c317330f41129e8bbab788f1f9d2d",
+  "status": "PASS_NATIVE_VERTEX_WRITE_WITNESS",
+  "system_files_checked_unchanged": true,
+  "trailing_invocation_proved": false
+}
