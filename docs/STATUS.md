@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Two fresh-process H.264 requests had zero hits at the resolved cached-entry check; the property query returned null and decoding remained -12913. Same-process reuse and actual cache-field reader calibration remain untested. [Evidence](VIDEO_GVA_CACHE_WITNESS.md).
+
 A pinned AppleGVA list path clears and conditionally reactivates a cached entry using its identifier, another byte and the first byte at the codec conversion destination. This is static only; reuse, node lifetime and hardware video remain unproved. [Evidence](VIDEO_GVA_CACHED_CODEC.md).
 
 The retained High Sierra update has no `IOGVACodec` key in 15 inspected GeForce/NVDA plists and no literal in 19 selected binaries; dynamic or other producers remain unexcluded. [Evidence](VIDEO_GVA_HIGH_SIERRA_INVENTORY.md).

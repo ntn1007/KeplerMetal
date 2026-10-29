@@ -1,0 +1,35 @@
+{
+  "audit_source_sha256": "32e17fbd9c9d6a41e8ebf65030f72460d29f91a6c06550991b8d634264b16987",
+  "build_sha256": "f9b8ceafa70ed1d83d8e369b59597df7881b5ba8346f2c02d7446b85e46c305a",
+  "cache_branch_hit_observed": false,
+  "cache_breakpoint_resolved": true,
+  "cache_path_impossible_proved": false,
+  "cache_read_calibrated_on_real_breakpoint": false,
+  "calibration_sha256": "3f4de472f352bf1714843755667fe641b5b0bac3725a08d511af76abf2854b3c",
+  "counterfactual_property_and_policy_used": true,
+  "hardware_video_execution_proved": false,
+  "node_lifetime_proved": false,
+  "reserved_control_sha256": "8628ff8f83396d7acce3e6b58a88724e67471d22c1979a6a2b39795259320990",
+  "runs": [
+    {
+      "cache_breakpoint_hits": 0,
+      "decoder_status": -12913,
+      "frames": 0,
+      "list_entry_hits": 2,
+      "log_sha256": "44e1a931241ff12f4a194938d8f1df1b54430d06a8a6fc800495577bda04f913",
+      "manifest_sha256": "acdcb619871a51abe25b24760306fd8179ee089d5cd9cacf8bf09a244e5c1979",
+      "property_return_hits": 1
+    },
+    {
+      "cache_breakpoint_hits": 0,
+      "decoder_status": -12913,
+      "frames": 0,
+      "list_entry_hits": 2,
+      "log_sha256": "5da232281715db94024dd0e84f40549550d7be37e2c5b662221faeabea649877",
+      "manifest_sha256": "e41ecffac6471b1f23216e9c01cd29a112d392227814f0652ead053d0bd0a260",
+      "property_return_hits": 1
+    }
+  ],
+  "status": "PASS_TWO_BOUNDED_CACHE_BREAKPOINT_OBSERVATIONS",
+  "system_modified": false
+}
