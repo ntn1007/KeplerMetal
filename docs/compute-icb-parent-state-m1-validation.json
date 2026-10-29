@@ -1,0 +1,24 @@
+{
+  "capture_hashes_verified_after_transfer": true,
+  "capture_pair_sha256": {
+    "pair-0": "e83596f1631ee6159068f1eb2588aac54b718052ff9fdc64b0b87264ec4a2ab7",
+    "pair-1": "db8b54e62442bf31b21e517b37619e5a9c5e8409623fb786f26ed8f168955104"
+  },
+  "correct_uint32_values": 256,
+  "direct_after_icb_runs": 2,
+  "indirect_runs": 2,
+  "kepler_gpu_execution": false,
+  "new_gpu_execution_by_audit": false,
+  "parent_pipeline_or_buffer_rebound_after_icb": false,
+  "pipeline_order": [
+    "a",
+    "b"
+  ],
+  "recorded_process_exit": "observed separately by SSH",
+  "reference_executable_sha256": "3a27b0ecf874aa194e8ad8e30e3bcc56a0d3a4be0daabdcb07adcbcc3f843830",
+  "remote_stdout_sha256": "519082b912274cdc73ae2b0c0f6a4ef84d7680f2589d733380a319465214fbaf",
+  "single_encoder": true,
+  "source_sha256": "e5f0b89d59a0895e7345ee77aab18cbe80d123150b9c629937811f447f1f465f",
+  "status": "PASS_M1_NATIVE_STATE_REFERENCE",
+  "untouched_control_words": 64
+}

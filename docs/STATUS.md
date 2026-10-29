@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+An M1 native reference preserves parent compute pipeline and buffer across two inherited ICB executions followed by direct dispatches. Static inspection identifies parent-state restoration as an unresolved risk in the existing scoped GTX transport; a GTX transition test remains NOT RUN. [Evidence](COMPUTE_ICB_INHERIT_REFERENCE.md#parent-state-after-indirect-execution).
+
 An Apple M1 Max native reference now verifies one inherited compute ICB across parent pipeline switches A/B/A, with direct comparisons and a no-dispatch control. The GTX adapter still refuses this feature and no Kepler execution is claimed. [Evidence](COMPUTE_ICB_INHERIT_REFERENCE.md).
 
 The offline CAS recognizer now refuses additional unmodeled GK104 stack, return, break/continue, exception and execution-mask operations. Ten one-word assembled-and-decoded controls are refused and four archived verdicts remain unchanged; no synthetic program was dispatched. [Evidence](CAS_UNMODELED_CONTROL.md).

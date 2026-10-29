@@ -54,6 +54,35 @@ with A/B/A switches, stale-cache and unregistered-pipeline refusals, followed by
 state-restoration and lifetime tests. The iMac GPU runs remain pending an
 unlocked graphical session. No driver or system file was changed here.
 
+## Parent state after indirect execution
+
+An additional [native reference client](../bridge/experiments/metal_compute_inherited_reference/state_reference.mm)
+uses two ICB commands and two parent pipelines A and B in a single compute
+encoder. For each pipeline it binds a parent buffer, executes an ICB command
+with a different explicitly bound buffer, then performs a direct dispatch
+without rebinding the parent pipeline or buffer. On the M1 Max, both ICB and
+parent buffers contain the expected distinct A/B outputs: 256 uint32 values
+match a CPU oracle, and a 64-word untouched buffer remains `A5`. The signed
+arm64 process exited 0; source, binary, logs and all five capture hashes were
+checked remotely before/after or after transfer as applicable. An independent
+[auditor](../bridge/experiments/metal_compute_inherited_reference/audit_state.py)
+checks the raw captures; three rehashed altered copies are refused. The
+[sanitized receipt](compute-icb-parent-state-m1-validation.json) omits device
+identifiers. This is one M1 process and is not an execution on the GTX.
+
+Static inspection of `KPRecordedNativeCompute::encodeSequence` in
+`KeplerNativeCommands.mm` shows it explicitly sets the preparation pipeline
+and buffers on the caller's encoder. Its body does not restore the former
+parent pipeline or bindings before returning. This is a concrete compatibility
+risk for a following direct dispatch, including the existing non-inherited
+compute path; its actual behavior on the GTX remains **NOT RUN**. The current
+scope tracks the caller's compute pipeline for thread-limit checks, but it does
+not track and restore the full parent buffer state. Do not treat earlier ICB
+output-only tests as a test of this transition. A correction needs to account
+for parent buffer setters, offsets, inline bytes, arrays and threadgroup state,
+as applicable, and test post-ICB direct dispatches on the GTX before claiming
+preservation or enabling inherited compute pipelines.
+
 ## Reference build and retained-input audit
 
 On an appropriately provisioned Mac with a fresh output directory:
