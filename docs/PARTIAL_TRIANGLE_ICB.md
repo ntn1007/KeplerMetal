@@ -14,9 +14,9 @@ command is encoded, restricts start/base/instance values, preserves index type,
 device and bounds checks, and rechecks the pipeline and bindings before
 execution. The recheck matters because command state can change after encoding.
 It must not be generalized to shaders with side effects: omitting their vertex
-invocations could change application results. The changed-state execution guard
-is present in the source but has not yet been independently exercised with an
-extended registered pipeline.
+invocations could change application results. A later [state-guard test](PARTIAL_TRIANGLE_STATE_GUARD.md) exercises a changed
+registered pipeline and vertex binding, plus restoration and copying; its
+coverage remains bounded.
 
 This is an **opt-in application-local** extension, not a system driver update
 or transparent Metal support. Non-legacy shaders, three-plus counts with a
