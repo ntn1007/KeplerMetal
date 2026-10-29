@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+The offline CAS recognizer now refuses unmodeled indirect branches anywhere in the program. Three assembled-and-decoded pre-lock examples that the preceding recognizer accepted are refused; four archived verdicts remain unchanged. No mutated shader was dispatched. [Evidence](CAS_INDIRECT_ENTRY_GUARD.md).
+
 The offline CAS recognizer now refuses direct branches that skip the proposed redirect after entering the lock region. Three assembled-and-decoded counterexamples are rejected; no mutated shader was executed. [Evidence](CAS_SKIP_REDIRECT.md).
 
 The offline CAS recognizer now refuses output insertions or stores outside the same straight-line AIR block as the expected-pointer load. Six parsed-JSON counterexamples are rejected while four archived verdicts remain unchanged; no shader or certificate was requalified. [Evidence](CAS_AIR_OUTPUT_PATH.md).

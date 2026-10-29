@@ -114,6 +114,13 @@ def sass_contract(code,text,component):
    return {'qualified':False,'reason':'Unsupported undecoded instruction/bits'}
   instructions.append((offset,op.split(' [unknown:')[0]))
  if next_offset!=len(code) or len(instructions)!=len(code)//8-len(code)//64:return {'qualified':False,'reason':'Decoder did not cover every original word'}
+ # The incoming-edge and bypass checks below model literal branch targets
+ # only. A register-indirect or otherwise unsupported branch anywhere in the
+ # program can enter the matched slice or redirect without a visible edge.
+ # Reject unknown spellings rather than silently treating them as no edge.
+ direct=r'(?:(?:\$p\d+|\(not \$p\d+\)) )?(?:bra|joinat) 0x[0-9a-f]+'
+ if any(re.search(r'\b(?:bra|joinat)\b',op) and not re.fullmatch(direct,op) for _,op in instructions):
+  return {'qualified':False,'reason':'Indirect or unsupported branch/reconvergence target'}
  # The floor applies to every lane of a vector operand, not only its base.
  max_reg=max((reg for _,op in instructions for reg in register_references(op)),default=0)
  if max_reg>=24:return {'qualified':False,'reason':'Register profile exceeds qualified floor24'}

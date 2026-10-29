@@ -1,0 +1,63 @@
+{
+  "archived_cases": [
+    {
+      "name": "slot1",
+      "native_sha256": "d39eb2371cbd96770576236ce8b48ba5b03d8dcd818db2b6826737bedaa89701",
+      "qualified": true
+    },
+    {
+      "name": "permuted",
+      "native_sha256": "9d6fc4f422a49b25c20f74a3e95accca8cbbd8ac6a6f5f7f53230a14d3dec7e0",
+      "qualified": true
+    },
+    {
+      "name": "live_noise",
+      "native_sha256": "c05047171ca9812e714a75d1679c9a535d04536ebecc915f91aef0cb19141146",
+      "qualified": true
+    },
+    {
+      "name": "original_compare_control",
+      "native_sha256": "ea09f179ff169422f6f3ac8c3b1f85f020c52f5853106e68becbb0f408ef85e3",
+      "qualified": false
+    }
+  ],
+  "assembler_sha256": "1f023d5e1f0a5afc3a04510e264159923dac3182139e03c0a67600b9b1d4428e",
+  "counterexamples": [
+    {
+      "listing_sha256": "8fcda65bbfcd7b91d2b783fbceb343fa98ece7867e7476502e932ac73f5966b2",
+      "name": "unconditional",
+      "offset": "0x238",
+      "operation": "bra $r1 0x0",
+      "previous_qualified": true,
+      "synthetic_program_sha256": "8b5c650fa51befae61165ea2720d2020fa3e01de6fc595b113cccec40e0f9c85",
+      "updated_qualified": false
+    },
+    {
+      "listing_sha256": "f191af02b7c6d131fe94abb4aa6aff2f51c9d8c2e852ee3ef8975046285ed0da",
+      "name": "positive",
+      "offset": "0x238",
+      "operation": "$p1 bra $r1 0x0",
+      "previous_qualified": true,
+      "synthetic_program_sha256": "0d52ca4d1cc1710d490d884be87497083bd825bf760b64eb50f0d4e0acd82aaa",
+      "updated_qualified": false
+    },
+    {
+      "listing_sha256": "2e926e9955d30e30c9eef5e206e5e308ba049363e386ac6e188d5234b3572e4a",
+      "name": "negative",
+      "offset": "0x238",
+      "operation": "(not $p1) bra $r1 0x0",
+      "previous_qualified": true,
+      "synthetic_program_sha256": "0d20d07a5491e633a570a54e31a8939ec4a9c92063d0ad5dc127a6b4e3f99c69",
+      "updated_qualified": false
+    }
+  ],
+  "current_recognizer_sha256": "1b5bcd072a94021b0eee966b67d0fcc9763462abdd1e2f2a311bab4a15e259e7",
+  "decoder_semantics_proved": false,
+  "decoder_sha256": "1c8730a9a4861f374c58407bff31d7ccb47a57eb23f9f82c6b3ea3deb079be0f",
+  "gpu_dispatches": 0,
+  "original_program_sha256": "d39eb2371cbd96770576236ce8b48ba5b03d8dcd818db2b6826737bedaa89701",
+  "previous_recognizer_sha256": "92258a746924e8e1589e4d38f1480d43fc7d6b99fd2bbf820887ba9ecfcfc863",
+  "status": "PASS_OFFLINE_INDIRECT_ENTRY_GUARD",
+  "synthetic_air_sass_compiler_correspondence_proved": false,
+  "system_modified": false
+}
