@@ -41,9 +41,11 @@ static std::vector<uint8_t> idr_slice(uint32_t first, bool no_output, bool long_
     w.bits(no_output,1); w.bits(long_term,1); w.finish();
     w.bytes.insert(w.bytes.begin(),0x65); return w.bytes;
 }
-static std::vector<uint8_t> slice(uint32_t first, uint32_t frame, uint32_t type = 0, int ref_override = -1) {
+static std::vector<uint8_t> slice(uint32_t first, uint32_t frame, uint32_t type = 0, int ref_override = -1, int controls = -1) {
     Writer w; w.ue(first); w.ue(type); w.ue(0); w.bits(frame, 5); w.bits(2, 7); w.se(0);
-    w.bits(ref_override >= 0, 1); if (ref_override >= 0) w.ue(static_cast<uint32_t>(ref_override)); w.finish();
+    w.bits(ref_override >= 0, 1); if (ref_override >= 0) w.ue(static_cast<uint32_t>(ref_override));
+    if (controls >= 0) { w.bits(controls == 1, 1); if (controls != 1) w.bits(controls == 2, 1); }
+    w.finish();
     w.bytes.insert(w.bytes.begin(), 0x41); return w.bytes;
 }
 static void append(std::vector<uint8_t>& out, const std::vector<uint8_t>& n) {
@@ -61,6 +63,16 @@ int main() {
     assert(out.frame_num == 1 && out.poc_lsb == 2 && out.first_macroblocks == std::vector<uint32_t>({0, 150}));
     assert(out.picture.pic_init_qp_minus26 == 2 && out.picture.num_ref_idx_l0_active_minus1 == 0);
     assert(out.is_reference && !out.is_idr && !out.chroma_qp_offset && !out.constrained_intra);
+    std::vector<uint8_t> simple; append(simple,slice(0,1,0,-1,0)); append(simple,slice(150,1,0,-1,0));
+    ParsedBaselinePicture controls;
+    assert(parse_baseline_picture(s.data(),s.size(),p.data(),p.size(),simple.data(),simple.size(),controls));
+    assert(controls.p_simple_reference_controls && !controls.frame_gaps_allowed);
+    std::vector<uint8_t> modified; append(modified,slice(0,1,0,-1,0)); append(modified,slice(150,1,0,-1,1));
+    assert(parse_baseline_picture(s.data(),s.size(),p.data(),p.size(),modified.data(),modified.size(),controls));
+    assert(!controls.p_simple_reference_controls);
+    std::vector<uint8_t> adaptive; append(adaptive,slice(0,1,0,-1,2));
+    assert(parse_baseline_picture(s.data(),s.size(),p.data(),p.size(),adaptive.data(),adaptive.size(),controls));
+    assert(!controls.p_simple_reference_controls);
     const auto rich_pps=pps(-4,true); std::vector<uint8_t> idr;
     append(idr,idr_slice(0,false,false)); append(idr,idr_slice(150,false,false));
     ParsedBaselinePicture parsed_idr;

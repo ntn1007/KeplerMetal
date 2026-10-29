@@ -53,7 +53,7 @@ struct Headers {
     uint32_t sps_id = 0, pps_id = 0, frame_bits = 0, poc_bits = 0;
     uint32_t l0_default = 0, l1_default = 0, max_references = 0;
     int8_t chroma_qp_offset = 0;
-    bool constrained_intra = false;
+    bool constrained_intra = false, frame_gaps_allowed = false;
 };
 
 bool sps_header(const uint8_t* nal, size_t n, Headers& h) {
@@ -66,7 +66,7 @@ bool sps_header(const uint8_t* nal, size_t n, Headers& h) {
     const uint32_t frame_log = b.ue(), poc_type = b.ue();
     if (!b.ok || profile != 66 || (constraints & 3) || h.sps_id > 31 || frame_log > 12 || poc_type != 0) return false;
     const uint32_t poc_log = b.ue(), max_refs = b.ue();
-    (void)b.take(1); // gaps_in_frame_num_value_allowed_flag
+    h.frame_gaps_allowed = b.take(1);
     const uint32_t width_minus_one = b.ue(), height_minus_one = b.ue();
     const uint32_t progressive = b.take(1), direct = b.take(1), cropped = b.take(1);
     const uint32_t vui_present = b.take(1); // VUI itself is deliberately not parsed
@@ -104,7 +104,7 @@ bool pps_header(const uint8_t* nal, size_t n, Headers& h) {
     return true;
 }
 
-struct Slice { uint32_t first, type, pps, frame, poc, idr, l0; int32_t delta; bool reference, is_idr, no_output, long_term; };
+struct Slice { uint32_t first, type, pps, frame, poc, idr, l0; int32_t delta; bool reference, is_idr, no_output, long_term, p_simple; };
 bool slice_header(const uint8_t* nal, size_t n, const Headers& h, Slice& s) {
     const uint8_t type = nal[0] & 31;
     std::vector<uint8_t> data;
@@ -122,6 +122,17 @@ bool slice_header(const uint8_t* nal, size_t n, const Headers& h, Slice& s) {
         s.l0 = override_refs ? b.ue() : h.l0_default;
     }
     if (s.is_idr) { s.no_output = b.take(1); s.long_term = b.take(1); }
+    // Probe only the narrow P-slice reference-control prefix. Keep the
+    // original extractor's acceptance unchanged when this probe is incomplete.
+    s.p_simple = false;
+    if (s.type == 0 && !h.picture.weighted_pred_flag) {
+        Bits controls = b;
+        const uint32_t modified = controls.take(1);
+        if (controls.ok && !modified) {
+            const uint32_t adaptive = s.reference ? controls.take(1) : 0;
+            s.p_simple = controls.ok && !adaptive;
+        }
+    }
     return b.ok && s.l0 <= 31;
 }
 }
@@ -135,7 +146,7 @@ bool parse_baseline_picture(const uint8_t* sps, size_t sps_size,
         Headers h;
         if (!sps_header(sps, sps_size, h) || !pps_header(pps, pps_size, h)) return false;
         ParsedBaselinePicture result;
-        Slice first{}; bool seen = false;
+        Slice first{}; bool seen = false, simple_controls = true;
         size_t pos = 0;
         while (pos < sample_size) {
             if (sample_size - pos < 4) return false;
@@ -154,6 +165,7 @@ bool parse_baseline_picture(const uint8_t* sps, size_t sps_size,
                          current.idr != first.idr || current.delta != first.delta || current.l0 != first.l0 ||
                          current.reference != first.reference || current.is_idr != first.is_idr ||
                          current.no_output != first.no_output || current.long_term != first.long_term) return false;
+                simple_controls = simple_controls && current.p_simple;
                 result.first_macroblocks.push_back(current.first);
                 if (result.first_macroblocks.size() > 4095) return false;
             } else if (type != 6) return false; // SEI is preserved but not parsed
@@ -170,7 +182,8 @@ bool parse_baseline_picture(const uint8_t* sps, size_t sps_size,
         result.slice_type = first.type; result.pps_id = first.pps; result.max_references = h.max_references;
         result.delta_poc_bottom = first.delta; result.chroma_qp_offset = h.chroma_qp_offset;
         result.constrained_intra = h.constrained_intra; result.is_reference = first.reference;
-        result.is_idr = first.is_idr; result.idr_no_output_prior = first.no_output; result.idr_long_term = first.long_term;
+        result.is_idr = first.is_idr; result.frame_gaps_allowed = h.frame_gaps_allowed;
+        result.p_simple_reference_controls = simple_controls; result.idr_no_output_prior = first.no_output; result.idr_long_term = first.long_term;
         out = std::move(result);
         return true;
     } catch (const std::bad_alloc&) { return false; }

@@ -10,6 +10,7 @@ struct ParsedBaselinePicture {
     int32_t delta_poc_bottom = 0;
     int8_t chroma_qp_offset = 0;
     bool constrained_intra = false, is_reference = false, is_idr = false;
+    bool frame_gaps_allowed = false, p_simple_reference_controls = false;
     bool idr_no_output_prior = false, idr_long_term = false;
     std::vector<uint32_t> first_macroblocks;
     std::vector<uint8_t> annex_b;

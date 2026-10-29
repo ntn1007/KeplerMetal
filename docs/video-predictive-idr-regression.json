@@ -1,0 +1,33 @@
+{
+  "baseline_receipt_sha256": "2536a8d5e386a92ebc3a5148f26bbc0a4ca550447d783d38dd6d059c1e633f09",
+  "block_bytes": 756,
+  "block_sha256": "380fde2ed50f03f48a968baa37ab66abd7e82b8a0d2b2b1bd74456807effd53b",
+  "complete_h264_validation": false,
+  "ffmpeg_derived_bytes_match": true,
+  "ffmpeg_trace_sha256": "d5b460b411df4ea82205ea57661e72e99fef525b47a1402a54352af8d881f85c",
+  "fixture_sha256": "8b0f93f2bf081d7e413bcd75f35cba8361be21dbf4afbd92c130e4c80d34048c",
+  "frames_validated": 1,
+  "hardware_video_execution_proved": false,
+  "mesa_generated_reference_sha256": "db6a036b28510c9b1940e5457c6b9c4b15f0dd6217826d6da7e42e01d7374005",
+  "mesa_helper_bytes_match": true,
+  "mesa_receipt_sha256": "2faa46947d6c5807c07ac2aea335ac393115588a0fc53fcc7788f14256b8c3fd",
+  "other_p_frames_refused": 5,
+  "slice_headers": 2,
+  "source_sha256": {
+    "H264Baseline.cpp": "5b50682c6fce3637fcbb64c138110e258f1752e5c43a4796973a36302028775e",
+    "H264Baseline.h": "5ceae7d014c313b24e4b99932238b359d14dc0b98d799102dccb525b010baebd",
+    "H264Stream.cpp": "d604ad21278f907f27a581d46af3d1f9b788306a8d1b0d9579ae6cb08f8d65e4",
+    "H264Stream.h": "c54cefe3dcff353d8aff27f3955d0b9aea4249a288ab623a9522277175054763",
+    "VideoIdr.cpp": "1d2de5358f6573030aef31d7d67075e42e7f7b67584d197f709168a0bdb7382c",
+    "VideoIdr.h": "7fe4087b63a9571d7f4581e6ef832f48924a38b81969ce2851fe107254cc3aa4",
+    "VideoLayout.cpp": "934403950258167baccc92aeb2d24b0c031fdb83ed6c199d81c1261ee2a158e7",
+    "VideoLayout.h": "730b86192b7ac04cf5b6b310b12b76f46a18f2ea6946f56261b5f97843601df8",
+    "VideoPicture.cpp": "f2d73943faee3423620c64233c62caf1205476c233ed781a7e8bf8db3f732387",
+    "VideoPicture.h": "fff5191307c94b325127e99d4f2d1b4e348bc1e63231c3793789c2e7ba79c822",
+    "idr_picture_tool.cpp": "37b8036419e97e8fd1d3833603d3a614ce5a91fa1228753454260ce7e4f12731",
+    "test_video_idr.cpp": "536803076c722c14e52d97a21be014d8272cf4161bc31c48b9ed977c74d00d76",
+    "validate_video_idr.py": "ff54346bbf84eb2e845624ff3201f1dd5831cd5ec6aff7c3dc0d5a130b61ed4c"
+  },
+  "status": "PASS_REAL_IDR_VP_CPU",
+  "system_modified": false
+}

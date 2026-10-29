@@ -1,0 +1,68 @@
+{
+  "actual_decoded_reference_ownership_proved": false,
+  "baseline_sha256": "2536a8d5e386a92ebc3a5148f26bbc0a4ca550447d783d38dd6d059c1e633f09",
+  "block_bytes": 756,
+  "complete_h264_validation": false,
+  "ffmpeg_trace_fields_match": true,
+  "fixture_assumed_reference_state": "chronological two-short-term sliding window; logical completion simulated",
+  "frames": 5,
+  "gpu_transport_implemented": false,
+  "hardware_video_execution_proved": false,
+  "idr_regression_sha256": "f50485122a0c612ba8af2519954b2f5b18844d140016e1a26fa14d928014f195",
+  "mesa_helper_bytes_match": true,
+  "mesa_reference_sha256": "db6a036b28510c9b1940e5457c6b9c4b15f0dd6217826d6da7e42e01d7374005",
+  "rows": [
+    {
+      "block_sha256": "c8547055aa836df7c61392411ade99dedc777876a7a12910a2edde3078cc97a1",
+      "frame": 1,
+      "reference_count": 1,
+      "target_slot": 1
+    },
+    {
+      "block_sha256": "66ab720d4f1d57cc216aa70d364fb72b76927252055140370519ede1554b3d87",
+      "frame": 2,
+      "reference_count": 2,
+      "target_slot": 2
+    },
+    {
+      "block_sha256": "3c225bafd4f4e114b423418a742271b771502710d575ea2014e702eda3366c0b",
+      "frame": 3,
+      "reference_count": 2,
+      "target_slot": 0
+    },
+    {
+      "block_sha256": "8d4f84e41db3abda179d233203e0f0aca2ad973c54868f5f43f62f7ebdc35d54",
+      "frame": 4,
+      "reference_count": 2,
+      "target_slot": 1
+    },
+    {
+      "block_sha256": "73be1562d8071f9cf43ec04920c9f17020edd02e363cbbc8a65664174168b3cd",
+      "frame": 5,
+      "reference_count": 2,
+      "target_slot": 2
+    }
+  ],
+  "slice_headers": 10,
+  "source_sha256": {
+    "H264Baseline.cpp": "5b50682c6fce3637fcbb64c138110e258f1752e5c43a4796973a36302028775e",
+    "H264Baseline.h": "5ceae7d014c313b24e4b99932238b359d14dc0b98d799102dccb525b010baebd",
+    "H264Stream.cpp": "d604ad21278f907f27a581d46af3d1f9b788306a8d1b0d9579ae6cb08f8d65e4",
+    "H264Stream.h": "c54cefe3dcff353d8aff27f3955d0b9aea4249a288ab623a9522277175054763",
+    "VideoIdr.cpp": "1d2de5358f6573030aef31d7d67075e42e7f7b67584d197f709168a0bdb7382c",
+    "VideoIdr.h": "7fe4087b63a9571d7f4581e6ef832f48924a38b81969ce2851fe107254cc3aa4",
+    "VideoLayout.cpp": "934403950258167baccc92aeb2d24b0c031fdb83ed6c199d81c1261ee2a158e7",
+    "VideoLayout.h": "730b86192b7ac04cf5b6b310b12b76f46a18f2ea6946f56261b5f97843601df8",
+    "VideoPicture.cpp": "f2d73943faee3423620c64233c62caf1205476c233ed781a7e8bf8db3f732387",
+    "VideoPicture.h": "fff5191307c94b325127e99d4f2d1b4e348bc1e63231c3793789c2e7ba79c822",
+    "VideoPredictive.cpp": "ba17d4f8259feb8352e49bee00f415fa79e0a4a4daa9df867fe83053ac218a9a",
+    "VideoPredictive.h": "3cca944d82191994a4b55603286af0f0586ed5b3529899d399b3994e30c915e4",
+    "predictive_picture_tool.cpp": "77039f31e6749f911fc4e6a4667e6b3d8acca0e6578f2833d4d427969495496c",
+    "test_video_predictive.cpp": "6645327fb84b4b88189ba6634046448b32f527dde1101398bb48e42415317069",
+    "validate_video_predictive.py": "684e889aa3e8234babf1ad62b74568788b09fcd8ebf2c86f92eef8b4d36ab177"
+  },
+  "status": "PASS_FIVE_BASELINE_P_PROPOSALS_CPU",
+  "system_modified": false,
+  "trace_derived_bytes_match": true,
+  "trace_sha256": "d5b460b411df4ea82205ea57661e72e99fef525b47a1402a54352af8d881f85c"
+}
