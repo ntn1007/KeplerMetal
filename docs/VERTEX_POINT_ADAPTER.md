@@ -15,8 +15,9 @@ pinned NVIDIA driver ABI. It does **not** support arbitrary writable shaders,
 point rendering in general, indexed draws, GPU-generated commands or transparent
 system-wide Metal integration. Cross-queue ordering, concurrent use, private or
 managed output buffers and arbitrary resource aliases remain unqualified. The
-application must coordinate its own CPU/GPU accesses. No performance claim is
-made.
+application must coordinate its own CPU/GPU accesses. A later [render-to-compute
+qualification](VERTEX_POINT_DEPENDENCY.md) covers two same-queue arrangements
+with device-created shared buffers. No performance claim is made.
 
 ## Validation
 
@@ -30,7 +31,7 @@ count, start, instances, base instance, missing/short/private buffers and a
 pipeline change. A count-zero command is skipped, rather than submitted.
 
 Two additional direct/adapted pairs requalified the previous
-[trailing-triangle profile](vertex-point-adapter-trailing-regression.json)
+[trailing-triangle profile](vertex-point-adapter-trailing-regression.json),
 two pairs requalified the [legacy incomplete-triangle profile](vertex-point-adapter-partial-regression.json),
 and two pairs requalified [explicit trailing geometry contracts](vertex-point-adapter-geometry-regression.json),
 on the same runtime. These are bounded regression tests, not a complete graphics

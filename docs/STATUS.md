@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Two GTX direct/adapted pairs qualify the certified point-write output consumed by a later compute pass, within one buffer or two committed buffers on one queue, without an intervening CPU wait. [Evidence](VERTEX_POINT_DEPENDENCY.md).
+
 The scoped CPU render ICB supports a hash-certified point-write vertex shader and bounded shared buffer; two GTX direct/adapted pairs match raw outputs, with registration and geometry refusals. General writable shaders remain unsupported. [Evidence](VERTEX_POINT_ADAPTER.md).
 
 A process-local native point-packet replay with a writable vertex shader matches direct GTX masks for counts 0–5 across two pairs; it does not yet add adapter support. [Evidence](VERTEX_POINT_REPLAY.md).
