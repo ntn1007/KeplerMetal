@@ -1,0 +1,94 @@
+{
+  "admitted_width_height": [
+    1,
+    4096
+  ],
+  "all_dimensions_exhaustively_tested": false,
+  "blank_control_differs_for_large_geometries": true,
+  "contract_command_buffers_committed": 0,
+  "cross_extent_cached_reuse_tested": true,
+  "drawable_sizes_overridden": true,
+  "extent_contract_cases": 12,
+  "framebuffer_readback_opt_in": true,
+  "matrix_frames": 48,
+  "matrix_sha256": "881ee6cda3f77a1bb9f6fb8eb10a99f98cb4f1162db9ccba903662ff993da4ae",
+  "original_draws_per_frame": 15,
+  "original_frames": 16,
+  "original_images_equal_direct": true,
+  "original_initial_drawable": [
+    800,
+    600
+  ],
+  "original_processes": 2,
+  "original_source_files_checked": 17,
+  "performance_benchmark": false,
+  "runs": [
+    {
+      "frames_sha256": {
+        "frame-0.bin": "6527707851d067579e7512cba432379d8405302cbe6b88a110341ca3e4edbb8a",
+        "frame-1.bin": "dc184e5402265d9fba48577082c7fba28e01daf15475cc9bfa50f91422c09407",
+        "frame-2.bin": "a7c62db073ac8b049e735340c0f99abcb43083c36221c47fcc81a0faeda5cc35",
+        "frame-3.bin": "284c2668f68f7b46543e645f4ef4c2354d0824f10a1917cfb4479b1a51ccccba",
+        "frame-4.bin": "53e2cf95ce9799796ff23e0e2f35b76c3bfd8086592510e6cad352668f744b47",
+        "frame-5.bin": "22062b4c1ce01673a44686f0bdeb7a098b4b9d83812236f941947dc06b94fd50",
+        "frame-6.bin": "16778c63adf5fb6bb23bc6a7000c32fa1a59d0641bbf83506f1d42ac69f9014b",
+        "frame-7.bin": "c7ef4025ecc2711622a22749796b1e3762329f690b2cc761056e1ac04d8cd0ee"
+      },
+      "manifest_sha256": "a2c7e36329855010200bcbd814f2683dfac488d29a03d5396c9ec5d7fce8d46c"
+    },
+    {
+      "frames_sha256": {
+        "frame-0.bin": "6527707851d067579e7512cba432379d8405302cbe6b88a110341ca3e4edbb8a",
+        "frame-1.bin": "dc184e5402265d9fba48577082c7fba28e01daf15475cc9bfa50f91422c09407",
+        "frame-2.bin": "a7c62db073ac8b049e735340c0f99abcb43083c36221c47fcc81a0faeda5cc35",
+        "frame-3.bin": "284c2668f68f7b46543e645f4ef4c2354d0824f10a1917cfb4479b1a51ccccba",
+        "frame-4.bin": "53e2cf95ce9799796ff23e0e2f35b76c3bfd8086592510e6cad352668f744b47",
+        "frame-5.bin": "22062b4c1ce01673a44686f0bdeb7a098b4b9d83812236f941947dc06b94fd50",
+        "frame-6.bin": "16778c63adf5fb6bb23bc6a7000c32fa1a59d0641bbf83506f1d42ac69f9014b",
+        "frame-7.bin": "c7ef4025ecc2711622a22749796b1e3762329f690b2cc761056e1ac04d8cd0ee"
+      },
+      "manifest_sha256": "fa95185c61d0e9dda824a5a080ccfa598a31ae935cf93df31c0da05f7f748995"
+    }
+  ],
+  "runtime_sha256": "9c36d5e7d915775a3b9f3b869eb06f6cda4f0daf927a79fd66a4a2cfd6854df6",
+  "same_runtime_64_regression": true,
+  "same_runtime_stagein_direct_adapted_match": true,
+  "status": "PASS_APPLE_BOUNDED_EXTENTS",
+  "system_hashes_unchanged": true,
+  "tested_extents": [
+    [
+      1,
+      1
+    ],
+    [
+      3,
+      7
+    ],
+    [
+      64,
+      48
+    ],
+    [
+      127,
+      91
+    ],
+    [
+      320,
+      240
+    ],
+    [
+      800,
+      600
+    ],
+    [
+      2560,
+      1440
+    ],
+    [
+      4096,
+      4096
+    ]
+  ],
+  "transparent_system_integration": false,
+  "window_resized_by_bootstrap": false
+}

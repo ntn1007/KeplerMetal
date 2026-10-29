@@ -175,8 +175,8 @@ BOOL validate(NSData*d,NSUInteger kind,id<MTLBuffer>indices,NSUInteger offset,NS
     if(!target||target.device!=_queue.device)return NO;NSDictionary*p=[self profileForPipeline:pipeline];if(!p)return NO;
     if([p[@"legacy"]boolValue])return target.width==64&&target.height==48&&target.pixelFormat==MTLPixelFormatRGBA32Float;
     BOOL ordinary=[p[@"target_width"]unsignedIntegerValue]==target.width&&[p[@"target_height"]unsignedIntegerValue]==target.height;
-    BOOL appleNative=[p[@"apple_explicit_view"]boolValue]&&[p[@"library_SHA256"]isEqual:@"04d8d8ae6a4485d3be0262e971c365cfff1d5bb04f88f24cdbdfa0ffdee6afa2"]&&target.width==800&&target.height==600;
-    return (ordinary||appleNative)&&[p[@"color_format"]unsignedIntegerValue]==target.pixelFormat;
+    BOOL appleBounded=[p[@"apple_explicit_view"]boolValue]&&[p[@"library_SHA256"]isEqual:@"04d8d8ae6a4485d3be0262e971c365cfff1d5bb04f88f24cdbdfa0ffdee6afa2"]&&target.width>=1&&target.width<=4096&&target.height>=1&&target.height<=4096;
+    return (ordinary||appleBounded)&&[p[@"color_format"]unsignedIntegerValue]==target.pixelFormat;
 }
 - (BOOL)acceptsRenderTarget:(id<MTLTexture>)target{if(!target||target.device!=_queue.device)return NO;if(target.width==64&&target.height==48&&target.pixelFormat==MTLPixelFormatRGBA32Float)return YES;for(id<MTLRenderPipelineState>pipeline in _vertexPipelines.allValues)if([self acceptsRenderTarget:target forPipeline:pipeline])return YES;return NO;}
 - (NSDictionary*)profileForPipeline:(id<MTLRenderPipelineState>)pipeline {

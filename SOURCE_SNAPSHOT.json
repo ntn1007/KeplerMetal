@@ -317,21 +317,26 @@
       "path": "bridge/src/KeplerNativeRenderDraws.mm",
       "source_path": "bridge/src/KeplerNativeRenderDraws.mm",
       "source_SHA256": "370abcc54cd28f4b9b6731b9a8d7b9debf21067a79d8aba9ac16b4782e0d32a5",
-      "published_SHA256": "a8a47bb8c34fd01c69331b322d695b0e63eb4550c45f962f188275274e08938b",
-      "bytes": 81716,
+      "published_SHA256": "f722f9d915bdd0b1e598fd436bfb8e132e513ff03387677cd48af71e1081bbb3",
+      "bytes": 81755,
       "modified_for_publication": true,
-      "previous_published_SHA256": "b2da1e8a46d99502f619b8d800de693e53a09d878c5432db4243aa8231d5242e",
+      "previous_published_SHA256": "a8a47bb8c34fd01c69331b322d695b0e63eb4550c45f962f188275274e08938b",
       "latest_change": {
+        "previous_published_SHA256": "a8a47bb8c34fd01c69331b322d695b0e63eb4550c45f962f188275274e08938b",
+        "previous_bytes": 81716,
+        "reason": "Allow bounded 1 through 4096 dimensions for the pinned Apple Release view profile."
+      },
+      "previous_latest_change": {
         "previous_published_SHA256": "b2da1e8a46d99502f619b8d800de693e53a09d878c5432db4243aa8231d5242e",
         "previous_bytes": 81040,
         "reason": "Accept 800 by 600 only for the pinned Apple Release view profile while preserving existing profile bounds."
       },
-      "previous_latest_change": {
-        "previous_published_SHA256": "f0b8c7f42545a937450f0b9b1efe7e669af9073c71bef6b70d223bf221987e4e",
-        "previous_bytes": 80791,
-        "reason": "Allow the exact Apple Release default-library hash only for the existing bounded view profile."
-      },
       "prior_change_history": [
+        {
+          "previous_published_SHA256": "f0b8c7f42545a937450f0b9b1efe7e669af9073c71bef6b70d223bf221987e4e",
+          "previous_bytes": 80791,
+          "reason": "Allow the exact Apple Release default-library hash only for the existing bounded view profile."
+        },
         {
           "previous_published_SHA256": "23425d2add17cd257819990666cb7857ef7cf757cf46d8bd67cc69fae067791c",
           "previous_bytes": 79868,

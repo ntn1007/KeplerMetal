@@ -23,6 +23,8 @@ A calibrated, process-local observer compares ordinary Metal buffer allocations 
 
 ## Recent progress
 
+The scoped Apple Release view profile now accepts bounded target extents, with eight tested sizes through 4096 × 4096 and direct-reference comparisons. [Evidence and limits](docs/APPLE_BOUNDED_EXTENTS.md).
+
 The scoped Apple Release ICB sample now renders at its observed initial 800 × 600 extent without resizing its window; fixed-size and extent-transition captures pass. [Evidence and limits](docs/APPLE_NATURAL_EXTENT.md).
 
 A local policy lets one scoped bootstrap select two builds of the Apple Release ICB sample; five GTX captures and two policy refusals pass. [Evidence and limits](docs/APPLE_RELEASE_POLICY.md).
