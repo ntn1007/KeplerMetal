@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Two failed VideoToolbox hardware requests write the availability callback context to an output slot; the caller frame is in VideoToolbox. Later array contents, selection and hardware video remain unproved. [Evidence](VIDEO_VT_AVAILABLE_OUTPUT.md).
+
 Two VideoToolbox requests revisit the GTX-linked table entry, observe `Available` as 1 and pass that entry to an append call. Final-array use and hardware video remain unproved. [Evidence](VIDEO_VT_AVAILABLE_PATH.md).
 
 Two VideoToolbox requests pass the GTX-linked device dictionary and its registry key to a call bound at arm time to `CFDictionarySetValue`; destination readback and hardware video remain unproved. [Evidence](VIDEO_VT_DEVICE_REGISTRATION_CALL.md).

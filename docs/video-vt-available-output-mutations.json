@@ -1,0 +1,64 @@
+{
+  "audit_sha256": "9e7118f80fd3f740cc9fa8f33902d070ac0efe506765e5100a260683d70382d6",
+  "checks": [
+    {
+      "case": "device",
+      "reason": "video enumeration identity differs",
+      "rejected": true
+    },
+    {
+      "case": "set-key",
+      "reason": "registration call observation differs",
+      "rejected": true
+    },
+    {
+      "case": "apply",
+      "reason": "availability path differs",
+      "rejected": true
+    },
+    {
+      "case": "callback",
+      "reason": "availability path differs",
+      "rejected": true
+    },
+    {
+      "case": "available",
+      "reason": "availability path differs",
+      "rejected": true
+    },
+    {
+      "case": "append-input",
+      "reason": "availability path differs",
+      "rejected": true
+    },
+    {
+      "case": "append-return",
+      "reason": "availability path differs",
+      "rejected": true
+    },
+    {
+      "case": "branch",
+      "reason": "enumeration decision differs",
+      "rejected": true
+    },
+    {
+      "case": "out-store",
+      "reason": "output observation differs",
+      "rejected": true
+    },
+    {
+      "case": "out-after",
+      "reason": "output observation differs",
+      "rejected": true
+    },
+    {
+      "case": "out-status",
+      "reason": "output observation differs",
+      "rejected": true
+    }
+  ],
+  "gpu_execution": false,
+  "originals_modified": false,
+  "source_sha256": "6645ca39129792ac2a0cdf6e7df872796a66c963152f0d0f757519e119bee307",
+  "status": "PASS_MUTATIONS_REJECTED"
+}
