@@ -17,6 +17,8 @@ timing; the experiment retains earlier process-local VideoToolbox presence and
 board counterfactuals. No hardware video execution or performance gain was
 established.
 
+A subsequent [static filter analysis](VIDEO_GVA_RENDERER_FILTER.md) identifies a separate numeric classification that would exclude the observed field if the entry and control flow remain unchanged. The branch itself remains untraced.
+
 The value is fabricated for the experiment. It is not an NVIDIA configuration
 value, a claimed supported codec, or a driver fix. The observer is confined to
 its own process and only substitutes a retained `CFString` for an originally

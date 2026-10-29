@@ -1,0 +1,70 @@
+{
+  "actual_branch_traced": false,
+  "full_cause_identified": false,
+  "hardware_video_execution_proved": false,
+  "node_stable_after_resume_proved": false,
+  "prior_audit_sha256": "d19e7c6809a18b32b4a69a11f713fd1e37ca9891aff6eb86719f0b223e4b83ac",
+  "rea_analysis_evidence": "ev_85c3930ac61c44d71934e0ce8ef511410b4c33d4e99bd4dea11c7cfdd347d8d1",
+  "rea_wrapper_sha256": "2b0f302644be362039a7e4bb353b20ba1a25ed98230ff0e92d4c8b1d59e8f605",
+  "runs": [
+    {
+      "enumeration_output": 0,
+      "manifest_sha256": "f353ccea3b0a63213c839099baf7946aeb2399b7213e4c55d5dc6cfb1ebd8ae7",
+      "modeled_category": "excluded",
+      "observed_node_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "probe": "off",
+      "renderer_field": "0x1040008",
+      "selection_flag": 0
+    },
+    {
+      "enumeration_output": 0,
+      "manifest_sha256": "ee316f260c167e765c01ff09b7d05e8b8eab197b5572d91feccc9111170b1c0e",
+      "modeled_category": "excluded",
+      "observed_node_flags": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "probe": "synthetic",
+      "renderer_field": "0x1040008",
+      "selection_flag": 0
+    },
+    {
+      "enumeration_output": 0,
+      "manifest_sha256": "ae400dd4cd8047d1ba0171ce25140070221779eb9fa95ca12a70ed0af31c5bc2",
+      "modeled_category": "excluded",
+      "observed_node_flags": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "probe": "synthetic",
+      "renderer_field": "0x1040008",
+      "selection_flag": 0
+    }
+  ],
+  "scope": "Static pinned selection path and three earlier debugger snapshots; no new vendor or GPU execution.",
+  "source_region_sha256": "4c07b6daa5d9e4449c3f77192951ffa230915193befe87cbbf443e25226fa564",
+  "static_classifier": {
+    "first_extra": "0x01080080",
+    "first_mask": "0x8000808b",
+    "first_mask_base": "0x01080001",
+    "first_mask_width": 32,
+    "second_mask": "0x15",
+    "second_mask_base": "0x01020000",
+    "second_mask_width": 5
+  },
+  "status": "PASS_STATIC_FILTER_AND_RECORDED_SNAPSHOTS",
+  "windows_sha256": {
+    "119:165": "d613bc956c1e65fb859cb772e480d8cc3077c9c22ad8efa23be07595342e2a32",
+    "168:193": "4fb0fab8b42fbe1bd26bbb335aa55dc817fdbf0d3d1c1f04804f5d2ae6e4e110",
+    "f0:119": "dfefbd9fbd5af3a5eea70d52094dcb9362c6ff1c521422caf3aa3f4f962abfe2"
+  }
+}
