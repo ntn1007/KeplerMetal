@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A public-Metal client loads the certified point shader through file, URL, data and two-segment data APIs under process-local opt-in; 27 GTX processes include native and wrong-library controls. [Evidence](STANDALONE_POINT_LOADERS.md).
+
 A public-Metal-only test client executes the certified point transform through explicitly injected process-local ICB adaptation; native missing-selector and four identity/descriptor controls stop before dispatch. [Evidence](STANDALONE_POINT_TRANSFORM.md).
 
 The offline CAS candidate recognizer rejects direct branches that enter a candidate after its lock or enter its fixed lock sequence. Four assembled synthetic counterexamples are refused; prior archived verdicts remain unchanged. [Evidence](CAS_INCOMING_BRANCH.md).

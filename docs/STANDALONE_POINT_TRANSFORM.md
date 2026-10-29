@@ -43,7 +43,8 @@ terminal; the final wrong-library control uses a valid differently compiled
 shader and is refused without that assertion. These exploratory processes are
 not counted in the ten-process audit.
 
-This does not demonstrate transparent compatibility for existing applications
+A subsequent [library-loading experiment](STANDALONE_POINT_LOADERS.md) covers
+URL and data routes for a related client. This does not demonstrate transparent compatibility for existing applications
 or an installed driver update. The direct and adapted output equality does not
 measure performance. The runtime archive SHA-256 is
 `9c5edae4c0bf28878d2a808e117c21472a455ff5236048f88f2f9ed9b3ad22e3`.
