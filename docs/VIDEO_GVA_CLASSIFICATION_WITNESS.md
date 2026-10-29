@@ -9,6 +9,8 @@ same pointer value and fields. The two caller offsets and order matched across
 runs. The enumeration output remained zero; each VideoToolbox request returned
 `-12913` with no frames.
 
+A [historical comparison](VIDEO_GVA_HISTORICAL_CLASSIFICATION.md) relates this numeric field to a High Sierra NVIDIA-labelled path; it does not establish compatibility with the current system.
+
 This runtime sequence supports the earlier [static prediction](VIDEO_GVA_RENDERER_FILTER.md):
 the observed identifier is outside both numeric categories in the pinned
 selection-flag-zero path. The individual conditional branch instructions were

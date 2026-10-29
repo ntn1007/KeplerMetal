@@ -1,0 +1,29 @@
+{
+  "current_observed_field": "0x01040008",
+  "current_region_sha256": "4c07b6daa5d9e4449c3f77192951ffa230915193befe87cbbf443e25226fa564",
+  "current_static_classification": "excluded",
+  "current_witness_audit_sha256": "578f2ba977aec927d98e3fe84f4229db362d4fafd57ff4888c49a5c65f1021bc",
+  "hardware_video_execution_proved": false,
+  "legacy_classifier_compares": "0x01040008",
+  "legacy_compatibility_proved": false,
+  "legacy_evidence_ids": [
+    "ev_247b9e60588040bc9a1d23ca7dc8ff8f96c7143b01a604d49f9704992436a124",
+    "ev_931bf92d58c7106a382a89793c44f1a449547dd15df2b697589287a5b3134103"
+  ],
+  "legacy_field_offset": "0x408",
+  "legacy_instruction_windows_sha256": {
+    "23c3e:23c56": "739b16741402a12e3f23bc5aa3a929d8402a022cfbc8c085b7b4b408bb60b193",
+    "24070:2408e": "e025a73b8ac4c23e682a46d1a7dedfcae9c91759b6fa29ef870094c03dd81ac3",
+    "240ea:2410d": "1f47391b577b985ef1df9ae8b56a060454e5e862c4be5f5dd9fdec57d36f32bd",
+    "2415a:24174": "aa96c8d86609a7325757eef95092e39c952a62dd203599d934c39fca8360e7d4",
+    "24218:2423f": "ef9e914e28e0de153211534737059eb26d369f42302a465ef62afee1c47027ae"
+  },
+  "legacy_label": "NVIDIA, VP4",
+  "legacy_rea_bundle_sha256": "6ad2ada34fa269ea9c41dabd86c7b5926cb48f4b210f6a8a1eb46f9af69b14eb",
+  "legacy_runtime_tested": false,
+  "legacy_universal_sha256": "fd3bb85c44252b11431cee998fb35906ed51ab0a8d5ea6afa5fd79c636a46948",
+  "legacy_uuid": "78a7c6684a3934c99309f3c418487d6f",
+  "legacy_x86_64_sha256": "54dc80c41bab45492d1eb601fb1d242b513107645d068bf24edee155b965681f",
+  "status": "PASS_PINNED_HISTORICAL_COMPARISON",
+  "system_modified": false
+}

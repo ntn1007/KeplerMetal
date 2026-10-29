@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A pinned historical AppleGVA labels `0x01040008` NVIDIA VP4 and has a candidate-count branch for it; the current observed classifier skips it. The historical image was not executed and compatibility is unproved. [Comparison](VIDEO_GVA_HISTORICAL_CLASSIFICATION.md).
+
 Two synthetic-property video requests hit the renderer classifier and then its skip instruction with the same pointer value and observed field `0x01040008`; enumeration and hardware decode still fail. [Evidence and limits](VIDEO_GVA_CLASSIFICATION_WITNESS.md).
 
 The pinned AppleGVA selector additionally filters renderer IDs: the observed `0x01040008` matches neither accepted numeric group. This is a static inference from earlier stopped snapshots, not a traced branch or hardware-video fix. [Evidence](VIDEO_GVA_RENDERER_FILTER.md).
