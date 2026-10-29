@@ -1,0 +1,38 @@
+{
+  "architecture": "arm64",
+  "baseline_receipt_sha256": "7759c658f5019e9d1b179ca479b5688895f87c2705c2b58decf6efafc380796f",
+  "binary_sha256": "f8ecffdef2ff09eabfafb51041514d9c8f6877b78ee1b223fa7810e6f9cfbd1c",
+  "capture_source_sha256": "b8f3bba7c6e6b3bf5eb12fa94e1762bc22f228a4040508aa65a09ceaeff4dfee",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "fixture_sha256": {
+    "frame-000.avcc": "8b0f93f2bf081d7e413bcd75f35cba8361be21dbf4afbd92c130e4c80d34048c",
+    "frame-001.avcc": "5c23f0e206472abaf7e051a016c99184b4fb8c6a8cf8c71b0dc7cc2f1b99ae03",
+    "frame-002.avcc": "fcdf3656e7624c8fc0b5d063724df2cba390c2b183a932ad0f9adf843bacda9d",
+    "frame-003.avcc": "6cf9f20f947526056e8d3378f6c0623068e8df3fcd2a721022fa04262a1ba9f1",
+    "frame-004.avcc": "e2a9ff1fbfae5284a01d3ad11f3026fa2dda1f756245849d59cd17edf75ac942",
+    "frame-005.avcc": "881c77a204f55337cbb39eca2f46af1ca301c67b5774d23787e163c7d7a9411a",
+    "param-0.bin": "4b26633d7f851efeef2e0bd1e5f0fd9841fb2fa019656983e36b5577456d8f75",
+    "param-1.bin": "d1ef2c5e892c5b6c1c0a92906803fc8fc11f7d1753ba34f15ff24f16f705609e"
+  },
+  "fixture_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "fixture_stdout_sha256": "d6280951ce358b5fd88f75a78e437812ed18bf832662894077f8814608810208",
+  "gpu_execution": false,
+  "real_fixture_frames": 6,
+  "six_outputs_match_imac": true,
+  "source_sha256": {
+    "H264Baseline.cpp": "ee643fc4e44335df0c4bb1f0e76518f021984eb3571b01c66b56c2f6886ec5d6",
+    "H264Baseline.h": "6d928f53af30cc4a80b7c3d62b502e16357289849598a9d869fc6177ec5f7aa5",
+    "H264Stream.cpp": "d604ad21278f907f27a581d46af3d1f9b788306a8d1b0d9579ae6cb08f8d65e4",
+    "H264Stream.h": "c54cefe3dcff353d8aff27f3955d0b9aea4249a288ab623a9522277175054763",
+    "VideoLayout.cpp": "934403950258167baccc92aeb2d24b0c031fdb83ed6c199d81c1261ee2a158e7",
+    "VideoLayout.h": "730b86192b7ac04cf5b6b310b12b76f46a18f2ea6946f56261b5f97843601df8",
+    "baseline_tool.cpp": "a31d37b2ad83998f23d531862a663d93a1fb9a5947175ed970d77e7add9b4dba",
+    "test_baseline.cpp": "6aba91686a9a6124ba17a3a7633f54cb43003475b940c0d2dee27eee4e35b31b"
+  },
+  "status": "PASS_MACBOOK_ASAN_UBSAN",
+  "test_exit_code": 0,
+  "test_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "test_stdout_sha256": "fabbe8c913d9ff036ed2f8c065567756e239477b815bf9b41e39e10ca49a9296",
+  "tool_sha256": "6552f595b1f7d3bab2d3012945acdbf7056e39f676b2205f174fd5a383b4972c",
+  "transfer_hashes_match_before_after": true
+}

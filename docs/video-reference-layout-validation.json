@@ -1,0 +1,21 @@
+{
+  "cases": 4096,
+  "compared_values": 49152,
+  "gpu_allocation_or_submission": false,
+  "hardware_video_execution_proved": false,
+  "mesa_alignment_helper_independently_modeled": true,
+  "mesa_archive_sha256": "bce5f7fbebb934373b86c999a064d52fb5065878dc57f287f95346648ec832e9",
+  "mesa_offset_helpers_executed_on_cpu": true,
+  "mesa_source_sha256": {
+    "src/gallium/drivers/nouveau/nouveau_vp3_video.h": "86d97313e8ae883186f1c389a67ebcb69ebe4e5089d55d094fac5ec21acb80bc",
+    "src/gallium/drivers/nouveau/nvc0/nvc0_video.c": "2c1662f23fb1afe0fd76c758e4779eee0e0ede8562938f7479e45dd3bec118a6"
+  },
+  "source_sha256": {
+    "VideoLayout.cpp": "934403950258167baccc92aeb2d24b0c031fdb83ed6c199d81c1261ee2a158e7",
+    "VideoLayout.h": "730b86192b7ac04cf5b6b310b12b76f46a18f2ea6946f56261b5f97843601df8",
+    "compare_layout.cpp": "591bbe41d6393a0cf547482102d0cc173a50958068273ae128979ae0ae7809d3",
+    "validate_layout.py": "b25936418709e1fc4a0f0cc2fbe0febade6207ae2220722f871be74731287498"
+  },
+  "status": "PASS_MESA_RELATIVE_LAYOUTS_CPU",
+  "system_modified": false
+}

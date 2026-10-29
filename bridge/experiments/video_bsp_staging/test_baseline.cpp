@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 #include "H264Baseline.h"
+#include "VideoLayout.h"
 #include <cassert>
 #include <cstdint>
 #include <vector>
@@ -51,9 +52,16 @@ int main() {
     std::vector<uint8_t> sample; append(sample, slice(0, 1)); append(sample, slice(150, 1));
     ParsedBaselinePicture out;
     assert(parse_baseline_picture(s.data(), s.size(), p.data(), p.size(), sample.data(), sample.size(), out));
-    assert(out.picture.width == 320 && out.picture.height == 240 && out.picture.slice_count == 2);
+    assert(out.picture.width == 320 && out.picture.height == 240 && out.picture.slice_count == 2 && out.max_references == 2);
     assert(out.frame_num == 1 && out.poc_lsb == 2 && out.first_macroblocks == std::vector<uint32_t>({0, 150}));
     assert(out.picture.pic_init_qp_minus26 == 2 && out.picture.num_ref_idx_l0_active_minus1 == 0);
+    VideoLayout layout;
+    assert(plan_h264_layout(out.picture.width, out.picture.height, out.max_references,
+                            out.picture.slice_count, 11161600, layout));
+    assert(layout.reference_stride == 122880 && layout.reference_bytes == 675840 && layout.initial_bytes == 11161600);
+    VideoLayout rejected_layout; rejected_layout.reference_stride = 0x1234;
+    assert(!plan_h264_layout(320, 240, 2, 2, 11161599, rejected_layout));
+    assert(rejected_layout.reference_stride == 0x1234);
     std::vector<uint8_t> override_sample;
     append(override_sample, slice(0, 1, 0, 2)); append(override_sample, slice(150, 1, 0, 2));
     ParsedBaselinePicture overridden;

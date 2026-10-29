@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+CPU-only H.264 reference/intermediate layout planning matches Mesa helpers across 4,096 configurations; fixture and MacBook sanitizer regressions pass. No GPU memory or video channel is allocated. [Evidence](VIDEO_REFERENCE_LAYOUT.md).
+
 Bounded baseline-H.264 field extraction matches an independent FFmpeg trace for six fixture pictures and 12 slice headers; M1 ASan/UBSan produces the same staged bytes as iMac. The parser is partial and GPU video remains unimplemented. [Evidence](VIDEO_BSP_BASELINE.md).
 
 CPU preparation of H.264 BSP picture blocks now matches Mesa's original helper for 4,096 synthetic inputs; the stream regression passes. Parsing, reference surfaces and GPU transport remain unimplemented. [Evidence](VIDEO_BSP_PICTURE.md).

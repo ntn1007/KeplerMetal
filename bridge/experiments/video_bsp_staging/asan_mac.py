@@ -12,7 +12,7 @@ from pathlib import Path, PurePosixPath
 from validate_baseline import EXPECTED
 
 HERE = Path(__file__).resolve().parent
-NAMES = ('H264Stream.h', 'H264Stream.cpp', 'H264Baseline.h', 'H264Baseline.cpp', 'test_baseline.cpp', 'baseline_tool.cpp')
+NAMES = ('H264Stream.h', 'H264Stream.cpp', 'H264Baseline.h', 'H264Baseline.cpp', 'VideoLayout.h', 'VideoLayout.cpp', 'test_baseline.cpp', 'baseline_tool.cpp')
 OPTS = ['-o','BatchMode=yes','-o','StrictHostKeyChecking=yes','-o','ConnectTimeout=8']
 
 
@@ -69,9 +69,9 @@ def main():
             raise ValueError(label + ' fixture hashes differ')
     verify_fixture('fixture-before')
     remote = prefix + ('xcrun clang++ -std=c++17 -Wall -Wextra -Werror -O1 -g '
-        '-fsanitize=address,undefined H264Stream.cpp H264Baseline.cpp test_baseline.cpp -o baseline-asan '
+        '-fsanitize=address,undefined H264Stream.cpp H264Baseline.cpp VideoLayout.cpp test_baseline.cpp -o baseline-asan '
         '&& ./baseline-asan && xcrun clang++ -std=c++17 -Wall -Wextra -Werror -O1 -g '
-        '-fsanitize=address,undefined H264Stream.cpp H264Baseline.cpp baseline_tool.cpp -o baseline-tool '
+        '-fsanitize=address,undefined H264Stream.cpp H264Baseline.cpp VideoLayout.cpp baseline_tool.cpp -o baseline-tool '
         '&& uname -m && xcrun clang++ --version | head -1 && shasum -a 256 baseline-asan baseline-tool')
     lines = command('test', [*ssh,remote], a.out).splitlines()
     if len(lines) != 4 or lines[0] != 'arm64' or not lines[1].startswith('Apple clang version '):

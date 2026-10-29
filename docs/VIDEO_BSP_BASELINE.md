@@ -17,6 +17,10 @@ slice header or payload, validate all H.264 syntax, discover access-unit
 boundaries, or manage decoded references. A malformed or unsupported stream
 may therefore be rejected, and acceptance is not proof of full validity.
 
+The extractor now also reports the SPS maximum-reference count to an
+experimental [relative layout planner](VIDEO_REFERENCE_LAYOUT.md). This is a
+model of initial Mesa allocations, not a measurement on the GTX.
+
 **The resulting BSP buffer remains incomplete and must not be submitted to a
 GPU.** VP picture parameters, reference surfaces, mappings, video channels,
 commands and synchronization are still missing. No hardware decoding or
@@ -32,7 +36,7 @@ had two slices starting at macroblocks 0 and 150. The staged BSP picture
 blocks, flags and preserved sample bytes were checked against independently
 constructed expectations from those fields. This comparison does not decode
 the images or prove hardware compatibility. A modified trace was rejected even
-after its hash was updated. [Header receipt](video-bsp-baseline-validation.json)
+after its hash was updated. [Current header and layout receipt](video-reference-layout-fixture-validation.json)
 · [FFmpeg capture receipt](video-bsp-ffmpeg-trace-validation.json).
 
 Synthetic malformed, truncated, unsupported and inconsistent inputs were
@@ -40,7 +44,7 @@ tested with UndefinedBehaviorSanitizer on the iMac. The same source and six
 real fixture samples were copied to the MacBook over authenticated SSH, with
 hashes checked at both ends before and after. AddressSanitizer and
 UndefinedBehaviorSanitizer passed there; its six staged output SHA-256 hashes
-matched those from the iMac. [MacBook receipt](video-bsp-baseline-asan-validation.json).
+matched those from the iMac. [Current MacBook receipt](video-reference-layout-asan-validation.json).
 This was CPU work on arm64, not a test of the GTX. On the iMac, an ASan test
 and a separately compiled empty ASan control both exited with signal 4; the
 cause was not established, so iMac ASan coverage is unavailable.

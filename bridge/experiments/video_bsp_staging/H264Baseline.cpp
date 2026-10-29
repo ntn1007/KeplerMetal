@@ -51,7 +51,7 @@ bool rbsp(const uint8_t* nal, size_t size, uint8_t type, std::vector<uint8_t>& o
 struct Headers {
     H264Picture picture{};
     uint32_t sps_id = 0, pps_id = 0, frame_bits = 0, poc_bits = 0;
-    uint32_t l0_default = 0, l1_default = 0;
+    uint32_t l0_default = 0, l1_default = 0, max_references = 0;
 };
 
 bool sps_header(const uint8_t* nal, size_t n, Headers& h) {
@@ -71,6 +71,7 @@ bool sps_header(const uint8_t* nal, size_t n, Headers& h) {
     if (!b.ok || poc_log > 12 || max_refs > 16 || !progressive || cropped ||
         width_minus_one > 4094 || height_minus_one > 4094 || (vui_present && b.pos >= data.size() * 8)) return false;
     h.frame_bits = frame_log + 4; h.poc_bits = poc_log + 4;
+    h.max_references = max_refs;
     h.picture.width = (width_minus_one + 1) * 16;
     h.picture.height = (height_minus_one + 1) * 16;
     h.picture.log2_max_frame_num_minus4 = frame_log;
@@ -161,7 +162,7 @@ bool parse_baseline_picture(const uint8_t* sps, size_t sps_size,
         // L1 is unused for the supported I/P subset; it is zero by convention.
         h.picture.num_ref_idx_l1_active_minus1 = 0;
         result.picture = h.picture; result.frame_num = first.frame; result.poc_lsb = first.poc;
-        result.slice_type = first.type; result.pps_id = first.pps;
+        result.slice_type = first.type; result.pps_id = first.pps; result.max_references = h.max_references;
         out = std::move(result);
         return true;
     } catch (const std::bad_alloc&) { return false; }

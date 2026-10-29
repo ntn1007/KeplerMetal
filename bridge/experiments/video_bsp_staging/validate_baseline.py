@@ -82,7 +82,7 @@ def main():
     a.out.mkdir()
     for i, data in enumerate(params): (a.out / ('param-%d.bin' % i)).write_bytes(data)
     common = ['-std=c++17', '-Wall', '-Wextra', '-Werror', '-O1', '-g', '-fsanitize=undefined']
-    base = ['xcrun','clang++', *common, HERE / 'H264Stream.cpp', HERE / 'H264Baseline.cpp']
+    base = ['xcrun','clang++', *common, HERE / 'H264Stream.cpp', HERE / 'H264Baseline.cpp', HERE / 'VideoLayout.cpp']
     command('build-test', [*base, HERE / 'test_baseline.cpp', '-o', a.out / 'test'], a.out)
     command('test', [a.out / 'test'], a.out)
     command('build-tool', [*base, HERE / 'baseline_tool.cpp', '-o', a.out / 'baseline'], a.out)
@@ -99,7 +99,15 @@ def main():
         l0 = 0 if first['slice_type'] == 2 else pp['num_ref_idx_l0_default_active_minus1']
         if first['slice_type'] == 0:
             need(all(s['num_ref_idx_active_override_flag'] == 0 for s in slices), 'reference override not covered')
-        expected = {'width':(sp['pic_width_in_mbs_minus1']+1)*16, 'height':(sp['pic_height_in_map_units_minus1']+1)*16,
+        width = (sp['pic_width_in_mbs_minus1']+1)*16
+        height = (sp['pic_height_in_map_units_minus1']+1)*16
+        max_refs = sp['max_num_ref_frames']
+        mbs_w, half_w, half_h, aligned_h = (width+15)//16, (width+31)//32, (height+31)//32, ((height+63)//64)*64
+        reference_stride = mbs_w*16*(half_h*32 + aligned_h//2)
+        temporary_stride = 16*half_w*aligned_h*3//2
+        reference_bytes = reference_stride*(max_refs+2) + temporary_stride*(max_refs+1)
+        intermediate = ((width*height*2 + (4<<20)-1)//(4<<20))*(4<<20)
+        expected = {'width':width, 'height':height,
             'slice_count':len(slices), 'frame_num':first['frame_num'], 'poc_lsb':first['pic_order_cnt_lsb'],
             'slice_type':first['slice_type'], 'pps_id':first['pic_parameter_set_id'],
             'frame_log':sp['log2_max_frame_num_minus4'], 'poc_log':sp['log2_max_pic_order_cnt_lsb_minus4'],
@@ -108,6 +116,9 @@ def main():
             'l0':l0, 'l1':0, 'weighted':pp['weighted_pred_flag'], 'bipred':pp['weighted_bipred_idc'],
             'qp':pp['pic_init_qp_minus26'], 'deblock':pp['deblocking_filter_control_present_flag'],
             'redundant':pp['redundant_pic_cnt_present_flag'], 'first_macroblocks':[s['first_mb_in_slice'] for s in slices],
+            'max_references':max_refs, 'reference_stride':reference_stride, 'reference_bytes':reference_bytes,
+            'temporary_stride':temporary_stride, 'intermediate_bytes':intermediate,
+            'initial_bytes':reference_bytes+2*intermediate+2*(1<<20),
             'flags':(len(slices) << 4) | 3 | (1 << 17)}
         need(got == expected, 'header fields differ from FFmpeg')
         words = [1, got['frame_log'], 0, got['poc_log'], 0, got['frame_mbs_only'], got['direct_8x8'],
@@ -125,7 +136,8 @@ def main():
         'fixture_annex_sha256':FIXTURE_SHA, 'reference_receipt_sha256':sha(a.reference/'receipt.json'),
         'reference_binary_sha256':receipt['binary_sha256_before_after'], 'reference_version':receipt['ffmpeg_version'],
         'reference_trace_sha256':receipt['trace_sha256'], 'source_sha256':{n:sha(HERE/n) for n in
-            ('H264Stream.cpp','H264Stream.h','H264Baseline.cpp','H264Baseline.h','baseline_tool.cpp','test_baseline.cpp','validate_baseline.py')},
+            ('H264Stream.cpp','H264Stream.h','H264Baseline.cpp','H264Baseline.h','VideoLayout.cpp','VideoLayout.h',
+             'baseline_tool.cpp','test_baseline.cpp','validate_baseline.py')},
         'rows':rows, 'reference_stage_comparison':True, 'vui_parsed':False, 'complete_slice_parsed':False,
         'gpu_transport_implemented':False, 'hardware_video_execution_proved':False, 'system_modified':False}
     (a.out/'validation.json').write_text(json.dumps(result,indent=2,sort_keys=True)+'\n')
