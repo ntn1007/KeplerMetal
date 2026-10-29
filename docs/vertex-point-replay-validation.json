@@ -1,0 +1,56 @@
+{
+  "adapter_tested": false,
+  "build_sha256": "b903feb01d7b4754d630bd73f502e2cb0f77d2e2b7e5517008ab92667d8d1ccd",
+  "captured_packets_checked": 24,
+  "completed_buffers": 24,
+  "counts": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "guard_bytes_reported": 3072,
+  "host_sha256": "a5b92a7cf9b5bd56e2413ab1180ce23824608a77738d81d0ecc0cb14e913a75b",
+  "native_method": "0x3830",
+  "observed_masks": [
+    0,
+    1,
+    3,
+    7,
+    15,
+    31
+  ],
+  "performance_benchmark": false,
+  "primitive_value": 0,
+  "raw_gpu_buffers_retained": false,
+  "replay_primer_count": 1,
+  "runs": [
+    {
+      "manifest_sha256": "f42256e81c16a3ea2450d4f035518f9a8e42747d79d2855075a86881976a9332",
+      "mode": "direct",
+      "stdout_sha256": "ffe074590545f0e51e75cc3e9d54239c1e4b9392703204dbca9f242aaaaa2feb"
+    },
+    {
+      "manifest_sha256": "3c48877d36e94e5928311d5295317f787745e9aeaf00656fdccde90419bc7da0",
+      "mode": "replay",
+      "stdout_sha256": "a277ad4b62afc920a6cca45c130a90bc2bbf42510b1f15e0a2fc3b81033d3233"
+    },
+    {
+      "manifest_sha256": "87d7504deb5b54adf373cf30fb6ba1e7b6d53f341dc8eae2f4ea9ecce81b819c",
+      "mode": "direct",
+      "stdout_sha256": "ffe074590545f0e51e75cc3e9d54239c1e4b9392703204dbca9f242aaaaa2feb"
+    },
+    {
+      "manifest_sha256": "3c0f05ea9f4b23b243ffa8b54a168394f14ce562429db8504d61f79d9b568122",
+      "mode": "replay",
+      "stdout_sha256": "a277ad4b62afc920a6cca45c130a90bc2bbf42510b1f15e0a2fc3b81033d3233"
+    }
+  ],
+  "source_sha256": "4bdf8312c5f514d49bb869b5d771f586831e8bd06b5757ea3301b94db4b31fbb",
+  "status": "PASS_POINT_PACKET_REPLAY",
+  "system_files_checked_unchanged": true,
+  "transparent_system_integration": false,
+  "uncommitted_records_copied": 12
+}
