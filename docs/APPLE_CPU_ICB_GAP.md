@@ -46,7 +46,9 @@ frame ordering have not been tested. The [auditor](apple-cpu-icb-gap-validation.
 checks hashes, process termination, reflection, refusals and a bounded set of
 unchanged system-file hashes.
 
-The next integration work is an explicit-buffer vertex profile with verified
+The [subsequent native reference](APPLE_EXPLICIT_NATIVE.md) executes the sample
+shader on the GTX with shared and private frame buffers and base instances 0/1;
+it does not use an ICB. The next integration work is an explicit-buffer vertex profile with verified
 reflection and bounds, followed by a GPU direct/adapted comparison of the
 sample shader, including `baseInstance` and the private-frame blit dependency.
 Then a bounded multi-command test and application-local integration can be
