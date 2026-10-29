@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+The retained High Sierra update has no `IOGVACodec` key in 15 inspected GeForce/NVDA plists and no literal in 19 selected binaries; dynamic or other producers remain unexcluded. [Evidence](VIDEO_GVA_HIGH_SIERRA_INVENTORY.md).
+
 The pinned AppleGVA non-null codec-property path calls `CFStringGetCString` with a 32-byte ASCII buffer; the inspected Apple and NVIDIA plists do not identify a Kepler value. [Evidence](VIDEO_GVA_CODEC_CONTRACT.md).
 
 Two scoped video processes correlate a null AppleGVA `IOGVACodec` return and zero node byte with the same later list-head address. Allocation lifetime and hardware decoding remain unproved. [Evidence](VIDEO_GVA_PROPERTY_NODE_LINK.md).

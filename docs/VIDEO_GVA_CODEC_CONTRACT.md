@@ -28,7 +28,9 @@ separate AppleGVA string call.
 
 This is a bounded plist search, not a search of every binary or runtime path.
 The property could be created dynamically or supplied elsewhere. The
-WebDriver's retained package hashes are recorded in the
+subsequent [High Sierra inventory](VIDEO_GVA_HIGH_SIERRA_INVENTORY.md) extends
+the bounded search to 15 GeForce/NVDA plists and 19 executable members.
+The WebDriver's retained package hashes are recorded in the
 [audit receipt](video-gva-codec-contract-validation.json); its nested payload
 was freshly extracted from that package and hash-checked. The current
 `pkgutil` check reports an expired signing certificate, so current package

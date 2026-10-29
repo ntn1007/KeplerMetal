@@ -1,0 +1,334 @@
+{
+  "GPU_execution": false,
+  "archive_bytes": 5801167872,
+  "archive_sha256": "b48e6eaaacb86400dfc9e84ed85a8df666baa24af7ca3a632b73607a1d2f4cc6",
+  "auditor_source_sha256": "fd5b07ebda1eddf017cb083e1cb3fbc6ea1818198c8b3dda461ae5908de2d703",
+  "controls": {
+    "./System/Library/Extensions/AMDRadeonX5000.kext/Contents/Info.plist": {
+      "matches": 1,
+      "sha256": "cc1729e12da8991a55658697a84e5ec8612fc10329e6de7f5f9753b315f6b319",
+      "value": "AMDU7V4"
+    },
+    "./System/Library/Extensions/AppleIntelBDWGraphics.kext/Contents/Info.plist": {
+      "matches": 1,
+      "sha256": "fa655eafbbaa72841f7350e9102d39d19adf3c94ab647469f54fd2c044d553fb",
+      "value": "Gen8"
+    },
+    "./System/Library/Extensions/AppleIntelHD3000Graphics.kext/Contents/Info.plist": {
+      "matches": 1,
+      "sha256": "dae0aa16a115b7cb88d0ad3363122c40a96844747cad3895a285488d718a18e3",
+      "value": "Gen6"
+    },
+    "./System/Library/Extensions/AppleIntelHD4000Graphics.kext/Contents/Info.plist": {
+      "matches": 1,
+      "sha256": "402681f8063c95dbaef7ea4865a04130a19435d4cc18bb6d195f85834673d0f4",
+      "value": "Gen7"
+    },
+    "./System/Library/Extensions/AppleIntelHD5000Graphics.kext/Contents/Info.plist": {
+      "matches": 1,
+      "sha256": "bc03e23127a06e9329eb157b785ec0062c45771c6417dbeb4aa3c5d939d89d64",
+      "value": "Gen75"
+    },
+    "./System/Library/Extensions/AppleIntelKBLGraphics.kext/Contents/Info.plist": {
+      "matches": 1,
+      "sha256": "edf40251d9c175405c088c7b64ef5d0febee4783183556a7315ade3cf19cfa40",
+      "value": "Gen95"
+    },
+    "./System/Library/Extensions/AppleIntelSKLGraphics.kext/Contents/Info.plist": {
+      "matches": 1,
+      "sha256": "c3b301a4254c9ca69700e0d587790265e25e04079ae6e53f1becaf16750be441",
+      "value": "Gen9"
+    }
+  },
+  "dynamically_produced_property_excluded": false,
+  "hardware_video_execution_proved": false,
+  "literal_absence_proves_no_producer": false,
+  "nvidia_binary_count": 19,
+  "nvidia_codec_value_identified": false,
+  "nvidia_members": [
+    {
+      "bytes": 3409,
+      "codec_key_paths": 0,
+      "kind": "plist",
+      "name": "./System/Library/Extensions/GeForce.kext/Contents/Info.plist",
+      "sha256": "2b666df85091a02c6610cc517523e923b6a7e434cc8f974caf9d0e981a3b392e"
+    },
+    {
+      "ascii_occurrences": 0,
+      "bytes": 1031072,
+      "kind": "binary",
+      "name": "./System/Library/Extensions/GeForce.kext/Contents/MacOS/GeForce",
+      "sha256": "bcd3d0f6d90235b1fa6e0d96904bbee829063de1b60a01362946dc8aad9a1791",
+      "utf16be_occurrences": 0,
+      "utf16le_occurrences": 0
+    },
+    {
+      "bytes": 924,
+      "codec_key_paths": 0,
+      "kind": "plist",
+      "name": "./System/Library/Extensions/GeForceAIRPlugin.bundle/Contents/Info.plist",
+      "sha256": "43df118f7f05c19b54d3101cac3a45a7a5927946f31ec59ee870cb093de2ac5d"
+    },
+    {
+      "ascii_occurrences": 0,
+      "bytes": 5460432,
+      "kind": "binary",
+      "name": "./System/Library/Extensions/GeForceAIRPlugin.bundle/Contents/MacOS/GeForceAIRPlugin",
+      "sha256": "c5ccf541538fde62e8a874f3b107a944ed29375ce97dd73cc1d95af05eefae3b",
+      "utf16be_occurrences": 0,
+      "utf16le_occurrences": 0
+    },
+    {
+      "bytes": 1179,
+      "codec_key_paths": 0,
+      "kind": "plist",
+      "name": "./System/Library/Extensions/GeForceGA.bundle/Contents/Info.plist",
+      "sha256": "d273aa99c6c74533c7c8520d52c26b5a9656a3ba625c80cbec0b2952a563dc82"
+    },
+    {
+      "ascii_occurrences": 0,
+      "bytes": 142992,
+      "kind": "binary",
+      "name": "./System/Library/Extensions/GeForceGA.bundle/Contents/MacOS/GeForceGA",
+      "sha256": "2f3ef41b0677930091667f78f515d219ade30414fcc4dd5adb4ec9dad6aca786",
+      "utf16be_occurrences": 0,
+      "utf16le_occurrences": 0
+    },
+    {
+      "bytes": 858,
+      "codec_key_paths": 0,
+      "kind": "plist",
+      "name": "./System/Library/Extensions/GeForceGLDriver.bundle/Contents/Info.plist",
+      "sha256": "c8d1fd65d90c594543d85ddb55dba4ebb293a08c908ec5b27e2a9bf0abc6f120"
+    },
+    {
+      "ascii_occurrences": 0,
+      "bytes": 35764704,
+      "kind": "binary",
+      "name": "./System/Library/Extensions/GeForceGLDriver.bundle/Contents/MacOS/GeForceGLDriver",
+      "sha256": "0d37a23faf7fd255bbf2a00433d03881ac4b13e57de59fc514361d2a0dabff7c",
+      "utf16be_occurrences": 0,
+      "utf16le_occurrences": 0
+    },
+    {
+      "ascii_occurrences": 0,
+      "bytes": 14790208,
+      "kind": "binary",
+      "name": "./System/Library/Extensions/GeForceGLDriver.bundle/Contents/MacOS/libclh.dylib",
+      "sha256": "eaed82d2b91d11484f0762434a2b5feed1c402ff03f71a2ff827e01764261c68",
+      "utf16be_occurrences": 0,
+      "utf16le_occurrences": 0
+    },
+    {
+      "bytes": 860,
+      "codec_key_paths": 0,
+      "kind": "plist",
+      "name": "./System/Library/Extensions/GeForceMTLDriver.bundle/Contents/Info.plist",
+      "sha256": "263ea6d89190f53107472cddf51b2d307df5ef63601add09475804957e37fc22"
+    },
+    {
+      "ascii_occurrences": 0,
+      "bytes": 2023360,
+      "kind": "binary",
+      "name": "./System/Library/Extensions/GeForceMTLDriver.bundle/Contents/MacOS/GeForceMTLDriver",
+      "sha256": "e59ce7818590bf3b67c10eccd6cdeb724f1bc3dd9d8a00a0b1d2824387369989",
+      "utf16be_occurrences": 0,
+      "utf16le_occurrences": 0
+    },
+    {
+      "bytes": 2711,
+      "codec_key_paths": 0,
+      "kind": "plist",
+      "name": "./System/Library/Extensions/GeForceTesla.kext/Contents/Info.plist",
+      "sha256": "50df7015e7f66be748c8bcbc0faca30e25a98af497ba74f0a58e944552e3e5bf"
+    },
+    {
+      "ascii_occurrences": 0,
+      "bytes": 1070848,
+      "kind": "binary",
+      "name": "./System/Library/Extensions/GeForceTesla.kext/Contents/MacOS/GeForceTesla",
+      "sha256": "346c41e010d6b1c6e594b9612d6dbd2ce82964262527c4188945fc9d051fb57d",
+      "utf16be_occurrences": 0,
+      "utf16le_occurrences": 0
+    },
+    {
+      "bytes": 869,
+      "codec_key_paths": 0,
+      "kind": "plist",
+      "name": "./System/Library/Extensions/GeForceTeslaGLDriver.bundle/Contents/Info.plist",
+      "sha256": "51238a3f5813205f0c728eb4757dd0ba103d895c383e4e3c1e227727c289aa7e"
+    },
+    {
+      "ascii_occurrences": 0,
+      "bytes": 51517744,
+      "kind": "binary",
+      "name": "./System/Library/Extensions/GeForceTeslaGLDriver.bundle/Contents/MacOS/GeForceTeslaGLDriver",
+      "sha256": "940b51d278c5bf7d4329194d6b7ce3e53955fd501b8a8851a869e1b9f50cd4a6",
+      "utf16be_occurrences": 0,
+      "utf16le_occurrences": 0
+    },
+    {
+      "ascii_occurrences": 0,
+      "bytes": 1520160,
+      "kind": "binary",
+      "name": "./System/Library/Extensions/GeForceTeslaGLDriver.bundle/Contents/MacOS/PTXSM1X.dylib",
+      "sha256": "3845d23f8b0a8d215d6e4413e86e958121a4d908a46d1e2b299a737ba7488d34",
+      "utf16be_occurrences": 0,
+      "utf16le_occurrences": 0
+    },
+    {
+      "ascii_occurrences": 0,
+      "bytes": 172720,
+      "kind": "binary",
+      "name": "./System/Library/Extensions/GeForceTeslaGLDriver.bundle/Contents/MacOS/libCLVMPTXSM1XPlugin.dylib",
+      "sha256": "036ccc449e6e08ae2976a0066f1969cf3af733352671d0b86aa9573d1eb0dbf8",
+      "utf16be_occurrences": 0,
+      "utf16le_occurrences": 0
+    },
+    {
+      "ascii_occurrences": 0,
+      "bytes": 16965936,
+      "kind": "binary",
+      "name": "./System/Library/Extensions/GeForceTeslaGLDriver.bundle/Contents/MacOS/libclh.dylib",
+      "sha256": "8d94f8fe68644b38ffc882e82cb7670ffbdad60f9f9fc06c98500c1a6ecd1ecf",
+      "utf16be_occurrences": 0,
+      "utf16le_occurrences": 0
+    },
+    {
+      "bytes": 857,
+      "codec_key_paths": 0,
+      "kind": "plist",
+      "name": "./System/Library/Extensions/GeForceTeslaVADriver.bundle/Contents/Info.plist",
+      "sha256": "e42e3ead6b9644fa505788c550601684646df55730ebc96ae2a632c02f2f714e"
+    },
+    {
+      "ascii_occurrences": 0,
+      "bytes": 1708384,
+      "kind": "binary",
+      "name": "./System/Library/Extensions/GeForceTeslaVADriver.bundle/Contents/MacOS/GeForceTeslaVADriver",
+      "sha256": "2542ef680fc4b51912793662d118ca687306f39cb993769da777f7252db7e4a3",
+      "utf16be_occurrences": 0,
+      "utf16le_occurrences": 0
+    },
+    {
+      "bytes": 846,
+      "codec_key_paths": 0,
+      "kind": "plist",
+      "name": "./System/Library/Extensions/GeForceVADriver.bundle/Contents/Info.plist",
+      "sha256": "935bb44ad3f68717ddb74f90c5b5ca0088d6c9e021ebc3ef95bf8d98d8f66457"
+    },
+    {
+      "ascii_occurrences": 0,
+      "bytes": 1610624,
+      "kind": "binary",
+      "name": "./System/Library/Extensions/GeForceVADriver.bundle/Contents/MacOS/GeForceVADriver",
+      "sha256": "10632d7d5e5ae6c81be6eb98045c3eb3901613434fe6f41fa1353967d60d24fd",
+      "utf16be_occurrences": 0,
+      "utf16le_occurrences": 0
+    },
+    {
+      "bytes": 1949,
+      "codec_key_paths": 0,
+      "kind": "plist",
+      "name": "./System/Library/Extensions/NVDAGF100Hal.kext/Contents/Info.plist",
+      "sha256": "121c86c572a227c3c691af78bc2794f6c1db6a20ac751170047c7519d891b7cc"
+    },
+    {
+      "ascii_occurrences": 0,
+      "bytes": 2140176,
+      "kind": "binary",
+      "name": "./System/Library/Extensions/NVDAGF100Hal.kext/Contents/MacOS/NVDAGF100Hal",
+      "sha256": "6738987ada36a47b2f2568fb95b43ff11545d0bc8fa8da3931a8d5600fc27e05",
+      "utf16be_occurrences": 0,
+      "utf16le_occurrences": 0
+    },
+    {
+      "bytes": 1949,
+      "codec_key_paths": 0,
+      "kind": "plist",
+      "name": "./System/Library/Extensions/NVDAGK100Hal.kext/Contents/Info.plist",
+      "sha256": "eddd33d073298641f30b941004e758231edc198b3764ff38803a2901a62032de"
+    },
+    {
+      "ascii_occurrences": 0,
+      "bytes": 2030592,
+      "kind": "binary",
+      "name": "./System/Library/Extensions/NVDAGK100Hal.kext/Contents/MacOS/NVDAGK100Hal",
+      "sha256": "4db5e71524c20162bedfc7605ef052da09c797878710e377f6cd5acee9779a52",
+      "utf16be_occurrences": 0,
+      "utf16le_occurrences": 0
+    },
+    {
+      "bytes": 1966,
+      "codec_key_paths": 0,
+      "kind": "plist",
+      "name": "./System/Library/Extensions/NVDANV50HalTesla.kext/Contents/Info.plist",
+      "sha256": "37fd2990330ed382500ae6ae1af31907d8ca3688f919c3e595017eec1d7b596d"
+    },
+    {
+      "ascii_occurrences": 0,
+      "bytes": 3157232,
+      "kind": "binary",
+      "name": "./System/Library/Extensions/NVDANV50HalTesla.kext/Contents/MacOS/NVDANV50HalTesla",
+      "sha256": "860a3ad4ecda1e65b802eb696ab61777a9e8e44b61e6b1048f7d78b3f8f7be51",
+      "utf16be_occurrences": 0,
+      "utf16le_occurrences": 0
+    },
+    {
+      "bytes": 2419,
+      "codec_key_paths": 0,
+      "kind": "plist",
+      "name": "./System/Library/Extensions/NVDAResman.kext/Contents/Info.plist",
+      "sha256": "153b7ba6c6fc376b506206a181f12a4596aa444c30f613b9fc2d74340532e5cd"
+    },
+    {
+      "ascii_occurrences": 0,
+      "bytes": 3031456,
+      "kind": "binary",
+      "name": "./System/Library/Extensions/NVDAResman.kext/Contents/MacOS/NVDAResman",
+      "sha256": "27c87b5001c1d9d6693bccf08620ab1e4ff26172e14e7b585304ca9b461b12d7",
+      "utf16be_occurrences": 0,
+      "utf16le_occurrences": 0
+    },
+    {
+      "bytes": 2232,
+      "codec_key_paths": 0,
+      "kind": "plist",
+      "name": "./System/Library/Extensions/NVDAResmanTesla.kext/Contents/Info.plist",
+      "sha256": "f1345d9430a14c923f813029ec9e5e9bcfc9991e9d3fbd4df8373407027cd00c"
+    },
+    {
+      "ascii_occurrences": 0,
+      "bytes": 2572576,
+      "kind": "binary",
+      "name": "./System/Library/Extensions/NVDAResmanTesla.kext/Contents/MacOS/NVDAResmanTesla",
+      "sha256": "b72216ad33bc80266b788593c2e1c5a54d2f28b83f2121e7dee0dc273b705307",
+      "utf16be_occurrences": 0,
+      "utf16le_occurrences": 0
+    },
+    {
+      "bytes": 1888,
+      "codec_key_paths": 0,
+      "kind": "plist",
+      "name": "./System/Library/Extensions/NVDAStartup.kext/Contents/Info.plist",
+      "sha256": "804378ff86673868105d71bb866d4ca22c0f7dfa9f900ccc9ac677ed93954e27"
+    },
+    {
+      "ascii_occurrences": 0,
+      "bytes": 43408,
+      "kind": "binary",
+      "name": "./System/Library/Extensions/NVDAStartup.kext/Contents/MacOS/NVDAStartup",
+      "sha256": "37beac6c9fce5d857fdc3414ae2d8afb6085f7eb69181c977df4b18756e88f27",
+      "utf16be_occurrences": 0,
+      "utf16le_occurrences": 0
+    }
+  ],
+  "nvidia_plist_count": 15,
+  "records": 86095,
+  "scope": "GeForce/NVDA extension plists and selected Mach-O members only; not all OS files or runtime paths",
+  "source": "retained macOS 10.13.6 Combo update payload",
+  "status": "PASS_BOUNDED_HISTORICAL_INVENTORY",
+  "system_modified": false,
+  "trailing_bytes": 389,
+  "vendor_execution": false
+}
