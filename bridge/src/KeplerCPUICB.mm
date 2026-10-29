@@ -235,6 +235,7 @@ NSDictionary*residentPredecessorOrder(id<MTLCommandBuffer>producer,id<MTLCommand
 @property(nonatomic,strong) NSMutableDictionary *vertexBindings,*fragmentBindings;
 @property(nonatomic) BOOL hasDraw;
 @property(nonatomic,strong) id record;
+@property(nonatomic,strong) id<MTLRenderPipelineState> cachedInheritedPipeline;
 - (void)copyStateFrom:(KPRenderICBCommand*)source;
 @end
 
@@ -541,14 +542,14 @@ static void executePartialRange(NSArray<KPComputeICBCommand*>*commands,NSRange r
 @implementation KPRenderICBCommand
 - (instancetype)init{if((self=[super init])){_vertexBindings=[NSMutableDictionary new];_fragmentBindings=[NSMutableDictionary new];}return self;}
 - (void)setRenderPipelineState:(id<MTLRenderPipelineState>)pipeline{
-    if(!_owner||_owner.inheritPipelineState||![_owner.scope.renderEngine profileForPipeline:pipeline])reject(@"Render pipeline is not owned by this scope or is inherited");_pipeline=pipeline;_record=nil;
+    if(!_owner||_owner.inheritPipelineState||![_owner.scope.renderEngine profileForPipeline:pipeline])reject(@"Render pipeline is not owned by this scope or is inherited");_pipeline=pipeline;_record=nil;_cachedInheritedPipeline=nil;
 }
 - (void)setVertexBuffer:(id<MTLBuffer>)buffer offset:(NSUInteger)offset atIndex:(NSUInteger)index{
     if(!_owner||index>=_owner.maxVertexBuffers||offset%16||(buffer&&(buffer.device!=_owner.scope.device||offset>buffer.length))||(!buffer&&offset))reject(@"Vertex binding outside descriptor/device/range");
-    if(buffer)_vertexBindings[@(index)]=@{@"buffer":buffer,@"offset":@(offset)};else[_vertexBindings removeObjectForKey:@(index)];_record=nil;
+    if(buffer)_vertexBindings[@(index)]=@{@"buffer":buffer,@"offset":@(offset)};else[_vertexBindings removeObjectForKey:@(index)];_record=nil;_cachedInheritedPipeline=nil;
 }
 - (void)setFragmentBuffer:(id<MTLBuffer>)buffer offset:(NSUInteger)offset atIndex:(NSUInteger)index{
-    if(!_owner||index>=_owner.maxFragmentBuffers||offset%256||(buffer&&(buffer.device!=_owner.scope.device||offset>buffer.length))||(!buffer&&offset))reject(@"Fragment binding outside descriptor/device/range");if(buffer)_fragmentBindings[@(index)]=@{@"buffer":buffer,@"offset":@(offset)};else[_fragmentBindings removeObjectForKey:@(index)];_record=nil;
+    if(!_owner||index>=_owner.maxFragmentBuffers||offset%256||(buffer&&(buffer.device!=_owner.scope.device||offset>buffer.length))||(!buffer&&offset))reject(@"Fragment binding outside descriptor/device/range");if(buffer)_fragmentBindings[@(index)]=@{@"buffer":buffer,@"offset":@(offset)};else[_fragmentBindings removeObjectForKey:@(index)];_record=nil;_cachedInheritedPipeline=nil;
 }
 - (void)drawPrimitives:(MTLPrimitiveType)type vertexStart:(NSUInteger)start vertexCount:(NSUInteger)count instanceCount:(NSUInteger)instances baseInstance:(NSUInteger)base{
     BOOL extended=[_owner.scope.renderEngine maxVertexBindings]>0;
@@ -556,19 +557,19 @@ static void executePartialRange(NSArray<KPComputeICBCommand*>*commands,NSRange r
     BOOL incomplete=count>0&&count<3&&[profile[@"legacy"]boolValue];
     BOOL pointWrite=[profile[@"vertex_point_write"]boolValue];
     BOOL trailing=(count==4||count==5)&&extended&&profile&&![profile[@"legacy"]boolValue];
-    if(pointWrite){if(!_owner||!(_owner.allowedTypes&MTLIndirectCommandTypeDraw)||type!=MTLPrimitiveTypePoint||start||count>[profile[@"point_count_limit"]unsignedIntegerValue]||instances!=1||base)reject(@"Point-write draw outside certified profile");_pointWrite=YES;_kind=0;_indices=nil;_offset=0;_instances=instances;_vertexStart=start;_vertexCount=count;_baseInstance=base;_baseVertex=0;_hasDraw=count>0;_record=nil;return;}
+    if(pointWrite){if(!_owner||!(_owner.allowedTypes&MTLIndirectCommandTypeDraw)||type!=MTLPrimitiveTypePoint||start||count>[profile[@"point_count_limit"]unsignedIntegerValue]||instances!=1||base)reject(@"Point-write draw outside certified profile");_pointWrite=YES;_kind=0;_indices=nil;_offset=0;_instances=instances;_vertexStart=start;_vertexCount=count;_baseInstance=base;_baseVertex=0;_hasDraw=count>0;_record=nil;_cachedInheritedPipeline=nil;return;}
     if(!_owner||!(_owner.allowedTypes&MTLIndirectCommandTypeDraw)||type!=MTLPrimitiveTypeTriangle||(count%3&&!incomplete&&!trailing)||count>4096||instances>64||start>65536-count||base>65536-instances||(incomplete&&(start||instances>2||base||_vertexBindings.count||_fragmentBindings.count))||(!extended&&(start||(count!=3&&count!=0&&!incomplete)||instances>2||base)))reject(@"Direct render geometry outside supported profile");
-    _pointWrite=NO;_kind=0;_indices=nil;_offset=0;_instances=instances;_vertexStart=start;_vertexCount=count;_baseInstance=base;_baseVertex=0;_hasDraw=count&&instances&&!incomplete;_record=nil;
+    _pointWrite=NO;_kind=0;_indices=nil;_offset=0;_instances=instances;_vertexStart=start;_vertexCount=count;_baseInstance=base;_baseVertex=0;_hasDraw=count&&instances&&!incomplete;_record=nil;_cachedInheritedPipeline=nil;
 }
 - (void)drawIndexedPrimitives:(MTLPrimitiveType)type indexCount:(NSUInteger)count indexType:(MTLIndexType)indexType indexBuffer:(id<MTLBuffer>)indices indexBufferOffset:(NSUInteger)offset instanceCount:(NSUInteger)instances baseVertex:(NSInteger)vertexBase baseInstance:(NSUInteger)base{
     if(_owner.inheritPipelineState)reject(@"Indexed draws with inherited pipelines are not qualified");
     NSUInteger bytes=indexType==MTLIndexTypeUInt16?2:indexType==MTLIndexTypeUInt32?4:0;BOOL extended=_owner.maxVertexBuffers>0;
     BOOL incomplete=count>0&&count<3&&[[_owner.scope.renderEngine profileForPipeline:_pipeline][@"legacy"]boolValue];
     if(!_owner||!(_owner.allowedTypes&MTLIndirectCommandTypeDrawIndexed)||type!=MTLPrimitiveTypeTriangle||(count%3&&!incomplete)||count>4096||!bytes||!indices||indices.device!=_owner.scope.device||offset%bytes||offset>indices.length||count*bytes>indices.length-offset||instances>64||base>65536-instances||vertexBase<-65536||vertexBase>65536||(incomplete&&(instances>2||vertexBase||base||_vertexBindings.count||_fragmentBindings.count))||(!extended&&((count!=3&&count!=0&&!incomplete)||instances>2||vertexBase||base||_vertexBindings.count)))reject(@"Indexed render geometry outside supported profile");
-    _pointWrite=NO;_kind=bytes==2?1:2;_indices=indices;_offset=offset;_instances=instances;_vertexStart=0;_vertexCount=count;_baseInstance=base;_baseVertex=vertexBase;_hasDraw=count&&instances&&!incomplete;_record=nil;
+    _pointWrite=NO;_kind=bytes==2?1:2;_indices=indices;_offset=offset;_instances=instances;_vertexStart=0;_vertexCount=count;_baseInstance=base;_baseVertex=vertexBase;_hasDraw=count&&instances&&!incomplete;_record=nil;_cachedInheritedPipeline=nil;
 }
-- (void)reset{_pipeline=nil;_indices=nil;_hasDraw=NO;_pointWrite=NO;_record=nil;_kind=_offset=_instances=_vertexStart=_vertexCount=_baseInstance=0;_baseVertex=0;[_vertexBindings removeAllObjects];[_fragmentBindings removeAllObjects];}
-- (void)copyStateFrom:(KPRenderICBCommand*)s{_pipeline=s.pipeline;_indices=s.indices;_kind=s.kind;_offset=s.offset;_instances=s.instances;_vertexStart=s.vertexStart;_vertexCount=s.vertexCount;_baseInstance=s.baseInstance;_baseVertex=s.baseVertex;_pointWrite=s.pointWrite;_vertexBindings=[s.vertexBindings mutableCopy];_fragmentBindings=[s.fragmentBindings mutableCopy];_hasDraw=s.hasDraw;_record=s.record;}
+- (void)reset{_pipeline=nil;_indices=nil;_hasDraw=NO;_pointWrite=NO;_record=nil;_cachedInheritedPipeline=nil;_kind=_offset=_instances=_vertexStart=_vertexCount=_baseInstance=0;_baseVertex=0;[_vertexBindings removeAllObjects];[_fragmentBindings removeAllObjects];}
+- (void)copyStateFrom:(KPRenderICBCommand*)s{_pipeline=s.pipeline;_indices=s.indices;_kind=s.kind;_offset=s.offset;_instances=s.instances;_vertexStart=s.vertexStart;_vertexCount=s.vertexCount;_baseInstance=s.baseInstance;_baseVertex=s.baseVertex;_pointWrite=s.pointWrite;_vertexBindings=[s.vertexBindings mutableCopy];_fragmentBindings=[s.fragmentBindings mutableCopy];_hasDraw=s.hasDraw;_record=s.record;_cachedInheritedPipeline=s.cachedInheritedPipeline;}
 @end
 
 @implementation KPRenderICB
@@ -576,7 +577,7 @@ static void executePartialRange(NSArray<KPComputeICBCommand*>*commands,NSRange r
 - (id<MTLIndirectComputeCommand>)indirectComputeCommandAtIndex:(NSUInteger)i{reject(@"Render command slots cannot be used for compute");return nil;}
 - (void)executeRenderRange:(NSRange)range encoder:(id<MTLRenderCommandEncoder>)encoder target:(id<MTLTexture>)target {
     bounds(range,self.size);KPCPUICBScope*scope=self.scope;if(scope.restored||!scope.renderEngine)reject(@"Inactive rendering scope");KPScopeLink*link=objc_getAssociatedObject(encoder,&contextKey);
-    NSMutableArray*records=[NSMutableArray new],*indices=[NSMutableArray new];
+    NSMutableArray*records=[NSMutableArray new],*indices=[NSMutableArray new],*reusedIndices=[NSMutableArray new];
     NSMutableIndexSet*changedBindings=[NSMutableIndexSet new],*changedFragmentBindings=[NSMutableIndexSet new];
     for(NSUInteger i=range.location;i<NSMaxRange(range);i++){
         KPRenderICBCommand*c=self.commands[i];
@@ -592,9 +593,13 @@ static void executePartialRange(NSArray<KPComputeICBCommand*>*commands,NSRange r
         BOOL legacy=[p[@"legacy"]boolValue];BOOL valid=c.kind&&!legacy?[scope.renderEngine validateIndexedVertexBindings:c.vertexBindings pipeline:effectivePipeline indexCount:c.vertexCount indexBuffer:c.indices indexOffset:c.offset kind:c.kind instances:c.instances baseVertex:c.baseVertex baseInstance:c.baseInstance error:&error]:[scope.renderEngine validateVertexBindings:c.vertexBindings pipeline:effectivePipeline vertexStart:c.vertexStart vertexCount:c.vertexCount instances:c.instances baseInstance:c.baseInstance error:&error];
         if(!valid||(legacy&&c.baseVertex))reject(error.localizedDescription?:@"Legacy baseVertex must remain zero");
         for(NSNumber*j in c.vertexBindings)[changedBindings addIndex:j.unsignedIntegerValue];if(![scope.renderEngine validateFragmentBindings:c.fragmentBindings pipeline:effectivePipeline error:&error])reject(error.localizedDescription);for(NSNumber*j in c.fragmentBindings)[changedFragmentBindings addIndex:j.unsignedIntegerValue];
-        id record=self.inheritPipelineState?nil:c.record;
+        // Only the pinned, read-only Apple view profile may reuse inherited
+        // records. All bindings, bounds and pass contracts were revalidated.
+        BOOL cacheable=self.inheritPipelineState&&[p[@"apple_explicit_view"]boolValue]&&!c.kind&&!c.fragmentBindings.count;
+        id record=self.inheritPipelineState?(cacheable&&c.cachedInheritedPipeline==effectivePipeline?c.record:nil):c.record;
+        if(record&&cacheable)[reusedIndices addObject:@(i)];
         if(!record){record=legacy?[scope.renderEngine prepareInheritedDrawKind:c.kind indexBuffer:c.indices offset:c.offset instances:c.instances error:&error]:c.kind&&c.fragmentBindings.count?[scope.renderEngine prepareIndexedFragmentPipeline:effectivePipeline vertexBindings:c.vertexBindings fragmentBindings:c.fragmentBindings indexCount:c.vertexCount indexBuffer:c.indices indexOffset:c.offset kind:c.kind instances:c.instances baseVertex:c.baseVertex baseInstance:c.baseInstance error:&error]:c.kind?[scope.renderEngine prepareIndexedVertexPipeline:effectivePipeline bindings:c.vertexBindings indexCount:c.vertexCount indexBuffer:c.indices indexOffset:c.offset kind:c.kind instances:c.instances baseVertex:c.baseVertex baseInstance:c.baseInstance error:&error]:c.fragmentBindings.count?[scope.renderEngine prepareFragmentDrawPipeline:effectivePipeline vertexBindings:c.vertexBindings fragmentBindings:c.fragmentBindings vertexStart:c.vertexStart vertexCount:c.vertexCount instances:c.instances baseInstance:c.baseInstance error:&error]:[scope.renderEngine prepareVertexDrawPipeline:effectivePipeline bindings:c.vertexBindings vertexStart:c.vertexStart vertexCount:c.vertexCount instances:c.instances baseInstance:c.baseInstance error:&error];
-            if(!record)reject(error.localizedDescription);if(!self.inheritPipelineState)c.record=record;NSDictionary*meta=[(id<KPOptionalRenderRecord>)record evidence];[scope.eventRows addObject:@{@"operation":@"materialize_CPU_render_command",@"index":@(i),@"record":meta,@"GPU_render_dispatches":@0}];}
+            if(!record)reject(error.localizedDescription);if(!self.inheritPipelineState||cacheable){c.record=record;c.cachedInheritedPipeline=cacheable?effectivePipeline:nil;}NSDictionary*meta=[(id<KPOptionalRenderRecord>)record evidence];[scope.eventRows addObject:@{@"operation":@"materialize_CPU_render_command",@"index":@(i),@"record":meta,@"GPU_render_dispatches":@0}];}
         [records addObject:record];[indices addObject:@(i)];
     }
     NSDictionary*evidence=@{};
@@ -604,7 +609,7 @@ static void executePartialRange(NSArray<KPComputeICBCommand*>*commands,NSRange r
             else[encoder setVertexBuffer:b[@"buffer"] offset:[b[@"offset"]unsignedIntegerValue] atIndex:i];
         }
         for(NSUInteger i=changedFragmentBindings.firstIndex;i!=NSNotFound;i=[changedFragmentBindings indexGreaterThanIndex:i]){NSDictionary*b=link.callerFragmentBindings[@(i)];if(b[@"bytes"]){NSData*d=b[@"bytes"];[encoder setFragmentBytes:d.bytes length:d.length atIndex:i];}else[encoder setFragmentBuffer:b[@"buffer"] offset:[b[@"offset"]unsignedIntegerValue] atIndex:i];}}@finally{link.encodingRenderICB=NO;}if(!ok)reject([error.localizedDescription stringByAppendingString:@"; discard command buffer"]);}
-    [scope.eventRows addObject:@{@"operation":@"execute_CPU_render_ICB",@"location":@(range.location),@"length":@(range.length),@"executed_indices":indices,@"empty_slots_skipped":@(range.length-records.count),@"caller_pipeline_restored":@(records.count&&link.callerRenderPipeline!=nil),@"caller_vertex_slots_restored":@(changedBindings.count),@"caller_fragment_slots_restored":@(changedFragmentBindings.count),@"evidence":evidence,@"full_ICB_contract":@NO}];
+    [scope.eventRows addObject:@{@"operation":@"execute_CPU_render_ICB",@"location":@(range.location),@"length":@(range.length),@"executed_indices":indices,@"reused_inherited_indices":reusedIndices,@"empty_slots_skipped":@(range.length-records.count),@"caller_pipeline_restored":@(records.count&&link.callerRenderPipeline!=nil),@"caller_vertex_slots_restored":@(changedBindings.count),@"caller_fragment_slots_restored":@(changedFragmentBindings.count),@"evidence":evidence,@"full_ICB_contract":@NO}];
 }
 @end
 

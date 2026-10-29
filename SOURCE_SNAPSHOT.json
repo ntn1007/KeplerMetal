@@ -74,19 +74,19 @@
       "path": "bridge/src/KeplerCPUICB.mm",
       "source_path": "bridge/src/KeplerCPUICB.mm",
       "source_SHA256": "3d59c2c609611ddc387e616b8945e903f6378dbd4a3b66a02cb22087ada84b60",
-      "published_SHA256": "e7561f8f60f9fde126db7e7eb6b8913235582924d1f9fb2c0c163dc37cad2367",
-      "bytes": 171556,
+      "published_SHA256": "8212f9cece201bba4e231e4795c6fb0b380c638992cd75f05ef28af14e627b4e",
+      "bytes": 172446,
       "modified_for_publication": true,
       "previous_published_SHA256": "183be0be67c910ebdbff61841347f6146f72e0b1512bf241d54f0d258a308828",
       "latest_change": {
+        "previous_published_SHA256": "e7561f8f60f9fde126db7e7eb6b8913235582924d1f9fb2c0c163dc37cad2367",
+        "previous_bytes": 171556,
+        "reason": "Reuse bounded inherited Apple render records only while pipeline and command state remain valid."
+      },
+      "previous_latest_change": {
         "previous_published_SHA256": "2b5ea3188323a354f70f5ce4c23364d2aa0cf4c2ebbfa8f47ae973601c55a453",
         "previous_bytes": 171496,
         "reason": "Accept DontCare depth store for qualified render passes while retaining all other attachment validation."
-      },
-      "previous_latest_change": {
-        "previous_published_SHA256": "1cdb428eb966bee339baf4b23f2da6d42d1bc3fd49fd74fdfad8f8125e16cb65",
-        "previous_bytes": 170706,
-        "reason": "Allow bounded render-ICB pipeline inheritance, rematerialize for each current parent pipeline, and guard incompatible snapshots."
       },
       "prior_change_history": [
         {
@@ -143,6 +143,11 @@
           "previous_published_SHA256": "855d1bcbc9bc32e51b7ecba129a8488c79d8e75585ea33be5006437c440224d8",
           "previous_bytes": 170656,
           "reason": "Add a hash-certified two-buffer point transform with count-dependent bounds, reflected access and CPU ICB replay."
+        },
+        {
+          "previous_published_SHA256": "1cdb428eb966bee339baf4b23f2da6d42d1bc3fd49fd74fdfad8f8125e16cb65",
+          "previous_bytes": 170706,
+          "reason": "Allow bounded render-ICB pipeline inheritance, rematerialize for each current parent pipeline, and guard incompatible snapshots."
         }
       ]
     },

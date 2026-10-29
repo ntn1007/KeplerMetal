@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+The scoped adapter reuses inherited records for the pinned Apple view profile while revalidating state; a changed mesh invalidates its record, and GTX output matches direct draws. No performance claim. [Evidence](APPLE_INHERITED_CACHE.md).
+
 Eight instrumented Apple storyboard frames with alternating state match direct GTX images when explicitly waiting only after the last commit. The adapted path did not observe more than one pending buffer; overlap is unproved. [Evidence](APPLE_STORYBOARD_INFLIGHT.md).
 
 An instrumented host instantiates the original Apple storyboard and locally adapted controller/renderer; scoped ICB GTX color output matches direct and blank controls. The original executable and transparent integration remain unproved. [Evidence](APPLE_STORYBOARD_ICB.md).
