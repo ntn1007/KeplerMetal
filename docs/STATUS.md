@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Two scoped video processes correlate a null AppleGVA `IOGVACodec` return and zero node byte with the same later list-head address. Allocation lifetime and hardware decoding remain unproved. [Evidence](VIDEO_GVA_PROPERTY_NODE_LINK.md).
+
 Two scoped video processes have a one-entry AppleGVA list with filter byte `0x463` equal to zero; pinned code would skip that entry under the observed selection mode if it remains unchanged. The byte's meaning and hardware decode remain unknown. [Evidence](VIDEO_GVA_LIST_FILTER.md).
 
 Two scoped AppleGVA video requests return an observed zero list length from the routine immediately after the constructor; entry semantics and the cause of the empty list remain unknown. [Evidence](VIDEO_GVA_ENUMERATION_RESULT.md).

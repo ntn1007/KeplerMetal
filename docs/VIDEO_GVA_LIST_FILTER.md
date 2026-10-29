@@ -16,6 +16,10 @@ not separately traced, and the byte's meaning and the reason it is zero remain
 unknown. The snapshot does not establish what the list would contain in other
 applications or configurations.
 
+A later [property-to-address correlation](VIDEO_GVA_PROPERTY_NODE_LINK.md)
+observes the null `IOGVACodec` result and the same later list-head address;
+allocation lifetime across the interval remains unproved.
+
 The observed numeric field equals the `IOVARendererID` value separately read
 from the `nvAccelerator` registry entry in these processes. This is a numeric
 match only: it does **not** establish that the list entry and registry object
