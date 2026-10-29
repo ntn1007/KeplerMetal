@@ -1,0 +1,46 @@
+{
+  "arbitrary_shader_support": false,
+  "blank_control_differs": true,
+  "contract_gpu_dispatches": 0,
+  "contract_manifest_sha256": "e19d4759a5dcdecef68d48ff12c18107575e958992c60bb5b0188063e0764802",
+  "default_library_sha256": "04d8d8ae6a4485d3be0262e971c365cfff1d5bb04f88f24cdbdfa0ffdee6afa2",
+  "draws_per_run": 15,
+  "duplicate_refused": true,
+  "frames_equal_direct_reference": true,
+  "matching_x86_64_sections": 22,
+  "new_pipeline_object": true,
+  "old_library_sha256": "adf18526f6b8fe358a30d3088dd801440b5509ac50126857174de03e17fba5bf",
+  "old_plain_accepted": true,
+  "performance_benchmark": false,
+  "pixels_per_run": 3072,
+  "process_local_injection": true,
+  "registration_refusals": 6,
+  "release_assertions_disabled": true,
+  "runs": [
+    {
+      "frame_sha256": "a7c62db073ac8b049e735340c0f99abcb43083c36221c47fcc81a0faeda5cc35",
+      "manifest_sha256": "3650d8aa59bbd285b5492719027d9ea323a53430877f586cf56e384939ff20f4",
+      "mode": "same_default_bytes",
+      "report_sha256": "8641ef349d314074fff96147289a15836dae105b51c4a969f9197c057dd557c0"
+    },
+    {
+      "frame_sha256": "a7c62db073ac8b049e735340c0f99abcb43083c36221c47fcc81a0faeda5cc35",
+      "manifest_sha256": "79579fc9a7eb966ed28927f144cf903262eaa0ba66a1f76a1b72488505ae087e",
+      "mode": "same_default_bytes",
+      "report_sha256": "47a57dbfe80e870dff0b5e99b1b18bc98182d173d5dd34ba721ed1fcc6dcaa64"
+    },
+    {
+      "frame_sha256": "a7c62db073ac8b049e735340c0f99abcb43083c36221c47fcc81a0faeda5cc35",
+      "manifest_sha256": "65f172c27577be92dd972f1f2c3cde47555e2e2dcc1d73eee35c87207c2beee8",
+      "mode": "old_library_regression",
+      "report_sha256": "a8b25cc66ed87db99f83beee4e2f7f44365b94a0c8a8c9fae042d52005378f43"
+    }
+  ],
+  "runtime_sha256": "3708f0fbba99fb4cb70007b68851820940e99cb685815ce4958b6aa25ab6cd45",
+  "same_default_library_bytes": true,
+  "source_files_matched_to_archive": 17,
+  "status": "PASS_SAME_DEFAULT_LIBRARY",
+  "system_hashes_unchanged": true,
+  "transparent_system_integration": false,
+  "view_configuration_modified_for_capture": true
+}

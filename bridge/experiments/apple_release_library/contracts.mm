@@ -1,0 +1,24 @@
+// SPDX-License-Identifier: MIT
+// No command buffer is submitted; tests the pinned registration boundary.
+#import <Foundation/Foundation.h>
+#import <Metal/Metal.h>
+#import <objc/runtime.h>
+#import <CommonCrypto/CommonDigest.h>
+#import "KeplerCPUICB.h"
+#import "KeplerGPUIdentity.h"
+
+static NSString *hash(NSData *d){unsigned char v[32];CC_SHA256(d.bytes,(CC_LONG)d.length,v);NSMutableString *s=[NSMutableString new];for(unsigned char x:v)[s appendFormat:@"%02x",x];return s;}
+static void need(BOOL x,NSString *why){if(!x)@throw [NSException exceptionWithName:@"ContractFailure" reason:why userInfo:nil];}
+int main(int argc,const char **argv){@autoreleasepool{@try{
+ need(argc==5,@"usage: carrier release-library release-manifest old-library");NSData *carrier=[NSData dataWithContentsOfFile:@(argv[1])],*release=[NSData dataWithContentsOfFile:@(argv[2])],*manifest=[NSData dataWithContentsOfFile:@(argv[3])],*old=[NSData dataWithContentsOfFile:@(argv[4])];
+ NSString *ch=@"965bed87530267bec5618a3b375ae116e60f1862fa65e7731aa33b42b870c4f7",*rh=@"04d8d8ae6a4485d3be0262e971c365cfff1d5bb04f88f24cdbdfa0ffdee6afa2",*mh=@"b5798a3c5129c4cec893c487cbc9211a439deaedd14a1c3a4857114a949e0ace",*oh=@"adf18526f6b8fe358a30d3088dd801440b5509ac50126857174de03e17fba5bf";
+ need([hash(carrier)isEqual:ch]&&[hash(release)isEqual:rh]&&[hash(manifest)isEqual:mh]&&[hash(old)isEqual:oh],@"asset hashes");NSArray<id<MTLDevice>> *devices=MTLCopyAllDevices();need(devices.count==1&&KPKepler880MIdentity(devices[0]),@"GPU identity");id<MTLDevice>d=devices[0];Class before=object_getClass(d);id<MTLCommandQueue>q=[d newCommandQueue];NSError *err=nil;KPCPUICBScope*s=[KPCPUICBScope installRenderingOnDevice:d queue:q libraryData:carrier expectedSHA256:ch error:&err];need(s!=nil,err.description?:@"scope");
+ NSMutableDictionary *root=[NSJSONSerialization JSONObjectWithData:manifest options:NSJSONReadingMutableContainers error:&err];need(root!=nil,@"manifest JSON");NSMutableDictionary *spec=root[@"pipelines"][0];NSMutableArray *results=[NSMutableArray new];
+ NSArray *mutations=@[@{ @"name":@"apple_explicit" },@{ @"color_format":@125 },@{ @"depth_format":@0 },@{ @"unexpected":@YES },@{ @"vertex":@"differentFunction" }];
+ for(NSDictionary *mutation in mutations){NSMutableDictionary *candidate=[spec mutableCopy];[candidate addEntriesFromDictionary:mutation];NSMutableDictionary *container=[root mutableCopy];container[@"pipelines"]=@[candidate];NSData *data=[NSJSONSerialization dataWithJSONObject:container options:NSJSONWritingSortedKeys error:&err];need(data!=nil,@"mutation encoding");err=nil;BOOL ok=[s registerRenderVertexLibraryData:release expectedSHA256:rh manifestData:data expectedManifestSHA256:hash(data) error:&err];need(!ok&&[err.localizedDescription isEqual:@"Apple explicit-buffer shader/manifest outside certified profile"],@"mutation accepted or wrong refusal");[results addObject:@{ @"mutation":mutation.allKeys[0],@"refused":@YES }];}
+ err=nil;BOOL wrong=[s registerRenderVertexLibraryData:release expectedSHA256:oh manifestData:manifest expectedManifestSHA256:mh error:&err];need(!wrong&&[err.localizedDescription isEqual:@"Vertex library/manifest snapshot identity mismatch"],@"wrong hash accepted");[results addObject:@{ @"mutation":@"library_hash",@"refused":@YES }];
+ err=nil;need([s registerRenderVertexLibraryData:release expectedSHA256:rh manifestData:manifest expectedManifestSHA256:mh error:&err],err.description?:@"valid Release registration");need([s renderPipelineForName:@"apple_explicit_view"]!=nil,@"Release pipeline");
+ NSDictionary *plain=@{@"schema":@1,@"library_SHA256":oh,@"pipelines":@[@{@"name":@"apple_explicit",@"vertex":@"vertexShader",@"fragment":@"fragmentShader",@"attributes":@[],@"layouts":@[],@"apple_explicit_buffers":@YES}]};NSData *oldManifest=[NSJSONSerialization dataWithJSONObject:plain options:NSJSONWritingSortedKeys error:&err];err=nil;need([s registerRenderVertexLibraryData:old expectedSHA256:oh manifestData:oldManifest expectedManifestSHA256:hash(oldManifest) error:&err],err.description?:@"old profile regression");need([s renderPipelineForName:@"apple_explicit"]!=nil,@"old pipeline");
+ err=nil;BOOL dup=[s registerRenderVertexLibraryData:release expectedSHA256:rh manifestData:manifest expectedManifestSHA256:mh error:&err];need(!dup&&err!=nil,@"duplicate accepted");[s restore];need(object_getClass(d)==before,@"device restoration");
+ NSDictionary *out=@{@"status":@"PASS",@"device":d.name,@"refusals":results,@"duplicate_refused":@YES,@"release_view_accepted":@YES,@"old_plain_accepted":@YES,@"device_restored":@YES,@"command_buffers_submitted":@0,@"gpu_execution_proved":@NO};NSData *json=[NSJSONSerialization dataWithJSONObject:out options:NSJSONWritingPrettyPrinted error:nil];fwrite(json.bytes,1,json.length,stdout);putchar('\n');return 0;
+ }@catch(NSException *e){fprintf(stderr,"%s: %s\n",e.name.UTF8String,e.reason.UTF8String);return 1;}}}
