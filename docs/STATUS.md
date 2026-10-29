@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Two instrumented failed video requests reach the GTX filter's statically identified IORegistry property-search call and observe a null return; the requested property and cause remain unknown. [Evidence](VIDEO_VT_FILTER_REASON.md).
+
 Two failed VideoToolbox requests retrieve the GTX-linked dictionary from the availability array and pass it to a local request filter, which returns zero. The reason and causal link to hardware video failure remain unproved. [Evidence](VIDEO_VT_AVAILABLE_FILTER.md).
 
 Two failed VideoToolbox hardware requests write the availability callback context to an output slot; the caller frame is in VideoToolbox. Later array contents, selection and hardware video remain unproved. [Evidence](VIDEO_VT_AVAILABLE_OUTPUT.md).
