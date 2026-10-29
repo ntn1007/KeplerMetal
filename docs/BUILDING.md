@@ -1,5 +1,7 @@
 # Build from source
 
+[STANDALONE_MIXED_APPLICATION.md](STANDALONE_MIXED_APPLICATION.md) documents the process-local standalone mixed client and reproduction.
+
 [PUBLIC_MIXED_CLIENT.md](PUBLIC_MIXED_CLIENT.md) documents the separate public Metal mixed compute/render client and reproduction.
 
 [DUAL_AUTOMATIC_FACTORIES.md](DUAL_AUTOMATIC_FACTORIES.md) documents the mixed compute/render automatic-factory GPU witness.

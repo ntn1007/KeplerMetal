@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+A pinned standalone public Metal executable creates its own compute/render pipelines and completes a GPU indirect sequence through explicit process-local injection; eight output processes and three refusals pass. Third-party and transparent integration remain unproved. [Evidence](STANDALONE_MIXED_APPLICATION.md).
+
 A separately compiled public-Metal client now runs a scoped GPU compute-to-indexed-render sequence through ordinary encoder factories; direct and indirect results agree across eight serial controls. Explicit host setup remains required. [Evidence](PUBLIC_MIXED_CLIENT.md).
 
 A mixed compute/render ICB GPU witness now passes with both queue-local automatic factories enabled in either order: six serialized processes and 54 matching frames. Explicit opt-in and pinned profiles remain required. [Evidence](DUAL_AUTOMATIC_FACTORIES.md).

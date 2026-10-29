@@ -1,0 +1,126 @@
+{
+  "status": "PASS_STANDALONE_MIXED_PUBLIC_METAL_GPU",
+  "processes": 11,
+  "gpu_output_processes": 8,
+  "expected_refusals": 3,
+  "checked_float_channels": 98304,
+  "direct_indirect_outputs_match": true,
+  "client_creates_libraries_and_pipelines": true,
+  "client_no_kepler_imports_checked": true,
+  "explicit_process_injection_required": true,
+  "unmodified_third_party_application": false,
+  "full_ICB_contract": false,
+  "system_modified": false,
+  "performance_benchmark": false,
+  "bad_descriptor_initialization_blit_executed": true,
+  "bad_descriptor_user_compute_render_executed": false,
+  "runtime_sha256": "4a0ed89819e9d14fd8c19212f25a278f6c409d6e610e52fbde9d97a9c7360782",
+  "prior_receipt_sha256": "451395f94c225ba40cae784ac228ae653c33831ab494136e1c28c0fb4b930c26",
+  "client_sha256": "7b0f94646ce2b6d1e94d7fc566b4739c622dc514d01e7830af656953d21ed338",
+  "workload_sha256": "a9ef16c755c87aef5275de4ba387a461e68018c2c36eeeb0108abe505367c504",
+  "bootstrap_sha256": "5fb8e468f985bca2a1468cc398417d064564302a22675058b3d246bd0464cd0a",
+  "current_runner_sha256": "159894b3a85a304991563888af5d48cc31a19c53fe6ec5014f2924580d50ea03",
+  "runner_source_pinned_per_run": false,
+  "audit_sha256": "31856e04a70508a7b0621a32592ad71fde5ca916db2e23e0032513e6974065ac",
+  "rows": [
+    {
+      "mode": "direct",
+      "exit_code": 0,
+      "reservation_id": "1e2bb80dd704420e9c2a36c0ace284a1",
+      "signed_client_sha256": "96ebdd1513e4b79f936fc0249c86e7cd747bc9a27b270eb1b329d2ede4eff60a",
+      "bootstrap_sha256": null,
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "exit_code": 0,
+      "reservation_id": "34e577a197934eb0bec2a3d00fcf638b",
+      "signed_client_sha256": "96ebdd1513e4b79f936fc0249c86e7cd747bc9a27b270eb1b329d2ede4eff60a",
+      "bootstrap_sha256": "d2c4024ae034efa992cf43f7b121c74800b6fd14dd8fe380b750e31cd233dc9e",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "no-producer",
+      "exit_code": 0,
+      "reservation_id": "bfa7044d5eb44351a2a1fa7b2096c9d2",
+      "signed_client_sha256": "96ebdd1513e4b79f936fc0249c86e7cd747bc9a27b270eb1b329d2ede4eff60a",
+      "bootstrap_sha256": "d2c4024ae034efa992cf43f7b121c74800b6fd14dd8fe380b750e31cd233dc9e",
+      "pixel_sha256": "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+      "terminal": true
+    },
+    {
+      "mode": "no-render",
+      "exit_code": 0,
+      "reservation_id": "416ea09959d24ec992e5ec5ac00a4803",
+      "signed_client_sha256": "96ebdd1513e4b79f936fc0249c86e7cd747bc9a27b270eb1b329d2ede4eff60a",
+      "bootstrap_sha256": "d2c4024ae034efa992cf43f7b121c74800b6fd14dd8fe380b750e31cd233dc9e",
+      "pixel_sha256": "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+      "terminal": true
+    },
+    {
+      "mode": "direct",
+      "exit_code": 0,
+      "reservation_id": "ae98e3dce7ca4755bcbdb794e06b0de0",
+      "signed_client_sha256": "96ebdd1513e4b79f936fc0249c86e7cd747bc9a27b270eb1b329d2ede4eff60a",
+      "bootstrap_sha256": null,
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "exit_code": 0,
+      "reservation_id": "6310c4c2b45e43a3ae7d13a5709d7947",
+      "signed_client_sha256": "96ebdd1513e4b79f936fc0249c86e7cd747bc9a27b270eb1b329d2ede4eff60a",
+      "bootstrap_sha256": "d2c4024ae034efa992cf43f7b121c74800b6fd14dd8fe380b750e31cd233dc9e",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "no-producer",
+      "exit_code": 0,
+      "reservation_id": "0a8df8f25e064834988c610e0c8519df",
+      "signed_client_sha256": "96ebdd1513e4b79f936fc0249c86e7cd747bc9a27b270eb1b329d2ede4eff60a",
+      "bootstrap_sha256": "d2c4024ae034efa992cf43f7b121c74800b6fd14dd8fe380b750e31cd233dc9e",
+      "pixel_sha256": "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+      "terminal": true
+    },
+    {
+      "mode": "no-render",
+      "exit_code": 0,
+      "reservation_id": "c2392fd4e55f441696d5c8ddf7982e3a",
+      "signed_client_sha256": "96ebdd1513e4b79f936fc0249c86e7cd747bc9a27b270eb1b329d2ede4eff60a",
+      "bootstrap_sha256": "d2c4024ae034efa992cf43f7b121c74800b6fd14dd8fe380b750e31cd233dc9e",
+      "pixel_sha256": "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+      "terminal": true
+    },
+    {
+      "mode": "wrong-client",
+      "exit_code": 3,
+      "reservation_id": "50aa8dea91d04583808b153314884b6c",
+      "signed_client_sha256": "1e6baed37328d2778a5ff7209e50f0ae34b29f8586af7dbba26b463c82000661",
+      "bootstrap_sha256": "d2c4024ae034efa992cf43f7b121c74800b6fd14dd8fe380b750e31cd233dc9e",
+      "pixel_sha256": null,
+      "terminal": true
+    },
+    {
+      "mode": "wrong-manifest",
+      "exit_code": 3,
+      "reservation_id": "738df6384fb249f2aa040fa3ded599ab",
+      "signed_client_sha256": "96ebdd1513e4b79f936fc0249c86e7cd747bc9a27b270eb1b329d2ede4eff60a",
+      "bootstrap_sha256": "d2c4024ae034efa992cf43f7b121c74800b6fd14dd8fe380b750e31cd233dc9e",
+      "pixel_sha256": null,
+      "terminal": true
+    },
+    {
+      "mode": "bad-descriptor",
+      "exit_code": 1,
+      "reservation_id": "f9f94734bbd54ffdb8d9efb89bc62dc7",
+      "signed_client_sha256": "96ebdd1513e4b79f936fc0249c86e7cd747bc9a27b270eb1b329d2ede4eff60a",
+      "bootstrap_sha256": "d2c4024ae034efa992cf43f7b121c74800b6fd14dd8fe380b750e31cd233dc9e",
+      "pixel_sha256": null,
+      "terminal": true
+    }
+  ]
+}
