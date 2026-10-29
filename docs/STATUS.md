@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Two VideoToolbox requests revisit the GTX-linked table entry, observe `Available` as 1 and pass that entry to an append call. Final-array use and hardware video remain unproved. [Evidence](VIDEO_VT_AVAILABLE_PATH.md).
+
 Two VideoToolbox requests pass the GTX-linked device dictionary and its registry key to a call bound at arm time to `CFDictionarySetValue`; destination readback and hardware video remain unproved. [Evidence](VIDEO_VT_DEVICE_REGISTRATION_CALL.md).
 
 In two failed VideoToolbox requests, the next batch for the GTX-containing list is empty and the zero comparison branch is reached. Its later effect and hardware video remain unknown. [Evidence](VIDEO_VT_ENUMERATION_DECISION.md).
