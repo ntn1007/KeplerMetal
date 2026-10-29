@@ -1,0 +1,34 @@
+{
+  "base_inputs_sha256": "d07d612a8c5ac9a116e26a57a7716b5db2703e911469b3dffab4798d6222d47e",
+  "config_sha256": "34b2d764afd469909d88b7c343328933c101f6dad2256b24c1177043e3536a20",
+  "gpu_execution": false,
+  "hardware_video_execution_proved": false,
+  "inspect_host_sha256": "b258931ead730e764b2f20356fe23f202c1d8157213e61f61538370492780795",
+  "library_sha256": "6bfd10002bd8e7dc60d26b2d8193e8bafc81362f96804911a8a443b06c5a4a28",
+  "logs_sha256": {
+    "inspect-0": "0775216cc7df91e5f02e37e7d4fce9ad08328517c72276665fbad0401f713ce5",
+    "inspect-1": "0775216cc7df91e5f02e37e7d4fce9ad08328517c72276665fbad0401f713ce5",
+    "test-0": "f1d6a4ddbe48d7b9e0ae907b69302c35e7e6ff8d2a87c6749aa0dd9ca6f5c514",
+    "test-1": "f1d6a4ddbe48d7b9e0ae907b69302c35e7e6ff8d2a87c6749aa0dd9ca6f5c514"
+  },
+  "observer_generations": 6,
+  "observer_host_sha256": "d1768e45af330fc5518ba2e470230c1bb8f71cac0fd8e3806e489f666a9903c5",
+  "observer_processes": 2,
+  "pinned_profile_generations": 6,
+  "pinned_profile_processes": 2,
+  "profile_iokit_positive_negative_controls": 12,
+  "profile_sha256": "2ba092cff6f2f39ac9302a69e10c5a0d7055eff2140d713bd8502173e6636409",
+  "qualifier_sha256": "26f9e90be7674750fc690e7ea0eade3c3453aec1f429bf854fbae705d393345f",
+  "sources_sha256": {
+    "dependency_inspect_test.mm": "42ff2f610b34914903583fe407909d5aafdf01666950f76c64d11cea1b3cda18",
+    "dependency_repeat.mm": "2198d55def9e8ca8094d7fb489522b80d66453d307030ffb9c6520fa31c71b3f",
+    "dependency_repeat_test.mm": "3205b10874698af05aa86bbea57905c7fc41de8b0e8c65f1a7c551247dff6962",
+    "repeat_gate.h": "bb2fdc9e3701623c913e807f74122fe8826a30f8f919abc078c948246d617755",
+    "video_dependency.h": "972404a7a70a83de20183faee804eb361f3d2b875ac554c8a332b8f29e46f2c3"
+  },
+  "status": "PASS_REPEAT_DEPENDENCY_CPU_SCOPES",
+  "system_modified": false,
+  "test_seam_enabled": true,
+  "video_host_integration": false,
+  "video_session_creation_tested": false
+}
