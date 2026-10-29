@@ -1,0 +1,243 @@
+{
+  "actual_vaapi_execution_observed": false,
+  "candidate_reverse_and_offset_inferred_from_ffmpeg_source_and_software_observation": true,
+  "comparisons": 20,
+  "frames": 5,
+  "gpu_transport_implemented": false,
+  "hardware_video_execution_proved": false,
+  "mesa_reference_sha256": "db6a036b28510c9b1940e5457c6b9c4b15f0dd6217826d6da7e42e01d7374005",
+  "nvidia_hardware_order_proved": false,
+  "observation_receipt_sha256": "de6444167c96c6d62cc9539158f837c40fd692712e5daf486aec4987f4951722",
+  "predictive_receipt_sha256": "eb828af32b718e0f8edd2686e4448d7444da7eae06a776f4d50f554dcb44dac6",
+  "profiles_per_frame": 4,
+  "project_model_and_mesa_bytes_match": true,
+  "rows": [
+    {
+      "different_bytes_from_baseline": 0,
+      "frame": 1,
+      "mode": 0,
+      "poc_base": 0,
+      "reference_numbers": [
+        0
+      ],
+      "sha256": "c8547055aa836df7c61392411ade99dedc777876a7a12910a2edde3078cc97a1"
+    },
+    {
+      "different_bytes_from_baseline": 0,
+      "frame": 1,
+      "mode": 1,
+      "poc_base": 0,
+      "reference_numbers": [
+        0
+      ],
+      "sha256": "c8547055aa836df7c61392411ade99dedc777876a7a12910a2edde3078cc97a1"
+    },
+    {
+      "different_bytes_from_baseline": 4,
+      "frame": 1,
+      "mode": 2,
+      "poc_base": 65536,
+      "reference_numbers": [
+        0
+      ],
+      "sha256": "ef531b9a6ef15bade2ebacc417bad3943191616cbe7f327e5083bcb5b8d34468"
+    },
+    {
+      "different_bytes_from_baseline": 4,
+      "frame": 1,
+      "mode": 3,
+      "poc_base": 65536,
+      "reference_numbers": [
+        0
+      ],
+      "sha256": "ef531b9a6ef15bade2ebacc417bad3943191616cbe7f327e5083bcb5b8d34468"
+    },
+    {
+      "different_bytes_from_baseline": 0,
+      "frame": 2,
+      "mode": 0,
+      "poc_base": 0,
+      "reference_numbers": [
+        0,
+        1
+      ],
+      "sha256": "66ab720d4f1d57cc216aa70d364fb72b76927252055140370519ede1554b3d87"
+    },
+    {
+      "different_bytes_from_baseline": 8,
+      "frame": 2,
+      "mode": 1,
+      "poc_base": 0,
+      "reference_numbers": [
+        1,
+        0
+      ],
+      "sha256": "c9cc739483281ee634cd40de6d75c1a785c708223e309cb9b94174f406cee1de"
+    },
+    {
+      "different_bytes_from_baseline": 6,
+      "frame": 2,
+      "mode": 2,
+      "poc_base": 65536,
+      "reference_numbers": [
+        0,
+        1
+      ],
+      "sha256": "dc43f8e2a717acccb1d3c989476b40796722ccf346ba3009f0afbbdb104db9ea"
+    },
+    {
+      "different_bytes_from_baseline": 14,
+      "frame": 2,
+      "mode": 3,
+      "poc_base": 65536,
+      "reference_numbers": [
+        1,
+        0
+      ],
+      "sha256": "4938df455b6058b24cda6c4f03ee8dcbc66e3fe59efcb2c5b42808d011d8e742"
+    },
+    {
+      "different_bytes_from_baseline": 0,
+      "frame": 3,
+      "mode": 0,
+      "poc_base": 0,
+      "reference_numbers": [
+        1,
+        2
+      ],
+      "sha256": "3c225bafd4f4e114b423418a742271b771502710d575ea2014e702eda3366c0b"
+    },
+    {
+      "different_bytes_from_baseline": 10,
+      "frame": 3,
+      "mode": 1,
+      "poc_base": 0,
+      "reference_numbers": [
+        2,
+        1
+      ],
+      "sha256": "2c3d5b235a2985286c249703df19681f8f9765ac746842f0b4bcbee481b87270"
+    },
+    {
+      "different_bytes_from_baseline": 6,
+      "frame": 3,
+      "mode": 2,
+      "poc_base": 65536,
+      "reference_numbers": [
+        1,
+        2
+      ],
+      "sha256": "b5bde4d19b70f64f8a8f63f5d5622bdf55e8dfe2dffdf3208ed4a09a3c61a8db"
+    },
+    {
+      "different_bytes_from_baseline": 16,
+      "frame": 3,
+      "mode": 3,
+      "poc_base": 65536,
+      "reference_numbers": [
+        2,
+        1
+      ],
+      "sha256": "d881222ae0b608c6f8ae25808981e164a9f9d3623623765aa78d0f69cd9719e1"
+    },
+    {
+      "different_bytes_from_baseline": 0,
+      "frame": 4,
+      "mode": 0,
+      "poc_base": 0,
+      "reference_numbers": [
+        2,
+        3
+      ],
+      "sha256": "8d4f84e41db3abda179d233203e0f0aca2ad973c54868f5f43f62f7ebdc35d54"
+    },
+    {
+      "different_bytes_from_baseline": 8,
+      "frame": 4,
+      "mode": 1,
+      "poc_base": 0,
+      "reference_numbers": [
+        3,
+        2
+      ],
+      "sha256": "c5762a4dc17c6d9b54e8f9bb10ba5334ba225835cc8415ee8dc45f31bb812d7e"
+    },
+    {
+      "different_bytes_from_baseline": 6,
+      "frame": 4,
+      "mode": 2,
+      "poc_base": 65536,
+      "reference_numbers": [
+        2,
+        3
+      ],
+      "sha256": "5001a2feddc3ddbccb91721e8cae311671606dfad359c1a8a637b1deba187a84"
+    },
+    {
+      "different_bytes_from_baseline": 14,
+      "frame": 4,
+      "mode": 3,
+      "poc_base": 65536,
+      "reference_numbers": [
+        3,
+        2
+      ],
+      "sha256": "3205ef3d57cb426cad7c499aebc6e16c94bfccaed465ccbca215d126329a40b1"
+    },
+    {
+      "different_bytes_from_baseline": 0,
+      "frame": 5,
+      "mode": 0,
+      "poc_base": 0,
+      "reference_numbers": [
+        3,
+        4
+      ],
+      "sha256": "73be1562d8071f9cf43ec04920c9f17020edd02e363cbbc8a65664174168b3cd"
+    },
+    {
+      "different_bytes_from_baseline": 8,
+      "frame": 5,
+      "mode": 1,
+      "poc_base": 0,
+      "reference_numbers": [
+        4,
+        3
+      ],
+      "sha256": "920025fb695f805647dc6db591545d94003fe5f7e0721ecb23761bf9bfe0ec24"
+    },
+    {
+      "different_bytes_from_baseline": 6,
+      "frame": 5,
+      "mode": 2,
+      "poc_base": 65536,
+      "reference_numbers": [
+        3,
+        4
+      ],
+      "sha256": "f4f106adadf1506af76822b27110ae9cf7926b286543dc687ff3c698a5e6b8de"
+    },
+    {
+      "different_bytes_from_baseline": 14,
+      "frame": 5,
+      "mode": 3,
+      "poc_base": 65536,
+      "reference_numbers": [
+        4,
+        3
+      ],
+      "sha256": "1b0f0221d2d9175f45e2ce9811bc1e0b14d060f80afcc543b7f66c8b507a0cc2"
+    }
+  ],
+  "same_fixture_original_profile_matches_previous": true,
+  "source_sha256": {
+    "H264Stream.h": "c54cefe3dcff353d8aff27f3955d0b9aea4249a288ab623a9522277175054763",
+    "VideoLayout.cpp": "934403950258167baccc92aeb2d24b0c031fdb83ed6c199d81c1261ee2a158e7",
+    "VideoLayout.h": "730b86192b7ac04cf5b6b310b12b76f46a18f2ea6946f56261b5f97843601df8",
+    "VideoPicture.cpp": "f2d73943faee3423620c64233c62caf1205476c233ed781a7e8bf8db3f732387",
+    "VideoPicture.h": "fff5191307c94b325127e99d4f2d1b4e348bc1e63231c3793789c2e7ba79c822",
+    "profiles.cpp": "5805e831a29103425527ec434c1a0cdcc57029b5478765a12417acca77567c49",
+    "validate.py": "7a050083570883deae81f98999da71c7d85b34ff24b46ea5ba19c8bb1e8644ae"
+  },
+  "status": "PASS_FOUR_CPU_DPB_PROFILES"
+}

@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Twenty CPU VP proposals compare two reference orders and two POC bases against pinned Mesa; arm64 sanitizers agree, while VA-API execution and NVIDIA correctness remain unproved. [Evidence](VIDEO_DPB_PROFILES.md).
+
 Software FFmpeg short-term snapshots match the five modeled P-picture reference sets while using the reverse order and a +65536 POC representation; NVIDIA ordering and decoding remain unproved. [Evidence](VIDEO_DPB_OBSERVATION.md).
 
 Five restricted H.264 P-picture parameter proposals match trace-derived and pinned Mesa CPU oracles, with arm64 ASan/UBSan checks; reference completion is simulated and hardware decoding remains unproved. [Evidence](VIDEO_PREDICTIVE_PICTURE.md).
