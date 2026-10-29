@@ -14,6 +14,8 @@ The two first exploratory injected runs fell back because the default vertex des
 
 The qualified result is limited to this client and exact profiles. It does not prove complete ICB behavior, arbitrary libraries or descriptors, unmodified applications, visible presentation, general Metal 3/4 support, hardware video decode or improved performance. The bootstrap restores the scoped device and queue when the process exits; concurrent restoration and shared-class behavior outside this process were not qualified by this cohort.
 
+The later [mixed-loader extension](STANDALONE_MIXED_LOADERS.md) qualifies additional public loading routes for both libraries.
+
 ## Reproduction
 
 Use the matching SDK/driver profile, the pinned compute/render metallibs and the common laboratory GPU reservation. The build copies the project-owned workload source from `public_mixed_client`, verifies that the application has no project imports, signs it and then pins its signed hash into the separately signed bootstrap. Use fresh paths and serialize runs. If a process outcome is unknown, inspect that exact process and reservation before retrying.

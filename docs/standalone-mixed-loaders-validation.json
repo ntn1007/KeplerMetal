@@ -1,0 +1,380 @@
+{
+  "status": "PASS_STANDALONE_TWO_LIBRARY_LOADERS_GPU",
+  "processes": 39,
+  "output_processes": 28,
+  "expected_refusals": 11,
+  "compute_render_route_combinations": 16,
+  "diagonal_auto_repeats": 4,
+  "checked_float_channels": 344064,
+  "same_output_all_direct_auto": true,
+  "wrong_library_cases": 8,
+  "client_no_kepler_imports_checked": true,
+  "explicit_process_injection_required": true,
+  "unmodified_third_party_application": false,
+  "full_ICB_contract": false,
+  "hardware_video_execution_proved": false,
+  "system_modified": false,
+  "performance_benchmark": false,
+  "bad_descriptor_and_wrong_library_initialization_blits_executed": true,
+  "negative_user_compute_render_executed": false,
+  "runtime_sha256": "4a0ed89819e9d14fd8c19212f25a278f6c409d6e610e52fbde9d97a9c7360782",
+  "prior_receipt_sha256": "451395f94c225ba40cae784ac228ae653c33831ab494136e1c28c0fb4b930c26",
+  "client_source_sha256": "36ea986b78690942ca6b467cf5ed0ebe89be3fdb943b05e57d8d5e779f04b3a1",
+  "bootstrap_source_sha256": "3132d183e35e08a5c73dba9d93c93486e6035f0f36cb7c702b5b9348004ffd1c",
+  "current_runner_source_sha256": "6acdf3e6b7a0450352b0bac120b8b2a15f57a6a8558f387191a758bd64d34f6f",
+  "runner_source_pinned_per_run": false,
+  "audit_sha256": "4a796aeb07a1cd5fef2251b5800cc65a21e00369c933ac835f045ff5092516d8",
+  "rows": [
+    {
+      "mode": "direct",
+      "compute_route": "file",
+      "render_route": "file",
+      "exit_code": 0,
+      "reservation_id": "c00a171d8d994e9182f95fde21be9d33",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "direct",
+      "compute_route": "url",
+      "render_route": "url",
+      "exit_code": 0,
+      "reservation_id": "be6203ed4e924184b35a00f60e2ddf42",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "direct",
+      "compute_route": "data",
+      "render_route": "data",
+      "exit_code": 0,
+      "reservation_id": "3ff078c1b67d4bcebd1237b94cbf9fc1",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "direct",
+      "compute_route": "segmented",
+      "render_route": "segmented",
+      "exit_code": 0,
+      "reservation_id": "8dec5f9febb04908a533f9ab5e47c4e6",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "file",
+      "render_route": "file",
+      "exit_code": 0,
+      "reservation_id": "9b4896351ef64fd7821412c9470ea441",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "file",
+      "render_route": "url",
+      "exit_code": 0,
+      "reservation_id": "0d679f7b8da94a2494b998a418c89c35",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "file",
+      "render_route": "data",
+      "exit_code": 0,
+      "reservation_id": "e7e1cdbf757046fb84ecc6de7a984939",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "file",
+      "render_route": "segmented",
+      "exit_code": 0,
+      "reservation_id": "977a7fb2742b444eab19f82128c74852",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "url",
+      "render_route": "file",
+      "exit_code": 0,
+      "reservation_id": "b10eeaca3ce04ecf87c923f90f49f876",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "url",
+      "render_route": "url",
+      "exit_code": 0,
+      "reservation_id": "fe164f0c803a42778c0f18f768384eca",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "url",
+      "render_route": "data",
+      "exit_code": 0,
+      "reservation_id": "8ce536d1eb8b47f1b91b6514543edbec",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "url",
+      "render_route": "segmented",
+      "exit_code": 0,
+      "reservation_id": "90a8f37f52214444a7c69e51ab24baed",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "data",
+      "render_route": "file",
+      "exit_code": 0,
+      "reservation_id": "3b5c264bf0134fd8ad06ec6b71dbb589",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "data",
+      "render_route": "url",
+      "exit_code": 0,
+      "reservation_id": "15cda86a0ce64615b96073c206d083a6",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "data",
+      "render_route": "data",
+      "exit_code": 0,
+      "reservation_id": "90ca7bde29544d94b209a8d06abee126",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "data",
+      "render_route": "segmented",
+      "exit_code": 0,
+      "reservation_id": "432360bf008a44018481ee42270a414f",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "segmented",
+      "render_route": "file",
+      "exit_code": 0,
+      "reservation_id": "4668a4af76ef44059bdb95a1048298ab",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "segmented",
+      "render_route": "url",
+      "exit_code": 0,
+      "reservation_id": "4d4f8747639243e287e24e0eff62df1a",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "segmented",
+      "render_route": "data",
+      "exit_code": 0,
+      "reservation_id": "637704ded0e64f68aa14193be83cf30b",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "segmented",
+      "render_route": "segmented",
+      "exit_code": 0,
+      "reservation_id": "1c285caa4fdb462c877b067ec5ea0171",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "file",
+      "render_route": "file",
+      "exit_code": 0,
+      "reservation_id": "9430c83993184fe9bfeee694a6e90a09",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "url",
+      "render_route": "url",
+      "exit_code": 0,
+      "reservation_id": "0c8e0fa08b4048b7bb4ed597a235ece6",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "data",
+      "render_route": "data",
+      "exit_code": 0,
+      "reservation_id": "837bea74027c46d0915b0b687cc16967",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "auto",
+      "compute_route": "segmented",
+      "render_route": "segmented",
+      "exit_code": 0,
+      "reservation_id": "af4f5ba208c04a66adb3634beb96b0c6",
+      "pixel_sha256": "8f4270c602bea77e001fa762ddd1e9776fbf5d2fc778668427aa93a9bab88b92",
+      "terminal": true
+    },
+    {
+      "mode": "no-producer",
+      "compute_route": "file",
+      "render_route": "file",
+      "exit_code": 0,
+      "reservation_id": "78783af6777f4886b572f04ab84b4f6b",
+      "pixel_sha256": "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+      "terminal": true
+    },
+    {
+      "mode": "no-render",
+      "compute_route": "file",
+      "render_route": "file",
+      "exit_code": 0,
+      "reservation_id": "0d72e610c97b461c86cd58debdd4ef20",
+      "pixel_sha256": "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+      "terminal": true
+    },
+    {
+      "mode": "no-producer",
+      "compute_route": "segmented",
+      "render_route": "segmented",
+      "exit_code": 0,
+      "reservation_id": "77e2de56cc85459caadcf6b8846b34b8",
+      "pixel_sha256": "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+      "terminal": true
+    },
+    {
+      "mode": "no-render",
+      "compute_route": "segmented",
+      "render_route": "segmented",
+      "exit_code": 0,
+      "reservation_id": "e37b8f078ac24f2094af7059b1f3d1c4",
+      "pixel_sha256": "e87c3ea8aeb56c62c5cbd45f16002673113040727852f57c313976fda99d07c8",
+      "terminal": true
+    },
+    {
+      "mode": "wrong-compute",
+      "compute_route": "file",
+      "render_route": "file",
+      "exit_code": 1,
+      "reservation_id": "6a86178e4a6841c8b0e17b3f2ed8b076",
+      "pixel_sha256": null,
+      "terminal": true
+    },
+    {
+      "mode": "wrong-compute",
+      "compute_route": "url",
+      "render_route": "url",
+      "exit_code": 1,
+      "reservation_id": "e02f71b7cc614c0bb4d10db207856c51",
+      "pixel_sha256": null,
+      "terminal": true
+    },
+    {
+      "mode": "wrong-compute",
+      "compute_route": "data",
+      "render_route": "data",
+      "exit_code": 1,
+      "reservation_id": "3f70b7b194ae4c3792a2a1c9c5e0881b",
+      "pixel_sha256": null,
+      "terminal": true
+    },
+    {
+      "mode": "wrong-compute",
+      "compute_route": "segmented",
+      "render_route": "segmented",
+      "exit_code": 1,
+      "reservation_id": "ed201f2f6a00431bb54da47a7f638a34",
+      "pixel_sha256": null,
+      "terminal": true
+    },
+    {
+      "mode": "wrong-render",
+      "compute_route": "file",
+      "render_route": "file",
+      "exit_code": 1,
+      "reservation_id": "8b23f2a440604f7ca82b5b58a18f2fff",
+      "pixel_sha256": null,
+      "terminal": true
+    },
+    {
+      "mode": "wrong-render",
+      "compute_route": "url",
+      "render_route": "url",
+      "exit_code": 1,
+      "reservation_id": "1ccb3e3b2a484c7eb3809c8863f985ff",
+      "pixel_sha256": null,
+      "terminal": true
+    },
+    {
+      "mode": "wrong-render",
+      "compute_route": "data",
+      "render_route": "data",
+      "exit_code": 1,
+      "reservation_id": "3ed25f0c6aba45209e70cd6fecf4374b",
+      "pixel_sha256": null,
+      "terminal": true
+    },
+    {
+      "mode": "wrong-render",
+      "compute_route": "segmented",
+      "render_route": "segmented",
+      "exit_code": 1,
+      "reservation_id": "28a093a10d2847f38072d84896da54e2",
+      "pixel_sha256": null,
+      "terminal": true
+    },
+    {
+      "mode": "wrong-client",
+      "compute_route": "file",
+      "render_route": "file",
+      "exit_code": 3,
+      "reservation_id": "ac1fa9a591f94d6a9990fa3f32946326",
+      "pixel_sha256": null,
+      "terminal": true
+    },
+    {
+      "mode": "wrong-manifest",
+      "compute_route": "file",
+      "render_route": "file",
+      "exit_code": 3,
+      "reservation_id": "d9a877ac1c5d431faed7639a5c1041e9",
+      "pixel_sha256": null,
+      "terminal": true
+    },
+    {
+      "mode": "bad-descriptor",
+      "compute_route": "file",
+      "render_route": "file",
+      "exit_code": 1,
+      "reservation_id": "f2c8f639946643128a8c0329c2fe65fb",
+      "pixel_sha256": null,
+      "terminal": true
+    }
+  ]
+}
