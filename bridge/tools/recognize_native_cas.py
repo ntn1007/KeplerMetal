@@ -182,6 +182,9 @@ def sass_contract(code,text,component):
   # or re-enter the fixed lock/unlock sequence without the ld-lock itself.
   if any(off<target<=comparison and not off<=source<=comparison for source,target in branches):continue
   if any(off<target<=retry for _,target in branches):continue
+  # A path that entered the lock region must not jump past the redirect;
+  # otherwise it could reach an output without receiving the repair.
+  if any(off<=source<patch and target>patch for source,target in branches):continue
   # Reconvergence is not an ordinary direct branch. Keep the one observed
   # scoped shape as an explicit assumption: a single joinat before ld-lock
   # resumes immediately after the join following the retry. Reject any other

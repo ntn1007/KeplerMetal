@@ -152,6 +152,25 @@ class CASRecognitionSafety(unittest.TestCase):
         code, text = listing(extra='bra 0x58')
         self.assertTrue(sass_contract(code, text, 0)['qualified'])
 
+    def test_branch_after_lock_cannot_bypass_the_correction(self):
+        # These are synthetic decoder-shaped listings only; no SASS encoding or
+        # execution claim follows from the matching word placeholders.
+        for branch in ('bra 0x58', '$p1 bra 0x58', '(not $p1) bra 0x58', 'bra 0x40'):
+            ops = ['sched 0x0', 'ld lock $p1 $r4 s[0x4]',
+                   '$p1 set b32 $r2 eq s32 $r4 $r0',
+                   '$p1 slct b32 $r5 $r1 $r4 ne s32 $r2',
+                   '$p1 st unlock $p0 s[0x4]', '(not $p0) bra 0x8',
+                   branch, 'set $p0 0x1 eq u32 $r0 $r4', 'sched 0x0',
+                   'membar cta', 'nop', 'st b128 wb g[$r8d] $r0q',
+                   'exit', 'nop', 'nop', 'nop']
+            ops[4] += ' $r5'
+            words = [0] * len(ops); words[9] = 0xe000000000001c05
+            code = b''.join(struct.pack('<Q', word) for word in words)
+            text = '\n'.join(f'{i*8:08x}: {word&0xffffffff:08x} {word>>32:08x}     {op}'
+                             for i, (word, op) in enumerate(zip(words, ops)))
+            with self.subTest(branch=branch):
+                self.assertFalse(sass_contract(code, text, 0)['qualified'])
+
     def test_external_branch_cannot_skip_lock_or_enter_retry_sequence(self):
         for operation in ('bra 0x38', '$p1 bra 0x38', 'bra 0x18', '(not $p1) bra 0x18', 'bra 0x40'):
             ops=['sched 0x0',operation,'ld lock $p1 $r4 s[0x4]',

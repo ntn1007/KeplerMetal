@@ -1,0 +1,40 @@
+{
+  "air_sass_correspondence_proved": false,
+  "assembler_sha256": "1f023d5e1f0a5afc3a04510e264159923dac3182139e03c0a67600b9b1d4428e",
+  "current_sha256": "92258a746924e8e1589e4d38f1480d43fc7d6b99fd2bbf820887ba9ecfcfc863",
+  "decoder_semantics_proved": false,
+  "decoder_sha256": "1c8730a9a4861f374c58407bff31d7ccb47a57eb23f9f82c6b3ea3deb079be0f",
+  "gpu_execution": false,
+  "previous_sha256": "bf9555f211ec49ff2b429cfcfba6ac23e63eebcd3af14e913bf540b37d9bf285",
+  "rows": [
+    {
+      "current_qualified": false,
+      "listing_sha256": "d2a396f5c5cf019277feed514f325350d42d5b1850c35cb99d85c193189bcc93",
+      "name": "direct",
+      "offset": "0x2a0",
+      "operation": "bra 0x328",
+      "previous_qualified": true,
+      "synthetic_sha256": "3781c6f65ffc2da111e62b3259482bdd37f342bd5ec0fe93d7d359fc6ef0b152"
+    },
+    {
+      "current_qualified": false,
+      "listing_sha256": "8454c1edca1ae9eb53515488c85adc22385869293a890dc428061337ffe4d48a",
+      "name": "positive",
+      "offset": "0x2a0",
+      "operation": "$p1 bra 0x328",
+      "previous_qualified": true,
+      "synthetic_sha256": "892090d42e23a4cf3339e103ed47d5e27965e9ea5f824108f79254b27e75f53d"
+    },
+    {
+      "current_qualified": false,
+      "listing_sha256": "6a8ebcea6a41a8d952dfd4d411017cc3f0c0c900afcaaf7efc0390ef7489f88b",
+      "name": "negative",
+      "offset": "0x2a0",
+      "operation": "(not $p1) bra 0x328",
+      "previous_qualified": true,
+      "synthetic_sha256": "da1e4430e54e07069fccb395345a84758ac873200408f08a671b1cf40f0f9454"
+    }
+  ],
+  "source_sha256": "d39eb2371cbd96770576236ce8b48ba5b03d8dcd818db2b6826737bedaa89701",
+  "status": "PASS"
+}

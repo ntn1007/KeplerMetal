@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+The offline CAS recognizer now refuses direct branches that skip the proposed redirect after entering the lock region. Three assembled-and-decoded counterexamples are rejected; no mutated shader was executed. [Evidence](CAS_SKIP_REDIRECT.md).
+
 The offline CAS recognizer now refuses output insertions or stores outside the same straight-line AIR block as the expected-pointer load. Six parsed-JSON counterexamples are rejected while four archived verdicts remain unchanged; no shader or certificate was requalified. [Evidence](CAS_AIR_OUTPUT_PATH.md).
 
 The pinned Apple Release view profile now admits dimensions 1–4096 on each axis. Two original-executable runs and a 48-frame adapted matrix match direct references across eight tested extents, including 2560 × 1440 and 4096 × 4096; intermediate combinations are not exhaustively qualified. Scope, instrumentation and shader restrictions remain. [Evidence](APPLE_BOUNDED_EXTENTS.md).
