@@ -1,5 +1,7 @@
 # Status, 2026-10-29
 
+Bounded main-thread stacks connect the observed Metal device/shared constructors to public VideoToolbox session creation in two failed requests. The failure cause and hardware video remain unproved. [Evidence](VIDEO_VT_OBJECT_STACKS.md).
+
 The selected device/shared constructors during two failed VideoToolbox requests have immediate `MetalOld.dylib` caller labels identical to Metal controls; their upstream initiator and hardware video remain unproved. [Evidence](VIDEO_VT_OBJECT_CALLERS.md).
 
 During two failed native VideoToolbox requests, a scoped observer matched natural device/shared objects to the selected NVIDIA PCI target; matching Metal controls pass. The actual consumer and hardware video remain unproved. [Evidence](VIDEO_VT_OBJECT_OBSERVER.md).

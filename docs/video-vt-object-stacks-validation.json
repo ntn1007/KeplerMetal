@@ -1,0 +1,1460 @@
+{
+  "audit_sha256": "79776e345cb34cdfd4799f7a864656bbd308739135ae8dc1fb1717cf5fef1ca2",
+  "audit_time_kernel_file_sha256": {
+    "/System/Library/Extensions/GeForce.kext/Contents/MacOS/GeForce": "44f131a958d48afd6ab675a851330c37506557c9d499484170c886c3731bdbb3",
+    "/System/Library/Extensions/IOAcceleratorFamily2.kext/Contents/MacOS/IOAcceleratorFamily2": "37e563d6cf3626101f30b1727a4f60dec02152dff9c74c0269c30c213a7320c8"
+  },
+  "audit_time_macos_build": "25G241",
+  "audit_time_macos_version": "26.7.1",
+  "audit_time_pci_device": "10de:1198",
+  "audit_time_reported_vram": "8 GB",
+  "build_sha256": "a34566e80cdc077713c8bef6b8fe0d9adf70d54640bbfc354cf50fa8014c5226",
+  "hardware_create_statuses": [
+    -12906,
+    -12906,
+    -12906,
+    -12906
+  ],
+  "hardware_device_shared_matches": 2,
+  "hardware_frames": 0,
+  "hardware_required_processes": 4,
+  "hardware_video_execution_proved": false,
+  "intervals_nonoverlapping": true,
+  "live_caller_code_bytes_verified": false,
+  "live_kernel_method_dispatch_proved": false,
+  "m1_audit_sha256": "4dd8a9f263b05b573e9a97fda1ed4b10c55bd910e95a773b763fa25bcd167433",
+  "m1_hardware_sessions_report_acceleration": 4,
+  "metal_control_processes": 4,
+  "metal_device_shared_matches": 2,
+  "observation_process_local_only": true,
+  "observed_calls_main_thread": true,
+  "observed_device_caller": {
+    "image": "MetalOld.dylib",
+    "nearest_symbol": "-[MTLIOAccelDevice initWithAcceleratorPort:]",
+    "offset": 7441
+  },
+  "observed_hardware_processes": 2,
+  "observed_shared_caller": {
+    "image": "MetalOld.dylib",
+    "nearest_symbol": "-[MTLIOAccelDevice lazyInitialize]",
+    "offset": 738937
+  },
+  "other_processes_observed": false,
+  "processes": 12,
+  "reference_sha256": "d73962c0592ae107d343591bf2d72e013015813e3b2ceff71d37e2c5fee36cd1",
+  "rows": [
+    {
+      "create_status": 0,
+      "frames": 0,
+      "manifest_sha256": "1cb88eb830b7212443d28f797d7ca56e2ca823644e805434e8ffea33329635c6",
+      "mode": "metal-observed",
+      "observation": {
+        "config_calls": 0,
+        "config_failures": 0,
+        "config_status": -1,
+        "config_values": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "config_values_match_object": 0,
+        "create_calls": 1,
+        "device_caller": {
+          "frames": [
+            {
+              "image": "observer.dylib",
+              "image_offset": 4533,
+              "resolved": true,
+              "symbol": "_ZN12_GLOBAL__N_17observeEjPKc"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 7441,
+              "resolved": true,
+              "symbol": "-[MTLIOAccelDevice initWithAcceleratorPort:]"
+            },
+            {
+              "image": "GeForceMTLDriver",
+              "image_offset": 1077719,
+              "resolved": true,
+              "symbol": ""
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 7261,
+              "resolved": true,
+              "symbol": "-[MTLIOAccelService initWithAcceleratorPort:]"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 6841,
+              "resolved": true,
+              "symbol": "+[MTLIOAccelService registerService:]"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 96434,
+              "resolved": true,
+              "symbol": "_dispatch_client_callout"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 58856,
+              "resolved": true,
+              "symbol": "_dispatch_lane_barrier_sync_invoke_and_complete"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 1222650,
+              "resolved": true,
+              "symbol": "MTLRegisterDevices"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 184058,
+              "resolved": true,
+              "symbol": "___ZL24MTLDeviceArrayInitializev_block_invoke"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 96434,
+              "resolved": true,
+              "symbol": "_dispatch_client_callout"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 14026,
+              "resolved": true,
+              "symbol": "_dispatch_once_callout"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 85984,
+              "resolved": true,
+              "symbol": "MTLCreateSystemDefaultDevice"
+            },
+            {
+              "image": "client",
+              "image_offset": 3463,
+              "resolved": true,
+              "symbol": "main"
+            },
+            {
+              "image": "dyld",
+              "image_offset": 78280,
+              "resolved": true,
+              "symbol": "start"
+            }
+          ],
+          "immediate": {
+            "image": "MetalOld.dylib",
+            "image_offset": 7441,
+            "resolved": true,
+            "symbol": "-[MTLIOAccelDevice initWithAcceleratorPort:]"
+          },
+          "limit": 32,
+          "main_thread": true
+        },
+        "matching_nonnull": 1,
+        "matching_type": 1,
+        "object_after": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "object_before": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "registry_query_failures": 0,
+        "return_unchanged": true,
+        "shared_caller": {
+          "frames": [
+            {
+              "image": "observer.dylib",
+              "image_offset": 2842,
+              "resolved": true,
+              "symbol": "_ZN12_GLOBAL__N_113observeSharedEPv"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 738937,
+              "resolved": true,
+              "symbol": "-[MTLIOAccelDevice lazyInitialize]"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 7859,
+              "resolved": true,
+              "symbol": "-[MTLIOAccelDevice initWithAcceleratorPort:]"
+            },
+            {
+              "image": "GeForceMTLDriver",
+              "image_offset": 1077719,
+              "resolved": true,
+              "symbol": ""
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 7261,
+              "resolved": true,
+              "symbol": "-[MTLIOAccelService initWithAcceleratorPort:]"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 6841,
+              "resolved": true,
+              "symbol": "+[MTLIOAccelService registerService:]"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 96434,
+              "resolved": true,
+              "symbol": "_dispatch_client_callout"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 58856,
+              "resolved": true,
+              "symbol": "_dispatch_lane_barrier_sync_invoke_and_complete"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 1222650,
+              "resolved": true,
+              "symbol": "MTLRegisterDevices"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 184058,
+              "resolved": true,
+              "symbol": "___ZL24MTLDeviceArrayInitializev_block_invoke"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 96434,
+              "resolved": true,
+              "symbol": "_dispatch_client_callout"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 14026,
+              "resolved": true,
+              "symbol": "_dispatch_once_callout"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 85984,
+              "resolved": true,
+              "symbol": "MTLCreateSystemDefaultDevice"
+            },
+            {
+              "image": "client",
+              "image_offset": 3463,
+              "resolved": true,
+              "symbol": "main"
+            },
+            {
+              "image": "dyld",
+              "image_offset": 78280,
+              "resolved": true,
+              "symbol": "start"
+            }
+          ],
+          "immediate": {
+            "image": "MetalOld.dylib",
+            "image_offset": 738937,
+            "resolved": true,
+            "symbol": "-[MTLIOAccelDevice lazyInitialize]"
+          },
+          "limit": 32,
+          "main_thread": true
+        },
+        "shared_calls": 1,
+        "shared_failures": 0,
+        "shared_matching_argument": 1,
+        "shared_nonnull": 1,
+        "shared_stored_device_matches": 1,
+        "shared_type_matches": 1,
+        "type_or_profile_failures": 0
+      },
+      "stdout_sha256": "ab175fa36aef9aa347d59277d01e2809d58e86a1e14782aa20c693a85f378014"
+    },
+    {
+      "create_status": -12906,
+      "frames": 0,
+      "manifest_sha256": "4a282bfb52a118b95a6a6c5d94f1a8b271c67ce275ffe8a2aa06c340613e916c",
+      "mode": "hardware-observed",
+      "observation": {
+        "config_calls": 0,
+        "config_failures": 0,
+        "config_status": -1,
+        "config_values": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "config_values_match_object": 0,
+        "create_calls": 1,
+        "device_caller": {
+          "frames": [
+            {
+              "image": "observer.dylib",
+              "image_offset": 4533,
+              "resolved": true,
+              "symbol": "_ZN12_GLOBAL__N_17observeEjPKc"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 7441,
+              "resolved": true,
+              "symbol": "-[MTLIOAccelDevice initWithAcceleratorPort:]"
+            },
+            {
+              "image": "GeForceMTLDriver",
+              "image_offset": 1077719,
+              "resolved": true,
+              "symbol": ""
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 7261,
+              "resolved": true,
+              "symbol": "-[MTLIOAccelService initWithAcceleratorPort:]"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 6841,
+              "resolved": true,
+              "symbol": "+[MTLIOAccelService registerService:]"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 96434,
+              "resolved": true,
+              "symbol": "_dispatch_client_callout"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 58856,
+              "resolved": true,
+              "symbol": "_dispatch_lane_barrier_sync_invoke_and_complete"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 1222650,
+              "resolved": true,
+              "symbol": "MTLRegisterDevices"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 184058,
+              "resolved": true,
+              "symbol": "___ZL24MTLDeviceArrayInitializev_block_invoke"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 96434,
+              "resolved": true,
+              "symbol": "_dispatch_client_callout"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 14026,
+              "resolved": true,
+              "symbol": "_dispatch_once_callout"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 170639,
+              "resolved": true,
+              "symbol": "MTLCopyAllDevicesWithObserver"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 6281723,
+              "resolved": true,
+              "symbol": "VTParavirtualizationReplyClerkDeliverReply"
+            },
+            {
+              "image": "libsystem_pthread.dylib",
+              "image_offset": 9535,
+              "resolved": true,
+              "symbol": "__pthread_once_handler"
+            },
+            {
+              "image": "libsystem_platform.dylib",
+              "image_offset": 3909,
+              "resolved": true,
+              "symbol": "_os_once_callout"
+            },
+            {
+              "image": "libsystem_pthread.dylib",
+              "image_offset": 9453,
+              "resolved": true,
+              "symbol": "pthread_once"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 16371,
+              "resolved": true,
+              "symbol": "VTCopyRenderIDArrayForIORegistryKey"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 6294014,
+              "resolved": true,
+              "symbol": "VTRegisterVideoDecoderBundleDirectory"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 2267004,
+              "resolved": true,
+              "symbol": "VTRegisterVideoDecoderWithInfo"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 6288798,
+              "resolved": true,
+              "symbol": "VTDoesAnyDeviceSupportIORegistryKey"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 20093,
+              "resolved": true,
+              "symbol": "VTDecompressionSessionCreateWithOptions"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 117132,
+              "resolved": true,
+              "symbol": "VTDecompressionSessionCreate"
+            },
+            {
+              "image": "client",
+              "image_offset": 5293,
+              "resolved": true,
+              "symbol": "main"
+            },
+            {
+              "image": "dyld",
+              "image_offset": 78280,
+              "resolved": true,
+              "symbol": "start"
+            }
+          ],
+          "immediate": {
+            "image": "MetalOld.dylib",
+            "image_offset": 7441,
+            "resolved": true,
+            "symbol": "-[MTLIOAccelDevice initWithAcceleratorPort:]"
+          },
+          "limit": 32,
+          "main_thread": true
+        },
+        "matching_nonnull": 1,
+        "matching_type": 1,
+        "object_after": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "object_before": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "registry_query_failures": 0,
+        "return_unchanged": true,
+        "shared_caller": {
+          "frames": [
+            {
+              "image": "observer.dylib",
+              "image_offset": 2842,
+              "resolved": true,
+              "symbol": "_ZN12_GLOBAL__N_113observeSharedEPv"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 738937,
+              "resolved": true,
+              "symbol": "-[MTLIOAccelDevice lazyInitialize]"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 7859,
+              "resolved": true,
+              "symbol": "-[MTLIOAccelDevice initWithAcceleratorPort:]"
+            },
+            {
+              "image": "GeForceMTLDriver",
+              "image_offset": 1077719,
+              "resolved": true,
+              "symbol": ""
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 7261,
+              "resolved": true,
+              "symbol": "-[MTLIOAccelService initWithAcceleratorPort:]"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 6841,
+              "resolved": true,
+              "symbol": "+[MTLIOAccelService registerService:]"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 96434,
+              "resolved": true,
+              "symbol": "_dispatch_client_callout"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 58856,
+              "resolved": true,
+              "symbol": "_dispatch_lane_barrier_sync_invoke_and_complete"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 1222650,
+              "resolved": true,
+              "symbol": "MTLRegisterDevices"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 184058,
+              "resolved": true,
+              "symbol": "___ZL24MTLDeviceArrayInitializev_block_invoke"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 96434,
+              "resolved": true,
+              "symbol": "_dispatch_client_callout"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 14026,
+              "resolved": true,
+              "symbol": "_dispatch_once_callout"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 170639,
+              "resolved": true,
+              "symbol": "MTLCopyAllDevicesWithObserver"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 6281723,
+              "resolved": true,
+              "symbol": "VTParavirtualizationReplyClerkDeliverReply"
+            },
+            {
+              "image": "libsystem_pthread.dylib",
+              "image_offset": 9535,
+              "resolved": true,
+              "symbol": "__pthread_once_handler"
+            },
+            {
+              "image": "libsystem_platform.dylib",
+              "image_offset": 3909,
+              "resolved": true,
+              "symbol": "_os_once_callout"
+            },
+            {
+              "image": "libsystem_pthread.dylib",
+              "image_offset": 9453,
+              "resolved": true,
+              "symbol": "pthread_once"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 16371,
+              "resolved": true,
+              "symbol": "VTCopyRenderIDArrayForIORegistryKey"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 6294014,
+              "resolved": true,
+              "symbol": "VTRegisterVideoDecoderBundleDirectory"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 2267004,
+              "resolved": true,
+              "symbol": "VTRegisterVideoDecoderWithInfo"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 6288798,
+              "resolved": true,
+              "symbol": "VTDoesAnyDeviceSupportIORegistryKey"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 20093,
+              "resolved": true,
+              "symbol": "VTDecompressionSessionCreateWithOptions"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 117132,
+              "resolved": true,
+              "symbol": "VTDecompressionSessionCreate"
+            },
+            {
+              "image": "client",
+              "image_offset": 5293,
+              "resolved": true,
+              "symbol": "main"
+            },
+            {
+              "image": "dyld",
+              "image_offset": 78280,
+              "resolved": true,
+              "symbol": "start"
+            }
+          ],
+          "immediate": {
+            "image": "MetalOld.dylib",
+            "image_offset": 738937,
+            "resolved": true,
+            "symbol": "-[MTLIOAccelDevice lazyInitialize]"
+          },
+          "limit": 32,
+          "main_thread": true
+        },
+        "shared_calls": 1,
+        "shared_failures": 0,
+        "shared_matching_argument": 1,
+        "shared_nonnull": 1,
+        "shared_stored_device_matches": 1,
+        "shared_type_matches": 1,
+        "type_or_profile_failures": 0
+      },
+      "stdout_sha256": "3e908732ecc2dc12bb981d6c998a325f29dc4cd58391d8588bb514f1b737493c"
+    },
+    {
+      "create_status": 0,
+      "frames": 0,
+      "manifest_sha256": "00318fe4fd8378630b048126b1baf14f7368b15cc6e7404cd0a34f1fd1aac7a7",
+      "mode": "metal-plain",
+      "observation": null,
+      "stdout_sha256": "de9159767d1286890e9c4701f8205be7f31a57fbd59ec2975f24bb1451090b62"
+    },
+    {
+      "create_status": 0,
+      "frames": 6,
+      "manifest_sha256": "5c0096855ebc8e43064f6fbbc944ef46f3eb10e14f9a659b61f0329aaa56d6ba",
+      "mode": "software-observed",
+      "observation": {
+        "config_calls": 0,
+        "config_failures": 0,
+        "config_status": -1,
+        "config_values": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "config_values_match_object": 0,
+        "create_calls": 0,
+        "device_caller": {
+          "frames": [],
+          "immediate": {
+            "image": "",
+            "image_offset": 0,
+            "resolved": false,
+            "symbol": ""
+          },
+          "limit": 32,
+          "main_thread": false
+        },
+        "matching_nonnull": 0,
+        "matching_type": 0,
+        "object_after": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "object_before": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "registry_query_failures": 0,
+        "return_unchanged": true,
+        "shared_caller": {
+          "frames": [],
+          "immediate": {
+            "image": "",
+            "image_offset": 0,
+            "resolved": false,
+            "symbol": ""
+          },
+          "limit": 32,
+          "main_thread": false
+        },
+        "shared_calls": 0,
+        "shared_failures": 0,
+        "shared_matching_argument": 0,
+        "shared_nonnull": 0,
+        "shared_stored_device_matches": 0,
+        "shared_type_matches": 0,
+        "type_or_profile_failures": 0
+      },
+      "stdout_sha256": "616f2a4c01fef33a97995666f61f7e889a3d63e93676dc9362619d06f3d5e85a"
+    },
+    {
+      "create_status": -12906,
+      "frames": 0,
+      "manifest_sha256": "9e973da27b55f6bf17b147b0f53e9cc67a1daf6048aa2cc8f15eb2b89201d4da",
+      "mode": "hardware-plain",
+      "observation": null,
+      "stdout_sha256": "d7aedff80b5ee8331ae1f8f3e252b0a03a9e43afc7cca36b93d68dfae66360ff"
+    },
+    {
+      "create_status": 0,
+      "frames": 6,
+      "manifest_sha256": "e3a178cef74aeaa292c15da3fa8b8725efc7033d26f6ec45bf4c93bb8424a39f",
+      "mode": "software-plain",
+      "observation": null,
+      "stdout_sha256": "f1cb37786835a440db4935376b1e3a5ce11d53c3eae4a36f87e369c9cd4589dc"
+    },
+    {
+      "create_status": 0,
+      "frames": 0,
+      "manifest_sha256": "68eb5976dd6d56c74c3007b620c7069b1485a4f846435775aebe674565351710",
+      "mode": "metal-observed",
+      "observation": {
+        "config_calls": 0,
+        "config_failures": 0,
+        "config_status": -1,
+        "config_values": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "config_values_match_object": 0,
+        "create_calls": 1,
+        "device_caller": {
+          "frames": [
+            {
+              "image": "observer.dylib",
+              "image_offset": 4533,
+              "resolved": true,
+              "symbol": "_ZN12_GLOBAL__N_17observeEjPKc"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 7441,
+              "resolved": true,
+              "symbol": "-[MTLIOAccelDevice initWithAcceleratorPort:]"
+            },
+            {
+              "image": "GeForceMTLDriver",
+              "image_offset": 1077719,
+              "resolved": true,
+              "symbol": ""
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 7261,
+              "resolved": true,
+              "symbol": "-[MTLIOAccelService initWithAcceleratorPort:]"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 6841,
+              "resolved": true,
+              "symbol": "+[MTLIOAccelService registerService:]"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 96434,
+              "resolved": true,
+              "symbol": "_dispatch_client_callout"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 58856,
+              "resolved": true,
+              "symbol": "_dispatch_lane_barrier_sync_invoke_and_complete"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 1222650,
+              "resolved": true,
+              "symbol": "MTLRegisterDevices"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 184058,
+              "resolved": true,
+              "symbol": "___ZL24MTLDeviceArrayInitializev_block_invoke"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 96434,
+              "resolved": true,
+              "symbol": "_dispatch_client_callout"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 14026,
+              "resolved": true,
+              "symbol": "_dispatch_once_callout"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 85984,
+              "resolved": true,
+              "symbol": "MTLCreateSystemDefaultDevice"
+            },
+            {
+              "image": "client",
+              "image_offset": 3463,
+              "resolved": true,
+              "symbol": "main"
+            },
+            {
+              "image": "dyld",
+              "image_offset": 78280,
+              "resolved": true,
+              "symbol": "start"
+            }
+          ],
+          "immediate": {
+            "image": "MetalOld.dylib",
+            "image_offset": 7441,
+            "resolved": true,
+            "symbol": "-[MTLIOAccelDevice initWithAcceleratorPort:]"
+          },
+          "limit": 32,
+          "main_thread": true
+        },
+        "matching_nonnull": 1,
+        "matching_type": 1,
+        "object_after": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "object_before": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "registry_query_failures": 0,
+        "return_unchanged": true,
+        "shared_caller": {
+          "frames": [
+            {
+              "image": "observer.dylib",
+              "image_offset": 2842,
+              "resolved": true,
+              "symbol": "_ZN12_GLOBAL__N_113observeSharedEPv"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 738937,
+              "resolved": true,
+              "symbol": "-[MTLIOAccelDevice lazyInitialize]"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 7859,
+              "resolved": true,
+              "symbol": "-[MTLIOAccelDevice initWithAcceleratorPort:]"
+            },
+            {
+              "image": "GeForceMTLDriver",
+              "image_offset": 1077719,
+              "resolved": true,
+              "symbol": ""
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 7261,
+              "resolved": true,
+              "symbol": "-[MTLIOAccelService initWithAcceleratorPort:]"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 6841,
+              "resolved": true,
+              "symbol": "+[MTLIOAccelService registerService:]"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 96434,
+              "resolved": true,
+              "symbol": "_dispatch_client_callout"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 58856,
+              "resolved": true,
+              "symbol": "_dispatch_lane_barrier_sync_invoke_and_complete"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 1222650,
+              "resolved": true,
+              "symbol": "MTLRegisterDevices"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 184058,
+              "resolved": true,
+              "symbol": "___ZL24MTLDeviceArrayInitializev_block_invoke"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 96434,
+              "resolved": true,
+              "symbol": "_dispatch_client_callout"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 14026,
+              "resolved": true,
+              "symbol": "_dispatch_once_callout"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 85984,
+              "resolved": true,
+              "symbol": "MTLCreateSystemDefaultDevice"
+            },
+            {
+              "image": "client",
+              "image_offset": 3463,
+              "resolved": true,
+              "symbol": "main"
+            },
+            {
+              "image": "dyld",
+              "image_offset": 78280,
+              "resolved": true,
+              "symbol": "start"
+            }
+          ],
+          "immediate": {
+            "image": "MetalOld.dylib",
+            "image_offset": 738937,
+            "resolved": true,
+            "symbol": "-[MTLIOAccelDevice lazyInitialize]"
+          },
+          "limit": 32,
+          "main_thread": true
+        },
+        "shared_calls": 1,
+        "shared_failures": 0,
+        "shared_matching_argument": 1,
+        "shared_nonnull": 1,
+        "shared_stored_device_matches": 1,
+        "shared_type_matches": 1,
+        "type_or_profile_failures": 0
+      },
+      "stdout_sha256": "ab175fa36aef9aa347d59277d01e2809d58e86a1e14782aa20c693a85f378014"
+    },
+    {
+      "create_status": -12906,
+      "frames": 0,
+      "manifest_sha256": "5f0cdabcfa473c9b1b8f2311f639070d7a76faea9016ac265593d103baf5a920",
+      "mode": "hardware-observed",
+      "observation": {
+        "config_calls": 0,
+        "config_failures": 0,
+        "config_status": -1,
+        "config_values": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "config_values_match_object": 0,
+        "create_calls": 1,
+        "device_caller": {
+          "frames": [
+            {
+              "image": "observer.dylib",
+              "image_offset": 4533,
+              "resolved": true,
+              "symbol": "_ZN12_GLOBAL__N_17observeEjPKc"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 7441,
+              "resolved": true,
+              "symbol": "-[MTLIOAccelDevice initWithAcceleratorPort:]"
+            },
+            {
+              "image": "GeForceMTLDriver",
+              "image_offset": 1077719,
+              "resolved": true,
+              "symbol": ""
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 7261,
+              "resolved": true,
+              "symbol": "-[MTLIOAccelService initWithAcceleratorPort:]"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 6841,
+              "resolved": true,
+              "symbol": "+[MTLIOAccelService registerService:]"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 96434,
+              "resolved": true,
+              "symbol": "_dispatch_client_callout"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 58856,
+              "resolved": true,
+              "symbol": "_dispatch_lane_barrier_sync_invoke_and_complete"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 1222650,
+              "resolved": true,
+              "symbol": "MTLRegisterDevices"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 184058,
+              "resolved": true,
+              "symbol": "___ZL24MTLDeviceArrayInitializev_block_invoke"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 96434,
+              "resolved": true,
+              "symbol": "_dispatch_client_callout"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 14026,
+              "resolved": true,
+              "symbol": "_dispatch_once_callout"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 170639,
+              "resolved": true,
+              "symbol": "MTLCopyAllDevicesWithObserver"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 6281723,
+              "resolved": true,
+              "symbol": "VTParavirtualizationReplyClerkDeliverReply"
+            },
+            {
+              "image": "libsystem_pthread.dylib",
+              "image_offset": 9535,
+              "resolved": true,
+              "symbol": "__pthread_once_handler"
+            },
+            {
+              "image": "libsystem_platform.dylib",
+              "image_offset": 3909,
+              "resolved": true,
+              "symbol": "_os_once_callout"
+            },
+            {
+              "image": "libsystem_pthread.dylib",
+              "image_offset": 9453,
+              "resolved": true,
+              "symbol": "pthread_once"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 16371,
+              "resolved": true,
+              "symbol": "VTCopyRenderIDArrayForIORegistryKey"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 6294014,
+              "resolved": true,
+              "symbol": "VTRegisterVideoDecoderBundleDirectory"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 2267004,
+              "resolved": true,
+              "symbol": "VTRegisterVideoDecoderWithInfo"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 6288798,
+              "resolved": true,
+              "symbol": "VTDoesAnyDeviceSupportIORegistryKey"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 20093,
+              "resolved": true,
+              "symbol": "VTDecompressionSessionCreateWithOptions"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 117132,
+              "resolved": true,
+              "symbol": "VTDecompressionSessionCreate"
+            },
+            {
+              "image": "client",
+              "image_offset": 5293,
+              "resolved": true,
+              "symbol": "main"
+            },
+            {
+              "image": "dyld",
+              "image_offset": 78280,
+              "resolved": true,
+              "symbol": "start"
+            }
+          ],
+          "immediate": {
+            "image": "MetalOld.dylib",
+            "image_offset": 7441,
+            "resolved": true,
+            "symbol": "-[MTLIOAccelDevice initWithAcceleratorPort:]"
+          },
+          "limit": 32,
+          "main_thread": true
+        },
+        "matching_nonnull": 1,
+        "matching_type": 1,
+        "object_after": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "object_before": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "registry_query_failures": 0,
+        "return_unchanged": true,
+        "shared_caller": {
+          "frames": [
+            {
+              "image": "observer.dylib",
+              "image_offset": 2842,
+              "resolved": true,
+              "symbol": "_ZN12_GLOBAL__N_113observeSharedEPv"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 738937,
+              "resolved": true,
+              "symbol": "-[MTLIOAccelDevice lazyInitialize]"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 7859,
+              "resolved": true,
+              "symbol": "-[MTLIOAccelDevice initWithAcceleratorPort:]"
+            },
+            {
+              "image": "GeForceMTLDriver",
+              "image_offset": 1077719,
+              "resolved": true,
+              "symbol": ""
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 7261,
+              "resolved": true,
+              "symbol": "-[MTLIOAccelService initWithAcceleratorPort:]"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 6841,
+              "resolved": true,
+              "symbol": "+[MTLIOAccelService registerService:]"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 96434,
+              "resolved": true,
+              "symbol": "_dispatch_client_callout"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 58856,
+              "resolved": true,
+              "symbol": "_dispatch_lane_barrier_sync_invoke_and_complete"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 1222650,
+              "resolved": true,
+              "symbol": "MTLRegisterDevices"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 184058,
+              "resolved": true,
+              "symbol": "___ZL24MTLDeviceArrayInitializev_block_invoke"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 96434,
+              "resolved": true,
+              "symbol": "_dispatch_client_callout"
+            },
+            {
+              "image": "libdispatch.dylib",
+              "image_offset": 14026,
+              "resolved": true,
+              "symbol": "_dispatch_once_callout"
+            },
+            {
+              "image": "MetalOld.dylib",
+              "image_offset": 170639,
+              "resolved": true,
+              "symbol": "MTLCopyAllDevicesWithObserver"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 6281723,
+              "resolved": true,
+              "symbol": "VTParavirtualizationReplyClerkDeliverReply"
+            },
+            {
+              "image": "libsystem_pthread.dylib",
+              "image_offset": 9535,
+              "resolved": true,
+              "symbol": "__pthread_once_handler"
+            },
+            {
+              "image": "libsystem_platform.dylib",
+              "image_offset": 3909,
+              "resolved": true,
+              "symbol": "_os_once_callout"
+            },
+            {
+              "image": "libsystem_pthread.dylib",
+              "image_offset": 9453,
+              "resolved": true,
+              "symbol": "pthread_once"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 16371,
+              "resolved": true,
+              "symbol": "VTCopyRenderIDArrayForIORegistryKey"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 6294014,
+              "resolved": true,
+              "symbol": "VTRegisterVideoDecoderBundleDirectory"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 2267004,
+              "resolved": true,
+              "symbol": "VTRegisterVideoDecoderWithInfo"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 6288798,
+              "resolved": true,
+              "symbol": "VTDoesAnyDeviceSupportIORegistryKey"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 20093,
+              "resolved": true,
+              "symbol": "VTDecompressionSessionCreateWithOptions"
+            },
+            {
+              "image": "VideoToolbox",
+              "image_offset": 117132,
+              "resolved": true,
+              "symbol": "VTDecompressionSessionCreate"
+            },
+            {
+              "image": "client",
+              "image_offset": 5293,
+              "resolved": true,
+              "symbol": "main"
+            },
+            {
+              "image": "dyld",
+              "image_offset": 78280,
+              "resolved": true,
+              "symbol": "start"
+            }
+          ],
+          "immediate": {
+            "image": "MetalOld.dylib",
+            "image_offset": 738937,
+            "resolved": true,
+            "symbol": "-[MTLIOAccelDevice lazyInitialize]"
+          },
+          "limit": 32,
+          "main_thread": true
+        },
+        "shared_calls": 1,
+        "shared_failures": 0,
+        "shared_matching_argument": 1,
+        "shared_nonnull": 1,
+        "shared_stored_device_matches": 1,
+        "shared_type_matches": 1,
+        "type_or_profile_failures": 0
+      },
+      "stdout_sha256": "3e908732ecc2dc12bb981d6c998a325f29dc4cd58391d8588bb514f1b737493c"
+    },
+    {
+      "create_status": 0,
+      "frames": 0,
+      "manifest_sha256": "b1b3f6e4ec4601618e0aecb47e5816ce7b4e997babd6489562812e9096593e3b",
+      "mode": "metal-plain",
+      "observation": null,
+      "stdout_sha256": "de9159767d1286890e9c4701f8205be7f31a57fbd59ec2975f24bb1451090b62"
+    },
+    {
+      "create_status": 0,
+      "frames": 6,
+      "manifest_sha256": "9caec75a78f7834c1e33afb7e18e84a6151a89c58e8b15ffe9851b1f68b64ea7",
+      "mode": "software-observed",
+      "observation": {
+        "config_calls": 0,
+        "config_failures": 0,
+        "config_status": -1,
+        "config_values": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "config_values_match_object": 0,
+        "create_calls": 0,
+        "device_caller": {
+          "frames": [],
+          "immediate": {
+            "image": "",
+            "image_offset": 0,
+            "resolved": false,
+            "symbol": ""
+          },
+          "limit": 32,
+          "main_thread": false
+        },
+        "matching_nonnull": 0,
+        "matching_type": 0,
+        "object_after": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "object_before": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "registry_query_failures": 0,
+        "return_unchanged": true,
+        "shared_caller": {
+          "frames": [],
+          "immediate": {
+            "image": "",
+            "image_offset": 0,
+            "resolved": false,
+            "symbol": ""
+          },
+          "limit": 32,
+          "main_thread": false
+        },
+        "shared_calls": 0,
+        "shared_failures": 0,
+        "shared_matching_argument": 0,
+        "shared_nonnull": 0,
+        "shared_stored_device_matches": 0,
+        "shared_type_matches": 0,
+        "type_or_profile_failures": 0
+      },
+      "stdout_sha256": "616f2a4c01fef33a97995666f61f7e889a3d63e93676dc9362619d06f3d5e85a"
+    },
+    {
+      "create_status": -12906,
+      "frames": 0,
+      "manifest_sha256": "77eb0eedb38af830b292e3547eb22db298d7c4decf7638b171a9918f3509b05e",
+      "mode": "hardware-plain",
+      "observation": null,
+      "stdout_sha256": "d7aedff80b5ee8331ae1f8f3e252b0a03a9e43afc7cca36b93d68dfae66360ff"
+    },
+    {
+      "create_status": 0,
+      "frames": 6,
+      "manifest_sha256": "d605f6a07009d613b35aeb6a5af0c54b920fe2e064dc074c20c0693e8cbb8931",
+      "mode": "software-plain",
+      "observation": null,
+      "stdout_sha256": "f1cb37786835a440db4935376b1e3a5ce11d53c3eae4a36f87e369c9cd4589dc"
+    }
+  ],
+  "software_bytes_compared": 2764800,
+  "software_device_shared_matches": 0,
+  "software_frames": 24,
+  "software_processes": 4,
+  "source_sha256": {
+    "client.mm": "b8694ff6810b9c91353fa0366608ea118a2ebd7e69e609ebfea61c4b3eb307e4",
+    "observer.mm": "5062c7f2d300f219e1d9107632c89b7003cd79e4b08489f271c65164dc4f6e6c"
+  },
+  "stack_capture_process_local": true,
+  "stack_unwinding_independently_validated": false,
+  "status": "PASS_VT_OBJECT_STACKS",
+  "system_modified": false,
+  "system_profile_files": 3
+}
