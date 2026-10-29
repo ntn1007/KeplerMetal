@@ -1,0 +1,124 @@
+{
+  "audit_sha256": "18bd0e040b3b08b3a596544e33144172f8328defda46c4062a92498ca63a2e67",
+  "checks": [
+    {
+      "case": "device",
+      "reason": "video enumeration identity differs",
+      "rejected": true
+    },
+    {
+      "case": "set-key",
+      "reason": "registration call observation differs",
+      "rejected": true
+    },
+    {
+      "case": "apply",
+      "reason": "availability path differs",
+      "rejected": true
+    },
+    {
+      "case": "callback",
+      "reason": "availability path differs",
+      "rejected": true
+    },
+    {
+      "case": "available",
+      "reason": "availability path differs",
+      "rejected": true
+    },
+    {
+      "case": "append-input",
+      "reason": "availability path differs",
+      "rejected": true
+    },
+    {
+      "case": "append-return",
+      "reason": "availability path differs",
+      "rejected": true
+    },
+    {
+      "case": "branch",
+      "reason": "enumeration decision differs",
+      "rejected": true
+    },
+    {
+      "case": "out-store",
+      "reason": "output observation differs",
+      "rejected": true
+    },
+    {
+      "case": "out-after",
+      "reason": "output observation differs",
+      "rejected": true
+    },
+    {
+      "case": "out-status",
+      "reason": "output observation differs",
+      "rejected": true
+    },
+    {
+      "case": "count",
+      "reason": "request filter observation differs",
+      "rejected": true
+    },
+    {
+      "case": "gtx-item",
+      "reason": "request filter observation differs",
+      "rejected": true
+    },
+    {
+      "case": "request-input",
+      "reason": "request filter observation differs",
+      "rejected": true
+    },
+    {
+      "case": "request-result",
+      "reason": "request filter observation differs",
+      "rejected": true
+    },
+    {
+      "case": "reason-input",
+      "reason": "reason observation differs",
+      "rejected": true
+    },
+    {
+      "case": "reason-first",
+      "reason": "reason observation differs",
+      "rejected": true
+    },
+    {
+      "case": "reason-service",
+      "reason": "reason observation differs",
+      "rejected": true
+    },
+    {
+      "case": "reason-property",
+      "reason": "reason observation differs",
+      "rejected": true
+    },
+    {
+      "case": "property-key",
+      "reason": "property identity observation differs",
+      "rejected": true
+    },
+    {
+      "case": "property-plane",
+      "reason": "property identity observation differs",
+      "rejected": true
+    },
+    {
+      "case": "property-options",
+      "reason": "property identity observation differs",
+      "rejected": true
+    },
+    {
+      "case": "property-request",
+      "reason": "property identity observation differs",
+      "rejected": true
+    }
+  ],
+  "gpu_execution": false,
+  "originals_modified": false,
+  "source_sha256": "4cf11ed9b793a564b68677d5a3416c23bafaf4476c42150c73d2277526ff3669",
+  "status": "PASS_MUTATIONS_REJECTED"
+}
